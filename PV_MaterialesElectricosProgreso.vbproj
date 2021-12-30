@@ -233,14 +233,11 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DBModelo.vb" />
-    <Compile Include="factura.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="FrmFacturacion.Designer.vb">
+      <DependentUpon>FrmFacturacion.vb</DependentUpon>
     </Compile>
-    <Compile Include="factura_total.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="foliosfactura.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="FrmFacturacion.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmListadoNC.designer.vb">
       <DependentUpon>FrmListadoNC.vb</DependentUpon>
@@ -611,7 +608,16 @@
     <Compile Include="tbldiascredito.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblFactura.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblFacturaTotal.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblFamilia.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblFoliofacturas.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblFoliosTicket.vb">

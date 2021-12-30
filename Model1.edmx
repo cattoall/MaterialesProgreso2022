@@ -740,7 +740,7 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <Property Name="RegimenFiscal" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="LugarExpedicion" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="factura_total">
+        <EntityType Name="tblFacturaTotal">
           <Key>
             <PropertyRef Name="n_factura" />
           </Key>
@@ -774,7 +774,7 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <Property Name="clave" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="foliosfactura">
+        <EntityType Name="tblFoliofacturas">
           <Key>
             <PropertyRef Name="TipoComprobante" />
             <PropertyRef Name="Year" />
@@ -992,7 +992,7 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <Property Name="motivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="numeroFactura" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="factura">
+        <EntityType Name="tblFactura">
           <Key>
             <PropertyRef Name="n_factura" />
             <PropertyRef Name="clave_p" />
@@ -1033,9 +1033,9 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <EntitySet Name="complementopagoshes" EntityType="Self.complementopagosh" />
           <EntitySet Name="compras" EntityType="Self.compra" />
           <EntitySet Name="tblConfiguracions" EntityType="pv_salvadorModel1.tblConfiguracion" />
-          <EntitySet Name="factura_total" EntityType="Self.factura_total" />
+          <EntitySet Name="tblFacturaTotals" EntityType="pv_salvadorModel1.tblFacturaTotal" />
           <EntitySet Name="tblFamilias" EntityType="pv_salvadorModel1.tblFamilia" />
-          <EntitySet Name="foliosfacturas" EntityType="Self.foliosfactura" />
+          <EntitySet Name="tblFoliofacturas" EntityType="pv_salvadorModel1.tblFoliofacturas" />
           <EntitySet Name="tblFoliosTickets" EntityType="pv_salvadorModel1.tblFoliosTicket" />
           <EntitySet Name="tblGrupos" EntityType="pv_salvadorModel1.tblGrupos" />
           <EntitySet Name="historial_pagos_proveedores" EntityType="Self.historial_pagos_proveedores" />
@@ -1056,7 +1056,7 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <EntitySet Name="tblUnidades" EntityType="pv_salvadorModel1.tblUnidades" />
           <EntitySet Name="tblUsuarios" EntityType="pv_salvadorModel1.tblUsuarios" />
           <EntitySet Name="tblVentas" EntityType="pv_salvadorModel1.tblVenta" />
-          <EntitySet Name="facturas" EntityType="Self.factura" />
+          <EntitySet Name="tblFacturas" EntityType="pv_salvadorModel1.tblFactura" />
           <EntitySet Name="ordencomprades" EntityType="Self.ordencomprade" />
           <FunctionImport Name="SP_DB_BACKUP">
             <Parameter Name="DatabaseName" Mode="In" Type="String" />
@@ -1359,8 +1359,8 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="factura_total">
-            <EntityTypeMapping TypeName="pv_salvadorModel1.factura_total">
+          <EntitySetMapping Name="tblFacturaTotals">
+            <EntityTypeMapping TypeName="pv_salvadorModel1.tblFacturaTotal">
               <MappingFragment StoreEntitySet="factura_total">
                 <ScalarProperty Name="n_factura" ColumnName="n_factura" />
                 <ScalarProperty Name="total" ColumnName="total" />
@@ -1395,8 +1395,8 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="foliosfacturas">
-            <EntityTypeMapping TypeName="pv_salvadorModel1.foliosfactura">
+          <EntitySetMapping Name="tblFoliofacturas">
+            <EntityTypeMapping TypeName="pv_salvadorModel1.tblFoliofacturas">
               <MappingFragment StoreEntitySet="foliosfacturas">
                 <ScalarProperty Name="TipoComprobante" ColumnName="TipoComprobante" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
@@ -1631,8 +1631,8 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="facturas">
-            <EntityTypeMapping TypeName="pv_salvadorModel1.factura">
+          <EntitySetMapping Name="tblFacturas">
+            <EntityTypeMapping TypeName="pv_salvadorModel1.tblFactura">
               <MappingFragment StoreEntitySet="facturas">
                 <ScalarProperty Name="n_factura" ColumnName="n_factura" />
                 <ScalarProperty Name="folio" ColumnName="folio" />

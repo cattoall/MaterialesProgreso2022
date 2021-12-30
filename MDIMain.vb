@@ -403,4 +403,10 @@
         FrmListadoVentasError.Close()
         FrmListadoVentasError.Dispose()
     End Sub
+
+    Private Sub FacturaciónToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FacturaciónToolStripMenuItem.Click
+        FrmFacturacion.ShowDialog()
+        FrmFacturacion.Close()
+        FrmFacturacion.Dispose()
+    End Sub
 End Class

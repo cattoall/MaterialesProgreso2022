@@ -16,7 +16,7 @@ Public Class FrmNotaDeCredito
                 Exit Sub
             End If
 
-            Dim strFacturaTotal As New factura_total
+            Dim strFacturaTotal As New tblFacturaTotal
             strFacturaTotal = DBModelo.Get_PV_FacturaTotal(Lv_pedido)
             If Not IsNothing(strFacturaTotal) Then
                 If strFacturaTotal.nc.Equals(" ") Then
@@ -29,7 +29,7 @@ Public Class FrmNotaDeCredito
                     Label9.Visible = True
                     Label9.Text = strFacturaTotal.id_cliente
 
-                    Dim lt_Facturas As New List(Of factura)
+                    Dim lt_Facturas As New List(Of tblFactura)
                     lt_Facturas = DBModelo.Get_Facturas(CDbl(TxtPedido.Text))
 
                     For i = 0 To lt_Facturas.Count - 1
@@ -116,7 +116,7 @@ Public Class FrmNotaDeCredito
     End Sub
     Private Sub FrmNotaDeCredito_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Dim lv_folio As Integer = 0
-        Dim strFoliosNC As New foliosfactura
+        Dim strFoliosNC As New tblFoliofacturas
 
         lv_folio = DBModelo.Get_PV_FoliosNC_Actual(Now.Year, "NOTAS DE CREDITO")
         If lv_folio = 0 Then
@@ -207,7 +207,7 @@ Public Class FrmNotaDeCredito
 
         MetroFramework.MetroMessageBox.Show(Me, "Nota de Credito con Folio C-" & Format(FolioNC_Actual, "000000") & ", creada correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-        Dim strFoliosNC As New foliosfactura
+        Dim strFoliosNC As New tblFoliofacturas
         strFoliosNC = DBModelo.Get_PV_FoliosNC(Now.Year, "NOTAS DE CREDITO")
 
         strFoliosNC.FolioActual = FolioNC_Actual + 1
@@ -217,7 +217,7 @@ Public Class FrmNotaDeCredito
             Exit Sub
         End If
 
-        Dim strFacturaTotal As New factura_total
+        Dim strFacturaTotal As New tblFacturaTotal
         strFacturaTotal = DBModelo.Get_PV_FacturaTotal(TxtPedido_C.Text)
 
         strFacturaTotal.nc = "X"

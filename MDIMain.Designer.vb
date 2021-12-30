@@ -76,6 +76,7 @@ Partial Class MDIMain
         Me.ToolStripStatusLabel9 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TssDB = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.FacturaciónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -176,7 +177,7 @@ Partial Class MDIMain
         '
         'ToolStripMenuItem1
         '
-        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListadoDeTicketsPorFacturasToolStripMenuItem, Me.ReimpresiónDeFacturaToolStripMenuItem, Me.RevisarFacturasConErroresToolStripMenuItem, Me.ConfiguraciónDeFoliosToolStripMenuItem, Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem})
+        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FacturaciónToolStripMenuItem, Me.ListadoDeTicketsPorFacturasToolStripMenuItem, Me.ReimpresiónDeFacturaToolStripMenuItem, Me.RevisarFacturasConErroresToolStripMenuItem, Me.ConfiguraciónDeFoliosToolStripMenuItem, Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem})
         Me.ToolStripMenuItem1.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FacturasFondo123
         Me.ToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
@@ -458,6 +459,12 @@ Partial Class MDIMain
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
         '
+        'FacturaciónToolStripMenuItem
+        '
+        Me.FacturaciónToolStripMenuItem.Name = "FacturaciónToolStripMenuItem"
+        Me.FacturaciónToolStripMenuItem.Size = New System.Drawing.Size(259, 22)
+        Me.FacturaciónToolStripMenuItem.Text = "Facturación"
+        '
         'MDIMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -537,4 +544,5 @@ Partial Class MDIMain
     Friend WithEvents GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportarDesdeExcelToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CorregirVentasACréditoConErroresToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FacturaciónToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class factura_total
+Partial Public Class tblFacturaTotal
     Public Property n_factura As Decimal
     Public Property total As Decimal
     Public Property usuario As String

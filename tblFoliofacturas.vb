@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class foliosfactura
+Partial Public Class tblFoliofacturas
     Public Property TipoComprobante As String
     Public Property Year As Integer
     Public Property FolioInicial As Nullable(Of Integer)

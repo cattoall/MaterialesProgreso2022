@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class factura
+Partial Public Class tblFactura
     Public Property n_factura As Long
     Public Property folio As String
     Public Property idProducto As Nullable(Of Long)

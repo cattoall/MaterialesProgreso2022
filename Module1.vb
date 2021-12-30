@@ -21,6 +21,14 @@ Module Module1
     Public Sql1 As New StringBuilder()
     Public DBConnected As String
 
+    Public ClaveUnidad As String = ""
+    Public FormaPago As String = ""
+    Public MetodoPago As String = ""
+    Public UsoCDFI As String = ""
+    Public gv_SerieFactura As String = ""
+    Public RegimenFiscal As String
+    Public LugarExpedicion As String
+
     Public privilegios As String
     Public usuario As String
     Public fventa, flimite, buscar, buscar2, motivoTexto, nombreUsuario, mensaje, coloniaCliente As String

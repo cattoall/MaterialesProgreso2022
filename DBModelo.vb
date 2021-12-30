@@ -1344,9 +1344,9 @@ Public Class DBModelo
         End Using
     End Function
 
-    Shared Function Get_Facturas(ByVal NumeroFactura As Integer) As List(Of factura)
+    Shared Function Get_Facturas(ByVal NumeroFactura As Integer) As List(Of tblFactura)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.facturas.Where(Function(i) i.n_factura = NumeroFactura).ToList()
+            Return ctx.tblFacturas.Where(Function(i) i.n_factura = NumeroFactura).ToList()
         End Using
     End Function
 
@@ -1366,7 +1366,7 @@ Public Class DBModelo
     Shared Function Get_PV_FoliosNC_Actual(ByVal Año As Integer, ByVal TipoDocumento As String) As Integer
         Try
             Using ctx As New pv_salvadorEntities1()
-                Dim rFolio As foliosfactura = ctx.foliosfacturas.Where(Function(i) i.Year = Año And i.TipoComprobante = TipoDocumento).FirstOrDefault
+                Dim rFolio As tblFoliofacturas = ctx.tblFoliofacturas.Where(Function(i) i.Year = Año And i.TipoComprobante = TipoDocumento).FirstOrDefault
                 If Not IsNothing(rFolio) Then
                     Return rFolio.FolioActual
                 Else
@@ -1378,10 +1378,10 @@ Public Class DBModelo
         End Try
     End Function
 
-    Shared Function Insert_PV_FoliosNC_Actual(ByVal strFolios As foliosfactura) As Boolean
+    Shared Function Insert_PV_FoliosNC_Actual(ByVal strFolios As tblFoliofacturas) As Boolean
         Try
             Using ctx As New pv_salvadorEntities1()
-                ctx.foliosfacturas.Add(strFolios)
+                ctx.tblFoliofacturas.Add(strFolios)
                 ctx.SaveChanges()
             End Using
             Return True
@@ -1390,10 +1390,10 @@ Public Class DBModelo
         End Try
     End Function
 
-    Shared Function Update_PV_FoliosNC_Actual(ByVal strFolios As foliosfactura) As Boolean
+    Shared Function Update_PV_FoliosNC_Actual(ByVal strFolios As tblFoliofacturas) As Boolean
         Try
             Using ctx As New pv_salvadorEntities1()
-                ctx.foliosfacturas.Attach(strFolios)
+                ctx.tblFoliofacturas.Attach(strFolios)
                 ctx.Entry(strFolios).State = EntityState.Modified
                 ctx.SaveChanges()
             End Using
@@ -1403,22 +1403,22 @@ Public Class DBModelo
         End Try
     End Function
 
-    Shared Function Get_PV_FoliosNC(ByVal Año As Integer, ByVal TipoDocumento As String) As foliosfactura
+    Shared Function Get_PV_FoliosNC(ByVal Año As Integer, ByVal TipoDocumento As String) As tblFoliofacturas
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.foliosfacturas.Where(Function(i) i.Year = Año And i.TipoComprobante = TipoDocumento).FirstOrDefault
+            Return ctx.tblFoliofacturas.Where(Function(i) i.Year = Año And i.TipoComprobante = TipoDocumento).FirstOrDefault
         End Using
     End Function
 
-    Shared Function Get_PV_FacturaTotal(ByVal NumeroFactura As String) As factura_total
+    Shared Function Get_PV_FacturaTotal(ByVal NumeroFactura As String) As tblFacturaTotal
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.factura_total.Where(Function(i) i.n_factura = NumeroFactura).FirstOrDefault
+            Return ctx.tblFacturaTotals.Where(Function(i) i.n_factura = NumeroFactura).FirstOrDefault
         End Using
     End Function
 
-    Shared Function Update_PV_FacturaTotal(ByVal strFacturaTotal As factura_total) As Boolean
+    Shared Function Update_PV_FacturaTotal(ByVal strFacturaTotal As tblFacturaTotal) As Boolean
         Try
             Using ctx As New pv_salvadorEntities1()
-                ctx.factura_total.Attach(strFacturaTotal)
+                ctx.tblFacturaTotals.Attach(strFacturaTotal)
                 ctx.Entry(strFacturaTotal).State = EntityState.Modified
                 ctx.SaveChanges()
             End Using
@@ -1499,5 +1499,62 @@ Public Class DBModelo
 
 #End Region
 
+#Region "Seccion <<Facturación>>"
+    Shared Function GetVentasMostrador(ByVal sFecha As String, ByVal iIdCliente As Integer, ByVal sNumeroFactura As String, ByVal sEstado As String) As List(Of tblVenta)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblVentas.Where(Function(i) i.fecha = sFecha And i.idCliente = iIdCliente And i.numeroFactura = sNumeroFactura And i.estado = sEstado).ToList()
+        End Using
+    End Function
+
+    Shared Function GetClienteByName(ByVal Nombre As String) As tblClientes
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblClientes.Where(Function(i) i.nombre.Contains(Nombre)).FirstOrDefault()
+        End Using
+    End Function
+
+    Shared Function InsertFacturaTotal(ByVal strFacturaTotal As tblFacturaTotal) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.tblFacturaTotals.Add(strFacturaTotal)
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function InsertFactura(ByVal strFactura As tblFactura) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.tblFacturas.Add(strFactura)
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function GetFolioFactura(ByVal TipoComprobante As String, ByVal Year As String) As tblFoliofacturas
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblFoliofacturas.Where(Function(i) i.TipoComprobante = TipoComprobante And i.Year = Year).FirstOrDefault()
+        End Using
+    End Function
+
+    Shared Function UpdateFolioFacturas(ByVal strFolioFacturas As tblFoliofacturas) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.tblFoliofacturas.Attach(strFolioFacturas)
+                ctx.Entry(strFolioFacturas).State = EntityState.Modified
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+#End Region
 
 End Class
