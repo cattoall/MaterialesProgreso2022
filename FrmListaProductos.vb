@@ -1,98 +1,114 @@
-﻿Imports System.Data.SqlClient
-
+﻿
 Public Class FrmListaProductos
 
     Private Sub FrmListaProductos_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyValue
             Case Keys.Escape
-                Me.Close()
+                Close()
+                Dispose()
         End Select
     End Sub
-    Private Sub FrmListaProductos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        bs.DataSource = Nothing
-        bs2.DataSource = Nothing
-        dt.Clear()
-        dt2.Clear()
-        Llena_grupos()
-        With Me.DataGridView1
-            ' alternar color de filas
-            '.AlternatingRowsDefaultCellStyle.BackColor = My.Settings.BackColorAlt
-            '.DefaultCellStyle.BackColor = My.Settings.BackColor
-            '.DefaultCellStyle.Font = My.Settings.RowFont
-            '.ColumnHeadersDefaultCellStyle.Font = My.Settings.HeaderFont
-            ' Establecer el origen de datos para el DataGridview   
-            .DataSource = bs
-        End With
-        'Me.BackColor = My.Settings.FormsBackColor
 
-        'Me.GroupBox1.ForeColor = My.Settings.FontForeColor
-        'Me.GroupBox1.Font = My.Settings.FontStyle
-        'Me.CmdVertodo.BackColor = My.Settings.FormsBackColor
+    Private Sub FrmListaProductos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        DataGridView1.Refresh()
+        Llena_grupos()
     End Sub
 
     Private Sub Llena_grupos()
-        Dim dt_tmp As DataTable
-        Try
-            SQL = "SELECT clave, descripcion FROM grupos order by descripcion asc "
-            conn.Open()
-            If conn.State = ConnectionState.Open Then
-                myCommand = New SqlCommand(SQL, conn)
-                myAdapter.SelectCommand = myCommand
-                myAdapter.Fill(myDs)
-                dt_tmp = New DataTable
-                dt_tmp.Clear()
-                myAdapter.Fill(dt_tmp)
-                LstGrupo.DataSource = dt_tmp
-                LstGrupo.ValueMember = "clave"
-                LstGrupo.DisplayMember = "descripcion"
-                Limpia_Variables_SQL_y_Cierra_Conexion()
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
-            Limpia_Variables_SQL_y_Cierra_Conexion()
-        End Try
+
+        Dim wGrupos As List(Of tblGrupos) = DBModelo.GetGroupsAll
+        LstGrupo.Refresh()
+
+        LstGrupo.DataSource = wGrupos.ToList
+        LstGrupo.ValueMember = "clave"
+        LstGrupo.DisplayMember = "descripcion"
     End Sub
 
     Private Sub LstGrupo_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LstGrupo.Click
-        SQL = "SELECT codigoBarras, clave, descripcionProducto, unidadMedida, precioPublico, precioP1, precioP2, precioP3, stock, Inventario FROM productos where grupo  = '" & LstGrupo.Text & "'"
 
-        'Carga Lista de Clasificaciones
-        load_record_dgv(SQL, Me.DataGridView1, DBConnected)
+        Dim tProductos As List(Of tblProductos) = DBModelo.GetProductByGrupo(LstGrupo.Text)
 
-        'Aplica formato al DataGridView
-        load_layout_dgv_Listaproductos(Me.DataGridView1)
+        DataGridView1.DataSource = tProductos.ToList()
+
+        ConfiguraGrid()
     End Sub
 
-    Private Sub ImgSalirB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgSalirB.MouseLeave
-        Me.ImgSalirA.Visible = True
-        Me.ImgSalirB.Visible = False
+    Private Sub ConfiguraGrid()
+        DataGridView1.Columns(0).Visible = False
+
+        DataGridView1.Columns(1).HeaderText = "Cod.Barras"
+        DataGridView1.Columns(1).ReadOnly = True
+        DataGridView1.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridView1.Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridView1.Columns(1).Width = 70
+
+        DataGridView1.Columns(2).HeaderText = "Clave"
+        DataGridView1.Columns(2).ReadOnly = True
+        DataGridView1.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridView1.Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridView1.Columns(2).Width = 70
+
+        DataGridView1.Columns(3).HeaderText = "Descripción del Producto"
+        DataGridView1.Columns(3).ReadOnly = True
+        DataGridView1.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridView1.Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridView1.Columns(3).Width = 300
+
+        DataGridView1.Columns(4).HeaderText = "UoM"
+        DataGridView1.Columns(4).ReadOnly = True
+        DataGridView1.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridView1.Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridView1.Columns(4).Width = 80
+
+        DataGridView1.Columns(5).Visible = False
+        DataGridView1.Columns(6).Visible = False
+        DataGridView1.Columns(7).Visible = False
+        DataGridView1.Columns(8).Visible = False
+        DataGridView1.Columns(9).Visible = False
+        DataGridView1.Columns(10).Visible = False
+        DataGridView1.Columns(11).Visible = False
+        DataGridView1.Columns(12).Visible = False
+        DataGridView1.Columns(13).Visible = False
+        DataGridView1.Columns(14).Visible = False
+
+        DataGridView1.Columns(15).HeaderText = "Público"
+        DataGridView1.Columns(15).ReadOnly = True
+        DataGridView1.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DataGridView1.Columns(15).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridView1.Columns(15).Width = 100
+
+        DataGridView1.Columns(16).Visible = False
+        DataGridView1.Columns(17).Visible = False
+        DataGridView1.Columns(18).Visible = False
+
+        DataGridView1.Columns(19).HeaderText = "Stock"
+        DataGridView1.Columns(19).ReadOnly = True
+        DataGridView1.Columns(19).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        DataGridView1.Columns(19).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridView1.Columns(19).DefaultCellStyle.Format = "########0.00"
+        DataGridView1.Columns(19).Width = 100
+
+        DataGridView1.Columns(20).Visible = False
+        DataGridView1.Columns(21).Visible = False
+
+        DataGridView1.Columns(22).Visible = False
+        DataGridView1.Columns(23).Visible = False
+        DataGridView1.Columns(24).Visible = False
+        DataGridView1.Columns(25).Visible = False
+        DataGridView1.Columns(26).Visible = False
+
     End Sub
 
-    Private Sub ImgSalirA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgSalirA.MouseHover
-        Me.ImgSalirB.Visible = True
-        Me.ImgSalirA.Visible = False
+    Private Sub CmdVerTodosLosProductos_Click(sender As Object, e As EventArgs) Handles CmdVerTodosLosProductos.Click
+        Dim tProductos As List(Of tblProductos) = DBModelo.GetProductsAll
+
+        DataGridView1.DataSource = tProductos.ToList()
+
+        ConfiguraGrid()
     End Sub
 
-    Private Sub ImgVerProductosB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgVerProductosB.MouseLeave
-        Me.ImgVerProductosA.Visible = True
-        Me.ImgVerProductosB.Visible = False
-    End Sub
-
-    Private Sub ImgVerProductosA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgVerProductosA.MouseHover
-        Me.ImgVerProductosB.Visible = True
-        Me.ImgVerProductosA.Visible = False
-    End Sub
-
-    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) Handles ImgSalirB.Click
-        Me.Close()
-    End Sub
-
-    Private Sub ImgVerProductosB_Click(sender As System.Object, e As System.EventArgs) Handles ImgVerProductosB.Click
-        SQL = "select * from productos"
-        'Carga Lista de Clasificaciones
-        load_record_dgv(SQL, Me.DataGridView1, DBConnected)
-
-        'Aplica formato al DataGridView
-        load_layout_dgv_Listaproductos_todos(Me.DataGridView1)
+    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) Handles CmdSalir.Click
+        Close()
+        Dispose()
     End Sub
 End Class

@@ -37,13 +37,13 @@
         <EntityTypeShape EntityType="pv_salvadorModel1.tblVenta" Width="1.5" PointX="14.75" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pv_salvadorModel1.factura" Width="1.5" PointX="4.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pv_salvadorModel1.ordencomprade" Width="1.5" PointX="16.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="pv_salvadorModel1.tblProductos" Width="1.5" PointX="7.375" PointY="18.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblTicket" Width="1.5" PointX="17.375" PointY="13.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.nc_detalle" Width="1.5" PointX="17.375" PointY="5.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblVentaPedido" Width="1.5" PointX="17.375" PointY="0.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblTicketPedido" Width="1.5" PointX="9.375" PointY="18.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblTicketCotiza" Width="1.5" PointX="0.75" PointY="17.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblCotizacion" Width="1.5" PointX="11.375" PointY="18.75" />
+        <EntityTypeShape EntityType="pv_salvadorModel1.tblProductos" Width="1.5" PointX="17.375" PointY="18.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

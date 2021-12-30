@@ -16,6 +16,7 @@ Partial Public Class tblProductos
     Public Property clave As String
     Public Property descripcionProducto As String
     Public Property unidadMedida As String
+    Public Property marca As String
     Public Property grupo As String
     Public Property familia As String
     Public Property subfamilia As String

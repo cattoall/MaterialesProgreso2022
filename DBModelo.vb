@@ -455,6 +455,12 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function GetProductByGrupo(ByVal IdGrupo As String) As List(Of tblProductos)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.productos.Where(Function(i) i.grupo = IdGrupo).ToList()
+        End Using
+    End Function
+
     Shared Function GetProducts(ByVal ProdDesc As String, ByVal ProdCB As String, ByVal ProdClave As String, ByVal ProdGrp As String, ByVal ProdFam As String, ByVal ProdLin As String) As List(Of tblProductos)
         Using ctx As New pv_salvadorEntities1()
             Return ctx.productos.Where(Function(i) i.descripcionProducto.Contains(ProdDesc) And
@@ -469,6 +475,12 @@ Public Class DBModelo
     Shared Function GetProducts(ByVal IdProducto As Integer) As tblProductos
         Using ctx As New pv_salvadorEntities1()
             Return ctx.productos.Where(Function(i) i.IdProducto = IdProducto).FirstOrDefault
+        End Using
+    End Function
+
+    Shared Function GetProductsAll() As List(Of tblProductos)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.productos.OrderBy(Function(i) i.descripcionProducto).ToList()
         End Using
     End Function
 

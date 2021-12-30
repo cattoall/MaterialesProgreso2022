@@ -352,6 +352,7 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <Property Name="clave" Type="varchar" MaxLength="255" />
           <Property Name="descripcionProducto" Type="varchar" MaxLength="255" />
           <Property Name="unidadMedida" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="marca" Type="varchar" MaxLength="50" />
           <Property Name="grupo" Type="varchar" MaxLength="255" />
           <Property Name="familia" Type="varchar" MaxLength="255" />
           <Property Name="subfamilia" Type="varchar" MaxLength="255" />
@@ -1080,7 +1081,6 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <EntitySet Name="tblVentas" EntityType="pv_salvadorModel1.tblVenta" />
           <EntitySet Name="facturas" EntityType="Self.factura" />
           <EntitySet Name="ordencomprades" EntityType="Self.ordencomprade" />
-          <EntitySet Name="productos" EntityType="pv_salvadorModel1.tblProductos" />
           <FunctionImport Name="SP_DB_BACKUP">
             <Parameter Name="DatabaseName" Mode="In" Type="String" />
             <Parameter Name="FullPath" Mode="In" Type="String" />
@@ -1091,38 +1091,8 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <EntitySet Name="tblTicketPedidoes" EntityType="pv_salvadorModel1.tblTicketPedido" />
           <EntitySet Name="tblTicketCotizas" EntityType="pv_salvadorModel1.tblTicketCotiza" />
           <EntitySet Name="tblCotizacions" EntityType="pv_salvadorModel1.tblCotizacion" />
+          <EntitySet Name="productos" EntityType="pv_salvadorModel1.tblProductos" />
         </EntityContainer>
-        <EntityType Name="tblProductos">
-          <Key>
-            <PropertyRef Name="IdProducto" />
-          </Key>
-          <Property Name="IdProducto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigoBarras" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="clave" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="descripcionProducto" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="unidadMedida" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="grupo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="familia" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="subfamilia" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="linea" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="proveedor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="tipoVenta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="descuento" Type="Decimal" Precision="20" Scale="2" />
-          <Property Name="precioLista" Type="Decimal" Nullable="false" Precision="20" Scale="2" />
-          <Property Name="precioCosto" Type="Decimal" Precision="20" Scale="2" />
-          <Property Name="precioPublico" Type="Decimal" Precision="20" Scale="2" />
-          <Property Name="precioP1" Type="Decimal" Precision="20" Scale="2" />
-          <Property Name="precioP2" Type="Decimal" Precision="20" Scale="2" />
-          <Property Name="precioP3" Type="Decimal" Precision="20" Scale="2" />
-          <Property Name="stock" Type="Decimal" Nullable="false" Precision="20" Scale="2" />
-          <Property Name="precioManual" Type="Int32" Nullable="false" />
-          <Property Name="Inventario" Type="Boolean" Nullable="false" />
-          <Property Name="UsarTC" Type="Boolean" />
-          <Property Name="TC" Type="Decimal" Precision="10" Scale="5" />
-          <Property Name="ClaveProducto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ClaveUnidad" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="TasaCero" Type="Boolean" />
-        </EntityType>
         <EntityType Name="tblTicket">
           <Key>
             <PropertyRef Name="Id" />
@@ -1242,6 +1212,38 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="motivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="numeroFactura" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblProductos">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigoBarras" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="clave" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="descripcionProducto" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="unidadMedida" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="grupo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="familia" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="subfamilia" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="linea" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="proveedor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tipoVenta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="descuento" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="precioLista" Type="Decimal" Nullable="false" Precision="20" Scale="2" />
+          <Property Name="precioCosto" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="precioPublico" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="precioP1" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="precioP2" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="precioP3" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="stock" Type="Decimal" Nullable="false" Precision="20" Scale="2" />
+          <Property Name="precioManual" Type="Int32" Nullable="false" />
+          <Property Name="Inventario" Type="Boolean" Nullable="false" />
+          <Property Name="UsarTC" Type="Boolean" />
+          <Property Name="TC" Type="Decimal" Precision="10" Scale="5" />
+          <Property Name="ClaveProducto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveUnidad" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="TasaCero" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1675,38 +1677,6 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="productos">
-            <EntityTypeMapping TypeName="pv_salvadorModel1.tblProductos">
-              <MappingFragment StoreEntitySet="productos">
-                <ScalarProperty Name="TasaCero" ColumnName="TasaCero" />
-                <ScalarProperty Name="ClaveUnidad" ColumnName="ClaveUnidad" />
-                <ScalarProperty Name="ClaveProducto" ColumnName="ClaveProducto" />
-                <ScalarProperty Name="TC" ColumnName="TC" />
-                <ScalarProperty Name="UsarTC" ColumnName="UsarTC" />
-                <ScalarProperty Name="Inventario" ColumnName="Inventario" />
-                <ScalarProperty Name="precioManual" ColumnName="precioManual" />
-                <ScalarProperty Name="stock" ColumnName="stock" />
-                <ScalarProperty Name="precioP3" ColumnName="precioP3" />
-                <ScalarProperty Name="precioP2" ColumnName="precioP2" />
-                <ScalarProperty Name="precioP1" ColumnName="precioP1" />
-                <ScalarProperty Name="precioPublico" ColumnName="precioPublico" />
-                <ScalarProperty Name="precioCosto" ColumnName="precioCosto" />
-                <ScalarProperty Name="precioLista" ColumnName="precioLista" />
-                <ScalarProperty Name="descuento" ColumnName="descuento" />
-                <ScalarProperty Name="tipoVenta" ColumnName="tipoVenta" />
-                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
-                <ScalarProperty Name="linea" ColumnName="linea" />
-                <ScalarProperty Name="subfamilia" ColumnName="subfamilia" />
-                <ScalarProperty Name="familia" ColumnName="familia" />
-                <ScalarProperty Name="grupo" ColumnName="grupo" />
-                <ScalarProperty Name="unidadMedida" ColumnName="unidadMedida" />
-                <ScalarProperty Name="descripcionProducto" ColumnName="descripcionProducto" />
-                <ScalarProperty Name="clave" ColumnName="clave" />
-                <ScalarProperty Name="codigoBarras" ColumnName="codigoBarras" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_DB_BACKUP" FunctionName="pv_salvadorModel1.Store.SP_DB_BACKUP" />
           <EntitySetMapping Name="tblTickets">
             <EntityTypeMapping TypeName="pv_salvadorModel1.tblTicket">
@@ -1823,6 +1793,39 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
                 <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="nticket" ColumnName="nticket" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productos">
+            <EntityTypeMapping TypeName="pv_salvadorModel1.tblProductos">
+              <MappingFragment StoreEntitySet="productos">
+                <ScalarProperty Name="TasaCero" ColumnName="TasaCero" />
+                <ScalarProperty Name="ClaveUnidad" ColumnName="ClaveUnidad" />
+                <ScalarProperty Name="ClaveProducto" ColumnName="ClaveProducto" />
+                <ScalarProperty Name="TC" ColumnName="TC" />
+                <ScalarProperty Name="UsarTC" ColumnName="UsarTC" />
+                <ScalarProperty Name="Inventario" ColumnName="Inventario" />
+                <ScalarProperty Name="precioManual" ColumnName="precioManual" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="precioP3" ColumnName="precioP3" />
+                <ScalarProperty Name="precioP2" ColumnName="precioP2" />
+                <ScalarProperty Name="precioP1" ColumnName="precioP1" />
+                <ScalarProperty Name="precioPublico" ColumnName="precioPublico" />
+                <ScalarProperty Name="precioCosto" ColumnName="precioCosto" />
+                <ScalarProperty Name="precioLista" ColumnName="precioLista" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="tipoVenta" ColumnName="tipoVenta" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="linea" ColumnName="linea" />
+                <ScalarProperty Name="subfamilia" ColumnName="subfamilia" />
+                <ScalarProperty Name="familia" ColumnName="familia" />
+                <ScalarProperty Name="grupo" ColumnName="grupo" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="unidadMedida" ColumnName="unidadMedida" />
+                <ScalarProperty Name="descripcionProducto" ColumnName="descripcionProducto" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="codigoBarras" ColumnName="codigoBarras" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
