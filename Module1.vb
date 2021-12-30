@@ -5459,38 +5459,35 @@ Module Module1
         Return True
     End Function
 
+    Public Function ConvertToDataTable(Of T)(ByVal list As IList(Of T)) As DataTable
+        Dim table As New DataTable()
+        Dim fields() As FieldInfo = GetType(T).GetFields()
+        For Each field As FieldInfo In fields
+            table.Columns.Add(field.Name, field.FieldType)
+        Next
+        For Each item As T In list
+            Dim row As DataRow = table.NewRow()
+            For Each field As FieldInfo In fields
+                row(field.Name) = field.GetValue(item)
+            Next
+            table.Rows.Add(row)
+        Next
+        Return table
+    End Function
+
     '-----------------------------------TICKET ABONOO------------------------------------------------------------------------
-    Public Function ImprimeTicketAbono(ByVal NumeroTicket As String, ByVal Imprimir As Boolean, ByVal abono As String, ByVal DB As String) As Boolean
+    Public Function ImprimeTicketAbono(ByVal NumeroTicket As String, ByVal Imprimir As Boolean, ByVal abono As String) As Boolean
 
         Dim dt_detail As DataTable = New DataTable
-        Dim sql_detail As String = ""
 
-        sql_detail = "SELECT * FROM cobrar where claveCliente= '" & idClienteVenta & "' and  resto <> 0"
+        Dim wCobrar As List(Of tblCobrar) = DBModelo.GetCobrarByIdCliente(idClienteVenta)
 
-        Try
-            Select Case DB
-                Case "Wendy"
-                    SqlDataAdapter = New SqlDataAdapter(sql_detail, gv_ConStringWendy)
-                Case "Librada"
-                    SqlDataAdapter = New SqlDataAdapter(sql_detail, gv_ConStringLibrada)
-                Case "Salvador"
-                    SqlDataAdapter = New SqlDataAdapter(sql_detail, gv_ConStringSalvador)
-            End Select
-
-            Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
-
-            ' llenar el DataTable   
-            dt_detail.Clear()
-            dt_detail.Dispose()
-            dt_detail.Reset()
-            dt_detail = New DataTable
-            SqlDataAdapter.Fill(dt_detail)
-
-        Catch exSql As SqlException
-            Return False
-        Catch ex As Exception
-            Return False
-        End Try
+        ' llenar el DataTable   
+        dt_detail.Clear()
+        dt_detail.Dispose()
+        dt_detail.Reset()
+        dt_detail = New DataTable
+        dt_detail = ConvertToDataTable(wCobrar)
 
         Try
             Dim Report As New LocalReport

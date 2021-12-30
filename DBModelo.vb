@@ -1182,6 +1182,12 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function GetCobrarByIdCliente(ByVal IdCliente As Integer) As List(Of tblCobrar)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblCobrars.Where(Function(i) i.claveCliente = IdCliente).ToList()
+        End Using
+    End Function
+
 
 #End Region
 

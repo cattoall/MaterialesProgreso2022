@@ -1,6 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
-
-Public Class FrmGenerarAbono
+﻿Public Class FrmGenerarAbono
     Dim lv_fecha As String
 
     Private Sub FrmGenerarAbono_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
@@ -13,25 +11,10 @@ Public Class FrmGenerarAbono
     End Sub
     Private Sub FrmGenerarAbono_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtventa.Text = venta
-        txtventa.Enabled = False
 
         lblresto.Text = resto
         lv_fecha = DateTime.Now.ToShortDateString()
 
-
-        'Me.BackColor = My.Settings.FormsBackColor
-        'Me.lblresto.BackColor = My.Settings.FormsBackColor
-        'Me.LblVenta.BackColor = My.Settings.FormsBackColor
-        'Me.LblTotall.BackColor = My.Settings.FormsBackColor
-        'Me.Lblobserbaciones.BackColor = My.Settings.FormsBackColor
-
-        'Me.GroupBox1.ForeColor = My.Settings.FontForeColor
-        'Me.GroupBox1.Font = My.Settings.FontStyle
-        'Me.GroupBox2.ForeColor = My.Settings.FontForeColor
-        'Me.GroupBox2.Font = My.Settings.FontStyle
-
-        'Me.Cmdguardar.BackColor = My.Settings.FormsBackColor
-        'Me.Cmdsalir.BackColor = My.Settings.FormsBackColor
         txttotal.Focus()
         RbnTotal.Checked = True
         Call RbnTotal_CheckedChanged(sender, e)
@@ -44,26 +27,20 @@ Public Class FrmGenerarAbono
         total_nota = Trim(Replace(total_nota, "$", ""))
         total_nota = Trim(Replace(total_nota, ",", ""))
         lv_resto = (total - txttotal.Text)
-        Sql1.Clear()
-        Sql1.Append("UPDATE cobrar SET resto = ")
-        Sql1.AppendFormat("{0} ", lv_resto)
-        Sql1.Append("where n_remision = ")
-        Sql1.AppendFormat("'{0}' ", txtventa.Text)
-        Sql1.Append("and claveCliente = ")
-        Sql1.AppendFormat("'{0}' ", idcliente)
-        Sql1.Append("and tipoDocumento = ")
-        Sql1.AppendFormat("'{0}' ", tipodoc)
-        If Insertar_Registro(Sql1.ToString, DBConnected) = False Then
+
+        Dim w_cobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(Convert.ToInt32(txtventa.Text), tipodoc, idcliente)
+        w_cobrar.resto = lv_resto
+
+        If DBModelo.Update_Cobrar(w_cobrar) Then
+        Else
             MsgBox("Error al Actualizar registro en Tabla COBRAR", MsgBoxStyle.Information, "Generar Abono a Cuenta")
-            Limpia_Variables_SQL_y_Cierra_Conexion()
             Exit Sub
         End If
-        Limpia_Variables_SQL_y_Cierra_Conexion()
     End Sub
 
     Private Sub txttotal_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txttotal.KeyDown
         If e.KeyCode = Keys.Enter Then
-            ImgAbonarB_Click(sender, e)
+            CmdCobrar_Click(sender, e)
         End If
     End Sub
 
@@ -100,42 +77,7 @@ Public Class FrmGenerarAbono
         End If
     End Sub
 
-    Private Sub ImgSalirB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgSalirB.MouseLeave
-        Me.ImgSalirA.Visible = True
-        Me.ImgSalirB.Visible = False
-    End Sub
-
-    Private Sub ImgSalirA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgSalirA.MouseHover
-        Me.ImgSalirB.Visible = True
-        Me.ImgSalirA.Visible = False
-    End Sub
-
-    Private Sub ImgAbonarB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgAbonarB.MouseLeave
-        Me.ImgAbonarA.Visible = True
-        Me.ImgAbonarB.Visible = False
-    End Sub
-
-    Private Sub ImgAbonarA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgAbonarA.MouseHover
-        Me.ImgAbonarB.Visible = True
-        Me.ImgAbonarA.Visible = False
-    End Sub
-
-    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) Handles ImgSalirB.Click
-        Me.Close()
-        txttotal.Text = ""
-        txttotal.SelectAll()
-    End Sub
-
-    Private Sub ImgAbonarB_Click(sender As System.Object, e As System.EventArgs) Handles ImgAbonarB.Click
-        'resto = Trim(Replace(resto, "$", ""))
-        'resto = Trim(Replace(resto, ",", ""))
-        ''If txttotal.Text > resto Then
-        '    MsgBox("El monto es Superior al Resto", MsgBoxStyle.Exclamation, "Mensaje de Informacion")
-        '    txttotal.Focus()
-        '    txttotal.SelectAll()
-        '    Exit Sub
-        'End If
-
+    Private Sub CmdCobrar_Click(sender As Object, e As EventArgs) Handles CmdCobrar.Click
         If IsNumeric(txttotal.Text) = False Then
             MsgBox("Introduce solo valores Numericos", MsgBoxStyle.Exclamation, "Mensaje de Informacion")
             txttotal.Text = ""
@@ -156,39 +98,44 @@ Public Class FrmGenerarAbono
         Dim theDate As Date = Now.Date
         lv_fecha = theDate.ToString("yyyy-MM-dd")
 
-        Sql1.Clear()
-        Sql1.Append("INSERT INTO historial_pagos (fecha,numeroVenta,total,claveCliente,cliente,observaciones) values ( ")
-        Sql1.AppendFormat("'{0}', ", lv_fecha)
-        Sql1.AppendFormat("'{0}', ", txtventa.Text)
-        Sql1.AppendFormat("'{0}', ", txttotal.Text)
-        Sql1.AppendFormat("'{0}' ,", idcliente)
-        Sql1.AppendFormat("'{0}' ,", cliente)
-        Sql1.AppendFormat("'{0}' ", txtobservaciones.Text)
-        Sql1.Append(" )")
+        Dim w_HistPago As tblHistorialPagos = New tblHistorialPagos
 
-        If Insertar_Registro(Sql1.ToString, DBConnected) = False Then
+        w_HistPago.fecha = lv_fecha
+        w_HistPago.numeroVenta = txtventa.Text
+        w_HistPago.total = txttotal.Text
+        w_HistPago.claveCliente = idcliente
+        w_HistPago.cliente = cliente
+        w_HistPago.observaciones = txtobservaciones.Text
+        w_HistPago.tipoDocumento = tipodoc
+
+        If DBModelo.InsertHistorialPago(w_HistPago) Then
+            actualiza()
+            MsgBox("Abono a Cuenta Generado Correctamente", MsgBoxStyle.Information, "Generar Abono a Cuenta")
+            abono = txttotal.Text
+            resto_total = resto_total - abono
+            cuenta = txtventa.Text
+            fecha = ""
+            txtventa.Text = ""
+            txttotal.Text = ""
+            idcliente = ""
+            cliente = ""
+            txtobservaciones.Text = ""
+            tipodoc = ""
+            If ImprimeTicketAbono(cuenta, True, abono) = False Then
+                MsgBox("Error al Generar la Impresión de la Cotización, favor de Re-Imprimir", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+            Call CmdSalir_Click(sender, e)
+        Else
             MsgBox("Error al Insertar Registro en la Tabla HISTORIAL_PAGOS", MsgBoxStyle.Information, "Generar Abono a Cuenta")
-            Limpia_Variables_SQL_y_Cierra_Conexion()
             Exit Sub
         End If
-        actualiza()
-        MsgBox("Abono a Cuenta Generado Correctamente", MsgBoxStyle.Information, "Generar Abono a Cuenta")
-        abono = txttotal.Text
-        resto_total = resto_total - abono
-        cuenta = txtventa.Text
-        fecha = ""
-        txtventa.Text = ""
+    End Sub
+
+    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) Handles CmdSalir.Click
         txttotal.Text = ""
-        idcliente = ""
-        cliente = ""
-        txtobservaciones.Text = ""
-        Limpia_Variables_SQL_y_Cierra_Conexion()
+        txttotal.SelectAll()
+        Me.Dispose()
         Me.Close()
-        If ImprimeTicketAbono(cuenta, True, abono, DBConnected) = False Then
-            MsgBox("Error al Generar la Impresión de la Cotización, favor de Re-Imprimir", MsgBoxStyle.Information)
-            Limpia_Variables_SQL_y_Cierra_Conexion()
-            Exit Sub
-        End If
-        'Frmimprimirticketvb.ShowDialog()
     End Sub
 End Class
