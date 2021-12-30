@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XMLConfig>
+  <Terminal>01</Terminal>
+  <CDFI_XML_PATH>C:\CFDI\</CDFI_XML_PATH>
+  <CFDI_PASSWORD>DEMO700101XXX</CFDI_PASSWORD>
+  <CFDI_PRD>NO</CFDI_PRD>
+  <CFDI_USUARIO>DEMO700101XXX</CFDI_USUARIO>
+  <ConStringLibrada>data source=DESKTOP-DV3U9M1\SQLEXPRESS;initial catalog=pv_new;persist security info=True;user id=sa;password=gxKh72am;MultipleActiveResultSets=True;App=EntityFramework;</ConStringLibrada>
+  <ConStringSalvador>data source=DESKTOP-DV3U9M1\SQLEXPRESS;initial catalog=pv_salvador;persist security info=True;user id=sa;password=gxKh72am;MultipleActiveResultSets=True;App=EntityFramework;</ConStringSalvador>
+  <ConStringWendy>data source=DESKTOP-DV3U9M1\SQLEXPRESS;initial catalog=pv;persist security info=True;user id=sa;password=gxKh72am;MultipleActiveResultSets=True;App=EntityFramework;</ConStringWendy>
+  <MySQLBackUpPath>C:\MySQL_BackUp\</MySQLBackUpPath>
+  <MySQLData>--host=localhost --user=root --password=gxKh72am --databases pv_salvador &gt; -r </MySQLData>
+  <MySQLDataLibrada>--host=localhost --user=root --password=gxKh72am --databases pv_new &gt; -r </MySQLDataLibrada>
+  <MySQLDataWendy>--host=localhost --user=root --password=gxKh72am --databases pv &gt; -r </MySQLDataWendy>
+  <MySQLDump_Path>C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqldump.exe</MySQLDump_Path>
+  <Report_Path>C:\Users\MSI\Documents\Visual Studio 2017\Projects\Material Electrico 2015\PuntoDeVenta_MaterialesProgreso\bin\Debug\</Report_Path>
+  <Report_Path_FE>C:\Program Files\TSF Colima\Facturación Electrónica 3.3\</Report_Path_FE>
+  <RutaProceso>C:\CFDI\</RutaProceso>
+  <SAT_CER>C:\SDK2\certificados\lan7008173r5.cer</SAT_CER>
+  <SAT_KEY>C:\SDK2\certificados\lan7008173r5.key</SAT_KEY>
+  <SAT_PASS>12345678a</SAT_PASS>
+  <SerieFacturaLibrada>A</SerieFacturaLibrada>
+  <SerieFacturaSalvador>B</SerieFacturaSalvador>
+  <SerieNCLibrada>C</SerieNCLibrada>
+  <SerieNCSalvador>D</SerieNCSalvador>
+  <SMTP_CORREO>chavabautista@hotmail.com</SMTP_CORREO>
+  <SMTP_PASS>19720416</SMTP_PASS>
+</XMLConfig>
