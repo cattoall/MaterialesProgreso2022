@@ -1064,6 +1064,12 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function Get_PV_PedidosDetalleByFolioAndIdProducto(ByVal nPedido As Integer, ByVal IdProducto As Integer) As tblTicketPedido
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblTicketPedidoes.Where(Function(i) i.folio = nPedido And i.IdProducto = IdProducto).FirstOrDefault
+        End Using
+    End Function
+
     Shared Function Get_PV_TicketHeader(ByVal nTicket As Integer) As tblVenta
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblVentas.Where(Function(i) i.nticket = nTicket).FirstOrDefault
