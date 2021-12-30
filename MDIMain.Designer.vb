@@ -27,6 +27,7 @@ Partial Class MDIMain
         Me.CatálogosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MarcasDeProductosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FamiliasDeProductosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GruposDeProductosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LineasDeProductosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -77,7 +78,6 @@ Partial Class MDIMain
         Me.ToolStripStatusLabel9 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TssDB = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.MarcasDeProductosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -118,6 +118,13 @@ Partial Class MDIMain
         Me.ProveedoresToolStripMenuItem.Name = "ProveedoresToolStripMenuItem"
         Me.ProveedoresToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.ProveedoresToolStripMenuItem.Text = "Proveedores"
+        '
+        'MarcasDeProductosToolStripMenuItem
+        '
+        Me.MarcasDeProductosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.icon_component
+        Me.MarcasDeProductosToolStripMenuItem.Name = "MarcasDeProductosToolStripMenuItem"
+        Me.MarcasDeProductosToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.MarcasDeProductosToolStripMenuItem.Text = "Marcas de Productos"
         '
         'FamiliasDeProductosToolStripMenuItem
         '
@@ -447,8 +454,8 @@ Partial Class MDIMain
         'ToolStripStatusLabel8
         '
         Me.ToolStripStatusLabel8.Name = "ToolStripStatusLabel8"
-        Me.ToolStripStatusLabel8.Size = New System.Drawing.Size(148, 17)
-        Me.ToolStripStatusLabel8.Text = "Versión CFDI 3.3 : 20180312"
+        Me.ToolStripStatusLabel8.Size = New System.Drawing.Size(158, 17)
+        Me.ToolStripStatusLabel8.Text = "Versión CFDI 3.3 : 2022-01-01"
         '
         'ToolStripStatusLabel9
         '
@@ -465,13 +472,6 @@ Partial Class MDIMain
         '
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
-        '
-        'MarcasDeProductosToolStripMenuItem
-        '
-        Me.MarcasDeProductosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.icon_component
-        Me.MarcasDeProductosToolStripMenuItem.Name = "MarcasDeProductosToolStripMenuItem"
-        Me.MarcasDeProductosToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
-        Me.MarcasDeProductosToolStripMenuItem.Text = "Marcas de Productos"
         '
         'MDIMain
         '
