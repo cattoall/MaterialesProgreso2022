@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="8ee950fd9763423eb188fe8fc246434d" Name="Diagram1" ZoomLevel="91">
         <EntityTypeShape EntityType="pv_salvadorModel1.tblClientes" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="pv_salvadorModel1.tblCobrar" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pv_salvadorModel1.complementopagosd" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pv_salvadorModel1.complementopagosh" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pv_salvadorModel1.compra" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
@@ -44,6 +43,7 @@
         <EntityTypeShape EntityType="pv_salvadorModel1.tblTicketCotiza" Width="1.5" PointX="0.75" PointY="17.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblCotizacion" Width="1.5" PointX="11.375" PointY="18.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblProductos" Width="1.5" PointX="17.375" PointY="18.75" />
+        <EntityTypeShape EntityType="pv_salvadorModel1.tblCobrar" Width="1.5" PointX="5.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

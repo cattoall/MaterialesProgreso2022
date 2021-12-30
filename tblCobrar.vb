@@ -20,5 +20,6 @@ Partial Public Class tblCobrar
     Public Property resto As Decimal
     Public Property claveCliente As String
     Public Property tipoDocumento As String
+    Public Property facturado As Nullable(Of Long)
 
 End Class

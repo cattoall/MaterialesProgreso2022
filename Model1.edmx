@@ -49,6 +49,7 @@
           <Property Name="resto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="claveCliente" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="tipoDocumento" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="facturado" Type="bigint" />
         </EntityType>
         <EntityType Name="complementopagosd">
           <Key>
@@ -671,20 +672,6 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <Property Name="FormaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="UsoCFDI" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="tblCobrar">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="n_remision" Type="Int64" />
-          <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="fecha_venta" Type="DateTime" Precision="0" />
-          <Property Name="fecha_limite" Type="DateTime" Precision="0" />
-          <Property Name="cliente" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="resto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="claveCliente" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="tipoDocumento" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="complementopagosd">
           <Key>
             <PropertyRef Name="n_pago" />
@@ -1050,7 +1037,6 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
         </EntityType>
         <EntityContainer Name="pv_salvadorEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblClientes" EntityType="pv_salvadorModel1.tblClientes" />
-          <EntitySet Name="tblCobrars" EntityType="pv_salvadorModel1.tblCobrar" />
           <EntitySet Name="complementopagosds" EntityType="Self.complementopagosd" />
           <EntitySet Name="complementopagoshes" EntityType="Self.complementopagosh" />
           <EntitySet Name="compras" EntityType="Self.compra" />
@@ -1092,6 +1078,7 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <EntitySet Name="tblTicketCotizas" EntityType="pv_salvadorModel1.tblTicketCotiza" />
           <EntitySet Name="tblCotizacions" EntityType="pv_salvadorModel1.tblCotizacion" />
           <EntitySet Name="productos" EntityType="pv_salvadorModel1.tblProductos" />
+          <EntitySet Name="tblCobrars" EntityType="pv_salvadorModel1.tblCobrar" />
         </EntityContainer>
         <EntityType Name="tblTicket">
           <Key>
@@ -1245,6 +1232,21 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <Property Name="ClaveUnidad" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="TasaCero" Type="Boolean" />
         </EntityType>
+        <EntityType Name="tblCobrar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="n_remision" Type="Int64" />
+          <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="fecha_venta" Type="DateTime" Precision="0" />
+          <Property Name="fecha_limite" Type="DateTime" Precision="0" />
+          <Property Name="cliente" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="resto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="claveCliente" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="tipoDocumento" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="facturado" Type="Int64" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1280,21 +1282,6 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
                 <ScalarProperty Name="tasa_cero" ColumnName="tasa_cero" />
                 <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
                 <ScalarProperty Name="UsoCFDI" ColumnName="UsoCFDI" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblCobrars">
-            <EntityTypeMapping TypeName="pv_salvadorModel1.tblCobrar">
-              <MappingFragment StoreEntitySet="cobrar">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="n_remision" ColumnName="n_remision" />
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="fecha_venta" ColumnName="fecha_venta" />
-                <ScalarProperty Name="fecha_limite" ColumnName="fecha_limite" />
-                <ScalarProperty Name="cliente" ColumnName="cliente" />
-                <ScalarProperty Name="resto" ColumnName="resto" />
-                <ScalarProperty Name="claveCliente" ColumnName="claveCliente" />
-                <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1826,6 +1813,22 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
                 <ScalarProperty Name="clave" ColumnName="clave" />
                 <ScalarProperty Name="codigoBarras" ColumnName="codigoBarras" />
                 <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCobrars">
+            <EntityTypeMapping TypeName="pv_salvadorModel1.tblCobrar">
+              <MappingFragment StoreEntitySet="cobrar">
+                <ScalarProperty Name="facturado" ColumnName="facturado" />
+                <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
+                <ScalarProperty Name="claveCliente" ColumnName="claveCliente" />
+                <ScalarProperty Name="resto" ColumnName="resto" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="fecha_limite" ColumnName="fecha_limite" />
+                <ScalarProperty Name="fecha_venta" ColumnName="fecha_venta" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="n_remision" ColumnName="n_remision" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

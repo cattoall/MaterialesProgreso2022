@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class FrmListadoDeudores
-    Inherits System.Windows.Forms.Form
+    Inherits MetroFramework.Forms.MetroForm
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -23,108 +23,113 @@ Partial Class FrmListadoDeudores
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ImgReImpB = New System.Windows.Forms.PictureBox()
-        Me.ImgReImpA = New System.Windows.Forms.PictureBox()
-        Me.ImgSalirB = New System.Windows.Forms.PictureBox()
-        Me.ImgSalirA = New System.Windows.Forms.PictureBox()
+        Me.CmdImprimir = New MetroFramework.Controls.MetroButton()
+        Me.CmdSalir = New MetroFramework.Controls.MetroButton()
+        Me.CmdGenerarReporte = New MetroFramework.Controls.MetroButton()
+        Me.DataGridView1 = New MetroFramework.Controls.MetroGrid()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.lbltotal = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.dtfinal = New System.Windows.Forms.DateTimePicker()
-        Me.dtinicio = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.ImgVerReporteA = New System.Windows.Forms.PictureBox()
-        Me.ImgVerReporteB = New System.Windows.Forms.PictureBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.dtinicio = New MetroFramework.Controls.MetroDateTime()
+        Me.dtfinal = New MetroFramework.Controls.MetroDateTime()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.ImgReImpB, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImgReImpA, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImgSalirB, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImgSalirA, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImgVerReporteA, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImgVerReporteB, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
-        Me.GroupBox1.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.GroupBox1.Controls.Add(Me.ImgReImpB)
-        Me.GroupBox1.Controls.Add(Me.ImgReImpA)
-        Me.GroupBox1.Controls.Add(Me.ImgSalirB)
-        Me.GroupBox1.Controls.Add(Me.ImgSalirA)
+        Me.GroupBox1.Controls.Add(Me.dtfinal)
+        Me.GroupBox1.Controls.Add(Me.dtinicio)
+        Me.GroupBox1.Controls.Add(Me.CmdImprimir)
+        Me.GroupBox1.Controls.Add(Me.CmdSalir)
+        Me.GroupBox1.Controls.Add(Me.CmdGenerarReporte)
+        Me.GroupBox1.Controls.Add(Me.DataGridView1)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.lbltotal)
         Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.dtfinal)
-        Me.GroupBox1.Controls.Add(Me.dtinicio)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.DataGridView1)
-        Me.GroupBox1.Controls.Add(Me.ImgVerReporteA)
-        Me.GroupBox1.Controls.Add(Me.ImgVerReporteB)
         Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 0)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 63)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(883, 440)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         '
-        'ImgReImpB
+        'CmdImprimir
         '
-        Me.ImgReImpB.BackColor = System.Drawing.Color.Transparent
-        Me.ImgReImpB.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ImgReImpB.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Reimprimir
-        Me.ImgReImpB.Location = New System.Drawing.Point(18, 389)
-        Me.ImgReImpB.Name = "ImgReImpB"
-        Me.ImgReImpB.Size = New System.Drawing.Size(46, 47)
-        Me.ImgReImpB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgReImpB.TabIndex = 62
-        Me.ImgReImpB.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.ImgReImpB, "Imprimir Reporte")
-        Me.ImgReImpB.Visible = False
+        Me.CmdImprimir.Location = New System.Drawing.Point(313, 405)
+        Me.CmdImprimir.Name = "CmdImprimir"
+        Me.CmdImprimir.Size = New System.Drawing.Size(75, 23)
+        Me.CmdImprimir.TabIndex = 68
+        Me.CmdImprimir.Text = "Imprimir"
+        Me.CmdImprimir.UseSelectable = True
         '
-        'ImgReImpA
+        'CmdSalir
         '
-        Me.ImgReImpA.BackColor = System.Drawing.Color.Transparent
-        Me.ImgReImpA.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Reimprimir
-        Me.ImgReImpA.Location = New System.Drawing.Point(21, 392)
-        Me.ImgReImpA.Name = "ImgReImpA"
-        Me.ImgReImpA.Size = New System.Drawing.Size(40, 43)
-        Me.ImgReImpA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgReImpA.TabIndex = 61
-        Me.ImgReImpA.TabStop = False
+        Me.CmdSalir.Location = New System.Drawing.Point(802, 43)
+        Me.CmdSalir.Name = "CmdSalir"
+        Me.CmdSalir.Size = New System.Drawing.Size(75, 23)
+        Me.CmdSalir.TabIndex = 67
+        Me.CmdSalir.Text = "Salir"
+        Me.CmdSalir.UseSelectable = True
         '
-        'ImgSalirB
+        'CmdGenerarReporte
         '
-        Me.ImgSalirB.BackColor = System.Drawing.Color.Transparent
-        Me.ImgSalirB.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.ImgSalirB.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ImgSalirB.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.btn_salir
-        Me.ImgSalirB.Location = New System.Drawing.Point(776, 26)
-        Me.ImgSalirB.Name = "ImgSalirB"
-        Me.ImgSalirB.Size = New System.Drawing.Size(94, 35)
-        Me.ImgSalirB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgSalirB.TabIndex = 46
-        Me.ImgSalirB.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.ImgSalirB, "Salir (Esc)")
-        Me.ImgSalirB.Visible = False
+        Me.CmdGenerarReporte.Location = New System.Drawing.Point(313, 38)
+        Me.CmdGenerarReporte.Name = "CmdGenerarReporte"
+        Me.CmdGenerarReporte.Size = New System.Drawing.Size(120, 28)
+        Me.CmdGenerarReporte.TabIndex = 66
+        Me.CmdGenerarReporte.Text = "Generar Listado"
+        Me.CmdGenerarReporte.UseSelectable = True
         '
-        'ImgSalirA
+        'DataGridView1
         '
-        Me.ImgSalirA.BackColor = System.Drawing.Color.Transparent
-        Me.ImgSalirA.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.ImgSalirA.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ImgSalirA.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.btn_salir
-        Me.ImgSalirA.Location = New System.Drawing.Point(779, 27)
-        Me.ImgSalirA.Name = "ImgSalirA"
-        Me.ImgSalirA.Size = New System.Drawing.Size(88, 31)
-        Me.ImgSalirA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgSalirA.TabIndex = 45
-        Me.ImgSalirA.TabStop = False
+        Me.DataGridView1.AllowUserToResizeRows = False
+        Me.DataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.DataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.DataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle8
+        Me.DataGridView1.EnableHeadersVisualStyles = False
+        Me.DataGridView1.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.DataGridView1.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.DataGridView1.Location = New System.Drawing.Point(6, 72)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
+        Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DataGridView1.Size = New System.Drawing.Size(871, 314)
+        Me.DataGridView1.TabIndex = 65
         '
         'Label4
         '
@@ -157,22 +162,6 @@ Partial Class FrmListadoDeudores
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "Fecha Final"
         '
-        'dtfinal
-        '
-        Me.dtfinal.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtfinal.Location = New System.Drawing.Point(156, 40)
-        Me.dtfinal.Name = "dtfinal"
-        Me.dtfinal.Size = New System.Drawing.Size(114, 26)
-        Me.dtfinal.TabIndex = 5
-        '
-        'dtinicio
-        '
-        Me.dtinicio.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtinicio.Location = New System.Drawing.Point(18, 40)
-        Me.dtinicio.Name = "dtinicio"
-        Me.dtinicio.Size = New System.Drawing.Size(118, 26)
-        Me.dtinicio.TabIndex = 4
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -183,51 +172,6 @@ Partial Class FrmListadoDeudores
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Fecha Inicio"
         '
-        'DataGridView1
-        '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver
-        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(6, 74)
-        Me.DataGridView1.MultiSelect = False
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.RowHeadersVisible = False
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        Me.DataGridView1.RowsDefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(871, 312)
-        Me.DataGridView1.TabIndex = 0
-        '
-        'ImgVerReporteA
-        '
-        Me.ImgVerReporteA.BackColor = System.Drawing.Color.Transparent
-        Me.ImgVerReporteA.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.verreportes
-        Me.ImgVerReporteA.Location = New System.Drawing.Point(306, 13)
-        Me.ImgVerReporteA.Name = "ImgVerReporteA"
-        Me.ImgVerReporteA.Size = New System.Drawing.Size(49, 57)
-        Me.ImgVerReporteA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgVerReporteA.TabIndex = 63
-        Me.ImgVerReporteA.TabStop = False
-        '
-        'ImgVerReporteB
-        '
-        Me.ImgVerReporteB.BackColor = System.Drawing.Color.Transparent
-        Me.ImgVerReporteB.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ImgVerReporteB.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.verreportes
-        Me.ImgVerReporteB.Location = New System.Drawing.Point(303, 10)
-        Me.ImgVerReporteB.Name = "ImgVerReporteB"
-        Me.ImgVerReporteB.Size = New System.Drawing.Size(54, 61)
-        Me.ImgVerReporteB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgVerReporteB.TabIndex = 64
-        Me.ImgVerReporteB.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.ImgVerReporteB, "Ver Reporte")
-        Me.ImgVerReporteB.Visible = False
-        '
         'ToolTip1
         '
         Me.ToolTip1.AutomaticDelay = 50
@@ -235,45 +179,55 @@ Partial Class FrmListadoDeudores
         Me.ToolTip1.InitialDelay = 50
         Me.ToolTip1.ReshowDelay = 10
         '
+        'dtinicio
+        '
+        Me.dtinicio.CustomFormat = "dd/MM/yyyy"
+        Me.dtinicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtinicio.Location = New System.Drawing.Point(22, 38)
+        Me.dtinicio.MinimumSize = New System.Drawing.Size(0, 29)
+        Me.dtinicio.Name = "dtinicio"
+        Me.dtinicio.Size = New System.Drawing.Size(127, 29)
+        Me.dtinicio.TabIndex = 69
+        '
+        'dtfinal
+        '
+        Me.dtfinal.CustomFormat = "dd/MM/yyyy"
+        Me.dtfinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtfinal.Location = New System.Drawing.Point(160, 37)
+        Me.dtfinal.MinimumSize = New System.Drawing.Size(0, 29)
+        Me.dtfinal.Name = "dtfinal"
+        Me.dtfinal.Size = New System.Drawing.Size(127, 29)
+        Me.dtfinal.TabIndex = 70
+        '
         'FrmListadoDeudores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.ClientSize = New System.Drawing.Size(907, 458)
+        Me.ClientSize = New System.Drawing.Size(907, 520)
         Me.ControlBox = False
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.Name = "FrmListadoDeudores"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Listado de Deudores"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.ImgReImpB, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImgReImpA, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImgSalirB, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImgSalirA, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImgVerReporteA, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImgVerReporteB, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents lbltotal As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents dtfinal As System.Windows.Forms.DateTimePicker
-    Friend WithEvents dtinicio As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents ImgSalirB As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgSalirA As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgReImpB As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgReImpA As System.Windows.Forms.PictureBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents ImgVerReporteA As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgVerReporteB As System.Windows.Forms.PictureBox
+    Friend WithEvents DataGridView1 As MetroFramework.Controls.MetroGrid
+    Friend WithEvents CmdGenerarReporte As MetroFramework.Controls.MetroButton
+    Friend WithEvents CmdSalir As MetroFramework.Controls.MetroButton
+    Friend WithEvents CmdImprimir As MetroFramework.Controls.MetroButton
+    Friend WithEvents dtinicio As MetroFramework.Controls.MetroDateTime
+    Friend WithEvents dtfinal As MetroFramework.Controls.MetroDateTime
 End Class

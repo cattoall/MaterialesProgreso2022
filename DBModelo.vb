@@ -1097,6 +1097,13 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function GetCobrarByDates(ByVal DateFrom As String, ByVal DateTo As String) As List(Of tblCobrar)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblCobrars.Where(Function(i) i.fecha_venta >= DateFrom And i.fecha_venta <= DateTo And i.resto <> 0).ToList()
+        End Using
+    End Function
+
+
     Shared Function Update_Cobrar(ByVal strCobrar As tblCobrar) As Boolean
         Try
             Using ctx As New pv_salvadorEntities1()
