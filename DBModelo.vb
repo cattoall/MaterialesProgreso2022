@@ -1240,4 +1240,59 @@ Public Class DBModelo
     End Function
 #End Region
 
+#Region "Seccion <<Usuarios>>"
+    Shared Function GetUsuariosAll() As List(Of tblUsuarios)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblUsuarios.ToList()
+        End Using
+    End Function
+
+    Shared Function GetUsuario(ByVal Usuario As String) As tblUsuarios
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblUsuarios.Where(Function(i) i.usuario1 = Usuario).FirstOrDefault
+        End Using
+    End Function
+
+    Shared Function InsertUsuario(ByVal strUsuario As tblUsuarios) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.tblUsuarios.Add(strUsuario)
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function UpdateUsuario(ByVal strUsuario As tblUsuarios) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.tblUsuarios.Attach(strUsuario)
+                ctx.Entry(strUsuario).State = EntityState.Modified
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function DeleteUsuario(ByVal strUsuario As tblUsuarios) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                If Not IsNothing(strUsuario) Then
+                    ctx.Entry(strUsuario).State = EntityState.Deleted
+                    ctx.SaveChanges()
+                End If
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+#End Region
+
+
 End Class

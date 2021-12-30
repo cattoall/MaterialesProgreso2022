@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class FrmUsuarios
-    Inherits System.Windows.Forms.Form
+    Inherits MetroFramework.Forms.MetroForm
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -24,16 +24,15 @@ Partial Class FrmUsuarios
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.CmdSalir = New MetroFramework.Controls.MetroButton()
+        Me.CmdEliminar = New MetroFramework.Controls.MetroButton()
+        Me.CmdCrear = New MetroFramework.Controls.MetroButton()
         Me.lblA3 = New System.Windows.Forms.Label()
         Me.lblA2 = New System.Windows.Forms.Label()
         Me.lblA1 = New System.Windows.Forms.Label()
         Me.lblObligatorio = New System.Windows.Forms.Label()
         Me.lblAsterisco = New System.Windows.Forms.Label()
-        Me.ImgCrearNewB = New System.Windows.Forms.PictureBox()
-        Me.ImgCrearNewA = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.ImgSalirB = New System.Windows.Forms.PictureBox()
-        Me.ImgSalirA = New System.Windows.Forms.PictureBox()
         Me.Lblempleado = New System.Windows.Forms.Label()
         Me.Lbladmin = New System.Windows.Forms.Label()
         Me.Lblcontraseña = New System.Windows.Forms.Label()
@@ -45,36 +44,22 @@ Partial Class FrmUsuarios
         Me.txtcontraseña = New System.Windows.Forms.TextBox()
         Me.txtusuario = New System.Windows.Forms.TextBox()
         Me.LstUsuarios = New System.Windows.Forms.ListBox()
-        Me.ImgEliminarB = New System.Windows.Forms.PictureBox()
-        Me.ImgEliminarA = New System.Windows.Forms.PictureBox()
-        Me.ImgGuardarA = New System.Windows.Forms.PictureBox()
-        Me.ImgGuardarB = New System.Windows.Forms.PictureBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox1.SuspendLayout()
-        CType(Me.ImgCrearNewB, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImgCrearNewA, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImgSalirB, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImgSalirA, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImgEliminarB, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImgEliminarA, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImgGuardarA, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ImgGuardarB, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
-        Me.GroupBox1.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
+        Me.GroupBox1.Controls.Add(Me.CmdSalir)
+        Me.GroupBox1.Controls.Add(Me.CmdEliminar)
+        Me.GroupBox1.Controls.Add(Me.CmdCrear)
         Me.GroupBox1.Controls.Add(Me.lblA3)
         Me.GroupBox1.Controls.Add(Me.lblA2)
         Me.GroupBox1.Controls.Add(Me.lblA1)
         Me.GroupBox1.Controls.Add(Me.lblObligatorio)
         Me.GroupBox1.Controls.Add(Me.lblAsterisco)
-        Me.GroupBox1.Controls.Add(Me.ImgCrearNewB)
-        Me.GroupBox1.Controls.Add(Me.ImgCrearNewA)
         Me.GroupBox1.Controls.Add(Me.PictureBox1)
-        Me.GroupBox1.Controls.Add(Me.ImgSalirB)
-        Me.GroupBox1.Controls.Add(Me.ImgSalirA)
         Me.GroupBox1.Controls.Add(Me.Lblempleado)
         Me.GroupBox1.Controls.Add(Me.Lbladmin)
         Me.GroupBox1.Controls.Add(Me.Lblcontraseña)
@@ -86,16 +71,39 @@ Partial Class FrmUsuarios
         Me.GroupBox1.Controls.Add(Me.txtcontraseña)
         Me.GroupBox1.Controls.Add(Me.txtusuario)
         Me.GroupBox1.Controls.Add(Me.LstUsuarios)
-        Me.GroupBox1.Controls.Add(Me.ImgGuardarB)
-        Me.GroupBox1.Controls.Add(Me.ImgEliminarB)
-        Me.GroupBox1.Controls.Add(Me.ImgEliminarA)
-        Me.GroupBox1.Controls.Add(Me.ImgGuardarA)
         Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 0)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 62)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(614, 423)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
+        '
+        'CmdSalir
+        '
+        Me.CmdSalir.Location = New System.Drawing.Point(419, 320)
+        Me.CmdSalir.Name = "CmdSalir"
+        Me.CmdSalir.Size = New System.Drawing.Size(116, 32)
+        Me.CmdSalir.TabIndex = 84
+        Me.CmdSalir.Text = "Salir"
+        Me.CmdSalir.UseSelectable = True
+        '
+        'CmdEliminar
+        '
+        Me.CmdEliminar.Location = New System.Drawing.Point(419, 282)
+        Me.CmdEliminar.Name = "CmdEliminar"
+        Me.CmdEliminar.Size = New System.Drawing.Size(116, 32)
+        Me.CmdEliminar.TabIndex = 83
+        Me.CmdEliminar.Text = "Eliminar Usuario"
+        Me.CmdEliminar.UseSelectable = True
+        '
+        'CmdCrear
+        '
+        Me.CmdCrear.Location = New System.Drawing.Point(419, 244)
+        Me.CmdCrear.Name = "CmdCrear"
+        Me.CmdCrear.Size = New System.Drawing.Size(116, 32)
+        Me.CmdCrear.TabIndex = 82
+        Me.CmdCrear.Text = "Crear Usuario"
+        Me.CmdCrear.UseSelectable = True
         '
         'lblA3
         '
@@ -162,31 +170,6 @@ Partial Class FrmUsuarios
         Me.lblAsterisco.Text = "*"
         Me.lblAsterisco.Visible = False
         '
-        'ImgCrearNewB
-        '
-        Me.ImgCrearNewB.BackColor = System.Drawing.Color.Transparent
-        Me.ImgCrearNewB.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ImgCrearNewB.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.CrateNew
-        Me.ImgCrearNewB.Location = New System.Drawing.Point(383, 246)
-        Me.ImgCrearNewB.Name = "ImgCrearNewB"
-        Me.ImgCrearNewB.Size = New System.Drawing.Size(186, 35)
-        Me.ImgCrearNewB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgCrearNewB.TabIndex = 54
-        Me.ImgCrearNewB.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.ImgCrearNewB, "Nuevo")
-        Me.ImgCrearNewB.Visible = False
-        '
-        'ImgCrearNewA
-        '
-        Me.ImgCrearNewA.BackColor = System.Drawing.Color.Transparent
-        Me.ImgCrearNewA.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.CrateNew
-        Me.ImgCrearNewA.Location = New System.Drawing.Point(392, 248)
-        Me.ImgCrearNewA.Name = "ImgCrearNewA"
-        Me.ImgCrearNewA.Size = New System.Drawing.Size(165, 31)
-        Me.ImgCrearNewA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgCrearNewA.TabIndex = 53
-        Me.ImgCrearNewA.TabStop = False
-        '
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
@@ -197,34 +180,6 @@ Partial Class FrmUsuarios
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 57
         Me.PictureBox1.TabStop = False
-        '
-        'ImgSalirB
-        '
-        Me.ImgSalirB.BackColor = System.Drawing.Color.Transparent
-        Me.ImgSalirB.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.ImgSalirB.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ImgSalirB.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.btn_salir
-        Me.ImgSalirB.Location = New System.Drawing.Point(425, 359)
-        Me.ImgSalirB.Name = "ImgSalirB"
-        Me.ImgSalirB.Size = New System.Drawing.Size(94, 35)
-        Me.ImgSalirB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgSalirB.TabIndex = 56
-        Me.ImgSalirB.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.ImgSalirB, "Salir (Esc)")
-        Me.ImgSalirB.Visible = False
-        '
-        'ImgSalirA
-        '
-        Me.ImgSalirA.BackColor = System.Drawing.Color.Transparent
-        Me.ImgSalirA.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.ImgSalirA.Cursor = System.Windows.Forms.Cursors.Arrow
-        Me.ImgSalirA.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.btn_salir
-        Me.ImgSalirA.Location = New System.Drawing.Point(428, 361)
-        Me.ImgSalirA.Name = "ImgSalirA"
-        Me.ImgSalirA.Size = New System.Drawing.Size(88, 31)
-        Me.ImgSalirA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgSalirA.TabIndex = 55
-        Me.ImgSalirA.TabStop = False
         '
         'Lblempleado
         '
@@ -328,57 +283,6 @@ Partial Class FrmUsuarios
         Me.LstUsuarios.Size = New System.Drawing.Size(261, 403)
         Me.LstUsuarios.TabIndex = 1
         '
-        'ImgEliminarB
-        '
-        Me.ImgEliminarB.BackColor = System.Drawing.Color.Transparent
-        Me.ImgEliminarB.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ImgEliminarB.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Eliminar123
-        Me.ImgEliminarB.Location = New System.Drawing.Point(419, 308)
-        Me.ImgEliminarB.Name = "ImgEliminarB"
-        Me.ImgEliminarB.Size = New System.Drawing.Size(110, 35)
-        Me.ImgEliminarB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgEliminarB.TabIndex = 76
-        Me.ImgEliminarB.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.ImgEliminarB, "Eliminar")
-        Me.ImgEliminarB.Visible = False
-        '
-        'ImgEliminarA
-        '
-        Me.ImgEliminarA.BackColor = System.Drawing.Color.Transparent
-        Me.ImgEliminarA.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Eliminar123
-        Me.ImgEliminarA.Location = New System.Drawing.Point(424, 309)
-        Me.ImgEliminarA.Name = "ImgEliminarA"
-        Me.ImgEliminarA.Size = New System.Drawing.Size(100, 32)
-        Me.ImgEliminarA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgEliminarA.TabIndex = 75
-        Me.ImgEliminarA.TabStop = False
-        '
-        'ImgGuardarA
-        '
-        Me.ImgGuardarA.BackColor = System.Drawing.Color.Transparent
-        Me.ImgGuardarA.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.img_guardar
-        Me.ImgGuardarA.Location = New System.Drawing.Point(300, 247)
-        Me.ImgGuardarA.Name = "ImgGuardarA"
-        Me.ImgGuardarA.Size = New System.Drawing.Size(35, 32)
-        Me.ImgGuardarA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgGuardarA.TabIndex = 73
-        Me.ImgGuardarA.TabStop = False
-        Me.ImgGuardarA.Visible = False
-        '
-        'ImgGuardarB
-        '
-        Me.ImgGuardarB.BackColor = System.Drawing.Color.Transparent
-        Me.ImgGuardarB.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ImgGuardarB.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.img_guardar
-        Me.ImgGuardarB.Location = New System.Drawing.Point(297, 244)
-        Me.ImgGuardarB.Name = "ImgGuardarB"
-        Me.ImgGuardarB.Size = New System.Drawing.Size(41, 38)
-        Me.ImgGuardarB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgGuardarB.TabIndex = 72
-        Me.ImgGuardarB.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.ImgGuardarB, "Guardar")
-        Me.ImgGuardarB.Visible = False
-        '
         'ToolTip1
         '
         Me.ToolTip1.AutomaticDelay = 50
@@ -391,26 +295,17 @@ Partial Class FrmUsuarios
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.ClientSize = New System.Drawing.Size(638, 429)
+        Me.ClientSize = New System.Drawing.Size(638, 515)
         Me.ControlBox = False
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.Name = "FrmUsuarios"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Usuarios"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.ImgCrearNewB, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImgCrearNewA, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImgSalirB, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImgSalirA, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImgEliminarB, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImgEliminarA, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImgGuardarA, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ImgGuardarB, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -427,18 +322,13 @@ Partial Class FrmUsuarios
     Friend WithEvents Lblempleado As System.Windows.Forms.Label
     Friend WithEvents Lbladmin As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents ImgSalirB As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgSalirA As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgGuardarB As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgGuardarA As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgEliminarB As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgEliminarA As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgCrearNewB As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgCrearNewA As System.Windows.Forms.PictureBox
     Friend WithEvents lblA3 As System.Windows.Forms.Label
     Friend WithEvents lblA2 As System.Windows.Forms.Label
     Friend WithEvents lblA1 As System.Windows.Forms.Label
     Friend WithEvents lblObligatorio As System.Windows.Forms.Label
     Friend WithEvents lblAsterisco As System.Windows.Forms.Label
+    Friend WithEvents CmdSalir As MetroFramework.Controls.MetroButton
+    Friend WithEvents CmdEliminar As MetroFramework.Controls.MetroButton
+    Friend WithEvents CmdCrear As MetroFramework.Controls.MetroButton
 End Class

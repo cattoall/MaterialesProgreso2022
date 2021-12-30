@@ -1,5 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports MySql.Data.MySqlClient
 
 Public Class FrmUsuarios
 
@@ -14,23 +13,14 @@ Public Class FrmUsuarios
     End Sub
 
     Private Sub FrmUsuarios_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        bs.DataSource = Nothing
-        bs2.DataSource = Nothing
-        dt.Clear()
-        dt2.Clear()
         Llena_lista()
-        deshabilitar()
 
-
-        ImgEliminarA.Visible = False
-        ImgGuardarA.Visible = False
-
-
+        Habilitar()
         txtcontraseña.Text = ""
         txtnombre.Text = ""
         txtusuario.Text = ""
         cmbprivilegios.SelectedIndex = -1
-
+        Add_Update = False
         lblObligatorio.Visible = False
         lblAsterisco.Visible = False
         lblA1.Visible = False
@@ -39,30 +29,7 @@ Public Class FrmUsuarios
         txtusuario.BackColor = Nothing
         txtcontraseña.BackColor = Nothing
         txtnombre.BackColor = Nothing
-
-        'Me.BackColor = My.Settings.FormsBackColor
-        'Me.LstUsuarios.BackColor = My.Settings.FormsBackColor
-        'Me.Lblcontraseña.BackColor = My.Settings.FormsBackColor
-        'Me.Lblempleado.BackColor = My.Settings.FormsBackColor
-        'Me.Lblnombre.BackColor = My.Settings.FormsBackColor
-        'Me.Lblprivilegios.BackColor = My.Settings.FormsBackColor
-        'Me.Lblusuario.BackColor = My.Settings.FormsBackColor
-
-        'Me.GroupBox1.ForeColor = My.Settings.FontForeColor
-        'Me.GroupBox1.Font = My.Settings.FontStyle
-        'Me.cmbprivilegios.BackColor = My.Settings.FormsBackColor
-        'Me.CmdEliminar.BackColor = My.Settings.FormsBackColor
-        'Me.CmdGuardarModificacion.BackColor = My.Settings.FormsBackColor
-        'Me.CmdNuevo.BackColor = My.Settings.FormsBackColor
-        'Me.CmdSalir.BackColor = My.Settings.FormsBackColor
-        Limpia_Variables_SQL_y_Cierra_Conexion()
-    End Sub
-
-    Private Sub deshabilitar()
-        txtcontraseña.Enabled = False
-        txtnombre.Enabled = False
-        txtusuario.Enabled = False
-        cmbprivilegios.Enabled = False
+        txtusuario.Focus()
     End Sub
 
     Private Sub Habilitar()
@@ -73,57 +40,23 @@ Public Class FrmUsuarios
     End Sub
 
     Private Sub Llena_lista()
-        Dim dt_tmp As DataTable
-        Try
-            SQL = "SELECT * FROM usuarios order by usuario asc "
-            conn.Open()
-            If conn.State = ConnectionState.Open Then
-                myCommand = New SqlCommand(SQL, conn)
-                myAdapter.SelectCommand = myCommand
-                myAdapter.Fill(myDs)
-                dt_tmp = New DataTable
-                dt_tmp.Clear()
-                myAdapter.Fill(dt_tmp)
-                LstUsuarios.DataSource = dt_tmp
-                LstUsuarios.ValueMember = "usuario"
-                LstUsuarios.DisplayMember = "usuario"
-                Limpia_Variables_SQL_y_Cierra_Conexion()
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
-            Limpia_Variables_SQL_y_Cierra_Conexion()
-        End Try
+        LstUsuarios.Refresh()
+        Dim Usuarios As List(Of tblUsuarios) = DBModelo.GetUsuariosAll()
+
+        LstUsuarios.DataSource = Usuarios.ToList
+        LstUsuarios.ValueMember = "usuario1"
+        LstUsuarios.DisplayMember = "usuario1"
     End Sub
 
     Private Sub LstUsuarios_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles LstUsuarios.DoubleClick
-        Dim dt_tmp As DataTable
-        Try
-            SQL = "SELECT * FROM usuarios where usuario = '" & LstUsuarios.SelectedValue & "' "
-            conn.Open()
-            If conn.State = ConnectionState.Open Then
-                myCommand = New SqlCommand(SQL, conn)
-                myAdapter.SelectCommand = myCommand
-                myAdapter.Fill(myDs)
-                dt_tmp = New DataTable
-                dt_tmp.Clear()
-                myAdapter.Fill(dt_tmp)
-                If dt_tmp.Rows.Count > 0 Then
-                    txtusuario.Text = dt_tmp.Rows(0)!usuario
-                    txtnombre.Text = dt_tmp.Rows(0)!nombreEmpleado
-                    txtcontraseña.Text = dt_tmp.Rows(0)!contrasena
-                    cmbprivilegios.Text = dt_tmp.Rows(0)!privilegios
-                    Add_Update = False
-                    Limpia_Variables_SQL_y_Cierra_Conexion()
-                End If
-            End If
-            ImgEliminarA.Visible = True
-            ImgGuardarA.Visible = True
-            Habilitar()
-            txtusuario.Enabled = False
-        Catch ex As Exception
-            MsgBox(ex.Message)
-            Limpia_Variables_SQL_y_Cierra_Conexion()
-        End Try
+        Dim Usuario As tblUsuarios = DBModelo.GetUsuario(LstUsuarios.SelectedValue.ToString)
+        txtusuario.Text = Usuario.usuario1
+        txtnombre.Text = Usuario.nombreEmpleado
+        txtcontraseña.Text = Usuario.contrasena
+        cmbprivilegios.Text = Usuario.privilegios
+        Add_Update = True
+        txtusuario.Enabled = False
+        CmdCrear.Text = "Guardar Usuario"
     End Sub
 
     Private Sub txtusuario_GotFocus(sender As Object, e As System.EventArgs) Handles txtusuario.GotFocus
@@ -173,44 +106,8 @@ Public Class FrmUsuarios
         cmbprivilegios.SelectedIndex = -1
     End Sub
 
-    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) Handles ImgSalirB.Click
-        Me.Close()
-        txtcontraseña.Text = ""
-        txtnombre.Text = ""
-        txtusuario.Text = ""
-    End Sub
-
-    Private Sub ImgSalirB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgSalirB.MouseLeave
-        Me.ImgSalirA.Visible = True
-        Me.ImgSalirB.Visible = False
-    End Sub
-
-    Private Sub ImgSalirA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgSalirA.MouseHover
-        Me.ImgSalirB.Visible = True
-        Me.ImgSalirA.Visible = False
-    End Sub
-
-    Private Sub ImgEliminarB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgEliminarB.MouseLeave
-        Me.ImgEliminarA.Visible = True
-        Me.ImgEliminarB.Visible = False
-    End Sub
-
-    Private Sub ImgEliminarA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgEliminarA.MouseHover
-        Me.ImgEliminarB.Visible = True
-        Me.ImgEliminarA.Visible = False
-    End Sub
-
-    Private Sub ImgCrearNewB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgCrearNewB.MouseLeave
-        Me.ImgCrearNewA.Visible = True
-        Me.ImgCrearNewB.Visible = False
-    End Sub
-
-    Private Sub ImgCrearNewA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgCrearNewA.MouseHover
-        Me.ImgCrearNewB.Visible = True
-        Me.ImgCrearNewA.Visible = False
-    End Sub
-
-    Private Sub ImgGuardarB_Click(sender As System.Object, e As System.EventArgs) Handles ImgGuardarB.Click
+    Private Sub CmdCrear_Click(sender As Object, e As EventArgs) Handles CmdCrear.Click
+        Dim strUsuario As New tblUsuarios
 
         If txtusuario.Text = "" Or txtcontraseña.Text = "" Or cmbprivilegios.Text = "" Or txtnombre.Text = "" Then
             MsgBox("Favor de llenar los campos Obligatorios", MsgBoxStyle.Exclamation, "Registrar Administradores/Usuarios")
@@ -242,80 +139,87 @@ Public Class FrmUsuarios
             Exit Sub
         End If
 
-        If Add_Update = False Then
+        If CmdCrear.Text = "Crear Usuario" Then
+            strUsuario.usuario1 = txtusuario.Text
+            strUsuario.contrasena = txtcontraseña.Text
+            strUsuario.privilegios = cmbprivilegios.Text
+            strUsuario.nombreEmpleado = txtnombre.Text
+
+            If Not IsNothing(strUsuario) Then
+                If DBModelo.InsertUsuario(strUsuario) Then
+                    MetroFramework.MetroMessageBox.Show(Me, "Usuario creado correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MetroFramework.MetroMessageBox.Show(Me, "Usuario NO pudo ser creado.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
+            End If
+
+            lblObligatorio.Visible = False
+            lblAsterisco.Visible = False
+            lblA1.Visible = False
+            lblA2.Visible = False
+            lblA3.Visible = False
+            txtusuario.BackColor = Nothing
+            txtcontraseña.BackColor = Nothing
+            txtnombre.BackColor = Nothing
+            Llena_lista()
+            Limpiar_Campos()
+        End If
+
+        If CmdCrear.Text = "Guardar Usuario" Then
             If MsgBox("Seguro que desea modificar al Usuario (" & txtusuario.Text & ")?", MsgBoxStyle.YesNo, "Registrar Administradores/Usuarios") = MsgBoxResult.No Then
                 Limpiar_Campos()
-                deshabilitar()
                 Exit Sub
             End If
+
+            strUsuario = DBModelo.GetUsuario(txtusuario.Text)
+
+            strUsuario.usuario1 = txtusuario.Text
+            strUsuario.contrasena = txtcontraseña.Text
+            strUsuario.privilegios = cmbprivilegios.Text
+            strUsuario.nombreEmpleado = txtnombre.Text
+
+            If Not IsNothing(strUsuario) Then
+                If DBModelo.UpdateUsuario(strUsuario) Then
+                    MetroFramework.MetroMessageBox.Show(Me, "Usuario actualizado correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MetroFramework.MetroMessageBox.Show(Me, "Usuario NO pudo ser actualizado.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
+            End If
+
+            lblObligatorio.Visible = False
+            lblAsterisco.Visible = False
+            lblA1.Visible = False
+            lblA2.Visible = False
+            lblA3.Visible = False
+            txtusuario.BackColor = Nothing
+            txtcontraseña.BackColor = Nothing
+            txtnombre.BackColor = Nothing
+            Llena_lista()
+            Limpiar_Campos()
+            CmdCrear.Text = "Crear Usuario"
         End If
-        If Add_Update = False Then
-            Sql1.Clear()
-            Sql1.Append("UPDATE usuarios SET usuario = ")
-            Sql1.AppendFormat("'{0}', ", txtusuario.Text)
-            Sql1.Append("contrasena = ")
-            Sql1.AppendFormat("'{0}', ", txtcontraseña.Text)
-            Sql1.Append("privilegios = ")
-            Sql1.AppendFormat("'{0}', ", cmbprivilegios.Text)
-            Sql1.Append("nombreEmpleado = ")
-            Sql1.AppendFormat("'{0}' ", txtnombre.Text)
-            Sql1.Append("where usuario = ")
-            Sql1.AppendFormat("'{0}' ", txtusuario.Text)
-        ElseIf Add_Update = True Then
-            Sql1.Clear()
-            Sql1.Append("INSERT INTO usuarios (usuario,contrasena,privilegios,nombreEmpleado) values ( ")
-            Sql1.AppendFormat("'{0}', ", txtusuario.Text)
-            Sql1.AppendFormat("'{0}', ", txtcontraseña.Text)
-            Sql1.AppendFormat("'{0}', ", cmbprivilegios.Text)
-            Sql1.AppendFormat("'{0}' ", txtnombre.Text)
-            Sql1.Append(" )")
-        End If
-        conn.Open()
-        If conn.State = ConnectionState.Open Then
-            myCommand = New SqlCommand(Sql1.ToString, conn)
-            myAdapter.SelectCommand = myCommand
-            myAdapter.Fill(myDs)
-            Limpia_Variables_SQL_y_Cierra_Conexion()
-        End If
-        MsgBox("Usuario u Administrador Creado Correctamente", MsgBoxStyle.Information, "Registrar Administradores/Usuarios")
-        ImgEliminarA.Visible = False
-        ImgGuardarA.Visible = False
-        lblObligatorio.Visible = False
-        lblAsterisco.Visible = False
-        lblA1.Visible = False
-        lblA2.Visible = False
-        lblA3.Visible = False
-        txtusuario.BackColor = Nothing
-        txtcontraseña.BackColor = Nothing
-        txtnombre.BackColor = Nothing
-        deshabilitar()
-        Llena_lista()
-        Limpiar_Campos()
-        Limpia_Variables_SQL_y_Cierra_Conexion()
+
     End Sub
 
-    Private Sub ImgEliminarB_Click(sender As System.Object, e As System.EventArgs) Handles ImgEliminarB.Click
+    Private Sub CmdEliminar_Click(sender As Object, e As EventArgs) Handles CmdEliminar.Click
         If MsgBox("Esta seguro que desea borrar al usuario (" & txtusuario.Text & ")?", MsgBoxStyle.YesNo, "Registrar Administradores/Usuarios") = MsgBoxResult.Yes Then
             Try
+                Dim strUsuario As New tblUsuarios
+                strUsuario = DBModelo.GetUsuario(txtusuario.Text)
 
-                Sql1.Clear()
-                Sql1.Append("DELETE from usuarios where usuario = ")
-                Sql1.AppendFormat("'{0}' ", txtusuario.Text)
-
-                conn.Open()
-                If conn.State = ConnectionState.Open Then
-                    myCommand = New SqlCommand(Sql1.ToString, conn)
-                    myAdapter.SelectCommand = myCommand
-                    myAdapter.Fill(myDs)
-                    Limpia_Variables_SQL_y_Cierra_Conexion()
+                If Not IsNothing(strUsuario) Then
+                    If DBModelo.DeleteUsuario(strUsuario) Then
+                        MetroFramework.MetroMessageBox.Show(Me, "Usuario eliminado correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Else
+                        MetroFramework.MetroMessageBox.Show(Me, "Usuario NO pudo ser eliminado.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    End If
                 End If
 
                 Limpiar_Campos()
-                deshabilitar()
                 Llena_lista()
-                Limpia_Variables_SQL_y_Cierra_Conexion()
-                ImgEliminarA.Visible = False
-                ImgGuardarA.Visible = False
                 lblObligatorio.Visible = False
                 lblAsterisco.Visible = False
                 lblA1.Visible = False
@@ -326,11 +230,9 @@ Public Class FrmUsuarios
                 txtnombre.BackColor = Nothing
             Catch ex As Exception
                 MsgBox(ex.Message)
-                Limpia_Variables_SQL_y_Cierra_Conexion()
             End Try
         Else
             Limpiar_Campos()
-            deshabilitar()
             lblObligatorio.Visible = False
             lblAsterisco.Visible = False
             lblA1.Visible = False
@@ -339,38 +241,13 @@ Public Class FrmUsuarios
             txtusuario.BackColor = Nothing
             txtcontraseña.BackColor = Nothing
             txtnombre.BackColor = Nothing
-            ImgEliminarA.Visible = False
-            ImgGuardarA.Visible = False
         End If
     End Sub
 
-    Private Sub ImgCrearNewB_Click(sender As System.Object, e As System.EventArgs) Handles ImgCrearNewB.Click
-        Habilitar()
-        ImgGuardarA.Visible = True
-        ImgEliminarA.Visible = False
+    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) Handles CmdSalir.Click
+        Me.Close()
         txtcontraseña.Text = ""
         txtnombre.Text = ""
         txtusuario.Text = ""
-        cmbprivilegios.Text = ""
-        Add_Update = True
-        lblObligatorio.Visible = False
-        lblAsterisco.Visible = False
-        lblA1.Visible = False
-        lblA2.Visible = False
-        lblA3.Visible = False
-        txtusuario.BackColor = Nothing
-        txtcontraseña.BackColor = Nothing
-        txtnombre.BackColor = Nothing
-        txtusuario.Focus()
-    End Sub
-
-    Private Sub ImgGuardarB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgGuardarB.MouseLeave
-        Me.ImgGuardarA.Visible = True
-        Me.ImgGuardarB.Visible = False
-    End Sub
-
-    Private Sub ImgGuardarA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgGuardarA.MouseHover
-        Me.ImgGuardarB.Visible = True
-        Me.ImgGuardarA.Visible = False
     End Sub
 End Class
