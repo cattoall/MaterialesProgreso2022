@@ -1112,6 +1112,40 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function Get_PedidosByDate(ByVal DateFrom As String, ByVal DateTo As String) As List(Of tblVentaPedido)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblVentaPedidoes.Where(Function(i) i.fecha >= DateFrom And i.fecha <= DateTo).ToList()
+        End Using
+    End Function
+
+    Shared Function DeleteVentaPedido(ByVal strVentaPedido As tblVentaPedido) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                If Not IsNothing(strVentaPedido) Then
+                    ctx.Entry(strVentaPedido).State = EntityState.Deleted
+                    ctx.SaveChanges()
+                End If
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function DeleteTicketPedido(ByVal strTicketPedido As tblTicketPedido) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                If Not IsNothing(strTicketPedido) Then
+                    ctx.Entry(strTicketPedido).State = EntityState.Deleted
+                    ctx.SaveChanges()
+                End If
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
 
 #End Region
 
@@ -1134,6 +1168,20 @@ Public Class DBModelo
                 ctx.tblCobrars.Attach(strCobrar)
                 ctx.Entry(strCobrar).State = EntityState.Modified
                 ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function DeleteCobrar(ByVal strCobrar As tblCobrar) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                If Not IsNothing(strCobrar) Then
+                    ctx.Entry(strCobrar).State = EntityState.Deleted
+                    ctx.SaveChanges()
+                End If
             End Using
             Return True
         Catch ex As Exception

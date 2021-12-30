@@ -67,7 +67,6 @@
 
             MetroFramework.MetroMessageBox.Show(Me, "Pedido: " + NoFactura + " cancelado cerrectamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            Call FrmPedidos.ImgVentasB_Click(sender, e)
             FrmPedidos.LblPedido.Text = ""
             NoFactura = ""
             Close()
