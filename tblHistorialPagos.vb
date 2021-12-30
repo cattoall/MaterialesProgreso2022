@@ -10,13 +10,14 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class historial_pagos
+Partial Public Class tblHistorialPagos
     Public Property Id As Long
-    Public Property fecha As Nullable(Of Date)
+    Public Property fecha As Date
     Public Property numeroVenta As String
     Public Property total As Nullable(Of Decimal)
     Public Property claveCliente As String
     Public Property cliente As String
     Public Property observaciones As String
+    Public Property tipoDocumento As String
 
 End Class

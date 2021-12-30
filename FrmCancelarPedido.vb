@@ -52,7 +52,7 @@
 
             If FrmPedidos.DataGridView1.Item(5, FrmPedidos.DataGridView1.CurrentRow.Index).Value = "CREDITO" Then
                 Try
-                    Dim strCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(NoFactura, "PEDIDO")
+                    Dim strCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(NoFactura, "PEDIDO", FrmPedidos.DataGridView1.Item(8, FrmPedidos.DataGridView1.CurrentRow.Index).Value)
                     strCobrar.resto = "0.00"
 
                     If DBModelo.Update_Cobrar(strCobrar) = False Then
@@ -113,7 +113,7 @@
 
             If FrmListadoVentas.DataGridConsulta.Item(5, FrmListadoVentas.DataGridConsulta.CurrentRow.Index).Value = "CREDITO" Then
                 Try
-                    Dim strCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(NoFactura, "TICKET")
+                    Dim strCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(NoFactura, "TICKET", FrmListadoVentas.DataGridConsulta.Item(8, FrmListadoVentas.DataGridConsulta.CurrentRow.Index).Value)
                     strCobrar.resto = "0.00"
 
                     If DBModelo.Update_Cobrar(strCobrar) = False Then

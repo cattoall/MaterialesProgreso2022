@@ -39,9 +39,10 @@
         <EntityType Name="cobrar">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="n_remision" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="n_remision" Type="bigint" />
+          <Property Name="n_remision" Type="bigint" Nullable="false" />
           <Property Name="total" Type="decimal" Precision="10" Scale="2" />
           <Property Name="fecha_venta" Type="date" />
           <Property Name="fecha_limite" Type="date" />
@@ -228,14 +229,17 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.facturas' no tiene d
         <EntityType Name="historial_pagos">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="numeroVenta" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fecha" Type="date" />
+          <Property Name="fecha" Type="date" Nullable="false" />
           <Property Name="numeroVenta" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="total" Type="decimal" Precision="10" Scale="2" />
           <Property Name="claveCliente" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="cliente" Type="nvarchar" MaxLength="255" />
           <Property Name="observaciones" Type="nvarchar" MaxLength="255" />
+          <Property Name="tipoDocumento" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="historial_pagos_proveedores">
           <Key>
@@ -804,18 +808,6 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <Property Name="factorP2" Type="Decimal" Precision="20" Scale="2" Nullable="false" />
           <Property Name="factorP3" Type="Decimal" Precision="20" Scale="2" Nullable="false" />
         </EntityType>
-        <EntityType Name="historial_pagos">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fecha" Type="DateTime" Precision="0" />
-          <Property Name="numeroVenta" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="claveCliente" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="cliente" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="observaciones" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="historial_pagos_proveedores">
           <Key>
             <PropertyRef Name="id" />
@@ -1046,7 +1038,6 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <EntitySet Name="foliosfacturas" EntityType="Self.foliosfactura" />
           <EntitySet Name="tblFoliosTickets" EntityType="pv_salvadorModel1.tblFoliosTicket" />
           <EntitySet Name="tblGrupos" EntityType="pv_salvadorModel1.tblGrupos" />
-          <EntitySet Name="historial_pagos" EntityType="Self.historial_pagos" />
           <EntitySet Name="historial_pagos_proveedores" EntityType="Self.historial_pagos_proveedores" />
           <EntitySet Name="tblLineas" EntityType="pv_salvadorModel1.tblLinea" />
           <EntitySet Name="marcas" EntityType="Self.marca" />
@@ -1078,6 +1069,7 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <EntitySet Name="tblTicketCotizas" EntityType="pv_salvadorModel1.tblTicketCotiza" />
           <EntitySet Name="tblCotizacions" EntityType="pv_salvadorModel1.tblCotizacion" />
           <EntitySet Name="productos" EntityType="pv_salvadorModel1.tblProductos" />
+          <EntitySet Name="tblHistorialPagos" EntityType="pv_salvadorModel1.tblHistorialPagos" />
           <EntitySet Name="tblCobrars" EntityType="pv_salvadorModel1.tblCobrar" />
         </EntityContainer>
         <EntityType Name="tblTicket">
@@ -1232,12 +1224,28 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <Property Name="ClaveUnidad" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="TasaCero" Type="Boolean" />
         </EntityType>
+        <EntityType Name="tblHistorialPagos">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="numeroVenta" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="numeroVenta" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="claveCliente" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="cliente" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="observaciones" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tipoDocumento" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="tblCobrar">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="n_remision" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="n_remision" Type="Int64" />
+          <Property Name="n_remision" Type="Int64" Nullable="false" />
           <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="fecha_venta" Type="DateTime" Precision="0" />
           <Property Name="fecha_limite" Type="DateTime" Precision="0" />
@@ -1418,19 +1426,6 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
                 <ScalarProperty Name="factorP1" ColumnName="factorP1" />
                 <ScalarProperty Name="factorP2" ColumnName="factorP2" />
                 <ScalarProperty Name="factorP3" ColumnName="factorP3" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="historial_pagos">
-            <EntityTypeMapping TypeName="pv_salvadorModel1.historial_pagos">
-              <MappingFragment StoreEntitySet="historial_pagos">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="numeroVenta" ColumnName="numeroVenta" />
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="claveCliente" ColumnName="claveCliente" />
-                <ScalarProperty Name="cliente" ColumnName="cliente" />
-                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1813,6 +1808,20 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
                 <ScalarProperty Name="clave" ColumnName="clave" />
                 <ScalarProperty Name="codigoBarras" ColumnName="codigoBarras" />
                 <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHistorialPagos">
+            <EntityTypeMapping TypeName="pv_salvadorModel1.tblHistorialPagos">
+              <MappingFragment StoreEntitySet="historial_pagos">
+                <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="claveCliente" ColumnName="claveCliente" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="numeroVenta" ColumnName="numeroVenta" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

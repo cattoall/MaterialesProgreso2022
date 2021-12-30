@@ -12,7 +12,7 @@ Imports System.Collections.Generic
 
 Partial Public Class tblCobrar
     Public Property Id As Long
-    Public Property n_remision As Nullable(Of Long)
+    Public Property n_remision As Long
     Public Property total As Nullable(Of Decimal)
     Public Property fecha_venta As Nullable(Of Date)
     Public Property fecha_limite As Nullable(Of Date)

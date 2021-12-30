@@ -514,9 +514,6 @@
     <Compile Include="FrmUsuarios.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="historial_pagos.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="historial_pagos_proveedores.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -624,6 +621,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblGrupos.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblHistorialPagos.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblLinea.vb">

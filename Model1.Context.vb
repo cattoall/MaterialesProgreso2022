@@ -34,7 +34,6 @@ Partial Public Class pv_salvadorEntities1
     Public Overridable Property foliosfacturas() As DbSet(Of foliosfactura)
     Public Overridable Property tblFoliosTickets() As DbSet(Of tblFoliosTicket)
     Public Overridable Property tblGrupos() As DbSet(Of tblGrupos)
-    Public Overridable Property historial_pagos() As DbSet(Of historial_pagos)
     Public Overridable Property historial_pagos_proveedores() As DbSet(Of historial_pagos_proveedores)
     Public Overridable Property tblLineas() As DbSet(Of tblLinea)
     Public Overridable Property marcas() As DbSet(Of marca)
@@ -62,6 +61,7 @@ Partial Public Class pv_salvadorEntities1
     Public Overridable Property tblTicketCotizas() As DbSet(Of tblTicketCotiza)
     Public Overridable Property tblCotizacions() As DbSet(Of tblCotizacion)
     Public Overridable Property productos() As DbSet(Of tblProductos)
+    Public Overridable Property tblHistorialPagos() As DbSet(Of tblHistorialPagos)
     Public Overridable Property tblCobrars() As DbSet(Of tblCobrar)
 
     Public Overridable Function SP_DB_BACKUP(databaseName As String, fullPath As String) As Integer

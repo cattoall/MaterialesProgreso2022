@@ -1116,9 +1116,9 @@ Public Class DBModelo
 #End Region
 
 #Region "Seccion <<Cobrar>>"
-    Shared Function Get_CobrarTipoDoc(ByVal NoRemisión As Integer, ByVal TipoDocumento As String) As tblCobrar
+    Shared Function Get_CobrarTipoDoc(ByVal NoRemisión As Integer, ByVal TipoDocumento As String, ByVal IdCliente As Integer) As tblCobrar
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblCobrars.Where(Function(i) i.n_remision = NoRemisión And i.tipoDocumento = TipoDocumento).FirstOrDefault
+            Return ctx.tblCobrars.Where(Function(i) i.n_remision = NoRemisión And i.tipoDocumento = TipoDocumento And i.claveCliente = IdCliente).FirstOrDefault
         End Using
     End Function
 
@@ -1127,7 +1127,6 @@ Public Class DBModelo
             Return ctx.tblCobrars.Where(Function(i) i.fecha_venta >= DateFrom And i.fecha_venta <= DateTo And i.resto <> 0).ToList()
         End Using
     End Function
-
 
     Shared Function Update_Cobrar(ByVal strCobrar As tblCobrar) As Boolean
         Try
@@ -1142,6 +1141,88 @@ Public Class DBModelo
         End Try
     End Function
 
+    Shared Function GetCXC_ByIdCliente(ByVal DbName As String, ByVal IdCliente As Integer) As List(Of tblCobrar)
+        Using ctx As New pv_salvadorEntities1()
+
+            Dim tCobrar As List(Of tblCobrar) = ctx.tblCobrars.Where(Function(i) i.claveCliente = IdCliente And i.resto <> 0).ToList()
+            Dim numeroFactura
+
+            For Each wCobrar In tCobrar
+                If wCobrar.tipoDocumento = "TICKET" Then
+                    numeroFactura = (From t1 In ctx.tblVentas
+                                     Where t1.nticket = wCobrar.n_remision
+                                     Select New With {t1.numeroFactura}).First().numeroFactura
+                    If numeroFactura = "" Then
+                        wCobrar.facturado = 0
+                    Else
+                        If numeroFactura = "X" Then
+                            wCobrar.facturado = 1
+                        Else
+                            wCobrar.facturado = Convert.ToInt32(numeroFactura)
+                        End If
+                    End If
+                Else
+                    numeroFactura = (From t1 In ctx.tblVentaPedidoes
+                                     Where t1.nticket = wCobrar.n_remision
+                                     Select New With {t1.numeroFactura}).First().numeroFactura
+                    If numeroFactura = "" Then
+                        wCobrar.facturado = 0
+                    Else
+                        If numeroFactura = "X" Then
+                            wCobrar.facturado = 1
+                        Else
+                            wCobrar.facturado = Convert.ToInt32(numeroFactura)
+                        End If
+                    End If
+                End If
+
+            Next
+
+            Return tCobrar
+        End Using
+    End Function
+
+
+#End Region
+
+#Region "Seccion <<HistorialPagos>>"
+    Shared Function InsertHistorialPago(ByVal strHistPago As tblHistorialPagos) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.tblHistorialPagos.Add(strHistPago)
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function Get_HistorialPago(ByVal IdPago As Integer) As tblHistorialPagos
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblHistorialPagos.Where(Function(i) i.Id = IdPago).FirstOrDefault
+        End Using
+    End Function
+
+    Shared Function GetHistorialPago_ByIdCliente(ByVal DbName As String, ByVal IdCliente As Integer) As List(Of tblHistorialPagos)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblHistorialPagos.Where(Function(i) i.claveCliente = IdCliente).ToList()
+        End Using
+    End Function
+
+    Shared Function DeleteHistorialPagos(ByVal strHistPago As tblHistorialPagos) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                If Not IsNothing(strHistPago) Then
+                    ctx.Entry(strHistPago).State = EntityState.Deleted
+                    ctx.SaveChanges()
+                End If
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 #End Region
 
 #Region "Sección <<Nota de Crédito>>"
