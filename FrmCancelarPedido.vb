@@ -128,8 +128,6 @@
 
             MetroFramework.MetroMessageBox.Show(Me, "Ticket: " + NoFactura + " cancelado cerrectamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            Call FrmListadoVentas.ImgVentasB_Click(sender, e)
-
             FrmListadoVentas.LblNumTicket.Text = ""
             FrmListadoVentas.LblNumTicket.Visible = False
             FrmListadoVentas.LblTotal.Text = "$0.00"

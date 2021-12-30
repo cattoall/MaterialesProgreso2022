@@ -34,6 +34,7 @@ Partial Class MDIMain
         Me.ProductosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UnidadesDeMedidaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UsuariosDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PuntoDeVentaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeTicketsPorFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReimpresiónDeFacturaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -58,9 +59,8 @@ Partial Class MDIMain
         Me.GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportarDesdeExcelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CorregirVentasACréditoConErroresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SalirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConfiguracionDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PuntoDeVentaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SalirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
@@ -166,6 +166,14 @@ Partial Class MDIMain
         Me.UsuariosDelSistemaToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.UsuariosDelSistemaToolStripMenuItem.Text = "Usuarios del Sistema"
         '
+        'PuntoDeVentaToolStripMenuItem1
+        '
+        Me.PuntoDeVentaToolStripMenuItem1.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Vents
+        Me.PuntoDeVentaToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.PuntoDeVentaToolStripMenuItem1.Name = "PuntoDeVentaToolStripMenuItem1"
+        Me.PuntoDeVentaToolStripMenuItem1.Size = New System.Drawing.Size(135, 39)
+        Me.PuntoDeVentaToolStripMenuItem1.Text = "Punto De Venta"
+        '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListadoDeTicketsPorFacturasToolStripMenuItem, Me.ReimpresiónDeFacturaToolStripMenuItem, Me.RevisarFacturasConErroresToolStripMenuItem, Me.ConfiguraciónDeFoliosToolStripMenuItem, Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem})
@@ -253,6 +261,7 @@ Partial Class MDIMain
         Me.ListadoDePreciosPorLineaToolStripMenuItem.Name = "ListadoDePreciosPorLineaToolStripMenuItem"
         Me.ListadoDePreciosPorLineaToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.ListadoDePreciosPorLineaToolStripMenuItem.Text = "Listado de Precios por Linea"
+        Me.ListadoDePreciosPorLineaToolStripMenuItem.Visible = False
         '
         'HistorialDeClientesToolStripMenuItem
         '
@@ -343,14 +352,6 @@ Partial Class MDIMain
         Me.CorregirVentasACréditoConErroresToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.CorregirVentasACréditoConErroresToolStripMenuItem.Text = "Corregir Ventas a Crédito con Errores"
         '
-        'SalirToolStripMenuItem
-        '
-        Me.SalirToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Salir
-        Me.SalirToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.SalirToolStripMenuItem.Name = "SalirToolStripMenuItem"
-        Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(76, 39)
-        Me.SalirToolStripMenuItem.Text = "Salir"
-        '
         'ConfiguracionDelSistemaToolStripMenuItem
         '
         Me.ConfiguracionDelSistemaToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.ConfiguracionBuena
@@ -359,13 +360,13 @@ Partial Class MDIMain
         Me.ConfiguracionDelSistemaToolStripMenuItem.Size = New System.Drawing.Size(193, 39)
         Me.ConfiguracionDelSistemaToolStripMenuItem.Text = "Configuración del Sistema"
         '
-        'PuntoDeVentaToolStripMenuItem1
+        'SalirToolStripMenuItem
         '
-        Me.PuntoDeVentaToolStripMenuItem1.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Vents
-        Me.PuntoDeVentaToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.PuntoDeVentaToolStripMenuItem1.Name = "PuntoDeVentaToolStripMenuItem1"
-        Me.PuntoDeVentaToolStripMenuItem1.Size = New System.Drawing.Size(135, 39)
-        Me.PuntoDeVentaToolStripMenuItem1.Text = "Punto De Venta"
+        Me.SalirToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Salir
+        Me.SalirToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.SalirToolStripMenuItem.Name = "SalirToolStripMenuItem"
+        Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(76, 39)
+        Me.SalirToolStripMenuItem.Text = "Salir"
         '
         'StatusStrip1
         '

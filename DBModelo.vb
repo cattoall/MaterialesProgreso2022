@@ -1088,6 +1088,12 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function Get_VentasByDate(ByVal DateFrom As String, ByVal DateTo As String) As List(Of tblVenta)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblVentas.Where(Function(i) i.fecha >= DateFrom And i.fecha <= DateTo).ToList()
+        End Using
+    End Function
+
 #End Region
 
 #Region "Seccion <<Cobrar>>"
