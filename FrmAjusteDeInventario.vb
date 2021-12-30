@@ -1,6 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
-
-Public Class FrmAjusteDeInventario
+﻿Public Class FrmAjusteDeInventario
     Dim strProducto As New tblProductos
 
     Private Sub LimpiarObjetos()
@@ -54,6 +52,7 @@ Public Class FrmAjusteDeInventario
         End If
 
         If RbtnAcumulativo.Checked = True Then
+            strProducto = DBModelo.GetProducts(ProductoID)
             If Not IsNothing(strProducto) Then
                 TxtStockActual.Text = strProducto.stock
             End If
@@ -73,6 +72,7 @@ Public Class FrmAjusteDeInventario
         End If
 
         If RbtnAcumulativo.Checked = True Then
+            strProducto = DBModelo.GetProducts(ProductoID)
             If Not IsNothing(strProducto) Then
                 TxtStockActual.Text = strProducto.stock
             End If
@@ -86,7 +86,6 @@ Public Class FrmAjusteDeInventario
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         AccionSalir = False
         Inventariado = False
-        SetFormName(FrmBuscarProductosINV, DBConnected)
         FrmBuscarProductosINV.ShowDialog()
         FrmBuscarProductosINV.Close()
         FrmBuscarProductosINV.Dispose()
