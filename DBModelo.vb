@@ -1094,6 +1094,25 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function Get_TicketsByDateIdCliente(ByVal DateFrom As String, ByVal DateTo As String, ByVal IdCliente As Integer) As List(Of tblVenta)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblVentas.Where(Function(i) i.fecha >= DateFrom And i.fecha <= DateTo And i.idCliente = IdCliente).ToList()
+        End Using
+    End Function
+
+    Shared Function Get_PedidosByDateIdCliente(ByVal DateFrom As String, ByVal DateTo As String, ByVal IdCliente As Integer) As List(Of tblVentaPedido)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblVentaPedidoes.Where(Function(i) i.fecha >= DateFrom And i.fecha <= DateTo And i.idCliente = IdCliente).ToList()
+        End Using
+    End Function
+
+    Shared Function Get_CotizacionesByDateIdCliente(ByVal DateFrom As String, ByVal DateTo As String, ByVal IdCliente As Integer) As List(Of tblCotizacion)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblCotizacions.Where(Function(i) i.fecha >= DateFrom And i.fecha <= DateTo And i.idCliente = IdCliente).ToList()
+        End Using
+    End Function
+
+
 #End Region
 
 #Region "Seccion <<Cobrar>>"
