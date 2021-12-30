@@ -327,7 +327,7 @@ Public Class DBModelo
 
     Shared Function GetUoM(ByVal IdUoM As Integer) As tblUnidades
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblUnidades.Where(Function(i) i.idTransaccion = IdUoM).FirstOrDefault
+            Return ctx.tblUnidades.Where(Function(i) i.Clave = IdUoM).FirstOrDefault
         End Using
     End Function
 
@@ -645,6 +645,62 @@ Public Class DBModelo
             End Select
         End Using
     End Sub
+#End Region
+
+#Region "Seccion <<Marcas>>"
+    Shared Function GetMarca(ByVal IdMarca As Integer) As tblMarcas
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblMarcas.Where(Function(i) i.Clave = IdMarca).FirstOrDefault
+        End Using
+    End Function
+
+    Shared Function GetMarcaByDesc(ByVal MarDesc As String) As List(Of tblMarcas)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblMarcas.Where(Function(i) i.descripcion.Contains(MarDesc)).ToList()
+        End Using
+    End Function
+
+    Shared Function GetMarcaAll() As List(Of tblMarcas)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblMarcas.ToList()
+        End Using
+    End Function
+
+    Shared Function UpdateMarca(ByVal strMarca As tblMarcas) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.tblMarcas.Attach(strMarca)
+                ctx.Entry(strMarca).State = EntityState.Modified
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function InsertMarca(ByVal strMarca As tblMarcas) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.tblMarcas.Add(strMarca)
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function UpdateMarcaProd(ByVal marca_new As String, ByVal marca_old As String) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.Database.ExecuteSqlCommand("UPDATE [pv_fuentes].[productos] SET marca = {0} WHERE marca = {1}", marca_new, marca_old)
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 #End Region
 
 #Region "Seccion <<Familias>>"

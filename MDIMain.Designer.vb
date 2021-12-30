@@ -36,6 +36,7 @@ Partial Class MDIMain
         Me.UsuariosDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PuntoDeVentaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FacturaciónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeTicketsPorFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReimpresiónDeFacturaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RevisarFacturasConErroresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -76,7 +77,7 @@ Partial Class MDIMain
         Me.ToolStripStatusLabel9 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TssDB = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.FacturaciónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MarcasDeProductosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -96,7 +97,7 @@ Partial Class MDIMain
         '
         'CatálogosToolStripMenuItem
         '
-        Me.CatálogosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClientesToolStripMenuItem, Me.ProveedoresToolStripMenuItem, Me.FamiliasDeProductosToolStripMenuItem, Me.GruposDeProductosToolStripMenuItem, Me.LineasDeProductosToolStripMenuItem, Me.SubfamiliasDeProductosToolStripMenuItem, Me.ProductosToolStripMenuItem, Me.UnidadesDeMedidaToolStripMenuItem, Me.UsuariosDelSistemaToolStripMenuItem})
+        Me.CatálogosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClientesToolStripMenuItem, Me.ProveedoresToolStripMenuItem, Me.MarcasDeProductosToolStripMenuItem, Me.FamiliasDeProductosToolStripMenuItem, Me.GruposDeProductosToolStripMenuItem, Me.LineasDeProductosToolStripMenuItem, Me.SubfamiliasDeProductosToolStripMenuItem, Me.ProductosToolStripMenuItem, Me.UnidadesDeMedidaToolStripMenuItem, Me.UsuariosDelSistemaToolStripMenuItem})
         Me.CatálogosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Catalagos
         Me.CatálogosToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.CatálogosToolStripMenuItem.Name = "CatálogosToolStripMenuItem"
@@ -183,6 +184,12 @@ Partial Class MDIMain
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(199, 39)
         Me.ToolStripMenuItem1.Text = "Facturas y Notas de Crédito"
+        '
+        'FacturaciónToolStripMenuItem
+        '
+        Me.FacturaciónToolStripMenuItem.Name = "FacturaciónToolStripMenuItem"
+        Me.FacturaciónToolStripMenuItem.Size = New System.Drawing.Size(259, 22)
+        Me.FacturaciónToolStripMenuItem.Text = "Facturación"
         '
         'ListadoDeTicketsPorFacturasToolStripMenuItem
         '
@@ -459,11 +466,12 @@ Partial Class MDIMain
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
         '
-        'FacturaciónToolStripMenuItem
+        'MarcasDeProductosToolStripMenuItem
         '
-        Me.FacturaciónToolStripMenuItem.Name = "FacturaciónToolStripMenuItem"
-        Me.FacturaciónToolStripMenuItem.Size = New System.Drawing.Size(259, 22)
-        Me.FacturaciónToolStripMenuItem.Text = "Facturación"
+        Me.MarcasDeProductosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.icon_component
+        Me.MarcasDeProductosToolStripMenuItem.Name = "MarcasDeProductosToolStripMenuItem"
+        Me.MarcasDeProductosToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.MarcasDeProductosToolStripMenuItem.Text = "Marcas de Productos"
         '
         'MDIMain
         '
@@ -545,4 +553,5 @@ Partial Class MDIMain
     Friend WithEvents ImportarDesdeExcelToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CorregirVentasACréditoConErroresToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FacturaciónToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MarcasDeProductosToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class tblusocfdi
+Partial Public Class tblUsoCFDI
     Public Property Id As Integer
     Public Property UsoCFDI As String
 

@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class tblformapago
+Partial Public Class tblFormaPago
     Public Property Id As Integer
     Public Property FormaPago As String
 

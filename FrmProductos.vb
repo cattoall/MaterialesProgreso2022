@@ -143,7 +143,7 @@ Public Class FrmProductos
 
         Material_Umedida = Material_Umedida.Trim
         If Material_Umedida <> "" Then
-            CmbUnidad.SelectedValue = uom.Find(Function(f) f.descripcion = Material_Umedida).idTransaccion
+            CmbUnidad.SelectedValue = uom.Find(Function(f) f.descripcion = Material_Umedida).Clave
         End If
     End Sub
 

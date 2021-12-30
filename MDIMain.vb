@@ -409,4 +409,10 @@
         FrmFacturacion.Close()
         FrmFacturacion.Dispose()
     End Sub
+
+    Private Sub MarcasDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MarcasDeProductosToolStripMenuItem.Click
+        FrmBuscarMarcas.ShowDialog()
+        FrmBuscarMarcas.Close()
+        FrmBuscarMarcas.Dispose()
+    End Sub
 End Class

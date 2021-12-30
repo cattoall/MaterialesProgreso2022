@@ -68,6 +68,7 @@ Module Module1
 
     Public Material_Grupo As String = ""
     Public Material_Familia As String = ""
+    Public Material_Marca As String = ""
     Public Material_Linea As String = ""
     Public Material_SubFam As String = ""
     Public Material_Proveedores As String = ""

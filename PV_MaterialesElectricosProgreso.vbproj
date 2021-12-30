@@ -233,6 +233,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DBModelo.vb" />
+    <Compile Include="FrmBuscarMarcas.Designer.vb">
+      <DependentUpon>FrmBuscarMarcas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBuscarMarcas.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmFacturacion.Designer.vb">
       <DependentUpon>FrmFacturacion.vb</DependentUpon>
     </Compile>
@@ -514,9 +520,6 @@
     <Compile Include="historial_pagos_proveedores.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="marca.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="MDIMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -605,7 +608,7 @@
     <Compile Include="tblCotizacion.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="tbldiascredito.vb">
+    <Compile Include="tblDiasCredito.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblFactura.vb">
@@ -623,7 +626,7 @@
     <Compile Include="tblFoliosTicket.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblformapago.vb">
+    <Compile Include="tblFormaPago.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblGrupos.vb">
@@ -635,13 +638,16 @@
     <Compile Include="tblLinea.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblmetodopago.vb">
+    <Compile Include="tblMarcas.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblMetodoPago.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblNC.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblparametro.vb">
+    <Compile Include="tblParametro.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblProductos.vb">
@@ -665,7 +671,7 @@
     <Compile Include="tblUnidades.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblusocfdi.vb">
+    <Compile Include="tblUsoCFDI.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblUsuarios.vb">

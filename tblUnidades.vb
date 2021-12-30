@@ -11,7 +11,7 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class tblUnidades
-    Public Property idTransaccion As Long
+    Public Property Clave As Long
     Public Property descripcion As String
 
 End Class
