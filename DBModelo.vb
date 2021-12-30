@@ -1070,6 +1070,12 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function Get_PV_TicketsDetalleByFolioAndIdProducto(ByVal nPedido As Integer, ByVal IdProducto As Integer) As tblTicket
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblTickets.Where(Function(i) i.folio = nPedido And i.IdProducto = IdProducto).FirstOrDefault
+        End Using
+    End Function
+
     Shared Function Get_PV_TicketHeader(ByVal nTicket As Integer) As tblVenta
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblVentas.Where(Function(i) i.nticket = nTicket).FirstOrDefault
@@ -1143,6 +1149,20 @@ Public Class DBModelo
             Using ctx As New pv_salvadorEntities1()
                 If Not IsNothing(strTicketPedido) Then
                     ctx.Entry(strTicketPedido).State = EntityState.Deleted
+                    ctx.SaveChanges()
+                End If
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function DeleteTicket(ByVal strTicket As tblTicket) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                If Not IsNothing(strTicket) Then
+                    ctx.Entry(strTicket).State = EntityState.Deleted
                     ctx.SaveChanges()
                 End If
             End Using
