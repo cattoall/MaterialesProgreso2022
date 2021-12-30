@@ -1,12 +1,11 @@
-﻿Imports MySql.Data.MySqlClient
-Imports System.Text
-
+﻿
 Public Class FrmCotizaciones
 
     Private Sub FrmCotizaciones_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyValue
             Case Keys.Escape
-                Me.Close()
+                Close()
+                Dispose()
         End Select
     End Sub
 
@@ -22,39 +21,32 @@ Public Class FrmCotizaciones
     Private Sub MetroGrid1_CellClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles MetroGrid1.CellClick
         lblcotizacion.Visible = True
         lblcotizacion.Text = Me.MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value
-        'SQL = "SELECT folio, cantidad, concepto, precio, subtotal, clave_producto, idProducto, preciocosto, subtotalcosto, ClaveProducto, ClaveUnidad, TasaCero FROM ticket_cotiza where folio = " & Me.MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value
 
         MetroGrid2.Refresh()
         Dim CotizaDet As List(Of tblTicketCotiza) = DBModelo.GetCotizacionesDet(Me.MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value)
 
         MetroGrid2.DataSource = CotizaDet.ToList
 
-        MetroGrid2.Columns(0).HeaderText = "Id"
-        MetroGrid2.Columns(0).ReadOnly = True
         MetroGrid2.Columns(0).Visible = False
-
-        MetroGrid2.Columns(1).HeaderText = "Folio"
-        MetroGrid2.Columns(1).ReadOnly = True
         MetroGrid2.Columns(1).Visible = False
-
-        MetroGrid2.Columns(2).HeaderText = "IdProducto"
-        MetroGrid2.Columns(2).ReadOnly = True
-        MetroGrid2.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         MetroGrid2.Columns(2).Visible = False
 
         MetroGrid2.Columns(3).HeaderText = "Descripcion"
         MetroGrid2.Columns(3).ReadOnly = True
         MetroGrid2.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+        MetroGrid1.Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         MetroGrid2.Columns(3).Width = 400
 
         MetroGrid2.Columns(4).HeaderText = "Ctd"
         MetroGrid2.Columns(4).ReadOnly = True
         MetroGrid2.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        MetroGrid1.Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         MetroGrid2.Columns(4).Width = 60
 
         MetroGrid2.Columns(5).HeaderText = "Precio Unitario"
         MetroGrid2.Columns(5).ReadOnly = True
         MetroGrid2.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        MetroGrid1.Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         MetroGrid2.Columns(5).DefaultCellStyle.Format = "$ ###,###,###.00"
 
         MetroGrid2.Columns(6).Visible = False
@@ -62,16 +54,17 @@ Public Class FrmCotizaciones
         MetroGrid2.Columns(7).HeaderText = "Subtotal"
         MetroGrid2.Columns(7).ReadOnly = True
         MetroGrid2.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        MetroGrid1.Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         MetroGrid2.Columns(7).DefaultCellStyle.Format = "$ ###,###,###.00"
 
         MetroGrid2.Columns(8).HeaderText = "Código Barra "
         MetroGrid2.Columns(8).ReadOnly = True
         MetroGrid2.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(8).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         MetroGrid2.Columns(8).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
         MetroGrid2.Columns(9).Visible = False
         MetroGrid2.Columns(9).Visible = False
-
         MetroGrid2.Columns(10).Visible = False
         MetroGrid2.Columns(11).Visible = False
         MetroGrid2.Columns(12).Visible = False
@@ -79,8 +72,6 @@ Public Class FrmCotizaciones
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-        'SQL = "SELECT * FROM cotizacion where fecha  >= '" & Format(dtinicio.Value.Date, "yyyy-MM-dd") & "' and fecha <= '" & Format(dtfinal.Value.Date, "yyyy-MM-dd") & "' order by nticket asc"
-
         MetroGrid1.Refresh()
         Dim Cotiza As List(Of tblCotizacion) = DBModelo.GetCotizaciones(dtinicio.Value.Date, dtfinal.Value.Date)
 
@@ -89,74 +80,49 @@ Public Class FrmCotizaciones
         MetroGrid1.Columns(0).HeaderText = "Ticket #"
         MetroGrid1.Columns(0).ReadOnly = True
         MetroGrid1.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        MetroGrid1.Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         MetroGrid1.Columns(0).Width = 70
 
         MetroGrid1.Columns(1).HeaderText = "Fecha"
         MetroGrid1.Columns(1).ReadOnly = True
         MetroGrid1.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        MetroGrid1.Columns(2).HeaderText = "SubTotal"
-        MetroGrid1.Columns(2).ReadOnly = True
-        MetroGrid1.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        MetroGrid1.Columns(2).DefaultCellStyle.Format = "$ ###,###,###.00"
         MetroGrid1.Columns(2).Visible = False
-
-        MetroGrid1.Columns(3).HeaderText = "IVA"
-        MetroGrid1.Columns(3).ReadOnly = True
-        MetroGrid1.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        MetroGrid1.Columns(3).DefaultCellStyle.Format = "$ ###,###,###.00"
         MetroGrid1.Columns(3).Visible = False
 
         MetroGrid1.Columns(4).HeaderText = "Total"
         MetroGrid1.Columns(4).ReadOnly = True
         MetroGrid1.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        MetroGrid1.Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         MetroGrid1.Columns(4).DefaultCellStyle.Format = "$ ###,###,###.00"
 
-        MetroGrid1.Columns(5).HeaderText = "Tipo"
-        MetroGrid1.Columns(5).ReadOnly = True
-        MetroGrid1.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         MetroGrid1.Columns(5).Visible = False
-
-        MetroGrid1.Columns(6).HeaderText = "Usuario"
-        MetroGrid1.Columns(6).ReadOnly = True
-        MetroGrid1.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         MetroGrid1.Columns(6).Visible = False
 
         MetroGrid1.Columns(7).HeaderText = "Cliente"
         MetroGrid1.Columns(7).ReadOnly = True
         MetroGrid1.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+        MetroGrid1.Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         MetroGrid1.Columns(7).Width = 300
         MetroGrid1.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
         MetroGrid1.Columns(8).HeaderText = "IdCliente"
         MetroGrid1.Columns(8).ReadOnly = True
         MetroGrid1.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        MetroGrid1.Columns(8).Visible = True
+        MetroGrid1.Columns(8).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        MetroGrid1.Columns(9).HeaderText = "Estado"
-        MetroGrid1.Columns(9).ReadOnly = True
-        MetroGrid1.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         MetroGrid1.Columns(9).Visible = False
-
-        MetroGrid1.Columns(10).HeaderText = "Motivo"
-        MetroGrid1.Columns(10).ReadOnly = True
         MetroGrid1.Columns(10).Visible = False
-
-        MetroGrid1.Columns(11).HeaderText = "Facturado"
-        MetroGrid1.Columns(11).ReadOnly = True
-        MetroGrid1.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         MetroGrid1.Columns(11).Visible = False
     End Sub
 
     Private Sub btnMandarATicket_Click(sender As Object, e As EventArgs) Handles btnMandarATicket.Click
-        Dim dt_tmp As DataTable
-
         If MetroGrid1.Rows.Count > 0 Then
 
             If CheckForm(FrmPuntoDeVenta) = False Then
                 FrmPuntoDeVenta.MdiParent = MDIMain
                 FrmPuntoDeVenta.StartPosition = FormStartPosition.CenterParent
-                SetFormName(FrmPuntoDeVenta, DBConnected)
                 FrmPuntoDeVenta.Show()
             End If
 
@@ -219,7 +185,8 @@ Public Class FrmCotizaciones
             EsCotizacion = True
             FrmPuntoDeVenta.CmbTipoVenta.Text = "CREDITO"
             EsCotizacion = False
-            Me.Close()
+            Close()
+            Dispose()
         Else
             MsgBox("Favor De Seleccionar Una Cotización", MsgBoxStyle.Critical, "Consulta y Reimpresion de Cotizaciones")
             Exit Sub
@@ -244,6 +211,7 @@ Public Class FrmCotizaciones
     End Sub
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        Me.Close()
+        Close()
+        Dispose()
     End Sub
 End Class
