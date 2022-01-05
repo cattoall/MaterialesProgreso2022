@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class FrmListadoFacturas
-    Inherits System.Windows.Forms.Form
+    Inherits MetroFramework.Forms.MetroForm
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -23,10 +23,10 @@ Partial Class FrmListadoFacturas
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ImgSalirB = New System.Windows.Forms.PictureBox()
@@ -63,7 +63,6 @@ Partial Class FrmListadoFacturas
         '
         'GroupBox1
         '
-        Me.GroupBox1.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.ImgSalirB)
         Me.GroupBox1.Controls.Add(Me.ImgSalirA)
@@ -84,7 +83,7 @@ Partial Class FrmListadoFacturas
         Me.GroupBox1.Controls.Add(Me.ImgCFDIB)
         Me.GroupBox1.Controls.Add(Me.ImgCFDIA)
         Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 0)
+        Me.GroupBox1.Location = New System.Drawing.Point(14, 63)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(995, 500)
         Me.GroupBox1.TabIndex = 9
@@ -107,7 +106,7 @@ Partial Class FrmListadoFacturas
         Me.ImgSalirB.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
         Me.ImgSalirB.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ImgSalirB.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.btn_salir
-        Me.ImgSalirB.Location = New System.Drawing.Point(883, 24)
+        Me.ImgSalirB.Location = New System.Drawing.Point(765, 24)
         Me.ImgSalirB.Name = "ImgSalirB"
         Me.ImgSalirB.Size = New System.Drawing.Size(94, 35)
         Me.ImgSalirB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -213,17 +212,17 @@ Partial Class FrmListadoFacturas
         Me.DataGridTikect.AllowUserToAddRows = False
         Me.DataGridTikect.AllowUserToDeleteRows = False
         Me.DataGridTikect.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        Me.DataGridTikect.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+        Me.DataGridTikect.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridTikect.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridTikect.Location = New System.Drawing.Point(15, 280)
         Me.DataGridTikect.Name = "DataGridTikect"
         Me.DataGridTikect.ReadOnly = True
         Me.DataGridTikect.RowHeadersVisible = False
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        Me.DataGridTikect.RowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        Me.DataGridTikect.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridTikect.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridTikect.ShowCellErrors = False
         Me.DataGridTikect.ShowCellToolTips = False
@@ -237,18 +236,18 @@ Partial Class FrmListadoFacturas
         Me.DataGridConsulta.AllowUserToAddRows = False
         Me.DataGridConsulta.AllowUserToDeleteRows = False
         Me.DataGridConsulta.AllowUserToResizeRows = False
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        Me.DataGridConsulta.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+        Me.DataGridConsulta.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridConsulta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridConsulta.Location = New System.Drawing.Point(15, 65)
         Me.DataGridConsulta.MultiSelect = False
         Me.DataGridConsulta.Name = "DataGridConsulta"
         Me.DataGridConsulta.ReadOnly = True
         Me.DataGridConsulta.RowHeadersVisible = False
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        Me.DataGridConsulta.RowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+        Me.DataGridConsulta.RowsDefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridConsulta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridConsulta.ShowCellErrors = False
         Me.DataGridConsulta.ShowCellToolTips = False
@@ -262,7 +261,7 @@ Partial Class FrmListadoFacturas
         Me.ImgVerFactB.BackColor = System.Drawing.Color.Transparent
         Me.ImgVerFactB.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ImgVerFactB.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.VerFacturasXxL
-        Me.ImgVerFactB.Location = New System.Drawing.Point(281, 17)
+        Me.ImgVerFactB.Location = New System.Drawing.Point(285, 18)
         Me.ImgVerFactB.Name = "ImgVerFactB"
         Me.ImgVerFactB.Size = New System.Drawing.Size(54, 48)
         Me.ImgVerFactB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -287,7 +286,7 @@ Partial Class FrmListadoFacturas
         Me.ImgCancelarB.BackColor = System.Drawing.Color.Transparent
         Me.ImgCancelarB.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ImgCancelarB.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.btnCancelar
-        Me.ImgCancelarB.Location = New System.Drawing.Point(266, 243)
+        Me.ImgCancelarB.Location = New System.Drawing.Point(264, 241)
         Me.ImgCancelarB.Name = "ImgCancelarB"
         Me.ImgCancelarB.Size = New System.Drawing.Size(91, 41)
         Me.ImgCancelarB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -312,7 +311,7 @@ Partial Class FrmListadoFacturas
         Me.ImgCFDIB.BackColor = System.Drawing.Color.Transparent
         Me.ImgCFDIB.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ImgCFDIB.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources._4318_aqua_icons_system_printer_s_
-        Me.ImgCFDIB.Location = New System.Drawing.Point(15, 447)
+        Me.ImgCFDIB.Location = New System.Drawing.Point(18, 446)
         Me.ImgCFDIB.Name = "ImgCFDIB"
         Me.ImgCFDIB.Size = New System.Drawing.Size(46, 47)
         Me.ImgCFDIB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -343,8 +342,7 @@ Partial Class FrmListadoFacturas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.ClientSize = New System.Drawing.Size(1019, 512)
+        Me.ClientSize = New System.Drawing.Size(1019, 620)
         Me.ControlBox = False
         Me.Controls.Add(Me.GroupBox1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -352,7 +350,6 @@ Partial Class FrmListadoFacturas
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.Name = "FrmListadoFacturas"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Consulta, Reimpresion y Cancelacion de Facturas"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
