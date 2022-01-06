@@ -8,13 +8,14 @@ Public Class FrmListadoFacturas
         LblNumTicket.Text = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
         NoFactura = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
         FechaFactura = Format(Me.DataGridConsulta.Item(6, DataGridConsulta.CurrentRow.Index).Value, "yyyyMMdd")
-        SQL = "SELECT n_factura,cantidad,descripcion,precio,subtotal,clave_p,idProducto,fecha,folio FROM facturas where n_factura = " & Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
-
+        'SQL = "SELECT n_factura,cantidad,descripcion,precio,subtotal,clave_p,idProducto,fecha,folio FROM facturas where n_factura = " & Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+        Dim nFactura As String = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+        DataGridTikect.DataSource = DBModelo.GetFacturaByN(nFactura)
         'Carga Lista de Clasificaciones
-        load_record_dgv2(SQL, Me.DataGridTikect, DBConnected)
-
+        'load_record_dgv2(SQL, Me.DataGridTikect, DBConnected)
+        
         'Aplica formato al DataGridView
-        load_layout_dgv_ListaFacturas_i(Me.DataGridTikect)
+        'load_layout_dgv_ListaFacturas_i(Me.DataGridTikect)
     End Sub
 
     Private Sub FrmListadoFacturas_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
@@ -111,14 +112,16 @@ Public Class FrmListadoFacturas
     End Sub
 
     Public Sub ImgVerFactB_Click(sender As System.Object, e As System.EventArgs) Handles ImgVerFactB.Click
-        SQL = "SELECT *, usuario FROM factura_total where  fecha_venta  >= '" & Format(dtFechaInicial.Value.Date, "yyyy-MM-dd") & "' and fecha_venta <= '" & Format(dtFechaFinal.Value.Date, "yyyy-MM-dd") & "' order by n_factura, fecha_venta asc"
-
-        'Carga Lista de Clasificaciones
-        load_record_dgv(SQL, Me.DataGridConsulta, DBConnected)
-
-        'Aplica formato al DataGridView
-        load_layout_dgv_ListaFactura_H(Me.DataGridConsulta)
-
+        Dim x As List(Of tblFacturaTotal) = DBModelo.GetIntervalFacturas(dtFechaInicial.Value.Date, dtFechaFinal.Value.Date)
+        DataGridConsulta.DataSource = x
+        'SQL = "SELECT *, usuario FROM factura_total where  fecha_venta  >= '" & Format(dtFechaInicial.Value.Date, "yyyy-MM-dd") & "' and fecha_venta <= '" & Format(dtFechaFinal.Value.Date, "yyyy-MM-dd") & "' order by n_factura, fecha_venta asc"
+        '
+        ''Carga Lista de Clasificaciones
+        'load_record_dgv(SQL, Me.DataGridConsulta, DBConnected)
+        '
+        ''Aplica formato al DataGridView
+        'load_layout_dgv_ListaFactura_H(Me.DataGridConsulta)
+        '
         For i = 0 To DataGridConsulta.RowCount - 1
             Select Case DataGridConsulta.Item(11, i).Value
                 Case "0"
@@ -169,7 +172,7 @@ Public Class FrmListadoFacturas
 
     Private Sub ImgCFDIB_Click(sender As System.Object, e As System.EventArgs) Handles ImgCFDIB.Click
         If LblNumTicket.Text <> "" Then
-            If ImprimeFactura2(DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value, DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value, True, DBConnected) = False Then
+            If ImprimeFactura2(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value, DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value, True, DBConnected) = False Then
                 MsgBox("Hubo un error al Generar la Impresión de la Factura", MsgBoxStyle.Critical, "Impresiones de Facturas")
             Else
                 MsgBox("Re'Impresión de Factura Correctamente", MsgBoxStyle.Information, "Impresiones de Facturas")

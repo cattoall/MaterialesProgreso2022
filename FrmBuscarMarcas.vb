@@ -11,6 +11,7 @@
 
     Private Sub refresh_data_dgv()
         MetroGrid1.Refresh()
+        Console.WriteLine(txtBusqueda.Text)
         Dim Marca As List(Of tblMarcas) = DBModelo.GetMarcaByDesc(txtBusqueda.Text)
 
         MetroGrid1.DataSource = Marca.ToList
@@ -26,7 +27,6 @@
 
     Private Sub LimpiarObjetos()
         MetroGrid1.Refresh()
-        txtBusqueda.Clear()
         txtMarca.Clear()
     End Sub
 

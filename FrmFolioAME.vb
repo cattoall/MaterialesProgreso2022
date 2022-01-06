@@ -116,21 +116,33 @@ Public Class FrmFolioAME
         End If
 
         Try
-        SQL = "INSERT INTO foliosfacturas (TipoComprobante,Year,FolioInicial,FolioFinal,FolioActual) values (@TipoComprobante,@year,@FolioInicial,@FolioFinal,@FolioActual)"
+        'SQL = "INSERT INTO foliosfacturas (TipoComprobante,Year,FolioInicial,FolioFinal,FolioActual) values (@TipoComprobante,@year,@FolioInicial,@FolioFinal,@FolioActual)"
         If conn.State = ConnectionState.Open Then
             conn.Close()
         End If
-        conn.Open()
-        myCommand.Parameters.Clear()
-        myCommand.Connection = conn
-        myCommand.CommandText = SQL
-        myCommand.Parameters.AddWithValue("@TipoComprobante", CmbTipoDoc.Text)
-        myCommand.Parameters.AddWithValue("@year", CInt(Label1.Text))
-        myCommand.Parameters.AddWithValue("@FolioInicial", CInt(TxtfolioIni.Text))
-        myCommand.Parameters.AddWithValue("@FolioFinal", CInt(txtFilioFin.Text))
-        myCommand.Parameters.AddWithValue("@FolioActual", CInt(TxtFolioAct.Text))
-        myCommand.ExecuteNonQuery()
-        conn.Close()
+        
+        Dim newFolio As tblFoliofacturas = New tblFoliofacturas
+
+        newFolio.TipoComprobante    = CmbTipoDoc.Text
+        newFolio.Year               = Label1.Text
+        newFolio.FolioInicial       = CInt(TxtfolioIni.Text)
+        newFolio.FolioFinal         = CInt(txtFilioFin.Text)
+        newFolio.FolioActual        = CInt(TxtFolioAct.Text)
+
+        if DBModelo.InsertFolio(newFolio) Then
+            
+        End If
+        'conn.Open()
+        'myCommand.Parameters.Clear()
+        'myCommand.Connection = conn
+        'myCommand.CommandText = SQL
+        'myCommand.Parameters.AddWithValue("@TipoComprobante", CmbTipoDoc.Text)
+        'myCommand.Parameters.AddWithValue("@year", CInt(Label1.Text))
+        'myCommand.Parameters.AddWithValue("@FolioInicial", CInt(TxtfolioIni.Text))
+        'myCommand.Parameters.AddWithValue("@FolioFinal", CInt(txtFilioFin.Text))
+        'myCommand.Parameters.AddWithValue("@FolioActual", CInt(TxtFolioAct.Text))
+        'myCommand.ExecuteNonQuery()
+        'conn.Close()
 
         Llena_Variables(CmbTipoDoc.Text, TxtfolioIni.Text, txtFilioFin.Text, TxtFolioAct.Text, CInt(Label1.Text))
         Limpiar_campos()
@@ -148,21 +160,34 @@ Public Class FrmFolioAME
             Exit Sub
         End If
 
-        SQL = "UPDATE foliosfacturas SET FolioInicial = @FolioInicial, FolioFinal = @FolioFinal, FolioActual = @FolioActual where TipoComprobante = @TipoComprobante and Year = @year"
-        If conn.State = ConnectionState.Open Then
-            conn.Close()
+        'SQL = "UPDATE foliosfacturas SET FolioInicial = @FolioInicial, FolioFinal = @FolioFinal, FolioActual = @FolioActual where TipoComprobante = @TipoComprobante and Year = @year"
+        
+        Dim newFolio As tblFoliofacturas = New tblFoliofacturas
+
+        newFolio.TipoComprobante    = foliotipodoc
+        newFolio.Year               = CInt(folioyear)
+        newFolio.FolioInicial       = CInt(folioini)
+        newFolio.FolioFinal         = CInt(foliofin)
+        newFolio.FolioActual        = CInt(TxtFolioAct.Text)
+
+        if DBModelo.UpdateFolioFacturas(newFolio) Then
+            
         End If
-        conn.Open()
-        myCommand.Parameters.Clear()
-        myCommand.Connection = conn
-        myCommand.CommandText = SQL
-        myCommand.Parameters.AddWithValue("@TipoComprobante", foliotipodoc)
-        myCommand.Parameters.AddWithValue("@year", CInt(folioyear))
-        myCommand.Parameters.AddWithValue("@FolioInicial", CInt(folioini))
-        myCommand.Parameters.AddWithValue("@FolioFinal", CInt(foliofin))
-        myCommand.Parameters.AddWithValue("@FolioActual", CInt(TxtFolioAct.Text))
-        myCommand.ExecuteNonQuery()
-        conn.Close()
+        
+        'If conn.State = ConnectionState.Open Then
+        '    conn.Close()
+        'End If
+        'conn.Open()
+        'myCommand.Parameters.Clear()
+        'myCommand.Connection = conn
+        'myCommand.CommandText = SQL
+        'myCommand.Parameters.AddWithValue("@TipoComprobante", foliotipodoc)
+        'myCommand.Parameters.AddWithValue("@year", CInt(folioyear))
+        'myCommand.Parameters.AddWithValue("@FolioInicial", CInt(folioini))
+        'myCommand.Parameters.AddWithValue("@FolioFinal", CInt(foliofin))
+        'myCommand.Parameters.AddWithValue("@FolioActual", CInt(TxtFolioAct.Text))
+        'myCommand.ExecuteNonQuery()
+        'conn.Close()
 
         Llena_Variables(CmbTipoDoc.Text, TxtfolioIni.Text, txtFilioFin.Text, TxtFolioAct.Text, CInt(Label1.Text))
         Limpiar_campos()

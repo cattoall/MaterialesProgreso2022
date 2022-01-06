@@ -527,7 +527,7 @@ Public Class DBModelo
 #Region "Seccion <<Grupos>>"
     Shared Function GetGroup(ByVal IdGrupo As String) As tblGrupos
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblGrupos.Where(Function(i) i.clave = IdGrupo).FirstOrDefault
+            Return ctx.tblGrupos.Where(Function(i) i.descripcion = IdGrupo).FirstOrDefault
         End Using
     End Function
 
@@ -1611,6 +1611,59 @@ Public Class DBModelo
         End Try
     End Function
 
+    Shared Function GetIntervalFacturas(ByVal startDate As String, ByVal endDate As String) As List(Of tblFacturaTotal)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblFacturaTotals.Where(Function(i) i.fecha_venta >= startDate And i.fecha_venta <= endDate).ToList
+        End Using
+    End Function
+
+    Shared Function GetFacturaByN(ByVal nFactura As String) As List(Of tblFactura)
+        Using ctx As New pv_salvadorEntities1
+            Return ctx.tblFacturas.Where(Function(i) i.n_factura = nFactura).ToList
+        End Using
+    End Function
+
+    Shared Function GetVenta(ByVal nFactura As String) As List(Of tblVenta)
+        Using ctx As New pv_salvadorEntities1()
+            Dim facturas As List(Of tblFactura) =  GetFacturaByN(nFactura)
+            Dim r As List(Of tblVenta) = New List(Of tblVenta)
+            Dim nFolios As List(Of String) = New List(Of String)
+            Dim ind As Int16
+            For ind = 0 To facturas.LongCount - 1
+                Dim folio As String = facturas(ind).folio
+                If nFolios.Contains(folio) Then
+                    Console.WriteLine("Repetido")
+                Else
+                    Dim temp As List(Of tblVenta) = ctx.tblVentas.Where(Function(i) i.nticket = CLng(folio)).ToList
+                    Dim inde As Int16
+                    For inde = 0 To temp.LongCount - 1
+                        r.Add(temp(inde))
+                    Next
+                    nFolios.Add(folio)
+                End If
+            Next
+            Return r
+        End Using
+    End Function
+
+    Shared Function GetFolios() As List(Of tblFoliofacturas)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblFoliofacturas.Where(Function(i) 1 = 1).ToList
+        End Using
+    End Function
+
+    Shared Function InsertFolio(ByVal nFolio As tblFoliofacturas) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1
+                ctx.tblFoliofacturas.Add(nFolio)
+                ctx.SaveChanges
+                Return True
+            End Using
+        Catch ex As Exception
+            Console.WriteLine(ex.ToString)
+            Return False
+        End Try
+    End Function
 #End Region
 
 End Class

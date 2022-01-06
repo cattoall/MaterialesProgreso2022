@@ -6,7 +6,6 @@ Public Class FrmBuscarLineas
 
     Private Sub LimpiarObjetos()
         MetroGrid1.Refresh()
-        txtBusqueda.Clear()
         txtLinea.Clear()
     End Sub
 

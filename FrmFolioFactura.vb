@@ -39,14 +39,15 @@ Public Class FrmFolioFactura
     End Sub
 
     Private Sub llena_grid()
-        SQL = "SELECT * FROM foliosfacturas"
-
-        'Carga Lista de Clasificaciones
-        load_record_dgv(SQL, Me.DataGridView1, DBConnected)
-
-        'Aplica formato al DataGridView
+        DataGridView1.DataSource = DBModelo.GetFolios()
+        'SQL = "SELECT * FROM foliosfacturas"
+        '
+        ''Carga Lista de Clasificaciones
+        'load_record_dgv(SQL, Me.DataGridView1, DBConnected)
+        '
+        ''Aplica formato al DataGridView
         load_layout_dgv_folios(Me.DataGridView1)
-
+        '
         ' folio = DataGridView1.Item(4, DataGridView1.CurrentRow.Index).Value
     End Sub
 

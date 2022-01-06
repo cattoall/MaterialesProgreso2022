@@ -1,4 +1,4 @@
-﻿' La generación de código T4 está habilitada para el modelo 'C:\Users\MSI\Documents\Visual Studio 2017\Projects\Material Electrico 2015\PuntoDeVenta_MaterialesProgreso\Model1.edmx'. 
+﻿' La generación de código T4 está habilitada para el modelo 'C:\Users\teban\Source\Repos\MaterialesProgreso2022\Model1.edmx'. 
 ' Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 ' por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 ' el modelo en el diseñador.

@@ -6,7 +6,6 @@ Public Class FrmBuscarUOM
 
     Private Sub LimpiarObjetos()
         MetroGrid1.Refresh()
-        txtBusqueda.Clear()
         txtUOM.Clear()
     End Sub
 

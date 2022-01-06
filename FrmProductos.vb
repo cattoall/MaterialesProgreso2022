@@ -38,12 +38,12 @@ Public Class FrmProductos
             Exit Sub
         End If
 
-        CmbGrupo.DataSource = grps
+        CmbGrupo.DataSource    = grps
         CmbGrupo.DisplayMember = "descripcion"
-        CmbGrupo.ValueMember = "clave"
+        CmbGrupo.ValueMember   = "clave"
         CmbGrupo.SelectedIndex = -1
 
-        Material_Grupo = Material_Grupo.Trim
+        'Material_Grupo = Material_Grupo.Trim
         If Material_Grupo <> "" Then
             CmbGrupo.SelectedValue = grps.Find(Function(f) f.descripcion = Material_Grupo).clave
         End If
@@ -57,6 +57,7 @@ Public Class FrmProductos
 
     Private Sub Llena_SubFamilias()
         Dim subfam As List(Of tblSubFamilia) = DBModelo.GetSubFamiliaAll
+        Dim i As Int16
 
         If IsNothing(subfam) Then
             Exit Sub
@@ -67,7 +68,7 @@ Public Class FrmProductos
         CmbSubFamilia.ValueMember = "clave"
         CmbSubFamilia.SelectedIndex = -1
 
-        Material_SubFam = Material_SubFam.Trim
+        'Material_SubFam = Material_SubFam.Trim
         If Material_SubFam <> "" Then
             CmbSubFamilia.SelectedValue = subfam.Find(Function(f) f.descripcion = Material_SubFam).clave
         End If
@@ -85,7 +86,7 @@ Public Class FrmProductos
         CmbProveedor.ValueMember = "clave"
         CmbProveedor.SelectedIndex = -1
 
-        Material_Proveedores = Material_Proveedores.Trim
+        'Material_Proveedores = Material_Proveedores.Trim
         If Material_Proveedores <> "" Then
             CmbProveedor.SelectedValue = proveedor.Find(Function(f) f.razonSocial = Material_Proveedores).clave
         End If
@@ -103,7 +104,7 @@ Public Class FrmProductos
         CmbFamilia.ValueMember = "clave"
         CmbFamilia.SelectedIndex = -1
 
-        Material_Familia = Material_Familia.Trim
+        'Material_Familia = Material_Familia.Trim
         If Material_Familia <> "" Then
             CmbFamilia.SelectedValue = familia.Find(Function(f) f.descripcion = Material_Familia).clave
         End If
@@ -122,7 +123,7 @@ Public Class FrmProductos
         CmbLinea.ValueMember = "clave"
         CmbLinea.SelectedIndex = -1
 
-        Material_Linea = Material_Linea.Trim
+        'Material_Linea = Material_Linea.Trim
         If Material_Linea <> "" Then
             CmbLinea.SelectedValue = linea.Find(Function(f) f.descripcion = Material_Linea).clave
         End If
@@ -138,10 +139,10 @@ Public Class FrmProductos
 
         CmbUnidad.DataSource = uom
         CmbUnidad.DisplayMember = "descripcion"
-        CmbUnidad.ValueMember = "idTransaccion"
+        CmbUnidad.ValueMember = "Clave"
         CmbUnidad.SelectedIndex = -1
 
-        Material_Umedida = Material_Umedida.Trim
+        'Material_Umedida = Material_Umedida.Trim
         If Material_Umedida <> "" Then
             CmbUnidad.SelectedValue = uom.Find(Function(f) f.descripcion = Material_Umedida).Clave
         End If

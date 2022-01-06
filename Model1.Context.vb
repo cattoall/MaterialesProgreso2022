@@ -27,7 +27,6 @@ Partial Public Class pv_salvadorEntities1
     Public Overridable Property tblClientes() As DbSet(Of tblClientes)
     Public Overridable Property complementopagosds() As DbSet(Of complementopagosd)
     Public Overridable Property complementopagoshes() As DbSet(Of complementopagosh)
-    Public Overridable Property compras() As DbSet(Of compra)
     Public Overridable Property tblConfiguracions() As DbSet(Of tblConfiguracion)
     Public Overridable Property tblFacturaTotals() As DbSet(Of tblFacturaTotal)
     Public Overridable Property tblFamilias() As DbSet(Of tblFamilia)
@@ -63,6 +62,7 @@ Partial Public Class pv_salvadorEntities1
     Public Overridable Property tblFacturas() As DbSet(Of tblFactura)
     Public Overridable Property tblMarcas() As DbSet(Of tblMarcas)
     Public Overridable Property tblUnidades() As DbSet(Of tblUnidades)
+    Public Overridable Property compras() As DbSet(Of compra)
 
     Public Overridable Function SP_DB_BACKUP(databaseName As String, fullPath As String) As Integer
         Dim databaseNameParameter As ObjectParameter = If(databaseName IsNot Nothing, New ObjectParameter("DatabaseName", databaseName), New ObjectParameter("DatabaseName", GetType(String)))

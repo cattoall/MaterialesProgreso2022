@@ -5,7 +5,6 @@ Public Class FrmBuscarFamilias
 
     Private Sub LimpiarObjetos()
         MetroGrid1.Refresh()
-        txtBusqueda.Clear()
         txtFamilia.Clear()
     End Sub
 

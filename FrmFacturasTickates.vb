@@ -44,12 +44,13 @@
     End Sub
 
     Private Sub DataGridConsulta_CellClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridConsulta.CellClick
-        SQL = " select * from venta where nticket in (SELECT distinct folio FROM facturas where n_factura = '" & Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value & "')"
+        'SQL = " select * from venta where nticket in (SELECT distinct folio FROM facturas where n_factura = '" & Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value & "')"
         'Carga Lista de Clasificaciones
-        load_record_dgv2(SQL, Me.DataGridTikect, DBConnected)
+        'load_record_dgv2(SQL, Me.DataGridTikect, DBConnected)
 
         'Aplica formato al DataGridView
-        load_layout_dgv_ListaTickets(Me.DataGridTikect)
+        'load_layout_dgv_ListaTickets(Me.DataGridTikect)
+        DataGridTikect.DataSource = DBModelo.GetVenta(Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value)
     End Sub
 
     Private Sub ImgVerFactA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgVerFactA.MouseHover
@@ -77,12 +78,12 @@
     End Sub
 
     Private Sub ImgVerFactB_Click(sender As System.Object, e As System.EventArgs) Handles ImgVerFactB.Click
-        SQL = "SELECT * , usuario FROM factura_total where  fecha_venta  >= '" & Format(dtFechaInicial.Value.Date, "yyyy-MM-dd") & "' and fecha_venta <= '" & Format(dtFechaFinal.Value.Date, "yyyy-MM-dd") & "' order by n_factura asc"
-
+        Dim x As List(Of tblFacturaTotal) = DBModelo.GetIntervalFacturas(dtFechaInicial.Value.Date, dtFechaFinal.Value.Date)
+        DataGridConsulta.DataSource = x
         'Carga Lista de Clasificaciones
-        load_record_dgv(SQL, Me.DataGridConsulta, DBConnected)
+        'load_record_dgv(SQL, Me.DataGridConsulta, DBConnected)
 
         'Aplica formato al DataGridView
-        load_layout_dgv_ListaFactura_H(Me.DataGridConsulta)
+        'load_layout_dgv_ListaFactura_H(Me.DataGridConsulta)
     End Sub
 End Class
