@@ -1617,6 +1617,12 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function GetNCIntervalFacturas(ByVal startDate As String, ByVal endDate As String) As List(Of tblNC)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblNCs.Where(Function(i) i.fecha_venta >= startDate And i.fecha_venta <= endDate).ToList
+        End Using
+    End Function
+
     Shared Function GetFacturaByN(ByVal nFactura As String) As List(Of tblFactura)
         Using ctx As New pv_salvadorEntities1
             Return ctx.tblFacturas.Where(Function(i) i.n_factura = nFactura).ToList
@@ -1632,7 +1638,7 @@ Public Class DBModelo
             For ind = 0 To facturas.LongCount - 1
                 Dim folio As String = facturas(ind).folio
                 If nFolios.Contains(folio) Then
-                    Console.WriteLine("Repetido")
+                    
                 Else
                     Dim temp As List(Of tblVenta) = ctx.tblVentas.Where(Function(i) i.nticket = CLng(folio)).ToList
                     Dim inde As Int16
@@ -1663,6 +1669,12 @@ Public Class DBModelo
             Console.WriteLine(ex.ToString)
             Return False
         End Try
+    End Function
+
+    Shared Function GetNCDetalle(ByVal n_nc As String) As List(Of nc_detalle)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.nc_detalle.Where(Function(i) i.n_nc = n_nc).ToList
+        End Using
     End Function
 #End Region
 

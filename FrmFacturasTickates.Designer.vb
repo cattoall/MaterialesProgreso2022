@@ -23,11 +23,14 @@ Partial Class FrmFacturasTickates
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.MetroGrid1 = New MetroFramework.Controls.MetroGrid()
         Me.ImgVerFactB = New System.Windows.Forms.PictureBox()
         Me.ImgVerFactA = New System.Windows.Forms.PictureBox()
         Me.ImgSalirB = New System.Windows.Forms.PictureBox()
@@ -38,20 +41,21 @@ Partial Class FrmFacturasTickates
         Me.dtFechaFinal = New System.Windows.Forms.DateTimePicker()
         Me.dtFechaInicial = New System.Windows.Forms.DateTimePicker()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.DataGridTikect = New System.Windows.Forms.DataGridView()
-        Me.DataGridConsulta = New System.Windows.Forms.DataGridView()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.DataGridTikect = New MetroFramework.Controls.MetroGrid()
         Me.GroupBox1.SuspendLayout
+        CType(Me.MetroGrid1,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.ImgVerFactB,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.ImgVerFactA,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.ImgSalirB,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.ImgSalirA,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.DataGridTikect,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.DataGridConsulta,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.DataGridTikect)
+        Me.GroupBox1.Controls.Add(Me.MetroGrid1)
         Me.GroupBox1.Controls.Add(Me.ImgVerFactB)
         Me.GroupBox1.Controls.Add(Me.ImgVerFactA)
         Me.GroupBox1.Controls.Add(Me.ImgSalirB)
@@ -62,8 +66,6 @@ Partial Class FrmFacturasTickates
         Me.GroupBox1.Controls.Add(Me.dtFechaFinal)
         Me.GroupBox1.Controls.Add(Me.dtFechaInicial)
         Me.GroupBox1.Controls.Add(Me.Label8)
-        Me.GroupBox1.Controls.Add(Me.DataGridTikect)
-        Me.GroupBox1.Controls.Add(Me.DataGridConsulta)
         Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(9, 62)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
@@ -72,6 +74,55 @@ Partial Class FrmFacturasTickates
         Me.GroupBox1.Size = New System.Drawing.Size(1312, 593)
         Me.GroupBox1.TabIndex = 10
         Me.GroupBox1.TabStop = false
+        '
+        'MetroGrid1
+        '
+        Me.MetroGrid1.AllowUserToAddRows = false
+        Me.MetroGrid1.AllowUserToDeleteRows = false
+        Me.MetroGrid1.AllowUserToResizeRows = false
+        Me.MetroGrid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.MetroGrid1.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.MetroGrid1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.MetroGrid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.MetroGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(174,Byte),Integer), CType(CType(219,Byte),Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.MetroGrid1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        Me.MetroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136,Byte),Integer), CType(CType(136,Byte),Integer), CType(CType(136,Byte),Integer))
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.MetroGrid1.DefaultCellStyle = DataGridViewCellStyle5
+        Me.MetroGrid1.EnableHeadersVisualStyles = false
+        Me.MetroGrid1.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.MetroGrid1.GridColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.MetroGrid1.Location = New System.Drawing.Point(20, 80)
+        Me.MetroGrid1.Name = "MetroGrid1"
+        Me.MetroGrid1.ReadOnly = true
+        Me.MetroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(174,Byte),Integer), CType(CType(219,Byte),Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.MetroGrid1.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        Me.MetroGrid1.RowHeadersWidth = 51
+        Me.MetroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.MetroGrid1.RowTemplate.Height = 24
+        Me.MetroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.MetroGrid1.Size = New System.Drawing.Size(1271, 218)
+        Me.MetroGrid1.TabIndex = 62
         '
         'ImgVerFactB
         '
@@ -193,65 +244,61 @@ Partial Class FrmFacturasTickates
         Me.Label8.TabIndex = 17
         Me.Label8.Text = "Desglose de Ticket"
         '
-        'DataGridTikect
-        '
-        Me.DataGridTikect.AllowUserToAddRows = false
-        Me.DataGridTikect.AllowUserToDeleteRows = false
-        Me.DataGridTikect.AllowUserToResizeRows = false
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        Me.DataGridTikect.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridTikect.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridTikect.Location = New System.Drawing.Point(20, 336)
-        Me.DataGridTikect.Margin = New System.Windows.Forms.Padding(4)
-        Me.DataGridTikect.Name = "DataGridTikect"
-        Me.DataGridTikect.ReadOnly = true
-        Me.DataGridTikect.RowHeadersVisible = false
-        Me.DataGridTikect.RowHeadersWidth = 51
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        Me.DataGridTikect.RowsDefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridTikect.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridTikect.ShowCellErrors = false
-        Me.DataGridTikect.ShowCellToolTips = false
-        Me.DataGridTikect.ShowEditingIcon = false
-        Me.DataGridTikect.ShowRowErrors = false
-        Me.DataGridTikect.Size = New System.Drawing.Size(1271, 229)
-        Me.DataGridTikect.TabIndex = 11
-        '
-        'DataGridConsulta
-        '
-        Me.DataGridConsulta.AllowUserToAddRows = false
-        Me.DataGridConsulta.AllowUserToDeleteRows = false
-        Me.DataGridConsulta.AllowUserToResizeRows = false
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        Me.DataGridConsulta.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.DataGridConsulta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridConsulta.Location = New System.Drawing.Point(20, 80)
-        Me.DataGridConsulta.Margin = New System.Windows.Forms.Padding(4)
-        Me.DataGridConsulta.MultiSelect = false
-        Me.DataGridConsulta.Name = "DataGridConsulta"
-        Me.DataGridConsulta.ReadOnly = true
-        Me.DataGridConsulta.RowHeadersVisible = false
-        Me.DataGridConsulta.RowHeadersWidth = 51
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        Me.DataGridConsulta.RowsDefaultCellStyle = DataGridViewCellStyle4
-        Me.DataGridConsulta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridConsulta.ShowCellErrors = false
-        Me.DataGridConsulta.ShowCellToolTips = false
-        Me.DataGridConsulta.ShowEditingIcon = false
-        Me.DataGridConsulta.ShowRowErrors = false
-        Me.DataGridConsulta.Size = New System.Drawing.Size(1271, 218)
-        Me.DataGridConsulta.TabIndex = 10
-        '
         'ToolTip1
         '
         Me.ToolTip1.AutomaticDelay = 50
         Me.ToolTip1.AutoPopDelay = 5000
         Me.ToolTip1.InitialDelay = 50
         Me.ToolTip1.ReshowDelay = 10
+        '
+        'DataGridTikect
+        '
+        Me.DataGridTikect.AllowUserToAddRows = false
+        Me.DataGridTikect.AllowUserToDeleteRows = false
+        Me.DataGridTikect.AllowUserToResizeRows = false
+        Me.DataGridTikect.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DataGridTikect.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.DataGridTikect.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DataGridTikect.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.DataGridTikect.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(174,Byte),Integer), CType(CType(219,Byte),Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridTikect.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.DataGridTikect.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136,Byte),Integer), CType(CType(136,Byte),Integer), CType(CType(136,Byte),Integer))
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridTikect.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DataGridTikect.EnableHeadersVisualStyles = false
+        Me.DataGridTikect.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.DataGridTikect.GridColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.DataGridTikect.Location = New System.Drawing.Point(23, 351)
+        Me.DataGridTikect.Name = "DataGridTikect"
+        Me.DataGridTikect.ReadOnly = true
+        Me.DataGridTikect.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(174,Byte),Integer), CType(CType(219,Byte),Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridTikect.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        Me.DataGridTikect.RowHeadersWidth = 51
+        Me.DataGridTikect.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.DataGridTikect.RowTemplate.Height = 24
+        Me.DataGridTikect.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DataGridTikect.Size = New System.Drawing.Size(1271, 218)
+        Me.DataGridTikect.TabIndex = 63
         '
         'FrmFacturasTickates
         '
@@ -270,12 +317,12 @@ Partial Class FrmFacturasTickates
         Me.Text = "Listado de Tickates por Facturas"
         Me.GroupBox1.ResumeLayout(false)
         Me.GroupBox1.PerformLayout
+        CType(Me.MetroGrid1,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.ImgVerFactB,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.ImgVerFactA,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.ImgSalirB,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.ImgSalirA,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.DataGridTikect,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.DataGridConsulta,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
 
 End Sub
@@ -286,11 +333,11 @@ End Sub
     Friend WithEvents dtFechaFinal As System.Windows.Forms.DateTimePicker
     Friend WithEvents dtFechaInicial As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents DataGridTikect As System.Windows.Forms.DataGridView
-    Friend WithEvents DataGridConsulta As System.Windows.Forms.DataGridView
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents ImgSalirB As System.Windows.Forms.PictureBox
     Friend WithEvents ImgSalirA As System.Windows.Forms.PictureBox
     Friend WithEvents ImgVerFactB As System.Windows.Forms.PictureBox
     Friend WithEvents ImgVerFactA As System.Windows.Forms.PictureBox
+    Friend WithEvents MetroGrid1 As MetroFramework.Controls.MetroGrid
+    Friend WithEvents DataGridTikect As MetroFramework.Controls.MetroGrid
 End Class

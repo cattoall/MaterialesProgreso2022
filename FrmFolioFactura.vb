@@ -51,7 +51,7 @@ Public Class FrmFolioFactura
         ' folio = DataGridView1.Item(4, DataGridView1.CurrentRow.Index).Value
     End Sub
 
-    Private Sub DataGridView1_CellClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+    Private Sub DataGridView1_CellDoubleClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) 
         foliotipodoc = DataGridView1.Item(0, e.RowIndex).Value
         folioyear = DataGridView1.Item(1, e.RowIndex).Value
         folioini = DataGridView1.Item(2, e.RowIndex).Value
@@ -59,54 +59,14 @@ Public Class FrmFolioFactura
         folioactual = DataGridView1.Item(4, e.RowIndex).Value
         Llena_Variables(foliotipodoc, folioini, foliofin, folioactual, folioyear)
         Selection = True
-    End Sub
-
-    Private Sub DataGridView1_CellDoubleClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
-        foliotipodoc = DataGridView1.Item(0, e.RowIndex).Value
-        folioyear = DataGridView1.Item(1, e.RowIndex).Value
-        folioini = DataGridView1.Item(2, e.RowIndex).Value
-        foliofin = DataGridView1.Item(3, e.RowIndex).Value
-        folioactual = DataGridView1.Item(4, e.RowIndex).Value
-        Llena_Variables(foliotipodoc, folioini, foliofin, folioactual, folioyear)
-        Selection = True
-        Call ImgModificarB_Click(sender, e)
+        Call btnEdit_Click(sender, e)
     End Sub
 
     Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) Handles ImgSalirB.Click
         Me.Close()
     End Sub
 
-    Private Sub ImgNewA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgNewA.MouseHover
-        Me.ImgNewA.Visible = False
-        Me.ImgNewB.Visible = True
-    End Sub
-
-    Private Sub ImgNewB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgNewB.MouseLeave
-        Me.ImgNewA.Visible = True
-        Me.ImgNewB.Visible = False
-    End Sub
-
-    Private Sub ImgModificarA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgModificarA.MouseHover
-        Me.ImgModificarA.Visible = False
-        Me.ImgModificarB.Visible = True
-    End Sub
-
-    Private Sub ImgModificarB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgModificarB.MouseLeave
-        Me.ImgModificarA.Visible = True
-        Me.ImgModificarB.Visible = False
-    End Sub
-
-    Private Sub ImgSalirB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgSalirB.MouseLeave
-        Me.ImgSalirA.Visible = True
-        Me.ImgSalirB.Visible = False
-    End Sub
-
-    Private Sub ImgSalirA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgSalirA.MouseHover
-        Me.ImgSalirB.Visible = True
-        Me.ImgSalirA.Visible = False
-    End Sub
-
-    Private Sub ImgNewB_Click(sender As System.Object, e As System.EventArgs) Handles ImgNewB.Click
+    Private Sub ImgNewB_Click(sender As System.Object, e As System.EventArgs) 
         FrmFolioAME.ImgGuardarA.Visible = True
         FrmFolioAME.ImgModificarA.Visible = False
         FrmFolioAME.TxtFolioAct.Visible = False
@@ -132,8 +92,44 @@ Public Class FrmFolioFactura
 
     End Sub
 
-    Private Sub ImgModificarB_Click(sender As System.Object, e As System.EventArgs) Handles ImgModificarB.Click
+    
 
+    Private Sub DataGridView1_CellClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+        foliotipodoc = DataGridView1.Item(0, e.RowIndex).Value
+        folioyear = DataGridView1.Item(1, e.RowIndex).Value
+        folioini = DataGridView1.Item(2, e.RowIndex).Value
+        foliofin = DataGridView1.Item(3, e.RowIndex).Value
+        folioactual = DataGridView1.Item(4, e.RowIndex).Value
+        Llena_Variables(foliotipodoc, folioini, foliofin, folioactual, folioyear)
+        Selection = True
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        FrmFolioAME.ImgGuardarA.Visible = True
+        FrmFolioAME.ImgModificarA.Visible = False
+        FrmFolioAME.TxtFolioAct.Visible = False
+        FrmFolioAME.lblfolioactual.Visible = False
+
+
+        FrmFolioAME.txtFilioFin.Text = ""
+        FrmFolioAME.TxtFolioAct.Text = ""
+        FrmFolioAME.TxtfolioIni.Text = ""
+        FrmFolioAME.CmbTipoDoc.Text = ""
+        FrmFolioAME.Label1.Text = CInt(Now.Date.Year)
+
+        Llena_Variables("", "", "", "", CInt(Now.Date.Year))
+        SetFormName(FrmFolioAME, DBConnected)
+        FrmFolioAME.ShowDialog()
+
+        llena_grid()
+
+        FrmFolioAME.ImgGuardarA.Visible = False
+        FrmFolioAME.ImgModificarA.Visible = True
+        FrmFolioAME.TxtFolioAct.Visible = True
+        FrmFolioAME.lblfolioactual.Visible = True
+    End Sub
+
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         If Selection = False Then
             MsgBox("Favor de seleccionar una Factura", MsgBoxStyle.Information, "Folio Fiscales")
             Exit Sub

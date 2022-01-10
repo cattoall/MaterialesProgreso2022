@@ -2,20 +2,6 @@
 
 Public Class FrmListadoNC
 
-    Private Sub DataGridConsulta_CellClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridConsulta.CellClick
-        LblNumTicket.Visible = True
-        LblTotal.Text = Format(Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,##0.00")
-        LblNumTicket.Text = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
-        NoFactura = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
-        SQL = "SELECT n_nc,cantidad,descripcion,precio,subtotal,clave_p,idProducto,fecha FROM nc_detalle where n_nc = " & Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
-
-        'Carga Lista de Clasificaciones
-        load_record_dgv2(SQL, Me.DataGridTikect, DBConnected)
-
-        'Aplica formato al DataGridView
-        load_layout_dgv_ListaNC_i(Me.DataGridTikect)
-    End Sub
-
     Private Sub FrmListadoFacturas_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyValue
             Case Keys.Escape
@@ -125,10 +111,11 @@ Public Class FrmListadoNC
     End Sub
 
     Public Sub ImgVerFactB_Click(sender As System.Object, e As System.EventArgs) Handles ImgVerFactB.Click
-        SQL = "SELECT *, usuario FROM nc where  fecha_venta  >= '" & Format(dtFechaInicial.Value.Date, "yyyy-MM-dd") & "' and fecha_venta <= '" & Format(dtFechaFinal.Value.Date, "yyyy-MM-dd") & "' order by n_nc, fecha_venta asc"
+        'SQL = "SELECT *, usuario FROM nc where  fecha_venta  >= '" & Format(dtFechaInicial.Value.Date, "yyyy-MM-dd") & "' and fecha_venta <= '" & Format(dtFechaFinal.Value.Date, "yyyy-MM-dd") & "' order by n_nc, fecha_venta asc"
 
         'Carga Lista de Clasificaciones
-        load_record_dgv(SQL, Me.DataGridConsulta, DBConnected)
+        'load_record_dgv(SQL, Me.DataGridConsulta, DBConnected)
+        DataGridConsulta.DataSource = DBModelo.GetNCIntervalFacturas(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"))
 
         'Aplica formato al DataGridView
         load_layout_dgv_ListaNC_H(Me.DataGridConsulta)
@@ -177,7 +164,22 @@ Public Class FrmListadoNC
         End If
     End Sub
 
-    Private Sub DataGridConsulta_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridConsulta.CellContentClick
+    Private Sub DataGridConsulta_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) 
 
+    End Sub
+
+    Private Sub DataGridConsulta_CellClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridConsulta.CellClick
+        LblNumTicket.Visible = True
+        LblTotal.Text = Format(Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,##0.00")
+        LblNumTicket.Text = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+        NoFactura = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+        'SQL = "SELECT n_nc,cantidad,descripcion,precio,subtotal,clave_p,idProducto,fecha FROM nc_detalle where n_nc = " & Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+
+        'Carga Lista de Clasificaciones
+        'load_record_dgv2(SQL, Me.DataGridTikect, DBConnected)
+        DataGridTikect.DataSource = DBModelo.GetNCDetalle(Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value)
+
+        'Aplica formato al DataGridView
+        load_layout_dgv_ListaNC_i(Me.DataGridTikect)
     End Sub
 End Class

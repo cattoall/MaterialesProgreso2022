@@ -59,7 +59,7 @@ Public Class FrmNotaDeCredito
         End If
     End Sub
 
-    Private Sub DGVDetalle_CellValueChanged(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DGVDetalle.CellValueChanged
+    Private Sub DGVDetalle_CellValueChanged(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) 
         If e.ColumnIndex = 2 And e.RowIndex <> -1 Then
             Dim lv_cantidad As Double = DGVDetalle.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             If lv_cantidad <= CDbl(DGVDetalle.Rows(e.RowIndex).Cells(6).Value) Then
@@ -83,7 +83,7 @@ Public Class FrmNotaDeCredito
         End If
     End Sub
 
-    Private Sub DGVDetalle_RowsRemoved(sender As Object, e As System.Windows.Forms.DataGridViewRowsRemovedEventArgs) Handles DGVDetalle.RowsRemoved
+    Private Sub DGVDetalle_RowsRemoved(sender As Object, e As System.Windows.Forms.DataGridViewRowsRemovedEventArgs) 
         Dim lv_total_c As Double = 0
         For i = 0 To DGVDetalle.Rows.Count - 1
             lv_total_c = lv_total_c + Trim(Replace(Trim(Replace(DGVDetalle.Rows(i).Cells(5).Value, "$", "")), ",", ""))

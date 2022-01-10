@@ -135,7 +135,7 @@
 
 
         ElseIf Cancelar = 3 Then
-
+            Console.WriteLine("No se que pase")
 
         ElseIf Cancelar = 4 Then
 

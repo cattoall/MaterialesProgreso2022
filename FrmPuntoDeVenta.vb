@@ -321,9 +321,9 @@
 
     Private Sub MetroGrid1_KeyDown(sender As Object, e As KeyEventArgs) Handles MetroGrid1.KeyDown
         Try
-            If MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value > -1 Then
+            If e.KeyCode = Keys.Enter Then
                 Dim lv_granTotal As Double = 0
-                If e.KeyCode = Keys.Enter Then
+                If MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value > -1 Then
                     FrmDescuento.lblDescripcion.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
                     FrmDescuento.NupCantidad.Text = MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value
                     FrmDescuento.NupPrecio.Text = Replace(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value, "$", "")
