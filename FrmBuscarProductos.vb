@@ -37,7 +37,7 @@
         Material_SubFam                     = MetroGrid1.Item(8,  MetroGrid1.CurrentRow.Index).Value
         Material_Linea                      = MetroGrid1.Item(9,  MetroGrid1.CurrentRow.Index).Value
         Material_Proveedores                = MetroGrid1.Item(10,  MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.CmbTipoVenta.Text      = MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.CmbTipoVenta.Text = MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value
         FrmProductos.txtDesc.Text           = MetroGrid1.Item(12, MetroGrid1.CurrentRow.Index).Value
         FrmProductos.txtPrecioLista.Text    = MetroGrid1.Item(13, MetroGrid1.CurrentRow.Index).Value
         FrmProductos.txtPrecioCosto.Text    = MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value
@@ -53,16 +53,16 @@
             FrmProductos.chkPrecioManual.Checked = False
         End If
 
-        If MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value = True Then
+        If MetroGrid1.Item(22, MetroGrid1.CurrentRow.Index).Value = True Then
             FrmProductos.chkTC.Checked = True
         Else
             FrmProductos.chkTC.Checked = False
         End If
 
-        FrmProductos.txtClaveProducto.Text  = MetroGrid1.Item(23, MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtClaveUnidad.Text    = MetroGrid1.Item(24, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtClaveProducto.Text = MetroGrid1.Item(24, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtClaveUnidad.Text = MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value
 
-        If MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value = "True" Then
+        If MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value = True Then
             FrmProductos.chkTasaCero.Checked = True
         Else
             FrmProductos.chkTasaCero.Checked = False

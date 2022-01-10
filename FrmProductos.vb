@@ -581,6 +581,7 @@ Public Class FrmProductos
         StrProductos.clave = txtClave.Text
         StrProductos.descripcionProducto = txtDescripcion.Text
         StrProductos.unidadMedida = CmbUnidad.Text
+        StrProductos.marca = ""
         StrProductos.grupo = CmbGrupo.Text
         StrProductos.familia = CmbFamilia.Text
         StrProductos.subfamilia = CmbSubFamilia.Text
