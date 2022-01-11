@@ -94,6 +94,8 @@ Public Class frmLogin
                     TicketPrinterName = conf.TicketPrinterName
                     GranTipoCambio = conf.TipoCambio
                     FactorIVA = conf.factorIVA
+                    RegimenFiscal = conf.RegimenFiscal
+                    LugarExpedicion = conf.LugarExpedicion
 
                     lv_backup_error = 0
                     Dim lv_backup_pathfile As String

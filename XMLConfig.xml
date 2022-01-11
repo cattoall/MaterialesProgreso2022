@@ -16,8 +16,8 @@
   <Report_Path>C:\Users\MSI\Documents\Visual Studio 2017\Projects\Material Electrico 2015\PuntoDeVenta_MaterialesProgreso\bin\Debug\</Report_Path>
   <Report_Path_FE>C:\Program Files\TSF Colima\Facturación Electrónica 3.3\</Report_Path_FE>
   <RutaProceso>C:\CFDI\</RutaProceso>
-  <SAT_CER>C:\SDK2\certificados\lan7008173r5.cer</SAT_CER>
-  <SAT_KEY>C:\SDK2\certificados\lan7008173r5.key</SAT_KEY>
+  <SAT_CER>C:\SDK2\certificados\XIA190128J61.cer</SAT_CER>
+  <SAT_KEY>C:\SDK2\certificados\XIA190128J61.key</SAT_KEY>
   <SAT_PASS>12345678a</SAT_PASS>
   <SerieFacturaLibrada>A</SerieFacturaLibrada>
   <SerieFacturaSalvador>B</SerieFacturaSalvador>

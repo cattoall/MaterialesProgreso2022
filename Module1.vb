@@ -2598,13 +2598,14 @@ Module Module1
     End Sub
     'END ***********************************Imprimir ReportViewer directo a Impresora******************************************
 
-    Public Function ImprimeFactura2(ByVal NumeroFactura As String, ByVal FolioFactura As String, ByVal Imprimir As Boolean, ByVal DB As String) As Boolean
+    Public Function ImprimeFactura2(ByVal NumeroFactura As String, ByVal FolioFactura As String, ByVal Imprimir As Boolean) As Boolean
 
         Dim dt_detail As DataTable = New DataTable
         '---------Variables para reporte--------------
         Dim rep_FormadePago As String
         Dim rep_MetododePago As String
-        Dim rep_folio As String = "B-" & NoFactura & "_" & FechaFactura & "CFDI"
+        Dim rep_UsoCFDI As String
+        Dim rep_folio As String = FolioFactura
         Dim rep_direccion As String
         Dim rep_colonia As String
         Dim rep_cuidad As String
@@ -2629,11 +2630,11 @@ Module Module1
         dt_detail.TableName = "facturas"
         Try
             Dim Report As New LocalReport
-            Dim ruta As String = My.Settings.CDFI_XML_PATH
+            Dim ruta As String = gv_CDFI_XML_PATH
             Dim DS As New DataSet
             Dim dt_comprobante As DataTable = New DataTable
 
-            ruta = ruta & rep_folio & ".xml"
+            ruta = ruta & rep_folio
             Dim fsReadXml As New System.IO.FileStream(ruta, System.IO.FileMode.Open)
             DS.ReadXml(fsReadXml)
 
