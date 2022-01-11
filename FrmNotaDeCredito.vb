@@ -38,7 +38,7 @@ Public Class FrmNotaDeCredito
                         lv_total_c = lv_total_c + lt_Facturas(i).subtotal
                     Next i
                     TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
-                    ImgGenerarA.Enabled = True
+                    mBtnGenerate.Enabled = True
                 Else
                     MetroFramework.MetroMessageBox.Show(Me, "Factura: " & Lv_pedido & " Ya Tiene Nota de Crédito Generada.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Limpiar_objetos()
@@ -101,7 +101,7 @@ Public Class FrmNotaDeCredito
         TxtTotal_N.Clear()
         DTPFecha.Value = Now.Date
         Label9.Visible = False
-        ImgGenerarA.Enabled = False
+        mBtnGenerate.Enabled = False
         DGVDetalle.Refresh()
         DGVDetalle.Rows.Clear()
         DGVDetalle.ResumeLayout()
@@ -138,31 +138,15 @@ Public Class FrmNotaDeCredito
 
         Limpiar_objetos()
     End Sub
-
-    Private Sub ImgSalirB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgSalirB.MouseLeave
-        Me.ImgSalirA.Visible = True
-        Me.ImgSalirB.Visible = False
-    End Sub
-
-    Private Sub ImgSalirA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgSalirA.MouseHover
-        Me.ImgSalirB.Visible = True
-        Me.ImgSalirA.Visible = False
-    End Sub
-
-    Private Sub ImgGenerarB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgGenerarB.MouseLeave
-        Me.ImgGenerarA.Visible = True
-        Me.ImgGenerarB.Visible = False
-    End Sub
-
-    Private Sub ImgGenerarA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgGenerarA.MouseHover
-        Me.ImgGenerarB.Visible = True
-        Me.ImgGenerarA.Visible = False
-    End Sub
-    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) Handles ImgSalirB.Click
+    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) 
         Me.Close()
     End Sub
 
-    Private Sub ImgGenerarB_Click(sender As System.Object, e As System.EventArgs) Handles ImgGenerarB.Click
+    Private Sub ImgGenerarB_Click(sender As System.Object, e As System.EventArgs) 
+        
+    End Sub
+
+    Private Sub mBtnGenerate_Click(sender As Object, e As EventArgs) Handles mBtnGenerate.Click
         Dim strNC As New tblNC
 
         strNC.n_nc = FolioNC_Actual
@@ -239,5 +223,9 @@ Public Class FrmNotaDeCredito
         MetroFramework.MetroMessageBox.Show(Me, "Devolución Terminada Correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         Limpiar_objetos()
+    End Sub
+
+    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) Handles mBtnExit.Click
+        Me.Close()
     End Sub
 End Class

@@ -39,37 +39,7 @@ Public Class FrmFolioAME
         CmbTipoDoc.SelectedIndex = -1
     End Sub
 
-    Private Sub ImgGuardarB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgGuardarB.MouseLeave
-        Me.ImgGuardarA.Visible = True
-        Me.ImgGuardarB.Visible = False
-    End Sub
-
-    Private Sub ImgGuardarA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgGuardarA.MouseHover
-        Me.ImgGuardarB.Visible = True
-        Me.ImgGuardarA.Visible = False
-    End Sub
-
-    Private Sub ImgModificarB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgModificarB.MouseLeave
-        Me.ImgModificarA.Visible = True
-        Me.ImgModificarB.Visible = False
-    End Sub
-
-    Private Sub ImgModificarA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgModificarA.MouseHover
-        Me.ImgModificarB.Visible = True
-        Me.ImgModificarA.Visible = False
-    End Sub
-
-    Private Sub ImgSalirB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgSalirB.MouseLeave
-        Me.ImgSalirA.Visible = True
-        Me.ImgSalirB.Visible = False
-    End Sub
-
-    Private Sub ImgSalirA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgSalirA.MouseHover
-        Me.ImgSalirB.Visible = True
-        Me.ImgSalirA.Visible = False
-    End Sub
-
-    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) Handles ImgSalirB.Click
+    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) 
         TxtFolioAct.Enabled = True
         txtFilioFin.Enabled = True
         TxtfolioIni.Enabled = True
@@ -105,59 +75,76 @@ Public Class FrmFolioAME
         End If
     End Sub
 
-    Private Sub ImgGuardarB_Click(sender As System.Object, e As System.EventArgs) Handles ImgGuardarB.Click
-        lv_tipo = CmbTipoDoc.Text
-        TxtFolioAct.Text = TxtfolioIni.Text
-        Dim SQL As String
-
-        If CmbTipoDoc.SelectedIndex < 0 Or TxtfolioIni.Text = "" Or txtFilioFin.Text = "" Then
-            MsgBox("Necesitas llenar todos los campos para poder guardar", MsgBoxStyle.Critical, "Folios Fiscales")
-            Exit Sub
-        End If
-
-        Try
-        'SQL = "INSERT INTO foliosfacturas (TipoComprobante,Year,FolioInicial,FolioFinal,FolioActual) values (@TipoComprobante,@year,@FolioInicial,@FolioFinal,@FolioActual)"
-        If conn.State = ConnectionState.Open Then
-            conn.Close()
-        End If
+    Private Sub ImgGuardarB_Click(sender As System.Object, e As System.EventArgs) 
         
-        Dim newFolio As tblFoliofacturas = New tblFoliofacturas
-
-        newFolio.TipoComprobante    = CmbTipoDoc.Text
-        newFolio.Year               = Label1.Text
-        newFolio.FolioInicial       = CInt(TxtfolioIni.Text)
-        newFolio.FolioFinal         = CInt(txtFilioFin.Text)
-        newFolio.FolioActual        = CInt(TxtFolioAct.Text)
-
-        if DBModelo.InsertFolio(newFolio) Then
-            
-        End If
-        'conn.Open()
-        'myCommand.Parameters.Clear()
-        'myCommand.Connection = conn
-        'myCommand.CommandText = SQL
-        'myCommand.Parameters.AddWithValue("@TipoComprobante", CmbTipoDoc.Text)
-        'myCommand.Parameters.AddWithValue("@year", CInt(Label1.Text))
-        'myCommand.Parameters.AddWithValue("@FolioInicial", CInt(TxtfolioIni.Text))
-        'myCommand.Parameters.AddWithValue("@FolioFinal", CInt(txtFilioFin.Text))
-        'myCommand.Parameters.AddWithValue("@FolioActual", CInt(TxtFolioAct.Text))
-        'myCommand.ExecuteNonQuery()
-        'conn.Close()
-
-        Llena_Variables(CmbTipoDoc.Text, TxtfolioIni.Text, txtFilioFin.Text, TxtFolioAct.Text, CInt(Label1.Text))
-        Limpiar_campos()
-            Me.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "Folios Fiscales")
-        End Try
     End Sub
 
-    Private Sub ImgModificarB_Click(sender As System.Object, e As System.EventArgs) Handles ImgModificarB.Click
+    Private Sub ImgModificarB_Click(sender As System.Object, e As System.EventArgs) 
+        
+    End Sub
+
+    Private Sub mBtnSave_Click(sender As Object, e As EventArgs) Handles mBtnSave.Click
+        If mBtnSave.Text = "Modificar"
+            Update()
+
+        Else
+            lv_tipo = CmbTipoDoc.Text
+            TxtFolioAct.Text = TxtfolioIni.Text
+            Dim SQL As String
+
+            If CmbTipoDoc.SelectedIndex < 0 Or TxtfolioIni.Text = "" Or txtFilioFin.Text = "" Then
+                MsgBox("Necesitas llenar todos los campos para poder guardar", MsgBoxStyle.Critical, "Folios Fiscales")
+                Exit Sub
+            End If
+
+            Try
+            'SQL = "INSERT INTO foliosfacturas (TipoComprobante,Year,FolioInicial,FolioFinal,FolioActual) values (@TipoComprobante,@year,@FolioInicial,@FolioFinal,@FolioActual)"
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        
+            Dim newFolio As tblFoliofacturas = New tblFoliofacturas
+
+            newFolio.TipoComprobante    = CmbTipoDoc.Text
+            newFolio.Year               = Label1.Text
+            newFolio.FolioInicial       = CInt(TxtfolioIni.Text)
+            newFolio.FolioFinal         = CInt(txtFilioFin.Text)
+            newFolio.FolioActual        = CInt(TxtFolioAct.Text)
+
+            if DBModelo.InsertFolio(newFolio) Then
+                Console.WriteLine("Se pudo")
+            Else
+                Console.WriteLine("No se pudo")
+            End If
+            'conn.Open()
+            'myCommand.Parameters.Clear()
+            'myCommand.Connection = conn
+            'myCommand.CommandText = SQL
+            'myCommand.Parameters.AddWithValue("@TipoComprobante", CmbTipoDoc.Text)
+            'myCommand.Parameters.AddWithValue("@year", CInt(Label1.Text))
+            'myCommand.Parameters.AddWithValue("@FolioInicial", CInt(TxtfolioIni.Text))
+            'myCommand.Parameters.AddWithValue("@FolioFinal", CInt(txtFilioFin.Text))
+            'myCommand.Parameters.AddWithValue("@FolioActual", CInt(TxtFolioAct.Text))
+            'myCommand.ExecuteNonQuery()
+            'conn.Close()
+
+            Llena_Variables(CmbTipoDoc.Text, TxtfolioIni.Text, txtFilioFin.Text, TxtFolioAct.Text, CInt(Label1.Text))
+            Limpiar_campos()
+                Me.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical, "Folios Fiscales")
+            End Try
+        End If
+        Me.Close()
+    End Sub
+
+    Function Update() 
         Dim SQL As String
 
         If TxtFolioAct.Text = "" Then
+            Console.WriteLine(TxtFolioAct.Text)
             MsgBox("Necesitas llenar Folio Actual para Modificarlo", MsgBoxStyle.Critical, "Folios Fiscales")
-            Exit Sub
+            Return 0
         End If
 
         'SQL = "UPDATE foliosfacturas SET FolioInicial = @FolioInicial, FolioFinal = @FolioFinal, FolioActual = @FolioActual where TipoComprobante = @TipoComprobante and Year = @year"
@@ -191,6 +178,10 @@ Public Class FrmFolioAME
 
         Llena_Variables(CmbTipoDoc.Text, TxtfolioIni.Text, txtFilioFin.Text, TxtFolioAct.Text, CInt(Label1.Text))
         Limpiar_campos()
+        Me.Close()
+    End Function
+
+    Private Sub MetroButton1_Click(sender As Object, e As EventArgs) Handles MetroButton1.Click
         Me.Close()
     End Sub
 End Class

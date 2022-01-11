@@ -135,7 +135,6 @@
 
 
         ElseIf Cancelar = 3 Then
-            Console.WriteLine("No se que pase")
 
         ElseIf Cancelar = 4 Then
 
@@ -165,7 +164,7 @@
 
             MetroFramework.MetroMessageBox.Show(Me, "Nota de Crédito " & NoFactura & " Ha sido cancelada.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            Call FrmListadoNC.ImgVerFactB_Click(sender, e)
+            'Call FrmListadoNC.ImgVerFactB_Click(sender, e)
 
             FrmListadoNC.LblNumTicket.Text = ""
             FrmListadoNC.LblNumTicket.Visible = False

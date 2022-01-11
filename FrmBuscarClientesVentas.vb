@@ -190,63 +190,6 @@
                     FrmListadoDePreciosPorLinea.txtcliente.Text = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value
                     idClienteVenta = MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value
                     precio_linea = MetroGrid1.Item(15, MetroGrid1.CurrentRow.Index).Value
-                Case "FACTURAS"
-                    FrmFacturacion.txtnombre.Text = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtdirecion.Text = MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtcolonia.Text = MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtestado.Text = MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtcp.Text = MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.TxtRFC.Text = MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtNumero.Text = MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtCiudad.Text = MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtEmail.Text = MetroGrid1.Item(13, MetroGrid1.CurrentRow.Index).Value
-                    'If DataGridView1.Item(18, DataGridView1.CurrentRow.Index).Value <> "" Then
-                    '    FrmFacturacion.CmbTipo.SelectedIndex = FrmFacturacion.CmbTipo.FindString(DataGridView1.Item(18, DataGridView1.CurrentRow.Index).Value)
-                    'Else
-                    '    FrmFacturacion.CmbTipo.SelectedIndex = -1
-                    'End If
-
-                    If MetroGrid1.Item(20, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                        FrmFacturacion.CmbCredito.SelectedIndex = FrmFacturacion.CmbCredito.FindString(MetroGrid1.Item(20, MetroGrid1.CurrentRow.Index).Value)
-                    Else
-                        FrmFacturacion.CmbCredito.SelectedIndex = -1
-                    End If
-
-                    If MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                        FrmFacturacion.txtCuenta.Text = MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value
-                    Else
-                        FrmFacturacion.txtCuenta.Clear()
-                    End If
-
-                    If MetroGrid1.Item(22, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                        FrmFacturacion.CmbBanco.SelectedIndex = FrmFacturacion.CmbBanco.FindString(MetroGrid1.Item(22, MetroGrid1.CurrentRow.Index).Value)
-                    Else
-                        FrmFacturacion.CmbBanco.SelectedIndex = -1
-                    End If
-
-                    If MetroGrid1.Item(23, MetroGrid1.CurrentRow.Index).Value = 1 Then
-                        FrmFacturacion.ChkTasaCero.Checked = True
-                    Else
-                        FrmFacturacion.ChkTasaCero.Checked = False
-                    End If
-
-                    If MetroGrid1.Item(19, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                        FrmFacturacion.CmbMetodoPago.SelectedIndex = FrmFacturacion.CmbMetodoPago.FindString(MetroGrid1.Item(19, MetroGrid1.CurrentRow.Index).Value)
-                    Else
-                        FrmFacturacion.CmbMetodoPago.SelectedIndex = -1
-                    End If
-
-                    If MetroGrid1.Item(24, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                        FrmFacturacion.CmdFormaPago.SelectedIndex = FrmFacturacion.CmdFormaPago.FindString(MetroGrid1.Item(24, MetroGrid1.CurrentRow.Index).Value)
-                    Else
-                        FrmFacturacion.CmdFormaPago.SelectedIndex = -1
-                    End If
-
-                    If MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                        FrmFacturacion.CmbUsoCDFI.SelectedIndex = FrmFacturacion.CmbUsoCDFI.FindString(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value)
-                    Else
-                        FrmFacturacion.CmbUsoCDFI.SelectedIndex = -1
-                    End If
             End Select
             idTipoPrecioCliente = MetroGrid1.Item(15, MetroGrid1.CurrentRow.Index).Value
             MetroGrid1.Refresh()

@@ -62,13 +62,13 @@ Public Class FrmFolioFactura
         Call btnEdit_Click(sender, e)
     End Sub
 
-    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) Handles ImgSalirB.Click
+    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) 
         Me.Close()
     End Sub
 
     Private Sub ImgNewB_Click(sender As System.Object, e As System.EventArgs) 
-        FrmFolioAME.ImgGuardarA.Visible = True
-        FrmFolioAME.ImgModificarA.Visible = False
+        'FrmFolioAME.ImgGuardarA.Visible = True
+        'FrmFolioAME.ImgModificarA.Visible = False
         FrmFolioAME.TxtFolioAct.Visible = False
         FrmFolioAME.lblfolioactual.Visible = False
 
@@ -85,8 +85,6 @@ Public Class FrmFolioFactura
 
         llena_grid()
 
-        FrmFolioAME.ImgGuardarA.Visible = False
-        FrmFolioAME.ImgModificarA.Visible = True
         FrmFolioAME.TxtFolioAct.Visible = True
         FrmFolioAME.lblfolioactual.Visible = True
 
@@ -105,8 +103,6 @@ Public Class FrmFolioFactura
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        FrmFolioAME.ImgGuardarA.Visible = True
-        FrmFolioAME.ImgModificarA.Visible = False
         FrmFolioAME.TxtFolioAct.Visible = False
         FrmFolioAME.lblfolioactual.Visible = False
 
@@ -123,8 +119,6 @@ Public Class FrmFolioFactura
 
         llena_grid()
 
-        FrmFolioAME.ImgGuardarA.Visible = False
-        FrmFolioAME.ImgModificarA.Visible = True
         FrmFolioAME.TxtFolioAct.Visible = True
         FrmFolioAME.lblfolioactual.Visible = True
     End Sub
@@ -135,8 +129,7 @@ Public Class FrmFolioFactura
             Exit Sub
         End If
 
-        FrmFolioAME.ImgGuardarA.Visible = False
-        FrmFolioAME.ImgModificarA.Visible = True
+        FrmFolioAME.mBtnSave.Text = "Modificar"
         FrmFolioAME.TxtFolioAct.Visible = True
         FrmFolioAME.lblfolioactual.Visible = True
 
@@ -158,13 +151,19 @@ Public Class FrmFolioFactura
         FrmFolioAME.ShowDialog()
         llena_grid()
 
-        FrmFolioAME.ImgGuardarA.Visible = True
-        FrmFolioAME.ImgModificarA.Visible = False
         FrmFolioAME.TxtFolioAct.Visible = False
         FrmFolioAME.lblfolioactual.Visible = False
         FrmFolioAME.CmbTipoDoc.Enabled = True
         FrmFolioAME.txtFilioFin.Enabled = True
         FrmFolioAME.TxtfolioIni.Enabled = True
         Selection = False
+    End Sub
+
+    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) Handles mBtnExit.Click
+        Me.Close()
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
     End Sub
 End Class

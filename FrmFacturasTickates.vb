@@ -43,31 +43,32 @@
 
     End Sub
 
-    Private Sub ImgVerFactA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgVerFactA.MouseHover
-        Me.ImgVerFactA.Visible = False
-        Me.ImgVerFactB.Visible = True
-    End Sub
-
-    Private Sub ImgVerFactB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgVerFactB.MouseLeave
-        Me.ImgVerFactA.Visible = True
-        Me.ImgVerFactB.Visible = False
-    End Sub
-
-    Private Sub ImgSalirB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgSalirB.MouseLeave
-        Me.ImgSalirA.Visible = True
-        Me.ImgSalirB.Visible = False
-    End Sub
-
-    Private Sub ImgSalirA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgSalirA.MouseHover
-        Me.ImgSalirB.Visible = True
-        Me.ImgSalirA.Visible = False
-    End Sub
-
-    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) Handles ImgSalirB.Click
+    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) 
         Me.Close()
     End Sub
 
-    Private Sub ImgVerFactB_Click(sender As System.Object, e As System.EventArgs) Handles ImgVerFactB.Click
+    Private Sub MetroGrid1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellClick
+        DataGridTikect.DataSource = DBModelo.GetVenta(Me.MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value)
+        DataGridTikect.Columns(0).HeaderText = "No. Ticket"
+        DataGridTikect.Columns(1).HeaderText = "Fecha"
+        DataGridTikect.Columns(2).HeaderText = "SubTotal"
+        DataGridTikect.Columns(3).HeaderText = "Tipo de Venta"
+        DataGridTikect.Columns(4).HeaderText = "IVA"
+        DataGridTikect.Columns(5).HeaderText = "Total"
+        DataGridTikect.Columns(6).HeaderText = "Tipo de Pago"
+        DataGridTikect.Columns(7).HeaderText = "Usuario"
+        DataGridTikect.Columns(8).HeaderText = "Cliente"
+        DataGridTikect.Columns(9).HeaderText = "ID Cliente"
+        DataGridTikect.Columns(10).HeaderText = "Estado"
+        DataGridTikect.Columns(11).HeaderText = "Motivo"
+        DataGridTikect.Columns(11).HeaderText = "No. Factura"
+    End Sub
+
+    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) Handles mBtnExit.Click
+        Me.Close()
+    End Sub
+
+    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs) Handles mBtnSearch.Click
         Dim x As List(Of tblFacturaTotal) = DBModelo.GetIntervalFacturas(dtFechaInicial.Value.Date, dtFechaFinal.Value.Date)
         MetroGrid1.DataSource = x
         Console.WriteLine(MetroGrid1.Columns.Count.ToString)
@@ -93,33 +94,5 @@
         MetroGrid1.Columns(19).HeaderText = "Cancelada"
         MetroGrid1.Columns(20).HeaderText = "Comprobante de Pago"
         MetroGrid1.Columns(21).HeaderText = "PDF"
-        'Carga Lista de Clasificaciones
-        'load_record_dgv(SQL, Me.DataGridConsulta, DBConnected)
-
-        'Aplica formato al DataGridView
-        'load_layout_dgv_ListaFactura_H(Me.DataGridConsulta)
-    End Sub
-
-    Private Sub MetroGrid1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellClick
-        'SQL = " select * from venta where nticket in (SELECT distinct folio FROM facturas where n_factura = '" & Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value & "')"
-        'Carga Lista de Clasificaciones
-        'load_record_dgv2(SQL, Me.DataGridTikect, DBConnected)
-    
-        'Aplica formato al DataGridView
-        'load_layout_dgv_ListaTickets(Me.DataGridTikect)
-        DataGridTikect.DataSource = DBModelo.GetVenta(Me.MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value)
-        DataGridTikect.Columns(0).HeaderText = "No. Ticket"
-        DataGridTikect.Columns(1).HeaderText = "Fecha"
-        DataGridTikect.Columns(2).HeaderText = "SubTotal"
-        DataGridTikect.Columns(3).HeaderText = "Tipo de Venta"
-        DataGridTikect.Columns(4).HeaderText = "IVA"
-        DataGridTikect.Columns(5).HeaderText = "Total"
-        DataGridTikect.Columns(6).HeaderText = "Tipo de Pago"
-        DataGridTikect.Columns(7).HeaderText = "Usuario"
-        DataGridTikect.Columns(8).HeaderText = "Cliente"
-        DataGridTikect.Columns(9).HeaderText = "ID Cliente"
-        DataGridTikect.Columns(10).HeaderText = "Estado"
-        DataGridTikect.Columns(11).HeaderText = "Motivo"
-        DataGridTikect.Columns(11).HeaderText = "No. Factura"
     End Sub
 End Class

@@ -37,7 +37,7 @@
         Material_SubFam                     = MetroGrid1.Item(8,  MetroGrid1.CurrentRow.Index).Value
         Material_Linea                      = MetroGrid1.Item(9,  MetroGrid1.CurrentRow.Index).Value
         Material_Proveedores                = MetroGrid1.Item(10,  MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.CmbTipoVenta.Text = MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.CmbTipoVenta.Text      = MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value
         FrmProductos.txtDesc.Text           = MetroGrid1.Item(12, MetroGrid1.CurrentRow.Index).Value
         FrmProductos.txtPrecioLista.Text    = MetroGrid1.Item(13, MetroGrid1.CurrentRow.Index).Value
         FrmProductos.txtPrecioCosto.Text    = MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value

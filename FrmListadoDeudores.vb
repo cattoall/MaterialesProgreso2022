@@ -96,29 +96,4 @@
         Close()
         Dispose()
     End Sub
-
-    Private Sub CmdImprimir_Click(sender As Object, e As EventArgs) Handles CmdImprimir.Click
-        'If DataGridView1.RowCount > 0 Then
-        '    dt.TableName = "deudores"
-        '
-        '    Dim lv_fecha_inicio As String = Format(dtinicio.Value, "dd/MM/yyyy")
-        '    Dim lv_fecha_final As String = Format(dtfinal.Value, "dd/MM/yyyy")
-        '
-        '    ' Format(, "dd/MM/yyyy")
-        '    Dim p1 As New Microsoft.Reporting.WinForms.ReportParameter("fecha_venta", lv_fecha_inicio.ToString)
-        '    Dim p2 As New Microsoft.Reporting.WinForms.ReportParameter("fecha_limite", lv_fecha_final.ToString)
-        '    Dim p3 As New Microsoft.Reporting.WinForms.ReportParameter("suma_resto", lbltotal.Text)
-        '
-        '    FrmImpDeudores.ReportViewer1.LocalReport.SetParameters(p1)
-        '    FrmImpDeudores.ReportViewer1.LocalReport.SetParameters(p2)
-        '    FrmImpDeudores.ReportViewer1.LocalReport.SetParameters(p3)
-        '    FrmImpDeudores.ReportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout)
-        '    FrmImpDeudores.ReportViewer1.LocalReport.DataSources.Clear()
-        '    FrmImpDeudores.ReportViewer1.LocalReport.DataSources.Add(New Microsoft.Reporting.WinForms.ReportDataSource("DataSet1", dt))
-        '    FrmImpDeudores.ShowDialog()
-        'Else
-        '    MsgBox("Favor de ver un Reporte de una Fecha", MsgBoxStyle.Information, "Listado de Deudores")
-        '    Exit Sub
-        'End If
-    End Sub
 End Class

@@ -23,13 +23,16 @@ Partial Class FrmNotaDeCredito
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.DGVDetalle = New MetroFramework.Controls.MetroGrid()
-        Me.ImgSalirB = New System.Windows.Forms.PictureBox()
-        Me.ImgSalirA = New System.Windows.Forms.PictureBox()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TxtTotal_N = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.TxtPedido = New System.Windows.Forms.TextBox()
@@ -48,35 +51,24 @@ Partial Class FrmNotaDeCredito
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TxtPedido_C = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.ImgGenerarB = New System.Windows.Forms.PictureBox()
-        Me.ImgGenerarA = New System.Windows.Forms.PictureBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.mBtnExit = New MetroFramework.Controls.MetroButton()
+        Me.mBtnGenerate = New MetroFramework.Controls.MetroButton()
         Me.GroupBox1.SuspendLayout
         CType(Me.DGVDetalle,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.ImgSalirB,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.ImgSalirA,System.ComponentModel.ISupportInitialize).BeginInit
         Me.GroupBox2.SuspendLayout
-        CType(Me.ImgGenerarB,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.ImgGenerarA,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.mBtnGenerate)
+        Me.GroupBox1.Controls.Add(Me.mBtnExit)
         Me.GroupBox1.Controls.Add(Me.DGVDetalle)
-        Me.GroupBox1.Controls.Add(Me.ImgSalirB)
-        Me.GroupBox1.Controls.Add(Me.ImgSalirA)
         Me.GroupBox1.Controls.Add(Me.TxtTotal_N)
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.TxtPedido)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.GroupBox2)
-        Me.GroupBox1.Controls.Add(Me.ImgGenerarB)
-        Me.GroupBox1.Controls.Add(Me.ImgGenerarA)
         Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(24, 64)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
@@ -96,24 +88,24 @@ Partial Class FrmNotaDeCredito
         Me.DGVDetalle.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DGVDetalle.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.DGVDetalle.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(174,Byte),Integer), CType(CType(219,Byte),Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGVDetalle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(174,Byte),Integer), CType(CType(219,Byte),Integer))
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGVDetalle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.DGVDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVDetalle.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136,Byte),Integer), CType(CType(136,Byte),Integer), CType(CType(136,Byte),Integer))
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGVDetalle.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136,Byte),Integer), CType(CType(136,Byte),Integer), CType(CType(136,Byte),Integer))
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGVDetalle.DefaultCellStyle = DataGridViewCellStyle8
         Me.DGVDetalle.EnableHeadersVisualStyles = false
         Me.DGVDetalle.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
         Me.DGVDetalle.GridColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
@@ -121,14 +113,14 @@ Partial Class FrmNotaDeCredito
         Me.DGVDetalle.Name = "DGVDetalle"
         Me.DGVDetalle.ReadOnly = true
         Me.DGVDetalle.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(174,Byte),Integer), CType(CType(219,Byte),Integer))
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGVDetalle.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(174,Byte),Integer), CType(CType(219,Byte),Integer))
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGVDetalle.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.DGVDetalle.RowHeadersWidth = 51
         Me.DGVDetalle.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DGVDetalle.RowTemplate.Height = 24
@@ -136,35 +128,45 @@ Partial Class FrmNotaDeCredito
         Me.DGVDetalle.Size = New System.Drawing.Size(1265, 367)
         Me.DGVDetalle.TabIndex = 76
         '
-        'ImgSalirB
+        'Column1
         '
-        Me.ImgSalirB.BackColor = System.Drawing.Color.Transparent
-        Me.ImgSalirB.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.ImgSalirB.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ImgSalirB.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.btn_salir
-        Me.ImgSalirB.Location = New System.Drawing.Point(1143, 17)
-        Me.ImgSalirB.Margin = New System.Windows.Forms.Padding(4)
-        Me.ImgSalirB.Name = "ImgSalirB"
-        Me.ImgSalirB.Size = New System.Drawing.Size(125, 43)
-        Me.ImgSalirB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgSalirB.TabIndex = 40
-        Me.ImgSalirB.TabStop = false
-        Me.ToolTip1.SetToolTip(Me.ImgSalirB, "Salir (Esc)")
-        Me.ImgSalirB.Visible = false
+        Me.Column1.HeaderText = "No. Factura"
+        Me.Column1.MinimumWidth = 6
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = true
+        Me.Column1.Width = 95
         '
-        'ImgSalirA
+        'Column2
         '
-        Me.ImgSalirA.BackColor = System.Drawing.Color.Transparent
-        Me.ImgSalirA.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.ImgSalirA.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ImgSalirA.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.btn_salir
-        Me.ImgSalirA.Location = New System.Drawing.Point(1147, 18)
-        Me.ImgSalirA.Margin = New System.Windows.Forms.Padding(4)
-        Me.ImgSalirA.Name = "ImgSalirA"
-        Me.ImgSalirA.Size = New System.Drawing.Size(117, 38)
-        Me.ImgSalirA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgSalirA.TabIndex = 39
-        Me.ImgSalirA.TabStop = false
+        Me.Column2.HeaderText = "ID Producto"
+        Me.Column2.MinimumWidth = 6
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = true
+        Me.Column2.Width = 97
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Cantidad"
+        Me.Column3.MinimumWidth = 6
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = true
+        Me.Column3.Width = 82
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Descripción"
+        Me.Column4.MinimumWidth = 6
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = true
+        Me.Column4.Width = 96
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = "Precio"
+        Me.Column5.MinimumWidth = 6
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = true
+        Me.Column5.Width = 67
         '
         'TxtTotal_N
         '
@@ -368,34 +370,6 @@ Partial Class FrmNotaDeCredito
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "Factura:"
         '
-        'ImgGenerarB
-        '
-        Me.ImgGenerarB.BackColor = System.Drawing.Color.Transparent
-        Me.ImgGenerarB.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ImgGenerarB.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Generar
-        Me.ImgGenerarB.Location = New System.Drawing.Point(620, 606)
-        Me.ImgGenerarB.Margin = New System.Windows.Forms.Padding(4)
-        Me.ImgGenerarB.Name = "ImgGenerarB"
-        Me.ImgGenerarB.Size = New System.Drawing.Size(112, 48)
-        Me.ImgGenerarB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgGenerarB.TabIndex = 42
-        Me.ImgGenerarB.TabStop = false
-        Me.ToolTip1.SetToolTip(Me.ImgGenerarB, "Generar Nota de Crédito")
-        Me.ImgGenerarB.Visible = false
-        '
-        'ImgGenerarA
-        '
-        Me.ImgGenerarA.BackColor = System.Drawing.Color.Transparent
-        Me.ImgGenerarA.Cursor = System.Windows.Forms.Cursors.Arrow
-        Me.ImgGenerarA.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Generar
-        Me.ImgGenerarA.Location = New System.Drawing.Point(621, 609)
-        Me.ImgGenerarA.Margin = New System.Windows.Forms.Padding(4)
-        Me.ImgGenerarA.Name = "ImgGenerarA"
-        Me.ImgGenerarA.Size = New System.Drawing.Size(108, 41)
-        Me.ImgGenerarA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.ImgGenerarA.TabIndex = 41
-        Me.ImgGenerarA.TabStop = false
-        '
         'ToolTip1
         '
         Me.ToolTip1.AutomaticDelay = 50
@@ -403,45 +377,23 @@ Partial Class FrmNotaDeCredito
         Me.ToolTip1.InitialDelay = 50
         Me.ToolTip1.ReshowDelay = 10
         '
-        'Column1
+        'mBtnExit
         '
-        Me.Column1.HeaderText = "No. Factura"
-        Me.Column1.MinimumWidth = 6
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = true
-        Me.Column1.Width = 95
+        Me.mBtnExit.Location = New System.Drawing.Point(1189, 29)
+        Me.mBtnExit.Name = "mBtnExit"
+        Me.mBtnExit.Size = New System.Drawing.Size(75, 23)
+        Me.mBtnExit.TabIndex = 77
+        Me.mBtnExit.Text = "Salir"
+        Me.mBtnExit.UseSelectable = true
         '
-        'Column2
+        'mBtnGenerate
         '
-        Me.Column2.HeaderText = "ID Producto"
-        Me.Column2.MinimumWidth = 6
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = true
-        Me.Column2.Width = 97
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Cantidad"
-        Me.Column3.MinimumWidth = 6
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = true
-        Me.Column3.Width = 82
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Descripción"
-        Me.Column4.MinimumWidth = 6
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = true
-        Me.Column4.Width = 96
-        '
-        'Column5
-        '
-        Me.Column5.HeaderText = "Precio"
-        Me.Column5.MinimumWidth = 6
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = true
-        Me.Column5.Width = 67
+        Me.mBtnGenerate.Location = New System.Drawing.Point(635, 624)
+        Me.mBtnGenerate.Name = "mBtnGenerate"
+        Me.mBtnGenerate.Size = New System.Drawing.Size(75, 23)
+        Me.mBtnGenerate.TabIndex = 78
+        Me.mBtnGenerate.Text = "Generar"
+        Me.mBtnGenerate.UseSelectable = true
         '
         'FrmNotaDeCredito
         '
@@ -459,12 +411,8 @@ Partial Class FrmNotaDeCredito
         Me.GroupBox1.ResumeLayout(false)
         Me.GroupBox1.PerformLayout
         CType(Me.DGVDetalle,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.ImgSalirB,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.ImgSalirA,System.ComponentModel.ISupportInitialize).EndInit
         Me.GroupBox2.ResumeLayout(false)
         Me.GroupBox2.PerformLayout
-        CType(Me.ImgGenerarB,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.ImgGenerarA,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
 
 End Sub
@@ -487,10 +435,6 @@ End Sub
     Friend WithEvents TxtTotal_N As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents ImgSalirB As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgSalirA As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgGenerarB As System.Windows.Forms.PictureBox
-    Friend WithEvents ImgGenerarA As System.Windows.Forms.PictureBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents DGVDetalle As MetroFramework.Controls.MetroGrid
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
@@ -498,4 +442,6 @@ End Sub
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents mBtnGenerate As MetroFramework.Controls.MetroButton
+    Friend WithEvents mBtnExit As MetroFramework.Controls.MetroButton
 End Class

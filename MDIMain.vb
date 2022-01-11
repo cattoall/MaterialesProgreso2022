@@ -96,11 +96,6 @@
             End
         End If
 
-        If gv_CDFI_XML_PATH_QR = "" Then
-            MsgBox("Falta crear la Variable CDFI_XML_PATH_QR", MsgBoxStyle.Critical, "CDFI_XML_PATH_QR")
-            End
-        End If
-
         If gv_RutaProceso = "" Then
             MsgBox("Falta crear la Variable RutaProceso", MsgBoxStyle.Critical, "RutaProceso")
             End

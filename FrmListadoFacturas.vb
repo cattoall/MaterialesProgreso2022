@@ -51,80 +51,24 @@ Public Class FrmListadoFacturas
         LblTotal.Text = "$ 0.00"
     End Sub
 
-    Private Sub ImgCFDIB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgCFDIB.MouseLeave
-        Me.ImgCFDIA.Visible = True
-        Me.ImgCFDIB.Visible = False
-    End Sub
-
-    Private Sub ImgCFDIA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgCFDIA.MouseHover
-        Me.ImgCFDIB.Visible = True
-        Me.ImgCFDIA.Visible = False
-    End Sub
-
-    Private Sub ImgCancelrarB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgCancelarB.MouseLeave
-        Me.ImgCancelarA.Visible = True
-        Me.ImgCancelarB.Visible = False
-    End Sub
-
-    Private Sub ImgCancelrarA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgCancelarA.MouseHover
-        Me.ImgCancelarB.Visible = True
-        Me.ImgCancelarA.Visible = False
-    End Sub
-
-    Private Sub ImgVerFactA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgVerFactA.MouseHover
-        Me.ImgVerFactA.Visible = False
-        Me.ImgVerFactB.Visible = True
-    End Sub
-
-    Private Sub ImgVerFactB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgVerFactB.MouseLeave
-        Me.ImgVerFactA.Visible = True
-        Me.ImgVerFactB.Visible = False
-    End Sub
-
-    Private Sub ImgSalirB_MouseLeave(sender As Object, e As System.EventArgs) Handles ImgSalirB.MouseLeave
-        Me.ImgSalirA.Visible = True
-        Me.ImgSalirB.Visible = False
-    End Sub
-
-    Private Sub ImgSalirA_MouseHover(sender As Object, e As System.EventArgs) Handles ImgSalirA.MouseHover
-        Me.ImgSalirB.Visible = True
-        Me.ImgSalirA.Visible = False
-    End Sub
-
-    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) Handles ImgSalirB.Click
+    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) 
         Me.Close()
     End Sub
 
-    Public Sub ImgVerFactB_Click(sender As System.Object, e As System.EventArgs) Handles ImgVerFactB.Click
-        Dim x As List(Of tblFacturaTotal) = DBModelo.GetIntervalFacturas(dtFechaInicial.Value.Date, dtFechaFinal.Value.Date)
-        DataGridConsulta.DataSource = x
-        'SQL = "SELECT *, usuario FROM factura_total where  fecha_venta  >= '" & Format(dtFechaInicial.Value.Date, "yyyy-MM-dd") & "' and fecha_venta <= '" & Format(dtFechaFinal.Value.Date, "yyyy-MM-dd") & "' order by n_factura, fecha_venta asc"
-        '
-        ''Carga Lista de Clasificaciones
-        'load_record_dgv(SQL, Me.DataGridConsulta, DBConnected)
-        '
-        ''Aplica formato al DataGridView
-        load_layout_dgv_ListaFactura_H(Me.DataGridConsulta)
-        '
-        For i = 0 To DataGridConsulta.RowCount - 1
-            Select Case DataGridConsulta.Item(11, i).Value
-                Case "0"
-                    DataGridConsulta.Item(12, i).Value = "CLIENTE"
-                Case "1"
-                    DataGridConsulta.Item(12, i).Value = "MOSTRADOR"
-            End Select
-        Next
+    Public Sub ImgVerFactB_Click(sender As System.Object, e As System.EventArgs) 
+        
     End Sub
 
-    Private Sub ImgCancelarB_Click(sender As System.Object, e As System.EventArgs) Handles ImgCancelarB.Click
-        If LblNumTicket.Text <> "" Then
-            Cancelar = 3
-            FrmCancelarPedido.ShowDialog()
-            Cancelar = ""
-        Else
-            MsgBox("Seleccione Una Venta Para Cancelar", MsgBoxStyle.Critical, "Cancelar Venta")
-        End If
-    End Sub
+    ' Eliminación de la cancelación de la factura
+    'Private Sub ImgCancelarB_Click(sender As System.Object, e As System.EventArgs) 
+    '    If LblNumTicket.Text <> "" Then
+    '        Cancelar = 3
+    '        FrmCancelarPedido.ShowDialog()
+    '        Cancelar = ""
+    '    Else
+    '        MsgBox("Seleccione Una Venta Para Cancelar", MsgBoxStyle.Critical, "Cancelar Venta")
+    '    End If
+    'End Sub
 
     'Private Sub ImgGenXmlB_Click(sender As System.Object, e As System.EventArgs) Handles ImgGenXmlB.Click
     '    If LblNumTicket.Text <> "" Then
@@ -154,20 +98,8 @@ Public Class FrmListadoFacturas
         'End If
     End Sub
 
-    Private Sub ImgCFDIB_Click(sender As System.Object, e As System.EventArgs) Handles ImgCFDIB.Click
-        If LblNumTicket.Text <> "" Then
-            If ImprimeFactura2(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value, DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value, True) = False Then
-                MsgBox("Hubo un error al Generar la Impresión de la Factura", MsgBoxStyle.Critical, "Impresiones de Facturas")
-            Else
-                MsgBox("Re'Impresión de Factura Correctamente", MsgBoxStyle.Information, "Impresiones de Facturas")
-            End If
-        Else
-            MsgBox("Favor de Seleccionar la Factura a Re-Imprimir.", MsgBoxStyle.Critical, "Impresiones de Facturas")
-        End If
-    End Sub
-
-    Private Sub ImgVerFactA_Click(sender As System.Object, e As System.EventArgs) Handles ImgVerFactA.Click
-
+    Private Sub ImgCFDIB_Click(sender As System.Object, e As System.EventArgs) 
+        
     End Sub
 
     Private Sub Label2_Click(sender As System.Object, e As System.EventArgs) Handles Label2.Click
@@ -196,5 +128,60 @@ Public Class FrmListadoFacturas
         
         'Aplica formato al DataGridView
         'load_layout_dgv_ListaFacturas_i(Me.DataGridTikect)
+        DataGridTikect.Columns(0).HeaderText = "ID"
+        DataGridTikect.Columns(1).HeaderText = "No. Factura"
+        DataGridTikect.Columns(2).HeaderText = "Folio"
+        DataGridTikect.Columns(3).HeaderText = "Id Producto"
+        DataGridTikect.Columns(4).HeaderText = "Clave Producto"
+        DataGridTikect.Columns(5).HeaderText = "Descripción"
+        DataGridTikect.Columns(6).HeaderText = "Cantidad"
+        DataGridTikect.Columns(7).HeaderText = "Fecha"
+        DataGridTikect.Columns(8).HeaderText = "Subtotal"
+        DataGridTikect.Columns(9).HeaderText = "IVA"
+        DataGridTikect.Columns(10).HeaderText = "Precio"
+        DataGridTikect.Columns(11).HeaderText = "Clave Producto"
+        DataGridTikect.Columns(12).HeaderText = "Clave Unidad"
+    End Sub
+
+    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs) Handles mBtnSearch.Click
+        Dim x As List(Of tblFacturaTotal) = DBModelo.GetIntervalFacturas(dtFechaInicial.Value.Date, dtFechaFinal.Value.Date)
+        DataGridConsulta.DataSource = x
+        'SQL = "SELECT *, usuario FROM factura_total where  fecha_venta  >= '" & Format(dtFechaInicial.Value.Date, "yyyy-MM-dd") & "' and fecha_venta <= '" & Format(dtFechaFinal.Value.Date, "yyyy-MM-dd") & "' order by n_factura, fecha_venta asc"
+        '
+        ''Carga Lista de Clasificaciones
+        'load_record_dgv(SQL, Me.DataGridConsulta, DBConnected)
+        '
+        ''Aplica formato al DataGridView
+        load_layout_dgv_ListaFactura_H(Me.DataGridConsulta)
+        '
+        For i = 0 To DataGridConsulta.RowCount - 1
+            Select Case DataGridConsulta.Item(11, i).Value
+                Case "0"
+                    DataGridConsulta.Item(12, i).Value = "CLIENTE"
+                Case "1"
+                    DataGridConsulta.Item(12, i).Value = "MOSTRADOR"
+            End Select
+        Next
+    End Sub
+
+    Private Sub MetroButton1_Click(sender As Object, e As EventArgs) Handles MetroButton1.Click
+        Me.Close()
+    End Sub
+
+    Private Sub mBtnPrint_Click(sender As Object, e As EventArgs) Handles mBtnPrint.Click
+        If LblNumTicket.Text <> "" Then
+            If ImprimeFactura2(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value, DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value, True, DBConnected) = False Then
+                MsgBox("Hubo un error al Generar la Impresión de la Factura", MsgBoxStyle.Critical, "Impresiones de Facturas")
+            Else
+                MsgBox("Re'Impresión de Factura Correctamente", MsgBoxStyle.Information, "Impresiones de Facturas")
+            End If
+            'If ImprimeFactura_CFDI(DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value, DBConnected) = False Then
+            '    MsgBox("Hubo un error al Generar la Impresión de la Factura", MsgBoxStyle.Critical, "Impresiones de Facturas")
+            'Else
+            '    MsgBox("Re'Impresión de Factura Correctamente", MsgBoxStyle.Information, "Impresiones de Facturas")
+            'End If
+        Else
+            MsgBox("Favor de Seleccionar la Factura a Re-Imprimir.", MsgBoxStyle.Critical, "Impresiones de Facturas")
+        End If
     End Sub
 End Class
