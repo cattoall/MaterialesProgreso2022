@@ -265,8 +265,10 @@ Public Class FrmFacturacion
     Private Sub CmbMetodoPago_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbMetodoPago.SelectedIndexChanged
         If CmbMetodoPago.Text.Contains("PPD") Then
             CmdFormaPago.SelectedIndex = CmdFormaPago.FindString("99")
-        Else
+        ElseIf CmbMetodoPago.Text.Contains("PUE") Then
             CmdFormaPago.SelectedIndex = 0
+        Else
+            CmdFormaPago.SelectedIndex = -1
         End If
     End Sub
 
@@ -329,12 +331,12 @@ Public Class FrmFacturacion
             MsgBox("No existen productos a Facturar", MsgBoxStyle.Critical, Nothing)
         Else
             Dim NoFactura As String = TxtFolio.Text
-            Dim FolioFactura As String = gv_SerieFacturaSalvador & "-" & TxtFolio.Text & "_" & Format(DateTimePicker1.Value.Date, "yyyyMMdd") & "_CFDI.xml"
+            Dim FolioFactura As String = gv_SerieFacturaSalvador & "-" & TxtFolio.Text & "_" & Format(DateTimePicker1.Value.Date, "yyyyMMdd") & "_CFDI"
             Dim SubTotalFactura As String = TxtSubtotal.Text
             PrBImprimiendo.Value = 10
 
             Dim wFacturaTotal As tblFacturaTotal = New tblFacturaTotal
-            wFacturaTotal.n_factura = Decimal.Parse(FolioFactura)
+            wFacturaTotal.n_factura = Decimal.Parse(NoFactura)
             wFacturaTotal.total = Decimal.Parse(TxtTotal.Text)
             wFacturaTotal.usuario = usuario
             If CmbMetodoPago.Text.Substring(0, 3) = "PUE" Then
@@ -399,8 +401,8 @@ Public Class FrmFacturacion
                 sdk = New MFSDK
                 sdk.Iniciales.Add("version_cfdi", "3.3")
                 sdk.Iniciales.Add("MODOINI", "DIVISOR")
-                sdk.Iniciales.Add("cfdi", (gv_CDFI_XML_PATH & FolioFactura))
-                sdk.Iniciales.Add("xml_debug", (gv_CDFI_XML_PATH & "sin_" & FolioFactura))
+                sdk.Iniciales.Add("cfdi", (gv_CDFI_XML_PATH & FolioFactura & ".xml"))
+                sdk.Iniciales.Add("xml_debug", (gv_CDFI_XML_PATH & "sin_" & FolioFactura & ".xml"))
                 sdk.Iniciales.Add("remueve_acentos", "NO")
                 sdk.Iniciales.Add("RESPUESTA_UTF8", "SI")
                 sdk.Iniciales.Add("html_a_txt", "NO")
@@ -506,12 +508,9 @@ Public Class FrmFacturacion
                     MsgBox($"Código: {respuesta.Codigo_MF_Numero} Mensaje: {respuesta.Codigo_MF_Texto}", MsgBoxStyle.Critical, Nothing)
                     view = DataGridView1
                     DataGridView1 = view
-                    'If Not Me.Rollback_full(Conversions.ToString(CDbl((Conversions.ToDouble(str2) - 1))), View) Then
-                    '    Interaction.MsgBox("No se pudo deshacer/eliminar la factura creada", MsgBoxStyle.ApplicationModal, Nothing)
-                    'End If
-                    'Me.TxtFolio.Text = Conversions.ToString(CDbl((Conversions.ToDouble(str2) - 1)))
                 End If
-
+                PrBImprimiendo.Visible = False
+                limpiar()
             Else
                 MsgBox("Error al insertar registro en tabla Factura_Total (Cabecera)", MsgBoxStyle.Critical, "Facturación")
                 Exit Sub
@@ -568,5 +567,49 @@ Public Class FrmFacturacion
         LblPlazo.Visible = True
         CmdGenerarMostrador.Enabled = False
         DateTimePicker3.Enabled = False
+
+        Llena_FormaDePago()
+        Llena_MetodoDePago()
+        Llena_UsoCFDI()
+    End Sub
+
+    Private Sub Llena_UsoCFDI()
+        Dim UsoCFDI As List(Of tblUsoCFDI) = DBModelo.GetUsoCFDI_All
+
+        If IsNothing(UsoCFDI) Then
+            Exit Sub
+        End If
+
+        CmbUsoCDFI.DataSource = UsoCFDI
+        CmbUsoCDFI.DisplayMember = "UsoCFDI"
+        CmbUsoCDFI.ValueMember = "Id"
+        CmbUsoCDFI.SelectedIndex = -1
+
+    End Sub
+
+    Private Sub Llena_MetodoDePago()
+        Dim MetodoDePago As List(Of tblMetodoPago) = DBModelo.GetMetodoDePago_All
+
+        If IsNothing(MetodoDePago) Then
+            Exit Sub
+        End If
+
+        CmbMetodoPago.DataSource = MetodoDePago
+        CmbMetodoPago.DisplayMember = "MetodoPago"
+        CmbMetodoPago.ValueMember = "Id"
+        CmbMetodoPago.SelectedIndex = -1
+    End Sub
+
+    Private Sub Llena_FormaDePago()
+        Dim FormaDePago As List(Of tblFormaPago) = DBModelo.GetFormaDePago_All
+
+        If IsNothing(FormaDePago) Then
+            Exit Sub
+        End If
+
+        CmdFormaPago.DataSource = FormaDePago
+        CmdFormaPago.DisplayMember = "FormaPago"
+        CmdFormaPago.ValueMember = "Id"
+        CmdFormaPago.SelectedIndex = -1
     End Sub
 End Class

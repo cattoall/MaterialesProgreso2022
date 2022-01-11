@@ -156,16 +156,11 @@ Public Class FrmListadoFacturas
 
     Private Sub ImgCFDIB_Click(sender As System.Object, e As System.EventArgs) Handles ImgCFDIB.Click
         If LblNumTicket.Text <> "" Then
-            If ImprimeFactura2(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value, DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value, True, DBConnected) = False Then
+            If ImprimeFactura2(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value, DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value, True) = False Then
                 MsgBox("Hubo un error al Generar la Impresión de la Factura", MsgBoxStyle.Critical, "Impresiones de Facturas")
             Else
                 MsgBox("Re'Impresión de Factura Correctamente", MsgBoxStyle.Information, "Impresiones de Facturas")
             End If
-            'If ImprimeFactura_CFDI(DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value, DBConnected) = False Then
-            '    MsgBox("Hubo un error al Generar la Impresión de la Factura", MsgBoxStyle.Critical, "Impresiones de Facturas")
-            'Else
-            '    MsgBox("Re'Impresión de Factura Correctamente", MsgBoxStyle.Information, "Impresiones de Facturas")
-            'End If
         Else
             MsgBox("Favor de Seleccionar la Factura a Re-Imprimir.", MsgBoxStyle.Critical, "Impresiones de Facturas")
         End If
