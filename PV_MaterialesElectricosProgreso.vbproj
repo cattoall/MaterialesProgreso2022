@@ -685,6 +685,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FrmFacturacion.resx">
+      <DependentUpon>FrmFacturacion.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmListadoNC.resx">
       <DependentUpon>FrmListadoNC.vb</DependentUpon>
     </EmbeddedResource>

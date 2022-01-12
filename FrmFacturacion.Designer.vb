@@ -684,7 +684,6 @@ Partial Class FrmFacturacion
         '
         Me.CmbMetodoPago.FormattingEnabled = True
         Me.CmbMetodoPago.ItemHeight = 23
-        Me.CmbMetodoPago.Items.AddRange(New Object() {"PUE-Pago en una sola exhibición", "PPD-Pago en parcialidades o diferido"})
         Me.CmbMetodoPago.Location = New System.Drawing.Point(20, 34)
         Me.CmbMetodoPago.Name = "CmbMetodoPago"
         Me.CmbMetodoPago.Size = New System.Drawing.Size(268, 29)
@@ -713,7 +712,6 @@ Partial Class FrmFacturacion
         '
         Me.CmdFormaPago.FormattingEnabled = True
         Me.CmdFormaPago.ItemHeight = 23
-        Me.CmdFormaPago.Items.AddRange(New Object() {"01-Efectivo", "02-Cheque nominativo", "03-Transferencia electrónica de fondos", "04-Tarjeta de crédito", "05-Monedero electrónico", "06-Dinero electrónico", "08-Vales de despensa", "12-Dación en pago", "13-Pago por subrogación", "14-Pago por consignación", "15-Condonación", "17-Compensación", "23-Novación", "24-Confusión", "25-Remisión de deuda", "26-Prescripción o caducidad", "27-A satisfacción del acreedor", "28-Tarjeta de débito", "29-Tarjeta de servicios", "30-Aplicación de anticipos", "99-Por definir"})
         Me.CmdFormaPago.Location = New System.Drawing.Point(297, 34)
         Me.CmdFormaPago.Name = "CmdFormaPago"
         Me.CmdFormaPago.Size = New System.Drawing.Size(336, 29)
@@ -744,9 +742,6 @@ Partial Class FrmFacturacion
         '
         Me.CmbUsoCDFI.FormattingEnabled = True
         Me.CmbUsoCDFI.ItemHeight = 23
-        Me.CmbUsoCDFI.Items.AddRange(New Object() {"G01-Adquisición de mercancias", "G02-Devoluciones, descuentos o bonificaciones", "G03-Gastos en general", "I01-Construcciones", "I02-Mobilario y equipo de oficina por inversiones", "I03-Equipo de transporte", "I04-Equipo de computo y accesorios", "I05-Dados, troqueles, moldes, matrices y herramental", "I06-Comunicaciones telefónicas", "I07-Comunicaciones satelitales", "I08-Otra maquinaria y equipo", "D01-Honorarios médicos, dentales y gastos hospitalarios", "D02-Gastos médicos por incapacidad o discapacidad", "D03-Gastos funerales", "D04-Donativos", "D05-Intereses reales efectivamente pagados por créditos hipotecarios (casa habita" &
-                "ción)", "D06-Aportaciones voluntarias al SAR", "D07-Primas por seguros de gastos médicos", "D08-Gastos de transportación escolar obligatoria", "D09-Depósitos en cuentas para el ahorro, primas que tengan como base planes de pe" &
-                "nsiones", "D10-Pagos por servicios educativos (colegiaturas)", "P01-Por definir"})
         Me.CmbUsoCDFI.Location = New System.Drawing.Point(299, 90)
         Me.CmbUsoCDFI.Name = "CmbUsoCDFI"
         Me.CmbUsoCDFI.Size = New System.Drawing.Size(571, 29)
@@ -947,7 +942,7 @@ Partial Class FrmFacturacion
         '
         '
         Me.TxtSubtotal.CustomButton.Image = Nothing
-        Me.TxtSubtotal.CustomButton.Location = New System.Drawing.Point(101, 2)
+        Me.TxtSubtotal.CustomButton.Location = New System.Drawing.Point(99, 2)
         Me.TxtSubtotal.CustomButton.Name = ""
         Me.TxtSubtotal.CustomButton.Size = New System.Drawing.Size(17, 17)
         Me.TxtSubtotal.CustomButton.Style = MetroFramework.MetroColorStyle.Blue

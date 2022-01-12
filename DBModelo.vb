@@ -1676,6 +1676,49 @@ Public Class DBModelo
             Return ctx.nc_detalle.Where(Function(i) i.n_nc = n_nc).ToList
         End Using
     End Function
+
+    Shared Function GetFormaDePagoByKey(ByVal FormaDePagoKey As String) As tblFormaPago
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblFormaPagoes1.Where(Function(i) i.FormaPago.Contains(FormaDePagoKey)).FirstOrDefault
+        End Using
+    End Function
+
+    Shared Function GetFormaDePago_All() As List(Of tblFormaPago)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblFormaPagoes1.ToList
+        End Using
+    End Function
+
+    Shared Function GetMetodoDePagoByKey(ByVal MetodoDePagoKey As String) As tblMetodoPago
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblMetodoPagoes1.Where(Function(i) i.MetodoPago.Contains(MetodoDePagoKey)).FirstOrDefault
+        End Using
+    End Function
+
+    Shared Function GetMetodoDePago_All() As List(Of tblMetodoPago)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblMetodoPagoes1.ToList
+        End Using
+    End Function
+
+    Shared Function GetUsoCFDIByKey(ByVal UsoCFDIKey As String) As tblUsoCFDI
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblUsoCFDIs1.Where(Function(i) i.UsoCFDI.Contains(UsoCFDIKey)).FirstOrDefault
+        End Using
+    End Function
+
+    Shared Function GetUsoCFDI_All() As List(Of tblUsoCFDI)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblUsoCFDIs1.ToList
+        End Using
+    End Function
+
+    Shared Function GetFacturaHeader(ByVal NumeroFactura As String) As tblFacturaTotal
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblFacturaTotals.Where(Function(i) i.n_factura.Equals(CDec(NumeroFactura))).FirstOrDefault
+        End Using
+    End Function
+
 #End Region
 
 End Class

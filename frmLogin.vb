@@ -1,5 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
-
+﻿
 Public Class frmLogin
 
     Private Sub frmLogin_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
@@ -45,19 +44,6 @@ Public Class frmLogin
 
             DBConnected = cmbSistema.Text
 
-
-            'Select Case cmbSistema.Text
-            '    Case "Wendy"
-            '        connStr = gv_ConStringWendy
-            '        DBConnected = "[pv]."
-            '    Case "Librada"
-            '        connStr = gv_ConStringLibrada
-            '        DBConnected = "[pv_new]."
-            '    Case "Salvador"
-            '        connStr = gv_ConStringSalvador
-            '        DBConnected = "[pv_salvador]."
-            'End Select
-
             Dim usr As tblUsuarios = DBModelo.GetUser(txtUsuario.Text)
 
             If IsNothing(usr) Then
@@ -94,6 +80,8 @@ Public Class frmLogin
                     TicketPrinterName = conf.TicketPrinterName
                     GranTipoCambio = conf.TipoCambio
                     FactorIVA = conf.factorIVA
+                    RegimenFiscal = conf.RegimenFiscal
+                    LugarExpedicion = conf.LugarExpedicion
 
                     lv_backup_error = 0
                     Dim lv_backup_pathfile As String

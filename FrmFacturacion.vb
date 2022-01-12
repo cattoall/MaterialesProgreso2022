@@ -172,9 +172,9 @@ Public Class FrmFacturacion
                 row(0) = wTicket.folio
                 row(1) = wTicket.cantidad
                 row(2) = wTicket.concepto
-                row(3) = wTicket.precio
-                row(4) = wTicket.subtotal / FactorIVA
-                row(5) = Format(wTicket.fecha, "dd-MM-yyyy")
+                row(3) = Math.Round(CDbl(wTicket.precio / FactorIVA), 6)
+                row(4) = Math.Round(CDbl(wTicket.subtotal / FactorIVA), 6)
+                row(5) = wTicket.fecha
                 row(6) = wTicket.precioCosto
                 row(7) = wTicket.subtotalCosto
                 row(8) = wTicket.clave_producto
@@ -183,13 +183,16 @@ Public Class FrmFacturacion
                 row(11) = wTicket.ClaveProducto
                 row(12) = wTicket.ClaveUnidad
                 row(13) = "0"
-                row(14) = (wTicket.subtotal - (wTicket.subtotal / FactorIVA))
+                row(14) = Math.Round(CDbl((wTicket.subtotal - (wTicket.subtotal / FactorIVA))), 6)
                 Dim rowValues As String() = row
                 DataGridView1.Rows.Add(rowValues)
-                TxtSubtotal.Text = TxtSubtotal.Text + wTicket.subtotal
-                TxtIVA.Text = TxtIVA.Text + (wTicket.subtotal - (wTicket.subtotal / FactorIVA))
+                TxtSubtotal.Text = TxtSubtotal.Text + Math.Round(CDbl(wTicket.subtotal / FactorIVA), 6)
+                TxtIVA.Text = TxtIVA.Text + Math.Round(CDbl((wTicket.subtotal - (wTicket.subtotal / FactorIVA))), 6)
                 TxtTotal.Text = CDbl(TxtSubtotal.Text) + CDbl(TxtIVA.Text)
             Next
+            TxtSubtotal.Text = FormatNumber(Math.Round(CDbl(TxtSubtotal.Text), 2))
+            TxtIVA.Text = FormatNumber(Math.Round(CDbl(TxtIVA.Text), 2))
+            TxtTotal.Text = FormatNumber(Math.Round(CDbl(TxtTotal.Text), 2))
             LblNRegistros.Text = DataGridView1.Rows.Count
             lv_ticket.Items.Add(TxtTikect.Text)
             TxtTikect.Clear()
@@ -262,8 +265,10 @@ Public Class FrmFacturacion
     Private Sub CmbMetodoPago_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbMetodoPago.SelectedIndexChanged
         If CmbMetodoPago.Text.Contains("PPD") Then
             CmdFormaPago.SelectedIndex = CmdFormaPago.FindString("99")
-        Else
+        ElseIf CmbMetodoPago.Text.Contains("PUE") Then
             CmdFormaPago.SelectedIndex = 0
+        Else
+            CmdFormaPago.SelectedIndex = -1
         End If
     End Sub
 
@@ -325,12 +330,13 @@ Public Class FrmFacturacion
         ElseIf DataGridView1.RowCount = 0 Then
             MsgBox("No existen productos a Facturar", MsgBoxStyle.Critical, Nothing)
         Else
-            Dim FolioFactura As String = TxtFolio.Text
+            Dim NoFactura As String = TxtFolio.Text
+            Dim FolioFactura As String = gv_SerieFacturaSalvador & "-" & TxtFolio.Text & "_" & Format(DateTimePicker1.Value.Date, "yyyyMMdd") & "_CFDI"
             Dim SubTotalFactura As String = TxtSubtotal.Text
             PrBImprimiendo.Value = 10
 
             Dim wFacturaTotal As tblFacturaTotal = New tblFacturaTotal
-            wFacturaTotal.n_factura = Decimal.Parse(FolioFactura)
+            wFacturaTotal.n_factura = Decimal.Parse(NoFactura)
             wFacturaTotal.total = Decimal.Parse(TxtTotal.Text)
             wFacturaTotal.usuario = usuario
             If CmbMetodoPago.Text.Substring(0, 3) = "PUE" Then
@@ -364,13 +370,13 @@ Public Class FrmFacturacion
             If DBModelo.InsertFacturaTotal(wFacturaTotal) Then
                 For i = 0 To DataGridView1.RowCount - 1
                     Dim wFactura As tblFactura = New tblFactura
-                    wFactura.n_factura = CDec(FolioFactura)
+                    wFactura.n_factura = CDec(NoFactura)
                     wFactura.folio = DataGridView1.Rows(i).Cells(0).Value.ToString
                     wFactura.idProducto = CInt(DataGridView1.Rows(i).Cells(10).Value)
                     wFactura.clave_p = DataGridView1.Rows(i).Cells(8).Value.ToString
                     wFactura.descripcion = DataGridView1.Rows(i).Cells(2).Value.ToString
                     wFactura.cantidad = CDec(DataGridView1.Rows(i).Cells(1).Value)
-                    wFactura.fecha = CDate(DataGridView1.Rows(i).Cells(5).Value)
+                    wFactura.fecha = DataGridView1.Rows(i).Cells(5).Value
                     wFactura.subtotal = CDec(DataGridView1.Rows(i).Cells(4).Value)
                     wFactura.IVA = CDec(DataGridView1.Rows(i).Cells(14).Value)
                     wFactura.precio = CDec(DataGridView1.Rows(i).Cells(3).Value)
@@ -408,12 +414,12 @@ Public Class FrmFacturacion
                 Dim subtotal As String = Trim(Trim(TxtSubtotal.Text.Replace("$", "")).Replace(",", ""))
                 Dim total As String = Trim(Trim(TxtTotal.Text.Replace("$", "")).Replace(",", ""))
 
-                factura("serie") = gv_SerieFactura
-                factura("folio") = CDbl(FolioFactura)
+                factura("serie") = gv_SerieFacturaSalvador
+                factura("folio") = CDbl(NoFactura)
                 factura("fecha_expedicion") = Now.ToString("s")
-                MetodoPago = CmbMetodoPago.SelectedItem
+                MetodoPago = CmbMetodoPago.Text
                 factura("metodo_pago") = MetodoPago.Substring(0, 3)
-                FormaPago = CmdFormaPago.SelectedItem
+                FormaPago = CmdFormaPago.Text
                 factura("forma_pago") = FormaPago.Substring(0, 2)
                 factura("condicionesDePago") = CmbCredito.Text
                 factura("tipocomprobante") = "I"
@@ -436,7 +442,7 @@ Public Class FrmFacturacion
                 If (UsoCDFI <> "") Then
                     receptor("UsoCFDI") = UsoCDFI
                 Else
-                    UsoCDFI = CmbUsoCDFI.SelectedItem
+                    UsoCDFI = CmbUsoCDFI.Text
                     receptor("UsoCFDI") = UsoCDFI.Substring(0, 3)
                 End If
                 sdk.AgregaObjeto(receptor)
@@ -495,8 +501,8 @@ Public Class FrmFacturacion
                 Dim respuesta As SDKRespuesta = sdk.Timbrar("C:\sdk2\timbrar32.bat", gv_CDFI_XML_PATH, FolioFactura, False)
                 If respuesta.Codigo_MF_Numero = 0 Then
                     PrBImprimiendo.PerformStep()
-                    MsgBox(("Factura " & FolioFactura & " Generada Correctamente"), MsgBoxStyle.Information, "Generació de Facturas")
-                    'Module1.ImprimeFactura2(Conversions.ToString(CDbl((Conversions.ToDouble(str2) - 1))), FolioFactura, True)
+                    MsgBox(("Factura " & gv_SerieFacturaSalvador & "-" & NoFactura & " Generada Correctamente"), MsgBoxStyle.Information, "Generació de Facturas")
+                    ImprimeFactura2(NoFactura, FolioFactura, True)
                 Else
                     PrBImprimiendo.Value = 100
                     MsgBox($"Código: {respuesta.Codigo_MF_Numero} Mensaje: {respuesta.Codigo_MF_Texto}", MsgBoxStyle.Critical, Nothing)
@@ -507,7 +513,8 @@ Public Class FrmFacturacion
                     'End If
                     'Me.TxtFolio.Text = Conversions.ToString(CDbl((Conversions.ToDouble(str2) - 1)))
                 End If
-
+                PrBImprimiendo.Visible = False
+                limpiar()
             Else
                 MsgBox("Error al insertar registro en tabla Factura_Total (Cabecera)", MsgBoxStyle.Critical, "Facturación")
                 Exit Sub
@@ -564,5 +571,50 @@ Public Class FrmFacturacion
         LblPlazo.Visible = True
         CmdGenerarMostrador.Enabled = False
         DateTimePicker3.Enabled = False
+
+        Llena_FormaDePago()
+        Llena_MetodoDePago()
+        Llena_UsoCFDI()
     End Sub
+
+    Private Sub Llena_UsoCFDI()
+        Dim UsoCFDI As List(Of tblUsoCFDI) = DBModelo.GetUsoCFDI_All
+
+        If IsNothing(UsoCFDI) Then
+            Exit Sub
+        End If
+
+        CmbUsoCDFI.DataSource = UsoCFDI
+        CmbUsoCDFI.DisplayMember = "UsoCFDI"
+        CmbUsoCDFI.ValueMember = "Id"
+        CmbUsoCDFI.SelectedIndex = -1
+
+    End Sub
+
+    Private Sub Llena_MetodoDePago()
+        Dim MetodoDePago As List(Of tblMetodoPago) = DBModelo.GetMetodoDePago_All
+
+        If IsNothing(MetodoDePago) Then
+            Exit Sub
+        End If
+
+        CmbMetodoPago.DataSource = MetodoDePago
+        CmbMetodoPago.DisplayMember = "MetodoPago"
+        CmbMetodoPago.ValueMember = "Id"
+        CmbMetodoPago.SelectedIndex = -1
+    End Sub
+
+    Private Sub Llena_FormaDePago()
+        Dim FormaDePago As List(Of tblFormaPago) = DBModelo.GetFormaDePago_All
+
+        If IsNothing(FormaDePago) Then
+            Exit Sub
+        End If
+
+        CmdFormaPago.DataSource = FormaDePago
+        CmdFormaPago.DisplayMember = "FormaPago"
+        CmdFormaPago.ValueMember = "Id"
+        CmdFormaPago.SelectedIndex = -1
+    End Sub
+
 End Class
