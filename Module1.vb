@@ -2806,15 +2806,19 @@ Module Module1
 
             ' Creación del ZIP en base al XML y PDF generado anteriormente
             Dim zipPath As String = gv_CDFI_XML_PATH & rep_folio & ".zip" '"C:\TEMP\Compression\myzip.zip"
+            If File.Exists(zipPath) Then
+                File.Delete(zipPath)
+            End If
             Dim zip As Package = ZipPackage.Open(zipPath, IO.FileMode.OpenOrCreate, IO.FileAccess.ReadWrite)
             AddToArchive(zip, gv_CDFI_XML_PATH & FolioFactura & ".xml") '"C:\TEMP\Compression\Compress Me1.txt")
             AddToArchive(zip, gv_CDFI_XML_PATH & FolioFactura & ".pdf") '"C:\TEMP\Compression\Compress Me2.txt")
             zip.Close() 'Close the zip file
 
-            If FrmFacturacion.txtEmail.Text <> "" Then
+            If wa_cliente.correo <> "" Then
 
                 'Envio de Archivo ZIP via Correo Electrónico
                 Dim oSmtp As New SmtpClient()
+
                 Dim oMail As New MailMessage()
 
                 oSmtp.UseDefaultCredentials = False

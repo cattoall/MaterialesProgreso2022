@@ -170,7 +170,11 @@ Public Class FrmListadoFacturas
 
     Private Sub mBtnPrint_Click(sender As Object, e As EventArgs) Handles mBtnPrint.Click
         If LblNumTicket.Text <> "" Then
-            If ImprimeFactura2(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value, DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value, True) = False Then
+            Dim NoFactura = DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+            Dim FechaFactura = DataGridConsulta.Item(6, DataGridConsulta.CurrentRow.Index).Value
+            Dim FolioFactura As String = gv_SerieFacturaSalvador & "-" & NoFactura & "_" & Format(FechaFactura, "yyyyMMdd") & "_CFDI"
+
+            If ImprimeFactura2(NoFactura, FolioFactura, True) = False Then
                 MsgBox("Hubo un error al Generar la Impresión de la Factura", MsgBoxStyle.Critical, "Impresiones de Facturas")
             Else
                 MsgBox("Re'Impresión de Factura Correctamente", MsgBoxStyle.Information, "Impresiones de Facturas")
