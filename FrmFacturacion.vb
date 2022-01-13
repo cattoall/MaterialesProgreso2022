@@ -377,9 +377,9 @@ Public Class FrmFacturacion
                     wFactura.descripcion = DataGridView1.Rows(i).Cells(2).Value.ToString
                     wFactura.cantidad = CDec(DataGridView1.Rows(i).Cells(1).Value)
                     wFactura.fecha = DataGridView1.Rows(i).Cells(5).Value
-                    wFactura.subtotal = CDec(DataGridView1.Rows(i).Cells(4).Value)
-                    wFactura.IVA = CDec(DataGridView1.Rows(i).Cells(14).Value)
-                    wFactura.precio = CDec(DataGridView1.Rows(i).Cells(3).Value)
+                    wFactura.subtotal = Math.Round(CDec(DataGridView1.Rows(i).Cells(4).Value), 2)
+                    wFactura.IVA = Math.Round(CDec(DataGridView1.Rows(i).Cells(14).Value), 2)
+                    wFactura.precio = Math.Round(CDec(DataGridView1.Rows(i).Cells(3).Value), 2)
                     wFactura.ClaveProducto = DataGridView1.Rows(i).Cells(11).Value.ToString
                     wFactura.ClaveUnidad = DataGridView1.Rows(i).Cells(12).Value.ToString
                     If DBModelo.InsertFactura(wFactura) = False Then
@@ -395,6 +395,7 @@ Public Class FrmFacturacion
                         MsgBox("Error al actualizar Folio Factura en tabla FolioFacturas", MsgBoxStyle.Critical, "Facturación")
                         Exit Sub
                     End If
+                    TxtFolio.Text = wFolioFacturas.FolioActual
                 End If
 
                 'Generación del archivo para envío electrónico al SAT
@@ -616,5 +617,4 @@ Public Class FrmFacturacion
         CmdFormaPago.ValueMember = "Id"
         CmdFormaPago.SelectedIndex = -1
     End Sub
-
 End Class

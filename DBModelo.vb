@@ -1701,6 +1701,12 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function GetTipoRelacion_All() As List(Of tblTipoDeRelacion)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblTipoDeRelacions.ToList
+        End Using
+    End Function
+
     Shared Function GetUsoCFDIByKey(ByVal UsoCFDIKey As String) As tblUsoCFDI
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblUsoCFDIs1.Where(Function(i) i.UsoCFDI.Contains(UsoCFDIKey)).FirstOrDefault

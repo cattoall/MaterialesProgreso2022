@@ -668,6 +668,9 @@
     <Compile Include="tblTicketPedido.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblTipoDeRelacion.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblUnidades.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

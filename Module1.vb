@@ -2673,6 +2673,10 @@ Module Module1
 
 
             Dim wa_header As tblFacturaTotal = DBModelo.GetFacturaHeader(NumeroFactura)
+            wa_header.UUID = DS.Tables("TimbreFiscalDigital").Rows(0)("UUID").ToString()
+            If Not DBModelo.Update_PV_FacturaTotal(wa_header) Then
+                MsgBox("Problemas al actualizar el UUID en la tabla FacturasTotal", MsgBoxStyle.Exclamation, "Actualización de UUID")
+            End If
             Dim wa_cliente As tblClientes = DBModelo.GetCliente(wa_header.id_cliente)
 
             Dim lv_nombre As String = ""

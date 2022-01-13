@@ -10,9 +10,8 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class tblParametro
+Partial Public Class tblTipoDeRelacion
     Public Property Id As Integer
-    Public Property Name As String
-    Public Property Value As String
+    Public Property TipoRelacion As String
 
 End Class

@@ -316,8 +316,8 @@
           <Property Name="idProveedor" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="atencion" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'pv_salvador.pv_salvador.ordencomprades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ordencomprades">
           <Key>
             <PropertyRef Name="folio" />
@@ -445,6 +445,13 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="45" />
           <Property Name="Value" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tbltiporelacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoRelacion" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tblusocfdi">
           <Key>
@@ -604,6 +611,7 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <EntitySet Name="tblformapago" EntityType="Self.tblformapago" Schema="pv_salvador" store:Type="Tables" />
           <EntitySet Name="tblmetodopago" EntityType="Self.tblmetodopago" Schema="pv_salvador" store:Type="Tables" />
           <EntitySet Name="tblparametro" EntityType="Self.tblparametro" Schema="pv_salvador" store:Type="Tables" />
+          <EntitySet Name="tbltiporelacion" EntityType="Self.tbltiporelacion" Schema="pv_salvador" store:Type="Tables" />
           <EntitySet Name="tblusocfdi" EntityType="Self.tblusocfdi" Schema="pv_salvador" store:Type="Tables" />
           <EntitySet Name="ticket" EntityType="Self.ticket" Schema="pv_salvador" store:Type="Tables" />
           <EntitySet Name="ticket_cotiza" EntityType="Self.ticket_cotiza" Schema="pv_salvador" store:Type="Tables" />
@@ -1014,6 +1022,7 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           <EntitySet Name="tblFacturas" EntityType="pv_salvadorModel1.tblFactura" />
           <EntitySet Name="tblMarcas" EntityType="pv_salvadorModel1.tblMarcas" />
           <EntitySet Name="tblUnidades" EntityType="pv_salvadorModel1.tblUnidades" />
+          <EntitySet Name="tblTipoDeRelacions" EntityType="pv_salvadorModel1.tblTipoDeRelacion" />
         </EntityContainer>
         <EntityType Name="tblTicket">
           <Key>
@@ -1231,6 +1240,13 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
           </Key>
           <Property Name="Clave" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblTipoDeRelacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoRelacion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1816,6 +1832,14 @@ advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no t
               <MappingFragment StoreEntitySet="unidades">
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="Clave" ColumnName="Clave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTipoDeRelacions">
+            <EntityTypeMapping TypeName="pv_salvadorModel1.tblTipoDeRelacion">
+              <MappingFragment StoreEntitySet="tbltiporelacion">
+                <ScalarProperty Name="TipoRelacion" ColumnName="TipoRelacion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
