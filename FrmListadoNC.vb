@@ -119,7 +119,10 @@ Public Class FrmListadoNC
 
     Private Sub mBtnPrint_Click(sender As Object, e As EventArgs) Handles mBtnPrint.Click
         If LblNumTicket.Text <> "" Then
-            If ImprimeNotaDeCredito_CFDI(DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value, DBConnected) = False Then
+            Dim NoFactura = DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+            Dim FechaFactura = DataGridConsulta.Item(8, DataGridConsulta.CurrentRow.Index).Value
+            Dim FolioFactura As String = gv_SerieNCSalvador & "-" & NoFactura & "_" & Format(FechaFactura, "yyyyMMdd") & "_CFDI"
+            If ImprimeNotaDeCredito(NoFactura, FolioFactura, true) = False Then
                 MsgBox("Hubo un error al Generar la Impresión de la Nota de Crédito", MsgBoxStyle.Critical, "Impresiones de Notas de Crédito")
             Else
                 MsgBox("Re'Impresión de Nota de Credito Correctamente", MsgBoxStyle.Information, "Impresiones de Notas de Crédito")

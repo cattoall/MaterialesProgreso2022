@@ -284,6 +284,7 @@
           <Property Name="metodopago" Type="varchar" MaxLength="3" />
           <Property Name="FormaPago" Type="varchar" MaxLength="2" />
           <Property Name="UsoCFDI" Type="varchar" MaxLength="3" />
+          <Property Name="UUID" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="nc_detalle">
           <Key>
@@ -316,8 +317,8 @@
           <Property Name="idProveedor" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="atencion" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'pv_salvador.pv_salvador.ordencomprades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'pv_salvador.pv_salvador.ordencomprades' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ordencomprades">
           <Key>
             <PropertyRef Name="folio" />
@@ -816,28 +817,6 @@ warning 6002: The table/view 'pv_salvador.pv_salvador.ordencomprades' does not h
           <Property Name="clave" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="tblNC">
-          <Key>
-            <PropertyRef Name="n_nc" />
-          </Key>
-          <Property Name="n_nc" Type="Decimal" Precision="20" Scale="0" Nullable="false" />
-          <Property Name="SubTotal" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="IVA" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tipo_venta" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="id_cliente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fecha_venta" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="fecha_limite" Type="DateTime" Precision="0" />
-          <Property Name="codiciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="FolioFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="metodopago" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="FormaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="UsoCFDI" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="ordencompra">
           <Key>
             <PropertyRef Name="nCompra" />
@@ -991,7 +970,6 @@ warning 6002: The table/view 'pv_salvador.pv_salvador.ordencomprades' does not h
           <EntitySet Name="tblGrupos" EntityType="pv_salvadorModel1.tblGrupos" />
           <EntitySet Name="historial_pagos_proveedores" EntityType="Self.historial_pagos_proveedores" />
           <EntitySet Name="tblLineas" EntityType="pv_salvadorModel1.tblLinea" />
-          <EntitySet Name="tblNCs" EntityType="pv_salvadorModel1.tblNC" />
           <EntitySet Name="ordencompras" EntityType="Self.ordencompra" />
           <EntitySet Name="pagars" EntityType="Self.pagar" />
           <EntitySet Name="tblProveedors" EntityType="pv_salvadorModel1.tblProveedor" />
@@ -1023,6 +1001,7 @@ warning 6002: The table/view 'pv_salvador.pv_salvador.ordencomprades' does not h
           <EntitySet Name="tblMarcas" EntityType="pv_salvadorModel1.tblMarcas" />
           <EntitySet Name="tblUnidades" EntityType="pv_salvadorModel1.tblUnidades" />
           <EntitySet Name="tblTipoDeRelacions" EntityType="pv_salvadorModel1.tblTipoDeRelacion" />
+          <EntitySet Name="tblNCs" EntityType="pv_salvadorModel1.tblNC" />
         </EntityContainer>
         <EntityType Name="tblTicket">
           <Key>
@@ -1248,6 +1227,29 @@ warning 6002: The table/view 'pv_salvador.pv_salvador.ordencomprades' does not h
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TipoRelacion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="tblNC">
+          <Key>
+            <PropertyRef Name="n_nc" />
+          </Key>
+          <Property Name="n_nc" Type="Decimal" Nullable="false" Precision="20" Scale="0" />
+          <Property Name="SubTotal" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IVA" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="total" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="usuario" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_venta" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="cliente" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="id_cliente" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_venta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha_limite" Type="DateTime" Precision="0" />
+          <Property Name="codiciones" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FolioFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="metodopago" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="FormaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="UsoCFDI" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="UUID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1441,29 +1443,6 @@ warning 6002: The table/view 'pv_salvador.pv_salvador.ordencomprades' does not h
               <MappingFragment StoreEntitySet="lineas">
                 <ScalarProperty Name="clave" ColumnName="clave" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblNCs">
-            <EntityTypeMapping TypeName="pv_salvadorModel1.tblNC">
-              <MappingFragment StoreEntitySet="nc">
-                <ScalarProperty Name="n_nc" ColumnName="n_nc" />
-                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
-                <ScalarProperty Name="IVA" ColumnName="IVA" />
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="usuario" ColumnName="usuario" />
-                <ScalarProperty Name="tipo_venta" ColumnName="tipo_venta" />
-                <ScalarProperty Name="cliente" ColumnName="cliente" />
-                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
-                <ScalarProperty Name="fecha_venta" ColumnName="fecha_venta" />
-                <ScalarProperty Name="fecha_limite" ColumnName="fecha_limite" />
-                <ScalarProperty Name="codiciones" ColumnName="codiciones" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
-                <ScalarProperty Name="FolioFactura" ColumnName="FolioFactura" />
-                <ScalarProperty Name="metodopago" ColumnName="metodopago" />
-                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
-                <ScalarProperty Name="UsoCFDI" ColumnName="UsoCFDI" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1840,6 +1819,30 @@ warning 6002: The table/view 'pv_salvador.pv_salvador.ordencomprades' does not h
               <MappingFragment StoreEntitySet="tbltiporelacion">
                 <ScalarProperty Name="TipoRelacion" ColumnName="TipoRelacion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblNCs">
+            <EntityTypeMapping TypeName="pv_salvadorModel1.tblNC">
+              <MappingFragment StoreEntitySet="nc">
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="UsoCFDI" ColumnName="UsoCFDI" />
+                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
+                <ScalarProperty Name="metodopago" ColumnName="metodopago" />
+                <ScalarProperty Name="FolioFactura" ColumnName="FolioFactura" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="codiciones" ColumnName="codiciones" />
+                <ScalarProperty Name="fecha_limite" ColumnName="fecha_limite" />
+                <ScalarProperty Name="fecha_venta" ColumnName="fecha_venta" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="tipo_venta" ColumnName="tipo_venta" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="n_nc" ColumnName="n_nc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

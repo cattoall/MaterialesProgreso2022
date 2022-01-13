@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="pv_salvadorModel1.tblGrupos" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pv_salvadorModel1.historial_pagos_proveedores" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblLinea" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="pv_salvadorModel1.tblNC" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pv_salvadorModel1.ordencompra" Width="1.5" PointX="4.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pv_salvadorModel1.pagar" Width="1.5" PointX="10.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblProveedor" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
@@ -45,6 +44,7 @@
         <EntityTypeShape EntityType="pv_salvadorModel1.tblMarcas" Width="1.5" PointX="19.375" PointY="0.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblUnidades" Width="1.5" PointX="19.375" PointY="3.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblTipoDeRelacion" Width="1.5" PointX="19.375" PointY="6.75" />
+        <EntityTypeShape EntityType="pv_salvadorModel1.tblNC" Width="1.5" PointX="0.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

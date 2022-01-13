@@ -2620,7 +2620,7 @@ Module Module1
         dt_detail.Columns.Add("descripcion", GetType(String))
         dt_detail.Columns.Add("precio", GetType(Double))
         dt_detail.Columns.Add("subtotal", GetType(Double))
-        dt_detail.Columns.Add("noidentificacion", GetType(Integer))
+        dt_detail.Columns.Add("noidentificacion", GetType(String))
         dt_detail.Columns.Add("impuesto", GetType(String))
         dt_detail.Columns.Add("base", GetType(Double))
         dt_detail.Columns.Add("importe", GetType(Double))
@@ -2645,7 +2645,7 @@ Module Module1
                 dt_details_row("cantidad") = CInt(DS.Tables("Concepto").Rows(i)("Cantidad"))
                 dt_details_row("unidad") = DS.Tables("Concepto").Rows(i)("ClaveUnidad").ToString()
                 dt_details_row("clave") = DS.Tables("Concepto").Rows(i)("ClaveProdServ").ToString()
-                dt_details_row("noidentificacion") = CInt(DS.Tables("Concepto").Rows(i)("NoIdentificacion"))
+                dt_details_row("noidentificacion") = DS.Tables("Concepto").Rows(i)("NoIdentificacion").ToString()
                 dt_details_row("descripcion") = DS.Tables("Concepto").Rows(i)("Descripcion").ToString()
                 dt_details_row("impuesto") = DS.Tables("Traslado").Rows(i)("Impuesto")
                 dt_details_row("base") = CDbl(DS.Tables("Traslado").Rows(i)("Base"))
@@ -4132,6 +4132,308 @@ Module Module1
             Return False
         End Try
 
+    End Function
+
+    Public Function ImprimeNotaDeCredito(ByVal NumeroFactura As String, ByVal FolioFactura As String, ByVal Imprimir As Boolean) As Boolean
+        
+        Dim dt_detail As DataTable = New DataTable
+        '---------Variables para reporte--------------
+        Dim rep_FormadePago As String
+        Dim rep_TipoRelacion As String
+        Dim rep_UUID_relacion As String
+        Dim rep_MetododePago As String
+        Dim rep_UsoCFDI As String
+        Dim rep_folio As String = FolioFactura
+        Dim rep_direccion As String
+        Dim rep_colonia As String
+        Dim rep_cuidad As String
+
+        '--------------------------------------------
+
+        dt_detail.Columns.Add("cantidad", GetType(Integer))
+        dt_detail.Columns.Add("unidad", GetType(String))
+        dt_detail.Columns.Add("clave", GetType(String))
+        dt_detail.Columns.Add("descripcion", GetType(String))
+        dt_detail.Columns.Add("precio", GetType(Double))
+        dt_detail.Columns.Add("subtotal", GetType(Double))
+        dt_detail.Columns.Add("noidentificacion", GetType(String))
+        dt_detail.Columns.Add("impuesto", GetType(String))
+        dt_detail.Columns.Add("base", GetType(Double))
+        dt_detail.Columns.Add("importe", GetType(Double))
+        dt_detail.Columns.Add("tasaocuota", GetType(Double))
+
+        dt_detail.TableName = "facturas"
+        Try
+            Dim Report As New LocalReport
+            Dim ruta As String = gv_CDFI_XML_PATH
+            Dim DS As New DataSet
+            Dim dt_comprobante As DataTable = New DataTable
+
+            ruta = ruta & rep_folio & ".xml"
+            Dim fsReadXml As New System.IO.FileStream(ruta, System.IO.FileMode.Open)
+            DS.ReadXml(fsReadXml)
+
+            Dim lv_iva_total As Double = 0
+            For i = 0 To DS.Tables("Concepto").Rows.Count - 1
+
+                Dim dt_details_row As DataRow = dt_detail.NewRow()
+
+                dt_details_row("cantidad") = CInt(DS.Tables("Concepto").Rows(i)("Cantidad"))
+                dt_details_row("unidad") = DS.Tables("Concepto").Rows(i)("ClaveUnidad").ToString()
+                dt_details_row("clave") = DS.Tables("Concepto").Rows(i)("ClaveProdServ").ToString()
+                dt_details_row("noidentificacion") = DS.Tables("Concepto").Rows(i)("NoIdentificacion").ToString()
+                dt_details_row("descripcion") = DS.Tables("Concepto").Rows(i)("Descripcion").ToString()
+                dt_details_row("impuesto") = DS.Tables("Traslado").Rows(i)("Impuesto")
+                dt_details_row("base") = CDbl(DS.Tables("Traslado").Rows(i)("Base"))
+                dt_details_row("importe") = CDbl(DS.Tables("Traslado").Rows(i)("Importe"))
+                dt_details_row("tasaocuota") = CDbl(DS.Tables("Traslado").Rows(i)("TasaOCuota")) * 100
+                dt_details_row("precio") = CDbl(DS.Tables("Concepto").Rows(i)("ValorUnitario"))
+                dt_details_row("subtotal") = CDbl(DS.Tables("Concepto").Rows(i)("Importe"))
+
+                lv_iva_total = lv_iva_total + CDbl(DS.Tables("Traslado").Rows(i)("Importe"))
+                dt_detail.Rows.Add(dt_details_row)
+
+            Next
+
+            rep_FormadePago = DS.Tables("Comprobante").Rows(0)("FormaPago").ToString()
+            Dim wa_FormaDePago As tblFormaPago = DBModelo.GetFormaDePagoByKey(rep_FormadePago)
+            rep_FormadePago = wa_FormaDePago.FormaPago
+
+            rep_TipoRelacion= DS.Tables("CfdiRelacionados").Rows(0)("TipoRelacion").ToString()
+            Dim wa_TipoRelacion As tblTipoDeRelacion = DBModelo.GetTipoRelacion_ByKey(rep_TipoRelacion)
+            rep_TipoRelacion = wa_TipoRelacion.TipoRelacion
+
+            rep_MetododePago = DS.Tables("Comprobante").Rows(0)("MetodoPago").ToString()
+            Dim wa_MetodoDePago As tblMetodoPago = DBModelo.GetMetodoDePagoByKey(rep_MetododePago)
+            rep_MetododePago = wa_MetodoDePago.MetodoPago
+
+            rep_UsoCFDI = DS.Tables("Receptor").Rows(0)("UsoCFDI").ToString()
+            Dim wa_UsoCFDI As tblUsoCFDI = DBModelo.GetUsoCFDIByKey(rep_UsoCFDI)
+            rep_UsoCFDI = wa_UsoCFDI.UsoCFDI
+
+            ' Copia del GetFacturasHeader en Notas de Crédito, junto con el Ipdate_PV_Notas
+            Dim wa_header As tblNC = DBModelo.GetNotaCreditoHeader(NumeroFactura)
+
+            wa_header.UUID = DS.Tables("TimbreFiscalDigital").Rows(0)("UUID").ToString()
+
+            rep_UUID_relacion = DS.Tables("CfdiRelacionado").Rows(0)("UUID").ToString()
+            
+            If Not DBModelo.Update_PV_NC(wa_header) Then
+                MsgBox("Problemas al actualizar el UUID en la tabla NC", MsgBoxStyle.Exclamation, "Actualización de UUID")
+            End If
+
+            Dim wa_cliente As tblClientes = DBModelo.GetCliente(wa_header.id_cliente)
+
+            Dim lv_nombre As String = ""
+            Dim lv_direccion As String = ""
+            Dim lv_colonia As String = ""
+            Dim lv_codigopostal As String = ""
+            Dim lv_ciudad As String = ""
+            Dim lv_rfc As String = ""
+
+
+            If wa_cliente.nombre <> "" Or wa_cliente.apat <> "" Or wa_cliente.amat <> "" Then
+                lv_nombre = wa_cliente.nombre & " " & wa_cliente.apat & " " & wa_cliente.amat
+            End If
+
+            If wa_cliente.calle <> "" Then
+                lv_direccion = wa_cliente.calle
+                If wa_cliente.numero <> "" Then
+                    lv_direccion = lv_direccion & " #" & wa_cliente.numero
+                End If
+            Else
+                lv_direccion = " "
+            End If
+
+            If wa_cliente.colonia <> "" Then
+                lv_colonia = wa_cliente.colonia
+            Else
+                lv_colonia = " "
+            End If
+
+            If wa_cliente.cp <> "" Then
+                lv_codigopostal = wa_cliente.cp
+            Else
+                lv_codigopostal = " "
+            End If
+
+            If wa_cliente.ciudad <> "" Then
+                If wa_cliente.estado <> "" Then
+                    lv_ciudad = wa_cliente.ciudad & ", " & wa_cliente.estado
+                Else
+                    lv_ciudad = wa_cliente.ciudad
+                End If
+            Else
+                lv_ciudad = " "
+            End If
+
+            If wa_cliente.rfc <> "" Then
+                lv_rfc = wa_cliente.rfc
+            Else
+                lv_rfc = " "
+            End If
+
+            rep_direccion = lv_direccion
+            rep_cuidad = lv_ciudad
+            rep_colonia = lv_colonia
+
+            Dim lv_TipoDeComprobante As String = ""
+            Select Case DS.Tables("Comprobante").Rows(0)("TipoDeComprobante").ToString()
+                Case "I"
+                    lv_TipoDeComprobante = "I-Ingreso"
+                Case "E"
+                    lv_TipoDeComprobante = "E-Egreso"
+            End Select
+
+            Dim p1 As New Microsoft.Reporting.WinForms.ReportParameter("RfcProvCertif", DS.Tables("TimbreFiscalDigital").Rows(0)("RfcProvCertif").ToString())
+            Dim p2 As New Microsoft.Reporting.WinForms.ReportParameter("UUID", DS.Tables("TimbreFiscalDigital").Rows(0)("UUID").ToString())
+            Dim p3 As New Microsoft.Reporting.WinForms.ReportParameter("TipoDeComprobante", lv_TipoDeComprobante)
+            Dim p4 As New Microsoft.Reporting.WinForms.ReportParameter("NoCertificadoSAT", DS.Tables("TimbreFiscalDigital").Rows(0)("NoCertificadoSAT").ToString())
+            Dim p5 As New Microsoft.Reporting.WinForms.ReportParameter("Image", "File:///" & gv_CDFI_XML_PATH_QR & rep_folio & ".png")
+            Dim p6 As New Microsoft.Reporting.WinForms.ReportParameter("RFC", DS.Tables("Receptor").Rows(0)("RFC").ToString())
+            Dim p7 As New Microsoft.Reporting.WinForms.ReportParameter("Serie", DS.Tables("Comprobante").Rows(0)("Serie").ToString())
+            Dim p8 As New Microsoft.Reporting.WinForms.ReportParameter("FolioFactura", DS.Tables("Comprobante").Rows(0)("Folio").ToString())
+            Dim p9 As New Microsoft.Reporting.WinForms.ReportParameter("Ciudad_RFC", rep_cuidad)
+            Dim p10 As New Microsoft.Reporting.WinForms.ReportParameter("CP", DS.Tables("Comprobante").Rows(0)("LugarExpedicion").ToString())
+            Dim p11 As New Microsoft.Reporting.WinForms.ReportParameter("Total", DS.Tables("Comprobante").Rows(0)("Total").ToString())
+            Dim p12 As New Microsoft.Reporting.WinForms.ReportParameter("Direccion", rep_direccion)
+            Dim p13 As New Microsoft.Reporting.WinForms.ReportParameter("FolioFiscal", DS.Tables("TimbreFiscalDigital").Rows(0)("UUID").ToString())
+            Dim p14 As New Microsoft.Reporting.WinForms.ReportParameter("FechadeEmision", DS.Tables("Comprobante").Rows(0)("Fecha").ToString())
+            Dim p15 As New Microsoft.Reporting.WinForms.ReportParameter("FechaTimbrado", DS.Tables("TimbreFiscalDigital").Rows(0)("FechaTimbrado").ToString())
+            Dim p16 As New Microsoft.Reporting.WinForms.ReportParameter("SelloSAT", DS.Tables("TimbreFiscalDigital").Rows(0)("SelloSAT").ToString())
+            Dim p17 As New Microsoft.Reporting.WinForms.ReportParameter("SelloCFD", DS.Tables("TimbreFiscalDigital").Rows(0)("SelloCFD").ToString())
+            Dim p18 As New Microsoft.Reporting.WinForms.ReportParameter("Version", DS.Tables("TimbreFiscalDigital").Rows(0)("Version").ToString())
+            Dim p19 As New Microsoft.Reporting.WinForms.ReportParameter("SubTotal", DS.Tables("Comprobante").Rows(0)("SubTotal").ToString())
+            Dim p20 As New Microsoft.Reporting.WinForms.ReportParameter("UsodeCFDI", rep_UsoCFDI)
+            Dim p21 As New Microsoft.Reporting.WinForms.ReportParameter("Nombre", DS.Tables("Receptor").Rows(0)("Nombre").ToString())
+            Dim p22 As New Microsoft.Reporting.WinForms.ReportParameter("FormadePago", rep_FormadePago)
+            Dim p23 As New Microsoft.Reporting.WinForms.ReportParameter("MetododePago", rep_MetododePago)
+            Dim p24 As New Microsoft.Reporting.WinForms.ReportParameter("Colonia", rep_colonia)
+            Dim p25 As New Microsoft.Reporting.WinForms.ReportParameter("CPReceptor", DS.Tables("Receptor").Rows(0)("Rfc").ToString())
+            Dim p26 As New Microsoft.Reporting.WinForms.ReportParameter("IVA", lv_iva_total.ToString)
+            Dim p27 As New Microsoft.Reporting.WinForms.ReportParameter("TipoRelacion", rep_TipoRelacion)
+            Dim p28 As New Microsoft.Reporting.WinForms.ReportParameter("UUID_Relacion", rep_UUID_relacion)
+
+            Report.ReportPath = gv_Report_Path & "Report8.rdlc"
+            Report.EnableExternalImages = True
+
+            Report.SetParameters(p1)
+            Report.SetParameters(p2)
+            Report.SetParameters(p3)
+            Report.SetParameters(p4)
+            Report.SetParameters(p5)
+            Report.SetParameters(p6)
+            Report.SetParameters(p7)
+            Report.SetParameters(p8)
+            Report.SetParameters(p9)
+            Report.SetParameters(p10)
+            Report.SetParameters(p11)
+            Report.SetParameters(p12)
+            Report.SetParameters(p13)
+            Report.SetParameters(p14)
+            Report.SetParameters(p15)
+            Report.SetParameters(p16)
+            Report.SetParameters(p17)
+            Report.SetParameters(p18)
+            Report.SetParameters(p19)
+            Report.SetParameters(p20)
+            Report.SetParameters(p21)
+            Report.SetParameters(p22)
+            Report.SetParameters(p23)
+            Report.SetParameters(p24)
+            Report.SetParameters(p25)
+            Report.SetParameters(p26)
+            Report.SetParameters(p27)
+            Report.SetParameters(p28)
+
+            Report.DataSources.Clear()
+            Report.DataSources.Add(New Microsoft.Reporting.WinForms.ReportDataSource("DataSet1", dt_detail))
+            fsReadXml.Close()
+
+            ' Creación del PDF en base al Reporte previamente llenado
+            Dim pdfContent As Byte() = Report.Render("PDF", Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+            Dim pdfPath As String = gv_CDFI_XML_PATH & rep_folio & ".pdf"
+            Dim pdfFile As New System.IO.FileStream(pdfPath, System.IO.FileMode.Create)
+            pdfFile.Write(pdfContent, 0, pdfContent.Length)
+            pdfFile.Close()
+
+            ' Creación del ZIP en base al XML y PDF generado anteriormente
+            Dim zipPath As String = gv_CDFI_XML_PATH & rep_folio & ".zip" '"C:\TEMP\Compression\myzip.zip"
+            If File.Exists(zipPath) Then
+                File.Delete(zipPath)
+            End If
+            Dim zip As Package = ZipPackage.Open(zipPath, IO.FileMode.OpenOrCreate, IO.FileAccess.ReadWrite)
+            AddToArchive(zip, gv_CDFI_XML_PATH & FolioFactura & ".xml") '"C:\TEMP\Compression\Compress Me1.txt")
+            AddToArchive(zip, gv_CDFI_XML_PATH & FolioFactura & ".pdf") '"C:\TEMP\Compression\Compress Me2.txt")
+            zip.Close() 'Close the zip file
+
+            If wa_cliente.correo <> "" Then
+
+                'Envio de Archivo ZIP via Correo Electrónico
+                Dim oSmtp As New SmtpClient()
+
+                Dim oMail As New MailMessage()
+
+                oSmtp.UseDefaultCredentials = False
+                oSmtp.Credentials = New Net.NetworkCredential(gv_smtp_correo, gv_smtp_pass)
+                oSmtp.Port = 587
+                oSmtp.EnableSsl = True
+                oSmtp.Host = "smtp.live.com"
+
+                oMail = New MailMessage()
+
+                ' Set sender email address, please change it to yours
+                oMail.From = New MailAddress(gv_smtp_correo)
+
+                ' Set recipient email address, please change it to yours
+                oMail.To.Add("cat_to_all@hotmail.com")
+                'oMail.CC.Add(gv_smtp_correo)
+
+                ' Set email subject
+                oMail.Subject = "Factura Electrónica Material Eléctrico Progreso"
+
+                oMail.IsBodyHtml = True
+
+                ' Set email body
+                oMail.Body = ""
+                oMail.Body = oMail.Body & "Estimado Cliente " & "J. Jesus Martinez Fuentes" & vbCrLf & vbCrLf
+                oMail.Body = oMail.Body & "Por medio del presente Correo Electrónico, le hago la notificación y envío del comprobante fiscal" & vbCrLf
+                oMail.Body = oMail.Body & "emitido por nuestra empresa Material Eléctrico Progreso." & vbCrLf
+                oMail.Body = oMail.Body & "Anexo archivo ZIP que contiene un archivo XML y un archivo PDF." & vbCrLf & vbCrLf
+                oMail.Body = oMail.Body & "Cualquier aclaración, favor de contactarnos. Lo puede hacer respondiendo a este correo." & vbCrLf & vbCrLf
+                oMail.Body = oMail.Body & "ATTE:" & vbCrLf
+                oMail.Body = oMail.Body & "Salvador Bautista Fuentes" & vbCrLf
+                oMail.Body = oMail.Body & "Empresario" & vbCrLf
+
+                Dim ct As Net.Mime.ContentType = New Net.Mime.ContentType("application/zip")
+                Dim attachItem As Attachment = New Attachment(gv_CDFI_XML_PATH & FolioFactura & ".zip", ct)
+
+                oMail.Attachments.Add(attachItem)
+
+                Try
+                    FrmCancelarPedido.Cursor = Cursors.WaitCursor
+                    oSmtp.Send(oMail)
+                    oSmtp.Dispose()
+                    oMail.Dispose()
+                    FrmCancelarPedido.Cursor = Cursors.Default
+                    MsgBox("Correo Electrónico enviado correctamente!", vbInformation, "Envío de Correo Electrónico")
+                Catch ep As Exception
+                    FrmCancelarPedido.Cursor = Cursors.Default
+                    oSmtp.Dispose()
+                    oMail.Dispose()
+                    MsgBox(ep.Message, vbCritical, "Error al enviar correo electrónico.")
+                    Return False
+                End Try
+            End If
+
+            If MsgBox("¿Requiere Factura Impresa?", vbYesNo, "Impresión de Factura") = vbYes Then
+                Print_Report2(InvocePrinterName, Report, 1, "Image", FolioFactura, gv_CDFI_XML_PATH)
+            End If
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeFactura Genera Reporte Local")
+            Return False
+        End Try
     End Function
 
     Public Function ImprimeNotaDeCredito_CFDI(ByVal NumeroFactura As Integer, ByVal DB As String) As Boolean

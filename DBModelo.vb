@@ -1484,6 +1484,19 @@ Public Class DBModelo
         End Try
     End Function
 
+    Shared Function Update_PV_NC(ByVal strNC As tblNC) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.tblNCs.Attach(strNC)
+                ctx.Entry(strNC).State = EntityState.Modified
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
 
 #End Region
 
@@ -1707,6 +1720,12 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function GetTipoRelacion_ByKey(ByVal keyTipo As String) As tblTipoDeRelacion
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblTipoDeRelacions.Where(Function(i) i.TipoRelacion.Contains(keyTipo)).FirstOrDefault
+        End Using
+    End Function
+
     Shared Function GetUsoCFDIByKey(ByVal UsoCFDIKey As String) As tblUsoCFDI
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblUsoCFDIs1.Where(Function(i) i.UsoCFDI.Contains(UsoCFDIKey)).FirstOrDefault
@@ -1722,6 +1741,12 @@ Public Class DBModelo
     Shared Function GetFacturaHeader(ByVal NumeroFactura As String) As tblFacturaTotal
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblFacturaTotals.Where(Function(i) i.n_factura.Equals(CDec(NumeroFactura))).FirstOrDefault
+        End Using
+    End Function
+
+    Shared Function GetNotaCreditoHeader(ByVal NumeroNota As String) As tblNC
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblNCs.Where(Function(i) i.n_nc = CDec(NumeroNota)).FirstOrDefault
         End Using
     End Function
 

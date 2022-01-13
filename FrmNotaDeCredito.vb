@@ -377,7 +377,7 @@ Public Class FrmNotaDeCredito
         Dim respuesta As SDKRespuesta = sdk.Timbrar("C:\sdk2\timbrar32.bat", gv_CDFI_XML_PATH, FolioFactura, False)
         If respuesta.Codigo_MF_Numero = 0 Then
             MsgBox(("Nota de Crédito " & gv_SerieNCSalvador & "-" & NoFactura & " Generada Correctamente"), MsgBoxStyle.Information, "Generación de Nota de Crédito")
-            ImprimeFactura2(NoFactura, FolioFactura, True)
+            ImprimeNotaDeCredito(NoFactura, FolioFactura, True)
         Else
             MsgBox($"Código: {respuesta.Codigo_MF_Numero} Mensaje: {respuesta.Codigo_MF_Texto}", MsgBoxStyle.Critical, Nothing)
             view = DGVDetalle
@@ -390,11 +390,11 @@ Public Class FrmNotaDeCredito
         'limpiar()
 
 
-        If ImprimeNotaDeCredito_CFDI(FolioNC_Actual, DBConnected) = False Then
-            MetroFramework.MetroMessageBox.Show(Me, "Hubo un error al Generar la Impresión de la Nota de Crédito", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Error_Venta = False
-            Exit Sub
-        End If
+        'If ImprimeNotaDeCredito_CFDI(FolioNC_Actual, DBConnected) = False Then
+        '    MetroFramework.MetroMessageBox.Show(Me, "Hubo un error al Generar la Impresión de la Nota de Crédito", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    Error_Venta = False
+        '    Exit Sub
+        'End If
 
         MetroFramework.MetroMessageBox.Show(Me, "Devolución Terminada Correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
