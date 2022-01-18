@@ -13,22 +13,16 @@ Public Class FrmFacturacion
     Private lv_total_ticket As Double
     Private sdk As MFSDK
 
-    Private Sub CmdBuscar_Click(sender As Object, e As EventArgs) Handles CmdBuscar.Click
-        Buscar_Clientes = "FACTURAS"
-        FrmBuscarClientesVentas.ShowDialog()
-        FrmBuscarClientesVentas.Close()
-        FrmBuscarClientesVentas.Dispose()
-        TxtTikect.Select()
-        LblCliente.Text = idClienteVenta
+    Private Sub CmdBuscar_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) Handles CmdSalir.Click
-        Close()
-        Dispose()
+    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
-    Private Sub CmdLimpiar_Click(sender As Object, e As EventArgs) Handles CmdLimpiar.Click
-        limpiar()
+    Private Sub CmdLimpiar_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
     Private Sub limpiar()
@@ -74,40 +68,8 @@ Public Class FrmFacturacion
         ClaveUnidad = ""
     End Sub
 
-    Private Sub CmdGenerarMostrador_Click(sender As Object, e As EventArgs) Handles CmdGenerarMostrador.Click
-        If Me.CbMostrador.Enabled Then
-            Dim tVentas As List(Of tblVenta) = DBModelo.GetVentasMostrador(Format(Me.DateTimePicker3.Value.Date, "yyyy-MM-dd"), 0, "", "VENDIDO")
-            DataGridView1.Rows.Clear()
-            DataGridView1.DataSource = Nothing
-
-            If tVentas.Count > 0 Then
-                For Each wVentas In tVentas
-                    Dim row As String() = New String(15 - 1) {}
-                    row(0) = wVentas.nticket
-                    row(1) = "1"
-                    row(2) = "TICKET DE VENTA: " & wVentas.nticket
-                    row(3) = wVentas.SubTotal
-                    row(4) = wVentas.total
-                    row(5) = Format(DateTimePicker1.Value, "dd-MM-yyyy")
-                    row(6) = "0.00"
-                    row(7) = "0.00"
-                    row(8) = "DIA"
-                    row(9) = TxtFolio.Text
-                    row(10) = "0"
-                    row(11) = "01010101"
-                    row(12) = "ACT"
-                    row(13) = "0"
-                    row(14) = wVentas.IVA
-                    Dim rowValues As String() = row
-                    DataGridView1.Rows.Add(rowValues)
-                    TxtSubtotal.Text = TxtSubtotal.Text + wVentas.SubTotal
-                    TxtIVA.Text = TxtIVA.Text + wVentas.IVA
-                    TxtTotal.Text = TxtTotal.Text + wVentas.total
-                Next
-            Else
-                MsgBox("No hay ventas registradas o pendientes por facturar para este día.", MsgBoxStyle.Critical, "Ventas de Mostrador")
-            End If
-        End If
+    Private Sub CmdGenerarMostrador_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
     Private Sub TxtTikect_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtTikect.KeyDown
@@ -223,7 +185,7 @@ Public Class FrmFacturacion
                 Next
             End If
 
-            CmdGenerarMostrador.Enabled = False
+            btnGenerarMostrador.Enabled = False
             DateTimePicker3.Enabled = False
             DateTimePicker3.Value = DateAndTime.Now
             CmbMetodoPago.SelectedIndex = -1
@@ -239,7 +201,7 @@ Public Class FrmFacturacion
             CmbMetodoPago.SelectedIndex = 0
             TxtTotal.Text = CDbl(0)
 
-            CmdGenerarMostrador.Enabled = True
+            btnGenerarMostrador.Enabled = True
             DateTimePicker3.Enabled = True
             Dim wCliente As tblClientes = DBModelo.GetClienteByName("VENTA AL PUBLICO EN GENERAL")
             If Not wCliente Is Nothing Then
@@ -290,31 +252,188 @@ Public Class FrmFacturacion
         End If
     End Sub
 
-    Private Sub Btn_cfdi3_3_Click(sender As Object, e As EventArgs) Handles Btn_cfdi3_3.Click
+    Private Sub Btn_cfdi3_3_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Public Function PAC() As MFObject
+        Dim oPAC As New MFObject("PAC")
+        oPAC("usuario") = gv_cfdi_usuario
+        oPAC("pass") = gv_cfdi_password
+        oPAC("produccion") = gv_cfdi_prd
+        Return oPAC
+    End Function
+
+    Public Function PAC2() As MFObject
+        Dim oPAC As New MFObject("PAC")
+        oPAC("usuario") = gv_cfdi_usuario
+        oPAC("pass") = gv_cfdi_password
+        Return oPAC
+    End Function
+
+    Public Function Conf() As MFObject
+        Dim oCONF As New MFObject("conf")
+        oCONF("cer") = gv_sat_cer
+        oCONF("key") = gv_sat_key
+        oCONF("pass") = gv_sat_pass
+        Return oCONF
+    End Function
+
+    Private Sub FrmFacturacion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim wFolioFacturas As tblFoliofacturas = DBModelo.GetFolioFactura("FACTURAS", Now.Year)
+        If Not wFolioFacturas Is Nothing Then
+            TxtFolio.Text = wFolioFacturas.FolioActual
+            folio_inicial = wFolioFacturas.FolioInicial
+            folio_final = wFolioFacturas.FolioFinal
+        Else
+            Dim wFolioFacturas1 As tblFoliofacturas = New tblFoliofacturas()
+            wFolioFacturas1.TipoComprobante = "FACTURAS"
+            wFolioFacturas1.Year = Now.Year
+            wFolioFacturas1.FolioInicial = 1
+            wFolioFacturas1.FolioFinal = 100000
+            wFolioFacturas1.FolioActual = 1
+            If DBModelo.Insert_PV_FoliosNC_Actual(wFolioFacturas1) = False Then
+                MsgBox("Error al insertar registro en tabla FolioFactura", MsgBoxStyle.Critical, "Facturación")
+                Exit Sub
+            End If
+            TxtFolio.Text = wFolioFacturas1.FolioActual
+            folio_inicial = wFolioFacturas1.FolioInicial
+            folio_final = wFolioFacturas1.FolioFinal
+        End If
+
+        CmbCredito.Visible = True
+        LblPlazo.Visible = True
+        btnGenerarMostrador.Enabled = False
+        DateTimePicker3.Enabled = False
+
+        Llena_FormaDePago()
+        Llena_MetodoDePago()
+        Llena_UsoCFDI()
+    End Sub
+
+    Private Sub Llena_UsoCFDI()
+        Dim UsoCFDI As List(Of tblUsoCFDI) = DBModelo.GetUsoCFDI_All
+
+        If IsNothing(UsoCFDI) Then
+            Exit Sub
+        End If
+
+        CmbUsoCDFI.DataSource = UsoCFDI
+        CmbUsoCDFI.DisplayMember = "UsoCFDI"
+        CmbUsoCDFI.ValueMember = "Id"
+        CmbUsoCDFI.SelectedIndex = -1
+
+    End Sub
+
+    Private Sub Llena_MetodoDePago()
+        Dim MetodoDePago As List(Of tblMetodoPago) = DBModelo.GetMetodoDePago_All
+
+        If IsNothing(MetodoDePago) Then
+            Exit Sub
+        End If
+
+        CmbMetodoPago.DataSource = MetodoDePago
+        CmbMetodoPago.DisplayMember = "MetodoPago"
+        CmbMetodoPago.ValueMember = "Id"
+        CmbMetodoPago.SelectedIndex = -1
+    End Sub
+
+    Private Sub Llena_FormaDePago()
+        Dim FormaDePago As List(Of tblFormaPago) = DBModelo.GetFormaDePago_All
+
+        If IsNothing(FormaDePago) Then
+            Exit Sub
+        End If
+
+        CmdFormaPago.DataSource = FormaDePago
+        CmdFormaPago.DisplayMember = "FormaPago"
+        CmdFormaPago.ValueMember = "Id"
+        CmdFormaPago.SelectedIndex = -1
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        Buscar_Clientes = "FACTURAS"
+        FrmBuscarClientesVentas.ShowDialog()
+        FrmBuscarClientesVentas.Close()
+        FrmBuscarClientesVentas.Dispose()
+        TxtTikect.Select()
+        LblCliente.Text = idClienteVenta
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Close()
+        Dispose()
+    End Sub
+
+    Private Sub cmdUpdateUUID_Click(sender As Object, e As EventArgs) 
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnUpdateUUID.Click
+
+    End Sub
+
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles btnGenerarMostrador.Click
+        If Me.CbMostrador.Enabled Then
+            Dim tVentas As List(Of tblVenta) = DBModelo.GetVentasMostrador(Format(Me.DateTimePicker3.Value.Date, "yyyy-MM-dd"), 0, "", "VENDIDO")
+            DataGridView1.Rows.Clear()
+            DataGridView1.DataSource = Nothing
+
+            If tVentas.Count > 0 Then
+                For Each wVentas In tVentas
+                    Dim row As String() = New String(15 - 1) {}
+                    row(0) = wVentas.nticket
+                    row(1) = "1"
+                    row(2) = "TICKET DE VENTA: " & wVentas.nticket
+                    row(3) = wVentas.SubTotal
+                    row(4) = wVentas.total
+                    row(5) = Format(DateTimePicker1.Value, "dd-MM-yyyy")
+                    row(6) = "0.00"
+                    row(7) = "0.00"
+                    row(8) = "DIA"
+                    row(9) = TxtFolio.Text
+                    row(10) = "0"
+                    row(11) = "01010101"
+                    row(12) = "ACT"
+                    row(13) = "0"
+                    row(14) = wVentas.IVA
+                    Dim rowValues As String() = row
+                    DataGridView1.Rows.Add(rowValues)
+                    TxtSubtotal.Text = TxtSubtotal.Text + wVentas.SubTotal
+                    TxtIVA.Text = TxtIVA.Text + wVentas.IVA
+                    TxtTotal.Text = TxtTotal.Text + wVentas.total
+                Next
+            Else
+                MsgBox("No hay ventas registradas o pendientes por facturar para este día.", MsgBoxStyle.Critical, "Ventas de Mostrador")
+            End If
+        End If
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         PrBImprimiendo.Visible = True
         PrBImprimiendo.Value = 0
         PrBImprimiendo.Step = 10
         If txtnombre.Text = "" Then
             MsgBox("Favor de especificar un Cliente.", MsgBoxStyle.Critical, Nothing)
-            CmdBuscar.Focus()
+            btnAdd.Focus()
         ElseIf txtdirecion.Text = "" Then
             MsgBox("Favor de especificar el Domicilio.", MsgBoxStyle.Critical, Nothing)
-            CmdBuscar.Focus()
+            btnAdd.Focus()
         ElseIf txtCiudad.Text = "" Then
             MsgBox("Favor de especificar la Ciudad.", MsgBoxStyle.Critical, Nothing)
-            CmdBuscar.Focus()
+            btnAdd.Focus()
         ElseIf txtestado.Text = "" Then
             MsgBox("Favor de especificar el Estado.", MsgBoxStyle.Critical, Nothing)
-            CmdBuscar.Focus()
+            btnAdd.Focus()
         ElseIf txtcolonia.Text = "" Then
             MsgBox("Favor de especificar la Colonia.", MsgBoxStyle.Critical, Nothing)
-            CmdBuscar.Focus()
+            btnAdd.Focus()
         ElseIf txtcp.Text = "" Then
             MsgBox("Favor de especificar el Código Postal.", MsgBoxStyle.Critical, Nothing)
-            CmdBuscar.Focus()
+            btnAdd.Focus()
         ElseIf TxtRFC.Text = "" Then
             MsgBox("Favor de especificar el RFC.", MsgBoxStyle.Critical, Nothing)
-            CmdBuscar.Focus()
+            btnAdd.Focus()
         ElseIf CmbMetodoPago.Text = "" Then
             MsgBox("Favor de especificar el Tipo de Pago", MsgBoxStyle.Critical, Nothing)
             CmbMetodoPago.Focus()
@@ -523,98 +642,7 @@ Public Class FrmFacturacion
         End If
     End Sub
 
-    Public Function PAC() As MFObject
-        Dim oPAC As New MFObject("PAC")
-        oPAC("usuario") = gv_cfdi_usuario
-        oPAC("pass") = gv_cfdi_password
-        oPAC("produccion") = gv_cfdi_prd
-        Return oPAC
-    End Function
-
-    Public Function PAC2() As MFObject
-        Dim oPAC As New MFObject("PAC")
-        oPAC("usuario") = gv_cfdi_usuario
-        oPAC("pass") = gv_cfdi_password
-        Return oPAC
-    End Function
-
-    Public Function Conf() As MFObject
-        Dim oCONF As New MFObject("conf")
-        oCONF("cer") = gv_sat_cer
-        oCONF("key") = gv_sat_key
-        oCONF("pass") = gv_sat_pass
-        Return oCONF
-    End Function
-
-    Private Sub FrmFacturacion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim wFolioFacturas As tblFoliofacturas = DBModelo.GetFolioFactura("FACTURAS", Now.Year)
-        If Not wFolioFacturas Is Nothing Then
-            TxtFolio.Text = wFolioFacturas.FolioActual
-            folio_inicial = wFolioFacturas.FolioInicial
-            folio_final = wFolioFacturas.FolioFinal
-        Else
-            Dim wFolioFacturas1 As tblFoliofacturas = New tblFoliofacturas()
-            wFolioFacturas1.TipoComprobante = "FACTURAS"
-            wFolioFacturas1.Year = Now.Year
-            wFolioFacturas1.FolioInicial = 1
-            wFolioFacturas1.FolioFinal = 100000
-            wFolioFacturas1.FolioActual = 1
-            If DBModelo.Insert_PV_FoliosNC_Actual(wFolioFacturas1) = False Then
-                MsgBox("Error al insertar registro en tabla FolioFactura", MsgBoxStyle.Critical, "Facturación")
-                Exit Sub
-            End If
-            TxtFolio.Text = wFolioFacturas1.FolioActual
-            folio_inicial = wFolioFacturas1.FolioInicial
-            folio_final = wFolioFacturas1.FolioFinal
-        End If
-
-        CmbCredito.Visible = True
-        LblPlazo.Visible = True
-        CmdGenerarMostrador.Enabled = False
-        DateTimePicker3.Enabled = False
-
-        Llena_FormaDePago()
-        Llena_MetodoDePago()
-        Llena_UsoCFDI()
-    End Sub
-
-    Private Sub Llena_UsoCFDI()
-        Dim UsoCFDI As List(Of tblUsoCFDI) = DBModelo.GetUsoCFDI_All
-
-        If IsNothing(UsoCFDI) Then
-            Exit Sub
-        End If
-
-        CmbUsoCDFI.DataSource = UsoCFDI
-        CmbUsoCDFI.DisplayMember = "UsoCFDI"
-        CmbUsoCDFI.ValueMember = "Id"
-        CmbUsoCDFI.SelectedIndex = -1
-
-    End Sub
-
-    Private Sub Llena_MetodoDePago()
-        Dim MetodoDePago As List(Of tblMetodoPago) = DBModelo.GetMetodoDePago_All
-
-        If IsNothing(MetodoDePago) Then
-            Exit Sub
-        End If
-
-        CmbMetodoPago.DataSource = MetodoDePago
-        CmbMetodoPago.DisplayMember = "MetodoPago"
-        CmbMetodoPago.ValueMember = "Id"
-        CmbMetodoPago.SelectedIndex = -1
-    End Sub
-
-    Private Sub Llena_FormaDePago()
-        Dim FormaDePago As List(Of tblFormaPago) = DBModelo.GetFormaDePago_All
-
-        If IsNothing(FormaDePago) Then
-            Exit Sub
-        End If
-
-        CmdFormaPago.DataSource = FormaDePago
-        CmdFormaPago.DisplayMember = "FormaPago"
-        CmdFormaPago.ValueMember = "Id"
-        CmdFormaPago.SelectedIndex = -1
+    Private Sub Button2_Click_2(sender As Object, e As EventArgs) Handles Button2.Click
+        limpiar()
     End Sub
 End Class

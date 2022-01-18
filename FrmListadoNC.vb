@@ -88,23 +88,12 @@ Public Class FrmListadoNC
         load_layout_dgv_ListaNC_i(Me.DataGridTikect)
     End Sub
 
-    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs) Handles mBtnSearch.Click
-        DataGridConsulta.DataSource = DBModelo.GetNCIntervalFacturas(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"))
-
-        'load_layout_dgv_ListaNC_H(Me.DataGridConsulta)
-
-        For i = 0 To DataGridConsulta.RowCount - 1
-            Select Case DataGridConsulta.Item(11, i).Value
-                Case "0"
-                    DataGridConsulta.Item(12, i).Value = "CLIENTE"
-                Case "1"
-                    DataGridConsulta.Item(12, i).Value = "MOSTRADOR"
-            End Select
-        Next
+    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
-    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) Handles mBtnExit.Click
-        Me.Close()
+    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
     Private Sub mBtnCancel_Click(sender As Object, e As EventArgs) Handles mBtnCancel.Click
@@ -117,7 +106,23 @@ Public Class FrmListadoNC
         End If
     End Sub
 
-    Private Sub mBtnPrint_Click(sender As Object, e As EventArgs) Handles mBtnPrint.Click
+    Private Sub mBtnPrint_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub mBtnXML_Click(sender As Object, e As EventArgs) Handles mBtnXML.Click
+        If LblNumTicket.Text <> "" Then
+            If MsgBox("¿Está seguro de generar el XML de Cancelación?", MsgBoxStyle.YesNo, "Generar XML Cancelación") = MsgBoxResult.Yes Then
+                CancelaNC_CFDI(CInt(LblNumTicket.Text), DBConnected)
+                MsgBox("XML generado.", MsgBoxStyle.Information, "Generar XML Cancelación")
+                'Call ImgVerFactB_Click(sender, e)
+            End If
+        Else
+            MsgBox("Favor de Seleccionar la Nota de Crédito a Generar el XML Cancelación.", MsgBoxStyle.Critical, "Generar XML Cancelación")
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If LblNumTicket.Text <> "" Then
             Dim NoFactura = DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
             Dim FechaFactura = DataGridConsulta.Item(8, DataGridConsulta.CurrentRow.Index).Value
@@ -132,15 +137,22 @@ Public Class FrmListadoNC
         End If
     End Sub
 
-    Private Sub mBtnXML_Click(sender As Object, e As EventArgs) Handles mBtnXML.Click
-        If LblNumTicket.Text <> "" Then
-            If MsgBox("¿Está seguro de generar el XML de Cancelación?", MsgBoxStyle.YesNo, "Generar XML Cancelación") = MsgBoxResult.Yes Then
-                CancelaNC_CFDI(CInt(LblNumTicket.Text), DBConnected)
-                MsgBox("XML generado.", MsgBoxStyle.Information, "Generar XML Cancelación")
-                'Call ImgVerFactB_Click(sender, e)
-            End If
-        Else
-            MsgBox("Favor de Seleccionar la Nota de Crédito a Generar el XML Cancelación.", MsgBoxStyle.Critical, "Generar XML Cancelación")
-        End If
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        DataGridConsulta.DataSource = DBModelo.GetNCIntervalFacturas(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"))
+
+        'load_layout_dgv_ListaNC_H(Me.DataGridConsulta)
+
+        For i = 0 To DataGridConsulta.RowCount - 1
+            Select Case DataGridConsulta.Item(11, i).Value
+                Case "0"
+                    DataGridConsulta.Item(12, i).Value = "CLIENTE"
+                Case "1"
+                    DataGridConsulta.Item(12, i).Value = "MOSTRADOR"
+            End Select
+        Next
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Me.Close()
     End Sub
 End Class

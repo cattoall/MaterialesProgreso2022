@@ -279,10 +279,7 @@
     End Sub
 
     Private Sub ReimpresiónDeFacturaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReimpresiónDeFacturaToolStripMenuItem.Click
-        SetFormName(FrmListadoNC, DBConnected)
-        FrmListadoFacturas.ShowDialog()
-        FrmListadoFacturas.Close()
-        FrmListadoFacturas.Dispose()
+        
     End Sub
 
     Private Sub RevisarFacturasConErroresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RevisarFacturasConErroresToolStripMenuItem.Click
@@ -300,10 +297,7 @@
     End Sub
 
     Private Sub ReimpresionesDeNotasDeCréditoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReimpresionesDeNotasDeCréditoToolStripMenuItem.Click
-        SetFormName(FrmListadoNC, DBConnected)
-        FrmListadoNC.ShowDialog()
-        FrmListadoNC.Close()
-        FrmListadoNC.Dispose()
+        
     End Sub
 
     Private Sub ListadoDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeProductosToolStripMenuItem.Click
@@ -385,11 +379,8 @@
         FrmDevTickets.Dispose()
     End Sub
 
-    Private Sub NotasDeCréditoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NotasDeCréditoToolStripMenuItem.Click
-        SetFormName(FrmNotaDeCredito, DBConnected)
-        FrmNotaDeCredito.ShowDialog()
-        FrmNotaDeCredito.Close()
-        FrmNotaDeCredito.Dispose()
+    Private Sub NotasDeCréditoToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
     Private Sub GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem.Click
@@ -410,14 +401,39 @@
     End Sub
 
     Private Sub FacturaciónToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FacturaciónToolStripMenuItem.Click
-        FrmFacturacion.ShowDialog()
-        FrmFacturacion.Close()
-        FrmFacturacion.Dispose()
+        
     End Sub
 
     Private Sub MarcasDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MarcasDeProductosToolStripMenuItem.Click
         FrmBuscarMarcas.ShowDialog()
         FrmBuscarMarcas.Close()
         FrmBuscarMarcas.Dispose()
+    End Sub
+
+    Private Sub FacturaciónToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles FacturaciónToolStripMenuItem1.Click
+        FrmFacturacion.ShowDialog()
+        FrmFacturacion.Close()
+        FrmFacturacion.Dispose()
+    End Sub
+
+    Private Sub ReimpresiónDeFacturasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReimpresiónDeFacturasToolStripMenuItem.Click
+        SetFormName(FrmListadoNC, DBConnected)
+        FrmListadoFacturas.ShowDialog()
+        FrmListadoFacturas.Close()
+        FrmListadoFacturas.Dispose()
+    End Sub
+
+    Private Sub ReimpresiónDeNotasDeCréditoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReimpresiónDeNotasDeCréditoToolStripMenuItem.Click
+        SetFormName(FrmListadoNC, DBConnected)
+        FrmListadoNC.ShowDialog()
+        FrmListadoNC.Close()
+        FrmListadoNC.Dispose()
+    End Sub
+
+    Private Sub NotasDeCréditoToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles NotasDeCréditoToolStripMenuItem1.Click
+        SetFormName(FrmNotaDeCredito, DBConnected)
+        FrmNotaDeCredito.ShowDialog()
+        FrmNotaDeCredito.Close()
+        FrmNotaDeCredito.Dispose()
     End Sub
 End Class

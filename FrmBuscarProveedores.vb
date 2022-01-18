@@ -110,12 +110,12 @@
         refresh_data_dgv()
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
         LimpiarObjetos()
         Close()
     End Sub
 
-    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) 
         Add_Update = False
         FrmProveedor.Text = "Crear Proveedor"
         SetFormName(FrmProveedor, DBConnected)
@@ -124,5 +124,21 @@
         FrmProveedor.Dispose()
         LimpiarObjetos()
         refresh_data_dgv()
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        Add_Update = False
+        FrmProveedor.Text = "Crear Proveedor"
+        SetFormName(FrmProveedor, DBConnected)
+        FrmProveedor.ShowDialog()
+        FrmProveedor.Close()
+        FrmProveedor.Dispose()
+        LimpiarObjetos()
+        refresh_data_dgv()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        LimpiarObjetos()
+        Close()
     End Sub
 End Class

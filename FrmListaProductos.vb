@@ -99,7 +99,15 @@ Public Class FrmListaProductos
 
     End Sub
 
-    Private Sub CmdVerTodosLosProductos_Click(sender As Object, e As EventArgs) Handles CmdVerTodosLosProductos.Click
+    Private Sub CmdVerTodosLosProductos_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles CmdVerTodosLosProductos.Click
         Dim tProductos As List(Of tblProductos) = DBModelo.GetProductsAll
 
         DataGridView1.DataSource = tProductos.ToList()
@@ -107,7 +115,7 @@ Public Class FrmListaProductos
         ConfiguraGrid()
     End Sub
 
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) Handles CmdSalir.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Close()
         Dispose()
     End Sub

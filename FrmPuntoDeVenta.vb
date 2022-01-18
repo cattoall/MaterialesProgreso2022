@@ -566,9 +566,10 @@ SiguienteRegistro:
         Dim lv_limiteActual = 0
 
         Error_Limite_Credito = False
-
+        idClienteVenta = txtIdCliente.Text
         If idClienteVenta = "0" Or idClienteVenta = "" Then
             MetroFramework.MetroMessageBox.Show(Me, "Favor de Seleccionar un Cliente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Console.WriteLine("Err 1")
             txtCliente.Focus()
             Error_Limite_Credito = True
         End If
@@ -748,6 +749,7 @@ SiguienteRegistro:
 
         If idClienteVenta = "0" Or idClienteVenta = "" Then
             MetroFramework.MetroMessageBox.Show(Me, "Favor de Seleccionar un Cliente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Console.WriteLine("Err 2")
             txtCliente.Focus()
             Error_Venta = True
             Exit Sub
@@ -822,7 +824,7 @@ SiguienteRegistro:
 
             strTicket.folio = nFolio
             strTicket.concepto = MetroGrid1.Rows(i).Cells(2).Value
-            strTicket.cantidad = MetroGrid1.Rows(i).Cells(0).Value
+            strTicket.cantidad = CDbl(MetroGrid1.Rows(i).Cells(0).Value)
             strTicket.precio = lv_pu
             strTicket.fecha = DateTime.Now.ToString("yyyy-MM-dd")
             strTicket.subtotal = lv_subtal
@@ -838,7 +840,7 @@ SiguienteRegistro:
             If DBModelo.Insert_PV_Ticket(strTicket) = False Then
                 MetroFramework.MetroMessageBox.Show(Me, "Error al Insertar en Tabla Ticket", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Error_Venta = True
-                Exit Sub
+                Exit Sub    
             End If
 
 SiguienteRegistro:
@@ -929,6 +931,7 @@ SiguienteRegistro:
         If idClienteVenta = "0" Then
             MetroFramework.MetroMessageBox.Show(Me, "Favor de Seleccionar un Cliente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
             MsgBox("Favor de Seleccionar un Cliente", MsgBoxStyle.Information, "Cotización")
+            Console.WriteLine("Err 3")
             txtCliente.Focus()
             Error_Venta = True
             Exit Sub
@@ -1248,7 +1251,6 @@ SiguienteRegistro:
         PV_Contado_Cambio = ""
         PV_Contado_Paga = ""
         TipoDocumento = CmbDocto.Text
-
         If TipoDocumento = "COTIZACION" And CmbTipoVenta.Text = "CONTADO" And (txtIdCliente.Text = "0" Or txtIdCliente.Text = "") Then
             MetroFramework.MetroMessageBox.Show(Me, "Cliente es obligatorio para hacer una cotización, Favor de seleccionar un cliente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub

@@ -29,10 +29,10 @@ Partial Class FrmBuscarClientes
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.MetroGrid1 = New MetroFramework.Controls.MetroGrid()
         Me.txtBusqueda = New MetroFramework.Controls.MetroTextBox()
-        Me.btnSalir = New MetroFramework.Controls.MetroButton()
-        Me.btnNuevo = New MetroFramework.Controls.MetroButton()
-        CType(Me.MetroGrid1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        CType(Me.MetroGrid1,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
         '
         'ToolTip1
         '
@@ -43,47 +43,50 @@ Partial Class FrmBuscarClientes
         '
         'MetroGrid1
         '
-        Me.MetroGrid1.AllowUserToAddRows = False
-        Me.MetroGrid1.AllowUserToDeleteRows = False
-        Me.MetroGrid1.AllowUserToResizeRows = False
-        Me.MetroGrid1.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.MetroGrid1.AllowUserToAddRows = false
+        Me.MetroGrid1.AllowUserToDeleteRows = false
+        Me.MetroGrid1.AllowUserToResizeRows = false
+        Me.MetroGrid1.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.MetroGrid1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.MetroGrid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.MetroGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(174,Byte),Integer), CType(CType(219,Byte),Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.MetroGrid1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.MetroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136,Byte),Integer), CType(CType(136,Byte),Integer), CType(CType(136,Byte),Integer))
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.MetroGrid1.DefaultCellStyle = DataGridViewCellStyle2
-        Me.MetroGrid1.EnableHeadersVisualStyles = False
-        Me.MetroGrid1.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.MetroGrid1.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.MetroGrid1.Location = New System.Drawing.Point(23, 91)
+        Me.MetroGrid1.EnableHeadersVisualStyles = false
+        Me.MetroGrid1.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.MetroGrid1.GridColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.MetroGrid1.Location = New System.Drawing.Point(31, 112)
+        Me.MetroGrid1.Margin = New System.Windows.Forms.Padding(4)
         Me.MetroGrid1.Name = "MetroGrid1"
-        Me.MetroGrid1.ReadOnly = True
+        Me.MetroGrid1.ReadOnly = true
         Me.MetroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(174,Byte),Integer), CType(CType(219,Byte),Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.MetroGrid1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        Me.MetroGrid1.RowHeadersWidth = 51
         Me.MetroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.MetroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.MetroGrid1.Size = New System.Drawing.Size(836, 364)
+        Me.MetroGrid1.Size = New System.Drawing.Size(1115, 448)
         Me.MetroGrid1.TabIndex = 4
         '
         'txtBusqueda
@@ -93,16 +96,18 @@ Partial Class FrmBuscarClientes
         '
         '
         Me.txtBusqueda.CustomButton.Image = Nothing
-        Me.txtBusqueda.CustomButton.Location = New System.Drawing.Point(312, 1)
+        Me.txtBusqueda.CustomButton.Location = New System.Drawing.Point(419, 2)
+        Me.txtBusqueda.CustomButton.Margin = New System.Windows.Forms.Padding(4)
         Me.txtBusqueda.CustomButton.Name = ""
-        Me.txtBusqueda.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtBusqueda.CustomButton.Size = New System.Drawing.Size(23, 23)
         Me.txtBusqueda.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtBusqueda.CustomButton.TabIndex = 1
         Me.txtBusqueda.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtBusqueda.CustomButton.UseSelectable = True
-        Me.txtBusqueda.CustomButton.Visible = False
+        Me.txtBusqueda.CustomButton.UseSelectable = true
+        Me.txtBusqueda.CustomButton.Visible = false
         Me.txtBusqueda.Lines = New String(-1) {}
-        Me.txtBusqueda.Location = New System.Drawing.Point(23, 62)
+        Me.txtBusqueda.Location = New System.Drawing.Point(31, 76)
+        Me.txtBusqueda.Margin = New System.Windows.Forms.Padding(4)
         Me.txtBusqueda.MaxLength = 32767
         Me.txtBusqueda.Name = "txtBusqueda"
         Me.txtBusqueda.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -111,57 +116,67 @@ Partial Class FrmBuscarClientes
         Me.txtBusqueda.SelectedText = ""
         Me.txtBusqueda.SelectionLength = 0
         Me.txtBusqueda.SelectionStart = 0
-        Me.txtBusqueda.ShortcutsEnabled = True
-        Me.txtBusqueda.Size = New System.Drawing.Size(334, 23)
+        Me.txtBusqueda.ShortcutsEnabled = true
+        Me.txtBusqueda.Size = New System.Drawing.Size(445, 28)
         Me.txtBusqueda.TabIndex = 5
-        Me.txtBusqueda.UseSelectable = True
+        Me.txtBusqueda.UseSelectable = true
         Me.txtBusqueda.WaterMark = "Buscar por Nombre/Apellido Paterno/Apellido Materno"
-        Me.txtBusqueda.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtBusqueda.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtBusqueda.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtBusqueda.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
-        'btnSalir
+        'btnAdd
         '
-        Me.btnSalir.FontSize = MetroFramework.MetroButtonSize.Medium
-        Me.btnSalir.Location = New System.Drawing.Point(745, 53)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(114, 32)
-        Me.btnSalir.TabIndex = 76
-        Me.btnSalir.Text = "Salir"
-        Me.btnSalir.UseSelectable = True
+        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdd.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.btnAdd.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.add_16px
+        Me.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAdd.Location = New System.Drawing.Point(483, 76)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(100, 28)
+        Me.btnAdd.TabIndex = 77
+        Me.btnAdd.Text = "Nuevo"
+        Me.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAdd.UseVisualStyleBackColor = true
         '
-        'btnNuevo
+        'Button1
         '
-        Me.btnNuevo.FontSize = MetroFramework.MetroButtonSize.Medium
-        Me.btnNuevo.Location = New System.Drawing.Point(546, 53)
-        Me.btnNuevo.Name = "btnNuevo"
-        Me.btnNuevo.Size = New System.Drawing.Size(114, 32)
-        Me.btnNuevo.TabIndex = 75
-        Me.btnNuevo.Text = "Nuevo"
-        Me.btnNuevo.UseSelectable = True
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.Color.Red
+        Me.Button1.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.close_window_16px
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.Location = New System.Drawing.Point(1046, 76)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(100, 28)
+        Me.Button1.TabIndex = 78
+        Me.Button1.Text = "Salir"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button1.UseVisualStyleBackColor = true
         '
         'FrmBuscarClientes
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8!, 16!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.ClientSize = New System.Drawing.Size(882, 478)
-        Me.ControlBox = False
-        Me.Controls.Add(Me.btnSalir)
-        Me.Controls.Add(Me.btnNuevo)
+        Me.ClientSize = New System.Drawing.Size(1176, 588)
+        Me.ControlBox = false
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.txtBusqueda)
         Me.Controls.Add(Me.MetroGrid1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.KeyPreview = True
-        Me.MaximizeBox = False
+        Me.KeyPreview = true
+        Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.MaximizeBox = false
         Me.Name = "FrmBuscarClientes"
+        Me.Padding = New System.Windows.Forms.Padding(27, 74, 27, 25)
         Me.Text = "Buscar Clientes"
-        CType(Me.MetroGrid1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
+        CType(Me.MetroGrid1,System.ComponentModel.ISupportInitialize).EndInit
+        Me.ResumeLayout(false)
 
-    End Sub
+End Sub
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents MetroGrid1 As MetroFramework.Controls.MetroGrid
     Friend WithEvents txtBusqueda As MetroFramework.Controls.MetroTextBox
-    Friend WithEvents btnSalir As MetroFramework.Controls.MetroButton
-    Friend WithEvents btnNuevo As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnAdd As Button
+    Friend WithEvents Button1 As Button
 End Class

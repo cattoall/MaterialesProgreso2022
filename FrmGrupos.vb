@@ -181,7 +181,7 @@
                     MetroFramework.MetroMessageBox.Show(Me, "Grupo NO pudo ser creado.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             Else
-                strGrupos = DBModelo.GetGroup(lv_idGrupo)
+                strGrupos = DBModelo.GetGroup(CInt(lv_idGrupo.ToString()))
                 If Not IsNothing(strGrupos) Then
                     strGrupos.descripcion = txtDescripcion.Text
                     strGrupos.factorCosto = txtFactorCosto.Text
@@ -214,6 +214,8 @@
                     Else
                         MetroFramework.MetroMessageBox.Show(Me, "Grupo NO pudo ser actualizado.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
+                Else
+                    Console.WriteLine("No pasó nada")
                 End If
             End If
             FrmBuscarGrupos.txtBusqueda.Text = txtDescripcion.Text

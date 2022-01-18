@@ -148,20 +148,12 @@
 
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        LimpiarObjetos()
-        Close()
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
-    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
-        Add_Update = False
-        FrmClientes.Text = "Crear Cliente"
-        SetFormName(FrmClientes, DBConnected)
-        FrmClientes.ShowDialog()
-        FrmClientes.Close()
-        FrmClientes.Dispose()
-        LimpiarObjetos()
-        refresh_data_dgv()
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
     Private Sub MetroGrid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellDoubleClick
@@ -265,5 +257,21 @@
             txtBusqueda.Focus()
             txtBusqueda.SelectAll()
         End If
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        Add_Update = False
+        FrmClientes.Text = "Crear Cliente"
+        SetFormName(FrmClientes, DBConnected)
+        FrmClientes.ShowDialog()
+        FrmClientes.Close()
+        FrmClientes.Dispose()
+        LimpiarObjetos()
+        refresh_data_dgv()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        LimpiarObjetos()
+        Close()
     End Sub
 End Class

@@ -76,8 +76,16 @@
 
     End Sub
 
-    Private Sub CmdGenerarReporte_Click(sender As Object, e As EventArgs) Handles CmdGenerarReporte.Click
+    Private Sub CmdGenerarReporte_Click(sender As Object, e As EventArgs) 
 
+    End Sub
+
+    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        
         Dim tCobrar As List(Of tblCobrar) = DBModelo.GetCobrarByDates(Format(dtinicio.Value.Date, "yyyy-MM-dd"), Format(dtfinal.Value.Date, "yyyy-MM-dd"))
 
         DataGridView1.Refresh()
@@ -92,7 +100,7 @@
         lbltotal.Text = FormatCurrency(lbltotal.Text, 2)
     End Sub
 
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) Handles CmdSalir.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Close()
         Dispose()
     End Sub

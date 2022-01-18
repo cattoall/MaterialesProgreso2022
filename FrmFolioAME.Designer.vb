@@ -34,8 +34,8 @@ Partial Class FrmFolioAME
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.mBtnSave = New MetroFramework.Controls.MetroButton()
-        Me.MetroButton1 = New MetroFramework.Controls.MetroButton()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.mBtnSave = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout
         Me.SuspendLayout
         '
@@ -120,8 +120,8 @@ Partial Class FrmFolioAME
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.MetroButton1)
         Me.GroupBox1.Controls.Add(Me.mBtnSave)
+        Me.GroupBox1.Controls.Add(Me.Button2)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.TxtfolioIni)
         Me.GroupBox1.Controls.Add(Me.TxtFolioAct)
@@ -159,23 +159,35 @@ Partial Class FrmFolioAME
         Me.ToolTip1.InitialDelay = 50
         Me.ToolTip1.ReshowDelay = 10
         '
+        'Button2
+        '
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Button2.ForeColor = System.Drawing.Color.Red
+        Me.Button2.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.close_window_16px
+        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button2.Location = New System.Drawing.Point(652, 143)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(100, 28)
+        Me.Button2.TabIndex = 82
+        Me.Button2.Text = "Salir"
+        Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button2.UseVisualStyleBackColor = true
+        '
         'mBtnSave
         '
-        Me.mBtnSave.Location = New System.Drawing.Point(462, 74)
+        Me.mBtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.mBtnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.mBtnSave.ForeColor = System.Drawing.Color.FromArgb(CType(CType(47,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(141,Byte),Integer))
+        Me.mBtnSave.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.save_16px
+        Me.mBtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.mBtnSave.Location = New System.Drawing.Point(462, 140)
         Me.mBtnSave.Name = "mBtnSave"
-        Me.mBtnSave.Size = New System.Drawing.Size(75, 23)
-        Me.mBtnSave.TabIndex = 64
+        Me.mBtnSave.Size = New System.Drawing.Size(100, 28)
+        Me.mBtnSave.TabIndex = 131
         Me.mBtnSave.Text = "Guardar"
-        Me.mBtnSave.UseSelectable = true
-        '
-        'MetroButton1
-        '
-        Me.MetroButton1.Location = New System.Drawing.Point(462, 113)
-        Me.MetroButton1.Name = "MetroButton1"
-        Me.MetroButton1.Size = New System.Drawing.Size(75, 23)
-        Me.MetroButton1.TabIndex = 65
-        Me.MetroButton1.Text = "Salir"
-        Me.MetroButton1.UseSelectable = true
+        Me.mBtnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.mBtnSave.UseVisualStyleBackColor = true
         '
         'FrmFolioAME
         '
@@ -208,6 +220,6 @@ End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents MetroButton1 As MetroFramework.Controls.MetroButton
-    Friend WithEvents mBtnSave As MetroFramework.Controls.MetroButton
+    Friend WithEvents Button2 As Button
+    Friend WithEvents mBtnSave As Button
 End Class

@@ -165,33 +165,12 @@
         LimpiarObjetos()
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        LimpiarObjetos()
-        Close()
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
-    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
-        Add_Update = False
-        FrmProductos.Text = "Crear Producto"
-        SetFormName(FrmProductos, DBConnected)
-        Material_Familia = ""
-        Material_Grupo = ""
-        Material_Linea = ""
-        Material_Proveedores = ""
-        Material_SubFam = ""
-        Material_Umedida = ""
-        FrmProductos.txtClave.Enabled = True
-        FrmProductos.txtCodigoBarras.Enabled = True
-
-        FrmProductos.ShowDialog()
-        FrmProductos.Close()
-        FrmProductos.Dispose()
-        If txtClave.Text <> "" Or txtCodigoBarras.Text <> "" Or txtDescripcion.Text <> "" Or txtFamilia.Text <> "" Or txtGrupo.Text <> "" Or txtLinea.Text <> "" Then
-            MetroGrid1.Refresh()
-            refresh_data_dgv()
-        End If
-        txtDescripcion.Focus()
-        txtDescripcion.SelectAll()
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
     Private Sub MetroGrid1_MouseUp(sender As Object, e As MouseEventArgs) Handles MetroGrid1.MouseUp
@@ -244,4 +223,32 @@
         refresh_data_dgv()
     End Sub
 
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        Add_Update = False
+        FrmProductos.Text = "Crear Producto"
+        SetFormName(FrmProductos, DBConnected)
+        Material_Familia = ""
+        Material_Grupo = ""
+        Material_Linea = ""
+        Material_Proveedores = ""
+        Material_SubFam = ""
+        Material_Umedida = ""
+        FrmProductos.txtClave.Enabled = True
+        FrmProductos.txtCodigoBarras.Enabled = True
+
+        FrmProductos.ShowDialog()
+        FrmProductos.Close()
+        FrmProductos.Dispose()
+        If txtClave.Text <> "" Or txtCodigoBarras.Text <> "" Or txtDescripcion.Text <> "" Or txtFamilia.Text <> "" Or txtGrupo.Text <> "" Or txtLinea.Text <> "" Then
+            MetroGrid1.Refresh()
+            refresh_data_dgv()
+        End If
+        txtDescripcion.Focus()
+        txtDescripcion.SelectAll()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        LimpiarObjetos()
+        Close()
+    End Sub
 End Class

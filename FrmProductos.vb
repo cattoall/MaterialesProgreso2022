@@ -469,12 +469,24 @@ Public Class FrmProductos
         Calcula_Precios()
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         LimpiarObjetos()
         Close()
     End Sub
 
-    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim strProductos As tblProductos = DBModelo.GetProducts(CInt(txtIdProducto.Text))
 
         If DBModelo.DeleteProductos(StrProductos) Then
@@ -487,7 +499,7 @@ Public Class FrmProductos
         End If
     End Sub
 
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Dim lv_PrecioManual As Byte
         Dim lv_UsarTC As Integer
         Dim lv_TasaCero As Integer
@@ -634,5 +646,4 @@ Public Class FrmProductos
         LimpiarObjetos()
         Close()
     End Sub
-
 End Class

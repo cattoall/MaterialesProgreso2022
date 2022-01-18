@@ -20,47 +20,12 @@ Public Class FrmHistorialCliente
         LblTotal.Text = "$0.00"
     End Sub
 
-    Private Sub CmdBuscar_Click(sender As Object, e As EventArgs) Handles CmdBuscar.Click
-        Buscar_Clientes = "HISTORIAL"
-        FrmBuscarClientesVentas.ShowDialog()
-        FrmBuscarClientesVentas.Close()
-        CmdMostrar.Select()
+    Private Sub CmdBuscar_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
-    Private Sub CmdMostrar_Click(sender As Object, e As EventArgs) Handles CmdMostrar.Click
+    Private Sub CmdMostrar_Click(sender As Object, e As EventArgs) 
 
-        If idClienteVenta = "0" Then
-            MessageBox.Show("Favor de seleccionar un Cliente")
-            CmdBuscar.Focus()
-            Exit Sub
-        End If
-
-        LblTotal.Text = "$0.00"
-        Dim tTickets As List(Of tblVenta)
-        Dim tPedidos As List(Of tblVentaPedido)
-        Dim tCotizaciones As List(Of tblCotizacion)
-        DataGridView1.Refresh()
-
-        If rbtVenta.Checked = True Then
-            tTickets = DBModelo.Get_TicketsByDateIdCliente(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"), idClienteVenta)
-            DataGridView1.DataSource = tTickets.ToList()
-
-        ElseIf rbtVentaPedido.Checked = True Then
-            tPedidos = DBModelo.Get_PedidosByDateIdCliente(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"), idClienteVenta)
-            DataGridView1.DataSource = tPedidos.ToList()
-
-        ElseIf rdbCotizacion.Checked = True Then
-            tCotizaciones = DBModelo.Get_CotizacionesByDateIdCliente(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"), idClienteVenta)
-            DataGridView1.DataSource = tCotizaciones.ToList()
-
-        End If
-
-        ConfiguraGrid(DataGridView1)
-
-        For i = 0 To DataGridView1.RowCount - 1
-            LblTotal.Text = CDbl(LblTotal.Text) + CDbl(DataGridView1.Item(4, i).Value)
-        Next
-        LblTotal.Text = FormatCurrency(LblTotal.Text, 2)
     End Sub
 
     Private Sub ConfiguraGrid(ByVal dv As DataGridView)
@@ -115,9 +80,56 @@ Public Class FrmHistorialCliente
         dv.Columns(11).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) Handles CmdSalir.Click
+    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles cmdBuscar.Click
+        Buscar_Clientes = "HISTORIAL"
+        FrmBuscarClientesVentas.ShowDialog()
+        FrmBuscarClientesVentas.Close()
+        CmdMostrar.Select()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         txtCliente.Text = ""
         Close()
         Dispose()
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles CmdMostrar.Click
+        
+        If idClienteVenta = "0" Then
+            MessageBox.Show("Favor de seleccionar un Cliente")
+            CmdBuscar.Focus()
+            Exit Sub
+        End If
+
+        LblTotal.Text = "$0.00"
+        Dim tTickets As List(Of tblVenta)
+        Dim tPedidos As List(Of tblVentaPedido)
+        Dim tCotizaciones As List(Of tblCotizacion)
+        DataGridView1.Refresh()
+
+        If rbtVenta.Checked = True Then
+            tTickets = DBModelo.Get_TicketsByDateIdCliente(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"), idClienteVenta)
+            DataGridView1.DataSource = tTickets.ToList()
+
+        ElseIf rbtVentaPedido.Checked = True Then
+            tPedidos = DBModelo.Get_PedidosByDateIdCliente(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"), idClienteVenta)
+            DataGridView1.DataSource = tPedidos.ToList()
+
+        ElseIf rdbCotizacion.Checked = True Then
+            tCotizaciones = DBModelo.Get_CotizacionesByDateIdCliente(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"), idClienteVenta)
+            DataGridView1.DataSource = tCotizaciones.ToList()
+
+        End If
+
+        ConfiguraGrid(DataGridView1)
+
+        For i = 0 To DataGridView1.RowCount - 1
+            LblTotal.Text = CDbl(LblTotal.Text) + CDbl(DataGridView1.Item(4, i).Value)
+        Next
+        LblTotal.Text = FormatCurrency(LblTotal.Text, 2)
     End Sub
 End Class

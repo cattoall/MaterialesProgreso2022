@@ -83,7 +83,62 @@ Public Class FrmFolioAME
         
     End Sub
 
-    Private Sub mBtnSave_Click(sender As Object, e As EventArgs) Handles mBtnSave.Click
+    Private Sub mBtnSave_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Function Update() 
+        Dim SQL As String
+
+        If TxtFolioAct.Text = "" Then
+            Console.WriteLine(TxtFolioAct.Text)
+            MsgBox("Necesitas llenar Folio Actual para Modificarlo", MsgBoxStyle.Critical, "Folios Fiscales")
+            Return 0
+        End If
+
+        'SQL = "UPDATE foliosfacturas SET FolioInicial = @FolioInicial, FolioFinal = @FolioFinal, FolioActual = @FolioActual where TipoComprobante = @TipoComprobante and Year = @year"
+        
+        Dim newFolio As tblFoliofacturas = New tblFoliofacturas
+
+        newFolio.TipoComprobante    = foliotipodoc
+        newFolio.Year               = CInt(folioyear)
+        newFolio.FolioInicial       = CInt(folioini)
+        newFolio.FolioFinal         = CInt(foliofin)
+        newFolio.FolioActual        = CInt(TxtFolioAct.Text)
+
+        if DBModelo.UpdateFolioFacturas(newFolio) Then
+            
+        End If
+        
+        'If conn.State = ConnectionState.Open Then
+        '    conn.Close()
+        'End If
+        'conn.Open()
+        'myCommand.Parameters.Clear()
+        'myCommand.Connection = conn
+        'myCommand.CommandText = SQL
+        'myCommand.Parameters.AddWithValue("@TipoComprobante", foliotipodoc)
+        'myCommand.Parameters.AddWithValue("@year", CInt(folioyear))
+        'myCommand.Parameters.AddWithValue("@FolioInicial", CInt(folioini))
+        'myCommand.Parameters.AddWithValue("@FolioFinal", CInt(foliofin))
+        'myCommand.Parameters.AddWithValue("@FolioActual", CInt(TxtFolioAct.Text))
+        'myCommand.ExecuteNonQuery()
+        'conn.Close()
+
+        Llena_Variables(CmbTipoDoc.Text, TxtfolioIni.Text, txtFilioFin.Text, TxtFolioAct.Text, CInt(Label1.Text))
+        Limpiar_campos()
+        Me.Close()
+    End Function
+
+    Private Sub MetroButton1_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles mBtnSave.Click
         If mBtnSave.Text = "Modificar"
             Update()
 
@@ -135,53 +190,6 @@ Public Class FrmFolioAME
                 MsgBox(ex.Message, MsgBoxStyle.Critical, "Folios Fiscales")
             End Try
         End If
-        Me.Close()
-    End Sub
-
-    Function Update() 
-        Dim SQL As String
-
-        If TxtFolioAct.Text = "" Then
-            Console.WriteLine(TxtFolioAct.Text)
-            MsgBox("Necesitas llenar Folio Actual para Modificarlo", MsgBoxStyle.Critical, "Folios Fiscales")
-            Return 0
-        End If
-
-        'SQL = "UPDATE foliosfacturas SET FolioInicial = @FolioInicial, FolioFinal = @FolioFinal, FolioActual = @FolioActual where TipoComprobante = @TipoComprobante and Year = @year"
-        
-        Dim newFolio As tblFoliofacturas = New tblFoliofacturas
-
-        newFolio.TipoComprobante    = foliotipodoc
-        newFolio.Year               = CInt(folioyear)
-        newFolio.FolioInicial       = CInt(folioini)
-        newFolio.FolioFinal         = CInt(foliofin)
-        newFolio.FolioActual        = CInt(TxtFolioAct.Text)
-
-        if DBModelo.UpdateFolioFacturas(newFolio) Then
-            
-        End If
-        
-        'If conn.State = ConnectionState.Open Then
-        '    conn.Close()
-        'End If
-        'conn.Open()
-        'myCommand.Parameters.Clear()
-        'myCommand.Connection = conn
-        'myCommand.CommandText = SQL
-        'myCommand.Parameters.AddWithValue("@TipoComprobante", foliotipodoc)
-        'myCommand.Parameters.AddWithValue("@year", CInt(folioyear))
-        'myCommand.Parameters.AddWithValue("@FolioInicial", CInt(folioini))
-        'myCommand.Parameters.AddWithValue("@FolioFinal", CInt(foliofin))
-        'myCommand.Parameters.AddWithValue("@FolioActual", CInt(TxtFolioAct.Text))
-        'myCommand.ExecuteNonQuery()
-        'conn.Close()
-
-        Llena_Variables(CmbTipoDoc.Text, TxtfolioIni.Text, txtFilioFin.Text, TxtFolioAct.Text, CInt(Label1.Text))
-        Limpiar_campos()
-        Me.Close()
-    End Function
-
-    Private Sub MetroButton1_Click(sender As Object, e As EventArgs) Handles MetroButton1.Click
         Me.Close()
     End Sub
 End Class

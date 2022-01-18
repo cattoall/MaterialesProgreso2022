@@ -51,12 +51,11 @@ Public Class FrmBuscarLineas
         lv_ValorAnterior = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        LimpiarObjetos()
-        Close()
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
-    Private Sub btnCrear_Click(sender As Object, e As EventArgs) Handles btnCrear.Click
+    Private Sub btnCrear_Click(sender As Object, e As EventArgs) 
         Dim strLinea As New tblLinea
 
         If txtLinea.Text = "" Then
@@ -97,5 +96,53 @@ Public Class FrmBuscarLineas
         LimpiarObjetos()
         refresh_data_dgv()
         txtBusqueda.Focus()
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Dim strLinea As New tblLinea
+
+        If txtLinea.Text = "" Then
+            MetroFramework.MetroMessageBox.Show(Me, "Favor de llenar el Campo Nombre de Linea", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+        Select Case Add_Update
+            Case True
+                strLinea = DBModelo.GetLinea(lv_idLinea)
+                If Not IsNothing(strLinea) Then
+                    strLinea.descripcion = txtLinea.Text
+                    If DBModelo.UpdateLinea(strLinea) Then
+                        If lv_ValorAnterior <> txtLinea.Text Then
+                            If DBModelo.UpdateLinea_Productos(txtLinea.Text, lv_ValorAnterior) Then
+                                MetroFramework.MetroMessageBox.Show(Me, "Linea actualizada correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            Else
+                                MetroFramework.MetroMessageBox.Show(Me, "Linea NO pudo ser actualizada.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            End If
+                        Else
+                            MetroFramework.MetroMessageBox.Show(Me, "Linea actualizada correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                    Else
+                        MetroFramework.MetroMessageBox.Show(Me, "Linea NO pudo ser actualizada.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+                End If
+            Case False
+                strLinea.descripcion = txtLinea.Text
+                If DBModelo.InsertLinea(strLinea) Then
+                    MetroFramework.MetroMessageBox.Show(Me, "Linea creada correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MetroFramework.MetroMessageBox.Show(Me, "Linea NO pudo ser creada.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+        End Select
+        Add_Update = False
+        Material_Linea = txtLinea.Text
+        txtBusqueda.Text = txtLinea.Text
+        LimpiarObjetos()
+        refresh_data_dgv()
+        txtBusqueda.Focus()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        LimpiarObjetos()
+        Close()
     End Sub
 End Class

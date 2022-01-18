@@ -143,7 +143,23 @@ Public Class FrmListadoFacturas
         DataGridTikect.Columns(12).HeaderText = "Clave Unidad"
     End Sub
 
-    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs) Handles mBtnSearch.Click
+    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub MetroButton1_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub mBtnPrint_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Me.Close()
+    End Sub
+
+    Private Sub mBtnGenerate_Click(sender As Object, e As EventArgs) Handles mBtnSearch.Click
         Dim x As List(Of tblFacturaTotal) = DBModelo.GetIntervalFacturas(dtFechaInicial.Value.Date, dtFechaFinal.Value.Date)
         DataGridConsulta.DataSource = x
         'SQL = "SELECT *, usuario FROM factura_total where  fecha_venta  >= '" & Format(dtFechaInicial.Value.Date, "yyyy-MM-dd") & "' and fecha_venta <= '" & Format(dtFechaFinal.Value.Date, "yyyy-MM-dd") & "' order by n_factura, fecha_venta asc"
@@ -164,11 +180,7 @@ Public Class FrmListadoFacturas
         Next
     End Sub
 
-    Private Sub MetroButton1_Click(sender As Object, e As EventArgs) Handles MetroButton1.Click
-        Me.Close()
-    End Sub
-
-    Private Sub mBtnPrint_Click(sender As Object, e As EventArgs) Handles mBtnPrint.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles mBtnPrint.Click
         If LblNumTicket.Text <> "" Then
             Dim NoFactura = DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
             Dim FechaFactura = DataGridConsulta.Item(6, DataGridConsulta.CurrentRow.Index).Value

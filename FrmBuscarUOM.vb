@@ -51,12 +51,16 @@ Public Class FrmBuscarUOM
         lv_ValorAnterior = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
         LimpiarObjetos()
         Close()
     End Sub
 
-    Private Sub btnCrear_Click(sender As Object, e As EventArgs) Handles btnCrear.Click
+    Private Sub btnCrear_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If txtUOM.Text = "" Then
             MetroFramework.MetroMessageBox.Show(Me, "Favor de llenar el Campo Nombre de la Unidad de Medida", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
@@ -93,5 +97,10 @@ Public Class FrmBuscarUOM
         Add_Update = False
         LimpiarObjetos()
         refresh_data_dgv()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        LimpiarObjetos()
+        Close()
     End Sub
 End Class

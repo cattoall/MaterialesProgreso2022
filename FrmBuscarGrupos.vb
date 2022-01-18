@@ -69,7 +69,23 @@
         Close()
     End Sub
 
-    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        refresh_data_dgv()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Add_Update = False
         FrmGrupos.Text = "Crear Grupo"
         FrmGrupos.ShowDialog()
@@ -79,11 +95,7 @@
         refresh_data_dgv()
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Close()
-    End Sub
-
-    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-        refresh_data_dgv()
     End Sub
 End Class

@@ -52,13 +52,15 @@ Public Class FrmBuscarSubFamilias
         lv_ValorAnterior = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        MetroGrid1.Refresh()
-        LimpiarObjetos()
-        Close()
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
-    Private Sub btnCrear_Click(sender As Object, e As EventArgs) Handles btnCrear.Click
+    Private Sub btnCrear_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If txtSubFamilia.Text = "" Then
             MetroFramework.MetroMessageBox.Show(Me, "Favor de llenar el Campo Nombre de SubFamilia", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
@@ -99,5 +101,11 @@ Public Class FrmBuscarSubFamilias
         refresh_data_dgv()
         txtBusqueda.Focus()
         LimpiarObjetos()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        MetroGrid1.Refresh()
+        LimpiarObjetos()
+        Close()
     End Sub
 End Class

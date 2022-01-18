@@ -525,9 +525,9 @@ Public Class DBModelo
 #End Region
 
 #Region "Seccion <<Grupos>>"
-    Shared Function GetGroup(ByVal IdGrupo As String) As tblGrupos
+    Shared Function GetGroup(ByVal IdGrupo As Long) As tblGrupos
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblGrupos.Where(Function(i) i.descripcion = IdGrupo).FirstOrDefault
+            Return ctx.tblGrupos.Where(Function(i) i.clave = IdGrupo).FirstOrDefault
         End Using
     End Function
 
@@ -694,10 +694,11 @@ Public Class DBModelo
     Shared Function UpdateMarcaProd(ByVal marca_new As String, ByVal marca_old As String) As Boolean
         Try
             Using ctx As New pv_salvadorEntities1()
-                ctx.Database.ExecuteSqlCommand("UPDATE [pv_fuentes].[productos] SET marca = {0} WHERE marca = {1}", marca_new, marca_old)
+                ctx.Database.ExecuteSqlCommand("UPDATE [pv_salvador].[productos] SET marca = {0} WHERE marca = {1}", marca_new, marca_old)
             End Using
             Return True
         Catch ex As Exception
+            Console.WriteLine(ex.Message)
             Return False
         End Try
     End Function

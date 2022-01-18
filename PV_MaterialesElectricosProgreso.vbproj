@@ -688,6 +688,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FrmBuscarMarcas.resx">
+      <DependentUpon>FrmBuscarMarcas.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmFacturacion.resx">
       <DependentUpon>FrmFacturacion.vb</DependentUpon>
     </EmbeddedResource>
@@ -4962,6 +4965,17 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.vb</LastGenOutput>
     </Content>
+    <None Include="Resources\add1.png" />
+    <None Include="Resources\close_window_16px.png" />
+    <None Include="Resources\save_16px.png" />
+    <None Include="Resources\trash_can_16px.png" />
+    <None Include="Resources\add_16px.png" />
+    <None Include="Resources\search_16px.png" />
+    <None Include="Resources\update_16px.png" />
+    <None Include="Resources\export_16px.png" />
+    <None Include="Resources\print_16px.png" />
+    <None Include="Resources\edit_16px.png" />
+    <None Include="Resources\list_16px.png" />
     <Content Include="SqlServerTypes\Loader.cs" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">

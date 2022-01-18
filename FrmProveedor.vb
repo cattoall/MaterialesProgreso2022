@@ -104,12 +104,103 @@ Public Class FrmProveedor
         txtObs.Clear()
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
         LimpiarObjetos()
         Close()
     End Sub
 
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) 
+        Dim strProveedor As New tblProveedor
+
+        If txtRazonSocial.Text = "" Then
+            MetroFramework.MetroMessageBox.Show(Me, "Favor de llenar el Campo Razón Social", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+
+        If Add_Update = False Then
+            strProveedor.razonSocial = txtRazonSocial.Text
+            strProveedor.calle = txtDomicilio.Text
+            strProveedor.numero = txtNumExterno.Text
+            strProveedor.colonia = txtColonia.Text
+            strProveedor.ciudad = txtCiudad.Text
+            strProveedor.estado = txtEstado.Text
+            strProveedor.cp = txtCodigoPostal.Text
+            strProveedor.rfc = txtRFC.Text
+            strProveedor.telefono = txtTelFijo.Text
+            strProveedor.celular = txtMovil.Text
+            strProveedor.correo = txtEmail.Text
+            strProveedor.contacto = txtContacto.Text
+            strProveedor.observaciones = txtObs.Text
+            If DBModelo.InsertProveedor(strProveedor) Then
+                MetroFramework.MetroMessageBox.Show(Me, "Proveedor creado correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                MetroFramework.MetroMessageBox.Show(Me, "Proveedor NO pudo ser creado.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Else
+            strProveedor = DBModelo.GetProveedor(lv_idProveedor)
+            If Not IsNothing(strProveedor) Then
+                strProveedor.clave = lv_idProveedor
+                strProveedor.razonSocial = txtRazonSocial.Text
+                strProveedor.calle = txtDomicilio.Text
+                strProveedor.numero = txtNumExterno.Text
+                strProveedor.colonia = txtColonia.Text
+                strProveedor.ciudad = txtCiudad.Text
+                strProveedor.estado = txtEstado.Text
+                strProveedor.cp = txtCodigoPostal.Text
+                strProveedor.rfc = txtRFC.Text
+                strProveedor.telefono = txtTelFijo.Text
+                strProveedor.celular = txtMovil.Text
+                strProveedor.correo = txtEmail.Text
+                strProveedor.contacto = txtContacto.Text
+                strProveedor.observaciones = txtObs.Text
+
+                If DBModelo.UpdateProveedor(strProveedor) Then
+                    MetroFramework.MetroMessageBox.Show(Me, "Proveedor actualizado correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    If lv_ValorAnterior <> txtRazonSocial.Text Then
+
+                        If DBModelo.UpdateProveedor_Compras(txtRazonSocial.Text, lv_idProveedor) = False Then
+                            MetroFramework.MetroMessageBox.Show(Me, "Proveedor NO pudo ser actualizado en la tabla de Compras.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
+
+                        If DBModelo.UpdateProveedor_OrdenCompra(txtRazonSocial.Text, lv_idProveedor) = False Then
+                            MetroFramework.MetroMessageBox.Show(Me, "Proveedor NO pudo ser actualizado en la tabla de OrdenCompra.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
+
+                        If DBModelo.UpdateProveedor_HistorialPagos(txtRazonSocial.Text, lv_idProveedor) = False Then
+                            MetroFramework.MetroMessageBox.Show(Me, "Proveedor NO pudo ser actualizado en la tabla de Historial_Pagos_Proveedores.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
+
+                        If DBModelo.UpdateProveedor_Pagar(txtRazonSocial.Text, lv_idProveedor) = False Then
+                            MetroFramework.MetroMessageBox.Show(Me, "Proveedor NO pudo ser actualizado en la tabla de Pagar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
+
+                        If DBModelo.UpdateProveedor_Productos(txtRazonSocial.Text, lv_idProveedor) = False Then
+                            MetroFramework.MetroMessageBox.Show(Me, "Proveedor NO pudo ser actualizado en la tabla de Productos.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
+
+                    End If
+                Else
+                    MetroFramework.MetroMessageBox.Show(Me, "Proveedor NO pudo ser actualizado.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Else
+                MetroFramework.MetroMessageBox.Show(Me, "Proveedor NO encontrado en el sistema.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        End If
+
+        FrmBuscarProveedores.txtBusqueda.Text = txtRazonSocial.Text
+        Add_Update = False
+        Material_Proveedores = txtRazonSocial.Text
+        LimpiarObjetos()
+        Close()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        LimpiarObjetos()
+        Close()
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim strProveedor As New tblProveedor
 
         If txtRazonSocial.Text = "" Then

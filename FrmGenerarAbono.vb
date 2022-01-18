@@ -89,7 +89,10 @@
             txttotal.Text = ""
             txttotal.Focus()
             Exit Sub
-
+        End If
+        If CInt(txttotal.Text) > CInt(lblresto.Text)
+            MsgBox("Monto Máximo: $ " & lblresto.Text)
+            Exit Sub
         End If
 
         Dim motivo As String

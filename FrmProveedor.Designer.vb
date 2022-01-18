@@ -37,9 +37,9 @@ Partial Class FrmProveedor
         Me.txtEmail = New MetroFramework.Controls.MetroTextBox()
         Me.txtContacto = New MetroFramework.Controls.MetroTextBox()
         Me.txtObs = New MetroFramework.Controls.MetroTextBox()
-        Me.btnGuardar = New MetroFramework.Controls.MetroButton()
-        Me.btnSalir = New MetroFramework.Controls.MetroButton()
-        Me.SuspendLayout()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.SuspendLayout
         '
         'ToolTip1
         '
@@ -55,16 +55,18 @@ Partial Class FrmProveedor
         '
         '
         Me.txtRazonSocial.CustomButton.Image = Nothing
-        Me.txtRazonSocial.CustomButton.Location = New System.Drawing.Point(459, 1)
+        Me.txtRazonSocial.CustomButton.Location = New System.Drawing.Point(820, 2)
+        Me.txtRazonSocial.CustomButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtRazonSocial.CustomButton.Name = ""
-        Me.txtRazonSocial.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtRazonSocial.CustomButton.Size = New System.Drawing.Size(31, 28)
         Me.txtRazonSocial.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtRazonSocial.CustomButton.TabIndex = 1
         Me.txtRazonSocial.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtRazonSocial.CustomButton.UseSelectable = True
-        Me.txtRazonSocial.CustomButton.Visible = False
+        Me.txtRazonSocial.CustomButton.UseSelectable = true
+        Me.txtRazonSocial.CustomButton.Visible = false
         Me.txtRazonSocial.Lines = New String(-1) {}
-        Me.txtRazonSocial.Location = New System.Drawing.Point(23, 63)
+        Me.txtRazonSocial.Location = New System.Drawing.Point(31, 78)
+        Me.txtRazonSocial.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtRazonSocial.MaxLength = 32767
         Me.txtRazonSocial.Name = "txtRazonSocial"
         Me.txtRazonSocial.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -73,13 +75,13 @@ Partial Class FrmProveedor
         Me.txtRazonSocial.SelectedText = ""
         Me.txtRazonSocial.SelectionLength = 0
         Me.txtRazonSocial.SelectionStart = 0
-        Me.txtRazonSocial.ShortcutsEnabled = True
-        Me.txtRazonSocial.Size = New System.Drawing.Size(481, 23)
+        Me.txtRazonSocial.ShortcutsEnabled = true
+        Me.txtRazonSocial.Size = New System.Drawing.Size(641, 28)
         Me.txtRazonSocial.TabIndex = 72
-        Me.txtRazonSocial.UseSelectable = True
+        Me.txtRazonSocial.UseSelectable = true
         Me.txtRazonSocial.WaterMark = "Razón Social"
-        Me.txtRazonSocial.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtRazonSocial.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtRazonSocial.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtRazonSocial.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'txtDomicilio
         '
@@ -88,16 +90,18 @@ Partial Class FrmProveedor
         '
         '
         Me.txtDomicilio.CustomButton.Image = Nothing
-        Me.txtDomicilio.CustomButton.Location = New System.Drawing.Point(459, 1)
+        Me.txtDomicilio.CustomButton.Location = New System.Drawing.Point(820, 2)
+        Me.txtDomicilio.CustomButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtDomicilio.CustomButton.Name = ""
-        Me.txtDomicilio.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtDomicilio.CustomButton.Size = New System.Drawing.Size(31, 28)
         Me.txtDomicilio.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtDomicilio.CustomButton.TabIndex = 1
         Me.txtDomicilio.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtDomicilio.CustomButton.UseSelectable = True
-        Me.txtDomicilio.CustomButton.Visible = False
+        Me.txtDomicilio.CustomButton.UseSelectable = true
+        Me.txtDomicilio.CustomButton.Visible = false
         Me.txtDomicilio.Lines = New String(-1) {}
-        Me.txtDomicilio.Location = New System.Drawing.Point(23, 92)
+        Me.txtDomicilio.Location = New System.Drawing.Point(31, 113)
+        Me.txtDomicilio.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtDomicilio.MaxLength = 32767
         Me.txtDomicilio.Name = "txtDomicilio"
         Me.txtDomicilio.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -106,13 +110,13 @@ Partial Class FrmProveedor
         Me.txtDomicilio.SelectedText = ""
         Me.txtDomicilio.SelectionLength = 0
         Me.txtDomicilio.SelectionStart = 0
-        Me.txtDomicilio.ShortcutsEnabled = True
-        Me.txtDomicilio.Size = New System.Drawing.Size(481, 23)
+        Me.txtDomicilio.ShortcutsEnabled = true
+        Me.txtDomicilio.Size = New System.Drawing.Size(641, 28)
         Me.txtDomicilio.TabIndex = 73
-        Me.txtDomicilio.UseSelectable = True
+        Me.txtDomicilio.UseSelectable = true
         Me.txtDomicilio.WaterMark = "Calle"
-        Me.txtDomicilio.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtDomicilio.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtDomicilio.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtDomicilio.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'txtNumExterno
         '
@@ -121,16 +125,18 @@ Partial Class FrmProveedor
         '
         '
         Me.txtNumExterno.CustomButton.Image = Nothing
-        Me.txtNumExterno.CustomButton.Location = New System.Drawing.Point(48, 1)
+        Me.txtNumExterno.CustomButton.Location = New System.Drawing.Point(89, 2)
+        Me.txtNumExterno.CustomButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtNumExterno.CustomButton.Name = ""
-        Me.txtNumExterno.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtNumExterno.CustomButton.Size = New System.Drawing.Size(31, 28)
         Me.txtNumExterno.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtNumExterno.CustomButton.TabIndex = 1
         Me.txtNumExterno.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtNumExterno.CustomButton.UseSelectable = True
-        Me.txtNumExterno.CustomButton.Visible = False
+        Me.txtNumExterno.CustomButton.UseSelectable = true
+        Me.txtNumExterno.CustomButton.Visible = false
         Me.txtNumExterno.Lines = New String(-1) {}
-        Me.txtNumExterno.Location = New System.Drawing.Point(23, 121)
+        Me.txtNumExterno.Location = New System.Drawing.Point(31, 149)
+        Me.txtNumExterno.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtNumExterno.MaxLength = 32767
         Me.txtNumExterno.Name = "txtNumExterno"
         Me.txtNumExterno.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -139,13 +145,13 @@ Partial Class FrmProveedor
         Me.txtNumExterno.SelectedText = ""
         Me.txtNumExterno.SelectionLength = 0
         Me.txtNumExterno.SelectionStart = 0
-        Me.txtNumExterno.ShortcutsEnabled = True
-        Me.txtNumExterno.Size = New System.Drawing.Size(70, 23)
+        Me.txtNumExterno.ShortcutsEnabled = true
+        Me.txtNumExterno.Size = New System.Drawing.Size(93, 28)
         Me.txtNumExterno.TabIndex = 74
-        Me.txtNumExterno.UseSelectable = True
+        Me.txtNumExterno.UseSelectable = true
         Me.txtNumExterno.WaterMark = "No.Ext"
-        Me.txtNumExterno.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtNumExterno.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtNumExterno.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtNumExterno.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'txtColonia
         '
@@ -154,16 +160,18 @@ Partial Class FrmProveedor
         '
         '
         Me.txtColonia.CustomButton.Image = Nothing
-        Me.txtColonia.CustomButton.Location = New System.Drawing.Point(298, 1)
+        Me.txtColonia.CustomButton.Location = New System.Drawing.Point(535, 2)
+        Me.txtColonia.CustomButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtColonia.CustomButton.Name = ""
-        Me.txtColonia.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtColonia.CustomButton.Size = New System.Drawing.Size(31, 28)
         Me.txtColonia.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtColonia.CustomButton.TabIndex = 1
         Me.txtColonia.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtColonia.CustomButton.UseSelectable = True
-        Me.txtColonia.CustomButton.Visible = False
+        Me.txtColonia.CustomButton.UseSelectable = true
+        Me.txtColonia.CustomButton.Visible = false
         Me.txtColonia.Lines = New String(-1) {}
-        Me.txtColonia.Location = New System.Drawing.Point(184, 121)
+        Me.txtColonia.Location = New System.Drawing.Point(245, 149)
+        Me.txtColonia.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtColonia.MaxLength = 32767
         Me.txtColonia.Name = "txtColonia"
         Me.txtColonia.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -172,13 +180,13 @@ Partial Class FrmProveedor
         Me.txtColonia.SelectedText = ""
         Me.txtColonia.SelectionLength = 0
         Me.txtColonia.SelectionStart = 0
-        Me.txtColonia.ShortcutsEnabled = True
-        Me.txtColonia.Size = New System.Drawing.Size(320, 23)
+        Me.txtColonia.ShortcutsEnabled = true
+        Me.txtColonia.Size = New System.Drawing.Size(427, 28)
         Me.txtColonia.TabIndex = 75
-        Me.txtColonia.UseSelectable = True
+        Me.txtColonia.UseSelectable = true
         Me.txtColonia.WaterMark = "Colonia"
-        Me.txtColonia.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtColonia.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtColonia.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtColonia.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'txtCiudad
         '
@@ -187,16 +195,18 @@ Partial Class FrmProveedor
         '
         '
         Me.txtCiudad.CustomButton.Image = Nothing
-        Me.txtCiudad.CustomButton.Location = New System.Drawing.Point(168, 1)
+        Me.txtCiudad.CustomButton.Location = New System.Drawing.Point(303, 2)
+        Me.txtCiudad.CustomButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtCiudad.CustomButton.Name = ""
-        Me.txtCiudad.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtCiudad.CustomButton.Size = New System.Drawing.Size(31, 28)
         Me.txtCiudad.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtCiudad.CustomButton.TabIndex = 1
         Me.txtCiudad.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtCiudad.CustomButton.UseSelectable = True
-        Me.txtCiudad.CustomButton.Visible = False
+        Me.txtCiudad.CustomButton.UseSelectable = true
+        Me.txtCiudad.CustomButton.Visible = false
         Me.txtCiudad.Lines = New String(-1) {}
-        Me.txtCiudad.Location = New System.Drawing.Point(23, 150)
+        Me.txtCiudad.Location = New System.Drawing.Point(31, 185)
+        Me.txtCiudad.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtCiudad.MaxLength = 32767
         Me.txtCiudad.Name = "txtCiudad"
         Me.txtCiudad.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -205,13 +215,13 @@ Partial Class FrmProveedor
         Me.txtCiudad.SelectedText = ""
         Me.txtCiudad.SelectionLength = 0
         Me.txtCiudad.SelectionStart = 0
-        Me.txtCiudad.ShortcutsEnabled = True
-        Me.txtCiudad.Size = New System.Drawing.Size(190, 23)
+        Me.txtCiudad.ShortcutsEnabled = true
+        Me.txtCiudad.Size = New System.Drawing.Size(253, 28)
         Me.txtCiudad.TabIndex = 76
-        Me.txtCiudad.UseSelectable = True
+        Me.txtCiudad.UseSelectable = true
         Me.txtCiudad.WaterMark = "Ciudad"
-        Me.txtCiudad.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtCiudad.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtCiudad.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtCiudad.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'txtEstado
         '
@@ -220,16 +230,18 @@ Partial Class FrmProveedor
         '
         '
         Me.txtEstado.CustomButton.Image = Nothing
-        Me.txtEstado.CustomButton.Location = New System.Drawing.Point(168, 1)
+        Me.txtEstado.CustomButton.Location = New System.Drawing.Point(303, 2)
+        Me.txtEstado.CustomButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtEstado.CustomButton.Name = ""
-        Me.txtEstado.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtEstado.CustomButton.Size = New System.Drawing.Size(31, 28)
         Me.txtEstado.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtEstado.CustomButton.TabIndex = 1
         Me.txtEstado.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtEstado.CustomButton.UseSelectable = True
-        Me.txtEstado.CustomButton.Visible = False
+        Me.txtEstado.CustomButton.UseSelectable = true
+        Me.txtEstado.CustomButton.Visible = false
         Me.txtEstado.Lines = New String(-1) {}
-        Me.txtEstado.Location = New System.Drawing.Point(314, 150)
+        Me.txtEstado.Location = New System.Drawing.Point(419, 185)
+        Me.txtEstado.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtEstado.MaxLength = 32767
         Me.txtEstado.Name = "txtEstado"
         Me.txtEstado.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -238,13 +250,13 @@ Partial Class FrmProveedor
         Me.txtEstado.SelectedText = ""
         Me.txtEstado.SelectionLength = 0
         Me.txtEstado.SelectionStart = 0
-        Me.txtEstado.ShortcutsEnabled = True
-        Me.txtEstado.Size = New System.Drawing.Size(190, 23)
+        Me.txtEstado.ShortcutsEnabled = true
+        Me.txtEstado.Size = New System.Drawing.Size(253, 28)
         Me.txtEstado.TabIndex = 77
-        Me.txtEstado.UseSelectable = True
+        Me.txtEstado.UseSelectable = true
         Me.txtEstado.WaterMark = "Estado"
-        Me.txtEstado.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtEstado.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtEstado.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtEstado.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'txtCodigoPostal
         '
@@ -253,16 +265,18 @@ Partial Class FrmProveedor
         '
         '
         Me.txtCodigoPostal.CustomButton.Image = Nothing
-        Me.txtCodigoPostal.CustomButton.Location = New System.Drawing.Point(168, 1)
+        Me.txtCodigoPostal.CustomButton.Location = New System.Drawing.Point(303, 2)
+        Me.txtCodigoPostal.CustomButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtCodigoPostal.CustomButton.Name = ""
-        Me.txtCodigoPostal.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtCodigoPostal.CustomButton.Size = New System.Drawing.Size(31, 28)
         Me.txtCodigoPostal.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtCodigoPostal.CustomButton.TabIndex = 1
         Me.txtCodigoPostal.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtCodigoPostal.CustomButton.UseSelectable = True
-        Me.txtCodigoPostal.CustomButton.Visible = False
+        Me.txtCodigoPostal.CustomButton.UseSelectable = true
+        Me.txtCodigoPostal.CustomButton.Visible = false
         Me.txtCodigoPostal.Lines = New String(-1) {}
-        Me.txtCodigoPostal.Location = New System.Drawing.Point(23, 179)
+        Me.txtCodigoPostal.Location = New System.Drawing.Point(31, 220)
+        Me.txtCodigoPostal.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtCodigoPostal.MaxLength = 32767
         Me.txtCodigoPostal.Name = "txtCodigoPostal"
         Me.txtCodigoPostal.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -271,13 +285,13 @@ Partial Class FrmProveedor
         Me.txtCodigoPostal.SelectedText = ""
         Me.txtCodigoPostal.SelectionLength = 0
         Me.txtCodigoPostal.SelectionStart = 0
-        Me.txtCodigoPostal.ShortcutsEnabled = True
-        Me.txtCodigoPostal.Size = New System.Drawing.Size(190, 23)
+        Me.txtCodigoPostal.ShortcutsEnabled = true
+        Me.txtCodigoPostal.Size = New System.Drawing.Size(253, 28)
         Me.txtCodigoPostal.TabIndex = 78
-        Me.txtCodigoPostal.UseSelectable = True
+        Me.txtCodigoPostal.UseSelectable = true
         Me.txtCodigoPostal.WaterMark = "Código Postal"
-        Me.txtCodigoPostal.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtCodigoPostal.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtCodigoPostal.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtCodigoPostal.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'txtRFC
         '
@@ -286,16 +300,18 @@ Partial Class FrmProveedor
         '
         '
         Me.txtRFC.CustomButton.Image = Nothing
-        Me.txtRFC.CustomButton.Location = New System.Drawing.Point(168, 1)
+        Me.txtRFC.CustomButton.Location = New System.Drawing.Point(303, 2)
+        Me.txtRFC.CustomButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtRFC.CustomButton.Name = ""
-        Me.txtRFC.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtRFC.CustomButton.Size = New System.Drawing.Size(31, 28)
         Me.txtRFC.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtRFC.CustomButton.TabIndex = 1
         Me.txtRFC.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtRFC.CustomButton.UseSelectable = True
-        Me.txtRFC.CustomButton.Visible = False
+        Me.txtRFC.CustomButton.UseSelectable = true
+        Me.txtRFC.CustomButton.Visible = false
         Me.txtRFC.Lines = New String(-1) {}
-        Me.txtRFC.Location = New System.Drawing.Point(314, 179)
+        Me.txtRFC.Location = New System.Drawing.Point(419, 220)
+        Me.txtRFC.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtRFC.MaxLength = 32767
         Me.txtRFC.Name = "txtRFC"
         Me.txtRFC.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -304,13 +320,13 @@ Partial Class FrmProveedor
         Me.txtRFC.SelectedText = ""
         Me.txtRFC.SelectionLength = 0
         Me.txtRFC.SelectionStart = 0
-        Me.txtRFC.ShortcutsEnabled = True
-        Me.txtRFC.Size = New System.Drawing.Size(190, 23)
+        Me.txtRFC.ShortcutsEnabled = true
+        Me.txtRFC.Size = New System.Drawing.Size(253, 28)
         Me.txtRFC.TabIndex = 79
-        Me.txtRFC.UseSelectable = True
+        Me.txtRFC.UseSelectable = true
         Me.txtRFC.WaterMark = "RFC"
-        Me.txtRFC.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtRFC.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtRFC.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtRFC.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'txtTelFijo
         '
@@ -319,16 +335,18 @@ Partial Class FrmProveedor
         '
         '
         Me.txtTelFijo.CustomButton.Image = Nothing
-        Me.txtTelFijo.CustomButton.Location = New System.Drawing.Point(168, 1)
+        Me.txtTelFijo.CustomButton.Location = New System.Drawing.Point(303, 2)
+        Me.txtTelFijo.CustomButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtTelFijo.CustomButton.Name = ""
-        Me.txtTelFijo.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtTelFijo.CustomButton.Size = New System.Drawing.Size(31, 28)
         Me.txtTelFijo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtTelFijo.CustomButton.TabIndex = 1
         Me.txtTelFijo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtTelFijo.CustomButton.UseSelectable = True
-        Me.txtTelFijo.CustomButton.Visible = False
+        Me.txtTelFijo.CustomButton.UseSelectable = true
+        Me.txtTelFijo.CustomButton.Visible = false
         Me.txtTelFijo.Lines = New String(-1) {}
-        Me.txtTelFijo.Location = New System.Drawing.Point(23, 208)
+        Me.txtTelFijo.Location = New System.Drawing.Point(31, 256)
+        Me.txtTelFijo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtTelFijo.MaxLength = 32767
         Me.txtTelFijo.Name = "txtTelFijo"
         Me.txtTelFijo.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -337,13 +355,13 @@ Partial Class FrmProveedor
         Me.txtTelFijo.SelectedText = ""
         Me.txtTelFijo.SelectionLength = 0
         Me.txtTelFijo.SelectionStart = 0
-        Me.txtTelFijo.ShortcutsEnabled = True
-        Me.txtTelFijo.Size = New System.Drawing.Size(190, 23)
+        Me.txtTelFijo.ShortcutsEnabled = true
+        Me.txtTelFijo.Size = New System.Drawing.Size(253, 28)
         Me.txtTelFijo.TabIndex = 80
-        Me.txtTelFijo.UseSelectable = True
+        Me.txtTelFijo.UseSelectable = true
         Me.txtTelFijo.WaterMark = "Teléfono Fijo"
-        Me.txtTelFijo.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtTelFijo.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtTelFijo.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtTelFijo.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'txtMovil
         '
@@ -352,16 +370,18 @@ Partial Class FrmProveedor
         '
         '
         Me.txtMovil.CustomButton.Image = Nothing
-        Me.txtMovil.CustomButton.Location = New System.Drawing.Point(168, 1)
+        Me.txtMovil.CustomButton.Location = New System.Drawing.Point(303, 2)
+        Me.txtMovil.CustomButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtMovil.CustomButton.Name = ""
-        Me.txtMovil.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtMovil.CustomButton.Size = New System.Drawing.Size(31, 28)
         Me.txtMovil.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtMovil.CustomButton.TabIndex = 1
         Me.txtMovil.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtMovil.CustomButton.UseSelectable = True
-        Me.txtMovil.CustomButton.Visible = False
+        Me.txtMovil.CustomButton.UseSelectable = true
+        Me.txtMovil.CustomButton.Visible = false
         Me.txtMovil.Lines = New String(-1) {}
-        Me.txtMovil.Location = New System.Drawing.Point(314, 208)
+        Me.txtMovil.Location = New System.Drawing.Point(419, 256)
+        Me.txtMovil.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtMovil.MaxLength = 32767
         Me.txtMovil.Name = "txtMovil"
         Me.txtMovil.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -370,13 +390,13 @@ Partial Class FrmProveedor
         Me.txtMovil.SelectedText = ""
         Me.txtMovil.SelectionLength = 0
         Me.txtMovil.SelectionStart = 0
-        Me.txtMovil.ShortcutsEnabled = True
-        Me.txtMovil.Size = New System.Drawing.Size(190, 23)
+        Me.txtMovil.ShortcutsEnabled = true
+        Me.txtMovil.Size = New System.Drawing.Size(253, 28)
         Me.txtMovil.TabIndex = 81
-        Me.txtMovil.UseSelectable = True
+        Me.txtMovil.UseSelectable = true
         Me.txtMovil.WaterMark = "Celular"
-        Me.txtMovil.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtMovil.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtMovil.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtMovil.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'txtEmail
         '
@@ -385,16 +405,18 @@ Partial Class FrmProveedor
         '
         '
         Me.txtEmail.CustomButton.Image = Nothing
-        Me.txtEmail.CustomButton.Location = New System.Drawing.Point(459, 1)
+        Me.txtEmail.CustomButton.Location = New System.Drawing.Point(820, 2)
+        Me.txtEmail.CustomButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtEmail.CustomButton.Name = ""
-        Me.txtEmail.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtEmail.CustomButton.Size = New System.Drawing.Size(31, 28)
         Me.txtEmail.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtEmail.CustomButton.TabIndex = 1
         Me.txtEmail.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtEmail.CustomButton.UseSelectable = True
-        Me.txtEmail.CustomButton.Visible = False
+        Me.txtEmail.CustomButton.UseSelectable = true
+        Me.txtEmail.CustomButton.Visible = false
         Me.txtEmail.Lines = New String(-1) {}
-        Me.txtEmail.Location = New System.Drawing.Point(23, 237)
+        Me.txtEmail.Location = New System.Drawing.Point(31, 292)
+        Me.txtEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtEmail.MaxLength = 32767
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -403,13 +425,13 @@ Partial Class FrmProveedor
         Me.txtEmail.SelectedText = ""
         Me.txtEmail.SelectionLength = 0
         Me.txtEmail.SelectionStart = 0
-        Me.txtEmail.ShortcutsEnabled = True
-        Me.txtEmail.Size = New System.Drawing.Size(481, 23)
+        Me.txtEmail.ShortcutsEnabled = true
+        Me.txtEmail.Size = New System.Drawing.Size(641, 28)
         Me.txtEmail.TabIndex = 82
-        Me.txtEmail.UseSelectable = True
+        Me.txtEmail.UseSelectable = true
         Me.txtEmail.WaterMark = "Correo Electrónico"
-        Me.txtEmail.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtEmail.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtEmail.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtEmail.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'txtContacto
         '
@@ -418,16 +440,18 @@ Partial Class FrmProveedor
         '
         '
         Me.txtContacto.CustomButton.Image = Nothing
-        Me.txtContacto.CustomButton.Location = New System.Drawing.Point(459, 1)
+        Me.txtContacto.CustomButton.Location = New System.Drawing.Point(820, 2)
+        Me.txtContacto.CustomButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtContacto.CustomButton.Name = ""
-        Me.txtContacto.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtContacto.CustomButton.Size = New System.Drawing.Size(31, 28)
         Me.txtContacto.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtContacto.CustomButton.TabIndex = 1
         Me.txtContacto.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtContacto.CustomButton.UseSelectable = True
-        Me.txtContacto.CustomButton.Visible = False
+        Me.txtContacto.CustomButton.UseSelectable = true
+        Me.txtContacto.CustomButton.Visible = false
         Me.txtContacto.Lines = New String(-1) {}
-        Me.txtContacto.Location = New System.Drawing.Point(23, 266)
+        Me.txtContacto.Location = New System.Drawing.Point(31, 327)
+        Me.txtContacto.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtContacto.MaxLength = 32767
         Me.txtContacto.Name = "txtContacto"
         Me.txtContacto.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -436,13 +460,13 @@ Partial Class FrmProveedor
         Me.txtContacto.SelectedText = ""
         Me.txtContacto.SelectionLength = 0
         Me.txtContacto.SelectionStart = 0
-        Me.txtContacto.ShortcutsEnabled = True
-        Me.txtContacto.Size = New System.Drawing.Size(481, 23)
+        Me.txtContacto.ShortcutsEnabled = true
+        Me.txtContacto.Size = New System.Drawing.Size(641, 28)
         Me.txtContacto.TabIndex = 83
-        Me.txtContacto.UseSelectable = True
+        Me.txtContacto.UseSelectable = true
         Me.txtContacto.WaterMark = "Persona de Contacto"
-        Me.txtContacto.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtContacto.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtContacto.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtContacto.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'txtObs
         '
@@ -451,18 +475,20 @@ Partial Class FrmProveedor
         '
         '
         Me.txtObs.CustomButton.Image = Nothing
-        Me.txtObs.CustomButton.Location = New System.Drawing.Point(323, 1)
+        Me.txtObs.CustomButton.Location = New System.Drawing.Point(596, 2)
+        Me.txtObs.CustomButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtObs.CustomButton.Name = ""
-        Me.txtObs.CustomButton.Size = New System.Drawing.Size(157, 157)
+        Me.txtObs.CustomButton.Size = New System.Drawing.Size(255, 235)
         Me.txtObs.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtObs.CustomButton.TabIndex = 1
         Me.txtObs.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtObs.CustomButton.UseSelectable = True
-        Me.txtObs.CustomButton.Visible = False
+        Me.txtObs.CustomButton.UseSelectable = true
+        Me.txtObs.CustomButton.Visible = false
         Me.txtObs.Lines = New String(-1) {}
-        Me.txtObs.Location = New System.Drawing.Point(23, 295)
+        Me.txtObs.Location = New System.Drawing.Point(31, 363)
+        Me.txtObs.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtObs.MaxLength = 32767
-        Me.txtObs.Multiline = True
+        Me.txtObs.Multiline = true
         Me.txtObs.Name = "txtObs"
         Me.txtObs.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtObs.PromptText = "Observaciones"
@@ -470,41 +496,51 @@ Partial Class FrmProveedor
         Me.txtObs.SelectedText = ""
         Me.txtObs.SelectionLength = 0
         Me.txtObs.SelectionStart = 0
-        Me.txtObs.ShortcutsEnabled = True
-        Me.txtObs.Size = New System.Drawing.Size(481, 159)
+        Me.txtObs.ShortcutsEnabled = true
+        Me.txtObs.Size = New System.Drawing.Size(641, 196)
         Me.txtObs.TabIndex = 84
-        Me.txtObs.UseSelectable = True
+        Me.txtObs.UseSelectable = true
         Me.txtObs.WaterMark = "Observaciones"
-        Me.txtObs.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtObs.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtObs.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer), CType(CType(109,Byte),Integer))
+        Me.txtObs.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
-        'btnGuardar
+        'Button1
         '
-        Me.btnGuardar.Location = New System.Drawing.Point(23, 462)
-        Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(75, 23)
-        Me.btnGuardar.TabIndex = 85
-        Me.btnGuardar.Text = "Guardar"
-        Me.btnGuardar.UseSelectable = True
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.Color.Red
+        Me.Button1.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.close_window_16px
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.Location = New System.Drawing.Point(572, 569)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(100, 28)
+        Me.Button1.TabIndex = 87
+        Me.Button1.Text = "Salir"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button1.UseVisualStyleBackColor = true
         '
-        'btnSalir
+        'btnSave
         '
-        Me.btnSalir.Location = New System.Drawing.Point(429, 462)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(75, 23)
-        Me.btnSalir.TabIndex = 86
-        Me.btnSalir.Text = "Salir"
-        Me.btnSalir.UseSelectable = True
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.ForeColor = System.Drawing.Color.FromArgb(CType(CType(47,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(141,Byte),Integer))
+        Me.btnSave.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.save_16px
+        Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSave.Location = New System.Drawing.Point(31, 569)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(100, 28)
+        Me.btnSave.TabIndex = 88
+        Me.btnSave.Text = "Guardar"
+        Me.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSave.UseVisualStyleBackColor = true
         '
         'FrmProveedor
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8!, 16!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.ClientSize = New System.Drawing.Size(529, 508)
-        Me.ControlBox = False
-        Me.Controls.Add(Me.btnSalir)
-        Me.Controls.Add(Me.btnGuardar)
+        Me.ClientSize = New System.Drawing.Size(705, 625)
+        Me.ControlBox = false
+        Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.txtObs)
         Me.Controls.Add(Me.txtContacto)
         Me.Controls.Add(Me.txtEmail)
@@ -519,13 +555,15 @@ Partial Class FrmProveedor
         Me.Controls.Add(Me.txtDomicilio)
         Me.Controls.Add(Me.txtRazonSocial)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.KeyPreview = True
-        Me.MaximizeBox = False
+        Me.KeyPreview = true
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MaximizeBox = false
         Me.Name = "FrmProveedor"
+        Me.Padding = New System.Windows.Forms.Padding(27, 74, 27, 25)
         Me.Text = "Datos del Proveedor"
-        Me.ResumeLayout(False)
+        Me.ResumeLayout(false)
 
-    End Sub
+End Sub
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents txtRazonSocial As MetroFramework.Controls.MetroTextBox
     Friend WithEvents txtDomicilio As MetroFramework.Controls.MetroTextBox
@@ -540,6 +578,6 @@ Partial Class FrmProveedor
     Friend WithEvents txtEmail As MetroFramework.Controls.MetroTextBox
     Friend WithEvents txtContacto As MetroFramework.Controls.MetroTextBox
     Friend WithEvents txtObs As MetroFramework.Controls.MetroTextBox
-    Friend WithEvents btnGuardar As MetroFramework.Controls.MetroButton
-    Friend WithEvents btnSalir As MetroFramework.Controls.MetroButton
+    Friend WithEvents Button1 As Button
+    Friend WithEvents btnSave As Button
 End Class

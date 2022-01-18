@@ -56,7 +56,7 @@ Public Class FrmUsuarios
         cmbprivilegios.Text = Usuario.privilegios
         Add_Update = True
         txtusuario.Enabled = False
-        CmdCrear.Text = "Guardar Usuario"
+        btnSave.Text = "Guardar"
     End Sub
 
     Private Sub txtusuario_GotFocus(sender As Object, e As System.EventArgs) Handles txtusuario.GotFocus
@@ -106,7 +106,19 @@ Public Class FrmUsuarios
         cmbprivilegios.SelectedIndex = -1
     End Sub
 
-    Private Sub CmdCrear_Click(sender As Object, e As EventArgs) Handles CmdCrear.Click
+    Private Sub CmdCrear_Click(sender As Object, e As EventArgs) 
+
+    End Sub
+
+    Private Sub CmdEliminar_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim strUsuario As New tblUsuarios
 
         If txtusuario.Text = "" Or txtcontraseña.Text = "" Or cmbprivilegios.Text = "" Or txtnombre.Text = "" Then
@@ -139,7 +151,7 @@ Public Class FrmUsuarios
             Exit Sub
         End If
 
-        If CmdCrear.Text = "Crear Usuario" Then
+        If btnSave.Text = "Nuevo" Then
             strUsuario.usuario1 = txtusuario.Text
             strUsuario.contrasena = txtcontraseña.Text
             strUsuario.privilegios = cmbprivilegios.Text
@@ -166,7 +178,7 @@ Public Class FrmUsuarios
             Limpiar_Campos()
         End If
 
-        If CmdCrear.Text = "Guardar Usuario" Then
+        If btnSave.Text = "Guardar" Then
             If MsgBox("Seguro que desea modificar al Usuario (" & txtusuario.Text & ")?", MsgBoxStyle.YesNo, "Registrar Administradores/Usuarios") = MsgBoxResult.No Then
                 Limpiar_Campos()
                 Exit Sub
@@ -198,12 +210,11 @@ Public Class FrmUsuarios
             txtnombre.BackColor = Nothing
             Llena_lista()
             Limpiar_Campos()
-            CmdCrear.Text = "Crear Usuario"
+            btnSave.Text = "Nuevo"
         End If
-
     End Sub
 
-    Private Sub CmdEliminar_Click(sender As Object, e As EventArgs) Handles CmdEliminar.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If MsgBox("Esta seguro que desea borrar al usuario (" & txtusuario.Text & ")?", MsgBoxStyle.YesNo, "Registrar Administradores/Usuarios") = MsgBoxResult.Yes Then
             Try
                 Dim strUsuario As New tblUsuarios
@@ -244,7 +255,7 @@ Public Class FrmUsuarios
         End If
     End Sub
 
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) Handles CmdSalir.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Me.Close()
         txtcontraseña.Text = ""
         txtnombre.Text = ""

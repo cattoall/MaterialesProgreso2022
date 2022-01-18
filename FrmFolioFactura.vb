@@ -102,7 +102,23 @@ Public Class FrmFolioFactura
         Selection = True
     End Sub
 
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs) Handles mBtnSearch.Click
         FrmFolioAME.TxtFolioAct.Visible = False
         FrmFolioAME.lblfolioactual.Visible = False
 
@@ -123,7 +139,7 @@ Public Class FrmFolioFactura
         FrmFolioAME.lblfolioactual.Visible = True
     End Sub
 
-    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If Selection = False Then
             MsgBox("Favor de seleccionar una Factura", MsgBoxStyle.Information, "Folio Fiscales")
             Exit Sub
@@ -159,11 +175,7 @@ Public Class FrmFolioFactura
         Selection = False
     End Sub
 
-    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) Handles mBtnExit.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Me.Close()
-    End Sub
-
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
     End Sub
 End Class

@@ -71,7 +71,23 @@ Public Class FrmCotizaciones
         MetroGrid2.Columns(13).Visible = False
     End Sub
 
-    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
+    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnMandarATicket_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnImprimir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         MetroGrid1.Refresh()
         Dim Cotiza As List(Of tblCotizacion) = DBModelo.GetCotizaciones(dtinicio.Value.Date, dtfinal.Value.Date)
 
@@ -117,7 +133,29 @@ Public Class FrmCotizaciones
         MetroGrid1.Columns(11).Visible = False
     End Sub
 
-    Private Sub btnMandarATicket_Click(sender As Object, e As EventArgs) Handles btnMandarATicket.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Close()
+        Dispose()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim lv_result As Boolean = False
+        If lblcotizacion.Text <> "" Then
+            If MsgBox("¿Deseas Imprimir la Cotización?", MsgBoxStyle.YesNo, "Impresiones de Cotizaciones") = MsgBoxResult.Yes Then
+                lv_result = True
+            End If
+
+            If ImprimeCotizacion(lblcotizacion.Text, lv_result, "COTIZACION", DBConnected) = False Then
+                MsgBox("Error al Generar la Impresión de la Cotización", MsgBoxStyle.Information, "Impresiones de Cotizaciones")
+                Limpia_Variables_SQL_y_Cierra_Conexion()
+                Exit Sub
+            End If
+        Else
+            MsgBox("Favor De Seleccionar Una Cotización", MsgBoxStyle.Critical, "Consulta y Reimpresion de Cotizaciones")
+        End If
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         If MetroGrid1.Rows.Count > 0 Then
 
             If CheckForm(FrmPuntoDeVenta) = False Then
@@ -191,27 +229,5 @@ Public Class FrmCotizaciones
             MsgBox("Favor De Seleccionar Una Cotización", MsgBoxStyle.Critical, "Consulta y Reimpresion de Cotizaciones")
             Exit Sub
         End If
-    End Sub
-
-    Private Sub btnImprimir_Click(sender As Object, e As EventArgs) Handles btnImprimir.Click
-        Dim lv_result As Boolean = False
-        If lblcotizacion.Text <> "" Then
-            If MsgBox("¿Deseas Imprimir la Cotización?", MsgBoxStyle.YesNo, "Impresiones de Cotizaciones") = MsgBoxResult.Yes Then
-                lv_result = True
-            End If
-
-            If ImprimeCotizacion(lblcotizacion.Text, lv_result, "COTIZACION", DBConnected) = False Then
-                MsgBox("Error al Generar la Impresión de la Cotización", MsgBoxStyle.Information, "Impresiones de Cotizaciones")
-                Limpia_Variables_SQL_y_Cierra_Conexion()
-                Exit Sub
-            End If
-        Else
-            MsgBox("Favor De Seleccionar Una Cotización", MsgBoxStyle.Critical, "Consulta y Reimpresion de Cotizaciones")
-        End If
-    End Sub
-
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        Close()
-        Dispose()
     End Sub
 End Class

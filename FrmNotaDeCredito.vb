@@ -187,7 +187,19 @@ Public Class FrmNotaDeCredito
 
     End Sub
 
-    Private Sub mBtnGenerate_Click(sender As Object, e As EventArgs) Handles mBtnGenerate.Click
+    Private Sub mBtnGenerate_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Close()
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles mBtnGenerate.Click
         Dim strNC As New tblNC
         If String.IsNullOrEmpty(CmdTipoRelacion.Text) Then
             MsgBox("Favor de seleccionar un Tipo de Relación", MsgBoxStyle.Critical, "Seleccionar Tipo de Relacion")
@@ -399,9 +411,5 @@ Public Class FrmNotaDeCredito
         MetroFramework.MetroMessageBox.Show(Me, "Devolución Terminada Correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         Limpiar_objetos()
-    End Sub
-
-    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) Handles mBtnExit.Click
-        Close()
     End Sub
 End Class

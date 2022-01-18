@@ -182,12 +182,11 @@ Public Class FrmClientes
         End If
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        LimpiarVar()
-        Close()
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim lv_FormaPago() As String = Split(cmbFormaPago.Text, "-")
         Dim lv_MetodoPago() As String = Split(cmbMetodoPago.Text, "-")
         Dim lv_UsoCFDI() As String = Split(cmbUsoCFDI.Text, "-")
@@ -305,7 +304,7 @@ Public Class FrmClientes
         Close()
     End Sub
 
-    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+    Private Sub btnEliminar_Click_1(sender As Object, e As EventArgs) Handles btnEliminar.Click
         If MetroFramework.MetroMessageBox.Show(Me, "¿Esta seguro que desea Eliminar este Cliente del Sistema?", Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             Dim strCliente As tblClientes = DBModelo.GetCliente(lv_idCliente)
             If Not IsNothing(strCliente) Then
@@ -321,5 +320,10 @@ Public Class FrmClientes
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        LimpiarVar()
+        Close()
     End Sub
 End Class

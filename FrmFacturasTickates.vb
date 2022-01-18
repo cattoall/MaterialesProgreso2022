@@ -64,11 +64,15 @@
         DataGridTikect.Columns(11).HeaderText = "No. Factura"
     End Sub
 
-    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) Handles mBtnExit.Click
-        Me.Close()
+    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
-    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs) Handles mBtnSearch.Click
+    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim x As List(Of tblFacturaTotal) = DBModelo.GetIntervalFacturas(dtFechaInicial.Value.Date, dtFechaFinal.Value.Date)
         MetroGrid1.DataSource = x
         Console.WriteLine(MetroGrid1.Columns.Count.ToString)
@@ -94,5 +98,9 @@
         MetroGrid1.Columns(19).HeaderText = "Cancelada"
         MetroGrid1.Columns(20).HeaderText = "Comprobante de Pago"
         MetroGrid1.Columns(21).HeaderText = "PDF"
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Me.Close()
     End Sub
 End Class

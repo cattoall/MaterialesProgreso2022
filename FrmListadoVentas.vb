@@ -73,14 +73,8 @@ Public Class FrmListadoVentas
         LblTotal.Text = "$ 0.00"
     End Sub
 
-    Private Sub CmdGenerarListado_Click(sender As Object, e As EventArgs) Handles CmdGenerarListado.Click
+    Private Sub CmdGenerarListado_Click(sender As Object, e As EventArgs) 
 
-        Dim tVentas As List(Of tblVenta) = DBModelo.Get_VentasByDate(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"))
-
-        DataGridConsulta.Refresh()
-        DataGridConsulta.DataSource = tVentas.ToList()
-
-        ConfigurarGrid(DataGridConsulta)
     End Sub
 
     Private Sub ConfigurarGrid(ByRef dv As DataGridView)
@@ -138,12 +132,48 @@ Public Class FrmListadoVentas
 
     End Sub
 
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) Handles CmdSalir.Click
+    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub CmdCancelar_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub CmdImpresion_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub DataGridConsulta_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridConsulta.CellClick
+        LblNumTicket.Visible = True
+        LblTotal.Text = Format(Me.DataGridConsulta.Item(4, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,###.00")
+        LblNumTicket.Text = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+        NoFactura = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+
+        Dim tTickets As List(Of tblTicket) = DBModelo.Get_PV_TicketsDetalle(DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value)
+
+        DataGridTikect.Refresh()
+        DataGridTikect.DataSource = tTickets.ToList()
+
+        ConfigurarGridDetalle(DataGridTikect)
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        
+        Dim tVentas As List(Of tblVenta) = DBModelo.Get_VentasByDate(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"))
+
+        DataGridConsulta.Refresh()
+        DataGridConsulta.DataSource = tVentas.ToList()
+
+        ConfigurarGrid(DataGridConsulta)
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Close()
         Dispose()
     End Sub
 
-    Private Sub CmdCancelar_Click(sender As Object, e As EventArgs) Handles CmdCancelar.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If LblNumTicket.Text <> "" Then
             If DataGridConsulta.Item(9, DataGridConsulta.CurrentRow.Index).Value = "VENDIDO" Then
                 Cancelar = 2
@@ -160,7 +190,7 @@ Public Class FrmListadoVentas
         End If
     End Sub
 
-    Private Sub CmdImpresion_Click(sender As Object, e As EventArgs) Handles CmdImpresion.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         If LblNumTicket.Text <> "" Then
             Dim lv_result As Boolean = False
             If MsgBox("¿Deseas Imprimir el Ticket?", MsgBoxStyle.YesNo, "Re-Impresiones de Tickets") = MsgBoxResult.Yes Then
@@ -176,19 +206,5 @@ Public Class FrmListadoVentas
             MsgBox("Favor de seleccionar una venta.", MsgBoxStyle.Critical, "Impresión de Ticket")
         End If
         Limpia_Variables_SQL_y_Cierra_Conexion()
-    End Sub
-
-    Private Sub DataGridConsulta_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridConsulta.CellClick
-        LblNumTicket.Visible = True
-        LblTotal.Text = Format(Me.DataGridConsulta.Item(4, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,###.00")
-        LblNumTicket.Text = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
-        NoFactura = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
-
-        Dim tTickets As List(Of tblTicket) = DBModelo.Get_PV_TicketsDetalle(DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value)
-
-        DataGridTikect.Refresh()
-        DataGridTikect.DataSource = tTickets.ToList()
-
-        ConfigurarGridDetalle(DataGridTikect)
     End Sub
 End Class
