@@ -4366,7 +4366,7 @@ Module Module1
             AddToArchive(zip, gv_CDFI_XML_PATH & FolioFactura & ".xml") '"C:\TEMP\Compression\Compress Me1.txt")
             AddToArchive(zip, gv_CDFI_XML_PATH & FolioFactura & ".pdf") '"C:\TEMP\Compression\Compress Me2.txt")
             zip.Close() 'Close the zip file
-            wa_cliente.correo = ""
+
             If wa_cliente.correo <> "" Then
 
                 'Envio de Archivo ZIP via Correo Electrónico
