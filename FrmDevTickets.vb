@@ -69,6 +69,12 @@ Public Class FrmDevTickets
 
             Dim wVenta As tblVenta = DBModelo.Get_PV_TicketHeader(CDbl(Lv_pedido))
             If Not wVenta Is Nothing Then
+                If wVenta.estado = "CANCELADO"
+                    MsgBox("Este ticket ya ha sido devuelto", MsgBoxStyle.Information, "Devolución de Tickets")
+                    Limpiar_objetos()
+                    TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
+                    Exit Sub
+                End If
                 TxtPedido_C.Text = wVenta.nticket
                 DTPFecha.Value = wVenta.fecha
                 txtSubTotal_C.Text = wVenta.SubTotal
@@ -191,6 +197,8 @@ Public Class FrmDevTickets
             wVenta.SubTotal = Trim(Replace(Trim(Replace(txtSubTotal_N.Text, "$", "")), ",", ""))
             wVenta.IVA = Trim(Replace(Trim(Replace(txtIVA_N.Text, "$", "")), ",", ""))
             wVenta.total = Trim(Replace(Trim(Replace(TxtTotal_N.Text, "$", "")), ",", ""))
+            wVenta.estado = "CANCELADO"
+            wVenta.motivo = "DEVOLUCION-ADMIN"
             If DBModelo.Update_PV_Venta(wVenta) = False Then
                 MsgBox("No se pudo Actualizar registros en la tabla VENTA", MsgBoxStyle.Critical)
                 Error_Venta = False
@@ -226,7 +234,7 @@ Public Class FrmDevTickets
             'Actualizamos Stock descontando las piezas correspondientes
             Dim wProducto As tblProductos = DBModelo.GetProductById(DGVDetalle.Rows(i).Cells(2).Value)
             If Not wProducto Is Nothing Then
-                wProducto.stock = wProducto.stock - CDec(DGVDetalle.Rows(i).Cells(4).Value)
+                'wProducto.stock = wProducto.stock - CDec(DGVDetalle.Rows(i).Cells(4).Value)
                 If DBModelo.UpdateProductos(wProducto) = False Then
                     MsgBox("No se pudo Actualizar Inventario en la tabla PRODUCTOS", MsgBoxStyle.Critical)
                     Error_Venta = False

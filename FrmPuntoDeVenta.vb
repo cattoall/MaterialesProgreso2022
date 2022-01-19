@@ -502,7 +502,6 @@ SiguienteRegistro:
                 Error_Venta = True
                 Exit Sub
             End If
-
             For i = 0 To MetroGrid1.RowCount - 1
                 Dim lv_pu = MetroGrid1.Rows(i).Cells(7).Value.ToString '3
                 lv_pu = Trim(lv_pu.Replace("$", " "))
@@ -525,9 +524,10 @@ SiguienteRegistro:
                 lv_subcosto = Trim(lv_subcosto.Replace(" ", ""))
 
                 Dim lv_precio_cantidad = (MetroGrid1.Rows(i).Cells(9).Value.ToString * MetroGrid1.Rows(i).Cells(0).Value.ToString)
-
                 If TasaCero = True And MetroGrid1.Rows(i).Cells(13).Value = True Then
+
                 ElseIf TasaCero = False And MetroGrid1.Rows(i).Cells(13).Value = False Then
+
                 Else
                     GoTo SiguienteRegistro
                 End If
@@ -718,6 +718,7 @@ SiguienteRegistro:
     End Sub
 
     Private Sub Procesa_Ticket_Credito(ByVal nFolio As String, ByVal TasaCero As Boolean)
+        Console.WriteLine("AA 1")
         Dim lv_subtotal = txtSubTotal.Text.ToString
         Dim lv_iva = txtIVA.Text.ToString
         Dim lv_total = txtTotal.Text.ToString
@@ -815,9 +816,9 @@ SiguienteRegistro:
 
 
             Dim lv_precio_cantidad = (MetroGrid1.Rows(i).Cells(9).Value.ToString * MetroGrid1.Rows(i).Cells(0).Value.ToString)
-
-            If TasaCero = True And MetroGrid1.Rows(i).Cells(13).Value = "1" Then
-            ElseIf TasaCero = False And MetroGrid1.Rows(i).Cells(13).Value = "0" Then
+            Console.WriteLine(MetroGrid1.Rows(i).Cells(13).Value)
+            If TasaCero = True And MetroGrid1.Rows(i).Cells(13).Value = True Then
+            ElseIf TasaCero = False And MetroGrid1.Rows(i).Cells(13).Value = False Then
             Else
                 GoTo SiguienteRegistro
             End If
@@ -835,7 +836,10 @@ SiguienteRegistro:
             strTicket.numeroFactura = ""
             strTicket.ClaveProducto = MetroGrid1.Rows(i).Cells(11).Value
             strTicket.ClaveUnidad = MetroGrid1.Rows(i).Cells(12).Value
-            strTicket.TasaCero = MetroGrid1.Rows(i).Cells(13).Value
+            strTicket.TasaCero = False
+            If MetroGrid1.Rows(i).Cells(13).Value = True
+                strTicket.TasaCero = True
+            End If
 
             If DBModelo.Insert_PV_Ticket(strTicket) = False Then
                 MetroFramework.MetroMessageBox.Show(Me, "Error al Insertar en Tabla Ticket", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)

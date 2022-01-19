@@ -497,6 +497,7 @@ Public Class DBModelo
     End Function
 
     Shared Function UpdateProductos(ByVal strProducto As tblProductos) As Boolean
+        Console.WriteLine(strProducto.stock.ToString)
         Try
             Using ctx As New pv_salvadorEntities1()
                 ctx.productos.Attach(strProducto)
@@ -1207,6 +1208,8 @@ Public Class DBModelo
                 If Not IsNothing(strTicketPedido) Then
                     ctx.Entry(strTicketPedido).State = EntityState.Deleted
                     ctx.SaveChanges()
+                Else
+                    Console.WriteLine("Is Nothing in DeleteTicketPedido")
                 End If
             End Using
             Return True

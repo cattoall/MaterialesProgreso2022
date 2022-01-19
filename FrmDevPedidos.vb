@@ -69,6 +69,12 @@ Public Class FrmDevPedidos
 
             Dim wVentaPedidos As tblVentaPedido = DBModelo.Get_PV_PedidosHeader(CDbl(Lv_pedido))
             If Not wVentaPedidos Is Nothing Then
+                If wVentaPedidos.estado = "CANCELADO"
+                    MsgBox("Esta Nota de Crédito ya ha sido cancelada", MsgBoxStyle.Information, "Devolución de Pedidos")
+                    Limpiar_objetos()
+                    TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
+                    Exit Sub
+                End If
                 TxtPedido_C.Text = wVentaPedidos.nticket
                 DTPFecha.Value = wVentaPedidos.fecha
                 txtSubTotal_C.Text = wVentaPedidos.SubTotal
@@ -162,11 +168,13 @@ Public Class FrmDevPedidos
         End If
 
         ' Restauramos stock de todos los productos de este pedido y eliminamos la linea
+        Console.WriteLine("CheckPoint 1")
         Dim tTicketPedidos As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(CInt(TxtPedido.Text))
         If tTicketPedidos.Count > 0 Then
             For Each wTicketPedido In tTicketPedidos
                 Dim wProducto As tblProductos = DBModelo.GetProductById(wTicketPedido.IdProducto)
                 If Not wProducto Is Nothing Then
+                    Console.WriteLine("CheckPoint 2")
                     wProducto.stock = wProducto.stock + wTicketPedido.cantidad
                     If DBModelo.UpdateProductos(wProducto) = False Then
                         MsgBox("No se pudo Actualizar Inventario en la tabla PRODUCTOS", MsgBoxStyle.Critical)
@@ -188,6 +196,8 @@ Public Class FrmDevPedidos
             wVentaPedido.SubTotal = Trim(Replace(Trim(Replace(txtSubTotal_N.Text, "$", "")), ",", ""))
             wVentaPedido.IVA = Trim(Replace(Trim(Replace(txtIVA_N.Text, "$", "")), ",", ""))
             wVentaPedido.total = Trim(Replace(Trim(Replace(TxtTotal_N.Text, "$", "")), ",", ""))
+            wVentaPedido.estado = "CANCELADO"
+            wVentaPedido.motivo = "DEVOLUCION-ADMIN"
             If DBModelo.Update_PV_VentaPedidos(wVentaPedido) = False Then
                 MsgBox("No se pudo Actualizar registros en la tabla VENTA_PEDIDO", MsgBoxStyle.Critical)
                 Error_Venta = False
@@ -227,7 +237,7 @@ Public Class FrmDevPedidos
             'Actualizamos Stock descontando las piezas correspondientes
             Dim wProducto As tblProductos = DBModelo.GetProductById(DGVDetalle.Rows(i).Cells(2).Value)
             If Not wProducto Is Nothing Then
-                wProducto.stock = wProducto.stock - CDec(DGVDetalle.Rows(i).Cells(4).Value)
+                'wProducto.stock = wProducto.stock + CDec(DGVDetalle.Rows(i).Cells(4).Value)
                 If DBModelo.UpdateProductos(wProducto) = False Then
                     MsgBox("No se pudo Actualizar Inventario en la tabla PRODUCTOS", MsgBoxStyle.Critical)
                     Error_Venta = False
