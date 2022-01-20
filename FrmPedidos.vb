@@ -17,12 +17,8 @@ Public Class FrmPedidos
         LblPedido.Text = ""
     End Sub
 
-    Private Sub CmdVerPedidos_Click(sender As Object, e As EventArgs) Handles CmdVerPedidos.Click
-        Dim tPedidosHeader As List(Of tblVentaPedido) = DBModelo.Get_PedidosByDate(Format(dpinicio.Value.Date, "yyyy-MM-dd"), Format(dpfinal.Value.Date, "yyyy-MM-dd"))
-        DataGridView1.Refresh()
-        DataGridView1.DataSource = tPedidosHeader.ToList()
-
-        ConfiguraGridHeader(DataGridView1)
+    Private Sub CmdVerPedidos_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
     Private Sub ConfiguraGridHeader(ByVal dv As DataGridView)
@@ -76,7 +72,98 @@ Public Class FrmPedidos
         dv.Columns(11).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
-    Private Sub CmdGenerarTicket_Click(sender As Object, e As EventArgs) Handles CmdGenerarTicket.Click
+    Private Sub CmdGenerarTicket_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub CmdCancelarPedido_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub CmdReimprimirPedido_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+        LblPedido.Text = Me.DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value
+        NoFactura = Me.DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value
+
+        Dim tPedidosDetails As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(NoFactura)
+        DataGridView2.Refresh()
+        DataGridView2.DataSource = tPedidosDetails.ToList()
+        ConfiguraGridDetail(DataGridView2)
+    End Sub
+
+    Private Sub ConfiguraGridDetail(ByVal dv As DataGridView)
+        dv.Columns(0).Visible = False
+        dv.Columns(1).Visible = False
+
+        dv.Columns(2).HeaderText = "IdProducto"
+        dv.Columns(2).ReadOnly = True
+        dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        dv.Columns(3).HeaderText = "Descripcion"
+        dv.Columns(3).ReadOnly = True
+        dv.Columns(3).Width = 300
+        dv.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+        dv.Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        dv.Columns(4).HeaderText = "Cantidad"
+        dv.Columns(4).ReadOnly = True
+        dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dv.Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        dv.Columns(5).HeaderText = "Precio Unitario"
+        dv.Columns(5).ReadOnly = True
+        dv.Columns(5).DefaultCellStyle.Format = "$ ###,###,##0.00"
+        dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dv.Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        dv.Columns(6).Visible = False
+
+        dv.Columns(7).HeaderText = "Subtotal"
+        dv.Columns(7).ReadOnly = True
+        dv.Columns(7).DefaultCellStyle.Format = "$ ###,###,##0.00"
+        dv.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dv.Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        dv.Columns(8).Visible = False
+        dv.Columns(9).Visible = False
+        dv.Columns(10).Visible = False
+        dv.Columns(11).Visible = False
+
+        dv.Columns(12).HeaderText = "ClaveProducto"
+        dv.Columns(12).ReadOnly = True
+        dv.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(12).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        dv.Columns(13).HeaderText = "ClaveUnidad"
+        dv.Columns(13).ReadOnly = True
+        dv.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(13).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        dv.Columns(14).Visible = False
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Close()
+        Dispose()
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles CmdVerPedidos.Click
+        Dim tPedidosHeader As List(Of tblVentaPedido) = DBModelo.Get_PedidosByDate(Format(dpinicio.Value.Date, "yyyy-MM-dd"), Format(dpfinal.Value.Date, "yyyy-MM-dd"))
+        DataGridView1.Refresh()
+        DataGridView1.DataSource = tPedidosHeader.ToList()
+
+        ConfiguraGridHeader(DataGridView1)
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim lv_folio As Integer = 0
         Dim lv_folioactual As Integer = 0
         Dim nuevo = 0
@@ -212,12 +299,7 @@ Public Class FrmPedidos
         LblPedido.Text = " "
     End Sub
 
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) Handles CmdSalir.Click
-        Close()
-        Dispose()
-    End Sub
-
-    Private Sub CmdCancelarPedido_Click(sender As Object, e As EventArgs) Handles CmdCancelarPedido.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         If LblPedido.Text <> "" Then
             Cancelar = 1
             FrmCancelarPedido.ShowDialog()
@@ -228,7 +310,7 @@ Public Class FrmPedidos
         End If
     End Sub
 
-    Private Sub CmdReimprimirPedido_Click(sender As Object, e As EventArgs) Handles CmdReimprimirPedido.Click
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         If LblPedido.Text <> "" Then
             Dim lv_result As Boolean = False
             If MsgBox("¿Deseas Imprimir el Pedido?", MsgBoxStyle.YesNo, "Re-Impresiones de Pedidos") = MsgBoxResult.Yes Then
@@ -244,67 +326,5 @@ Public Class FrmPedidos
             MsgBox("Favor de seleccionar una venta.", MsgBoxStyle.Critical, "Re-Impresiones de Pedidos")
         End If
         Limpia_Variables_SQL_y_Cierra_Conexion()
-    End Sub
-
-    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
-        LblPedido.Text = Me.DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value
-        NoFactura = Me.DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value
-
-        Dim tPedidosDetails As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(NoFactura)
-        DataGridView2.Refresh()
-        DataGridView2.DataSource = tPedidosDetails.ToList()
-        ConfiguraGridDetail(DataGridView2)
-    End Sub
-
-    Private Sub ConfiguraGridDetail(ByVal dv As DataGridView)
-        dv.Columns(0).Visible = False
-        dv.Columns(1).Visible = False
-
-        dv.Columns(2).HeaderText = "IdProducto"
-        dv.Columns(2).ReadOnly = True
-        dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(3).HeaderText = "Descripcion"
-        dv.Columns(3).ReadOnly = True
-        dv.Columns(3).Width = 300
-        dv.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-        dv.Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(4).HeaderText = "Cantidad"
-        dv.Columns(4).ReadOnly = True
-        dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        dv.Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(5).HeaderText = "Precio Unitario"
-        dv.Columns(5).ReadOnly = True
-        dv.Columns(5).DefaultCellStyle.Format = "$ ###,###,##0.00"
-        dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        dv.Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(6).Visible = False
-
-        dv.Columns(7).HeaderText = "Subtotal"
-        dv.Columns(7).ReadOnly = True
-        dv.Columns(7).DefaultCellStyle.Format = "$ ###,###,##0.00"
-        dv.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        dv.Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(8).Visible = False
-        dv.Columns(9).Visible = False
-        dv.Columns(10).Visible = False
-        dv.Columns(11).Visible = False
-
-        dv.Columns(12).HeaderText = "ClaveProducto"
-        dv.Columns(12).ReadOnly = True
-        dv.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(12).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(13).HeaderText = "ClaveUnidad"
-        dv.Columns(13).ReadOnly = True
-        dv.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(13).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(14).Visible = False
     End Sub
 End Class

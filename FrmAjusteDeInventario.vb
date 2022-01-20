@@ -117,7 +117,25 @@
         End If
     End Sub
 
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnCancelar_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        LimpiarObjetos()
+        AccionSalir = True
+        Close()
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If RbtnActual.Checked = True Then
             strProducto.stock = CDbl(TxtStockActual.Text)
         End If
@@ -135,13 +153,7 @@
         LimpiarObjetos()
     End Sub
 
-    Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         LimpiarObjetos()
-    End Sub
-
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        LimpiarObjetos()
-        AccionSalir = True
-        Close()
     End Sub
 End Class

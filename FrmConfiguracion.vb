@@ -160,7 +160,71 @@
         acceptableKey = False
     End Sub
 
-    Private Sub btnTecnoLite_Click(sender As System.Object, e As System.EventArgs) Handles btnTecnoLite.Click
+    Private Sub btnTecnoLite_Click(sender As System.Object, e As System.EventArgs) 
+        
+    End Sub
+
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Dim strConfig As tblConfiguracion = DBModelo.GetConfiguration(gv_terminal)
+        If Not IsNothing(strConfig) Then
+            strConfig.nombreEmpresa = txtNombre.Text
+            strConfig.direccionEmpresa = txtDireccion.Text
+            strConfig.localidadEmpresa = txtColonia.Text
+            strConfig.telefonoEmpresa = txtTelefono.Text
+            strConfig.ciudadEmpresa = txtCiudad.Text
+            strConfig.rfcEmpresa = txtRFC.Text
+            strConfig.propietario = txtPropietario.Text
+            strConfig.factorIVA = txtFactorIVA.Text
+            strConfig.cajaChica = txtCajaChica.Text
+            strConfig.folioFactura = txtFolioFactura.Text
+            strConfig.InvoicePrinterName = txtFacturas.Text
+            strConfig.TicketPrinterName = txtTickets.Text
+            strConfig.impresiones = txtNumFacturas.Text
+            strConfig.TipoCambio = txtTipoCambio.Text
+            If Config_On_Off = False Then
+                If DBModelo.Insert_Configuracion(strConfig) Then
+                    If TipoCambio <> txtTipoCambio.Text Then
+                        btnTecnoLite.Visible = True
+                        GranTipoCambio = txtTipoCambio.Text
+                        TipoCambio = txtTipoCambio.Text
+                    End If
+                    TicketPrinterName = txtTickets.Text
+                    InvocePrinterName = txtFacturas.Text
+                    MetroFramework.MetroMessageBox.Show(Me, "Configuración creada correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MetroFramework.MetroMessageBox.Show(Me, "Error al insertar el registro.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Else
+                If DBModelo.Update_Configuracion(strConfig) Then
+                    If TipoCambio <> txtTipoCambio.Text Then
+                        btnTecnoLite.Visible = True
+                        GranTipoCambio = txtTipoCambio.Text
+                        TipoCambio = txtTipoCambio.Text
+                    End If
+                    TicketPrinterName = txtTickets.Text
+                    InvocePrinterName = txtFacturas.Text
+                    MetroFramework.MetroMessageBox.Show(Me, "Configuración actualizada correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MetroFramework.MetroMessageBox.Show(Me, "Error al modificar el registro.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        LimpiarObjetos()
+        Close()
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnTecnoLite.Click
         Dim l_updated As Boolean = True
 
         factorCosto_TL = 0
@@ -241,57 +305,5 @@
         Else
             MetroFramework.MetroMessageBox.Show(Me, "Precios NO actualizados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
-    End Sub
-
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        Dim strConfig As tblConfiguracion = DBModelo.GetConfiguration(gv_terminal)
-        If Not IsNothing(strConfig) Then
-            strConfig.nombreEmpresa = txtNombre.Text
-            strConfig.direccionEmpresa = txtDireccion.Text
-            strConfig.localidadEmpresa = txtColonia.Text
-            strConfig.telefonoEmpresa = txtTelefono.Text
-            strConfig.ciudadEmpresa = txtCiudad.Text
-            strConfig.rfcEmpresa = txtRFC.Text
-            strConfig.propietario = txtPropietario.Text
-            strConfig.factorIVA = txtFactorIVA.Text
-            strConfig.cajaChica = txtCajaChica.Text
-            strConfig.folioFactura = txtFolioFactura.Text
-            strConfig.InvoicePrinterName = txtFacturas.Text
-            strConfig.TicketPrinterName = txtTickets.Text
-            strConfig.impresiones = txtNumFacturas.Text
-            strConfig.TipoCambio = txtTipoCambio.Text
-            If Config_On_Off = False Then
-                If DBModelo.Insert_Configuracion(strConfig) Then
-                    If TipoCambio <> txtTipoCambio.Text Then
-                        btnTecnoLite.Visible = True
-                        GranTipoCambio = txtTipoCambio.Text
-                        TipoCambio = txtTipoCambio.Text
-                    End If
-                    TicketPrinterName = txtTickets.Text
-                    InvocePrinterName = txtFacturas.Text
-                    MetroFramework.MetroMessageBox.Show(Me, "Configuración creada correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Else
-                    MetroFramework.MetroMessageBox.Show(Me, "Error al insertar el registro.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-            Else
-                If DBModelo.Update_Configuracion(strConfig) Then
-                    If TipoCambio <> txtTipoCambio.Text Then
-                        btnTecnoLite.Visible = True
-                        GranTipoCambio = txtTipoCambio.Text
-                        TipoCambio = txtTipoCambio.Text
-                    End If
-                    TicketPrinterName = txtTickets.Text
-                    InvocePrinterName = txtFacturas.Text
-                    MetroFramework.MetroMessageBox.Show(Me, "Configuración actualizada correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Else
-                    MetroFramework.MetroMessageBox.Show(Me, "Error al modificar el registro.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-            End If
-        End If
-    End Sub
-
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        LimpiarObjetos()
-        Close()
     End Sub
 End Class

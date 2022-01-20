@@ -152,8 +152,63 @@ Public Class FrmDevPedidos
         Limpiar_objetos()
     End Sub
 
-    Private Sub CmdGenerar_Click(sender As Object, e As EventArgs) Handles CmdGenerar.Click
+    Private Sub CmdGenerar_Click(sender As Object, e As EventArgs) 
 
+    End Sub
+
+    Private Sub DGVDetalle_RowsRemoved(sender As Object, e As DataGridViewRowsRemovedEventArgs) Handles DGVDetalle.RowsRemoved
+        Dim lv_subtotal_c As Double = 0
+        Dim lv_iva_c As Double = 0
+        Dim lv_total_c As Double = 0
+        For i = 0 To DGVDetalle.Rows.Count - 1
+            lv_subtotal_c = lv_subtotal_c + DGVDetalle.Rows(i).Cells(7).Value
+        Next i
+        lv_iva_c = lv_subtotal_c * (FactorIVA - 1)
+        lv_total_c = lv_subtotal_c + lv_iva_c
+        txtSubTotal_N.Text = Format(lv_subtotal_c, "$ ###,###,##0.00")
+        txtIVA_N.Text = Format(lv_iva_c, "$ ###,###,##0.00")
+        TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
+    End Sub
+
+    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub DGVDetalle_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DGVDetalle.CellValueChanged
+        If e.ColumnIndex = 4 And e.RowIndex <> -1 Then
+            Dim lv_cantidad As Double = DGVDetalle.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+            Dim wTicketPedidoOrig As tblTicketPedido = DBModelo.Get_PV_PedidosDetalleByFolioAndIdProducto(DGVDetalle.Rows(e.RowIndex).Cells(1).Value, DGVDetalle.Rows(e.RowIndex).Cells(2).Value)
+            If lv_cantidad <= wTicketPedidoOrig.cantidad Then
+                Dim lv_pu As Double = DGVDetalle.Rows(e.RowIndex).Cells(5).Value
+
+                DGVDetalle.Rows(e.RowIndex).Cells(7).Value = CDec(lv_cantidad * lv_pu)
+
+                Dim lv_subtotal_c As Double = 0
+                Dim lv_iva_c As Double = 0
+                Dim lv_total_c As Double = 0
+                For i = 0 To DGVDetalle.Rows.Count - 1
+                    lv_subtotal_c = lv_subtotal_c + DGVDetalle.Rows(i).Cells(7).Value
+                Next i
+                lv_iva_c = lv_subtotal_c * (FactorIVA - 1)
+                lv_total_c = lv_subtotal_c + lv_iva_c
+                txtSubTotal_N.Text = Format(lv_subtotal_c, "$ ###,###,##0.00")
+                txtIVA_N.Text = Format(lv_iva_c, "$ ###,###,##0.00")
+                TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
+                'DGVDetalle.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Format(lv_cantidad, "###0.00")
+            Else
+                MsgBox("Cantidad mayor a la Cantidad Original", MsgBoxStyle.Critical, "Favor de verificar")
+                DGVDetalle.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Format(wTicketPedidoOrig.cantidad, "###0.00")
+            End If
+        End If
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Close()
+        Dispose()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles CmdGenerar.Click
+        
         'Validar que el pedido no tenga abonos realizados en caso de que sea Pedido a Crédito
         If TxtTipo_C.Text = "CREDITO" Then
             Dim wCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(CDbl(TxtPedido_C.Text), "PEDIDO", CInt(Label9.Text))
@@ -276,52 +331,5 @@ Public Class FrmDevPedidos
 
         MsgBox("Devolución Terminada Correctamente", MsgBoxStyle.Information, "Devolución Terminada")
         Limpiar_objetos()
-    End Sub
-
-    Private Sub DGVDetalle_RowsRemoved(sender As Object, e As DataGridViewRowsRemovedEventArgs) Handles DGVDetalle.RowsRemoved
-        Dim lv_subtotal_c As Double = 0
-        Dim lv_iva_c As Double = 0
-        Dim lv_total_c As Double = 0
-        For i = 0 To DGVDetalle.Rows.Count - 1
-            lv_subtotal_c = lv_subtotal_c + DGVDetalle.Rows(i).Cells(7).Value
-        Next i
-        lv_iva_c = lv_subtotal_c * (FactorIVA - 1)
-        lv_total_c = lv_subtotal_c + lv_iva_c
-        txtSubTotal_N.Text = Format(lv_subtotal_c, "$ ###,###,##0.00")
-        txtIVA_N.Text = Format(lv_iva_c, "$ ###,###,##0.00")
-        TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
-    End Sub
-
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) Handles CmdSalir.Click
-        Close()
-        Dispose()
-    End Sub
-
-    Private Sub DGVDetalle_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DGVDetalle.CellValueChanged
-        If e.ColumnIndex = 4 And e.RowIndex <> -1 Then
-            Dim lv_cantidad As Double = DGVDetalle.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-            Dim wTicketPedidoOrig As tblTicketPedido = DBModelo.Get_PV_PedidosDetalleByFolioAndIdProducto(DGVDetalle.Rows(e.RowIndex).Cells(1).Value, DGVDetalle.Rows(e.RowIndex).Cells(2).Value)
-            If lv_cantidad <= wTicketPedidoOrig.cantidad Then
-                Dim lv_pu As Double = DGVDetalle.Rows(e.RowIndex).Cells(5).Value
-
-                DGVDetalle.Rows(e.RowIndex).Cells(7).Value = CDec(lv_cantidad * lv_pu)
-
-                Dim lv_subtotal_c As Double = 0
-                Dim lv_iva_c As Double = 0
-                Dim lv_total_c As Double = 0
-                For i = 0 To DGVDetalle.Rows.Count - 1
-                    lv_subtotal_c = lv_subtotal_c + DGVDetalle.Rows(i).Cells(7).Value
-                Next i
-                lv_iva_c = lv_subtotal_c * (FactorIVA - 1)
-                lv_total_c = lv_subtotal_c + lv_iva_c
-                txtSubTotal_N.Text = Format(lv_subtotal_c, "$ ###,###,##0.00")
-                txtIVA_N.Text = Format(lv_iva_c, "$ ###,###,##0.00")
-                TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
-                'DGVDetalle.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Format(lv_cantidad, "###0.00")
-            Else
-                MsgBox("Cantidad mayor a la Cantidad Original", MsgBoxStyle.Critical, "Favor de verificar")
-                DGVDetalle.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Format(wTicketPedidoOrig.cantidad, "###0.00")
-            End If
-        End If
     End Sub
 End Class

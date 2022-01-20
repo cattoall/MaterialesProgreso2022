@@ -4976,6 +4976,7 @@
     <None Include="Resources\print_16px.png" />
     <None Include="Resources\edit_16px.png" />
     <None Include="Resources\list_16px.png" />
+    <None Include="Resources\coin_in_hand_32px.png" />
     <Content Include="SqlServerTypes\Loader.cs" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">

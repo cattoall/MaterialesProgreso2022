@@ -219,35 +219,16 @@ Public Class FrmCuentasPorCobrar
         llenar_datagrid()
     End Sub
 
-    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-        Buscar_Clientes = "PAGOS"
-        FrmBuscarClientesVentas.ShowDialog()
-        FrmBuscarClientesVentas.Close()
-        TxtCliente.Select()
-        idTipoPrecioCliente = ""
-        If idClienteVenta <> "0" Then
-            llenar_datagrid()
-        End If
+    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        TxtCliente.Text = "<PRESIONA F2 PARA SELECCIONAR UN CLIENTE>"
-        DataGridView1.DataSource = Nothing
-        DataGridView1.Refresh()
-        DataGridView1.Rows.Clear()
-        DataGridView1.ResumeLayout()
-        TxtDomicilio.Clear()
-        Me.Close()
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
+        
     End Sub
 
-    Private Sub btnCancelarAbono_Click_1(sender As Object, e As EventArgs) Handles btnCancelarAbono.Click
-        Select Case AbonoSeleccionado
-            Case True
-                CancelarAbono()
-                AbonoSeleccionado = False
-            Case False
-                MsgBox("Favor de Seleccionar el Abono que desea Cancelar.", MsgBoxStyle.Information, "Cancelar Abono")
-        End Select
+    Private Sub btnCancelarAbono_Click_1(sender As Object, e As EventArgs) 
+        
     End Sub
 
     Private Sub DataGridView1_CellDoubleClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
@@ -281,5 +262,36 @@ Public Class FrmCuentasPorCobrar
 
     Private Sub DataGridView2_CellDoubleClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView2.CellDoubleClick
         AbonoSeleccionado = True
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        TxtCliente.Text = "<PRESIONA F2 PARA SELECCIONAR UN CLIENTE>"
+        DataGridView1.DataSource = Nothing
+        DataGridView1.Refresh()
+        DataGridView1.Rows.Clear()
+        DataGridView1.ResumeLayout()
+        TxtDomicilio.Clear()
+        Me.Close()
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        Buscar_Clientes = "PAGOS"
+        FrmBuscarClientesVentas.ShowDialog()
+        FrmBuscarClientesVentas.Close()
+        TxtCliente.Select()
+        idTipoPrecioCliente = ""
+        If idClienteVenta <> "0" Then
+            llenar_datagrid()
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Select Case AbonoSeleccionado
+            Case True
+                CancelarAbono()
+                AbonoSeleccionado = False
+            Case False
+                MsgBox("Favor de Seleccionar el Abono que desea Cancelar.", MsgBoxStyle.Information, "Cancelar Abono")
+        End Select
     End Sub
 End Class

@@ -77,7 +77,15 @@
         End If
     End Sub
 
-    Private Sub CmdCobrar_Click(sender As Object, e As EventArgs) Handles CmdCobrar.Click
+    Private Sub CmdCobrar_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
+        
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If IsNumeric(txttotal.Text) = False Then
             MsgBox("Introduce solo valores Numericos", MsgBoxStyle.Exclamation, "Mensaje de Informacion")
             txttotal.Text = ""
@@ -135,7 +143,7 @@
         End If
     End Sub
 
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) Handles CmdSalir.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         txttotal.Text = ""
         txttotal.SelectAll()
         Me.Dispose()
