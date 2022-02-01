@@ -231,10 +231,10 @@ Public Class FrmNotaDeCredito
             MetroFramework.MetroMessageBox.Show(Me, "Error al Insertar Registro en la table NC", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         Else
-            Dim strNC_Detalle As New nc_detalle
+            Dim strNC_Detalle As New tblNcDetalle
             For i = 0 To DGVDetalle.Rows.Count - 1
 
-                strNC_Detalle = New nc_detalle
+                strNC_Detalle = New tblNcDetalle
 
                 strNC_Detalle.n_nc = CLng(FolioNC_Actual)
                 strNC_Detalle.FolioFactura = TxtPedido_C.Text

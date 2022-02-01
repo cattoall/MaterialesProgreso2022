@@ -1,5 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
-
+﻿
 Public Class FrmProveedor
     Public lv_idProveedor
     Public lv_ValorAnterior As String

@@ -37,7 +37,21 @@ Public Class frmLogin
 
     Private Sub btnEntrar_Click(sender As Object, e As EventArgs) Handles btnEntrar.Click
         Try
-            If gv_terminal = "" Then
+            Select Case cmbSistema.Text
+                Case "Wendy"
+                    CompanyCode = "01"
+                Case "Librada"
+                    CompanyCode = "02"
+                Case "Salvador"
+                    CompanyCode = "03"
+            End Select
+
+            If CompanyCode = String.Empty Then
+                MetroFramework.MetroMessageBox.Show(Me, "La base de datos (" & cmbSistema.Text & ") no está definida.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+
+            If gv_terminal = String.Empty Then
                 MetroFramework.MetroMessageBox.Show(Me, "Falta crear la Variable de Ambiente de Windows (Terminal)", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If

@@ -30,7 +30,7 @@ Public Class FrmListadoVentasError
         End If
 
         'Carga Lista de Clasificaciones
-        load_record_dgv2(SQL, Me.DataGridConsulta1, DBConnected)
+        'load_record_dgv2(SQL, Me.DataGridConsulta1, DBConnected)
 
         'Aplica formato al DataGridView
         load_layout_dgv_ListaVenta_i(Me.DataGridConsulta1)
@@ -117,72 +117,4 @@ Public Class FrmListadoVentasError
         Me.Close()
     End Sub
 
-    Private Sub ImgVentasB_Click(sender As System.Object, e As System.EventArgs) Handles ImgVentasB.Click
-        If RbtTicket.Checked = True Then
-            SQL = "SELECT * FROM venta where tipo = 'CREDITO' and nticket not in (SELECT n_remision FROM cobrar where tipodocumento = 'TICKET')"
-        End If
-        If RbtPedidos.Checked = True Then
-            SQL = "SELECT * FROM venta_pedido where tipo = 'CREDITO' and nticket not in (SELECT n_remision FROM cobrar where tipodocumento = 'PEDIDO')"
-        End If
-
-        'Carga Lista de Clasificaciones
-        load_record_dgv(SQL, Me.DataGridConsulta, DBConnected)
-
-        'Aplica formato al DataGridView
-        load_layout_dgv_ListaVenta_h(Me.DataGridConsulta)
-    End Sub
-
-    Private Sub ImgCorregirB_Click(sender As System.Object, e As System.EventArgs) Handles ImgCorregirB.Click
-        If LblNumTicket.Text <> "" Then
-            If RbtTicket.Checked = True Then
-                Sql1.Clear()
-                Sql1.Append("INSERT INTO cobrar (n_remision,total,fecha_venta,fecha_limite,cliente,resto,claveCliente,tipoDocumento) values ( ")
-                Sql1.AppendFormat("'{0}', ", LblNumTicket.Text) '
-                Sql1.AppendFormat("'{0}', ", Me.DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value) '
-                Sql1.AppendFormat("'{0}', ", Format(lv_fechaventa, "yyyy-MM-dd"))
-                Sql1.AppendFormat("'{0}', ", Format(lv_fechalimite, "yyyy-MM-dd"))
-                Sql1.AppendFormat("'{0}', ", Me.DataGridConsulta.Item(5, DataGridConsulta.CurrentRow.Index).Value) '
-                Sql1.AppendFormat("'{0}', ", Me.DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value)
-                Sql1.AppendFormat("'{0}', ", Me.DataGridConsulta.Item(6, DataGridConsulta.CurrentRow.Index).Value) '
-                Sql1.AppendFormat("'{0}' ", "TICKET")
-                Sql1.Append(" )")
-            End If
-
-            If RbtPedidos.Checked = True Then
-                Sql1.Clear()
-                Sql1.Append("INSERT INTO cobrar (n_remision,total,fecha_venta,fecha_limite,cliente,resto,claveCliente,tipoDocumento) values ( ")
-                Sql1.AppendFormat("'{0}', ", LblNumTicket.Text) '
-                Sql1.AppendFormat("'{0}', ", Me.DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value) '
-                Sql1.AppendFormat("'{0}', ", Format(lv_fechaventa, "yyyy-MM-dd"))
-                Sql1.AppendFormat("'{0}', ", Format(lv_fechalimite, "yyyy-MM-dd"))
-                Sql1.AppendFormat("'{0}', ", Me.DataGridConsulta.Item(5, DataGridConsulta.CurrentRow.Index).Value) '
-                Sql1.AppendFormat("'{0}', ", Me.DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value)
-                Sql1.AppendFormat("'{0}', ", Me.DataGridConsulta.Item(6, DataGridConsulta.CurrentRow.Index).Value) '
-                Sql1.AppendFormat("'{0}' ", "PEDIDO")
-                Sql1.Append(" )")
-            End If
-
-            If Insertar_Registro(Sql1.ToString, DBConnected) = False Then
-                MsgBox("Error al Insertar en Tabla Cobrar", MsgBoxStyle.Critical)
-                Limpia_Variables_SQL_y_Cierra_Conexion()
-                Error_Venta = True
-                Exit Sub
-            End If
-        Else
-            MsgBox("Se requiere que selecciones la Venta", MsgBoxStyle.Information, "No se Seleccionó la Venta")
-        End If
-        Call ImgVentasB_Click(sender, e)
-        bs2.DataSource = Nothing
-        dt2.Clear()
-        With Me.DataGridConsulta1
-            ' alternar color de filas
-            '.AlternatingRowsDefaultCellStyle.BackColor = My.Settings.BackColorAlt
-            '.DefaultCellStyle.BackColor = My.Settings.BackColor
-            '.DefaultCellStyle.Font = My.Settings.RowFont
-            '.ColumnHeadersDefaultCellStyle.Font = My.Settings.HeaderFont
-            ' Establecer el origen de datos para el DataGridview   
-            .DataSource = bs2
-        End With
-        LblNumTicket.Text = ""
-    End Sub
 End Class

@@ -20,6 +20,7 @@ Module Module1
     Public myDs As New DataSet
     Public Sql1 As New StringBuilder()
     Public DBConnected As String
+    Public CompanyCode As String
 
     Public ClaveUnidad As String = ""
     Public FormaPago As String = ""
@@ -266,63 +267,63 @@ Module Module1
     End Sub
 
     Public Sub load_record_dgv5(ByVal sql As String, ByVal dv As DataGridView, ByVal DB As String)
-        Try
-            ' Inicializar el SqlDataAdapter indicandole el comando y el connection string  
-            Select Case DB
-                Case "Wendy"
-                    SqlDataAdapter = New SqlDataAdapter(sql, gv_ConStringWendy)
-                Case "Librada"
-                    SqlDataAdapter = New SqlDataAdapter(sql, gv_ConStringLibrada)
-                Case "Salvador"
-                    SqlDataAdapter = New SqlDataAdapter(sql, gv_ConStringSalvador)
-            End Select
+        'Try
+        '    ' Inicializar el SqlDataAdapter indicandole el comando y el connection string  
+        '    Select Case DB
+        '        Case "Wendy"
+        '            SqlDataAdapter = New SqlDataAdapter(sql, gv_ConStringWendy)
+        '        Case "Librada"
+        '            SqlDataAdapter = New SqlDataAdapter(sql, gv_ConStringLibrada)
+        '        Case "Salvador"
+        '            SqlDataAdapter = New SqlDataAdapter(sql, gv_ConStringSalvador)
+        '    End Select
 
-            Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
+        '    Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
 
-            ' llenar el DataTable   
-            dt5.Clear()
-            dt5.Dispose()
-            dt5.Reset()
-            dt5 = New DataTable
-            SqlDataAdapter.Fill(dt5)
+        '    ' llenar el DataTable   
+        '    dt5.Clear()
+        '    dt5.Dispose()
+        '    dt5.Reset()
+        '    dt5 = New DataTable
+        '    SqlDataAdapter.Fill(dt5)
 
-            ' Enlazar el BindingSource con el datatable anterior   
-            ' ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''   
-            bs5.DataSource = dt5
+        '    ' Enlazar el BindingSource con el datatable anterior   
+        '    ' ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''   
+        '    bs5.DataSource = dt5
 
-            With dv
-                .Refresh()
-                ' coloca el registro arriba de todo  
-                If bs.Position > -1 Then
-                    .FirstDisplayedScrollingRowIndex = bs.Position
-                End If
-            End With
+        '    With dv
+        '        .Refresh()
+        '        ' coloca el registro arriba de todo  
+        '        If bs.Position > -1 Then
+        '            .FirstDisplayedScrollingRowIndex = bs.Position
+        '        End If
+        '    End With
 
-            bEdit = False
+        '    bEdit = False
 
-        Catch exSql As SqlException
-            MsgBox(exSql.Message.ToString, MsgBoxStyle.Critical)
-            Limpia_Variables_SQL_y_Cierra_Conexion()
-        Catch ex As Exception
-            MsgBox(ex.Message.ToString, MsgBoxStyle.Critical)
-            Limpia_Variables_SQL_y_Cierra_Conexion()
-        End Try
+        'Catch exSql As SqlException
+        '    MsgBox(exSql.Message.ToString, MsgBoxStyle.Critical)
+        '    Limpia_Variables_SQL_y_Cierra_Conexion()
+        'Catch ex As Exception
+        '    MsgBox(ex.Message.ToString, MsgBoxStyle.Critical)
+        '    Limpia_Variables_SQL_y_Cierra_Conexion()
+        'End Try
     End Sub
 
     Public Sub load_record_dgv_best(ByVal sql As String, ByVal dv As DataGridView, ByVal DB As String)
-        Try
-            Dim Dts As New clsMySQL(DB)
+        'Try
+        '    Dim Dts As New clsMySQL(DB)
 
-            Dts.EjecutarSQLTable(sql, dt)
+        '    Dts.EjecutarSQLTable(sql, dt)
 
-            Dts.Dispose()
-        Catch exSql As SqlException
-            MsgBox(exSql.Message.ToString, MsgBoxStyle.Critical)
-            Limpia_Variables_SQL_y_Cierra_Conexion()
-        Catch ex As Exception
-            MsgBox(ex.Message.ToString, MsgBoxStyle.Critical)
-            Limpia_Variables_SQL_y_Cierra_Conexion()
-        End Try
+        '    Dts.Dispose()
+        'Catch exSql As SqlException
+        '    MsgBox(exSql.Message.ToString, MsgBoxStyle.Critical)
+        '    Limpia_Variables_SQL_y_Cierra_Conexion()
+        'Catch ex As Exception
+        '    MsgBox(ex.Message.ToString, MsgBoxStyle.Critical)
+        '    Limpia_Variables_SQL_y_Cierra_Conexion()
+        'End Try
     End Sub
 
     Public Sub load_record_dgv(ByVal sql As String, ByVal dv As DataGridView, ByVal DB As String)
@@ -527,45 +528,45 @@ Module Module1
     End Sub
 
     Public Sub load_record_dgv2(ByVal sql As String, ByVal dv As DataGridView, ByVal DB As String)
-        Try
-            ' Inicializar el SqlDataAdapter indicandole el comando y el connection string   
-            Select Case DB
-                Case "Wendy"
-                    SqlDataAdapter = New SqlDataAdapter(sql, gv_ConStringWendy)
-                Case "Librada"
-                    SqlDataAdapter = New SqlDataAdapter(sql, gv_ConStringLibrada)
-                Case "Salvador"
-                    SqlDataAdapter = New SqlDataAdapter(sql, gv_ConStringSalvador)
-            End Select
+        'Try
+        '    ' Inicializar el SqlDataAdapter indicandole el comando y el connection string   
+        '    Select Case DB
+        '        Case "Wendy"
+        '            SqlDataAdapter = New SqlDataAdapter(sql, gv_ConStringWendy)
+        '        Case "Librada"
+        '            SqlDataAdapter = New SqlDataAdapter(sql, gv_ConStringLibrada)
+        '        Case "Salvador"
+        '            SqlDataAdapter = New SqlDataAdapter(sql, gv_ConStringSalvador)
+        '    End Select
 
-            Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
+        '    Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
 
-            ' llenar el DataTable   
-            dt2.Clear()
-            dt2.Dispose()
-            dt2.Reset()
-            dt2 = New DataTable
-            SqlDataAdapter.Fill(dt2)
+        '    ' llenar el DataTable   
+        '    dt2.Clear()
+        '    dt2.Dispose()
+        '    dt2.Reset()
+        '    dt2 = New DataTable
+        '    SqlDataAdapter.Fill(dt2)
 
-            ' Enlazar el BindingSource con el datatable anterior   
-            ' ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''   
-            bs2.DataSource = dt2
+        '    ' Enlazar el BindingSource con el datatable anterior   
+        '    ' ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''   
+        '    bs2.DataSource = dt2
 
-            With dv
-                .Refresh()
-                ' coloca el registro arriba de todo  
-                If bs2.Position > -1 Then
-                    .FirstDisplayedScrollingRowIndex = bs2.Position
-                End If
-            End With
+        '    With dv
+        '        .Refresh()
+        '        ' coloca el registro arriba de todo  
+        '        If bs2.Position > -1 Then
+        '            .FirstDisplayedScrollingRowIndex = bs2.Position
+        '        End If
+        '    End With
 
-            bEdit = False
+        '    bEdit = False
 
-        Catch exSql As SqlException
-            MsgBox(exSql.Message.ToString, MsgBoxStyle.Critical)
-        Catch ex As Exception
-            MsgBox(ex.Message.ToString, MsgBoxStyle.Critical)
-        End Try
+        'Catch exSql As SqlException
+        '    MsgBox(exSql.Message.ToString, MsgBoxStyle.Critical)
+        'Catch ex As Exception
+        '    MsgBox(ex.Message.ToString, MsgBoxStyle.Critical)
+        'End Try
     End Sub
 
     'Public Sub load_record_dgv2_cotizacion(ByVal sql As String, ByVal dv As DataGridView, ByVal DB As String)
@@ -3738,404 +3739,404 @@ Module Module1
     '    End Try
     'End Function
 
-    Public Function CancelaNC_CFDI(ByVal NumeroFactura As Integer, ByVal DB As String) As Boolean
-        Dim dt_header As DataTable = New DataTable
-        Dim dt_detail As DataTable = New DataTable
-        Dim dt_factura As DataTable = New DataTable
-        Dim dt_cliente As DataTable = New DataTable
-        Dim dt_productos As DataTable = New DataTable
-        Dim sql_header As String = "Select * from nc where n_nc = " & NumeroFactura
-        Dim sql_detail As String = "select * from nc_detalle where n_nc = " & NumeroFactura
-        Dim sql_factura As String = "select * from foliosfacturas where tipocomprobante = 'NOTAS DE CREDITO' and year = " & CInt(Now.Date.Year)
+    'Public Function CancelaNC_CFDI(ByVal NumeroFactura As Integer, ByVal DB As String) As Boolean
+    '    Dim dt_header As DataTable = New DataTable
+    '    Dim dt_detail As DataTable = New DataTable
+    '    Dim dt_factura As DataTable = New DataTable
+    '    Dim dt_cliente As DataTable = New DataTable
+    '    Dim dt_productos As DataTable = New DataTable
+    '    Dim sql_header As String = "Select * from nc where n_nc = " & NumeroFactura
+    '    Dim sql_detail As String = "select * from nc_detalle where n_nc = " & NumeroFactura
+    '    Dim sql_factura As String = "select * from foliosfacturas where tipocomprobante = 'NOTAS DE CREDITO' and year = " & CInt(Now.Date.Year)
 
-        Dim lv_documento_01 As String = ""
-        Dim lv_cliente_02_bill_to As String = ""
-        Dim lv_cliente_02_ship_to As String = ""
-        Dim lv_concepto_04 As String = ""
-        Dim lv_iva_10 As String = ""
-        Try
-            Select Case DB
-                Case "Wendy"
-                    SqlDataAdapter = New SqlDataAdapter(sql_header, gv_ConStringWendy)
-                Case "Librada"
-                    SqlDataAdapter = New SqlDataAdapter(sql_header, gv_ConStringLibrada)
-                Case "Salvador"
-                    SqlDataAdapter = New SqlDataAdapter(sql_header, gv_ConStringSalvador)
-            End Select
+    '    Dim lv_documento_01 As String = ""
+    '    Dim lv_cliente_02_bill_to As String = ""
+    '    Dim lv_cliente_02_ship_to As String = ""
+    '    Dim lv_concepto_04 As String = ""
+    '    Dim lv_iva_10 As String = ""
+    '    Try
+    '        Select Case DB
+    '            Case "Wendy"
+    '                SqlDataAdapter = New SqlDataAdapter(sql_header, gv_ConStringWendy)
+    '            Case "Librada"
+    '                SqlDataAdapter = New SqlDataAdapter(sql_header, gv_ConStringLibrada)
+    '            Case "Salvador"
+    '                SqlDataAdapter = New SqlDataAdapter(sql_header, gv_ConStringSalvador)
+    '        End Select
 
-            Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
+    '        Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
 
-            ' llenar el DataTable   
-            dt_header.Clear()
-            dt_header.Dispose()
-            dt_header.Reset()
-            dt_header = New DataTable
-            SqlDataAdapter.Fill(dt_header)
+    '        ' llenar el DataTable   
+    '        dt_header.Clear()
+    '        dt_header.Dispose()
+    '        dt_header.Reset()
+    '        dt_header = New DataTable
+    '        SqlDataAdapter.Fill(dt_header)
 
-        Catch exSql As SqlException
-            MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNC dt_header")
-            Return False
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNC dt_header")
-            Return False
-        End Try
+    '    Catch exSql As SqlException
+    '        MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNC dt_header")
+    '        Return False
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNC dt_header")
+    '        Return False
+    '    End Try
 
-        Try
-            Select Case DB
-                Case "Wendy"
-                    SqlDataAdapter = New SqlDataAdapter(sql_detail, gv_ConStringWendy)
-                Case "Librada"
-                    SqlDataAdapter = New SqlDataAdapter(sql_detail, gv_ConStringLibrada)
-                Case "Salvador"
-                    SqlDataAdapter = New SqlDataAdapter(sql_detail, gv_ConStringSalvador)
-            End Select
+    '    Try
+    '        Select Case DB
+    '            Case "Wendy"
+    '                SqlDataAdapter = New SqlDataAdapter(sql_detail, gv_ConStringWendy)
+    '            Case "Librada"
+    '                SqlDataAdapter = New SqlDataAdapter(sql_detail, gv_ConStringLibrada)
+    '            Case "Salvador"
+    '                SqlDataAdapter = New SqlDataAdapter(sql_detail, gv_ConStringSalvador)
+    '        End Select
 
-            Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
+    '        Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
 
-            ' llenar el DataTable   
-            dt_detail.Clear()
-            dt_detail.Dispose()
-            dt_detail.Reset()
-            dt_detail = New DataTable
-            SqlDataAdapter.Fill(dt_detail)
+    '        ' llenar el DataTable   
+    '        dt_detail.Clear()
+    '        dt_detail.Dispose()
+    '        dt_detail.Reset()
+    '        dt_detail = New DataTable
+    '        SqlDataAdapter.Fill(dt_detail)
 
-        Catch exSql As SqlException
-            MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNC dt_detail")
-            Return False
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNC dt_detail")
-            Return False
-        End Try
+    '    Catch exSql As SqlException
+    '        MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNC dt_detail")
+    '        Return False
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNC dt_detail")
+    '        Return False
+    '    End Try
 
-        Try
-            Select Case DB
-                Case "Wendy"
-                    SqlDataAdapter = New SqlDataAdapter(sql_factura, gv_ConStringWendy)
-                Case "Librada"
-                    SqlDataAdapter = New SqlDataAdapter(sql_factura, gv_ConStringLibrada)
-                Case "Salvador"
-                    SqlDataAdapter = New SqlDataAdapter(sql_factura, gv_ConStringSalvador)
-            End Select
+    '    Try
+    '        Select Case DB
+    '            Case "Wendy"
+    '                SqlDataAdapter = New SqlDataAdapter(sql_factura, gv_ConStringWendy)
+    '            Case "Librada"
+    '                SqlDataAdapter = New SqlDataAdapter(sql_factura, gv_ConStringLibrada)
+    '            Case "Salvador"
+    '                SqlDataAdapter = New SqlDataAdapter(sql_factura, gv_ConStringSalvador)
+    '        End Select
 
-            Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
+    '        Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
 
-            ' llenar el DataTable   
-            dt_factura.Clear()
-            dt_factura.Dispose()
-            dt_factura.Reset()
-            dt_factura = New DataTable
-            SqlDataAdapter.Fill(dt_factura)
+    '        ' llenar el DataTable   
+    '        dt_factura.Clear()
+    '        dt_factura.Dispose()
+    '        dt_factura.Reset()
+    '        dt_factura = New DataTable
+    '        SqlDataAdapter.Fill(dt_factura)
 
-        Catch exSql As SqlException
-            MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNC dt_detail")
-            Return False
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNC dt_detail")
-            Return False
-        End Try
+    '    Catch exSql As SqlException
+    '        MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNC dt_detail")
+    '        Return False
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNC dt_detail")
+    '        Return False
+    '    End Try
 
-        Try
-            Dim sql_cliente As String = "select * from clientes where clave = '" & dt_header.Rows(0)!id_cliente & "'"
-            Select Case DB
-                Case "Wendy"
-                    SqlDataAdapter = New SqlDataAdapter(sql_cliente, gv_ConStringWendy)
-                Case "Librada"
-                    SqlDataAdapter = New SqlDataAdapter(sql_cliente, gv_ConStringLibrada)
-                Case "Salvador"
-                    SqlDataAdapter = New SqlDataAdapter(sql_cliente, gv_ConStringSalvador)
-            End Select
+    '    Try
+    '        Dim sql_cliente As String = "select * from clientes where clave = '" & dt_header.Rows(0)!id_cliente & "'"
+    '        Select Case DB
+    '            Case "Wendy"
+    '                SqlDataAdapter = New SqlDataAdapter(sql_cliente, gv_ConStringWendy)
+    '            Case "Librada"
+    '                SqlDataAdapter = New SqlDataAdapter(sql_cliente, gv_ConStringLibrada)
+    '            Case "Salvador"
+    '                SqlDataAdapter = New SqlDataAdapter(sql_cliente, gv_ConStringSalvador)
+    '        End Select
 
-            Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
+    '        Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
 
-            ' llenar el DataTable   
-            dt_cliente.Clear()
-            dt_cliente.Dispose()
-            dt_cliente.Reset()
-            dt_cliente = New DataTable
-            SqlDataAdapter.Fill(dt_cliente)
+    '        ' llenar el DataTable   
+    '        dt_cliente.Clear()
+    '        dt_cliente.Dispose()
+    '        dt_cliente.Reset()
+    '        dt_cliente = New DataTable
+    '        SqlDataAdapter.Fill(dt_cliente)
 
-        Catch exSql As SqlException
-            MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNC dt_cliente")
-            Return False
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNC dt_detail")
-            Return False
-        End Try
+    '    Catch exSql As SqlException
+    '        MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNC dt_cliente")
+    '        Return False
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNC dt_detail")
+    '        Return False
+    '    End Try
 
-        Dim lv_nombre As String = ""
-        Dim lv_direccion As String = ""
-        Dim lv_colonia As String = ""
-        Dim lv_codigopostal As String = ""
-        Dim lv_ciudad As String = ""
-        Dim lv_rfc As String = ""
+    '    Dim lv_nombre As String = ""
+    '    Dim lv_direccion As String = ""
+    '    Dim lv_colonia As String = ""
+    '    Dim lv_codigopostal As String = ""
+    '    Dim lv_ciudad As String = ""
+    '    Dim lv_rfc As String = ""
 
-        Try
-            If dt_cliente.Rows.Count > 0 Then
-                If dt_cliente.Rows(0)!nombre <> "" Or dt_cliente.Rows(0)!apat <> "" Or dt_cliente.Rows(0)!amat <> "" Then
-                    lv_nombre = dt_cliente.Rows(0)!nombre & " " & dt_cliente.Rows(0)!apat & " " & dt_cliente.Rows(0)!amat
-                End If
-                If dt_cliente.Rows(0)!calle <> "" Then
-                    lv_direccion = dt_cliente.Rows(0)!calle
-                    If dt_cliente.Rows(0)!numero <> "" Then
-                        lv_direccion = lv_direccion & " #" & dt_cliente.Rows(0)!numero
-                    End If
-                Else
-                    lv_direccion = " "
-                End If
-                If dt_cliente.Rows(0)!colonia <> "" Then
-                    lv_colonia = dt_cliente.Rows(0)!colonia
-                Else
-                    lv_colonia = " "
-                End If
-                If dt_cliente.Rows(0)!cp <> "" Then
-                    lv_codigopostal = dt_cliente.Rows(0)!cp
-                Else
-                    lv_codigopostal = " "
-                End If
-                If dt_cliente.Rows(0)!ciudad <> "" Then
-                    If dt_cliente.Rows(0)!estado <> "" Then
-                        lv_ciudad = dt_cliente.Rows(0)!ciudad & ", " & dt_cliente.Rows(0)!estado
-                    Else
-                        lv_ciudad = dt_cliente.Rows(0)!ciudad
-                    End If
-                Else
-                    lv_ciudad = " "
-                End If
-                If dt_cliente.Rows(0)!rfc <> "" Then
-                    lv_rfc = dt_cliente.Rows(0)!rfc
-                Else
-                    lv_rfc = " "
-                End If
-                lv_cliente_02_bill_to = "<BILL_TO_CUSTOMER SEND_XML=""TRUE"" SEND_PDF=""TRUE"">" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<PARTY>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<PARTY_ID>" & dt_cliente.Rows(0)!clave & "</PARTY_ID>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<PARTY_NAME><![CDATA[" & lv_nombre & "]]></PARTY_NAME>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<PARTY_TYPE>" & "CUSTOMER" & "</PARTY_TYPE>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<JGZZ_FISCAL_CODE><![CDATA[" & lv_rfc & "]]></JGZZ_FISCAL_CODE>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<ADDRESS1><![CDATA[" & dt_cliente.Rows(0)!calle & "]]></ADDRESS1>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<ADDRESS2><![CDATA[" & dt_cliente.Rows(0)!numero & "]]></ADDRESS2>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<ADDRESS3>" & "" & "</ADDRESS3>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<ADDRESS4><![CDATA[" & lv_colonia & "]]></ADDRESS4>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<POSTAL_CODE>" & lv_codigopostal & "</POSTAL_CODE>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<CITY><![CDATA[" & lv_ciudad & "]]></CITY>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<STATE><![CDATA[" & dt_cliente.Rows(0)!estado & "]]></STATE>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<COUNTRY><![CDATA[" & "México" & "]]></COUNTRY>" & vbCrLf
+    '    Try
+    '        If dt_cliente.Rows.Count > 0 Then
+    '            If dt_cliente.Rows(0)!nombre <> "" Or dt_cliente.Rows(0)!apat <> "" Or dt_cliente.Rows(0)!amat <> "" Then
+    '                lv_nombre = dt_cliente.Rows(0)!nombre & " " & dt_cliente.Rows(0)!apat & " " & dt_cliente.Rows(0)!amat
+    '            End If
+    '            If dt_cliente.Rows(0)!calle <> "" Then
+    '                lv_direccion = dt_cliente.Rows(0)!calle
+    '                If dt_cliente.Rows(0)!numero <> "" Then
+    '                    lv_direccion = lv_direccion & " #" & dt_cliente.Rows(0)!numero
+    '                End If
+    '            Else
+    '                lv_direccion = " "
+    '            End If
+    '            If dt_cliente.Rows(0)!colonia <> "" Then
+    '                lv_colonia = dt_cliente.Rows(0)!colonia
+    '            Else
+    '                lv_colonia = " "
+    '            End If
+    '            If dt_cliente.Rows(0)!cp <> "" Then
+    '                lv_codigopostal = dt_cliente.Rows(0)!cp
+    '            Else
+    '                lv_codigopostal = " "
+    '            End If
+    '            If dt_cliente.Rows(0)!ciudad <> "" Then
+    '                If dt_cliente.Rows(0)!estado <> "" Then
+    '                    lv_ciudad = dt_cliente.Rows(0)!ciudad & ", " & dt_cliente.Rows(0)!estado
+    '                Else
+    '                    lv_ciudad = dt_cliente.Rows(0)!ciudad
+    '                End If
+    '            Else
+    '                lv_ciudad = " "
+    '            End If
+    '            If dt_cliente.Rows(0)!rfc <> "" Then
+    '                lv_rfc = dt_cliente.Rows(0)!rfc
+    '            Else
+    '                lv_rfc = " "
+    '            End If
+    '            lv_cliente_02_bill_to = "<BILL_TO_CUSTOMER SEND_XML=""TRUE"" SEND_PDF=""TRUE"">" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<PARTY>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<PARTY_ID>" & dt_cliente.Rows(0)!clave & "</PARTY_ID>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<PARTY_NAME><![CDATA[" & lv_nombre & "]]></PARTY_NAME>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<PARTY_TYPE>" & "CUSTOMER" & "</PARTY_TYPE>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<JGZZ_FISCAL_CODE><![CDATA[" & lv_rfc & "]]></JGZZ_FISCAL_CODE>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<ADDRESS1><![CDATA[" & dt_cliente.Rows(0)!calle & "]]></ADDRESS1>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<ADDRESS2><![CDATA[" & dt_cliente.Rows(0)!numero & "]]></ADDRESS2>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<ADDRESS3>" & "" & "</ADDRESS3>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<ADDRESS4><![CDATA[" & lv_colonia & "]]></ADDRESS4>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<POSTAL_CODE>" & lv_codigopostal & "</POSTAL_CODE>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<CITY><![CDATA[" & lv_ciudad & "]]></CITY>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<STATE><![CDATA[" & dt_cliente.Rows(0)!estado & "]]></STATE>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<COUNTRY><![CDATA[" & "México" & "]]></COUNTRY>" & vbCrLf
 
-                Select Case dt_header.Rows(0)!metodopago
-                    Case "EFECTIVO"
-                        lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<METODO_PAGO>" & "1" & "</METODO_PAGO>" & vbCrLf
-                    Case "CHEQUE"
-                        lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<METODO_PAGO>" & "2" & "</METODO_PAGO>" & vbCrLf
-                    Case "TRANSFERENCIA"
-                        lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<METODO_PAGO>" & "3" & "</METODO_PAGO>" & vbCrLf
-                End Select
+    '            Select Case dt_header.Rows(0)!metodopago
+    '                Case "EFECTIVO"
+    '                    lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<METODO_PAGO>" & "1" & "</METODO_PAGO>" & vbCrLf
+    '                Case "CHEQUE"
+    '                    lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<METODO_PAGO>" & "2" & "</METODO_PAGO>" & vbCrLf
+    '                Case "TRANSFERENCIA"
+    '                    lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<METODO_PAGO>" & "3" & "</METODO_PAGO>" & vbCrLf
+    '            End Select
 
-                Select Case dt_header.Rows(0)!tipo_venta
-                    Case "CONTADO"
-                        lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<COND_PAGO>" & "1" & "</COND_PAGO>" & vbCrLf
-                    Case "CREDITO"
-                        lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<COND_PAGO>" & "2" & "</COND_PAGO>" & vbCrLf
-                End Select
+    '            Select Case dt_header.Rows(0)!tipo_venta
+    '                Case "CONTADO"
+    '                    lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<COND_PAGO>" & "1" & "</COND_PAGO>" & vbCrLf
+    '                Case "CREDITO"
+    '                    lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<COND_PAGO>" & "2" & "</COND_PAGO>" & vbCrLf
+    '            End Select
 
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<DIAS_PAGO>" & "0" & "</DIAS_PAGO>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<LOCALIDAD>" & "0" & "</LOCALIDAD>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<REFERENCIA>" & "0" & "</REFERENCIA>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<EMAIL>" & dt_cliente.Rows(0)!correo & "</EMAIL>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<CODIGO_CLIENTE>" & dt_cliente.Rows(0)!clave & "</CODIGO_CLIENTE>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "</PARTY>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "</BILL_TO_CUSTOMER>"
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<DIAS_PAGO>" & "0" & "</DIAS_PAGO>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<LOCALIDAD>" & "0" & "</LOCALIDAD>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<REFERENCIA>" & "0" & "</REFERENCIA>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<EMAIL>" & dt_cliente.Rows(0)!correo & "</EMAIL>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<CODIGO_CLIENTE>" & dt_cliente.Rows(0)!clave & "</CODIGO_CLIENTE>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "</PARTY>" & vbCrLf
+    '            lv_cliente_02_bill_to = lv_cliente_02_bill_to & "</BILL_TO_CUSTOMER>"
 
-                lv_cliente_02_ship_to = "<SHIP_TO_CUSTOMER>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<PARTY>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<PARTY_ID>" & dt_cliente.Rows(0)!clave & "</PARTY_ID>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<PARTY_NAME><![CDATA[" & lv_nombre & "]]></PARTY_NAME>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<PARTY_TYPE>" & "CUSTOMER" & "</PARTY_TYPE>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<JGZZ_FISCAL_CODE><![CDATA[" & lv_rfc & "]]></JGZZ_FISCAL_CODE>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<ADDRESS1><![CDATA[" & dt_cliente.Rows(0)!calle & "]]></ADDRESS1>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<ADDRESS2><![CDATA[" & dt_cliente.Rows(0)!numero & "]]></ADDRESS2>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<ADDRESS3>" & "" & "</ADDRESS3>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<ADDRESS4><![CDATA[" & lv_colonia & "]]></ADDRESS4>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<POSTAL_CODE>" & lv_codigopostal & "</POSTAL_CODE>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<CITY><![CDATA[" & lv_ciudad & "]]></CITY>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<STATE><![CDATA[" & dt_cliente.Rows(0)!estado & "]]></STATE>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<COUNTRY><![CDATA[" & "México" & "]]></COUNTRY>" & vbCrLf
+    '            lv_cliente_02_ship_to = "<SHIP_TO_CUSTOMER>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<PARTY>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<PARTY_ID>" & dt_cliente.Rows(0)!clave & "</PARTY_ID>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<PARTY_NAME><![CDATA[" & lv_nombre & "]]></PARTY_NAME>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<PARTY_TYPE>" & "CUSTOMER" & "</PARTY_TYPE>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<JGZZ_FISCAL_CODE><![CDATA[" & lv_rfc & "]]></JGZZ_FISCAL_CODE>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<ADDRESS1><![CDATA[" & dt_cliente.Rows(0)!calle & "]]></ADDRESS1>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<ADDRESS2><![CDATA[" & dt_cliente.Rows(0)!numero & "]]></ADDRESS2>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<ADDRESS3>" & "" & "</ADDRESS3>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<ADDRESS4><![CDATA[" & lv_colonia & "]]></ADDRESS4>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<POSTAL_CODE>" & lv_codigopostal & "</POSTAL_CODE>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<CITY><![CDATA[" & lv_ciudad & "]]></CITY>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<STATE><![CDATA[" & dt_cliente.Rows(0)!estado & "]]></STATE>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<COUNTRY><![CDATA[" & "México" & "]]></COUNTRY>" & vbCrLf
 
-                Select Case dt_header.Rows(0)!metodopago
-                    Case "EFECTIVO"
-                        lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<METODO_PAGO>" & "1" & "</METODO_PAGO>" & vbCrLf
-                    Case "CHEQUE"
-                        lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<METODO_PAGO>" & "2" & "</METODO_PAGO>" & vbCrLf
-                    Case "TRANSFERENCIA"
-                        lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<METODO_PAGO>" & "3" & "</METODO_PAGO>" & vbCrLf
-                End Select
+    '            Select Case dt_header.Rows(0)!metodopago
+    '                Case "EFECTIVO"
+    '                    lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<METODO_PAGO>" & "1" & "</METODO_PAGO>" & vbCrLf
+    '                Case "CHEQUE"
+    '                    lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<METODO_PAGO>" & "2" & "</METODO_PAGO>" & vbCrLf
+    '                Case "TRANSFERENCIA"
+    '                    lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<METODO_PAGO>" & "3" & "</METODO_PAGO>" & vbCrLf
+    '            End Select
 
-                Select Case dt_header.Rows(0)!tipo_venta
-                    Case "CONTADO"
-                        lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<COND_PAGO>" & "1" & "</COND_PAGO>" & vbCrLf
-                    Case "CREDITO"
-                        lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<COND_PAGO>" & "2" & "</COND_PAGO>" & vbCrLf
-                End Select
+    '            Select Case dt_header.Rows(0)!tipo_venta
+    '                Case "CONTADO"
+    '                    lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<COND_PAGO>" & "1" & "</COND_PAGO>" & vbCrLf
+    '                Case "CREDITO"
+    '                    lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<COND_PAGO>" & "2" & "</COND_PAGO>" & vbCrLf
+    '            End Select
 
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<DIAS_PAGO>" & "0" & "</DIAS_PAGO>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<CODIGO_CLIENTE>" & dt_cliente.Rows(0)!clave & "</CODIGO_CLIENTE>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "</PARTY>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "</SHIP_TO_CUSTOMER>"
-            End If
-        Catch exSql As SqlException
-            MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNC Datos Cliente")
-            Return False
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNC Datos Cliente")
-            Return False
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<DIAS_PAGO>" & "0" & "</DIAS_PAGO>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<CODIGO_CLIENTE>" & dt_cliente.Rows(0)!clave & "</CODIGO_CLIENTE>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "</PARTY>" & vbCrLf
+    '            lv_cliente_02_ship_to = lv_cliente_02_ship_to & "</SHIP_TO_CUSTOMER>"
+    '        End If
+    '    Catch exSql As SqlException
+    '        MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNC Datos Cliente")
+    '        Return False
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNC Datos Cliente")
+    '        Return False
 
-        End Try
+    '    End Try
 
-        Try
-            Dim lv_factura As String = NumeroFactura
-            Dim lv_fecha As String = Format(dt_header.Rows(0)!fecha_venta, "MM/dd/yyyy")
-            Dim lv_time As String = Format(Now.TimeOfDay.Hours, "00") & ":" & Format(Now.TimeOfDay.Minutes, "00") & ":" & Format(Now.TimeOfDay.Seconds, "00")
-            Dim lv_full_date As String = lv_fecha & " " & lv_time
+    '    Try
+    '        Dim lv_factura As String = NumeroFactura
+    '        Dim lv_fecha As String = Format(dt_header.Rows(0)!fecha_venta, "MM/dd/yyyy")
+    '        Dim lv_time As String = Format(Now.TimeOfDay.Hours, "00") & ":" & Format(Now.TimeOfDay.Minutes, "00") & ":" & Format(Now.TimeOfDay.Seconds, "00")
+    '        Dim lv_full_date As String = lv_fecha & " " & lv_time
 
-            Dim lv_subtotal As String = dt_header.Rows(0)!total
+    '        Dim lv_subtotal As String = dt_header.Rows(0)!total
 
-            Dim lv_iva As String = dt_header.Rows(0)!total * (FactorIVA - 1)
+    '        Dim lv_iva As String = dt_header.Rows(0)!total * (FactorIVA - 1)
 
-            Dim lv_total As String = Val(lv_subtotal) + Val(lv_iva)
+    '        Dim lv_total As String = Val(lv_subtotal) + Val(lv_iva)
 
-            lv_documento_01 = "<?xml version='1.0'  encoding='UTF-8' ?>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<TRANSACTIONS>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<TRANSACTION>" & vbCrLf
-            Select Case DB
-                Case "Wendy"
-                    lv_documento_01 = lv_documento_01 & "<SERIE>" & "XXX" & "</SERIE>" & vbCrLf
-                Case "Librada"
-                    lv_documento_01 = lv_documento_01 & "<SERIE>" & gv_SerieNCLibrada & "</SERIE>" & vbCrLf
-                Case "Salvador"
-                    lv_documento_01 = lv_documento_01 & "<SERIE>" & gv_SerieNCSalvador & "</SERIE>" & vbCrLf
-            End Select
-            lv_documento_01 = lv_documento_01 & "<TRX_NUMBER>" & NumeroFactura & "</TRX_NUMBER>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<CUST_TRX_TYPE_ID>" & "2" & "</CUST_TRX_TYPE_ID>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<TRX_DATE>" & lv_full_date & "</TRX_DATE>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & lv_cliente_02_bill_to & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<TIPO_MONEDA>" & "MXN" & "</TIPO_MONEDA>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<TASA_DE_CAMBIO>" & "1" & "</TASA_DE_CAMBIO>" & vbCrLf
-            Select Case DB
-                Case "Librada"
-                    lv_documento_01 = lv_documento_01 & "<SELLER_ID>" & "1120" & "</SELLER_ID>" & vbCrLf
-                Case "Salvador"
-                    lv_documento_01 = lv_documento_01 & "<SELLER_ID>" & "631" & "</SELLER_ID>" & vbCrLf
-            End Select
-            lv_documento_01 = lv_documento_01 & "<BUYER_ID>" & dt_cliente.Rows(0)!clave & "</BUYER_ID>" & vbCrLf
-            Select Case DB
-                Case "Librada"
-                    lv_documento_01 = lv_documento_01 & "<SHIP_FROM>" & "1121" & "</SHIP_FROM>" & vbCrLf
-                Case "Salvador"
-                    lv_documento_01 = lv_documento_01 & "<SHIP_FROM>" & "632" & "</SHIP_FROM>" & vbCrLf
-            End Select
-            lv_documento_01 = lv_documento_01 & "<SHIP_TO>" & dt_cliente.Rows(0)!clave & "</SHIP_TO>" & vbCrLf
-            Select Case dt_header.Rows(0)!metodopago
-                Case "EFECTIVO"
-                    lv_documento_01 = lv_documento_01 & "<ACCOUNT_NUMBER>" & "NO IDENTIFICADO" & "</ACCOUNT_NUMBER>" & vbCrLf
-                Case Else
-                    If dt_header.Rows(0)!cuenta <> "" Then
-                        lv_documento_01 = lv_documento_01 & "<ACCOUNT_NUMBER>" & dt_header.Rows(0)!cuenta & " (" & dt_header.Rows(0)!banco & ")</ACCOUNT_NUMBER>" & vbCrLf
-                    Else
-                        lv_documento_01 = lv_documento_01 & "<ACCOUNT_NUMBER>" & "NO IDENTIFICADO" & "</ACCOUNT_NUMBER>" & vbCrLf
-                    End If
-            End Select
-            lv_documento_01 = lv_documento_01 & lv_cliente_02_ship_to & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<PEDIDO>" & NumeroFactura & "</PEDIDO>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<FECHA_PEDIDO>" & lv_full_date & "</FECHA_PEDIDO>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<STATUS_FACTURA>" & "0" & "</STATUS_FACTURA>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<FEC_VENC_FACT />" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<TRANSACTION_LINES>"
+    '        lv_documento_01 = "<?xml version='1.0'  encoding='UTF-8' ?>" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "<TRANSACTIONS>" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "<TRANSACTION>" & vbCrLf
+    '        Select Case DB
+    '            Case "Wendy"
+    '                lv_documento_01 = lv_documento_01 & "<SERIE>" & "XXX" & "</SERIE>" & vbCrLf
+    '            Case "Librada"
+    '                lv_documento_01 = lv_documento_01 & "<SERIE>" & gv_SerieNCLibrada & "</SERIE>" & vbCrLf
+    '            Case "Salvador"
+    '                lv_documento_01 = lv_documento_01 & "<SERIE>" & gv_SerieNCSalvador & "</SERIE>" & vbCrLf
+    '        End Select
+    '        lv_documento_01 = lv_documento_01 & "<TRX_NUMBER>" & NumeroFactura & "</TRX_NUMBER>" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "<CUST_TRX_TYPE_ID>" & "2" & "</CUST_TRX_TYPE_ID>" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "<TRX_DATE>" & lv_full_date & "</TRX_DATE>" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & lv_cliente_02_bill_to & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "<TIPO_MONEDA>" & "MXN" & "</TIPO_MONEDA>" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "<TASA_DE_CAMBIO>" & "1" & "</TASA_DE_CAMBIO>" & vbCrLf
+    '        Select Case DB
+    '            Case "Librada"
+    '                lv_documento_01 = lv_documento_01 & "<SELLER_ID>" & "1120" & "</SELLER_ID>" & vbCrLf
+    '            Case "Salvador"
+    '                lv_documento_01 = lv_documento_01 & "<SELLER_ID>" & "631" & "</SELLER_ID>" & vbCrLf
+    '        End Select
+    '        lv_documento_01 = lv_documento_01 & "<BUYER_ID>" & dt_cliente.Rows(0)!clave & "</BUYER_ID>" & vbCrLf
+    '        Select Case DB
+    '            Case "Librada"
+    '                lv_documento_01 = lv_documento_01 & "<SHIP_FROM>" & "1121" & "</SHIP_FROM>" & vbCrLf
+    '            Case "Salvador"
+    '                lv_documento_01 = lv_documento_01 & "<SHIP_FROM>" & "632" & "</SHIP_FROM>" & vbCrLf
+    '        End Select
+    '        lv_documento_01 = lv_documento_01 & "<SHIP_TO>" & dt_cliente.Rows(0)!clave & "</SHIP_TO>" & vbCrLf
+    '        Select Case dt_header.Rows(0)!metodopago
+    '            Case "EFECTIVO"
+    '                lv_documento_01 = lv_documento_01 & "<ACCOUNT_NUMBER>" & "NO IDENTIFICADO" & "</ACCOUNT_NUMBER>" & vbCrLf
+    '            Case Else
+    '                If dt_header.Rows(0)!cuenta <> "" Then
+    '                    lv_documento_01 = lv_documento_01 & "<ACCOUNT_NUMBER>" & dt_header.Rows(0)!cuenta & " (" & dt_header.Rows(0)!banco & ")</ACCOUNT_NUMBER>" & vbCrLf
+    '                Else
+    '                    lv_documento_01 = lv_documento_01 & "<ACCOUNT_NUMBER>" & "NO IDENTIFICADO" & "</ACCOUNT_NUMBER>" & vbCrLf
+    '                End If
+    '        End Select
+    '        lv_documento_01 = lv_documento_01 & lv_cliente_02_ship_to & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "<PEDIDO>" & NumeroFactura & "</PEDIDO>" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "<FECHA_PEDIDO>" & lv_full_date & "</FECHA_PEDIDO>" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "<STATUS_FACTURA>" & "0" & "</STATUS_FACTURA>" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "<FEC_VENC_FACT />" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "<TRANSACTION_LINES>"
 
-            lv_concepto_04 = ""
-            For i = 0 To dt_detail.Rows.Count - 1
-                Try
-                    Select Case DB
-                        Case "Wendy"
-                            SqlDataAdapter = New SqlDataAdapter("SELECT * FROM productos WHERE idProducto = " & dt_detail.Rows(i)!idProducto, gv_ConStringWendy)
-                        Case "Librada"
-                            SqlDataAdapter = New SqlDataAdapter("SELECT * FROM productos WHERE idProducto = " & dt_detail.Rows(i)!idProducto, gv_ConStringLibrada)
-                        Case "Salvador"
-                            SqlDataAdapter = New SqlDataAdapter("SELECT * FROM productos WHERE idProducto = " & dt_detail.Rows(i)!idProducto, gv_ConStringSalvador)
-                    End Select
+    '        lv_concepto_04 = ""
+    '        For i = 0 To dt_detail.Rows.Count - 1
+    '            Try
+    '                Select Case DB
+    '                    Case "Wendy"
+    '                        SqlDataAdapter = New SqlDataAdapter("SELECT * FROM productos WHERE idProducto = " & dt_detail.Rows(i)!idProducto, gv_ConStringWendy)
+    '                    Case "Librada"
+    '                        SqlDataAdapter = New SqlDataAdapter("SELECT * FROM productos WHERE idProducto = " & dt_detail.Rows(i)!idProducto, gv_ConStringLibrada)
+    '                    Case "Salvador"
+    '                        SqlDataAdapter = New SqlDataAdapter("SELECT * FROM productos WHERE idProducto = " & dt_detail.Rows(i)!idProducto, gv_ConStringSalvador)
+    '                End Select
 
-                    Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
+    '                Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
 
-                    ' llenar el DataTable   
-                    dt_productos.Clear()
-                    dt_productos.Dispose()
-                    dt_productos.Reset()
-                    dt_productos = New DataTable
-                    SqlDataAdapter.Fill(dt_productos)
+    '                ' llenar el DataTable   
+    '                dt_productos.Clear()
+    '                dt_productos.Dispose()
+    '                dt_productos.Reset()
+    '                dt_productos = New DataTable
+    '                SqlDataAdapter.Fill(dt_productos)
 
-                Catch exSql As SqlException
-                    MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNC dt_productos")
-                    Return False
-                Catch ex As Exception
-                    MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNC dt_productos")
-                    Return False
-                End Try
-                lv_concepto_04 = lv_concepto_04 & "<TRANSACTION_LINE>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<LINE_NUMBER>" & i + 1 & "</LINE_NUMBER>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<LINE_TYPE>" & "LINE" & "</LINE_TYPE>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<INVENTORY_ITEM_ID>" & dt_detail.Rows(i)!idProducto & "</INVENTORY_ITEM_ID>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<ITEM_EAN_NUMBER />" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<SERIAL />" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<DESCRIPTION><![CDATA[" & dt_detail.Rows(i)!descripcion & "]]></DESCRIPTION>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<QUANTITY_INVOICED>" & dt_detail.Rows(i)!cantidad & "</QUANTITY_INVOICED>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<QUANTITY_CREDITED>" & "</QUANTITY_CREDITED>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<UNIT_SELLING_PRICE>" & dt_detail.Rows(i)!precio & "</UNIT_SELLING_PRICE>" & vbCrLf
+    '            Catch exSql As SqlException
+    '                MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNC dt_productos")
+    '                Return False
+    '            Catch ex As Exception
+    '                MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNC dt_productos")
+    '                Return False
+    '            End Try
+    '            lv_concepto_04 = lv_concepto_04 & "<TRANSACTION_LINE>" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<LINE_NUMBER>" & i + 1 & "</LINE_NUMBER>" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<LINE_TYPE>" & "LINE" & "</LINE_TYPE>" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<INVENTORY_ITEM_ID>" & dt_detail.Rows(i)!idProducto & "</INVENTORY_ITEM_ID>" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<ITEM_EAN_NUMBER />" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<SERIAL />" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<DESCRIPTION><![CDATA[" & dt_detail.Rows(i)!descripcion & "]]></DESCRIPTION>" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<QUANTITY_INVOICED>" & dt_detail.Rows(i)!cantidad & "</QUANTITY_INVOICED>" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<QUANTITY_CREDITED>" & "</QUANTITY_CREDITED>" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<UNIT_SELLING_PRICE>" & dt_detail.Rows(i)!precio & "</UNIT_SELLING_PRICE>" & vbCrLf
 
-                If dt_productos.Rows.Count > 0 Then
-                    lv_concepto_04 = lv_concepto_04 & "<UOM_CODE>" & dt_productos.Rows(0)!unidadMedida & "</UOM_CODE>" & vbCrLf
-                Else
-                    lv_concepto_04 = lv_concepto_04 & "<UOM_CODE>" & "PIEZA" & "</UOM_CODE>" & vbCrLf
-                End If
+    '            If dt_productos.Rows.Count > 0 Then
+    '                lv_concepto_04 = lv_concepto_04 & "<UOM_CODE>" & dt_productos.Rows(0)!unidadMedida & "</UOM_CODE>" & vbCrLf
+    '            Else
+    '                lv_concepto_04 = lv_concepto_04 & "<UOM_CODE>" & "PIEZA" & "</UOM_CODE>" & vbCrLf
+    '            End If
 
-                lv_concepto_04 = lv_concepto_04 & "<TAX_RATE>" & (FactorIVA - 1) * 100 & "</TAX_RATE>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<TAXABLE_AMOUNT>" & (dt_detail.Rows(i)!subtotal * (FactorIVA - 1)) & "</TAXABLE_AMOUNT>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<PRECIO_NETO>" & dt_detail.Rows(i)!subtotal & "</PRECIO_NETO>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<DESCUENTO/>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<VAT_TAX_ID>1</VAT_TAX_ID>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "</TRANSACTION_LINE>" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<TAX_RATE>" & (FactorIVA - 1) * 100 & "</TAX_RATE>" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<TAXABLE_AMOUNT>" & (dt_detail.Rows(i)!subtotal * (FactorIVA - 1)) & "</TAXABLE_AMOUNT>" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<PRECIO_NETO>" & dt_detail.Rows(i)!subtotal & "</PRECIO_NETO>" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<DESCUENTO/>" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "<VAT_TAX_ID>1</VAT_TAX_ID>" & vbCrLf
+    '            lv_concepto_04 = lv_concepto_04 & "</TRANSACTION_LINE>" & vbCrLf
 
-            Next i
-            lv_documento_01 = lv_documento_01 & vbCrLf & lv_concepto_04
-            lv_documento_01 = lv_documento_01 & "</TRANSACTION_LINES>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<ADDENDA TYPE=""NONE""/>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<COMPLEMENTO TYPE=""NONE"" />" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "</TRANSACTION>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "</TRANSACTIONS>"
+    '        Next i
+    '        lv_documento_01 = lv_documento_01 & vbCrLf & lv_concepto_04
+    '        lv_documento_01 = lv_documento_01 & "</TRANSACTION_LINES>" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "<ADDENDA TYPE=""NONE""/>" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "<COMPLEMENTO TYPE=""NONE"" />" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "</TRANSACTION>" & vbCrLf
+    '        lv_documento_01 = lv_documento_01 & "</TRANSACTIONS>"
 
-            Dim path As String = ""
-            Select Case DB
-                Case "Librada"
-                    path = gv_CDFI_XML_PATH & "C-" & Format(NumeroFactura, "000000") & "_" & Format(Now.Year, "00") & Format(Now.Month, "00") & Format(Now.Day, "00") & "(CANCELADA)_CFDI.xml"
-                Case "Salvador"
-                    path = gv_CDFI_XML_PATH & "D-" & Format(NumeroFactura, "000000") & "_" & Format(Now.Year, "00") & Format(Now.Month, "00") & Format(Now.Day, "00") & "(CANCELADA)_CFDI.xml"
-            End Select
+    '        Dim path As String = ""
+    '        Select Case DB
+    '            Case "Librada"
+    '                path = gv_CDFI_XML_PATH & "C-" & Format(NumeroFactura, "000000") & "_" & Format(Now.Year, "00") & Format(Now.Month, "00") & Format(Now.Day, "00") & "(CANCELADA)_CFDI.xml"
+    '            Case "Salvador"
+    '                path = gv_CDFI_XML_PATH & "D-" & Format(NumeroFactura, "000000") & "_" & Format(Now.Year, "00") & Format(Now.Month, "00") & Format(Now.Day, "00") & "(CANCELADA)_CFDI.xml"
+    '        End Select
 
-            ' This text is added only once to the file. 
-            If File.Exists(path) = False Then
-                ' Create a file to write to. 
-                File.WriteAllText(path, lv_documento_01)
-            Else
-                File.Delete(path)
-                File.WriteAllText(path, lv_documento_01)
-            End If
-            Return True
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeFactura Genera Reporte Local")
-            Return False
-        End Try
+    '        ' This text is added only once to the file. 
+    '        If File.Exists(path) = False Then
+    '            ' Create a file to write to. 
+    '            File.WriteAllText(path, lv_documento_01)
+    '        Else
+    '            File.Delete(path)
+    '            File.WriteAllText(path, lv_documento_01)
+    '        End If
+    '        Return True
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeFactura Genera Reporte Local")
+    '        Return False
+    '    End Try
 
-    End Function
+    'End Function
 
     Public Function ImprimeNotaDeCredito(ByVal NumeroFactura As String, ByVal FolioFactura As String, ByVal Imprimir As Boolean) As Boolean
-        
+
         Dim dt_detail As DataTable = New DataTable
         '---------Variables para reporte--------------
         Dim rep_FormadePago As String
@@ -4199,7 +4200,7 @@ Module Module1
             Dim wa_FormaDePago As tblFormaPago = DBModelo.GetFormaDePagoByKey(rep_FormadePago)
             rep_FormadePago = wa_FormaDePago.FormaPago
 
-            rep_TipoRelacion= DS.Tables("CfdiRelacionados").Rows(0)("TipoRelacion").ToString()
+            rep_TipoRelacion = DS.Tables("CfdiRelacionados").Rows(0)("TipoRelacion").ToString()
             Dim wa_TipoRelacion As tblTipoDeRelacion = DBModelo.GetTipoRelacion_ByKey(rep_TipoRelacion)
             rep_TipoRelacion = wa_TipoRelacion.TipoRelacion
 
@@ -4217,7 +4218,7 @@ Module Module1
             wa_header.UUID = DS.Tables("TimbreFiscalDigital").Rows(0)("UUID").ToString()
 
             rep_UUID_relacion = DS.Tables("CfdiRelacionado").Rows(0)("UUID").ToString()
-            
+
             If Not DBModelo.Update_PV_NC(wa_header) Then
                 MsgBox("Problemas al actualizar el UUID en la tabla NC", MsgBoxStyle.Exclamation, "Actualización de UUID")
             End If
@@ -4438,7 +4439,7 @@ Module Module1
 
     Public Function ImprimeNotaDeCredito_CFDI(ByVal NumeroFactura As Integer, ByVal DB As String) As Boolean
         Dim dt_header As List(Of tblNC) = New List(Of tblNC)
-        Dim dt_detail As List(Of nc_detalle) = New List(Of nc_detalle)
+        Dim dt_detail As List(Of tblNcDetalle) = New List(Of tblNcDetalle)
         Dim dt_factura As List(Of tblFoliofacturas) = New List(Of tblFoliofacturas)
         Dim dt_cliente As List(Of tblClientes) = New List(Of tblClientes)
         Dim dt_productos As List(Of tblProductos) = New List(Of tblProductos)
@@ -4453,7 +4454,7 @@ Module Module1
         Dim lv_iva_10 As String = ""
         Using ctx As New pv_salvadorEntities1
             dt_header = ctx.tblNCs.Where(Function(i) i.n_nc = NumeroFactura).ToList
-            dt_detail = ctx.nc_detalle.Where(Function(i) i.n_nc = NumeroFactura).ToList
+            dt_detail = ctx.tblNcDetalles.Where(Function(i) i.n_nc = NumeroFactura).ToList
             Dim d As Int32 = CInt(Now.Date.Year)
             dt_factura = ctx.tblFoliofacturas.Where(Function(i) i.TipoComprobante = "NOTAS DE CREDITO" & i.Year = d).ToList
             'dt_cliente = ctx.tblClientes.Where(Function(i) i.clave = dt_header(0).id_cliente).ToList
@@ -4538,7 +4539,7 @@ Module Module1
         '    MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNotaDeCredito_CFDI dt_detail")
         '    Return False
         'End Try
-        
+
         'Try
         '    Dim sql_cliente As String = "select * from clientes where clave = '" & dt_header.Rows(0)!id_cliente & "'"
         '
@@ -4576,7 +4577,7 @@ Module Module1
         Dim lv_rfc As String = ""
 
         Try
-            If dt_cliente.LongCount> 0 Then
+            If dt_cliente.LongCount > 0 Then
                 If dt_cliente(0).nombre <> "" Or dt_cliente(0).apat <> "" Or dt_cliente(0).amat <> "" Then
                     lv_nombre = dt_cliente(0).nombre & " " & dt_cliente(0).apat & " " & dt_cliente(0).amat
                 End If
@@ -4757,7 +4758,7 @@ Module Module1
             lv_documento_01 = lv_documento_01 & "<TRANSACTION_LINES>"
 
             lv_concepto_04 = ""
-            
+
             For i = 0 To dt_detail.LongCount - 1
                 Console.WriteLine("Largo: " & dt_detail.LongCount.ToString & "N: " & i.ToString)
                 Using ctx As New pv_salvadorEntities1
@@ -4889,31 +4890,31 @@ Module Module1
         Return lv_mensaje
     End Function
 
-    Public Function Insertar_Registro(ByRef sql As String, ByVal DB As String) As Boolean
-        Dim SQLConnection As SqlConnection = New SqlConnection
+    'Public Function Insertar_Registro(ByRef sql As String, ByVal DB As String) As Boolean
+    '    Dim SQLConnection As SqlConnection = New SqlConnection
 
-        SQLConnection = New SqlConnection()
-        Select Case DB
-            Case "Wendy"
-                SQLConnection.ConnectionString = gv_ConStringWendy
-            Case "Librada"
-                SQLConnection.ConnectionString = gv_ConStringLibrada
-            Case "Salvador"
-                SQLConnection.ConnectionString = gv_ConStringSalvador
-        End Select
+    '    SQLConnection = New SqlConnection()
+    '    Select Case DB
+    '        Case "Wendy"
+    '            SQLConnection.ConnectionString = gv_ConStringWendy
+    '        Case "Librada"
+    '            SQLConnection.ConnectionString = gv_ConStringLibrada
+    '        Case "Salvador"
+    '            SQLConnection.ConnectionString = gv_ConStringSalvador
+    '    End Select
 
-        Dim sqlCommand As New SqlCommand
-        Try
-            SQLConnection.Open()
-            sqlCommand.Connection = SQLConnection
-            sqlCommand.CommandText = sql
-            sqlCommand.ExecuteNonQuery()
-            SQLConnection.Close()
-            Return True
-        Catch ex As Exception
-            Return False
-        End Try
-    End Function
+    '    Dim sqlCommand As New SqlCommand
+    '    Try
+    '        SQLConnection.Open()
+    '        sqlCommand.Connection = SQLConnection
+    '        sqlCommand.CommandText = sql
+    '        sqlCommand.ExecuteNonQuery()
+    '        SQLConnection.Close()
+    '        Return True
+    '    Catch ex As Exception
+    '        Return False
+    '    End Try
+    'End Function
 
     Public Function ConvertGenericListToDataTable(ByVal genericList As Object) As DataTable
 
@@ -4979,7 +4980,7 @@ Module Module1
 
     End Function
 
-    Public Function ImprimeVenta(ByVal NumeroVenta As String, ByVal Imprimir As Boolean, ByVal TipoVenta As String, ByVal Paga As String, ByVal Cambio As String, ByVal DB As String) As Boolean
+    Public Function ImprimeVenta(ByVal NumeroVenta As String, ByVal Imprimir As Boolean, ByVal TipoVenta As String, ByVal Paga As String, ByVal Cambio As String) As Boolean
         Dim dt_header As DataTable = New DataTable
         Dim dt_detail As DataTable = New DataTable
         Dim dt_cliente As DataTable = New DataTable
@@ -5256,7 +5257,7 @@ Module Module1
         End Try
     End Function
 
-    Public Function ReImprimeVenta(ByVal NumeroVenta As String, ByVal Imprimir As Boolean, ByVal TipoVenta As String, ByVal Paga As String, ByVal Cambio As String, ByVal DB As String) As Boolean
+    Public Function ReImprimeVenta(ByVal NumeroVenta As String, ByVal Imprimir As Boolean, ByVal TipoVenta As String, ByVal Paga As String, ByVal Cambio As String) As Boolean
         Dim dt_header As DataTable = New DataTable
         Dim dt_detail As DataTable = New DataTable
         Dim dt_cliente As DataTable = New DataTable
@@ -5522,7 +5523,7 @@ Module Module1
         End Try
     End Function
 
-    Public Function ImprimeCotizacion(ByVal NumeroVenta As String, ByVal Imprimir As Boolean, ByVal TipoVenta As String, ByVal DB As String) As Boolean
+    Public Function ImprimeCotizacion(ByVal NumeroVenta As String, ByVal Imprimir As Boolean, ByVal TipoVenta As String) As Boolean
         Dim dt_header As DataTable = New DataTable
         Dim dt_detail As DataTable = New DataTable
         Dim dt_cliente As DataTable = New DataTable
@@ -5865,15 +5866,4 @@ Module Module1
         Next
         Return False
     End Function
-
-    Public Sub SetFormName(MyForm As Form, ByVal DB As String)
-        'Select Case DBConnected
-        '    Case "Wendy"
-        '        MyForm.Text = MyForm.Text & " <- WENDY ->"
-        '    Case "Librada"
-        '        MyForm.Text = MyForm.Text & " <- LIBRADA ->"
-        '    Case "Salvador"
-        '        MyForm.Text = MyForm.Text & " <- SALVADOR ->"
-        'End Select
-    End Sub
 End Module

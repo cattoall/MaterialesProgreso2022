@@ -222,16 +222,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="clsMySQL.vb" />
-    <Compile Include="complementopagosd.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="complementopagosh.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="compra.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBModelo.vb" />
     <Compile Include="FrmBuscarMarcas.Designer.vb">
       <DependentUpon>FrmBuscarMarcas.vb</DependentUpon>
@@ -517,9 +507,6 @@
     <Compile Include="FrmUsuarios.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="historial_pagos_proveedores.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="MDIMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -570,36 +557,30 @@
     <Compile Include="FrmOrdenesCompra.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="nc_detalle.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ordencompra.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ordencomprade.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="pagar.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="PreviewDocuments.Designer.vb">
       <DependentUpon>PreviewDocuments.vb</DependentUpon>
     </Compile>
     <Compile Include="PreviewDocuments.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="salida.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Settings.vb" />
     <Compile Include="Settings1.vb" />
-    <Compile Include="tblbanco.vb">
+    <Compile Include="tblBanco.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblClientes.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblCobrar.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TblComplementoPagosD.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblComplementoPagosH.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCompra.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblConfiguracion.vb">
@@ -620,7 +601,7 @@
     <Compile Include="tblFamilia.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblFoliofacturas.vb">
+    <Compile Include="tblFolioFacturas.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblFoliosTicket.vb">
@@ -635,6 +616,9 @@
     <Compile Include="tblHistorialPagos.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblHistorialPagosProveedores.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblLinea.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -647,6 +631,18 @@
     <Compile Include="tblNC.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblNcDetalle.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblOrdenCompra.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblOrdenCompraDe.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblPagar.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblParametro.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -656,10 +652,16 @@
     <Compile Include="tblProveedor.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblSalida.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblSubFamilia.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblTicket.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblTicketCom.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblTicketCotiza.vb">

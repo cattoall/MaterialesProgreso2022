@@ -142,7 +142,6 @@
         TssDB.Text = "Conectado a Base de Datos: <- " & UCase(DBConnected) & " ->"
         FrmPuntoDeVenta.MdiParent = Me
         FrmPuntoDeVenta.StartPosition = FormStartPosition.CenterParent
-        SetFormName(FrmPuntoDeVenta, DBConnected)
         FrmPuntoDeVenta.Show()
     End Sub
 
@@ -181,127 +180,79 @@
         frmOrdenesCompra.Dispose()
     End Sub
 
-    'Private Sub OtrasOperacionesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OtrasOperacionesToolStripMenuItem.Click
-    '    FrmPuntoDeVenta.Hide()
-    'End Sub
-
-    'Private Sub TransaccionesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles TransaccionesToolStripMenuItem.Click
-    '    FrmPuntoDeVenta.Hide()
-    'End Sub
-
     Private Sub PuntoDeVentaToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles PuntoDeVentaToolStripMenuItem1.Click
         FrmPuntoDeVenta.MdiParent = Me
         FrmPuntoDeVenta.StartPosition = FormStartPosition.CenterParent
-        SetFormName(FrmPuntoDeVenta, DBConnected)
         FrmPuntoDeVenta.Show()
     End Sub
 
-    'Private Sub InformesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles InformesToolStripMenuItem.Click
-    '    FrmPuntoDeVenta.Hide()
-    'End Sub
-
-    'Private Sub ToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem1.Click
-    '    FrmPuntoDeVenta.Hide()
-    'End Sub
-
-    'Private Sub CatálogosToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CatálogosToolStripMenuItem.Click
-    '    FrmPuntoDeVenta.Hide()
-    'End Sub
-
     Private Sub ClientesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClientesToolStripMenuItem.Click
-        SetFormName(FrmBuscarClientes, DBConnected)
         FrmBuscarClientes.ShowDialog()
         FrmBuscarClientes.Close()
         FrmBuscarClientes.Dispose()
     End Sub
 
     Private Sub ProveedoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProveedoresToolStripMenuItem.Click
-        SetFormName(FrmBuscarProveedores, DBConnected)
         FrmBuscarProveedores.ShowDialog()
         FrmBuscarProveedores.Close()
         FrmBuscarProveedores.Dispose()
     End Sub
 
     Private Sub FamiliasDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FamiliasDeProductosToolStripMenuItem.Click
-        SetFormName(FrmBuscarFamilias, DBConnected)
         FrmBuscarFamilias.ShowDialog()
         FrmBuscarFamilias.Close()
         FrmBuscarFamilias.Dispose()
     End Sub
 
     Private Sub GruposDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GruposDeProductosToolStripMenuItem.Click
-        SetFormName(FrmBuscarGrupos, DBConnected)
         FrmBuscarGrupos.ShowDialog()
         FrmBuscarGrupos.Close()
         FrmBuscarGrupos.Dispose()
     End Sub
 
     Private Sub LineasDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LineasDeProductosToolStripMenuItem.Click
-        SetFormName(FrmBuscarLineas, DBConnected)
         FrmBuscarLineas.ShowDialog()
         FrmBuscarLineas.Close()
         FrmBuscarLineas.Dispose()
     End Sub
 
     Private Sub SubfamiliasDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SubfamiliasDeProductosToolStripMenuItem.Click
-        SetFormName(FrmBuscarSubFamilias, DBConnected)
         FrmBuscarSubFamilias.ShowDialog()
         FrmBuscarSubFamilias.Close()
         FrmBuscarSubFamilias.Dispose()
     End Sub
 
     Private Sub ProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProductosToolStripMenuItem.Click
-        SetFormName(FrmBuscarProductos, DBConnected)
         FrmBuscarProductos.ShowDialog()
         FrmBuscarProductos.Close()
         FrmBuscarProductos.Dispose()
     End Sub
 
     Private Sub UnidadesDeMedidaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnidadesDeMedidaToolStripMenuItem.Click
-        SetFormName(FrmBuscarUOM, DBConnected)
         FrmBuscarUOM.ShowDialog()
         FrmBuscarUOM.Close()
         FrmBuscarUOM.Dispose()
     End Sub
 
     Private Sub UsuariosDelSistemaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UsuariosDelSistemaToolStripMenuItem.Click
-        SetFormName(FrmUsuarios, DBConnected)
         FrmUsuarios.ShowDialog()
         FrmUsuarios.Close()
         FrmUsuarios.Dispose()
     End Sub
 
     Private Sub ListadoDeTicketsPorFacturasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeTicketsPorFacturasToolStripMenuItem.Click
-        SetFormName(FrmFacturasTickates, DBConnected)
         FrmFacturasTickates.ShowDialog()
         FrmFacturasTickates.Close()
         FrmFacturasTickates.Dispose()
     End Sub
 
-    Private Sub ReimpresiónDeFacturaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReimpresiónDeFacturaToolStripMenuItem.Click
-        
-    End Sub
-
-    Private Sub RevisarFacturasConErroresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RevisarFacturasConErroresToolStripMenuItem.Click
-        'SetFormName(frmFacturasErrores, DBConnected)
-        'frmFacturasErrores.ShowDialog()
-        'frmFacturasErrores.Close()
-        'frmFacturasErrores.Dispose()
-    End Sub
-
     Private Sub ConfiguraciónDeFoliosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfiguraciónDeFoliosToolStripMenuItem.Click
-        SetFormName(FrmFolioFactura, DBConnected)
         FrmFolioFactura.ShowDialog()
         FrmFolioFactura.Close()
         FrmFolioFactura.Dispose()
     End Sub
 
-    Private Sub ReimpresionesDeNotasDeCréditoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReimpresionesDeNotasDeCréditoToolStripMenuItem.Click
-        
-    End Sub
-
     Private Sub ListadoDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeProductosToolStripMenuItem.Click
-        SetFormName(FrmListaProductos, DBConnected)
         FrmListaProductos.ShowDialog()
         FrmListaProductos.Close()
         FrmListaProductos.Dispose()
@@ -309,7 +260,6 @@
 
     Private Sub ListadoDeCotizacionesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeCotizacionesToolStripMenuItem.Click
         CotFlag = True
-        SetFormName(FrmCotizaciones, DBConnected)
         FrmCotizaciones.ShowDialog()
         FrmCotizaciones.Close()
         FrmCotizaciones.Dispose()
@@ -317,70 +267,57 @@
     End Sub
 
     Private Sub ListadoDeDeudoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeDeudoresToolStripMenuItem.Click
-        SetFormName(FrmListadoDeudores, DBConnected)
         FrmListadoDeudores.ShowDialog()
         FrmListadoDeudores.Close()
         FrmListadoDeudores.Dispose()
     End Sub
 
     Private Sub ListadoDeVentasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeVentasToolStripMenuItem.Click
-        SetFormName(FrmListadoVentas, DBConnected)
         FrmListadoVentas.ShowDialog()
         FrmListadoVentas.Close()
         FrmListadoVentas.Dispose()
     End Sub
 
     Private Sub ListadoDePreciosPorLineaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDePreciosPorLineaToolStripMenuItem.Click
-        SetFormName(FrmListadoDePreciosPorLinea, DBConnected)
         FrmListadoDePreciosPorLinea.ShowDialog()
         FrmListadoDePreciosPorLinea.Close()
         FrmListadoDePreciosPorLinea.Dispose()
     End Sub
 
     Private Sub HistorialDeClientesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HistorialDeClientesToolStripMenuItem.Click
-        SetFormName(FrmHistorialCliente, DBConnected)
         FrmHistorialCliente.ShowDialog()
         FrmHistorialCliente.Close()
         FrmHistorialCliente.Dispose()
     End Sub
 
     Private Sub AjusteDeInventarioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AjusteDeInventarioToolStripMenuItem.Click
-        SetFormName(FrmAjusteDeInventario, DBConnected)
         FrmAjusteDeInventario.ShowDialog()
         FrmAjusteDeInventario.Close()
         FrmAjusteDeInventario.Dispose()
     End Sub
 
     Private Sub PagosDeClientesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PagosDeClientesToolStripMenuItem.Click
-        SetFormName(FrmCuentasPorCobrar, DBConnected)
         FrmCuentasPorCobrar.ShowDialog()
         FrmCuentasPorCobrar.Close()
         FrmCuentasPorCobrar.Dispose()
     End Sub
 
     Private Sub ConvertirPedidoATicketToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConvertirPedidoATicketToolStripMenuItem.Click
-        SetFormName(FrmPedidos, DBConnected)
         FrmPedidos.ShowDialog()
         FrmPedidos.Close()
         FrmPedidos.Dispose()
     End Sub
 
     Private Sub DevoluciónDePedidosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DevoluciónDePedidosToolStripMenuItem.Click
-        SetFormName(FrmDevPedidos, DBConnected)
         FrmDevPedidos.ShowDialog()
         FrmDevPedidos.Close()
         FrmDevPedidos.Dispose()
     End Sub
 
     Private Sub DevoluciónDeTicketsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DevoluciónDeTicketsToolStripMenuItem.Click
-        SetFormName(FrmDevTickets, DBConnected)
         FrmDevTickets.ShowDialog()
         FrmDevTickets.Close()
         FrmDevTickets.Dispose()
-    End Sub
-
-    Private Sub NotasDeCréditoToolStripMenuItem_Click(sender As Object, e As EventArgs) 
-        
     End Sub
 
     Private Sub GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem.Click
@@ -394,14 +331,9 @@
     End Sub
 
     Private Sub CorregirVentasACréditoConErroresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CorregirVentasACréditoConErroresToolStripMenuItem.Click
-        SetFormName(FrmListadoVentasError, DBConnected)
         FrmListadoVentasError.ShowDialog()
         FrmListadoVentasError.Close()
         FrmListadoVentasError.Dispose()
-    End Sub
-
-    Private Sub FacturaciónToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FacturaciónToolStripMenuItem.Click
-        
     End Sub
 
     Private Sub MarcasDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MarcasDeProductosToolStripMenuItem.Click
@@ -417,21 +349,18 @@
     End Sub
 
     Private Sub ReimpresiónDeFacturasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReimpresiónDeFacturasToolStripMenuItem.Click
-        SetFormName(FrmListadoNC, DBConnected)
         FrmListadoFacturas.ShowDialog()
         FrmListadoFacturas.Close()
         FrmListadoFacturas.Dispose()
     End Sub
 
     Private Sub ReimpresiónDeNotasDeCréditoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReimpresiónDeNotasDeCréditoToolStripMenuItem.Click
-        SetFormName(FrmListadoNC, DBConnected)
         FrmListadoNC.ShowDialog()
         FrmListadoNC.Close()
         FrmListadoNC.Dispose()
     End Sub
 
     Private Sub NotasDeCréditoToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles NotasDeCréditoToolStripMenuItem1.Click
-        SetFormName(FrmNotaDeCredito, DBConnected)
         FrmNotaDeCredito.ShowDialog()
         FrmNotaDeCredito.Close()
         FrmNotaDeCredito.Dispose()

@@ -145,7 +145,7 @@ Public Class FrmCotizaciones
                 lv_result = True
             End If
 
-            If ImprimeCotizacion(lblcotizacion.Text, lv_result, "COTIZACION", DBConnected) = False Then
+            If ImprimeCotizacion(lblcotizacion.Text, lv_result, "COTIZACION") = False Then
                 MsgBox("Error al Generar la Impresión de la Cotización", MsgBoxStyle.Information, "Impresiones de Cotizaciones")
                 Limpia_Variables_SQL_y_Cierra_Conexion()
                 Exit Sub

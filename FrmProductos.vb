@@ -1,5 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
-
+﻿
 Public Class FrmProductos
     Public lv_idProducto
     Private lv_flag_tmp As Boolean = False
@@ -404,7 +403,6 @@ Public Class FrmProductos
     Private Sub CmdAgrupo_Click(sender As System.Object, e As System.EventArgs) Handles CmdAgrupo.Click
         lv_flag_tmp = Add_Update
         Add_Update = False
-        SetFormName(FrmGrupos, DBConnected)
         FrmGrupos.ShowDialog()
         FrmGrupos.Close()
         FrmGrupos.Dispose()
@@ -415,7 +413,6 @@ Public Class FrmProductos
     Private Sub CmdSubFam_Click(sender As System.Object, e As System.EventArgs) Handles CmdSubFam.Click
         lv_flag_tmp = Add_Update
         Add_Update = False
-        SetFormName(FrmBuscarSubFamilias, DBConnected)
         FrmBuscarSubFamilias.ShowDialog()
         FrmBuscarSubFamilias.Close()
         FrmBuscarSubFamilias.Dispose()
@@ -426,7 +423,6 @@ Public Class FrmProductos
     Private Sub CmdProveedor_Click(sender As System.Object, e As System.EventArgs) Handles CmdProveedor.Click
         lv_flag_tmp = Add_Update
         Add_Update = False
-        SetFormName(FrmBuscarProveedores, DBConnected)
         FrmBuscarProveedores.ShowDialog()
         FrmBuscarProveedores.Close()
         FrmBuscarProveedores.Dispose()
@@ -437,7 +433,6 @@ Public Class FrmProductos
     Private Sub CmdFamilia_Click(sender As System.Object, e As System.EventArgs) Handles CmdFamilia.Click
         lv_flag_tmp = Add_Update
         Add_Update = False
-        SetFormName(FrmBuscarFamilias, DBConnected)
         FrmBuscarFamilias.ShowDialog()
         FrmBuscarFamilias.Close()
         FrmBuscarFamilias.Dispose()
@@ -448,7 +443,6 @@ Public Class FrmProductos
     Private Sub CmdLinea_Click(sender As System.Object, e As System.EventArgs) Handles CmdLinea.Click
         lv_flag_tmp = Add_Update
         Add_Update = False
-        SetFormName(FrmBuscarLineas, DBConnected)
         FrmBuscarLineas.ShowDialog()
         FrmBuscarLineas.Close()
         FrmBuscarLineas.Dispose()
@@ -589,6 +583,7 @@ Public Class FrmProductos
         'Try
         Dim StrProductos As New tblProductos
 
+        StrProductos.IdComp = CompanyCode
         StrProductos.codigoBarras = txtCodigoBarras.Text
         StrProductos.clave = txtClave.Text
         StrProductos.descripcionProducto = txtDescripcion.Text

@@ -1,6 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
-Imports System.Text
-
+﻿
 Public Class FrmFolioAME
     Dim lv_tipo As String
 
@@ -145,7 +143,6 @@ Public Class FrmFolioAME
         Else
             lv_tipo = CmbTipoDoc.Text
             TxtFolioAct.Text = TxtfolioIni.Text
-            Dim SQL As String
 
             If CmbTipoDoc.SelectedIndex < 0 Or TxtfolioIni.Text = "" Or txtFilioFin.Text = "" Then
                 MsgBox("Necesitas llenar todos los campos para poder guardar", MsgBoxStyle.Critical, "Folios Fiscales")
@@ -153,38 +150,23 @@ Public Class FrmFolioAME
             End If
 
             Try
-            'SQL = "INSERT INTO foliosfacturas (TipoComprobante,Year,FolioInicial,FolioFinal,FolioActual) values (@TipoComprobante,@year,@FolioInicial,@FolioFinal,@FolioActual)"
-            If conn.State = ConnectionState.Open Then
-                conn.Close()
-            End If
-        
-            Dim newFolio As tblFoliofacturas = New tblFoliofacturas
 
-            newFolio.TipoComprobante    = CmbTipoDoc.Text
-            newFolio.Year               = Label1.Text
-            newFolio.FolioInicial       = CInt(TxtfolioIni.Text)
-            newFolio.FolioFinal         = CInt(txtFilioFin.Text)
-            newFolio.FolioActual        = CInt(TxtFolioAct.Text)
+                Dim newFolio As tblFolioFacturas = New tblFolioFacturas
 
-            if DBModelo.InsertFolio(newFolio) Then
-                Console.WriteLine("Se pudo")
-            Else
-                Console.WriteLine("No se pudo")
-            End If
-            'conn.Open()
-            'myCommand.Parameters.Clear()
-            'myCommand.Connection = conn
-            'myCommand.CommandText = SQL
-            'myCommand.Parameters.AddWithValue("@TipoComprobante", CmbTipoDoc.Text)
-            'myCommand.Parameters.AddWithValue("@year", CInt(Label1.Text))
-            'myCommand.Parameters.AddWithValue("@FolioInicial", CInt(TxtfolioIni.Text))
-            'myCommand.Parameters.AddWithValue("@FolioFinal", CInt(txtFilioFin.Text))
-            'myCommand.Parameters.AddWithValue("@FolioActual", CInt(TxtFolioAct.Text))
-            'myCommand.ExecuteNonQuery()
-            'conn.Close()
+                newFolio.TipoComprobante = CmbTipoDoc.Text
+                newFolio.Year = Label1.Text
+                newFolio.FolioInicial = CInt(TxtfolioIni.Text)
+                newFolio.FolioFinal = CInt(txtFilioFin.Text)
+                newFolio.FolioActual = CInt(TxtFolioAct.Text)
 
-            Llena_Variables(CmbTipoDoc.Text, TxtfolioIni.Text, txtFilioFin.Text, TxtFolioAct.Text, CInt(Label1.Text))
-            Limpiar_campos()
+                If DBModelo.InsertFolio(newFolio) Then
+                    Console.WriteLine("Se pudo")
+                Else
+                    Console.WriteLine("No se pudo")
+                End If
+
+                Llena_Variables(CmbTipoDoc.Text, TxtfolioIni.Text, txtFilioFin.Text, TxtFolioAct.Text, CInt(Label1.Text))
+                Limpiar_campos()
                 Me.Close()
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Critical, "Folios Fiscales")

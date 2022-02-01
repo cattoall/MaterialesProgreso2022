@@ -1,6 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
-
-Public Class FrmBuscarLineas
+﻿Public Class FrmBuscarLineas
     Private lv_idLinea
     Public lv_ValorAnterior As String
 
@@ -51,11 +49,11 @@ Public Class FrmBuscarLineas
         lv_ValorAnterior = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
-        
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs)
+
     End Sub
 
-    Private Sub btnCrear_Click(sender As Object, e As EventArgs) 
+    Private Sub btnCrear_Click(sender As Object, e As EventArgs)
         Dim strLinea As New tblLinea
 
         If txtLinea.Text = "" Then

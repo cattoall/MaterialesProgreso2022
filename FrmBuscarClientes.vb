@@ -262,7 +262,6 @@
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Add_Update = False
         FrmClientes.Text = "Crear Cliente"
-        SetFormName(FrmClientes, DBConnected)
         FrmClientes.ShowDialog()
         FrmClientes.Close()
         FrmClientes.Dispose()

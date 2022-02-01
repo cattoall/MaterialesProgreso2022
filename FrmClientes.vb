@@ -1,6 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
-
-Public Class FrmClientes
+﻿Public Class FrmClientes
     Public lv_idCliente
 
     Private Sub FrmClientes_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
@@ -182,8 +180,8 @@ Public Class FrmClientes
         End If
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
-        
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -198,6 +196,43 @@ Public Class FrmClientes
         End If
 
         If Add_Update = False Then
+            strCliente.nombre = txtNombre.Text
+            strCliente.apat = txtApat.Text
+            strCliente.amat = txtAmat.Text
+            strCliente.calle = txtDomicilio.Text
+            strCliente.numero = txtNumExterno.Text
+            strCliente.colonia = txtColonia.Text
+            strCliente.ciudad = txtCiudad.Text
+            strCliente.estado = txtEstado.Text
+            strCliente.cp = txtCodigoPostal.Text
+            strCliente.rfc = txtRFC.Text
+            strCliente.telefono = txtTelFijo.Text
+            strCliente.celular = txtMovil.Text
+            strCliente.correo = txtEmail.Text
+            strCliente.observaciones = txtObs.Text
+            strCliente.listaPrecios = CmbPrecio.Text
+            strCliente.diasCredito = CInt(txtCredito.Text)
+            strCliente.limiteCredito = CDbl(txtLimite.Text)
+            strCliente.tipo_venta = CmbTipo.Text
+            strCliente.codiciones = CmbCredito.Text
+            strCliente.cuenta = txtCuenta.Text
+            strCliente.banco = CmbBanco.Text
+            If ChkTasaCero.Checked = True Then
+                strCliente.tasa_cero = 1
+            Else
+                strCliente.tasa_cero = 0
+            End If
+            strCliente.FormaPago = lv_FormaPago(0)
+            strCliente.metodopago = lv_MetodoPago(0)
+            strCliente.UsoCFDI = lv_UsoCFDI(0)
+            If DBModelo.InsertCliente(strCliente) Then
+                MetroFramework.MetroMessageBox.Show(Me, "Cliente creado correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser creado.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Else
+            strCliente = DBModelo.GetCliente(lv_idCliente)
+            If Not IsNothing(strCliente) Then
                 strCliente.nombre = txtNombre.Text
                 strCliente.apat = txtApat.Text
                 strCliente.amat = txtAmat.Text
@@ -227,80 +262,43 @@ Public Class FrmClientes
                 strCliente.FormaPago = lv_FormaPago(0)
                 strCliente.metodopago = lv_MetodoPago(0)
                 strCliente.UsoCFDI = lv_UsoCFDI(0)
-                If DBModelo.InsertCliente(strCliente) Then
-                    MetroFramework.MetroMessageBox.Show(Me, "Cliente creado correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                If DBModelo.UpdateCliente(strCliente) Then
+                    MetroFramework.MetroMessageBox.Show(Me, "Cliente actualizado correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    If DBModelo.UpdateCliente_Cotizacion(txtNombre.Text & " " & txtApat.Text & " " & txtAmat.Text, lv_idCliente) = False Then
+                        MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado en la tabla de Cotizacion.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    End If
+
+                    If DBModelo.UpdateCliente_Venta(txtNombre.Text & " " & txtApat.Text & " " & txtAmat.Text, lv_idCliente) = False Then
+                        MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado en la tabla de Venta.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    End If
+
+                    If DBModelo.UpdateCliente_VentaPedido(txtNombre.Text & " " & txtApat.Text & " " & txtAmat.Text, lv_idCliente) = False Then
+                        MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado en la tabla de VentaPedido.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    End If
+
+                    If DBModelo.UpdateCliente_Cobrar(txtNombre.Text & " " & txtApat.Text & " " & txtAmat.Text, lv_idCliente) = False Then
+                        MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado en la tabla de Cobrar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    End If
+
+                    If DBModelo.UpdateCliente_HistorialPagos(txtNombre.Text & " " & txtApat.Text & " " & txtAmat.Text, lv_idCliente) = False Then
+                        MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado en la tabla de Historial_Pagos.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    End If
+
+                    If DBModelo.UpdateCliente_FacturaTotal(txtNombre.Text & " " & txtApat.Text & " " & txtAmat.Text, lv_idCliente) = False Then
+                        MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado en la tabla de Factura_Total.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    End If
                 Else
-                    MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser creado.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             Else
-                strCliente = DBModelo.GetCliente(lv_idCliente)
-                If Not IsNothing(strCliente) Then
-                    strCliente.nombre = txtNombre.Text
-                    strCliente.apat = txtApat.Text
-                    strCliente.amat = txtAmat.Text
-                    strCliente.calle = txtDomicilio.Text
-                    strCliente.numero = txtNumExterno.Text
-                    strCliente.colonia = txtColonia.Text
-                    strCliente.ciudad = txtCiudad.Text
-                    strCliente.estado = txtEstado.Text
-                    strCliente.cp = txtCodigoPostal.Text
-                    strCliente.rfc = txtRFC.Text
-                    strCliente.telefono = txtTelFijo.Text
-                    strCliente.celular = txtMovil.Text
-                    strCliente.correo = txtEmail.Text
-                    strCliente.observaciones = txtObs.Text
-                    strCliente.listaPrecios = CmbPrecio.Text
-                    strCliente.diasCredito = CInt(txtCredito.Text)
-                    strCliente.limiteCredito = CDbl(txtLimite.Text)
-                    strCliente.tipo_venta = CmbTipo.Text
-                    strCliente.codiciones = CmbCredito.Text
-                    strCliente.cuenta = txtCuenta.Text
-                    strCliente.banco = CmbBanco.Text
-                    If ChkTasaCero.Checked = True Then
-                        strCliente.tasa_cero = 1
-                    Else
-                        strCliente.tasa_cero = 0
-                    End If
-                    strCliente.FormaPago = lv_FormaPago(0)
-                    strCliente.metodopago = lv_MetodoPago(0)
-                    strCliente.UsoCFDI = lv_UsoCFDI(0)
-                    If DBModelo.UpdateCliente(strCliente) Then
-                        MetroFramework.MetroMessageBox.Show(Me, "Cliente actualizado correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                        If DBModelo.UpdateCliente_Cotizacion(txtNombre.Text & " " & txtApat.Text & " " & txtAmat.Text, lv_idCliente) = False Then
-                            MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado en la tabla de Cotizacion.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        End If
-
-                        If DBModelo.UpdateCliente_Venta(txtNombre.Text & " " & txtApat.Text & " " & txtAmat.Text, lv_idCliente) = False Then
-                            MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado en la tabla de Venta.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        End If
-
-                        If DBModelo.UpdateCliente_VentaPedido(txtNombre.Text & " " & txtApat.Text & " " & txtAmat.Text, lv_idCliente) = False Then
-                            MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado en la tabla de VentaPedido.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        End If
-
-                        If DBModelo.UpdateCliente_Cobrar(txtNombre.Text & " " & txtApat.Text & " " & txtAmat.Text, lv_idCliente) = False Then
-                            MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado en la tabla de Cobrar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        End If
-
-                        If DBModelo.UpdateCliente_HistorialPagos(txtNombre.Text & " " & txtApat.Text & " " & txtAmat.Text, lv_idCliente) = False Then
-                            MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado en la tabla de Historial_Pagos.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        End If
-
-                        If DBModelo.UpdateCliente_FacturaTotal(txtNombre.Text & " " & txtApat.Text & " " & txtAmat.Text, lv_idCliente) = False Then
-                            MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado en la tabla de Factura_Total.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        End If
-                    Else
-                        MetroFramework.MetroMessageBox.Show(Me, "Cliente NO pudo ser actualizado.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End If
-                Else
-                    MetroFramework.MetroMessageBox.Show(Me, "Cliente NO encontrado en el sistema.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
+                MetroFramework.MetroMessageBox.Show(Me, "Cliente NO encontrado en el sistema.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
+        End If
 
-            FrmBuscarClientes.txtBusqueda.Text = txtNombre.Text
-            Add_Update = False
-            LimpiarVar()
+        FrmBuscarClientes.txtBusqueda.Text = txtNombre.Text
+        Add_Update = False
+        LimpiarVar()
         Close()
     End Sub
 

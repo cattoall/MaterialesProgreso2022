@@ -1,5 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports MySql.Data.MySqlClient
 
 Public Class FrmListadoDePreciosPorLinea
     Private Sub FrmListadoDePreciosPorLinea_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
@@ -149,83 +148,4 @@ Public Class FrmListadoDePreciosPorLinea
         End If
     End Sub
 
-    Private Sub ImgGenerarB_Click(sender As System.Object, e As System.EventArgs) Handles ImgGenerarB.Click
-
-        Dim lv_notfound As Boolean = True
-
-        If cmblineas.SelectedIndex <> 0 Then
-
-            If RadioButton1.Checked = True And txtcliente.Text = "" Then
-                MsgBox("Se Necesita Seleccionar un Cliente para Generar Listado", MsgBoxStyle.Critical, "Reporte de Productos por Linea")
-                Exit Sub
-            ElseIf RadioButton2.Checked = True And cmbprecio.Text = "" Then
-                MsgBox("No hay tipo precio seleccionado", MsgBoxStyle.Critical, "Reporte de Productos por Linea")
-                Exit Sub
-            End If
-
-            DataGridView1.Refresh()
-            DataGridView1.Rows.Clear()
-            DataGridView1.ResumeLayout()
-            Limpia_Variables_SQL_y_Cierra_Conexion()
-
-            If precio_linea = "" Then
-                MsgBox("El Tipo de Precio esta vacío", MsgBoxStyle.Critical, "Reporte de Productos por Linea")
-                Exit Sub
-            End If
-
-            Select Case precio_linea
-                Case "Precio Público"
-                    SQL = "SELECT clave, codigoBarras, descripcionProducto, unidadMedida, grupo, precioPublico as precio FROM productos WHERE linea = '" & cmblineas.Text & "'  "
-                Case "Precio P1"
-                    SQL = "SELECT clave, codigoBarras, descripcionProducto, unidadMedida, grupo, precioP1 as precio FROM productos WHERE linea = '" & cmblineas.Text & "'  "
-                Case "Precio P2"
-                    SQL = "SELECT clave, codigoBarras, descripcionProducto, unidadMedida, grupo, precioP2 as precio FROM productos WHERE linea = '" & cmblineas.Text & "'  "
-                Case "Precio P3"
-                    SQL = "SELECT clave, codigoBarras, descripcionProducto, unidadMedida, grupo, precioP3 as precio FROM productos WHERE linea = '" & cmblineas.Text & "'  "
-                Case Else
-                    MsgBox("No se encontró Tipo de Precio, favor de verificar.", MsgBoxStyle.Exclamation, "Reporte de Productos por Linea")
-                    lv_notfound = False
-            End Select
-            If lv_notfound Then
-                'Carga Lista de Clasificaciones
-                load_record_dgv_best(SQL, Me.DataGridView1, DBConnected)
-
-
-                If dt.Rows.Count = 0 Then
-                    MsgBox("No hay Registros de Productos por Linea", MsgBoxStyle.Information, "Reporte de Productos por Linea")
-                    Exit Sub
-                End If
-
-                For i = 0 To dt.Rows.Count - 1
-                    Dim row As String() = New String() {dt.Rows(i)!clave, dt.Rows(i)!codigoBarras, dt.Rows(i)!descripcionproducto, dt.Rows(i)!unidadmedida, dt.Rows(i)!grupo, dt.Rows(i)!precio}
-                    Me.DataGridView1.Rows.Add(row)
-
-                    'Select Case precio_linea
-                    '    Case "Precio Público"
-                    '        Dim row As String() = New String() {dt.Rows(i)!clave, dt.Rows(i)!codigoBarras, dt.Rows(i)!descripcionproducto, dt.Rows(i)!unidadmedida, dt.Rows(i)!grupo, dt.Rows(i)!precioPublico}
-                    '        Me.DataGridView1.Rows.Add(row)
-                    '    Case "Precio P1"
-                    '        Dim row As String() = New String() {dt.Rows(i)!clave, dt.Rows(i)!codigoBarras, dt.Rows(i)!descripcionproducto, dt.Rows(i)!unidadmedida, dt.Rows(i)!grupo, dt.Rows(i)!precioP1}
-                    '        Me.DataGridView1.Rows.Add(row)
-                    '    Case "Precio P2"
-                    '        Dim row As String() = New String() {dt.Rows(i)!clave, dt.Rows(i)!codigoBarras, dt.Rows(i)!descripcionproducto, dt.Rows(i)!unidadmedida, dt.Rows(i)!grupo, dt.Rows(i)!precioP2}
-                    '        Me.DataGridView1.Rows.Add(row)
-                    '    Case "Precio P3"
-                    '        Dim row As String() = New String() {dt.Rows(i)!clave, dt.Rows(i)!codigoBarras, dt.Rows(i)!descripcionproducto, dt.Rows(i)!unidadmedida, dt.Rows(i)!grupo, dt.Rows(i)!precioP3}
-                    '        Me.DataGridView1.Rows.Add(row)
-                    'End Select
-                Next
-            End If
-        Else
-            MsgBox("Seleccione la Linea para poder Generar un Reporte", MsgBoxStyle.Critical, "Reporte de Productos por Linea")
-        End If
-    End Sub
-
-    Private Sub ImgBuscarB_Click(sender As System.Object, e As System.EventArgs) Handles ImgBuscarB.Click
-        Buscar_Clientes = "LINEAS"
-        SetFormName(FrmBuscarClientesVentas, DBConnected)
-        FrmBuscarClientesVentas.ShowDialog()
-        FrmBuscarClientesVentas.Close()
-        Limpia_Variables_SQL_y_Cierra_Conexion()
-    End Sub
 End Class

@@ -1088,7 +1088,6 @@ SiguienteRegistro:
                 FrmDescuento.NupCantidad.Text = MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value
                 FrmDescuento.NupPrecio.Text = Replace(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value, "$", "")
                 FrmDescuento.NupDescuento.Value = MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value
-                SetFormName(FrmDescuento, DBConnected)
                 FrmDescuento.ShowDialog()
                 FrmDescuento.Close()
                 FrmDescuento.Dispose()
@@ -1185,13 +1184,13 @@ SiguienteRegistro:
                         End If
                     Next
 
-                    If ImprimeVenta(lv_folioactual, True, CmbDocto.Text, PV_Contado_Paga, PV_Contado_Cambio, DBConnected) = False Then
+                    If ImprimeVenta(lv_folioactual, True, CmbDocto.Text, PV_Contado_Paga, PV_Contado_Cambio) = False Then
                         MetroFramework.MetroMessageBox.Show(Me, "Error al Generar la Impresión de el Ticket/Pedido, favor de Re-Imprimir", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Call NuevaVenta()
                         Exit Sub
                     End If
                 Else
-                    If ImprimeCotizacion(lv_folioactual, True, CmbDocto.Text, DBConnected) = False Then
+                    If ImprimeCotizacion(lv_folioactual, True, CmbDocto.Text) = False Then
                         MetroFramework.MetroMessageBox.Show(Me, "Error al Generar la Impresión de la Cotización, favor de Re-Imprimir", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Call NuevaVenta()
                         Exit Sub
@@ -1206,7 +1205,6 @@ SiguienteRegistro:
     End Sub
 
     Private Sub lblBuscarP_Click(sender As Object, e As EventArgs) Handles lblBuscarP.Click
-        SetFormName(FrmBuscarProductosPV, DBConnected)
         FrmBuscarProductosPV.ShowDialog()
         FrmBuscarProductosPV.Close()
         FrmBuscarProductosPV.Dispose()
@@ -1222,7 +1220,6 @@ SiguienteRegistro:
             Buscar_Clientes = "VENTAS"
             Cliente_diasCredito = 0
             Cliente_limite = 0
-            SetFormName(FrmBuscarClientesVentas, DBConnected)
             FrmBuscarClientesVentas.ShowDialog()
             FrmBuscarClientesVentas.Close()
             FrmBuscarClientesVentas.Dispose()
@@ -1232,7 +1229,6 @@ SiguienteRegistro:
             Buscar_Clientes = "VENTAS"
             Cliente_diasCredito = 0
             Cliente_limite = 0
-            SetFormName(FrmBuscarClientesVentas, DBConnected)
             FrmBuscarClientesVentas.ShowDialog()
             FrmBuscarClientesVentas.Close()
             FrmBuscarClientesVentas.Dispose()

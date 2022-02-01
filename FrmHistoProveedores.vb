@@ -1,5 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports MySql.Data.MySqlClient
 
 Public Class FrmHistoProveedores
     Private Sub CmdVerVenta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CmdVerVenta.Click
@@ -10,7 +9,7 @@ Public Class FrmHistoProveedores
         SQL = "SELECT idTransaccion, fecha, total, tipo, usuario,   proveedor, idProveedor, estado, motivo, numeroFactura FROM compras where idproveedor = " & idProveedor & " and   fecha  >= '" & Format(dtFechaInicial.Value.Date, "yyyy-MM-dd") & "' and fecha <= '" & Format(dtFechaFinal.Value.Date, "yyyy-MM-dd") & "'"
 
         'Carga Lista de Clasificaciones
-        load_record_dgv5(SQL, Me.DataGridView1, DBConnected)
+        'load_record_dgv5(SQL, Me.DataGridView1, DBConnected)
 
         'Aplica formato al DataGridView
         load_layout_dgv_proveedor_histo(Me.DataGridView1)

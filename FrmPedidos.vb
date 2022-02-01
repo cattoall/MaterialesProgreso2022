@@ -317,7 +317,7 @@ Public Class FrmPedidos
                 lv_result = True
             End If
 
-            If ImprimeVenta(LblPedido.Text, lv_result, "PEDIDO", DataGridView1.Item(2, DataGridView1.CurrentRow.Index).Value, "0.00", DBConnected) = False Then
+            If ImprimeVenta(LblPedido.Text, lv_result, "PEDIDO", DataGridView1.Item(2, DataGridView1.CurrentRow.Index).Value, "0.00") = False Then
                 MsgBox("Error al Generar la Impresión del Pedido", MsgBoxStyle.Information, "Re-Impresiones de Pedidos")
                 Limpia_Variables_SQL_y_Cierra_Conexion()
                 Exit Sub

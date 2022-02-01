@@ -1,6 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
-
-Public Class FrmBuscarUOM
+﻿Public Class FrmBuscarUOM
     Private lv_idUOM
     Public lv_ValorAnterior As String
 
@@ -51,13 +49,13 @@ Public Class FrmBuscarUOM
         lv_ValorAnterior = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs)
         LimpiarObjetos()
         Close()
     End Sub
 
-    Private Sub btnCrear_Click(sender As Object, e As EventArgs) 
-        
+    Private Sub btnCrear_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click

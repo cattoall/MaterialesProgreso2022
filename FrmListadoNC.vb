@@ -1,6 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
-
-Public Class FrmListadoNC
+﻿Public Class FrmListadoNC
 
     Private Sub FrmListadoFacturas_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyValue
@@ -56,23 +54,23 @@ Public Class FrmListadoNC
         End If
     End Sub
 
-    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) 
+    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs)
         Me.Close()
     End Sub
 
-    Private Sub ImgCancelarB_Click(sender As System.Object, e As System.EventArgs) 
-        
+    Private Sub ImgCancelarB_Click(sender As System.Object, e As System.EventArgs)
+
     End Sub
 
-    Private Sub ImgGenXmlB_Click(sender As System.Object, e As System.EventArgs) 
-        
+    Private Sub ImgGenXmlB_Click(sender As System.Object, e As System.EventArgs)
+
     End Sub
 
-    Private Sub ImgCFDIB_Click(sender As System.Object, e As System.EventArgs) 
-        
+    Private Sub ImgCFDIB_Click(sender As System.Object, e As System.EventArgs)
+
     End Sub
 
-    Private Sub DataGridConsulta_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) 
+    Private Sub DataGridConsulta_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs)
 
     End Sub
 
@@ -88,12 +86,12 @@ Public Class FrmListadoNC
         load_layout_dgv_ListaNC_i(Me.DataGridTikect)
     End Sub
 
-    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs) 
-        
+    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs)
+
     End Sub
 
-    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) 
-        
+    Private Sub mBtnExit_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub mBtnCancel_Click(sender As Object, e As EventArgs) Handles mBtnCancel.Click
@@ -106,14 +104,14 @@ Public Class FrmListadoNC
         End If
     End Sub
 
-    Private Sub mBtnPrint_Click(sender As Object, e As EventArgs) 
-        
+    Private Sub mBtnPrint_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub mBtnXML_Click(sender As Object, e As EventArgs) Handles mBtnXML.Click
         If LblNumTicket.Text <> "" Then
             If MsgBox("¿Está seguro de generar el XML de Cancelación?", MsgBoxStyle.YesNo, "Generar XML Cancelación") = MsgBoxResult.Yes Then
-                CancelaNC_CFDI(CInt(LblNumTicket.Text), DBConnected)
+                'CancelaNC_CFDI(CInt(LblNumTicket.Text), DBConnected)
                 MsgBox("XML generado.", MsgBoxStyle.Information, "Generar XML Cancelación")
                 'Call ImgVerFactB_Click(sender, e)
             End If
@@ -127,7 +125,7 @@ Public Class FrmListadoNC
             Dim NoFactura = DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
             Dim FechaFactura = DataGridConsulta.Item(8, DataGridConsulta.CurrentRow.Index).Value
             Dim FolioFactura As String = gv_SerieNCSalvador & "-" & NoFactura & "_" & Format(FechaFactura, "yyyyMMdd") & "_CFDI"
-            If ImprimeNotaDeCredito(NoFactura, FolioFactura, true) = False Then
+            If ImprimeNotaDeCredito(NoFactura, FolioFactura, True) = False Then
                 MsgBox("Hubo un error al Generar la Impresión de la Nota de Crédito", MsgBoxStyle.Critical, "Impresiones de Notas de Crédito")
             Else
                 MsgBox("Re'Impresión de Nota de Credito Correctamente", MsgBoxStyle.Information, "Impresiones de Notas de Crédito")

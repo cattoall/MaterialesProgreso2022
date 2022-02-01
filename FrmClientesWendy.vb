@@ -437,20 +437,4 @@ Public Class FrmClientesWendy
 
     End Sub
 
-    Private Sub BtnEliminar_Click(sender As System.Object, e As System.EventArgs) Handles BtnEliminar.Click
-        If MsgBox("¿Esta seguro que desea Eliminar este Cliente del Sistema?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-            Sql1.Clear()
-            Sql1.Append("DELETE FROM clientes WHERE clave = ")
-            Sql1.AppendFormat("'{0}' ", lv_idCliente)
-            If Insertar_Registro(Sql1.ToString, DBConnected) = False Then
-                MsgBox("Cliente no pudo ser Eliminado de la Base de Datos", MsgBoxStyle.Critical, "Clientes")
-                Exit Sub
-            End If
-            FrmBuscarClientes.txtBusqueda.Text = txtNombre.Text
-            Limpia_Variables_SQL_y_Cierra_Conexion()
-            Add_Update = False
-            LimpiarObjetos()
-            Me.Close()
-        End If
-    End Sub
 End Class

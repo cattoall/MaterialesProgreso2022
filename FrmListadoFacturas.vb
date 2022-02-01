@@ -1,6 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
-
-Public Class FrmListadoFacturas
+﻿Public Class FrmListadoFacturas
 
     Private Sub FrmListadoFacturas_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyValue
@@ -51,12 +49,12 @@ Public Class FrmListadoFacturas
         LblTotal.Text = "$ 0.00"
     End Sub
 
-    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) 
+    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs)
         Me.Close()
     End Sub
 
-    Public Sub ImgVerFactB_Click(sender As System.Object, e As System.EventArgs) 
-        
+    Public Sub ImgVerFactB_Click(sender As System.Object, e As System.EventArgs)
+
     End Sub
 
     ' Eliminación de la cancelación de la factura
@@ -98,19 +96,19 @@ Public Class FrmListadoFacturas
         'End If
     End Sub
 
-    Private Sub ImgCFDIB_Click(sender As System.Object, e As System.EventArgs) 
-        
+    Private Sub ImgCFDIB_Click(sender As System.Object, e As System.EventArgs)
+
     End Sub
 
     Private Sub Label2_Click(sender As System.Object, e As System.EventArgs) Handles Label2.Click
 
     End Sub
 
-    Private Sub DataGridConsulta_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) 
+    Private Sub DataGridConsulta_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs)
 
     End Sub
 
-    Private Sub DataGridConsulta_CellContextMenuStripChanged(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) 
+    Private Sub DataGridConsulta_CellContextMenuStripChanged(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs)
 
     End Sub
 
@@ -125,7 +123,7 @@ Public Class FrmListadoFacturas
         DataGridTikect.DataSource = DBModelo.GetFacturaByN(nFactura)
         'Carga Lista de Clasificaciones
         'load_record_dgv2(SQL, Me.DataGridTikect, DBConnected)
-        
+
         'Aplica formato al DataGridView
         'load_layout_dgv_ListaFacturas_i(Me.DataGridTikect)
         DataGridTikect.Columns(0).HeaderText = "ID"
@@ -143,16 +141,16 @@ Public Class FrmListadoFacturas
         DataGridTikect.Columns(12).HeaderText = "Clave Unidad"
     End Sub
 
-    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs) 
-        
+    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs)
+
     End Sub
 
-    Private Sub MetroButton1_Click(sender As Object, e As EventArgs) 
-        
+    Private Sub MetroButton1_Click(sender As Object, e As EventArgs)
+
     End Sub
 
-    Private Sub mBtnPrint_Click(sender As Object, e As EventArgs) 
-        
+    Private Sub mBtnPrint_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

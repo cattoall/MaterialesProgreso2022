@@ -1,6 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
-Imports System.Text
-
+﻿
 Public Class FrmFolioFactura
     Dim folio As String
     Dim Selection As Boolean = False
@@ -80,7 +78,6 @@ Public Class FrmFolioFactura
         FrmFolioAME.Label1.Text = CInt(Now.Date.Year)
 
         Llena_Variables("", "", "", "", CInt(Now.Date.Year))
-        SetFormName(FrmFolioAME, DBConnected)
         FrmFolioAME.ShowDialog()
 
         llena_grid()
@@ -130,7 +127,6 @@ Public Class FrmFolioFactura
         FrmFolioAME.Label1.Text = CInt(Now.Date.Year)
 
         Llena_Variables("", "", "", "", CInt(Now.Date.Year))
-        SetFormName(FrmFolioAME, DBConnected)
         FrmFolioAME.ShowDialog()
 
         llena_grid()
@@ -163,7 +159,6 @@ Public Class FrmFolioFactura
         FrmFolioAME.txtFilioFin.Text = foliofin
         FrmFolioAME.TxtFolioAct.Text = folioactual
         FrmFolioAME.Label1.Text = folioyear
-        SetFormName(FrmFolioAME, DBConnected)
         FrmFolioAME.ShowDialog()
         llena_grid()
 

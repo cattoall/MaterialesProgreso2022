@@ -118,7 +118,6 @@
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) 
         Add_Update = False
         FrmProveedor.Text = "Crear Proveedor"
-        SetFormName(FrmProveedor, DBConnected)
         FrmProveedor.ShowDialog()
         FrmProveedor.Close()
         FrmProveedor.Dispose()
@@ -129,7 +128,6 @@
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Add_Update = False
         FrmProveedor.Text = "Crear Proveedor"
-        SetFormName(FrmProveedor, DBConnected)
         FrmProveedor.ShowDialog()
         FrmProveedor.Close()
         FrmProveedor.Dispose()

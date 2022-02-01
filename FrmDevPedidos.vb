@@ -324,7 +324,7 @@ Public Class FrmDevPedidos
             lv_result = True
         End If
 
-        If ReImprimeVenta(TxtPedido_C.Text, lv_result, "PEDIDO", Trim(Replace(Trim(Replace(TxtTotal_N.Text, "$", "")), ",", "")), "0.00", DBConnected) = False Then
+        If ReImprimeVenta(TxtPedido_C.Text, lv_result, "PEDIDO", Trim(Replace(Trim(Replace(TxtTotal_N.Text, "$", "")), ",", "")), "0.00") = False Then
             MsgBox("Error al Generar la Impresión del Pedido", MsgBoxStyle.Information)
             Exit Sub
         End If

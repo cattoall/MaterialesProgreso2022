@@ -226,7 +226,6 @@
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Add_Update = False
         FrmProductos.Text = "Crear Producto"
-        SetFormName(FrmProductos, DBConnected)
         Material_Familia = ""
         Material_Grupo = ""
         Material_Linea = ""

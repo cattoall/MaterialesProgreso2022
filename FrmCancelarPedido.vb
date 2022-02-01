@@ -160,7 +160,7 @@
                 Exit Sub
             End Try
 
-            CancelaNC_CFDI(CInt(NoFactura), DBConnected)
+            'CancelaNC_CFDI(CInt(NoFactura), DBConnected)
 
             MetroFramework.MetroMessageBox.Show(Me, "Nota de Crédito " & NoFactura & " Ha sido cancelada.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 

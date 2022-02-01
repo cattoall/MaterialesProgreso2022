@@ -10,19 +10,18 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class tblVentaPedido
+Partial Public Class tblTicketCom
     Public Property IdComp As String
-    Public Property nticket As Long
+    Public Property folio As String
+    Public Property concepto As String
+    Public Property cantidad As Nullable(Of Decimal)
+    Public Property precio As Nullable(Of Decimal)
     Public Property fecha As Nullable(Of Date)
-    Public Property SubTotal As Nullable(Of Decimal)
-    Public Property IVA As Nullable(Of Decimal)
-    Public Property total As Nullable(Of Decimal)
-    Public Property tipo As String
-    Public Property usuario As String
-    Public Property cliente As String
-    Public Property idCliente As Long
-    Public Property estado As String
-    Public Property motivo As String
-    Public Property numeroFactura As String
+    Public Property subtotal As Nullable(Of Decimal)
+    Public Property clave_producto As String
+    Public Property proveedor As String
+    Public Property ClaveProducto As String
+    Public Property ClaveUnidad As String
+    Public Property TasaCero As Byte()
 
 End Class

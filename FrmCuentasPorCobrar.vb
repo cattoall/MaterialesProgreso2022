@@ -43,21 +43,16 @@ Public Class FrmCuentasPorCobrar
     End Sub
 
     Private Sub llenar_datagrid()
-        Dim lv_dbselected As String = String.Empty
-        Select Case DBConnected
-            Case "Fuentes"
-                lv_dbselected = "pv_fuentes"
-        End Select
 
         DataGridView1.Refresh()
-        Dim tCobrar As List(Of tblCobrar) = DBModelo.GetCXC_ByIdCliente(lv_dbselected, idClienteVenta)
+        Dim tCobrar As List(Of tblCobrar) = DBModelo.GetCXC_ByIdCliente(idClienteVenta)
 
         DataGridView1.DataSource = tCobrar.ToList
         ConfiguraGridCobrar(DataGridView1)
 
 
         DataGridView2.Refresh()
-        Dim tHistPagos As List(Of tblHistorialPagos) = DBModelo.GetHistorialPago_ByIdCliente(lv_dbselected, idClienteVenta)
+        Dim tHistPagos As List(Of tblHistorialPagos) = DBModelo.GetHistorialPago_ByIdCliente(idClienteVenta)
 
         DataGridView2.DataSource = tHistPagos.ToList
         ConfiguraGridPagos(DataGridView2)

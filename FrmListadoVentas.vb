@@ -197,7 +197,7 @@ Public Class FrmListadoVentas
                 lv_result = True
             End If
 
-            If ReImprimeVenta(LblNumTicket.Text, lv_result, "TICKET", DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value, "0.00", DBConnected) = False Then
+            If ReImprimeVenta(LblNumTicket.Text, lv_result, "TICKET", DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value, "0.00") = False Then
                 MsgBox("Error al Generar la Impresión del Ticket", MsgBoxStyle.Information, "Impresión de Ticket")
                 Limpia_Variables_SQL_y_Cierra_Conexion()
                 Exit Sub
