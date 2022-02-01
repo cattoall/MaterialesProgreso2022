@@ -5800,6 +5800,84 @@ Module Module1
         End Try
     End Function
 
+    Public Function ImprimeTicketAbonoWendy(ByVal NumeroTicket As String, ByVal Imprimir As Boolean, ByVal abono As String) As Boolean
+
+        Dim dt_detail As DataTable = New DataTable
+
+        Dim wCobrar As List(Of tblWCobrar) = DBModelo.GetCobrarByIdClienteWendy(idClienteVenta)
+        Dim wConfiguracion As tblWConfiguracion = DBModelo.GetConfigurationWendy(gv_terminal)
+
+        ' llenar el DataTable   
+        dt_detail.Clear()
+        dt_detail.Dispose()
+        dt_detail.Reset()
+        dt_detail = New DataTable
+        dt_detail = ConvertToDataTable(wCobrar)
+
+        Try
+            Dim Report As New LocalReport
+
+            dt_detail.TableName = "cobrar"
+            Dim p2 As New Microsoft.Reporting.WinForms.ReportParameter("Nombre", wConfiguracion.nombreEmpresa)
+            Dim p3 As New Microsoft.Reporting.WinForms.ReportParameter("Propietario", wConfiguracion.propietario)
+            Dim p4 As New Microsoft.Reporting.WinForms.ReportParameter("RFC", wConfiguracion.rfcEmpresa)
+            Dim p5 As New Microsoft.Reporting.WinForms.ReportParameter("Domicilio", wConfiguracion.direccionEmpresa)
+            Dim p6 As New Microsoft.Reporting.WinForms.ReportParameter("Colonia", "Los Aguajes")
+            Dim p7 As New Microsoft.Reporting.WinForms.ReportParameter("Telefono", wConfiguracion.telefonoEmpresa)
+            Dim p8 As New Microsoft.Reporting.WinForms.ReportParameter("Ciudad", wConfiguracion.ciudadEmpresa)
+            Dim p9 As New Microsoft.Reporting.WinForms.ReportParameter("Fecha", DateTime.Now.ToShortDateString())
+
+
+            Dim lv_dinero As String = Dinero(resto_total, 2, "Pesos", True)
+            Dim p13 As New Microsoft.Reporting.WinForms.ReportParameter("Dinero", lv_dinero.ToUpper)
+
+            Dim lv_abono As String = abono
+            Dim p10 As New Microsoft.Reporting.WinForms.ReportParameter("abono", lv_abono)
+
+            Dim lv_resto As String = resto_total
+            Dim p11 As New Microsoft.Reporting.WinForms.ReportParameter("resto_total", lv_resto)
+
+            Dim p12 As New Microsoft.Reporting.WinForms.ReportParameter("cuenta", NumeroTicket)
+
+            Dim lv_cliente As String = cliente_abono
+            Dim p14 As New Microsoft.Reporting.WinForms.ReportParameter("Cliente", lv_cliente)
+
+            Dim lv_a As String = "admin"
+            Dim p15 As New Microsoft.Reporting.WinForms.ReportParameter("Atendido", lv_a)
+
+            Report.ReportPath = gv_Report_Path & "Report5.rdlc"
+
+            Report.SetParameters(p2)
+            Report.SetParameters(p3)
+            Report.SetParameters(p4)
+            Report.SetParameters(p5)
+            Report.SetParameters(p6)
+            Report.SetParameters(p7)
+            Report.SetParameters(p8)
+            Report.SetParameters(p9)
+            Report.SetParameters(p10)
+            Report.SetParameters(p11)
+            Report.SetParameters(p12)
+            Report.SetParameters(p13)
+            Report.SetParameters(p14)
+            Report.SetParameters(p15)
+
+
+            Report.DataSources.Clear()
+            Report.DataSources.Add(New Microsoft.Reporting.WinForms.ReportDataSource("DataSet1", dt_detail))
+            Dim lv_time As String = " " & Format(DateTime.Now.Hour, "00") & Format(DateTime.Now.Minute, "00") & Format(DateTime.Now.Second, "00")
+            Print_Report(TicketPrinterName, Report, 1, "Pdf", NumeroTicket + " " + cliente_abono + lv_time, "C:\Abono\" + Now.Year.ToString, "VENTA")
+            If Imprimir = True Then
+                Print_Report(TicketPrinterName, Report, 1, "Image", NumeroTicket + " " + cliente_abono + lv_time, "C:\Abono\" + Now.Year.ToString, "VENTA")
+            End If
+
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
     Public Sub GenerarBackUp(ByVal FileName As String, ByVal Id As Integer)
         Try
             Dim startInfo As New ProcessStartInfo(gv_MySQLDump_Path)

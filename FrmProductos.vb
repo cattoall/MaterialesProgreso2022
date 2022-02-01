@@ -232,7 +232,7 @@ Public Class FrmProductos
     End Function
 
     Private Sub Calcula_Precios()
-        Dim grp As tblGrupos = DBModelo.GetGroup(CmbGrupo.Text)
+        Dim grp As tblGrupos = DBModelo.GetGroup(CmbGrupo.SelectedValue)
 
         If IsNothing(grp) Then
             Exit Sub

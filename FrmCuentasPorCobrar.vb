@@ -16,20 +16,6 @@ Public Class FrmCuentasPorCobrar
         DataGridView1.Refresh()
         DataGridView2.Refresh()
 
-        'bs.DataSource = Nothing
-        'bs2.DataSource = Nothing
-        'bs3.DataSource = Nothing
-        'dt.Clear()
-        'dt2.Clear()
-        'dt3.Clear()
-        'With Me.DataGridView1
-        '    .DataSource = bs3
-        'End With
-
-        'With Me.DataGridView2
-        '    .DataSource = bs2
-        'End With
-
         lblabonado.Text = "0"
         lblgrantotal.Text = "0"
         lblresto.Text = "0"

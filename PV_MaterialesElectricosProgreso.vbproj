@@ -222,17 +222,56 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="compra.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cotizacion.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBModelo.vb" />
+    <Compile Include="factura.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="factura_total.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="familia.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="foliosfactura.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="foliosticket.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
     <Compile Include="FrmBuscarMarcas.Designer.vb">
       <DependentUpon>FrmBuscarMarcas.vb</DependentUpon>
     </Compile>
     <Compile Include="FrmBuscarMarcas.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmCobrarWendy.Designer.vb">
+      <DependentUpon>frmCobrarWendy.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCobrarWendy.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCuentasPorCobrarWendy.Designer.vb">
+      <DependentUpon>frmCuentasPorCobrarWendy.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCuentasPorCobrarWendy.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmFacturacion.Designer.vb">
       <DependentUpon>FrmFacturacion.vb</DependentUpon>
     </Compile>
     <Compile Include="FrmFacturacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGenerarAbonoWendy.Designer.vb">
+      <DependentUpon>frmGenerarAbonoWendy.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGenerarAbonoWendy.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmListadoNC.designer.vb">
@@ -507,6 +546,18 @@
     <Compile Include="FrmUsuarios.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="grupos.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="historial_pagos_proveedores.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="linea.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="marca.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
     <Compile Include="MDIMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -557,14 +608,56 @@
     <Compile Include="FrmOrdenesCompra.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="nc.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="nc_detalle.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ordencompra.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ordencomprade.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pagar.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
     <Compile Include="PreviewDocuments.Designer.vb">
       <DependentUpon>PreviewDocuments.vb</DependentUpon>
     </Compile>
     <Compile Include="PreviewDocuments.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="producto.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proveedor.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pv_Wendy.Context.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>pv_Wendy.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pv_Wendy.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>pv_Wendy.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="pv_Wendy.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="salida.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
     <Compile Include="Settings.vb" />
     <Compile Include="Settings1.vb" />
+    <Compile Include="subfamilia.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblBanco.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -688,13 +781,58 @@
     <Compile Include="tblVentaPedido.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblWClientes.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblWCobrar.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblWConfiguracion.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblWHistorialPagos.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblWVentasPedidos.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblWVventa.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblW_Usuarios.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ticket.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ticket_com.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ticket_cotiza.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ticket_pedido.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="unidade.vb">
+      <DependentUpon>pv_Wendy.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FrmBuscarMarcas.resx">
       <DependentUpon>FrmBuscarMarcas.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCobrarWendy.resx">
+      <DependentUpon>frmCobrarWendy.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCuentasPorCobrarWendy.resx">
+      <DependentUpon>frmCuentasPorCobrarWendy.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmFacturacion.resx">
       <DependentUpon>FrmFacturacion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGenerarAbonoWendy.resx">
+      <DependentUpon>frmGenerarAbonoWendy.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmListadoNC.resx">
       <DependentUpon>FrmListadoNC.vb</DependentUpon>
@@ -909,6 +1047,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <EntityDeploy Include="pv_Wendy.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>pv_Wendy.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <None Include="pv_Wendy.edmx.diagram">
+      <DependentUpon>pv_Wendy.edmx</DependentUpon>
+    </None>
     <None Include="Resources\accept.png" />
   </ItemGroup>
   <ItemGroup>
@@ -4979,6 +5124,16 @@
     <None Include="Resources\edit_16px.png" />
     <None Include="Resources\list_16px.png" />
     <None Include="Resources\coin_in_hand_32px.png" />
+    <Content Include="pv_Wendy.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>pv_Wendy.edmx</DependentUpon>
+      <LastGenOutput>pv_Wendy.Context.vb</LastGenOutput>
+    </Content>
+    <Content Include="pv_Wendy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>pv_Wendy.edmx</DependentUpon>
+      <LastGenOutput>pv_Wendy.vb</LastGenOutput>
+    </Content>
     <Content Include="SqlServerTypes\Loader.cs" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">

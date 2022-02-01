@@ -40,7 +40,7 @@
 
     Private Sub txttotal_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txttotal.KeyDown
         If e.KeyCode = Keys.Enter Then
-            CmdCobrar_Click(sender, e)
+            btnAdd_Click(sender, e)
         End If
     End Sub
 
@@ -75,14 +75,6 @@
             txttotal.Focus()
             txttotal.SelectAll()
         End If
-    End Sub
-
-    Private Sub CmdCobrar_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
-        
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -136,7 +128,7 @@
                 MsgBox("Error al Generar la Impresión de la Cotización, favor de Re-Imprimir", MsgBoxStyle.Information)
                 Exit Sub
             End If
-            Call CmdSalir_Click(sender, e)
+            Call Button2_Click(sender, e)
         Else
             MsgBox("Error al Insertar Registro en la Tabla HISTORIAL_PAGOS", MsgBoxStyle.Information, "Generar Abono a Cuenta")
             Exit Sub

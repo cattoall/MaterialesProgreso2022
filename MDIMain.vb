@@ -365,4 +365,10 @@
         FrmNotaDeCredito.Close()
         FrmNotaDeCredito.Dispose()
     End Sub
+
+    Private Sub CuentasPorCobrarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CuentasPorCobrarToolStripMenuItem.Click
+        frmCuentasPorCobrarWendy.ShowDialog()
+        frmCuentasPorCobrarWendy.Close()
+        frmCuentasPorCobrarWendy.Dispose()
+    End Sub
 End Class

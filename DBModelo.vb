@@ -123,6 +123,15 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function GetClientesByNameApatAmatWendy(ByVal Nombre As String) As List(Of tblWClientes)
+        Using ctx As New pvEntities()
+            Return ctx.tblWClientes.Where(Function(i) i.IdComp = "01" And
+                                              i.nombre.Contains(Nombre) Or
+                                              i.apat.Contains(Nombre) Or
+                                              i.amat.Contains(Nombre)).ToList()
+        End Using
+    End Function
+
     Shared Function GetCliente(ByVal IdCliente As Integer) As tblClientes
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblClientes.Where(Function(i) i.IdComp = CompanyCode And i.clave = IdCliente).FirstOrDefault
@@ -310,19 +319,26 @@ Public Class DBModelo
     End Function
     Shared Function GetConfigGroupDesc(ByVal GroupDesc As String) As tblGrupos
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblGrupos.Where(Function(i) i.descripcion = GroupDesc).FirstOrDefault
+            Return ctx.tblGrupos.Where(Function(i) i.IdComp = CompanyCode And i.descripcion = GroupDesc).FirstOrDefault
         End Using
     End Function
 
     Shared Function GetConfigProducts(ByVal Grupo As String, UsarTC As Integer) As List(Of tblProductos)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.productos.Where(Function(i) i.grupo = UsarTC And
+            Return ctx.productos.Where(Function(i) i.IdComp = CompanyCode And
+                                                   i.grupo = UsarTC And
                                                    i.UsarTC = UsarTC).ToList()
         End Using
     End Function
     Shared Function GetConfiguration(ByVal IdTerminal As String) As tblConfiguracion
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblConfiguracions.Where(Function(i) i.IdTerminal = IdTerminal).FirstOrDefault
+            Return ctx.tblConfiguracions.Where(Function(i) i.IdComp = CompanyCode And i.IdTerminal = IdTerminal).FirstOrDefault
+        End Using
+    End Function
+
+    Shared Function GetConfigurationWendy(ByVal IdTerminal As String) As tblWConfiguracion
+        Using ctx As New pvEntities()
+            Return ctx.tblWConfiguracions.Where(Function(i) i.IdComp = "01" And i.IdTerminal = IdTerminal).FirstOrDefault
         End Using
     End Function
 
@@ -356,31 +372,32 @@ Public Class DBModelo
 #Region "Seccion <<Productos>>"
     Shared Function GetProductByCB(ByVal CodigoBarras As String) As tblProductos
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.productos.Where(Function(i) i.codigoBarras = CodigoBarras).FirstOrDefault
+            Return ctx.productos.Where(Function(i) i.IdComp = CompanyCode And i.codigoBarras = CodigoBarras).FirstOrDefault
         End Using
     End Function
 
     Shared Function GetProductById(ByVal IdProducto As Integer) As tblProductos
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.productos.Where(Function(i) i.IdProducto = IdProducto).FirstOrDefault
+            Return ctx.productos.Where(Function(i) i.IdComp = CompanyCode And i.IdProducto = IdProducto).FirstOrDefault
         End Using
     End Function
 
     Shared Function GetProductByClave(ByVal Clave As String) As tblProductos
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.productos.Where(Function(i) i.clave = Clave).FirstOrDefault
+            Return ctx.productos.Where(Function(i) i.IdComp = CompanyCode And i.clave = Clave).FirstOrDefault
         End Using
     End Function
 
     Shared Function GetProductByGrupo(ByVal IdGrupo As String) As List(Of tblProductos)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.productos.Where(Function(i) i.grupo = IdGrupo).ToList()
+            Return ctx.productos.Where(Function(i) i.IdComp = CompanyCode And i.grupo = IdGrupo).ToList()
         End Using
     End Function
 
     Shared Function GetProducts(ByVal ProdDesc As String, ByVal ProdCB As String, ByVal ProdClave As String, ByVal ProdGrp As String, ByVal ProdFam As String, ByVal ProdLin As String) As List(Of tblProductos)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.productos.Where(Function(i) i.descripcionProducto.Contains(ProdDesc) And
+            Return ctx.productos.Where(Function(i) i.IdComp = CompanyCode And
+                                              i.descripcionProducto.Contains(ProdDesc) And
                                               i.codigoBarras.Contains(ProdCB) And
                                               i.clave.Contains(ProdClave) And
                                               i.grupo.Contains(ProdGrp) And
@@ -391,13 +408,13 @@ Public Class DBModelo
 
     Shared Function GetProducts(ByVal IdProducto As Integer) As tblProductos
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.productos.Where(Function(i) i.IdProducto = IdProducto).FirstOrDefault
+            Return ctx.productos.Where(Function(i) i.IdComp = CompanyCode And i.IdProducto = IdProducto).FirstOrDefault
         End Using
     End Function
 
     Shared Function GetProductsAll() As List(Of tblProductos)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.productos.OrderBy(Function(i) i.descripcionProducto).ToList()
+            Return ctx.productos.OrderBy(Function(i) i.IdComp = CompanyCode And i.descripcionProducto).ToList()
         End Using
     End Function
 
@@ -1090,6 +1107,12 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function Get_CobrarTipoDocWendy(ByVal NoRemisión As Integer, ByVal TipoDocumento As String, ByVal IdCliente As Integer) As tblWCobrar
+        Using ctx As New pvEntities()
+            Return ctx.tblWCobrars.Where(Function(i) i.IdComp = "01" And i.n_remision = NoRemisión And i.tipoDocumento = TipoDocumento And i.claveCliente = IdCliente).FirstOrDefault
+        End Using
+    End Function
+
     Shared Function GetCobrarByDates(ByVal DateFrom As String, ByVal DateTo As String) As List(Of tblCobrar)
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblCobrars.Where(Function(i) i.IdComp = CompanyCode And i.fecha_venta >= DateFrom And i.fecha_venta <= DateTo And i.resto <> 0).ToList()
@@ -1100,6 +1123,18 @@ Public Class DBModelo
         Try
             Using ctx As New pv_salvadorEntities1()
                 ctx.tblCobrars.Attach(strCobrar)
+                ctx.Entry(strCobrar).State = EntityState.Modified
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    Shared Function Update_CobrarWendy(ByVal strCobrar As tblWCobrar) As Boolean
+        Try
+            Using ctx As New pvEntities()
+                ctx.tblWCobrars.Attach(strCobrar)
                 ctx.Entry(strCobrar).State = EntityState.Modified
                 ctx.SaveChanges()
             End Using
@@ -1164,12 +1199,58 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function GetCXC_ByIdClienteWendy(ByVal IdCliente As Integer) As List(Of tblWCobrar)
+        Using ctx As New pvEntities()
+
+            Dim tCobrar As List(Of tblWCobrar) = ctx.tblWCobrars.Where(Function(i) i.IdComp = "01" And i.claveCliente = IdCliente And i.resto <> 0).ToList()
+            Dim numeroFactura
+
+            For Each wCobrar In tCobrar
+                If wCobrar.tipoDocumento = "TICKET" Then
+                    numeroFactura = (From t1 In ctx.tblWVventas
+                                     Where t1.IdComp = "01" And t1.nticket = wCobrar.n_remision
+                                     Select New With {t1.numeroFactura}).First().numeroFactura
+                    If numeroFactura = "" Then
+                        wCobrar.facturado = 0
+                    Else
+                        If numeroFactura = "X" Then
+                            wCobrar.facturado = 1
+                        Else
+                            wCobrar.facturado = Convert.ToInt32(numeroFactura)
+                        End If
+                    End If
+                Else
+                    numeroFactura = (From t1 In ctx.tblWVentasPedidos
+                                     Where t1.IdComp = "01" And t1.nticket = wCobrar.n_remision
+                                     Select New With {t1.numeroFactura}).First().numeroFactura
+                    If numeroFactura = "" Then
+                        wCobrar.facturado = 0
+                    Else
+                        If numeroFactura = "X" Then
+                            wCobrar.facturado = 1
+                        Else
+                            wCobrar.facturado = Convert.ToInt32(numeroFactura)
+                        End If
+                    End If
+                End If
+
+            Next
+
+            Return tCobrar
+        End Using
+    End Function
+
     Shared Function GetCobrarByIdCliente(ByVal IdCliente As Integer) As List(Of tblCobrar)
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblCobrars.Where(Function(i) i.IdComp = CompanyCode And i.claveCliente = IdCliente).ToList()
         End Using
     End Function
 
+    Shared Function GetCobrarByIdClienteWendy(ByVal IdCliente As Integer) As List(Of tblWCobrar)
+        Using ctx As New pvEntities()
+            Return ctx.tblWCobrars.Where(Function(i) i.IdComp = "01" And i.claveCliente = IdCliente).ToList()
+        End Using
+    End Function
 
 #End Region
 
@@ -1185,10 +1266,26 @@ Public Class DBModelo
             Return False
         End Try
     End Function
+    Shared Function InsertHistorialPagoWendy(ByVal strHistPago As tblWHistorialPagos) As Boolean
+        Try
+            Using ctx As New pvEntities()
+                ctx.tblWHistorialPagos.Add(strHistPago)
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 
     Shared Function Get_HistorialPago(ByVal IdPago As Integer) As tblHistorialPagos
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblHistorialPagos.Where(Function(i) i.IdComp = CompanyCode And i.Id = IdPago).FirstOrDefault
+        End Using
+    End Function
+    Shared Function Get_HistorialPagoWendy(ByVal IdPago As Integer) As tblWHistorialPagos
+        Using ctx As New pvEntities()
+            Return ctx.tblWHistorialPagos.Where(Function(i) i.IdComp = "01" And i.Id = IdPago).FirstOrDefault
         End Using
     End Function
 
@@ -1198,9 +1295,28 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function GetHistorialPago_ByIdClienteWendy(ByVal IdCliente As Integer) As List(Of tblWHistorialPagos)
+        Using ctx As New pvEntities()
+            Return ctx.tblWHistorialPagos.Where(Function(i) i.IdComp = "01" And i.claveCliente = IdCliente).ToList()
+        End Using
+    End Function
+
     Shared Function DeleteHistorialPagos(ByVal strHistPago As tblHistorialPagos) As Boolean
         Try
             Using ctx As New pv_salvadorEntities1()
+                If Not IsNothing(strHistPago) Then
+                    ctx.Entry(strHistPago).State = EntityState.Deleted
+                    ctx.SaveChanges()
+                End If
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    Shared Function DeleteHistorialPagosWendy(ByVal strHistPago As tblWHistorialPagos) As Boolean
+        Try
+            Using ctx As New pvEntities()
                 If Not IsNothing(strHistPago) Then
                     ctx.Entry(strHistPago).State = EntityState.Deleted
                     ctx.SaveChanges()

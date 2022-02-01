@@ -38,6 +38,11 @@ Partial Class MDIMain
         Me.PuntoDeVentaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.FacturaciónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FacturaciónToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NotasDeCréditoToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ReimpresiónDeFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReimpresiónDeNotasDeCréditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeTicketsPorFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReimpresiónDeFacturaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RevisarFacturasConErroresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -77,26 +82,23 @@ Partial Class MDIMain
         Me.ToolStripStatusLabel9 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TssDB = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.FacturaciónToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NotasDeCréditoToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ReimpresiónDeFacturasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReimpresiónDeNotasDeCréditoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStrip1.SuspendLayout
-        Me.StatusStrip1.SuspendLayout
-        Me.SuspendLayout
+        Me.CuentasPorCobrarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStrip1.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
+        Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.AutoSize = false
+        Me.MenuStrip1.AutoSize = False
         Me.MenuStrip1.BackColor = System.Drawing.Color.White
         Me.MenuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CatálogosToolStripMenuItem, Me.PuntoDeVentaToolStripMenuItem1, Me.ToolStripMenuItem1, Me.InformesToolStripMenuItem, Me.TransaccionesToolStripMenuItem, Me.OtrasOperacionesToolStripMenuItem, Me.ConfiguracionDelSistemaToolStripMenuItem, Me.SalirToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(2, 2, 0, 2)
         Me.MenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.MenuStrip1.Size = New System.Drawing.Size(1733, 53)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1300, 43)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -106,7 +108,7 @@ Partial Class MDIMain
         Me.CatálogosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Catalagos
         Me.CatálogosToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.CatálogosToolStripMenuItem.Name = "CatálogosToolStripMenuItem"
-        Me.CatálogosToolStripMenuItem.Size = New System.Drawing.Size(125, 49)
+        Me.CatálogosToolStripMenuItem.Size = New System.Drawing.Size(107, 39)
         Me.CatálogosToolStripMenuItem.Text = "Catálogos"
         '
         'ClientesToolStripMenuItem
@@ -114,70 +116,70 @@ Partial Class MDIMain
         Me.ClientesToolStripMenuItem.BackColor = System.Drawing.Color.Transparent
         Me.ClientesToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.ClientesOnline
         Me.ClientesToolStripMenuItem.Name = "ClientesToolStripMenuItem"
-        Me.ClientesToolStripMenuItem.Size = New System.Drawing.Size(260, 26)
+        Me.ClientesToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.ClientesToolStripMenuItem.Text = "Clientes"
         '
         'ProveedoresToolStripMenuItem
         '
         Me.ProveedoresToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Proveedores
         Me.ProveedoresToolStripMenuItem.Name = "ProveedoresToolStripMenuItem"
-        Me.ProveedoresToolStripMenuItem.Size = New System.Drawing.Size(260, 26)
+        Me.ProveedoresToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.ProveedoresToolStripMenuItem.Text = "Proveedores"
         '
         'MarcasDeProductosToolStripMenuItem
         '
         Me.MarcasDeProductosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.icon_component
         Me.MarcasDeProductosToolStripMenuItem.Name = "MarcasDeProductosToolStripMenuItem"
-        Me.MarcasDeProductosToolStripMenuItem.Size = New System.Drawing.Size(260, 26)
+        Me.MarcasDeProductosToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.MarcasDeProductosToolStripMenuItem.Text = "Marcas de Productos"
         '
         'FamiliasDeProductosToolStripMenuItem
         '
         Me.FamiliasDeProductosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FamProd
         Me.FamiliasDeProductosToolStripMenuItem.Name = "FamiliasDeProductosToolStripMenuItem"
-        Me.FamiliasDeProductosToolStripMenuItem.Size = New System.Drawing.Size(260, 26)
+        Me.FamiliasDeProductosToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.FamiliasDeProductosToolStripMenuItem.Text = "Familias de Productos"
         '
         'GruposDeProductosToolStripMenuItem
         '
         Me.GruposDeProductosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.GrupProd
         Me.GruposDeProductosToolStripMenuItem.Name = "GruposDeProductosToolStripMenuItem"
-        Me.GruposDeProductosToolStripMenuItem.Size = New System.Drawing.Size(260, 26)
+        Me.GruposDeProductosToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.GruposDeProductosToolStripMenuItem.Text = "Grupos de Productos"
         '
         'LineasDeProductosToolStripMenuItem
         '
         Me.LineasDeProductosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.LineasPro
         Me.LineasDeProductosToolStripMenuItem.Name = "LineasDeProductosToolStripMenuItem"
-        Me.LineasDeProductosToolStripMenuItem.Size = New System.Drawing.Size(260, 26)
+        Me.LineasDeProductosToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.LineasDeProductosToolStripMenuItem.Text = "Lineas de Productos"
         '
         'SubfamiliasDeProductosToolStripMenuItem
         '
         Me.SubfamiliasDeProductosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.SubFam
         Me.SubfamiliasDeProductosToolStripMenuItem.Name = "SubfamiliasDeProductosToolStripMenuItem"
-        Me.SubfamiliasDeProductosToolStripMenuItem.Size = New System.Drawing.Size(260, 26)
+        Me.SubfamiliasDeProductosToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.SubfamiliasDeProductosToolStripMenuItem.Text = "Subfamilias de Productos"
         '
         'ProductosToolStripMenuItem
         '
         Me.ProductosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Productosaaa
         Me.ProductosToolStripMenuItem.Name = "ProductosToolStripMenuItem"
-        Me.ProductosToolStripMenuItem.Size = New System.Drawing.Size(260, 26)
+        Me.ProductosToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.ProductosToolStripMenuItem.Text = "Productos"
         '
         'UnidadesDeMedidaToolStripMenuItem
         '
         Me.UnidadesDeMedidaToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Conversiones
         Me.UnidadesDeMedidaToolStripMenuItem.Name = "UnidadesDeMedidaToolStripMenuItem"
-        Me.UnidadesDeMedidaToolStripMenuItem.Size = New System.Drawing.Size(260, 26)
+        Me.UnidadesDeMedidaToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.UnidadesDeMedidaToolStripMenuItem.Text = "Unidades de Medida"
         '
         'UsuariosDelSistemaToolStripMenuItem
         '
         Me.UsuariosDelSistemaToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.UsSistem
         Me.UsuariosDelSistemaToolStripMenuItem.Name = "UsuariosDelSistemaToolStripMenuItem"
-        Me.UsuariosDelSistemaToolStripMenuItem.Size = New System.Drawing.Size(260, 26)
+        Me.UsuariosDelSistemaToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.UsuariosDelSistemaToolStripMenuItem.Text = "Usuarios del Sistema"
         '
         'PuntoDeVentaToolStripMenuItem1
@@ -185,7 +187,7 @@ Partial Class MDIMain
         Me.PuntoDeVentaToolStripMenuItem1.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Vents
         Me.PuntoDeVentaToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.PuntoDeVentaToolStripMenuItem1.Name = "PuntoDeVentaToolStripMenuItem1"
-        Me.PuntoDeVentaToolStripMenuItem1.Size = New System.Drawing.Size(160, 49)
+        Me.PuntoDeVentaToolStripMenuItem1.Size = New System.Drawing.Size(135, 39)
         Me.PuntoDeVentaToolStripMenuItem1.Text = "Punto De Venta"
         '
         'ToolStripMenuItem1
@@ -194,53 +196,82 @@ Partial Class MDIMain
         Me.ToolStripMenuItem1.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FacturasFondo123
         Me.ToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(239, 49)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(199, 39)
         Me.ToolStripMenuItem1.Text = "Facturas y Notas de Crédito"
         '
         'FacturaciónToolStripMenuItem
         '
         Me.FacturaciónToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FacturaciónToolStripMenuItem1, Me.NotasDeCréditoToolStripMenuItem1, Me.ToolStripSeparator1, Me.ReimpresiónDeFacturasToolStripMenuItem, Me.ReimpresiónDeNotasDeCréditoToolStripMenuItem})
         Me.FacturaciónToolStripMenuItem.Name = "FacturaciónToolStripMenuItem"
-        Me.FacturaciónToolStripMenuItem.Size = New System.Drawing.Size(327, 26)
+        Me.FacturaciónToolStripMenuItem.Size = New System.Drawing.Size(263, 26)
         Me.FacturaciónToolStripMenuItem.Text = "Facturación Electrónica"
+        '
+        'FacturaciónToolStripMenuItem1
+        '
+        Me.FacturaciónToolStripMenuItem1.Name = "FacturaciónToolStripMenuItem1"
+        Me.FacturaciónToolStripMenuItem1.Size = New System.Drawing.Size(248, 22)
+        Me.FacturaciónToolStripMenuItem1.Text = "Facturación"
+        '
+        'NotasDeCréditoToolStripMenuItem1
+        '
+        Me.NotasDeCréditoToolStripMenuItem1.Name = "NotasDeCréditoToolStripMenuItem1"
+        Me.NotasDeCréditoToolStripMenuItem1.Size = New System.Drawing.Size(248, 22)
+        Me.NotasDeCréditoToolStripMenuItem1.Text = "Notas de Crédito"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(245, 6)
+        '
+        'ReimpresiónDeFacturasToolStripMenuItem
+        '
+        Me.ReimpresiónDeFacturasToolStripMenuItem.Name = "ReimpresiónDeFacturasToolStripMenuItem"
+        Me.ReimpresiónDeFacturasToolStripMenuItem.Size = New System.Drawing.Size(248, 22)
+        Me.ReimpresiónDeFacturasToolStripMenuItem.Text = "Reimpresión de Facturas"
+        '
+        'ReimpresiónDeNotasDeCréditoToolStripMenuItem
+        '
+        Me.ReimpresiónDeNotasDeCréditoToolStripMenuItem.Name = "ReimpresiónDeNotasDeCréditoToolStripMenuItem"
+        Me.ReimpresiónDeNotasDeCréditoToolStripMenuItem.Size = New System.Drawing.Size(248, 22)
+        Me.ReimpresiónDeNotasDeCréditoToolStripMenuItem.Text = "Reimpresión de Notas de Crédito"
         '
         'ListadoDeTicketsPorFacturasToolStripMenuItem
         '
         Me.ListadoDeTicketsPorFacturasToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.ZuneFact
         Me.ListadoDeTicketsPorFacturasToolStripMenuItem.Name = "ListadoDeTicketsPorFacturasToolStripMenuItem"
-        Me.ListadoDeTicketsPorFacturasToolStripMenuItem.Size = New System.Drawing.Size(327, 26)
+        Me.ListadoDeTicketsPorFacturasToolStripMenuItem.Size = New System.Drawing.Size(263, 26)
         Me.ListadoDeTicketsPorFacturasToolStripMenuItem.Text = "Listado de Tickets por Facturas"
         '
         'ReimpresiónDeFacturaToolStripMenuItem
         '
         Me.ReimpresiónDeFacturaToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Re_Imp
         Me.ReimpresiónDeFacturaToolStripMenuItem.Name = "ReimpresiónDeFacturaToolStripMenuItem"
-        Me.ReimpresiónDeFacturaToolStripMenuItem.Size = New System.Drawing.Size(327, 26)
+        Me.ReimpresiónDeFacturaToolStripMenuItem.Size = New System.Drawing.Size(263, 26)
         Me.ReimpresiónDeFacturaToolStripMenuItem.Text = "Reimpresión de Factura"
-        Me.ReimpresiónDeFacturaToolStripMenuItem.Visible = false
+        Me.ReimpresiónDeFacturaToolStripMenuItem.Visible = False
         '
         'RevisarFacturasConErroresToolStripMenuItem
         '
         Me.RevisarFacturasConErroresToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.RevisarFact
         Me.RevisarFacturasConErroresToolStripMenuItem.Name = "RevisarFacturasConErroresToolStripMenuItem"
-        Me.RevisarFacturasConErroresToolStripMenuItem.Size = New System.Drawing.Size(327, 26)
+        Me.RevisarFacturasConErroresToolStripMenuItem.Size = New System.Drawing.Size(263, 26)
         Me.RevisarFacturasConErroresToolStripMenuItem.Text = "Revisar Facturas con Errores"
-        Me.RevisarFacturasConErroresToolStripMenuItem.Visible = false
+        Me.RevisarFacturasConErroresToolStripMenuItem.Visible = False
         '
         'ConfiguraciónDeFoliosToolStripMenuItem
         '
         Me.ConfiguraciónDeFoliosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.ConFol
         Me.ConfiguraciónDeFoliosToolStripMenuItem.Name = "ConfiguraciónDeFoliosToolStripMenuItem"
-        Me.ConfiguraciónDeFoliosToolStripMenuItem.Size = New System.Drawing.Size(327, 26)
+        Me.ConfiguraciónDeFoliosToolStripMenuItem.Size = New System.Drawing.Size(263, 26)
         Me.ConfiguraciónDeFoliosToolStripMenuItem.Text = "Configuración de Folios"
         '
         'ReimpresionesDeNotasDeCréditoToolStripMenuItem
         '
         Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Re_Imp
         Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem.Name = "ReimpresionesDeNotasDeCréditoToolStripMenuItem"
-        Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem.Size = New System.Drawing.Size(327, 26)
+        Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem.Size = New System.Drawing.Size(263, 26)
         Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem.Text = "Reimpresiones de Notas de Crédito"
-        Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem.Visible = false
+        Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem.Visible = False
         '
         'InformesToolStripMenuItem
         '
@@ -248,94 +279,94 @@ Partial Class MDIMain
         Me.InformesToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Informes
         Me.InformesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.InformesToolStripMenuItem.Name = "InformesToolStripMenuItem"
-        Me.InformesToolStripMenuItem.Size = New System.Drawing.Size(116, 49)
+        Me.InformesToolStripMenuItem.Size = New System.Drawing.Size(101, 39)
         Me.InformesToolStripMenuItem.Text = "Informes"
         '
         'ListadoDeProductosToolStripMenuItem
         '
         Me.ListadoDeProductosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Productosxx
         Me.ListadoDeProductosToolStripMenuItem.Name = "ListadoDeProductosToolStripMenuItem"
-        Me.ListadoDeProductosToolStripMenuItem.Size = New System.Drawing.Size(278, 26)
+        Me.ListadoDeProductosToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
         Me.ListadoDeProductosToolStripMenuItem.Text = "Listado de Productos"
         '
         'ListadoDeCotizacionesToolStripMenuItem
         '
         Me.ListadoDeCotizacionesToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Cotizacion
         Me.ListadoDeCotizacionesToolStripMenuItem.Name = "ListadoDeCotizacionesToolStripMenuItem"
-        Me.ListadoDeCotizacionesToolStripMenuItem.Size = New System.Drawing.Size(278, 26)
+        Me.ListadoDeCotizacionesToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
         Me.ListadoDeCotizacionesToolStripMenuItem.Text = "Listado de Cotizaciones"
         '
         'ListadoDeDeudoresToolStripMenuItem
         '
         Me.ListadoDeDeudoresToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Deudores
         Me.ListadoDeDeudoresToolStripMenuItem.Name = "ListadoDeDeudoresToolStripMenuItem"
-        Me.ListadoDeDeudoresToolStripMenuItem.Size = New System.Drawing.Size(278, 26)
+        Me.ListadoDeDeudoresToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
         Me.ListadoDeDeudoresToolStripMenuItem.Text = "Listado de Deudores"
         '
         'ListadoDeVentasToolStripMenuItem
         '
         Me.ListadoDeVentasToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.VentasBien
         Me.ListadoDeVentasToolStripMenuItem.Name = "ListadoDeVentasToolStripMenuItem"
-        Me.ListadoDeVentasToolStripMenuItem.Size = New System.Drawing.Size(278, 26)
+        Me.ListadoDeVentasToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
         Me.ListadoDeVentasToolStripMenuItem.Text = "Listado de Ventas"
         '
         'ListadoDePreciosPorLineaToolStripMenuItem
         '
         Me.ListadoDePreciosPorLineaToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.PrecioLinea
         Me.ListadoDePreciosPorLineaToolStripMenuItem.Name = "ListadoDePreciosPorLineaToolStripMenuItem"
-        Me.ListadoDePreciosPorLineaToolStripMenuItem.Size = New System.Drawing.Size(278, 26)
+        Me.ListadoDePreciosPorLineaToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
         Me.ListadoDePreciosPorLineaToolStripMenuItem.Text = "Listado de Precios por Linea"
-        Me.ListadoDePreciosPorLineaToolStripMenuItem.Visible = false
+        Me.ListadoDePreciosPorLineaToolStripMenuItem.Visible = False
         '
         'HistorialDeClientesToolStripMenuItem
         '
         Me.HistorialDeClientesToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Historial
         Me.HistorialDeClientesToolStripMenuItem.Name = "HistorialDeClientesToolStripMenuItem"
-        Me.HistorialDeClientesToolStripMenuItem.Size = New System.Drawing.Size(278, 26)
+        Me.HistorialDeClientesToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
         Me.HistorialDeClientesToolStripMenuItem.Text = "Historial de Clientes"
         '
         'AjusteDeInventarioToolStripMenuItem
         '
         Me.AjusteDeInventarioToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.InventarioAjust
         Me.AjusteDeInventarioToolStripMenuItem.Name = "AjusteDeInventarioToolStripMenuItem"
-        Me.AjusteDeInventarioToolStripMenuItem.Size = New System.Drawing.Size(278, 26)
+        Me.AjusteDeInventarioToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
         Me.AjusteDeInventarioToolStripMenuItem.Text = "Ajuste de Inventario"
         '
         'TransaccionesToolStripMenuItem
         '
-        Me.TransaccionesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PagosDeClientesToolStripMenuItem, Me.ConvertirPedidoATicketToolStripMenuItem, Me.DevoluciónDePedidosToolStripMenuItem, Me.DevoluciónDeTicketsToolStripMenuItem})
+        Me.TransaccionesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PagosDeClientesToolStripMenuItem, Me.CuentasPorCobrarToolStripMenuItem, Me.ConvertirPedidoATicketToolStripMenuItem, Me.DevoluciónDePedidosToolStripMenuItem, Me.DevoluciónDeTicketsToolStripMenuItem})
         Me.TransaccionesToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Transacction
         Me.TransaccionesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.TransaccionesToolStripMenuItem.Name = "TransaccionesToolStripMenuItem"
-        Me.TransaccionesToolStripMenuItem.Size = New System.Drawing.Size(149, 49)
+        Me.TransaccionesToolStripMenuItem.Size = New System.Drawing.Size(127, 39)
         Me.TransaccionesToolStripMenuItem.Text = "Transacciones"
         '
         'PagosDeClientesToolStripMenuItem
         '
         Me.PagosDeClientesToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.PagosClientes
         Me.PagosDeClientesToolStripMenuItem.Name = "PagosDeClientesToolStripMenuItem"
-        Me.PagosDeClientesToolStripMenuItem.Size = New System.Drawing.Size(257, 26)
+        Me.PagosDeClientesToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
         Me.PagosDeClientesToolStripMenuItem.Text = "Pagos de Clientes"
         '
         'ConvertirPedidoATicketToolStripMenuItem
         '
         Me.ConvertirPedidoATicketToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.keynotes_alt
         Me.ConvertirPedidoATicketToolStripMenuItem.Name = "ConvertirPedidoATicketToolStripMenuItem"
-        Me.ConvertirPedidoATicketToolStripMenuItem.Size = New System.Drawing.Size(257, 26)
+        Me.ConvertirPedidoATicketToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
         Me.ConvertirPedidoATicketToolStripMenuItem.Text = "Convertir Pedido a Ticket"
         '
         'DevoluciónDePedidosToolStripMenuItem
         '
         Me.DevoluciónDePedidosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.spideroak
         Me.DevoluciónDePedidosToolStripMenuItem.Name = "DevoluciónDePedidosToolStripMenuItem"
-        Me.DevoluciónDePedidosToolStripMenuItem.Size = New System.Drawing.Size(257, 26)
+        Me.DevoluciónDePedidosToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
         Me.DevoluciónDePedidosToolStripMenuItem.Text = "Devolución de Pedidos"
         '
         'DevoluciónDeTicketsToolStripMenuItem
         '
         Me.DevoluciónDeTicketsToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.pay
         Me.DevoluciónDeTicketsToolStripMenuItem.Name = "DevoluciónDeTicketsToolStripMenuItem"
-        Me.DevoluciónDeTicketsToolStripMenuItem.Size = New System.Drawing.Size(257, 26)
+        Me.DevoluciónDeTicketsToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
         Me.DevoluciónDeTicketsToolStripMenuItem.Text = "Devolución de Tickets"
         '
         'OtrasOperacionesToolStripMenuItem
@@ -344,29 +375,29 @@ Partial Class MDIMain
         Me.OtrasOperacionesToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Otros
         Me.OtrasOperacionesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.OtrasOperacionesToolStripMenuItem.Name = "OtrasOperacionesToolStripMenuItem"
-        Me.OtrasOperacionesToolStripMenuItem.Size = New System.Drawing.Size(180, 49)
+        Me.OtrasOperacionesToolStripMenuItem.Size = New System.Drawing.Size(151, 39)
         Me.OtrasOperacionesToolStripMenuItem.Text = "Otras Operaciones"
-        Me.OtrasOperacionesToolStripMenuItem.Visible = false
+        Me.OtrasOperacionesToolStripMenuItem.Visible = False
         '
         'GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem
         '
         Me.GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Respaldo
         Me.GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem.Name = "GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem"
-        Me.GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(346, 26)
+        Me.GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem.Text = "Generar Respaldo de la Base de Datos"
         '
         'ImportarDesdeExcelToolStripMenuItem
         '
         Me.ImportarDesdeExcelToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Excel12
         Me.ImportarDesdeExcelToolStripMenuItem.Name = "ImportarDesdeExcelToolStripMenuItem"
-        Me.ImportarDesdeExcelToolStripMenuItem.Size = New System.Drawing.Size(346, 26)
+        Me.ImportarDesdeExcelToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.ImportarDesdeExcelToolStripMenuItem.Text = "Importar desde Excel"
         '
         'CorregirVentasACréditoConErroresToolStripMenuItem
         '
         Me.CorregirVentasACréditoConErroresToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Documents_Library
         Me.CorregirVentasACréditoConErroresToolStripMenuItem.Name = "CorregirVentasACréditoConErroresToolStripMenuItem"
-        Me.CorregirVentasACréditoConErroresToolStripMenuItem.Size = New System.Drawing.Size(346, 26)
+        Me.CorregirVentasACréditoConErroresToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
         Me.CorregirVentasACréditoConErroresToolStripMenuItem.Text = "Corregir Ventas a Crédito con Errores"
         '
         'ConfiguracionDelSistemaToolStripMenuItem
@@ -374,7 +405,7 @@ Partial Class MDIMain
         Me.ConfiguracionDelSistemaToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.ConfiguracionBuena
         Me.ConfiguracionDelSistemaToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ConfiguracionDelSistemaToolStripMenuItem.Name = "ConfiguracionDelSistemaToolStripMenuItem"
-        Me.ConfiguracionDelSistemaToolStripMenuItem.Size = New System.Drawing.Size(232, 49)
+        Me.ConfiguracionDelSistemaToolStripMenuItem.Size = New System.Drawing.Size(193, 39)
         Me.ConfiguracionDelSistemaToolStripMenuItem.Text = "Configuración del Sistema"
         '
         'SalirToolStripMenuItem
@@ -382,144 +413,119 @@ Partial Class MDIMain
         Me.SalirToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Salir
         Me.SalirToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.SalirToolStripMenuItem.Name = "SalirToolStripMenuItem"
-        Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(87, 49)
+        Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(76, 39)
         Me.SalirToolStripMenuItem.Text = "Salir"
         '
         'StatusStrip1
         '
         Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripProgressBar1, Me.ToolStripStatusLabel1, Me.TssDate, Me.ToolStripStatusLabel3, Me.ToolStripStatusLabel2, Me.TssTime, Me.ToolStripStatusLabel4, Me.ToolStripStatusLabel5, Me.ToolStripStatusLabel6, Me.ToolStripStatusLabel7, Me.ToolStripStatusLabel8, Me.ToolStripStatusLabel9, Me.TssDB})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 817)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 663)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 19, 0)
-        Me.StatusStrip1.Size = New System.Drawing.Size(1733, 26)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1300, 22)
         Me.StatusStrip1.TabIndex = 3
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'ToolStripProgressBar1
         '
         Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
-        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(0, 20)
+        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(0, 17)
         '
         'ToolStripStatusLabel1
         '
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(50, 20)
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(41, 17)
         Me.ToolStripStatusLabel1.Text = "Fecha:"
         '
         'TssDate
         '
         Me.TssDate.Name = "TssDate"
-        Me.TssDate.Size = New System.Drawing.Size(67, 20)
+        Me.TssDate.Size = New System.Drawing.Size(54, 17)
         Me.TssDate.Text = "<Fecha>"
         '
         'ToolStripStatusLabel3
         '
         Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
-        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(13, 20)
+        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(10, 17)
         Me.ToolStripStatusLabel3.Text = "|"
         '
         'ToolStripStatusLabel2
         '
         Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
-        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(45, 20)
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(36, 17)
         Me.ToolStripStatusLabel2.Text = "Hora:"
         '
         'TssTime
         '
         Me.TssTime.Name = "TssTime"
-        Me.TssTime.Size = New System.Drawing.Size(62, 20)
+        Me.TssTime.Size = New System.Drawing.Size(49, 17)
         Me.TssTime.Text = "<Time>"
         '
         'ToolStripStatusLabel4
         '
         Me.ToolStripStatusLabel4.Name = "ToolStripStatusLabel4"
-        Me.ToolStripStatusLabel4.Size = New System.Drawing.Size(13, 20)
+        Me.ToolStripStatusLabel4.Size = New System.Drawing.Size(10, 17)
         Me.ToolStripStatusLabel4.Text = "|"
         '
         'ToolStripStatusLabel5
         '
         Me.ToolStripStatusLabel5.Name = "ToolStripStatusLabel5"
-        Me.ToolStripStatusLabel5.Size = New System.Drawing.Size(125, 20)
+        Me.ToolStripStatusLabel5.Size = New System.Drawing.Size(97, 17)
         Me.ToolStripStatusLabel5.Text = "Desarrollado por:"
         '
         'ToolStripStatusLabel6
         '
         Me.ToolStripStatusLabel6.Name = "ToolStripStatusLabel6"
-        Me.ToolStripStatusLabel6.Size = New System.Drawing.Size(286, 20)
+        Me.ToolStripStatusLabel6.Size = New System.Drawing.Size(230, 17)
         Me.ToolStripStatusLabel6.Text = "Ing. J. Jesús Martínez Fuentes (TSF Colima)"
         '
         'ToolStripStatusLabel7
         '
         Me.ToolStripStatusLabel7.Name = "ToolStripStatusLabel7"
-        Me.ToolStripStatusLabel7.Size = New System.Drawing.Size(13, 20)
+        Me.ToolStripStatusLabel7.Size = New System.Drawing.Size(10, 17)
         Me.ToolStripStatusLabel7.Text = "|"
         '
         'ToolStripStatusLabel8
         '
         Me.ToolStripStatusLabel8.Name = "ToolStripStatusLabel8"
-        Me.ToolStripStatusLabel8.Size = New System.Drawing.Size(202, 20)
+        Me.ToolStripStatusLabel8.Size = New System.Drawing.Size(158, 17)
         Me.ToolStripStatusLabel8.Text = "Versión CFDI 3.3 : 2022-01-01"
         '
         'ToolStripStatusLabel9
         '
         Me.ToolStripStatusLabel9.Name = "ToolStripStatusLabel9"
-        Me.ToolStripStatusLabel9.Size = New System.Drawing.Size(13, 20)
+        Me.ToolStripStatusLabel9.Size = New System.Drawing.Size(10, 17)
         Me.ToolStripStatusLabel9.Text = "|"
         '
         'TssDB
         '
         Me.TssDB.Name = "TssDB"
-        Me.TssDB.Size = New System.Drawing.Size(0, 20)
+        Me.TssDB.Size = New System.Drawing.Size(0, 17)
         '
         'Timer1
         '
-        Me.Timer1.Enabled = true
+        Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
         '
-        'FacturaciónToolStripMenuItem1
+        'CuentasPorCobrarToolStripMenuItem
         '
-        Me.FacturaciónToolStripMenuItem1.Name = "FacturaciónToolStripMenuItem1"
-        Me.FacturaciónToolStripMenuItem1.Size = New System.Drawing.Size(313, 26)
-        Me.FacturaciónToolStripMenuItem1.Text = "Facturación"
-        '
-        'NotasDeCréditoToolStripMenuItem1
-        '
-        Me.NotasDeCréditoToolStripMenuItem1.Name = "NotasDeCréditoToolStripMenuItem1"
-        Me.NotasDeCréditoToolStripMenuItem1.Size = New System.Drawing.Size(313, 26)
-        Me.NotasDeCréditoToolStripMenuItem1.Text = "Notas de Crédito"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(310, 6)
-        '
-        'ReimpresiónDeFacturasToolStripMenuItem
-        '
-        Me.ReimpresiónDeFacturasToolStripMenuItem.Name = "ReimpresiónDeFacturasToolStripMenuItem"
-        Me.ReimpresiónDeFacturasToolStripMenuItem.Size = New System.Drawing.Size(313, 26)
-        Me.ReimpresiónDeFacturasToolStripMenuItem.Text = "Reimpresión de Facturas"
-        '
-        'ReimpresiónDeNotasDeCréditoToolStripMenuItem
-        '
-        Me.ReimpresiónDeNotasDeCréditoToolStripMenuItem.Name = "ReimpresiónDeNotasDeCréditoToolStripMenuItem"
-        Me.ReimpresiónDeNotasDeCréditoToolStripMenuItem.Size = New System.Drawing.Size(313, 26)
-        Me.ReimpresiónDeNotasDeCréditoToolStripMenuItem.Text = "Reimpresión de Notas de Crédito"
+        Me.CuentasPorCobrarToolStripMenuItem.Name = "CuentasPorCobrarToolStripMenuItem"
+        Me.CuentasPorCobrarToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
+        Me.CuentasPorCobrarToolStripMenuItem.Text = "Pago de Clientes Wendy"
         '
         'MDIMain
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8!, 16!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.lOGO_X
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.ClientSize = New System.Drawing.Size(1733, 843)
+        Me.ClientSize = New System.Drawing.Size(1300, 685)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.MenuStrip1)
-        Me.DoubleBuffered = true
-        Me.IsMdiContainer = true
+        Me.DoubleBuffered = True
+        Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "MDIMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Materiales Electricos ""Progreso"""
@@ -592,4 +598,5 @@ End Sub
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ReimpresiónDeFacturasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReimpresiónDeNotasDeCréditoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CuentasPorCobrarToolStripMenuItem As ToolStripMenuItem
 End Class
