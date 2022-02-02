@@ -196,6 +196,7 @@
         End If
 
         If Add_Update = False Then
+            strCliente.IdComp = CompanyCode
             strCliente.nombre = txtNombre.Text
             strCliente.apat = txtApat.Text
             strCliente.amat = txtAmat.Text
@@ -233,6 +234,7 @@
         Else
             strCliente = DBModelo.GetCliente(lv_idCliente)
             If Not IsNothing(strCliente) Then
+                strCliente.IdComp = CompanyCode
                 strCliente.nombre = txtNombre.Text
                 strCliente.apat = txtApat.Text
                 strCliente.amat = txtAmat.Text
@@ -307,7 +309,7 @@
             Dim strCliente As tblClientes = DBModelo.GetCliente(lv_idCliente)
             If Not IsNothing(strCliente) Then
                 If DBModelo.DeleteCliente(strCliente) Then
-                    MetroFramework.MetroMessageBox.Show(Me, "Cliente: " & strCliente.nombre & " " & strCliente.apat & " " & strCliente.amat & " eliminaro correctamente!", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MetroFramework.MetroMessageBox.Show(Me, "Cliente: " & strCliente.nombre & " " & strCliente.apat & " " & strCliente.amat & " eliminado correctamente!", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     FrmBuscarClientes.txtBusqueda.Text = txtNombre.Text
                     Add_Update = False
                     LimpiarVar()

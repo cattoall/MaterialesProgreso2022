@@ -26,43 +26,43 @@
     Private Sub MetroGrid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellDoubleClick
         Add_Update                          = True
         FrmProductos.Text                   = "Modificar Producto en el Sistema"
-        FrmProductos.lv_idProducto          = MetroGrid1.Item(0,  MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtIdProducto.Text     = MetroGrid1.Item(0,  MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtCodigoBarras.Text   = MetroGrid1.Item(1,  MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtClave.Text          = MetroGrid1.Item(2,  MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtDescripcion.Text    = MetroGrid1.Item(3,  MetroGrid1.CurrentRow.Index).Value
-        Material_Umedida                    = MetroGrid1.Item(4,  MetroGrid1.CurrentRow.Index).Value
-        Material_Grupo                      = MetroGrid1.Item(6,  MetroGrid1.CurrentRow.Index).Value
-        Material_Familia                    = MetroGrid1.Item(7,  MetroGrid1.CurrentRow.Index).Value
-        Material_SubFam                     = MetroGrid1.Item(8,  MetroGrid1.CurrentRow.Index).Value
-        Material_Linea                      = MetroGrid1.Item(9,  MetroGrid1.CurrentRow.Index).Value
-        Material_Proveedores                = MetroGrid1.Item(10,  MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.CmbTipoVenta.Text      = MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtDesc.Text           = MetroGrid1.Item(12, MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtPrecioLista.Text    = MetroGrid1.Item(13, MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtPrecioCosto.Text    = MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtPrecioPublico.Text  = MetroGrid1.Item(15, MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtPrecioP1.Text       = MetroGrid1.Item(16, MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtPrecioP2.Text       = MetroGrid1.Item(17, MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtPrecioP3.Text       = MetroGrid1.Item(18, MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtStock.Text          = MetroGrid1.Item(19, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.lv_idProducto          = MetroGrid1.Item(1,  MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtIdProducto.Text     = MetroGrid1.Item(1,  MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtCodigoBarras.Text   = MetroGrid1.Item(2,  MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtClave.Text          = MetroGrid1.Item(3,  MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtDescripcion.Text    = MetroGrid1.Item(4,  MetroGrid1.CurrentRow.Index).Value
+        Material_Umedida                    = MetroGrid1.Item(5,  MetroGrid1.CurrentRow.Index).Value
+        Material_Grupo                      = MetroGrid1.Item(7,  MetroGrid1.CurrentRow.Index).Value
+        Material_Familia                    = MetroGrid1.Item(8,  MetroGrid1.CurrentRow.Index).Value
+        Material_SubFam                     = MetroGrid1.Item(9,  MetroGrid1.CurrentRow.Index).Value
+        Material_Linea                      = MetroGrid1.Item(10,  MetroGrid1.CurrentRow.Index).Value
+        Material_Proveedores                = MetroGrid1.Item(11,  MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.CmbTipoVenta.Text      = MetroGrid1.Item(12, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtDesc.Text           = MetroGrid1.Item(13, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtPrecioLista.Text    = MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtPrecioCosto.Text    = MetroGrid1.Item(15, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtPrecioPublico.Text  = MetroGrid1.Item(16, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtPrecioP1.Text       = MetroGrid1.Item(17, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtPrecioP2.Text       = MetroGrid1.Item(18, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtPrecioP3.Text       = MetroGrid1.Item(19, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtStock.Text          = MetroGrid1.Item(20, MetroGrid1.CurrentRow.Index).Value
 
-        If MetroGrid1.Item(20, MetroGrid1.CurrentRow.Index).Value = True Then
+        If MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value = True Then
             FrmProductos.chkPrecioManual.Checked = True
         Else
             FrmProductos.chkPrecioManual.Checked = False
         End If
 
-        If MetroGrid1.Item(22, MetroGrid1.CurrentRow.Index).Value = True Then
+        If MetroGrid1.Item(23, MetroGrid1.CurrentRow.Index).Value = True Then
             FrmProductos.chkTC.Checked = True
         Else
             FrmProductos.chkTC.Checked = False
         End If
 
-        FrmProductos.txtClaveProducto.Text = MetroGrid1.Item(24, MetroGrid1.CurrentRow.Index).Value
-        FrmProductos.txtClaveUnidad.Text = MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtClaveProducto.Text = MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value
+        FrmProductos.txtClaveUnidad.Text = MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value
 
-        If MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value = True Then
+        If MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value = True Then
             FrmProductos.chkTasaCero.Checked = True
         Else
             FrmProductos.chkTasaCero.Checked = False
@@ -86,42 +86,41 @@
             MetroGrid1.Refresh()
             MetroGrid1.DataSource = products.ToList
 
-            ' A partir de la columna de Grupos están movidos uno, es decir, en Familia está lo de Grupo
-            ' en SubFamilia esta lo de familia, etc etc.
-
-            MetroGrid1.Columns(0).HeaderText    = "Id"
+            MetroGrid1.Columns(0).HeaderText    = "IdComp"
             MetroGrid1.Columns(0).Visible       = False
-            MetroGrid1.Columns(1).HeaderText    = "CB"
-            MetroGrid1.Columns(2).HeaderText    = "Clave"
-            MetroGrid1.Columns(3).HeaderText    = "Descripción"
-            MetroGrid1.Columns(4).HeaderText    = "UoM"
-            MetroGrid1.Columns(5).Visible       = False
-            MetroGrid1.Columns(6).HeaderText    = "Grupo"
-            MetroGrid1.Columns(7).HeaderText    = "Familia"
-            MetroGrid1.Columns(8).HeaderText    = "SubFamilia"
-            MetroGrid1.Columns(8).Visible       = False
-            MetroGrid1.Columns(9).HeaderText    = "Linea"
-            MetroGrid1.Columns(10).HeaderText    = "Proveedor"
-            MetroGrid1.Columns(10).Visible       = False
-            MetroGrid1.Columns(11).HeaderText   = "TipoVenta"
-            MetroGrid1.Columns(11).Visible      = False
-            MetroGrid1.Columns(12).HeaderText   = "Descuento"
-            MetroGrid1.Columns(13).HeaderText   = "PrecioLista"
-            MetroGrid1.Columns(14).HeaderText   = "PrecioCosto"
-            MetroGrid1.Columns(15).HeaderText   = "PrecioPublico"
-            MetroGrid1.Columns(16).HeaderText   = "Precio P1"
-            MetroGrid1.Columns(17).HeaderText   = "Precio P2"
-            MetroGrid1.Columns(18).HeaderText   = "Precio P3"
-            MetroGrid1.Columns(19).HeaderText   = "Stock"
-            MetroGrid1.Columns(19).Visible      = False
-            MetroGrid1.Columns(20).HeaderText   = "PrecioManual"
-            MetroGrid1.Columns(21).HeaderText   = "Inventario"
-            MetroGrid1.Columns(21).Visible      = False
-            MetroGrid1.Columns(22).HeaderText   = "UsarTC"
-            MetroGrid1.Columns(23).HeaderText   = "TC"
-            MetroGrid1.Columns(24).HeaderText   = "ClaveProducto"
-            MetroGrid1.Columns(25).HeaderText   = "ClaveUnidad"
-            MetroGrid1.Columns(26).HeaderText   = "TasaCero"
+            MetroGrid1.Columns(1).HeaderText    = "Id"
+            MetroGrid1.Columns(1).Visible       = False
+            MetroGrid1.Columns(2).HeaderText    = "CB"
+            MetroGrid1.Columns(3).HeaderText    = "Clave"
+            MetroGrid1.Columns(4).HeaderText    = "Descripción"
+            MetroGrid1.Columns(5).HeaderText    = "UoM"
+            MetroGrid1.Columns(6).Visible       = False
+            MetroGrid1.Columns(7).HeaderText    = "Grupo"
+            MetroGrid1.Columns(8).HeaderText    = "Familia"
+            MetroGrid1.Columns(9).HeaderText    = "SubFamilia"
+            MetroGrid1.Columns(9).Visible       = False
+            MetroGrid1.Columns(10).HeaderText    = "Linea"
+            MetroGrid1.Columns(11).HeaderText    = "Proveedor"
+            MetroGrid1.Columns(11).Visible       = False
+            MetroGrid1.Columns(12).HeaderText   = "TipoVenta"
+            MetroGrid1.Columns(12).Visible      = False
+            MetroGrid1.Columns(13).HeaderText   = "Descuento"
+            MetroGrid1.Columns(14).HeaderText   = "PrecioLista"
+            MetroGrid1.Columns(15).HeaderText   = "PrecioCosto"
+            MetroGrid1.Columns(16).HeaderText   = "PrecioPublico"
+            MetroGrid1.Columns(17).HeaderText   = "Precio P1"
+            MetroGrid1.Columns(18).HeaderText   = "Precio P2"
+            MetroGrid1.Columns(19).HeaderText   = "Precio P3"
+            MetroGrid1.Columns(20).HeaderText   = "Stock"
+            MetroGrid1.Columns(20).Visible      = False
+            MetroGrid1.Columns(21).HeaderText   = "PrecioManual"
+            MetroGrid1.Columns(22).HeaderText   = "Inventario"
+            MetroGrid1.Columns(22).Visible      = False
+            MetroGrid1.Columns(23).HeaderText   = "UsarTC"
+            MetroGrid1.Columns(24).HeaderText   = "TC"
+            MetroGrid1.Columns(25).HeaderText   = "ClaveProducto"
+            MetroGrid1.Columns(26).HeaderText   = "ClaveUnidad"
+            MetroGrid1.Columns(27).HeaderText   = "TasaCero"
         End If
     End Sub
 

@@ -169,6 +169,7 @@
         Try
             Dim strGrupos As New tblGrupos
             If Add_Update = False Then
+                strGrupos.IdComp = CompanyCode
                 strGrupos.descripcion = txtDescripcion.Text
                 strGrupos.factorCosto = txtFactorCosto.Text
                 strGrupos.factorPublico = txtFactorPublico.Text

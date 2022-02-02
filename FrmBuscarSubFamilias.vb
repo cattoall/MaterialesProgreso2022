@@ -37,19 +37,21 @@ Public Class FrmBuscarSubFamilias
 
         MetroGrid1.DataSource = subfamilia.ToList
 
-        MetroGrid1.Columns(0).HeaderText = "Id SubFamilia"
-        MetroGrid1.Columns(0).ReadOnly = True
+        MetroGrid1.Columns(0).Visible = False
 
-        MetroGrid1.Columns(1).HeaderText = "Descripción"
+        MetroGrid1.Columns(1).HeaderText = "Id SubFamilia"
         MetroGrid1.Columns(1).ReadOnly = True
-        MetroGrid1.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+
+        MetroGrid1.Columns(2).HeaderText = "Descripción"
+        MetroGrid1.Columns(2).ReadOnly = True
+        MetroGrid1.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
     End Sub
 
     Private Sub MetroGrid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellDoubleClick
         Add_Update = True
-        lv_idSubFamilia = MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value
-        txtSubFamilia.Text = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-        lv_ValorAnterior = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
+        lv_idSubFamilia = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
+        txtSubFamilia.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
+        lv_ValorAnterior = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
     End Sub
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
@@ -87,6 +89,7 @@ Public Class FrmBuscarSubFamilias
                     End If
                 End If
             Case False
+                strSubFamilia.IdComp = CompanyCode
                 strSubFamilia.descripcion = txtSubFamilia.Text
                 If DBModelo.InsertSubfamilia(strSubFamilia) Then
                     MetroFramework.MetroMessageBox.Show(Me, "SubFamilia creada correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)

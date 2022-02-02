@@ -16,12 +16,14 @@
 
         MetroGrid1.DataSource = Marca.ToList
 
-        MetroGrid1.Columns(0).HeaderText = "Id Marca"
-        MetroGrid1.Columns(0).ReadOnly = True
+        MetroGrid1.Columns(0).Visible = False
 
-        MetroGrid1.Columns(1).HeaderText = "Descripción"
+        MetroGrid1.Columns(1).HeaderText = "Id Marca"
         MetroGrid1.Columns(1).ReadOnly = True
-        MetroGrid1.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+
+        MetroGrid1.Columns(2).HeaderText = "Descripción"
+        MetroGrid1.Columns(2).ReadOnly = True
+        MetroGrid1.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
     End Sub
 
@@ -46,9 +48,9 @@
 
     Private Sub MetroGrid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellDoubleClick
         Add_Update = True
-        lv_idMarca = MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value
-        txtMarca.Text = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-        lv_ValorAnterior = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
+        lv_idMarca = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
+        txtMarca.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
+        lv_ValorAnterior = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
     End Sub
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
@@ -83,6 +85,7 @@
                     End If
                 End If
             Case False
+                strMarca.IdComp = CompanyCode
                 strMarca.descripcion = txtMarca.Text
                 If DBModelo.InsertMarca(strMarca) Then
                     MetroFramework.MetroMessageBox.Show(Me, "Marca creada correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -108,6 +111,7 @@
             Case True
                 strMarca = DBModelo.GetMarca(lv_idMarca)
                 If Not IsNothing(strMarca) Then
+                    strMarca.IdComp = CompanyCode
                     strMarca.descripcion = txtMarca.Text
                     If DBModelo.UpdateMarca(strMarca) Then
                         If lv_ValorAnterior <> txtMarca.Text Then

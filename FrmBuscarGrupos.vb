@@ -28,14 +28,15 @@
     Private Sub MetroGrid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellDoubleClick
         Add_Update = True
         FrmGrupos.Text = "Modificar Grupo"
-        FrmGrupos.lv_idGrupo = MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.lv_ValorAnterior = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.txtDescripcion.Text = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.txtFactorCosto.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.txtFactorPublico.Text = MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.txtFactorP1.Text = MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.txtFactorP2.Text = MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.txtFactorP3.Text = MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value
+
+        FrmGrupos.lv_idGrupo            = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
+        FrmGrupos.lv_ValorAnterior      = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
+        FrmGrupos.txtDescripcion.Text   = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
+        FrmGrupos.txtFactorCosto.Text   = MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value
+        FrmGrupos.txtFactorPublico.Text = MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
+        FrmGrupos.txtFactorP1.Text      = MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value
+        FrmGrupos.txtFactorP2.Text      = MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value
+        FrmGrupos.txtFactorP3.Text      = MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value
         FrmGrupos.ShowDialog()
         FrmGrupos.Close()
         FrmGrupos.Dispose()
@@ -55,13 +56,14 @@
         MetroGrid1.DataSource = grps.ToList
 
         MetroGrid1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-        MetroGrid1.Columns(0).HeaderText = "Id"
-        MetroGrid1.Columns(1).HeaderText = "Descripción"
-        MetroGrid1.Columns(2).HeaderText = "Factor Costo"
-        MetroGrid1.Columns(3).HeaderText = "Factor Público"
-        MetroGrid1.Columns(4).HeaderText = "Factor P1"
-        MetroGrid1.Columns(5).HeaderText = "Factor P2"
-        MetroGrid1.Columns(6).HeaderText = "Factor P3"
+        MetroGrid1.Columns(0).Visible = False
+        MetroGrid1.Columns(1).HeaderText = "Id"
+        MetroGrid1.Columns(2).HeaderText = "Descripción"
+        MetroGrid1.Columns(3).HeaderText = "Factor Costo"
+        MetroGrid1.Columns(4).HeaderText = "Factor Público"
+        MetroGrid1.Columns(5).HeaderText = "Factor P1"
+        MetroGrid1.Columns(6).HeaderText = "Factor P2"
+        MetroGrid1.Columns(7).HeaderText = "Factor P3"
     End Sub
 
     Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs)

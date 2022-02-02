@@ -209,6 +209,7 @@ Public Class FrmProveedor
 
 
         If Add_Update = False Then
+            strProveedor.IdComp = CompanyCode
             strProveedor.razonSocial = txtRazonSocial.Text
             strProveedor.calle = txtDomicilio.Text
             strProveedor.numero = txtNumExterno.Text

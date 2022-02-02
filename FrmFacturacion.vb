@@ -455,6 +455,7 @@ Public Class FrmFacturacion
             PrBImprimiendo.Value = 10
 
             Dim wFacturaTotal As tblFacturaTotal = New tblFacturaTotal
+            wFacturaTotal.IdComp = CompanyCode
             wFacturaTotal.n_factura = Decimal.Parse(NoFactura)
             wFacturaTotal.total = Decimal.Parse(TxtTotal.Text)
             wFacturaTotal.usuario = usuario
