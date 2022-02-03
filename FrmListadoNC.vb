@@ -76,14 +76,16 @@
 
     Private Sub DataGridConsulta_CellClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridConsulta.CellClick
         LblNumTicket.Visible = True
-        LblTotal.Text = Format(Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,##0.00")
-        LblNumTicket.Text = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
-        NoFactura = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+        LblTotal.Text       = Format(Me.DataGridConsulta.Item(4, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,##0.00")
+        LblNumTicket.Text   = Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value
+        NoFactura = Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value
 
-        DataGridTikect.DataSource = DBModelo.GetNCDetalle(Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value)
+        DataGridTikect.DataSource = DBModelo.GetNCDetalle(Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value)
 
         'Aplica formato al DataGridView
-        load_layout_dgv_ListaNC_i(Me.DataGridTikect)
+        DataGridTikect.Columns(0).Visible = False
+        DataGridTikect.Columns(1).Visible = False
+        'load_layout_dgv_ListaNC_i(Me.DataGridTikect)
     End Sub
 
     Private Sub mBtnSearch_Click(sender As Object, e As EventArgs)
@@ -122,8 +124,8 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If LblNumTicket.Text <> "" Then
-            Dim NoFactura = DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
-            Dim FechaFactura = DataGridConsulta.Item(8, DataGridConsulta.CurrentRow.Index).Value
+            Dim NoFactura       = DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value
+            Dim FechaFactura    = DataGridConsulta.Item(9, DataGridConsulta.CurrentRow.Index).Value
             Dim FolioFactura As String = gv_SerieNCSalvador & "-" & NoFactura & "_" & Format(FechaFactura, "yyyyMMdd") & "_CFDI"
             If ImprimeNotaDeCredito(NoFactura, FolioFactura, True) = False Then
                 MsgBox("Hubo un error al Generar la Impresión de la Nota de Crédito", MsgBoxStyle.Critical, "Impresiones de Notas de Crédito")
@@ -138,6 +140,7 @@
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         DataGridConsulta.DataSource = DBModelo.GetNCIntervalFacturas(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"))
 
+        DataGridConsulta.Columns(0).Visible = False
         'load_layout_dgv_ListaNC_H(Me.DataGridConsulta)
 
         For i = 0 To DataGridConsulta.RowCount - 1

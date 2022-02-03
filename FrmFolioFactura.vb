@@ -50,11 +50,12 @@ Public Class FrmFolioFactura
     End Sub
 
     Private Sub DataGridView1_CellDoubleClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) 
-        foliotipodoc = DataGridView1.Item(0, e.RowIndex).Value
-        folioyear = DataGridView1.Item(1, e.RowIndex).Value
-        folioini = DataGridView1.Item(2, e.RowIndex).Value
-        foliofin = DataGridView1.Item(3, e.RowIndex).Value
-        folioactual = DataGridView1.Item(4, e.RowIndex).Value
+        foliotipodoc    = DataGridView1.Item(1, e.RowIndex).Value
+        folioyear       = DataGridView1.Item(2, e.RowIndex).Value
+        folioini        = DataGridView1.Item(3, e.RowIndex).Value
+        foliofin        = DataGridView1.Item(4, e.RowIndex).Value
+        folioactual     = DataGridView1.Item(5, e.RowIndex).Value
+        
         Llena_Variables(foliotipodoc, folioini, foliofin, folioactual, folioyear)
         Selection = True
         Call btnEdit_Click(sender, e)
@@ -90,11 +91,12 @@ Public Class FrmFolioFactura
     
 
     Private Sub DataGridView1_CellClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
-        foliotipodoc = DataGridView1.Item(0, e.RowIndex).Value
-        folioyear = DataGridView1.Item(1, e.RowIndex).Value
-        folioini = DataGridView1.Item(2, e.RowIndex).Value
-        foliofin = DataGridView1.Item(3, e.RowIndex).Value
-        folioactual = DataGridView1.Item(4, e.RowIndex).Value
+        foliotipodoc    = DataGridView1.Item(1, e.RowIndex).Value
+        folioyear       = DataGridView1.Item(2, e.RowIndex).Value
+        folioini        = DataGridView1.Item(3, e.RowIndex).Value
+        foliofin        = DataGridView1.Item(4, e.RowIndex).Value
+        folioactual     = DataGridView1.Item(5, e.RowIndex).Value
+        
         Llena_Variables(foliotipodoc, folioini, foliofin, folioactual, folioyear)
         Selection = True
     End Sub

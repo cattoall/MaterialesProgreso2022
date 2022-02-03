@@ -698,27 +698,29 @@ Module Module1
     '---------------------------------------Folios--------------------------------------------------------
     Public Sub load_layout_dgv_folios(ByVal dv As DataGridView)
         Try
-            dv.Columns(0).HeaderText = "Tipo de Documento"
-            dv.Columns(0).ReadOnly = True
-            dv.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-            dv.Columns(0).Width = "200"
+            dv.Columns(0).Visible = False
 
-            dv.Columns(1).HeaderText = "Año"
+            dv.Columns(1).HeaderText = "Tipo de Documento"
             dv.Columns(1).ReadOnly = True
-            dv.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            dv.Columns(1).Width = "50"
+            dv.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            dv.Columns(1).Width = "200"
 
-            dv.Columns(2).HeaderText = "Folio Inicial"
+            dv.Columns(2).HeaderText = "Año"
             dv.Columns(2).ReadOnly = True
-            dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dv.Columns(2).Width = "50"
 
-            dv.Columns(3).HeaderText = "Folio Final"
+            dv.Columns(3).HeaderText = "Folio Inicial"
             dv.Columns(3).ReadOnly = True
             dv.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
-            dv.Columns(4).HeaderText = "Folio Actual"
+            dv.Columns(4).HeaderText = "Folio Final"
             dv.Columns(4).ReadOnly = True
             dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+            dv.Columns(5).HeaderText = "Folio Actual"
+            dv.Columns(5).ReadOnly = True
+            dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Catch ex As Exception
             MsgBox(ex.Message.ToString, MsgBoxStyle.Critical)
         End Try
@@ -1279,75 +1281,77 @@ Module Module1
 
     Public Sub load_layout_dgv_ListaFactura_H(ByVal dv As DataGridView)
         Try
-            dv.Columns(0).HeaderText = "Factura"
-            dv.Columns(0).ReadOnly = True
-            dv.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            dv.Columns(0).DefaultCellStyle.Format = "#########"
-            dv.Columns(0).Width = 70
+            dv.Columns(0).Visible = False
 
-            dv.Columns(1).HeaderText = "Total"
+            dv.Columns(1).HeaderText = "Factura"
             dv.Columns(1).ReadOnly = True
             dv.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            dv.Columns(1).DefaultCellStyle.Format = "$ ###,###,###.00"
-            dv.Columns(1).Width = 110
+            dv.Columns(1).DefaultCellStyle.Format = "#########"
+            dv.Columns(1).Width = 70
 
-            dv.Columns(2).HeaderText = "Usuario"
+            dv.Columns(2).HeaderText = "Total"
             dv.Columns(2).ReadOnly = True
-            dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            dv.Columns(2).Visible = False
-            dv.Columns(2).Width = 100
+            dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            dv.Columns(2).DefaultCellStyle.Format = "$ ###,###,###.00"
+            dv.Columns(2).Width = 110
 
-            dv.Columns(3).HeaderText = "Tipo"
+            dv.Columns(3).HeaderText = "Usuario"
             dv.Columns(3).ReadOnly = True
             dv.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dv.Columns(3).Visible = False
             dv.Columns(3).Width = 100
 
-            dv.Columns(4).HeaderText = "Cliente"
+            dv.Columns(4).HeaderText = "Tipo"
             dv.Columns(4).ReadOnly = True
-            dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-            dv.Columns(4).Width = 400
+            dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dv.Columns(4).Width = 100
 
-            dv.Columns(5).HeaderText = "IdCliente"
+            dv.Columns(5).HeaderText = "Cliente"
             dv.Columns(5).ReadOnly = True
-            dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight
-            dv.Columns(5).Visible = False
-            dv.Columns(5).Width = 100
+            dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            dv.Columns(5).Width = 400
 
-            dv.Columns(6).HeaderText = "Fecha Factura"
+            dv.Columns(6).HeaderText = "IdCliente"
             dv.Columns(6).ReadOnly = True
-            dv.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dv.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight
+            dv.Columns(6).Visible = False
             dv.Columns(6).Width = 100
 
-            dv.Columns(7).HeaderText = "Fecha Límite"
+            dv.Columns(7).HeaderText = "Fecha Factura"
             dv.Columns(7).ReadOnly = True
             dv.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            dv.Columns(7).Visible = False
             dv.Columns(7).Width = 100
 
-            dv.Columns(8).HeaderText = "Condiciones"
+            dv.Columns(8).HeaderText = "Fecha Límite"
             dv.Columns(8).ReadOnly = True
+            dv.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dv.Columns(8).Visible = False
             dv.Columns(8).Width = 100
 
-            dv.Columns(9).HeaderText = "Estado"
+            dv.Columns(9).HeaderText = "Condiciones"
             dv.Columns(9).ReadOnly = True
-            dv.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            dv.Columns(9).Visible = False
             dv.Columns(9).Width = 100
 
-            dv.Columns(10).HeaderText = "Observaciones"
+            dv.Columns(10).HeaderText = "Estado"
             dv.Columns(10).ReadOnly = True
+            dv.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
             dv.Columns(10).Width = 100
 
-            dv.Columns(11).HeaderText = "Tipo Factura"
+            dv.Columns(11).HeaderText = "Observaciones"
             dv.Columns(11).ReadOnly = True
-            dv.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            dv.Columns(11).Visible = False
-            dv.Columns(11).Width = 150
+            dv.Columns(11).Width = 100
 
             dv.Columns(12).HeaderText = "Tipo Factura"
             dv.Columns(12).ReadOnly = True
             dv.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dv.Columns(12).Visible = False
             dv.Columns(12).Width = 150
+
+            dv.Columns(13).HeaderText = "Tipo Factura"
+            dv.Columns(13).ReadOnly = True
+            dv.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dv.Columns(13).Width = 150
 
         Catch ex As Exception
             MsgBox(ex.Message.ToString, MsgBoxStyle.Critical)

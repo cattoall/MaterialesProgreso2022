@@ -153,11 +153,12 @@ Public Class FrmFolioAME
 
                 Dim newFolio As tblFolioFacturas = New tblFolioFacturas
 
-                newFolio.TipoComprobante = CmbTipoDoc.Text
-                newFolio.Year = Label1.Text
-                newFolio.FolioInicial = CInt(TxtfolioIni.Text)
-                newFolio.FolioFinal = CInt(txtFilioFin.Text)
-                newFolio.FolioActual = CInt(TxtFolioAct.Text)
+                newFolio.IdComp             = CompanyCode
+                newFolio.TipoComprobante    = CmbTipoDoc.Text
+                newFolio.Year               = Label1.Text
+                newFolio.FolioInicial       = CInt(TxtfolioIni.Text)
+                newFolio.FolioFinal         = CInt(txtFilioFin.Text)
+                newFolio.FolioActual        = CInt(TxtFolioAct.Text)
 
                 If DBModelo.InsertFolio(newFolio) Then
                     Console.WriteLine("Se pudo")

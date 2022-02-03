@@ -209,23 +209,24 @@ Public Class FrmNotaDeCredito
         Dim NoFactura As String = FolioNC_Actual
         Dim FolioFactura As String = gv_SerieNCSalvador & "-" & FolioNC_Actual & "_" & Format(Date.Now, "yyyyMMdd") & "_CFDI"
 
-        strNC.n_nc = CDec(FolioNC_Actual)
-        strNC.SubTotal = CDec(txtSubtotal.Text)
-        strNC.IVA = CDec(txtIVA.Text)
-        strNC.total = CDec(txtTotal.Text)
-        strNC.usuario = nombreUsuario
-        strNC.tipo_venta = strFacturaTotal.tipo_venta
-        strNC.cliente = TxtNombre_C.Text
-        strNC.id_cliente = CInt(Label9.Text)
-        strNC.fecha_venta = DateTime.Now
-        strNC.fecha_limite = DateTime.Now
-        strNC.codiciones = strFacturaTotal.codiciones
-        strNC.estado = "VENDIDO"
+        strNC.IdComp        = CompanyCode
+        strNC.n_nc          = CDec(FolioNC_Actual)
+        strNC.SubTotal      = CDec(txtSubtotal.Text)
+        strNC.IVA           = CDec(txtIVA.Text)
+        strNC.total         = CDec(txtTotal.Text)
+        strNC.usuario       = nombreUsuario
+        strNC.tipo_venta    = strFacturaTotal.tipo_venta
+        strNC.cliente       = TxtNombre_C.Text
+        strNC.id_cliente    = CInt(Label9.Text)
+        strNC.fecha_venta   = DateTime.Now
+        strNC.fecha_limite  = DateTime.Now
+        strNC.codiciones    = strFacturaTotal.codiciones
+        strNC.estado        = "VENDIDO"
         strNC.observaciones = "NC con referencia a Factura:" & TxtPedido_C.Text
-        strNC.FolioFactura = TxtPedido_C.Text
-        strNC.FormaPago = strFacturaTotal.FormaPago
-        strNC.metodopago = strFacturaTotal.metodopago
-        strNC.UsoCFDI = strFacturaTotal.UsoCFDI
+        strNC.FolioFactura  = TxtPedido_C.Text
+        strNC.FormaPago     = strFacturaTotal.FormaPago
+        strNC.metodopago    = strFacturaTotal.metodopago
+        strNC.UsoCFDI       = strFacturaTotal.UsoCFDI
 
         If DBModelo.Insert_NC(strNC) = False Then
             MetroFramework.MetroMessageBox.Show(Me, "Error al Insertar Registro en la table NC", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)

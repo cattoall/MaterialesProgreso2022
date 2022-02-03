@@ -114,31 +114,33 @@
 
     Private Sub DataGridConsulta_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridConsulta.CellClick
         LblNumTicket.Visible = True
-        LblTotal.Text = Format(Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,##0.00")
-        LblNumTicket.Text = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
-        NoFactura = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
-        FechaFactura = Format(Me.DataGridConsulta.Item(6, DataGridConsulta.CurrentRow.Index).Value, "yyyyMMdd")
+        LblTotal.Text = Format(Me.DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,##0.00")
+        LblNumTicket.Text = Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value
+        NoFactura = Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value
+        FechaFactura = Format(Me.DataGridConsulta.Item(7, DataGridConsulta.CurrentRow.Index).Value, "yyyyMMdd")
         'SQL = "SELECT n_factura,cantidad,descripcion,precio,subtotal,clave_p,idProducto,fecha,folio FROM facturas where n_factura = " & Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
-        Dim nFactura As String = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+        Dim nFactura As String = Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value
         DataGridTikect.DataSource = DBModelo.GetFacturaByN(nFactura)
         'Carga Lista de Clasificaciones
         'load_record_dgv2(SQL, Me.DataGridTikect, DBConnected)
 
         'Aplica formato al DataGridView
         'load_layout_dgv_ListaFacturas_i(Me.DataGridTikect)
-        DataGridTikect.Columns(0).HeaderText = "ID"
-        DataGridTikect.Columns(1).HeaderText = "No. Factura"
-        DataGridTikect.Columns(2).HeaderText = "Folio"
-        DataGridTikect.Columns(3).HeaderText = "Id Producto"
-        DataGridTikect.Columns(4).HeaderText = "Clave Producto"
-        DataGridTikect.Columns(5).HeaderText = "Descripción"
-        DataGridTikect.Columns(6).HeaderText = "Cantidad"
-        DataGridTikect.Columns(7).HeaderText = "Fecha"
-        DataGridTikect.Columns(8).HeaderText = "Subtotal"
-        DataGridTikect.Columns(9).HeaderText = "IVA"
-        DataGridTikect.Columns(10).HeaderText = "Precio"
-        DataGridTikect.Columns(11).HeaderText = "Clave Producto"
-        DataGridTikect.Columns(12).HeaderText = "Clave Unidad"
+
+        DataGridTikect.Columns(0).Visible    = False
+        DataGridTikect.Columns(1).HeaderText = "ID"
+        DataGridTikect.Columns(2).HeaderText = "No. Factura"
+        DataGridTikect.Columns(3).HeaderText = "Folio"
+        DataGridTikect.Columns(4).HeaderText = "Id Producto"
+        DataGridTikect.Columns(5).HeaderText = "Clave Producto"
+        DataGridTikect.Columns(6).HeaderText = "Descripción"
+        DataGridTikect.Columns(7).HeaderText = "Cantidad"
+        DataGridTikect.Columns(8).HeaderText = "Fecha"
+        DataGridTikect.Columns(9).HeaderText = "Subtotal"
+        DataGridTikect.Columns(10).HeaderText = "IVA"
+        DataGridTikect.Columns(11).HeaderText = "Precio"
+        DataGridTikect.Columns(12).HeaderText = "Clave Producto"
+        DataGridTikect.Columns(13).HeaderText = "Clave Unidad"
     End Sub
 
     Private Sub mBtnSearch_Click(sender As Object, e As EventArgs)
@@ -180,9 +182,9 @@
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles mBtnPrint.Click
         If LblNumTicket.Text <> "" Then
-            Dim NoFactura = DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
-            Dim FechaFactura = DataGridConsulta.Item(6, DataGridConsulta.CurrentRow.Index).Value
-            Dim FolioFactura As String = gv_SerieFacturaSalvador & "-" & NoFactura & "_" & Format(FechaFactura, "yyyyMMdd") & "_CFDI"
+            Dim NoFactura               = DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value
+            Dim FechaFactura            = DataGridConsulta.Item(7, DataGridConsulta.CurrentRow.Index).Value
+            Dim FolioFactura As String  = gv_SerieFacturaSalvador & "-" & NoFactura & "_" & Format(FechaFactura, "yyyyMMdd") & "_CFDI"
 
             If ImprimeFactura2(NoFactura, FolioFactura, True) = False Then
                 MsgBox("Hubo un error al Generar la Impresión de la Factura", MsgBoxStyle.Critical, "Impresiones de Facturas")
