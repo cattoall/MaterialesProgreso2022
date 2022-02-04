@@ -414,7 +414,8 @@ Public Class DBModelo
 
     Shared Function GetProductsAll() As List(Of tblProductos)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.productos.OrderBy(Function(i) i.IdComp = CompanyCode And i.descripcionProducto).ToList()
+            Return ctx.productos.Where(Function(i) i.IdComp = CompanyCode).ToList()
+            'Return ctx.productos.OrderBy(Function(i) i.IdComp = CompanyCode And i.descripcionProducto).ToList()
         End Using
     End Function
 
