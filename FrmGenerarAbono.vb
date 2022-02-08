@@ -103,6 +103,7 @@
 
         Dim w_HistPago As tblHistorialPagos = New tblHistorialPagos
 
+        w_HistPago.IdComp = CompanyCode
         w_HistPago.fecha = lv_fecha
         w_HistPago.numeroVenta = txtventa.Text
         w_HistPago.total = txttotal.Text

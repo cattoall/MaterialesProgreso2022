@@ -3,52 +3,53 @@ Public Class FrmDevPedidos
     Private Sub ConfigurarGridDetalle(ByRef dv As DataGridView)
         dv.Columns(0).Visible = False
         dv.Columns(1).Visible = False
+        dv.Columns(2).Visible = False
 
-        dv.Columns(2).HeaderText = "IdProducto"
-        dv.Columns(2).ReadOnly = True
-        dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(3).HeaderText = "Descripcion"
+        dv.Columns(3).HeaderText = "IdProducto"
         dv.Columns(3).ReadOnly = True
-        dv.Columns(3).Width = 300
-        dv.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+        dv.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(4).HeaderText = "Cantidad"
-        dv.Columns(4).ReadOnly = False
-        dv.Columns(4).DefaultCellStyle.Format = "###.00"
-        dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dv.Columns(4).HeaderText = "Descripcion"
+        dv.Columns(4).ReadOnly = True
+        dv.Columns(4).Width = 300
+        dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
         dv.Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(5).HeaderText = "Precio Unitario"
-        dv.Columns(5).ReadOnly = True
+        dv.Columns(5).HeaderText = "Cantidad"
+        dv.Columns(5).ReadOnly = False
+        dv.Columns(5).DefaultCellStyle.Format = "###.00"
         dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         dv.Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(6).Visible = False
+        dv.Columns(6).HeaderText = "Precio Unitario"
+        dv.Columns(6).ReadOnly = True
+        dv.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dv.Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(7).HeaderText = "Subtotal"
-        dv.Columns(7).ReadOnly = False
-        dv.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        dv.Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(7).Visible = False
 
-        dv.Columns(8).Visible = False
+        dv.Columns(8).HeaderText = "Subtotal"
+        dv.Columns(8).ReadOnly = False
+        dv.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dv.Columns(8).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         dv.Columns(9).Visible = False
         dv.Columns(10).Visible = False
         dv.Columns(11).Visible = False
+        dv.Columns(12).Visible = False
 
-        dv.Columns(12).HeaderText = "ClaveProducto"
-        dv.Columns(12).ReadOnly = True
-        dv.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(12).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(13).HeaderText = "ClaveUnidad"
+        dv.Columns(13).HeaderText = "ClaveProducto"
         dv.Columns(13).ReadOnly = True
         dv.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(13).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(14).Visible = False
+        dv.Columns(14).HeaderText = "ClaveUnidad"
+        dv.Columns(14).ReadOnly = True
+        dv.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(14).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        dv.Columns(15).Visible = False
     End Sub
 
     Private Sub TxtPedido_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles TxtPedido.KeyDown
@@ -264,24 +265,26 @@ Public Class FrmDevPedidos
         For i = 0 To DGVDetalle.Rows.Count - 1
             Dim wTicketPedido As tblTicketPedido = New tblTicketPedido
 
-            wTicketPedido.folio = DGVDetalle.Rows(i).Cells(1).Value.ToString
-            wTicketPedido.IdProducto = DGVDetalle.Rows(i).Cells(2).Value
-            wTicketPedido.concepto = DGVDetalle.Rows(i).Cells(3).Value.ToString
-            wTicketPedido.cantidad = CDec(DGVDetalle.Rows(i).Cells(4).Value)
-            wTicketPedido.precio = CDec(DGVDetalle.Rows(i).Cells(5).Value)
-            wTicketPedido.fecha = DGVDetalle.Rows(i).Cells(6).Value.ToString
-            wTicketPedido.subtotal = CDec(DGVDetalle.Rows(i).Cells(7).Value)
-            wTicketPedido.clave_producto = DGVDetalle.Rows(i).Cells(8).Value.ToString
-            wTicketPedido.precioCosto = CDec(DGVDetalle.Rows(i).Cells(9).Value)
-            wTicketPedido.subtotalCosto = CDec(DGVDetalle.Rows(i).Cells(10).Value)
-            If DGVDetalle.Rows(i).Cells(11).Value Is Nothing Then
+            wTicketPedido.IdComp            = CompanyCode
+            wTicketPedido.folio             = DGVDetalle.Rows(i).Cells(2).Value.ToString
+            wTicketPedido.IdProducto        = DGVDetalle.Rows(i).Cells(3).Value
+            wTicketPedido.concepto          = DGVDetalle.Rows(i).Cells(4).Value.ToString
+            wTicketPedido.cantidad          = CDec(DGVDetalle.Rows(i).Cells(5).Value)
+            wTicketPedido.precio            = CDec(DGVDetalle.Rows(i).Cells(6).Value)
+            wTicketPedido.fecha             = DGVDetalle.Rows(i).Cells(7).Value.ToString
+            wTicketPedido.subtotal          = CDec(DGVDetalle.Rows(i).Cells(8).Value)
+            wTicketPedido.clave_producto    = DGVDetalle.Rows(i).Cells(9).Value.ToString
+            wTicketPedido.precioCosto       = CDec(DGVDetalle.Rows(i).Cells(10).Value)
+            wTicketPedido.subtotalCosto     = CDec(DGVDetalle.Rows(i).Cells(11).Value)
+
+            If DGVDetalle.Rows(i).Cells(12).Value Is Nothing Then
                 wTicketPedido.numeroFactura = 0
             Else
-                wTicketPedido.numeroFactura = DGVDetalle.Rows(i).Cells(11).Value.ToString
+                wTicketPedido.numeroFactura = DGVDetalle.Rows(i).Cells(12).Value.ToString
             End If
-            wTicketPedido.ClaveProducto = DGVDetalle.Rows(i).Cells(12).Value.ToString
-            wTicketPedido.ClaveUnidad = DGVDetalle.Rows(i).Cells(13).Value.ToString
-            wTicketPedido.TasaCero = CBool(DGVDetalle.Rows(i).Cells(14).Value)
+            wTicketPedido.ClaveProducto = DGVDetalle.Rows(i).Cells(13).Value.ToString
+            wTicketPedido.ClaveUnidad = DGVDetalle.Rows(i).Cells(14).Value.ToString
+            wTicketPedido.TasaCero = CBool(DGVDetalle.Rows(i).Cells(15).Value)
 
             If DBModelo.Insert_PV_TicketPedidos(wTicketPedido) = False Then
                 MsgBox("No se pudo Insertar registros en la tabla TICKETPEDIDO", MsgBoxStyle.Critical)
@@ -290,7 +293,7 @@ Public Class FrmDevPedidos
             End If
 
             'Actualizamos Stock descontando las piezas correspondientes
-            Dim wProducto As tblProductos = DBModelo.GetProductById(DGVDetalle.Rows(i).Cells(2).Value)
+            Dim wProducto As tblProductos = DBModelo.GetProductById(DGVDetalle.Rows(i).Cells(3).Value)
             If Not wProducto Is Nothing Then
                 'wProducto.stock = wProducto.stock + CDec(DGVDetalle.Rows(i).Cells(4).Value)
                 If DBModelo.UpdateProductos(wProducto) = False Then

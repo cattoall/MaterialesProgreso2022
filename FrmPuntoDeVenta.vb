@@ -369,7 +369,8 @@
             lv_subtotal = Trim(lv_subtotal)
             lv_total = Val(lv_total) - Val(lv_total_TasaCero)
             lv_total = Trim(lv_total)
-
+            
+            strVentaPedido.IdComp = CompanyCode
             strVentaPedido.nticket = nFolio
             strVentaPedido.fecha = DateTime.Now.ToString("yyyy-MM-dd")
             If TasaCero = True Then
@@ -423,6 +424,7 @@
                     GoTo SiguienteRegistro
                 End If
 
+                strTicketPedido.IdComp = CompanyCode
                 strTicketPedido.folio = nFolio
                 strTicketPedido.concepto = MetroGrid1.Rows(i).Cells(2).Value.ToString
                 strTicketPedido.cantidad = MetroGrid1.Rows(i).Cells(0).Value.ToString
@@ -478,6 +480,7 @@ SiguienteRegistro:
             lv_total = Val(lv_total) - Val(lv_total_TasaCero)
             lv_total = Trim(lv_total)
 
+            strVenta.IdComp = CompanyCode
             strVenta.nticket = nFolio
             strVenta.fecha = DateTime.Now.ToString("yyyy-MM-dd")
             If TasaCero = True Then
@@ -532,6 +535,7 @@ SiguienteRegistro:
                     GoTo SiguienteRegistro
                 End If
 
+                strTicket.IdComp = CompanyCode
                 strTicket.folio = nFolio
                 strTicket.concepto = MetroGrid1.Rows(i).Cells(2).Value.ToString
                 strTicket.cantidad = MetroGrid1.Rows(i).Cells(0).Value.ToString
@@ -613,6 +617,7 @@ SiguienteRegistro:
         lv_total = Val(lv_total) - Val(lv_total_TasaCero)
         lv_total = Trim(lv_total)
 
+        strVentaPedido.IdComp = CompanyCode
         strVentaPedido.nticket = nFolio
         strVentaPedido.fecha = DateTime.Now.ToString("yyyy-MM-dd")
         If TasaCero = True Then
@@ -666,6 +671,7 @@ SiguienteRegistro:
                 GoTo SiguienteRegistro
             End If
 
+            strTicketPedido.IdComp = CompanyCode
             strTicketPedido.folio = nFolio
             strTicketPedido.concepto = MetroGrid1.Rows(i).Cells(2).Value.ToString
             strTicketPedido.cantidad = MetroGrid1.Rows(i).Cells(0).Value.ToString
@@ -692,6 +698,7 @@ SiguienteRegistro:
         Dim lv_fechalimite As String = Format(DateTime.Now.AddDays(Cliente_diasCredito), "yyyy-MM-dd")
         Dim strCobrar As New tblCobrar
 
+        strCobrar.IdComp = CompanyCode
         strCobrar.n_remision = nFolio
         If TasaCero = True Then
             strCobrar.total = lv_total_TasaCero
@@ -769,6 +776,7 @@ SiguienteRegistro:
             Exit Sub
         End If
 
+        strVenta.IdComp = CompanyCode
         strVenta.nticket = nFolio
         strVenta.fecha = DateTime.Now.ToString("yyyy-MM-dd")
         If TasaCero = True Then
@@ -823,6 +831,7 @@ SiguienteRegistro:
                 GoTo SiguienteRegistro
             End If
 
+            strTicket.IdComp = CompanyCode
             strTicket.folio = nFolio
             strTicket.concepto = MetroGrid1.Rows(i).Cells(2).Value
             strTicket.cantidad = CDbl(MetroGrid1.Rows(i).Cells(0).Value)
@@ -854,6 +863,7 @@ SiguienteRegistro:
         Dim lv_fechalimite As String = Format(DateTime.Now.AddDays(Cliente_diasCredito), "yyyy-MM-dd")
         Dim strCobrar As New tblCobrar
 
+        strCobrar.IdComp = CompanyCode
         strCobrar.n_remision = nFolio
         If TasaCero = True Then
             strCobrar.total = lv_total_TasaCero
@@ -941,6 +951,8 @@ SiguienteRegistro:
             Exit Sub
         End If
 
+        strCotizacion.IdComp = CompanyCode
+       
         strCotizacion.nticket = nFolio
         strCotizacion.fecha = DateTime.Now.ToString("yyyy-MM-dd")
         If TasaCero = True Then
@@ -994,6 +1006,7 @@ SiguienteRegistro:
                 GoTo SiguienteRegistro
             End If
 
+            strTicketCotizacion.IdComp = CompanyCode
             strTicketCotizacion.folio = nFolio
             strTicketCotizacion.concepto = MetroGrid1.Rows(i).Cells(2).Value.ToString
             strTicketCotizacion.cantidad = MetroGrid1.Rows(i).Cells(0).Value.ToString

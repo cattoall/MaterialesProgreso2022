@@ -22,54 +22,57 @@ Public Class FrmPedidos
     End Sub
 
     Private Sub ConfiguraGridHeader(ByVal dv As DataGridView)
-        dv.Columns(0).HeaderText = "Pedido"
-        dv.Columns(0).ReadOnly = True
-        dv.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(1).HeaderText = "Fecha"
+        
+        dv.Columns(0).Visible = False
+        
+        dv.Columns(1).HeaderText = "Pedido"
         dv.Columns(1).ReadOnly = True
         dv.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(2).Visible = False
+        dv.Columns(2).HeaderText = "Fecha"
+        dv.Columns(2).ReadOnly = True
+        dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         dv.Columns(3).Visible = False
+        dv.Columns(4).Visible = False
 
-        dv.Columns(4).HeaderText = "Total"
-        dv.Columns(4).ReadOnly = True
-        dv.Columns(4).DefaultCellStyle.Format = "$ ###,###,##0.00"
-        dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        dv.Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(5).HeaderText = "Tipo"
+        dv.Columns(5).HeaderText = "Total"
         dv.Columns(5).ReadOnly = True
-        dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(5).DefaultCellStyle.Format = "$ ###,###,##0.00"
+        dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         dv.Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(6).Visible = False
+        dv.Columns(6).HeaderText = "Tipo"
+        dv.Columns(6).ReadOnly = True
+        dv.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(7).HeaderText = "Cliente"
-        dv.Columns(7).ReadOnly = True
-        dv.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-        dv.Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(7).Width = 100
+        dv.Columns(7).Visible = False
 
-        dv.Columns(8).Visible = False
+        dv.Columns(8).HeaderText = "Cliente"
+        dv.Columns(8).ReadOnly = True
+        dv.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+        dv.Columns(8).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(8).Width = 100
 
-        dv.Columns(9).HeaderText = "Estado"
-        dv.Columns(9).ReadOnly = True
-        dv.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(9).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(9).Visible = False
 
-        dv.Columns(10).HeaderText = "Motivo"
+        dv.Columns(10).HeaderText = "Estado"
         dv.Columns(10).ReadOnly = True
         dv.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(10).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(11).HeaderText = "#factura"
+        dv.Columns(11).HeaderText = "Motivo"
         dv.Columns(11).ReadOnly = True
         dv.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(11).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        dv.Columns(12).HeaderText = "#factura"
+        dv.Columns(12).ReadOnly = True
+        dv.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(12).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
     Private Sub CmdGenerarTicket_Click(sender As Object, e As EventArgs) 
@@ -89,8 +92,8 @@ Public Class FrmPedidos
     End Sub
 
     Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
-        LblPedido.Text = Me.DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value
-        NoFactura = Me.DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value
+        LblPedido.Text  = Me.DataGridView1.Item(1, DataGridView1.CurrentRow.Index).Value
+        NoFactura       = Me.DataGridView1.Item(1, DataGridView1.CurrentRow.Index).Value
 
         Dim tPedidosDetails As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(NoFactura)
         DataGridView2.Refresh()
@@ -101,53 +104,54 @@ Public Class FrmPedidos
     Private Sub ConfiguraGridDetail(ByVal dv As DataGridView)
         dv.Columns(0).Visible = False
         dv.Columns(1).Visible = False
+        dv.Columns(2).Visible = False
 
-        dv.Columns(2).HeaderText = "IdProducto"
-        dv.Columns(2).ReadOnly = True
-        dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(3).HeaderText = "Descripcion"
+        dv.Columns(3).HeaderText = "IdProducto"
         dv.Columns(3).ReadOnly = True
-        dv.Columns(3).Width = 300
-        dv.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+        dv.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(4).HeaderText = "Cantidad"
+        dv.Columns(4).HeaderText = "Descripcion"
         dv.Columns(4).ReadOnly = True
-        dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dv.Columns(4).Width = 300
+        dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
         dv.Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(5).HeaderText = "Precio Unitario"
+        dv.Columns(5).HeaderText = "Cantidad"
         dv.Columns(5).ReadOnly = True
-        dv.Columns(5).DefaultCellStyle.Format = "$ ###,###,##0.00"
         dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         dv.Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(6).Visible = False
+        dv.Columns(6).HeaderText = "Precio Unitario"
+        dv.Columns(6).ReadOnly = True
+        dv.Columns(6).DefaultCellStyle.Format = "$ ###,###,##0.00"
+        dv.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dv.Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(7).HeaderText = "Subtotal"
-        dv.Columns(7).ReadOnly = True
-        dv.Columns(7).DefaultCellStyle.Format = "$ ###,###,##0.00"
-        dv.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        dv.Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(7).Visible = False
 
-        dv.Columns(8).Visible = False
+        dv.Columns(8).HeaderText = "Subtotal"
+        dv.Columns(8).ReadOnly = True
+        dv.Columns(8).DefaultCellStyle.Format = "$ ###,###,##0.00"
+        dv.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dv.Columns(8).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         dv.Columns(9).Visible = False
         dv.Columns(10).Visible = False
         dv.Columns(11).Visible = False
+        dv.Columns(12).Visible = False
 
-        dv.Columns(12).HeaderText = "ClaveProducto"
-        dv.Columns(12).ReadOnly = True
-        dv.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(12).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(13).HeaderText = "ClaveUnidad"
+        dv.Columns(13).HeaderText = "ClaveProducto"
         dv.Columns(13).ReadOnly = True
         dv.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(13).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(14).Visible = False
+        dv.Columns(14).HeaderText = "ClaveUnidad"
+        dv.Columns(14).ReadOnly = True
+        dv.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(14).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        dv.Columns(15).Visible = False
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -168,7 +172,7 @@ Public Class FrmPedidos
         Dim lv_folioactual As Integer = 0
         Dim nuevo = 0
         Dim lv_resto = 0
-        Dim lIdCliente As Integer = DataGridView1.Item(8, DataGridView1.CurrentRow.Index).Value
+        Dim lIdCliente As Integer = DataGridView1.Item(9, DataGridView1.CurrentRow.Index).Value
         Dim wFoliosTicket As tblFoliosTicket = New tblFoliosTicket
 
         If DataGridView1.Rows.Count = 0 Then
@@ -182,9 +186,9 @@ Public Class FrmPedidos
             Exit Sub
         End If
 
-        Dim folio_pedido As String = Me.DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value
+        Dim folio_pedido As String = Me.DataGridView1.Item(1, DataGridView1.CurrentRow.Index).Value
 
-        If Me.DataGridView1.Item(5, DataGridView1.CurrentRow.Index).Value = "CREDITO" Then
+        If Me.DataGridView1.Item(6, DataGridView1.CurrentRow.Index).Value = "CREDITO" Then
             Dim wCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(folio_pedido, "PEDIDO", lIdCliente)
             lv_resto = wCobrar.resto
             If lv_resto > 0 Then
@@ -197,6 +201,7 @@ Public Class FrmPedidos
         lv_folio = DBModelo.Get_PV_FoliosTicketActual(Now.Year, gv_terminal, "TICKET")
 
         If lv_folio = 0 Then
+            wFoliosTicket.IdComp = CompanyCode
             wFoliosTicket.Year = Now.Year
             wFoliosTicket.IdTerminal = gv_terminal
             wFoliosTicket.DocType = "TICKET"
@@ -216,16 +221,17 @@ Public Class FrmPedidos
         Dim strVenta As New tblVenta
         Dim strTicket As New tblTicket
 
+        strVenta.IdComp = CompanyCode
         strVenta.nticket = lv_folioactual
         strVenta.fecha = DateTime.Now.ToString("yyyy-MM-dd")
-        strVenta.SubTotal = CDbl(DataGridView1.Item(2, DataGridView1.CurrentRow.Index).Value)
-        strVenta.IVA = CDbl(DataGridView1.Item(3, DataGridView1.CurrentRow.Index).Value)
-        strVenta.total = CDbl(DataGridView1.Item(4, DataGridView1.CurrentRow.Index).Value)
+        strVenta.SubTotal = CDbl(DataGridView1.Item(3, DataGridView1.CurrentRow.Index).Value)
+        strVenta.IVA = CDbl(DataGridView1.Item(4, DataGridView1.CurrentRow.Index).Value)
+        strVenta.total = CDbl(DataGridView1.Item(5, DataGridView1.CurrentRow.Index).Value)
         strVenta.tipo = "CONTADO"
-        strVenta.usuario = DataGridView1.Item(6, DataGridView1.CurrentRow.Index).Value
+        strVenta.usuario = DataGridView1.Item(7, DataGridView1.CurrentRow.Index).Value
         strVenta.cliente = "PUBLICO GENERAL"
         strVenta.idCliente = 0
-        strVenta.estado = DataGridView1.Item(9, DataGridView1.CurrentRow.Index).Value
+        strVenta.estado = DataGridView1.Item(10, DataGridView1.CurrentRow.Index).Value
         strVenta.motivo = ""
         strVenta.numeroFactura = ""
 
@@ -238,6 +244,7 @@ Public Class FrmPedidos
         Dim tTicketPedido As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(folio_pedido)
 
         For Each wTicketPedido In tTicketPedido
+            strTicket.IdComp = CompanyCode
             strTicket.folio = lv_folioactual
             strTicket.concepto = wTicketPedido.concepto
             strTicket.cantidad = wTicketPedido.cantidad
@@ -276,7 +283,7 @@ Public Class FrmPedidos
             End If
         Next
 
-        If Me.DataGridView1.Item(5, DataGridView1.CurrentRow.Index).Value = "CREDITO" Then
+        If Me.DataGridView1.Item(6, DataGridView1.CurrentRow.Index).Value = "CREDITO" Then
             Dim wCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(folio_pedido, "PEDIDO", lIdCliente)
             If DBModelo.DeleteCobrar(wCobrar) = False Then
                 MsgBox("Error al Eliminar Registro en tabla COBRAR", MsgBoxStyle.Critical, "Convertir Pedido a Ticket")
@@ -317,7 +324,7 @@ Public Class FrmPedidos
                 lv_result = True
             End If
 
-            If ImprimeVenta(LblPedido.Text, lv_result, "PEDIDO", DataGridView1.Item(2, DataGridView1.CurrentRow.Index).Value, "0.00") = False Then
+            If ImprimeVenta(LblPedido.Text, lv_result, "PEDIDO", DataGridView1.Item(3, DataGridView1.CurrentRow.Index).Value, "0.00") = False Then
                 MsgBox("Error al Generar la Impresión del Pedido", MsgBoxStyle.Information, "Re-Impresiones de Pedidos")
                 Limpia_Variables_SQL_y_Cierra_Conexion()
                 Exit Sub

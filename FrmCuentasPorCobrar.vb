@@ -46,8 +46,8 @@ Public Class FrmCuentasPorCobrar
         lblgrantotal.Text = 0
         lblresto.Text = 0
         For i = 0 To DataGridView1.RowCount - 1
-            lblgrantotal.Text = CDbl(lblgrantotal.Text) + CDbl(DataGridView1.Item(2, i).Value)
-            lblresto.Text = CDbl(lblresto.Text) + CDbl(DataGridView1.Item(6, i).Value)
+            lblgrantotal.Text = CDbl(lblgrantotal.Text) + CDbl(DataGridView1.Item(3, i).Value)
+            lblresto.Text = CDbl(lblresto.Text) + CDbl(DataGridView1.Item(7, i).Value)
         Next
         lblgrantotal.Text = FormatCurrency(lblgrantotal.Text, 2)
         lblresto.Text = FormatCurrency(lblresto.Text, 2)
@@ -56,7 +56,7 @@ Public Class FrmCuentasPorCobrar
 
         lblabonado.Text = 0
         For i = 0 To DataGridView2.RowCount - 1
-            lblabonado.Text = CDbl(lblabonado.Text) + CDbl(DataGridView2.Item(3, i).Value)
+            lblabonado.Text = CDbl(lblabonado.Text) + CDbl(DataGridView2.Item(4, i).Value)
         Next
         lblabonado.Text = FormatCurrency(lblabonado.Text, 2)
     End Sub
@@ -64,119 +64,121 @@ Public Class FrmCuentasPorCobrar
     Private Sub ConfiguraGridPagos(ByVal dv As DataGridView)
 
         dv.Columns(0).Visible = False
+        dv.Columns(1).Visible = False
 
-        dv.Columns(1).HeaderText = "Fecha"
-        dv.Columns(1).ReadOnly = True
-        dv.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(1).Width = 100
+        dv.Columns(2).HeaderText = "Fecha"
+        dv.Columns(2).ReadOnly = True
+        dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(2).Width = 100
+
+        dv.Columns(3).HeaderText = "Venta"
+        dv.Columns(3).ReadOnly = True
+        dv.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(3).Width = 100
+
+        dv.Columns(4).HeaderText = "Total"
+        dv.Columns(4).ReadOnly = True
+        dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dv.Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(4).DefaultCellStyle.Format = "$ ###,###,##0.00"
+        dv.Columns(4).Width = 100
+
+        dv.Columns(5).Visible = False
+
+        dv.Columns(6).HeaderText = "Cliente"
+        dv.Columns(6).ReadOnly = True
+        dv.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+        dv.Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(6).Width = 300
+
+        dv.Columns(7).HeaderText = "Observaciones"
+        dv.Columns(7).ReadOnly = True
+        dv.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(7).Width = 200
+
+        dv.Columns(8).HeaderText = "TipoDoc"
+        dv.Columns(8).ReadOnly = True
+        dv.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(8).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(8).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+    End Sub
+
+    Private Sub ConfiguraGridCobrar(ByVal dv As DataGridView)
+        dv.Columns(0).Visible = False
+        dv.Columns(1).Visible = False
 
         dv.Columns(2).HeaderText = "Venta"
         dv.Columns(2).ReadOnly = True
         dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(2).Width = 100
+        dv.Columns(2).Width = 110
 
         dv.Columns(3).HeaderText = "Total"
         dv.Columns(3).ReadOnly = True
         dv.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         dv.Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(3).DefaultCellStyle.Format = "$ ###,###,##0.00"
-        dv.Columns(3).Width = 100
-
-        dv.Columns(4).Visible = False
-
-        dv.Columns(5).HeaderText = "Cliente"
-        dv.Columns(5).ReadOnly = True
-        dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-        dv.Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(5).Width = 300
-
-        dv.Columns(6).HeaderText = "Observaciones"
-        dv.Columns(6).ReadOnly = True
-        dv.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(6).Width = 200
-
-        dv.Columns(7).HeaderText = "TipoDoc"
-        dv.Columns(7).ReadOnly = True
-        dv.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(7).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-    End Sub
-
-    Private Sub ConfiguraGridCobrar(ByVal dv As DataGridView)
-        dv.Columns(0).Visible = False
-
-        dv.Columns(1).HeaderText = "Venta"
-        dv.Columns(1).ReadOnly = True
-        dv.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(1).Width = 110
-
-        dv.Columns(2).HeaderText = "Total"
-        dv.Columns(2).ReadOnly = True
-        dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        dv.Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(2).DefaultCellStyle.Format = "$ ###,###,##0.00"
-        dv.Columns(2).Width = 110
-
-        dv.Columns(3).HeaderText = "Fecha Venta"
-        dv.Columns(3).ReadOnly = True
-        dv.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(3).Width = 110
 
-        dv.Columns(4).HeaderText = "Fecha Límite"
+        dv.Columns(4).HeaderText = "Fecha Venta"
         dv.Columns(4).ReadOnly = True
         dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(4).Width = 110
 
-        dv.Columns(5).HeaderText = "Cliente"
+        dv.Columns(5).HeaderText = "Fecha Límite"
         dv.Columns(5).ReadOnly = True
-        dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+        dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(5).Width = 280
+        dv.Columns(5).Width = 110
 
-        dv.Columns(6).HeaderText = "Resto"
+        dv.Columns(6).HeaderText = "Cliente"
         dv.Columns(6).ReadOnly = True
-        dv.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dv.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
         dv.Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(6).DefaultCellStyle.Format = "$ ###,###,##0.00"
-        dv.Columns(6).Width = 100
+        dv.Columns(6).Width = 280
 
-        dv.Columns(7).Visible = False
+        dv.Columns(7).HeaderText = "Resto"
+        dv.Columns(7).ReadOnly = True
+        dv.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dv.Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(7).DefaultCellStyle.Format = "$ ###,###,##0.00"
+        dv.Columns(7).Width = 100
 
-        dv.Columns(8).HeaderText = "Tipo Doc."
-        dv.Columns(8).ReadOnly = True
-        dv.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(8).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(8).Width = 100
+        dv.Columns(8).Visible = False
 
-        dv.Columns(9).HeaderText = "Facturado"
+        dv.Columns(9).HeaderText = "Tipo Doc."
         dv.Columns(9).ReadOnly = True
         dv.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(9).Width = 70
-        dv.Columns(9).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        dv.Columns(9).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(9).Width = 100
+
+        dv.Columns(10).HeaderText = "Facturado"
+        dv.Columns(10).ReadOnly = True
+        dv.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(10).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(10).Width = 70
+        dv.Columns(10).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
     End Sub
 
     Private Sub CancelarAbono()
-        Dim lv_tmp As String = DataGridView2.Item(3, DataGridView2.CurrentRow.Index).Value
+        Dim lv_tmp As String = DataGridView2.Item(4, DataGridView2.CurrentRow.Index).Value
         Dim lv_resto As Double = 0
         Dim lv_remision As String
         Dim lv_TipoDoc As String
-        Dim lv_IdPago As Integer = DataGridView2.Rows(DataGridView2.CurrentRow.Index).Cells(0).Value
-        Dim Idcliente As Integer = DataGridView2.Item(4, DataGridView2.CurrentRow.Index).Value
+        Dim lv_IdPago As Integer = DataGridView2.Rows(DataGridView2.CurrentRow.Index).Cells(1).Value
+        Dim Idcliente As Integer = DataGridView2.Item(5, DataGridView2.CurrentRow.Index).Value
 
         lv_tmp = Trim(lv_tmp.Replace("$", ""))
         lv_tmp = Trim(lv_tmp.Replace(",", ""))
 
         lv_resto = lv_tmp
 
-        lv_remision = DataGridView2.Item(2, DataGridView2.CurrentRow.Index).Value
-        lv_TipoDoc = DataGridView2.Item(7, DataGridView2.CurrentRow.Index).Value
+        lv_remision = DataGridView2.Item(3, DataGridView2.CurrentRow.Index).Value
+        lv_TipoDoc = DataGridView2.Item(8, DataGridView2.CurrentRow.Index).Value
 
         Dim w_cobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(lv_remision, lv_TipoDoc, Idcliente)
 
@@ -213,17 +215,17 @@ Public Class FrmCuentasPorCobrar
     End Sub
 
     Private Sub DataGridView1_CellDoubleClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
-        venta = DataGridView1.Item(1, DataGridView1.CurrentRow.Index).Value
-        resto = Format(DataGridView1.Item(6, DataGridView1.CurrentRow.Index).Value, "$ ###,###,##0.00")
-        cliente = DataGridView1.Item(5, DataGridView1.CurrentRow.Index).Value
-        idcliente = DataGridView1.Item(7, DataGridView1.CurrentRow.Index).Value
-        fecha = Format(DataGridView1.Item(3, DataGridView1.CurrentRow.Index).Value, "yyyy-MM-dd")
-        fechaL = Format(DataGridView1.Item(4, DataGridView1.CurrentRow.Index).Value, "yyyy-MM-dd")
-        tipodoc = DataGridView1.Item(8, DataGridView1.CurrentRow.Index).Value
-        total = Format(DataGridView1.Item(6, DataGridView1.CurrentRow.Index).Value, "$ ###,###,##0.00")
-        total_nota = Format(DataGridView1.Item(2, DataGridView1.CurrentRow.Index).Value, "$ ###,###,##0.00")
-        abono_total = lblresto.Text
-        cliente_abono = TxtCliente.Text
+        venta           = DataGridView1.Item(2, DataGridView1.CurrentRow.Index).Value
+        resto           = Format(DataGridView1.Item(7, DataGridView1.CurrentRow.Index).Value, "$ ###,###,##0.00")
+        cliente         = DataGridView1.Item(6, DataGridView1.CurrentRow.Index).Value
+        idcliente       = DataGridView1.Item(8, DataGridView1.CurrentRow.Index).Value
+        fecha           = Format(DataGridView1.Item(4, DataGridView1.CurrentRow.Index).Value, "yyyy-MM-dd")
+        fechaL          = Format(DataGridView1.Item(5, DataGridView1.CurrentRow.Index).Value, "yyyy-MM-dd")
+        tipodoc         = DataGridView1.Item(9, DataGridView1.CurrentRow.Index).Value
+        total           = Format(DataGridView1.Item(7, DataGridView1.CurrentRow.Index).Value, "$ ###,###,##0.00")
+        total_nota      = Format(DataGridView1.Item(3, DataGridView1.CurrentRow.Index).Value, "$ ###,###,##0.00")
+        abono_total     = lblresto.Text
+        cliente_abono   = TxtCliente.Text
         'GC.Collect()
         FrmGenerarAbono.ShowDialog()
         llenar_datagrid()

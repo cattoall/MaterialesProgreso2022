@@ -260,20 +260,21 @@ Public Class FrmDevTickets
         For i = 0 To DGVDetalle.Rows.Count - 1
             Dim wTicket As tblTicket = New tblTicket
 
-            wTicket.folio = DGVDetalle.Rows(i).Cells(1).Value.ToString
-            wTicket.IdProducto = DGVDetalle.Rows(i).Cells(2).Value
-            wTicket.concepto = DGVDetalle.Rows(i).Cells(3).Value.ToString
-            wTicket.cantidad = CDec(DGVDetalle.Rows(i).Cells(4).Value)
-            wTicket.precio = CDec(DGVDetalle.Rows(i).Cells(5).Value)
-            wTicket.fecha = DGVDetalle.Rows(i).Cells(6).Value.ToString
-            wTicket.subtotal = CDec(DGVDetalle.Rows(i).Cells(7).Value)
-            wTicket.clave_producto = DGVDetalle.Rows(i).Cells(8).Value.ToString
-            wTicket.precioCosto = CDec(DGVDetalle.Rows(i).Cells(9).Value)
-            wTicket.subtotalCosto = CDec(DGVDetalle.Rows(i).Cells(10).Value)
-            wTicket.numeroFactura = DGVDetalle.Rows(i).Cells(11).Value.ToString
-            wTicket.ClaveProducto = DGVDetalle.Rows(i).Cells(12).Value.ToString
-            wTicket.ClaveUnidad = DGVDetalle.Rows(i).Cells(13).Value.ToString
-            wTicket.TasaCero = CBool(DGVDetalle.Rows(i).Cells(14).Value)
+            wTicket.IdComp          = CompanyCode
+            wTicket.folio           = DGVDetalle.Rows(i).Cells(2).Value.ToString
+            wTicket.IdProducto      = DGVDetalle.Rows(i).Cells(3).Value
+            wTicket.concepto        = DGVDetalle.Rows(i).Cells(4).Value.ToString
+            wTicket.cantidad        = CDec(DGVDetalle.Rows(i).Cells(5).Value)
+            wTicket.precio          = CDec(DGVDetalle.Rows(i).Cells(6).Value)
+            wTicket.fecha           = DGVDetalle.Rows(i).Cells(7).Value.ToString
+            wTicket.subtotal        = CDec(DGVDetalle.Rows(i).Cells(8).Value)
+            wTicket.clave_producto  = DGVDetalle.Rows(i).Cells(9).Value.ToString
+            wTicket.precioCosto     = CDec(DGVDetalle.Rows(i).Cells(10).Value)
+            wTicket.subtotalCosto   = CDec(DGVDetalle.Rows(i).Cells(11).Value)
+            wTicket.numeroFactura   = DGVDetalle.Rows(i).Cells(12).Value.ToString
+            wTicket.ClaveProducto   = DGVDetalle.Rows(i).Cells(13).Value.ToString
+            wTicket.ClaveUnidad     = DGVDetalle.Rows(i).Cells(14).Value.ToString
+            wTicket.TasaCero        = CBool(DGVDetalle.Rows(i).Cells(15).Value)
 
             If DBModelo.Insert_PV_Ticket(wTicket) = False Then
                 MsgBox("No se pudo Insertar registros en la tabla TICKET", MsgBoxStyle.Critical)
