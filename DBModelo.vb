@@ -441,6 +441,7 @@ Public Class DBModelo
             End Using
             Return True
         Catch ex As Exception
+            Console.WriteLine(ex.Message)
             Return False
         End Try
     End Function

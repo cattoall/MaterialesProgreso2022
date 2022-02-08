@@ -55,8 +55,10 @@
             strProducto = DBModelo.GetProducts(ProductoID)
             If Not IsNothing(strProducto) Then
                 TxtStockActual.Text = strProducto.stock
+                ' Es nothing
             End If
-            LblStock.Text = Format(CDbl(TxtStockActual.Text), "###,###,##0.00") & " +"
+            
+            'LblStock.Text = Format(CDbl(TxtStockActual.Text), "###,###,##0.00") & " +"
             TxtStockActual.Text = "0.00"
             TxtStockActual.Focus()
             TxtStockActual.SelectAll()
@@ -143,7 +145,7 @@
         If RbtnAcumulativo.Checked = True Then
             strProducto.stock = strProducto.stock + CDbl(TxtStockActual.Text)
         End If
-
+        strProducto.IdComp = CompanyCode
         If DBModelo.UpdateProductos(strProducto) = False Then
             MetroFramework.MetroMessageBox.Show(Me, "Inventario NO pudo ser Actualizado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub

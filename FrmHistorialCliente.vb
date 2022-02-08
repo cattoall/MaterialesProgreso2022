@@ -31,53 +31,55 @@ Public Class FrmHistorialCliente
     Private Sub ConfiguraGrid(ByVal dv As DataGridView)
 
         If rbtVenta.Checked = True Then
-            dv.Columns(0).HeaderText = "Ticket"
+            dv.Columns(1).HeaderText = "Ticket"
         ElseIf rbtVentaPedido.Checked = True Then
-            dv.Columns(0).HeaderText = "Pedido"
+            dv.Columns(1).HeaderText = "Pedido"
         ElseIf rdbCotizacion.Checked = True Then
-            dv.Columns(0).HeaderText = "Cotización"
+            dv.Columns(1).HeaderText = "Cotización"
         End If
-        dv.Columns(0).ReadOnly = True
-        dv.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(0).Visible = False
 
-        dv.Columns(1).HeaderText = "Fecha"
         dv.Columns(1).ReadOnly = True
         dv.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(2).Visible = False
+        dv.Columns(2).HeaderText = "Fecha"
+        dv.Columns(2).ReadOnly = True
+        dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         dv.Columns(3).Visible = False
+        dv.Columns(4).Visible = False
 
-        dv.Columns(4).HeaderText = "Total"
-        dv.Columns(4).ReadOnly = True
-        dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        dv.Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(4).DefaultCellStyle.Format = "$ ###,###,###.00"
-
-        dv.Columns(5).HeaderText = "Tipo"
+        dv.Columns(5).HeaderText = "Total"
         dv.Columns(5).ReadOnly = True
-        dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         dv.Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(5).DefaultCellStyle.Format = "$ ###,###,###.00"
 
-        dv.Columns(6).Visible = False
+        dv.Columns(6).HeaderText = "Tipo"
+        dv.Columns(6).ReadOnly = True
+        dv.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         dv.Columns(7).Visible = False
         dv.Columns(8).Visible = False
+        dv.Columns(9).Visible = False
 
-        dv.Columns(9).HeaderText = "Estado"
-        dv.Columns(9).ReadOnly = True
-        dv.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        dv.Columns(9).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        dv.Columns(10).HeaderText = "Motivo"
+        dv.Columns(10).HeaderText = "Estado"
         dv.Columns(10).ReadOnly = True
         dv.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(10).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(11).HeaderText = "Numero de Factura"
+        dv.Columns(11).HeaderText = "Motivo"
         dv.Columns(11).ReadOnly = True
         dv.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dv.Columns(11).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        dv.Columns(12).HeaderText = "Numero de Factura"
+        dv.Columns(12).ReadOnly = True
+        dv.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dv.Columns(12).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
     Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
@@ -128,7 +130,7 @@ Public Class FrmHistorialCliente
         ConfiguraGrid(DataGridView1)
 
         For i = 0 To DataGridView1.RowCount - 1
-            LblTotal.Text = CDbl(LblTotal.Text) + CDbl(DataGridView1.Item(4, i).Value)
+            LblTotal.Text = CDbl(LblTotal.Text) + CDbl(DataGridView1.Item(5, i).Value)
         Next
         LblTotal.Text = FormatCurrency(LblTotal.Text, 2)
     End Sub
