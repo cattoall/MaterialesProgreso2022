@@ -210,7 +210,7 @@ Public Class FrmNotaDeCredito
         Dim FolioFactura As String = gv_SerieNCSalvador & "-" & FolioNC_Actual & "_" & Format(Date.Now, "yyyyMMdd") & "_CFDI"
 
         strNC.IdComp        = CompanyCode
-        strNC.n_nc          = CDec(FolioNC_Actual)
+        strNC.n_nc          = CDec(FolioNC_Actual + 1)
         strNC.SubTotal      = CDec(txtSubtotal.Text)
         strNC.IVA           = CDec(txtIVA.Text)
         strNC.total         = CDec(txtTotal.Text)
@@ -237,6 +237,7 @@ Public Class FrmNotaDeCredito
 
                 strNC_Detalle = New tblNcDetalle
 
+                strNC_Detalle.IdComp = CompanyCode
                 strNC_Detalle.n_nc = CLng(FolioNC_Actual)
                 strNC_Detalle.FolioFactura = TxtPedido_C.Text
                 strNC_Detalle.folio = DGVDetalle.Rows(i).Cells(7).Value.ToString
@@ -269,6 +270,7 @@ Public Class FrmNotaDeCredito
         Dim strFoliosNC As New tblFoliofacturas
         strFoliosNC = DBModelo.Get_PV_FoliosNC(Now.Year, "NOTAS DE CREDITO")
 
+        strFoliosNC.IdComp = CompanyCode
         strFoliosNC.FolioActual = FolioNC_Actual + 1
 
         If DBModelo.Update_PV_FoliosNC_Actual(strFoliosNC) = False Then

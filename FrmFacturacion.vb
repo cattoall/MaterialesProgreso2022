@@ -455,8 +455,11 @@ Public Class FrmFacturacion
             PrBImprimiendo.Value = 10
 
             Dim wFacturaTotal As tblFacturaTotal = New tblFacturaTotal
+
             wFacturaTotal.IdComp = CompanyCode
-            wFacturaTotal.n_factura = Decimal.Parse(NoFactura)
+            ' Desconozco si sea error de mi lado
+            wFacturaTotal.n_factura = Decimal.Parse(NoFactura + 1)
+            Console.WriteLine(wFacturaTotal.n_factura)
             wFacturaTotal.total = Decimal.Parse(TxtTotal.Text)
             wFacturaTotal.usuario = usuario
             If CmbMetodoPago.Text.Substring(0, 3) = "PUE" Then
@@ -487,9 +490,11 @@ Public Class FrmFacturacion
             wFacturaTotal.Cancelada = 0
             wFacturaTotal.ComproPago = 0
             wFacturaTotal.pdf = ""
+
             If DBModelo.InsertFacturaTotal(wFacturaTotal) Then
                 For i = 0 To DataGridView1.RowCount - 1
                     Dim wFactura As tblFactura = New tblFactura
+                    wFactura.IdComp = CompanyCode
                     wFactura.n_factura = CDec(NoFactura)
                     wFactura.folio = DataGridView1.Rows(i).Cells(0).Value.ToString
                     wFactura.idProducto = CInt(DataGridView1.Rows(i).Cells(10).Value)
@@ -510,6 +515,7 @@ Public Class FrmFacturacion
 
                 Dim wFolioFacturas As tblFoliofacturas = DBModelo.GetFolioFactura("FACTURAS", Now.Year)
                 If Not wFolioFacturas Is Nothing Then
+                    wFolioFacturas.IdComp = CompanyCode
                     wFolioFacturas.FolioActual = wFolioFacturas.FolioActual + 1
                     If DBModelo.UpdateFolioFacturas(wFolioFacturas) = False Then
                         MsgBox("Error al actualizar Folio Factura en tabla FolioFacturas", MsgBoxStyle.Critical, "Facturación")
