@@ -43,6 +43,8 @@
 
         MetroGrid1.DataSource = Clientes.ToList
 
+        MetroGrid1.Columns(0).Visible = False
+
         MetroGrid1.Columns(1).HeaderText = "ID"
         MetroGrid1.Columns(1).ReadOnly = True
         MetroGrid1.Columns(1).Width = 50

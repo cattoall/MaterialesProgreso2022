@@ -111,7 +111,6 @@
             Case True
                 strMarca = DBModelo.GetMarca(lv_idMarca)
                 If Not IsNothing(strMarca) Then
-                    strMarca.IdComp = CompanyCode
                     strMarca.descripcion = txtMarca.Text
                     If DBModelo.UpdateMarca(strMarca) Then
                         If lv_ValorAnterior <> txtMarca.Text Then
@@ -128,6 +127,7 @@
                     End If
                 End If
             Case False
+                strMarca.IdComp = CompanyCode
                 strMarca.descripcion = txtMarca.Text
                 If DBModelo.InsertMarca(strMarca) Then
                     MetroFramework.MetroMessageBox.Show(Me, "Marca creada correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
