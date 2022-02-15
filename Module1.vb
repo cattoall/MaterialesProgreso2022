@@ -2834,7 +2834,7 @@ Module Module1
                 oSmtp.Credentials = New Net.NetworkCredential(gv_smtp_correo, gv_smtp_pass)
                 oSmtp.Port = 587
                 oSmtp.EnableSsl = True
-                oSmtp.Host = "smtp.live.com"
+                oSmtp.Host = "smtp.office365.com" '"smtp.live.com"
 
                 oMail = New MailMessage()
 
@@ -4383,7 +4383,7 @@ Module Module1
                 oSmtp.Credentials = New Net.NetworkCredential(gv_smtp_correo, gv_smtp_pass)
                 oSmtp.Port = 587
                 oSmtp.EnableSsl = True
-                oSmtp.Host = "smtp.live.com"
+                oSmtp.Host = "smtp.office365.com"
 
                 oMail = New MailMessage()
 

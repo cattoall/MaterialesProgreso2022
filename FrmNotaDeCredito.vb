@@ -209,24 +209,28 @@ Public Class FrmNotaDeCredito
         Dim NoFactura As String = FolioNC_Actual
         Dim FolioFactura As String = gv_SerieNCSalvador & "-" & FolioNC_Actual & "_" & Format(Date.Now, "yyyyMMdd") & "_CFDI"
 
-        strNC.IdComp        = CompanyCode
-        strNC.n_nc          = CDec(FolioNC_Actual + 1)
-        strNC.SubTotal      = CDec(txtSubtotal.Text)
-        strNC.IVA           = CDec(txtIVA.Text)
-        strNC.total         = CDec(txtTotal.Text)
-        strNC.usuario       = nombreUsuario
-        strNC.tipo_venta    = strFacturaTotal.tipo_venta
-        strNC.cliente       = TxtNombre_C.Text
-        strNC.id_cliente    = CInt(Label9.Text)
-        strNC.fecha_venta   = DateTime.Now
-        strNC.fecha_limite  = DateTime.Now
-        strNC.codiciones    = strFacturaTotal.codiciones
-        strNC.estado        = "VENDIDO"
+        Dim lv_Subtotal As String = Trim(txtSubtotal.Text.Replace(",", ""))
+        Dim lv_IVA As String = Trim(txtIVA.Text.Replace(",", ""))
+        Dim lv_Total As String = Trim(txtTotal.Text.Replace(",", ""))
+
+        strNC.IdComp = CompanyCode
+        strNC.n_nc = CDec(FolioNC_Actual)
+        strNC.SubTotal = CDec(lv_Subtotal)
+        strNC.IVA = CDec(lv_IVA)
+        strNC.total = CDec(lv_Total)
+        strNC.usuario = nombreUsuario
+        strNC.tipo_venta = strFacturaTotal.tipo_venta
+        strNC.cliente = TxtNombre_C.Text
+        strNC.id_cliente = CInt(Label9.Text)
+        strNC.fecha_venta = DateTime.Now
+        strNC.fecha_limite = DateTime.Now
+        strNC.codiciones = strFacturaTotal.codiciones
+        strNC.estado = "VENDIDO"
         strNC.observaciones = "NC con referencia a Factura:" & TxtPedido_C.Text
-        strNC.FolioFactura  = TxtPedido_C.Text
-        strNC.FormaPago     = strFacturaTotal.FormaPago
-        strNC.metodopago    = strFacturaTotal.metodopago
-        strNC.UsoCFDI       = strFacturaTotal.UsoCFDI
+        strNC.FolioFactura = TxtPedido_C.Text
+        strNC.FormaPago = strFacturaTotal.FormaPago
+        strNC.metodopago = strFacturaTotal.metodopago
+        strNC.UsoCFDI = strFacturaTotal.UsoCFDI
 
         If DBModelo.Insert_NC(strNC) = False Then
             MetroFramework.MetroMessageBox.Show(Me, "Error al Insertar Registro en la table NC", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -294,8 +298,8 @@ Public Class FrmNotaDeCredito
         sdk.AgregaObjeto(Conf)
 
         Dim factura As New MFObject("factura")
-        Dim subtotal As String = txtSubtotal.Text
-        Dim total As String = txtTotal.Text
+        Dim subtotal As String = Trim(txtSubtotal.Text.Replace(",", ""))
+        Dim total As String = Trim(txtTotal.Text.Replace(",", ""))
 
         factura("serie") = gv_SerieNCSalvador
         factura("folio") = CDbl(NoFactura)

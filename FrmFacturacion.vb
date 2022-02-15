@@ -134,8 +134,8 @@ Public Class FrmFacturacion
                 row(0) = wTicket.folio
                 row(1) = wTicket.cantidad
                 row(2) = wTicket.concepto
-                row(3) = Math.Round(CDbl(wTicket.precio / FactorIVA), 6)
-                row(4) = Math.Round(CDbl(wTicket.subtotal / FactorIVA), 6)
+                row(3) = wTicket.precio 'Math.Round(CDbl(wTicket.precio / FactorIVA), 6)
+                row(4) = wTicket.subtotal 'Math.Round(CDbl(wTicket.subtotal / FactorIVA), 6)
                 row(5) = wTicket.fecha
                 row(6) = wTicket.precioCosto
                 row(7) = wTicket.subtotalCosto
@@ -145,11 +145,11 @@ Public Class FrmFacturacion
                 row(11) = wTicket.ClaveProducto
                 row(12) = wTicket.ClaveUnidad
                 row(13) = "0"
-                row(14) = Math.Round(CDbl((wTicket.subtotal - (wTicket.subtotal / FactorIVA))), 6)
+                row(14) = Math.Round(CDbl(((wTicket.subtotal * FactorIVA) - wTicket.subtotal)), 6) 'Math.Round(CDbl((wTicket.subtotal - (wTicket.subtotal / FactorIVA))), 6)
                 Dim rowValues As String() = row
                 DataGridView1.Rows.Add(rowValues)
-                TxtSubtotal.Text = TxtSubtotal.Text + Math.Round(CDbl(wTicket.subtotal / FactorIVA), 6)
-                TxtIVA.Text = TxtIVA.Text + Math.Round(CDbl((wTicket.subtotal - (wTicket.subtotal / FactorIVA))), 6)
+                TxtSubtotal.Text = TxtSubtotal.Text + wTicket.subtotal 'Math.Round(CDbl(wTicket.subtotal / FactorIVA), 6)
+                TxtIVA.Text = TxtIVA.Text + Math.Round(CDbl(((wTicket.subtotal * FactorIVA) - wTicket.subtotal)), 6) 'Math.Round(CDbl((wTicket.subtotal - (wTicket.subtotal / FactorIVA))), 6)
                 TxtTotal.Text = CDbl(TxtSubtotal.Text) + CDbl(TxtIVA.Text)
             Next
             TxtSubtotal.Text = FormatNumber(Math.Round(CDbl(TxtSubtotal.Text), 2))
@@ -458,8 +458,7 @@ Public Class FrmFacturacion
 
             wFacturaTotal.IdComp = CompanyCode
             ' Desconozco si sea error de mi lado
-            wFacturaTotal.n_factura = Decimal.Parse(NoFactura + 1)
-            Console.WriteLine(wFacturaTotal.n_factura)
+            wFacturaTotal.n_factura = Decimal.Parse(NoFactura)
             wFacturaTotal.total = Decimal.Parse(TxtTotal.Text)
             wFacturaTotal.usuario = usuario
             If CmbMetodoPago.Text.Substring(0, 3) = "PUE" Then

@@ -94,11 +94,11 @@
         Dim strProducto As tblProductos = DBModelo.Get_PV_Producto(txtProducto.Text)
         If Not IsNothing(strProducto) Then
             If strProducto.ClaveProducto = "" Then
-                MetroFramework.MetroMessageBox.Show(Me, "Producto: " & myDs.Tables(0).Rows(0)!descripcionProducto & " no tiene ClaveProducto SAT definido.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MetroFramework.MetroMessageBox.Show(Me, "Producto: " & strProducto.descripcionProducto & " no tiene ClaveProducto SAT definido.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
             If strProducto.ClaveUnidad = "" Then
-                MetroFramework.MetroMessageBox.Show(Me, "Producto: " & myDs.Tables(0).Rows(0)!descripcionProducto & " no tiene ClaveUnidad SAT definida.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MetroFramework.MetroMessageBox.Show(Me, "Producto: " & strProducto.descripcionProducto & " no tiene ClaveUnidad SAT definida.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
             If MetroGrid1.Rows.Count > 0 Then
