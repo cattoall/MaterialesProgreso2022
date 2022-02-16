@@ -45,27 +45,27 @@
 
         MetroGrid1.Columns(0).Visible = False
 
+        Dim i As Int16 = 0
+
+        For i = 0 To MetroGrid1.Columns.Count - 1 
+            MetroGrid1.Columns(i).ReadOnly = True
+        Next
+
         MetroGrid1.Columns(1).HeaderText = "ID"
-        MetroGrid1.Columns(1).ReadOnly = True
         MetroGrid1.Columns(1).Width = 50
 
         MetroGrid1.Columns(2).HeaderText = "Nombre"
-        MetroGrid1.Columns(2).ReadOnly = True
         MetroGrid1.Columns(2).Width = 150
 
         MetroGrid1.Columns(3).HeaderText = "Apellido Paterno"
-        MetroGrid1.Columns(3).ReadOnly = True
         MetroGrid1.Columns(3).Width = 150
 
         MetroGrid1.Columns(4).HeaderText = "Apellido Materno"
-        MetroGrid1.Columns(4).ReadOnly = True
         MetroGrid1.Columns(4).Width = 150
 
         MetroGrid1.Columns(11).HeaderText = "R.F.C."
-        MetroGrid1.Columns(11).ReadOnly = True
 
         MetroGrid1.Columns(15).HeaderText = "Observaciones"
-        MetroGrid1.Columns(15).ReadOnly = True
         MetroGrid1.Columns(15).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
         MetroGrid1.Columns(5).HeaderText = "Domicilio"
@@ -93,59 +93,45 @@
         MetroGrid1.Columns(10).Visible = False
 
         MetroGrid1.Columns(12).HeaderText = "Teléfono"
-        MetroGrid1.Columns(12).ReadOnly = True
         MetroGrid1.Columns(12).Visible = False
 
         MetroGrid1.Columns(13).HeaderText = "Celular"
-        MetroGrid1.Columns(13).ReadOnly = True
         MetroGrid1.Columns(13).Visible = False
 
         MetroGrid1.Columns(14).HeaderText = "Correo"
-        MetroGrid1.Columns(14).ReadOnly = True
         MetroGrid1.Columns(14).Visible = False
 
         MetroGrid1.Columns(16).HeaderText = "Lista Precios"
-        MetroGrid1.Columns(16).ReadOnly = True
         MetroGrid1.Columns(16).Visible = False
 
         MetroGrid1.Columns(17).HeaderText = "Días Crédito"
-        MetroGrid1.Columns(17).ReadOnly = True
         MetroGrid1.Columns(17).Visible = False
 
         MetroGrid1.Columns(18).HeaderText = "Límite Crédito"
-        MetroGrid1.Columns(18).ReadOnly = True
         MetroGrid1.Columns(18).Visible = False
 
         MetroGrid1.Columns(19).HeaderText = "Tipo Venta"
-        MetroGrid1.Columns(19).ReadOnly = True
         MetroGrid1.Columns(19).Visible = False
 
         MetroGrid1.Columns(20).HeaderText = "Método Pago"
-        MetroGrid1.Columns(20).ReadOnly = True
         MetroGrid1.Columns(20).Visible = False
 
         MetroGrid1.Columns(21).HeaderText = "Condiciones"
-        MetroGrid1.Columns(21).ReadOnly = True
         MetroGrid1.Columns(21).Visible = False
 
         MetroGrid1.Columns(22).HeaderText = "Cuenta"
-        MetroGrid1.Columns(22).ReadOnly = True
         MetroGrid1.Columns(22).Visible = False
 
         MetroGrid1.Columns(23).HeaderText = "Banco"
-        MetroGrid1.Columns(23).ReadOnly = True
         MetroGrid1.Columns(23).Visible = False
 
         MetroGrid1.Columns(24).HeaderText = "Tasa Cero"
-        MetroGrid1.Columns(24).ReadOnly = True
         MetroGrid1.Columns(24).Visible = False
 
         MetroGrid1.Columns(25).HeaderText = "Forma Pago"
-        MetroGrid1.Columns(25).ReadOnly = True
         MetroGrid1.Columns(25).Visible = False
 
         MetroGrid1.Columns(26).HeaderText = "Uso CFDI"
-        MetroGrid1.Columns(26).ReadOnly = True
         MetroGrid1.Columns(26).Visible = False
 
     End Sub

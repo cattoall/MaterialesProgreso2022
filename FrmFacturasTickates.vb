@@ -79,31 +79,122 @@
         MetroGrid1.DataSource = x
         Console.WriteLine(MetroGrid1.Columns.Count.ToString)
 
+        ConfigurarGrid()
+    End Sub
+
+    Private Sub ConfigurarGrid()
         MetroGrid1.Columns(0).Visible       = False
         MetroGrid1.Columns(0).HeaderText    = "Id Compañía"
 
         MetroGrid1.Columns(1).HeaderText    = "No. Factura"
+        MetroGrid1.Columns(1).ReadOnly = True
+        MetroGrid1.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(2).HeaderText    = "Total"
+        MetroGrid1.Columns(2).ReadOnly = True
+        MetroGrid1.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(3).HeaderText    = "Usuario"
+        MetroGrid1.Columns(3).ReadOnly = True
+        MetroGrid1.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(4).HeaderText    = "Tipo de Venta"
+        MetroGrid1.Columns(4).ReadOnly = True
+        MetroGrid1.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(5).HeaderText    = "Cliente"
+        MetroGrid1.Columns(5).ReadOnly = True
+        MetroGrid1.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(6).HeaderText    = "ID Cliente"
+        MetroGrid1.Columns(6).ReadOnly = True
+        MetroGrid1.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(7).HeaderText    = "Fecha de Venta"
+        MetroGrid1.Columns(7).ReadOnly = True
+        MetroGrid1.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(8).HeaderText    = "Fecha Límite"
+        MetroGrid1.Columns(8).ReadOnly = True
+        MetroGrid1.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(8).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(9).HeaderText    = "Condiciones"
-        MetroGrid1.Columns(10).HeaderText    = "Estado"
+        MetroGrid1.Columns(9).ReadOnly = True
+        MetroGrid1.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(9).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        MetroGrid1.Columns(10).HeaderText   = "Estado"
+        MetroGrid1.Columns(10).ReadOnly = True
+        MetroGrid1.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(10).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(11).HeaderText   = "Observaciones"
+        MetroGrid1.Columns(11).ReadOnly = True
+        MetroGrid1.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(11).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(12).HeaderText   = "Día De Factura"
+        MetroGrid1.Columns(12).ReadOnly = True
+        MetroGrid1.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(12).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(13).HeaderText   = "Método de Pago"
+        MetroGrid1.Columns(13).ReadOnly = True
+        MetroGrid1.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(13).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(14).HeaderText   = "nc"
+        MetroGrid1.Columns(14).ReadOnly = True
+        MetroGrid1.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(14).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(15).HeaderText   = "Cuenta"
+        MetroGrid1.Columns(15).ReadOnly = True
+        MetroGrid1.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(15).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(16).HeaderText   = "Banco"
+        MetroGrid1.Columns(16).ReadOnly = True
+        MetroGrid1.Columns(16).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(16).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(17).HeaderText   = "Forma de Pago"
+        MetroGrid1.Columns(17).ReadOnly = True
+        MetroGrid1.Columns(17).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(17).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(18).HeaderText   = "Uso de CFDI"
+        MetroGrid1.Columns(18).ReadOnly = True
+        MetroGrid1.Columns(18).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(18).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         MetroGrid1.Columns(19).HeaderText   = "UUID"
+        MetroGrid1.Columns(19).ReadOnly = True
+        MetroGrid1.Columns(19).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(19).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        
         MetroGrid1.Columns(20).HeaderText   = "Cancelada"
+        MetroGrid1.Columns(20).ReadOnly = True
+        MetroGrid1.Columns(20).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(20).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        
         MetroGrid1.Columns(21).HeaderText   = "Comprobante de Pago"
+        MetroGrid1.Columns(21).ReadOnly = True
+        MetroGrid1.Columns(21).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(21).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        
         MetroGrid1.Columns(22).HeaderText   = "PDF"
+        MetroGrid1.Columns(22).ReadOnly = True
+        MetroGrid1.Columns(22).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        MetroGrid1.Columns(22).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click

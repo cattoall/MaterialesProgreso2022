@@ -57,6 +57,14 @@
 
         MetroGrid1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         MetroGrid1.Columns(0).Visible = False
+
+        Dim i As Int16 = 0
+
+        For i = 0 To MetroGrid1.Columns.Count - 1 
+            MetroGrid1.Columns(i).ReadOnly = True
+            MetroGrid1.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        Next
+
         MetroGrid1.Columns(1).HeaderText = "Id"
         MetroGrid1.Columns(2).HeaderText = "Descripción"
         MetroGrid1.Columns(3).HeaderText = "Factor Costo"
