@@ -26,6 +26,7 @@ Partial Class FrmDevTickets
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.CmdGenerar = New System.Windows.Forms.Button()
         Me.DGVDetalle = New MetroFramework.Controls.MetroGrid()
@@ -57,10 +58,10 @@ Partial Class FrmDevTickets
         Me.TxtPedido_C = New System.Windows.Forms.TextBox()
         Me.MetroLabel10 = New MetroFramework.Controls.MetroLabel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox1.SuspendLayout
-        CType(Me.DGVDetalle,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox2.SuspendLayout
-        Me.SuspendLayout
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.DGVDetalle, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox2.SuspendLayout()
+        Me.SuspendLayout()
         '
         'GroupBox1
         '
@@ -76,172 +77,167 @@ Partial Class FrmDevTickets
         Me.GroupBox1.Controls.Add(Me.TxtTotal_N)
         Me.GroupBox1.Controls.Add(Me.TxtPedido)
         Me.GroupBox1.Controls.Add(Me.GroupBox2)
-        Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 78)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(9, 63)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox1.Size = New System.Drawing.Size(1316, 689)
+        Me.GroupBox1.Size = New System.Drawing.Size(987, 560)
         Me.GroupBox1.TabIndex = 0
-        Me.GroupBox1.TabStop = false
+        Me.GroupBox1.TabStop = False
         '
         'CmdGenerar
         '
         Me.CmdGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CmdGenerar.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.CmdGenerar.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmdGenerar.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.CmdGenerar.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.export_16px
         Me.CmdGenerar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.CmdGenerar.Location = New System.Drawing.Point(609, 624)
+        Me.CmdGenerar.Location = New System.Drawing.Point(457, 507)
+        Me.CmdGenerar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CmdGenerar.Name = "CmdGenerar"
-        Me.CmdGenerar.Size = New System.Drawing.Size(99, 28)
+        Me.CmdGenerar.Size = New System.Drawing.Size(74, 23)
         Me.CmdGenerar.TabIndex = 91
         Me.CmdGenerar.Text = "Generar"
         Me.CmdGenerar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.CmdGenerar.UseVisualStyleBackColor = true
+        Me.CmdGenerar.UseVisualStyleBackColor = True
         '
         'DGVDetalle
         '
-        Me.DGVDetalle.AllowUserToAddRows = false
-        Me.DGVDetalle.AllowUserToResizeRows = false
-        Me.DGVDetalle.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.DGVDetalle.AllowUserToAddRows = False
+        Me.DGVDetalle.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+        Me.DGVDetalle.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.DGVDetalle.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.DGVDetalle.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DGVDetalle.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.DGVDetalle.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(174,Byte),Integer), CType(CType(219,Byte),Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGVDetalle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DGVDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136,Byte),Integer), CType(CType(136,Byte),Integer), CType(CType(136,Byte),Integer))
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGVDetalle.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DGVDetalle.EnableHeadersVisualStyles = false
-        Me.DGVDetalle.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.DGVDetalle.GridColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        Me.DGVDetalle.Location = New System.Drawing.Point(8, 191)
-        Me.DGVDetalle.Margin = New System.Windows.Forms.Padding(4)
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGVDetalle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.DGVDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGVDetalle.DefaultCellStyle = DataGridViewCellStyle3
+        Me.DGVDetalle.EnableHeadersVisualStyles = False
+        Me.DGVDetalle.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.DGVDetalle.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.DGVDetalle.Location = New System.Drawing.Point(6, 155)
         Me.DGVDetalle.Name = "DGVDetalle"
         Me.DGVDetalle.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(174,Byte),Integer), CType(CType(219,Byte),Integer))
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 11!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(198,Byte),Integer), CType(CType(247,Byte),Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer), CType(CType(17,Byte),Integer))
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGVDetalle.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGVDetalle.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DGVDetalle.RowHeadersWidth = 51
         Me.DGVDetalle.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DGVDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGVDetalle.Size = New System.Drawing.Size(1292, 396)
+        Me.DGVDetalle.Size = New System.Drawing.Size(969, 322)
         Me.DGVDetalle.TabIndex = 64
         '
         'Button2
         '
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.ForeColor = System.Drawing.Color.Red
         Me.Button2.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.close_window_16px
         Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button2.Location = New System.Drawing.Point(1206, 18)
+        Me.Button2.Location = New System.Drawing.Point(904, 15)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(94, 28)
+        Me.Button2.Size = New System.Drawing.Size(70, 23)
         Me.Button2.TabIndex = 90
         Me.Button2.Text = "Salir"
         Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button2.UseVisualStyleBackColor = true
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'MetroLabel12
         '
-        Me.MetroLabel12.AutoSize = true
+        Me.MetroLabel12.AutoSize = True
         Me.MetroLabel12.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.MetroLabel12.Location = New System.Drawing.Point(425, 594)
-        Me.MetroLabel12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.MetroLabel12.Location = New System.Drawing.Point(319, 483)
         Me.MetroLabel12.Name = "MetroLabel12"
-        Me.MetroLabel12.Size = New System.Drawing.Size(94, 20)
+        Me.MetroLabel12.Size = New System.Drawing.Size(90, 19)
         Me.MetroLabel12.TabIndex = 61
         Me.MetroLabel12.Text = "Nuevo Total"
         '
         'MetroLabel11
         '
-        Me.MetroLabel11.AutoSize = true
+        Me.MetroLabel11.AutoSize = True
         Me.MetroLabel11.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.MetroLabel11.Location = New System.Drawing.Point(225, 594)
-        Me.MetroLabel11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.MetroLabel11.Location = New System.Drawing.Point(169, 483)
         Me.MetroLabel11.Name = "MetroLabel11"
-        Me.MetroLabel11.Size = New System.Drawing.Size(84, 20)
+        Me.MetroLabel11.Size = New System.Drawing.Size(79, 19)
         Me.MetroLabel11.TabIndex = 60
         Me.MetroLabel11.Text = "Nuevo IVA"
         '
         'MetroLabel2
         '
-        Me.MetroLabel2.AutoSize = true
+        Me.MetroLabel2.AutoSize = True
         Me.MetroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.MetroLabel2.Location = New System.Drawing.Point(21, 594)
-        Me.MetroLabel2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.MetroLabel2.Location = New System.Drawing.Point(16, 483)
         Me.MetroLabel2.Name = "MetroLabel2"
-        Me.MetroLabel2.Size = New System.Drawing.Size(118, 20)
+        Me.MetroLabel2.Size = New System.Drawing.Size(113, 19)
         Me.MetroLabel2.TabIndex = 59
         Me.MetroLabel2.Text = "Nuevo Subtotal"
         '
         'MetroLabel1
         '
-        Me.MetroLabel1.AutoSize = true
+        Me.MetroLabel1.AutoSize = True
         Me.MetroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.MetroLabel1.Location = New System.Drawing.Point(8, 20)
-        Me.MetroLabel1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.MetroLabel1.Location = New System.Drawing.Point(6, 16)
         Me.MetroLabel1.Name = "MetroLabel1"
-        Me.MetroLabel1.Size = New System.Drawing.Size(80, 20)
+        Me.MetroLabel1.Size = New System.Drawing.Size(77, 19)
         Me.MetroLabel1.TabIndex = 58
         Me.MetroLabel1.Text = "No. Ticket"
         '
         'txtIVA_N
         '
-        Me.txtIVA_N.Enabled = false
-        Me.txtIVA_N.Location = New System.Drawing.Point(225, 622)
-        Me.txtIVA_N.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtIVA_N.Enabled = False
+        Me.txtIVA_N.Location = New System.Drawing.Point(169, 505)
         Me.txtIVA_N.Name = "txtIVA_N"
-        Me.txtIVA_N.Size = New System.Drawing.Size(177, 30)
+        Me.txtIVA_N.Size = New System.Drawing.Size(134, 26)
         Me.txtIVA_N.TabIndex = 42
         Me.txtIVA_N.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtSubTotal_N
         '
-        Me.txtSubTotal_N.Enabled = false
-        Me.txtSubTotal_N.Location = New System.Drawing.Point(21, 622)
-        Me.txtSubTotal_N.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtSubTotal_N.Enabled = False
+        Me.txtSubTotal_N.Location = New System.Drawing.Point(16, 505)
         Me.txtSubTotal_N.Name = "txtSubTotal_N"
-        Me.txtSubTotal_N.Size = New System.Drawing.Size(177, 30)
+        Me.txtSubTotal_N.Size = New System.Drawing.Size(134, 26)
         Me.txtSubTotal_N.TabIndex = 40
         Me.txtSubTotal_N.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TxtTotal_N
         '
-        Me.TxtTotal_N.Enabled = false
-        Me.TxtTotal_N.Location = New System.Drawing.Point(425, 622)
-        Me.TxtTotal_N.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtTotal_N.Enabled = False
+        Me.TxtTotal_N.Location = New System.Drawing.Point(319, 505)
         Me.TxtTotal_N.Name = "TxtTotal_N"
-        Me.TxtTotal_N.Size = New System.Drawing.Size(177, 30)
+        Me.TxtTotal_N.Size = New System.Drawing.Size(134, 26)
         Me.TxtTotal_N.TabIndex = 9
         Me.TxtTotal_N.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TxtPedido
         '
-        Me.TxtPedido.Location = New System.Drawing.Point(127, 18)
-        Me.TxtPedido.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtPedido.Location = New System.Drawing.Point(95, 15)
         Me.TxtPedido.Name = "TxtPedido"
         Me.TxtPedido.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtPedido.Size = New System.Drawing.Size(132, 30)
+        Me.TxtPedido.Size = New System.Drawing.Size(100, 26)
         Me.TxtPedido.TabIndex = 2
         '
         'GroupBox2
@@ -263,192 +259,173 @@ Partial Class FrmDevTickets
         Me.GroupBox2.Controls.Add(Me.MetroLabel3)
         Me.GroupBox2.Controls.Add(Me.TxtPedido_C)
         Me.GroupBox2.Controls.Add(Me.MetroLabel10)
-        Me.GroupBox2.Location = New System.Drawing.Point(8, 53)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4)
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 43)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox2.Size = New System.Drawing.Size(1292, 130)
+        Me.GroupBox2.Size = New System.Drawing.Size(969, 106)
         Me.GroupBox2.TabIndex = 0
-        Me.GroupBox2.TabStop = false
+        Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Cabecera"
         '
         'DTPFecha
         '
         Me.DTPFecha.CustomFormat = "dd/MM/yyyy"
         Me.DTPFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DTPFecha.Location = New System.Drawing.Point(360, 31)
-        Me.DTPFecha.Margin = New System.Windows.Forms.Padding(4)
-        Me.DTPFecha.MinimumSize = New System.Drawing.Size(0, 30)
+        Me.DTPFecha.Location = New System.Drawing.Point(270, 25)
+        Me.DTPFecha.MinimumSize = New System.Drawing.Size(0, 29)
         Me.DTPFecha.Name = "DTPFecha"
-        Me.DTPFecha.Size = New System.Drawing.Size(147, 30)
+        Me.DTPFecha.Size = New System.Drawing.Size(111, 30)
         Me.DTPFecha.TabIndex = 68
         '
         'txtSubTotal_C
         '
-        Me.txtSubTotal_C.Enabled = false
-        Me.txtSubTotal_C.Location = New System.Drawing.Point(1151, 16)
-        Me.txtSubTotal_C.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtSubTotal_C.Enabled = False
+        Me.txtSubTotal_C.Location = New System.Drawing.Point(863, 13)
         Me.txtSubTotal_C.Name = "txtSubTotal_C"
-        Me.txtSubTotal_C.Size = New System.Drawing.Size(132, 30)
+        Me.txtSubTotal_C.Size = New System.Drawing.Size(100, 26)
         Me.txtSubTotal_C.TabIndex = 18
         Me.txtSubTotal_C.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label9
         '
-        Me.Label9.AutoSize = true
+        Me.Label9.AutoSize = True
         Me.Label9.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.Label9.Location = New System.Drawing.Point(768, 85)
-        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label9.Location = New System.Drawing.Point(576, 69)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(55, 20)
+        Me.Label9.Size = New System.Drawing.Size(53, 19)
         Me.Label9.TabIndex = 63
         Me.Label9.Text = "Label9"
-        Me.Label9.Visible = false
+        Me.Label9.Visible = False
         '
         'MetroLabel9
         '
-        Me.MetroLabel9.AutoSize = true
+        Me.MetroLabel9.AutoSize = True
         Me.MetroLabel9.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.MetroLabel9.Location = New System.Drawing.Point(1087, 95)
-        Me.MetroLabel9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.MetroLabel9.Location = New System.Drawing.Point(815, 77)
         Me.MetroLabel9.Name = "MetroLabel9"
-        Me.MetroLabel9.Size = New System.Drawing.Size(44, 20)
+        Me.MetroLabel9.Size = New System.Drawing.Size(42, 19)
         Me.MetroLabel9.TabIndex = 67
         Me.MetroLabel9.Text = "Total"
         '
         'txtIVA_C
         '
-        Me.txtIVA_C.Enabled = false
-        Me.txtIVA_C.Location = New System.Drawing.Point(1151, 54)
-        Me.txtIVA_C.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtIVA_C.Enabled = False
+        Me.txtIVA_C.Location = New System.Drawing.Point(863, 44)
         Me.txtIVA_C.Name = "txtIVA_C"
-        Me.txtIVA_C.Size = New System.Drawing.Size(132, 30)
+        Me.txtIVA_C.Size = New System.Drawing.Size(100, 26)
         Me.txtIVA_C.TabIndex = 16
         Me.txtIVA_C.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'MetroLabel8
         '
-        Me.MetroLabel8.AutoSize = true
+        Me.MetroLabel8.AutoSize = True
         Me.MetroLabel8.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.MetroLabel8.Location = New System.Drawing.Point(1101, 59)
-        Me.MetroLabel8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.MetroLabel8.Location = New System.Drawing.Point(826, 48)
         Me.MetroLabel8.Name = "MetroLabel8"
-        Me.MetroLabel8.Size = New System.Drawing.Size(34, 20)
+        Me.MetroLabel8.Size = New System.Drawing.Size(31, 19)
         Me.MetroLabel8.TabIndex = 66
         Me.MetroLabel8.Text = "IVA"
         '
         'TxtNombre_C
         '
-        Me.TxtNombre_C.Enabled = false
-        Me.TxtNombre_C.Location = New System.Drawing.Point(117, 81)
-        Me.TxtNombre_C.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtNombre_C.Enabled = False
+        Me.TxtNombre_C.Location = New System.Drawing.Point(88, 66)
         Me.TxtNombre_C.Name = "TxtNombre_C"
-        Me.TxtNombre_C.Size = New System.Drawing.Size(641, 30)
+        Me.TxtNombre_C.Size = New System.Drawing.Size(482, 26)
         Me.TxtNombre_C.TabIndex = 13
         '
         'MetroLabel7
         '
-        Me.MetroLabel7.AutoSize = true
+        Me.MetroLabel7.AutoSize = True
         Me.MetroLabel7.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.MetroLabel7.Location = New System.Drawing.Point(1056, 22)
-        Me.MetroLabel7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.MetroLabel7.Location = New System.Drawing.Point(792, 18)
         Me.MetroLabel7.Name = "MetroLabel7"
-        Me.MetroLabel7.Size = New System.Drawing.Size(68, 20)
+        Me.MetroLabel7.Size = New System.Drawing.Size(65, 19)
         Me.MetroLabel7.TabIndex = 65
         Me.MetroLabel7.Text = "Subtotal"
         '
         'TxtStatus_C
         '
-        Me.TxtStatus_C.Enabled = false
-        Me.TxtStatus_C.Location = New System.Drawing.Point(837, 32)
-        Me.TxtStatus_C.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtStatus_C.Enabled = False
+        Me.TxtStatus_C.Location = New System.Drawing.Point(628, 26)
         Me.TxtStatus_C.Name = "TxtStatus_C"
-        Me.TxtStatus_C.Size = New System.Drawing.Size(147, 30)
+        Me.TxtStatus_C.Size = New System.Drawing.Size(111, 26)
         Me.TxtStatus_C.TabIndex = 11
         Me.TxtStatus_C.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TxtTipo_C
         '
-        Me.TxtTipo_C.Enabled = false
-        Me.TxtTipo_C.Location = New System.Drawing.Point(611, 32)
-        Me.TxtTipo_C.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtTipo_C.Enabled = False
+        Me.TxtTipo_C.Location = New System.Drawing.Point(458, 26)
         Me.TxtTipo_C.Name = "TxtTipo_C"
-        Me.TxtTipo_C.Size = New System.Drawing.Size(132, 30)
+        Me.TxtTipo_C.Size = New System.Drawing.Size(100, 26)
         Me.TxtTipo_C.TabIndex = 9
         Me.TxtTipo_C.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'MetroLabel5
         '
-        Me.MetroLabel5.AutoSize = true
+        Me.MetroLabel5.AutoSize = True
         Me.MetroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.MetroLabel5.Location = New System.Drawing.Point(764, 36)
-        Me.MetroLabel5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.MetroLabel5.Location = New System.Drawing.Point(573, 29)
         Me.MetroLabel5.Name = "MetroLabel5"
-        Me.MetroLabel5.Size = New System.Drawing.Size(53, 20)
+        Me.MetroLabel5.Size = New System.Drawing.Size(49, 19)
         Me.MetroLabel5.TabIndex = 62
         Me.MetroLabel5.Text = "Status"
         '
         'MetroLabel6
         '
-        Me.MetroLabel6.AutoSize = true
+        Me.MetroLabel6.AutoSize = True
         Me.MetroLabel6.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.MetroLabel6.Location = New System.Drawing.Point(13, 85)
-        Me.MetroLabel6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.MetroLabel6.Location = New System.Drawing.Point(10, 69)
         Me.MetroLabel6.Name = "MetroLabel6"
-        Me.MetroLabel6.Size = New System.Drawing.Size(78, 20)
+        Me.MetroLabel6.Size = New System.Drawing.Size(76, 19)
         Me.MetroLabel6.TabIndex = 64
         Me.MetroLabel6.Text = "Vendido a"
         '
         'MetroLabel4
         '
-        Me.MetroLabel4.AutoSize = true
+        Me.MetroLabel4.AutoSize = True
         Me.MetroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.MetroLabel4.Location = New System.Drawing.Point(516, 36)
-        Me.MetroLabel4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.MetroLabel4.Location = New System.Drawing.Point(387, 29)
         Me.MetroLabel4.Name = "MetroLabel4"
-        Me.MetroLabel4.Size = New System.Drawing.Size(68, 20)
+        Me.MetroLabel4.Size = New System.Drawing.Size(65, 19)
         Me.MetroLabel4.TabIndex = 61
         Me.MetroLabel4.Text = "Tipo Vta"
         '
         'txtTotal_C
         '
-        Me.txtTotal_C.Enabled = false
-        Me.txtTotal_C.Location = New System.Drawing.Point(1151, 91)
-        Me.txtTotal_C.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtTotal_C.Enabled = False
+        Me.txtTotal_C.Location = New System.Drawing.Point(863, 74)
         Me.txtTotal_C.Name = "txtTotal_C"
-        Me.txtTotal_C.Size = New System.Drawing.Size(132, 30)
+        Me.txtTotal_C.Size = New System.Drawing.Size(100, 26)
         Me.txtTotal_C.TabIndex = 7
         Me.txtTotal_C.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'MetroLabel3
         '
-        Me.MetroLabel3.AutoSize = true
+        Me.MetroLabel3.AutoSize = True
         Me.MetroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.MetroLabel3.Location = New System.Drawing.Point(293, 36)
-        Me.MetroLabel3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.MetroLabel3.Location = New System.Drawing.Point(220, 29)
         Me.MetroLabel3.Name = "MetroLabel3"
-        Me.MetroLabel3.Size = New System.Drawing.Size(49, 20)
+        Me.MetroLabel3.Size = New System.Drawing.Size(47, 19)
         Me.MetroLabel3.TabIndex = 60
         Me.MetroLabel3.Text = "Fecha"
         '
         'TxtPedido_C
         '
-        Me.TxtPedido_C.Enabled = false
-        Me.TxtPedido_C.Location = New System.Drawing.Point(131, 32)
-        Me.TxtPedido_C.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtPedido_C.Enabled = False
+        Me.TxtPedido_C.Location = New System.Drawing.Point(98, 26)
         Me.TxtPedido_C.Name = "TxtPedido_C"
-        Me.TxtPedido_C.Size = New System.Drawing.Size(132, 30)
+        Me.TxtPedido_C.Size = New System.Drawing.Size(100, 26)
         Me.TxtPedido_C.TabIndex = 3
         Me.TxtPedido_C.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'MetroLabel10
         '
-        Me.MetroLabel10.AutoSize = true
+        Me.MetroLabel10.AutoSize = True
         Me.MetroLabel10.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.MetroLabel10.Location = New System.Drawing.Point(13, 36)
-        Me.MetroLabel10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.MetroLabel10.Location = New System.Drawing.Point(10, 29)
         Me.MetroLabel10.Name = "MetroLabel10"
-        Me.MetroLabel10.Size = New System.Drawing.Size(80, 20)
+        Me.MetroLabel10.Size = New System.Drawing.Size(77, 19)
         Me.MetroLabel10.TabIndex = 59
         Me.MetroLabel10.Text = "No. Ticket"
         '
@@ -461,18 +438,16 @@ Partial Class FrmDevTickets
         '
         'FrmDevTickets
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8!, 16!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.ClientSize = New System.Drawing.Size(1343, 795)
-        Me.ControlBox = false
+        Me.ClientSize = New System.Drawing.Size(1007, 646)
+        Me.ControlBox = False
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.KeyPreview = true
-        Me.Margin = New System.Windows.Forms.Padding(4)
-        Me.MaximizeBox = false
+        Me.KeyPreview = True
+        Me.MaximizeBox = False
         Me.Name = "FrmDevTickets"
-        Me.Padding = New System.Windows.Forms.Padding(27, 74, 27, 25)
         Me.Text = "Devolución de Tickets"
         Me.GroupBox1.ResumeLayout(false)
         Me.GroupBox1.PerformLayout

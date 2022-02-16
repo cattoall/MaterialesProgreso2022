@@ -26,4 +26,6 @@
 	<SerieNCSalvador>D</SerieNCSalvador>
 	<SMTP_CORREO>chavabautista@hotmail.com</SMTP_CORREO>
 	<SMTP_PASS>19720416</SMTP_PASS>
+	<SMTP_SERVER>smtp.office365.com</SMTP_SERVER>
+	<SMTP_PORT>587</SMTP_PORT>
 </XMLConfig>

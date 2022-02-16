@@ -26,6 +26,16 @@
             End
         End If
 
+        If gv_smtp_server = "" Then
+            MsgBox("Falta crear la Variable SMTP_SERVER", MsgBoxStyle.Critical, "SMTP_SERVER")
+            End
+        End If
+
+        If gv_smtp_port = "" Then
+            MsgBox("Falta crear la Variable SMTP_PORT", MsgBoxStyle.Critical, "SMTP_PORT")
+            End
+        End If
+
         If gv_cfdi_usuario = "" Then
             MsgBox("Falta crear la Variable CFDI_USUARIO", MsgBoxStyle.Critical, "CFDI_USUARIO")
             End

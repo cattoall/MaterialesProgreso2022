@@ -152,6 +152,8 @@ Module Module1
     Public gv_sat_pass As String = ""
     Public gv_smtp_correo As String = ""
     Public gv_smtp_pass As String = ""
+    Public gv_smtp_server As String = ""
+    Public gv_smtp_port As String = ""
     Public gv_terminal As String = ""
     Public gv_ConStringWendy As String = ""
     Public gv_ConStringLibrada As String = ""
@@ -235,6 +237,10 @@ Module Module1
                             gv_smtp_correo = readXML.Value
                         Case "SMTP_PASS"
                             gv_smtp_pass = readXML.Value
+                        Case "SMTP_SERVER"
+                            gv_smtp_server = readXML.Value
+                        Case "SMTP_PORT"
+                            gv_smtp_port = readXML.Value
                     End Select
                     Exit Select
             End Select
@@ -5908,12 +5914,12 @@ Module Module1
     Public Function EnviarEmail(ByVal SendFrom As String, ByVal SendTo As String, ByVal Subject As String, ByVal Body As String, ByVal Filename As String, ByVal Password As String) As Boolean
 
         Dim AttachmentFile = New Attachment(Filename)
-        Dim Smtp As SmtpClient = New SmtpClient("smtp.live.com")
+        Dim Smtp As SmtpClient = New SmtpClient(gv_smtp_server)
 
         Dim myMessage As MailMessage
 
         Try
-            Smtp.Port = "587"
+            Smtp.Port = gv_smtp_port
             Smtp.UseDefaultCredentials = False
             Smtp.Credentials = New Net.NetworkCredential(SendFrom, Password)
             Smtp.EnableSsl = True
