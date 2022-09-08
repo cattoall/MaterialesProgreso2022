@@ -65,6 +65,9 @@
 
         MetroGrid1.Columns(11).HeaderText = "R.F.C."
 
+        MetroGrid1.Columns(27).HeaderText = "Régimen Fiscal"
+        MetroGrid1.Columns(27).Visible = True
+
         MetroGrid1.Columns(15).HeaderText = "Observaciones"
         MetroGrid1.Columns(15).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
@@ -163,8 +166,8 @@
             FrmClientes.txtTelFijo.Text         = MetroGrid1.Item(12, MetroGrid1.CurrentRow.Index).Value
             FrmClientes.txtMovil.Text           = MetroGrid1.Item(13, MetroGrid1.CurrentRow.Index).Value
             FrmClientes.txtEmail.Text           = MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtObs.Text             = MetroGrid1.Item(15, MetroGrid1.CurrentRow.Index).Value
-            
+            FrmClientes.txtObs.Text = MetroGrid1.Item(15, MetroGrid1.CurrentRow.Index).Value
+
             Select Case MetroGrid1.Item(16, MetroGrid1.CurrentRow.Index).Value
                 Case "Precio Publico"
                     FrmClientes.CmbPrecio.SelectedIndex = 0
@@ -228,15 +231,17 @@
                 FrmClientes.cmbFormaPago.SelectedIndex = -1
             End If
 
-            If Not IsDBNull(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value) Then
-                If MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                    FrmClientes.cmbUsoCFDI.SelectedIndex = FrmClientes.cmbUsoCFDI.FindString(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value)
+            If Not IsDBNull(MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value) Then
+                If MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value <> "" Then
+                    FrmClientes.cmbUsoCFDI.SelectedIndex = FrmClientes.cmbUsoCFDI.FindString(MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value)
                 Else
                     FrmClientes.cmbUsoCFDI.SelectedIndex = -1
                 End If
             Else
                 FrmClientes.cmbUsoCFDI.SelectedIndex = -1
             End If
+
+            FrmClientes.txtRegimenFiscal.Text = MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value
 
             FrmClientes.ShowDialog()
             FrmClientes.Close()

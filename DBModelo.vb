@@ -905,6 +905,19 @@ Public Class DBModelo
         End Try
     End Function
 
+    Shared Function Update_Tickets(ByVal strTicket As tblTicket) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.tblTickets.Attach(strTicket)
+                ctx.Entry(strTicket).State = EntityState.Modified
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Shared Function Insert_PV_TicketPedidos(ByVal strTicketPedidos As tblTicketPedido) As Boolean
         Try
             Using ctx As New pv_salvadorEntities1()
@@ -1031,9 +1044,21 @@ Public Class DBModelo
         End Using
     End Function
 
+    Shared Function Get_VentasByFactura(ByVal NoFactura As String) As List(Of tblVenta)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblVentas.Where(Function(i) i.IdComp = CompanyCode And i.numeroFactura.Equals(NoFactura)).ToList()
+        End Using
+    End Function
+
     Shared Function Get_TicketsByDateIdCliente(ByVal DateFrom As String, ByVal DateTo As String, ByVal IdCliente As Integer) As List(Of tblVenta)
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblVentas.Where(Function(i) i.IdComp = CompanyCode And i.fecha >= DateFrom And i.fecha <= DateTo And i.idCliente = IdCliente).ToList()
+        End Using
+    End Function
+
+    Shared Function Get_TicketsByFactura(ByVal NoFactura As String) As List(Of tblTicket)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblTickets.Where(Function(i) i.IdComp = CompanyCode And i.numeroFactura.Equals(NoFactura)).ToList()
         End Using
     End Function
 
@@ -1347,6 +1372,7 @@ Public Class DBModelo
                     Dim st2 As String = b.ErrorMessage
                 Next
             Next
+            Return False
         Catch ex As Exception
             Return False
         End Try
@@ -1446,6 +1472,32 @@ Public Class DBModelo
             Using ctx As New pv_salvadorEntities1()
                 ctx.tblFacturaTotals.Attach(strFacturaTotal)
                 ctx.Entry(strFacturaTotal).State = EntityState.Modified
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function Update_ComplementoPagoH(ByVal strComplementoPagoH As tblComplementoPagosH) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.tblComplementoPagosHes.Attach(strComplementoPagoH)
+                ctx.Entry(strComplementoPagoH).State = EntityState.Modified
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function Update_ComplementoPagoD(ByVal strComplementoPagoD As TblComplementoPagosD) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.TblComplementoPagosDs.Attach(strComplementoPagoD)
+                ctx.Entry(strComplementoPagoD).State = EntityState.Modified
                 ctx.SaveChanges()
             End Using
             Return True
@@ -1563,6 +1615,44 @@ Public Class DBModelo
         End Try
     End Function
 
+    Shared Function DeleteFacturaTotal(ByVal strFacturaTotal As tblFacturaTotal) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                If Not IsNothing(strFacturaTotal) Then
+                    ctx.Entry(strFacturaTotal).State = EntityState.Deleted
+                    ctx.SaveChanges()
+                End If
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function InsertComplementoPagoH(ByVal strComplementoH As tblComplementoPagosH) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.tblComplementoPagosHes.Add(strComplementoH)
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function InsertComplementoPagoD(ByVal strComplementoD As TblComplementoPagosD) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.TblComplementoPagosDs.Add(strComplementoD)
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Shared Function InsertFactura(ByVal strFactura As tblFactura) As Boolean
         Try
             Using ctx As New pv_salvadorEntities1()
@@ -1574,6 +1664,21 @@ Public Class DBModelo
             Return False
         End Try
     End Function
+
+    Shared Function DeleteFactura(ByVal strFactura As tblFactura) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                If Not IsNothing(strFactura) Then
+                    ctx.Entry(strFactura).State = EntityState.Deleted
+                    ctx.SaveChanges()
+                End If
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
 
     Shared Function GetFolioFactura(ByVal TipoComprobante As String, ByVal Year As String) As tblFoliofacturas
         Using ctx As New pv_salvadorEntities1()
@@ -1609,6 +1714,36 @@ Public Class DBModelo
     Shared Function GetFacturaByN(ByVal nFactura As String) As List(Of tblFactura)
         Using ctx As New pv_salvadorEntities1
             Return ctx.tblFacturas.Where(Function(i) i.IdComp = CompanyCode And i.n_factura = nFactura).ToList
+        End Using
+    End Function
+
+    Shared Function GetFacturasHeaderByIdCliente(ByVal IdCliente As String) As List(Of tblFacturaTotal)
+        Using ctx As New pv_salvadorEntities1
+            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.id_cliente = IdCliente).ToList
+        End Using
+    End Function
+
+    Shared Function GetFacturasHeaderByIdClienteFechaVenta(ByVal IdCliente As String, ByVal FechaVentaFrom As String, ByVal FechaVentaTo As String) As List(Of tblFacturaTotal)
+        Using ctx As New pv_salvadorEntities1
+            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.id_cliente = IdCliente And i.fecha_venta >= FechaVentaFrom And i.fecha_venta <= FechaVentaTo).ToList
+        End Using
+    End Function
+
+    Shared Function GetFacturasHeaderByIdClienteFechaVentaCancelados(ByVal IdCliente As String, ByVal FechaVentaFrom As String, ByVal FechaVentaTo As String, ByVal Cancelados As String) As List(Of tblFacturaTotal)
+        Using ctx As New pv_salvadorEntities1
+            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.id_cliente = IdCliente And i.fecha_venta >= FechaVentaFrom And i.fecha_venta <= FechaVentaTo And i.Cancelada <> Cancelados).ToList
+        End Using
+    End Function
+
+    Shared Function GetFacturasHeaderByIdClienteFechaVentaPagados(ByVal IdCliente As String, ByVal FechaVentaFrom As String, ByVal FechaVentaTo As String, ByVal Pagados As String) As List(Of tblFacturaTotal)
+        Using ctx As New pv_salvadorEntities1
+            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.id_cliente = IdCliente And i.fecha_venta >= FechaVentaFrom And i.fecha_venta <= FechaVentaTo And i.ComproPago <> Pagados).ToList
+        End Using
+    End Function
+
+    Shared Function GetFacturasHeaderByIdClienteFechaVentaCanceladosPagados(ByVal IdCliente As String, ByVal FechaVentaFrom As String, ByVal FechaVentaTo As String, ByVal Cancelados As String, ByVal Pagados As String) As List(Of tblFacturaTotal)
+        Using ctx As New pv_salvadorEntities1
+            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.id_cliente = IdCliente And i.fecha_venta >= FechaVentaFrom And i.fecha_venta <= FechaVentaTo And i.Cancelada <> Cancelados And i.ComproPago <> Pagados).ToList
         End Using
     End Function
 
@@ -1711,6 +1846,37 @@ Public Class DBModelo
     Shared Function GetFacturaHeader(ByVal NumeroFactura As String) As tblFacturaTotal
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.n_factura.Equals(CDec(NumeroFactura))).FirstOrDefault
+        End Using
+    End Function
+
+    Shared Function GetComplementoPagoH(ByVal NoPago As String) As tblComplementoPagosH
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblComplementoPagosHes.Where(Function(i) i.IdComp = CompanyCode And i.n_pago.Equals(CInt(NoPago))).FirstOrDefault
+        End Using
+    End Function
+
+    Shared Function UpdateComplementoPagoH(ByVal strComplementoH As tblComplementoPagosH) As Boolean
+        Try
+            Using ctx As New pv_salvadorEntities1()
+                ctx.tblComplementoPagosHes.Attach(strComplementoH)
+                ctx.Entry(strComplementoH).State = EntityState.Modified
+                ctx.SaveChanges()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Shared Function GetComplementoPagoD(ByVal NoPago As String) As List(Of TblComplementoPagosD)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.TblComplementoPagosDs.Where(Function(i) i.IdComp = CompanyCode And i.n_pago.Equals(CDec(NoPago))).ToList()
+        End Using
+    End Function
+
+    Shared Function GetComplementoPagoD_ByFactura(ByVal NoFactura As String) As List(Of TblComplementoPagosD)
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.TblComplementoPagosDs.Where(Function(i) i.IdComp = CompanyCode And i.n_factura.Equals(CInt(NoFactura))).ToList()
         End Using
     End Function
 

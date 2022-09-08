@@ -24,8 +24,10 @@ Module Module1
 
     Public ClaveUnidad As String = ""
     Public FormaPago As String = ""
+    Public gv_formapago As Integer
     Public MetodoPago As String = ""
     Public UsoCDFI As String = ""
+    Public idClientePago As String = ""
     Public gv_SerieFactura As String = ""
     Public RegimenFiscal As String
     Public LugarExpedicion As String
@@ -74,6 +76,17 @@ Module Module1
     Public Material_SubFam As String = ""
     Public Material_Proveedores As String = ""
     Public Material_Umedida As String = ""
+
+    Public rep_UsodeCFDI As String
+    Public rep_FormadePago As String
+    Public rep_TipoComprobante As String
+    Public rep_MontoEnLetras As String
+    Public rep_MetododePago As String
+    Public rep_folio As String
+    Public rep_direccion As String
+    Public rep_colonia As String
+    Public rep_cuidad As String
+    Public rep_cp As String
 
     Public cuenta As String
     Public venta As String
@@ -125,11 +138,11 @@ Module Module1
     Public AbonoSeleccionado As Boolean = False
 
     Public idapro As String
-    Public foliotipodoc As String
-    Public folioyear As String
-    Public folioini As String
-    Public foliofin As String
-    Public folioactual As String
+    'Public foliotipodoc As String
+    'Public folioyear As String
+    'Public folioini As String
+    'Public foliofin As String
+    'Public folioactual As String
 
     Const lv_enter = vbCrLf
     Dim lv_mensaje As String = ""
@@ -248,28 +261,15 @@ Module Module1
     End Sub
 
     Public Sub Limpia_Variables_SQL()
-        'myCommand.Dispose()
-        'myAdapter.Dispose()
         myDs.Tables.Clear()
         myDs.Dispose()
         myDs.Clear()
     End Sub
 
     Public Sub Limpia_Variables_SQL_y_Cierra_Conexion()
-        'myCommand.Dispose()
-        'myAdapter.Dispose()
         myDs.Tables.Clear()
         myDs.Dispose()
         myDs.Clear()
-        'conn.Close()
-    End Sub
-
-    Public Sub Llena_Variables(ByVal lv_foliotipodoc As String, ByVal lv_folioini As String, ByVal lv_foliofin As String, ByVal lv_folioactual As String, ByVal lv_folioyear As String)
-        foliotipodoc = lv_foliotipodoc
-        folioyear = lv_folioyear
-        folioini = lv_folioini
-        foliofin = lv_foliofin
-        folioactual = lv_folioactual
     End Sub
 
     Public Sub load_record_dgv5(ByVal sql As String, ByVal dv As DataGridView, ByVal DB As String)
@@ -2838,9 +2838,9 @@ Module Module1
 
                 oSmtp.UseDefaultCredentials = False
                 oSmtp.Credentials = New Net.NetworkCredential(gv_smtp_correo, gv_smtp_pass)
-                oSmtp.Port = 587
+                oSmtp.Port = gv_smtp_port
                 oSmtp.EnableSsl = True
-                oSmtp.Host = "smtp.office365.com" '"smtp.live.com"
+                oSmtp.Host = gv_smtp_server
 
                 oMail = New MailMessage()
 
@@ -2848,24 +2848,24 @@ Module Module1
                 oMail.From = New MailAddress(gv_smtp_correo)
 
                 ' Set recipient email address, please change it to yours
-                oMail.To.Add("cat_to_all@hotmail.com")
+                oMail.To.Add(wa_cliente.correo)
                 'oMail.CC.Add(gv_smtp_correo)
 
                 ' Set email subject
                 oMail.Subject = "Factura Electrónica Material Eléctrico Progreso"
-
+                oMail.BodyEncoding = Encoding.UTF8
                 oMail.IsBodyHtml = True
 
+                Dim sEnter As String = ChrW(13) & ChrW(10)
                 ' Set email body
-                oMail.Body = ""
-                oMail.Body = oMail.Body & "Estimado Cliente " & "J. Jesus Martinez Fuentes" & vbCrLf & vbCrLf
-                oMail.Body = oMail.Body & "Por medio del presente Correo Electrónico, le hago la notificación y envío del comprobante fiscal" & vbCrLf
-                oMail.Body = oMail.Body & "emitido por nuestra empresa Material Eléctrico Progreso." & vbCrLf
-                oMail.Body = oMail.Body & "Anexo archivo ZIP que contiene un archivo XML y un archivo PDF." & vbCrLf & vbCrLf
-                oMail.Body = oMail.Body & "Cualquier aclaración, favor de contactarnos. Lo puede hacer respondiendo a este correo." & vbCrLf & vbCrLf
-                oMail.Body = oMail.Body & "ATTE:" & vbCrLf
-                oMail.Body = oMail.Body & "Salvador Bautista Fuentes" & vbCrLf
-                oMail.Body = oMail.Body & "Empresario" & vbCrLf
+                oMail.Body = "Estimado Cliente " & FrmFacturacion.txtnombre.Text & sEnter & sEnter
+                oMail.Body = oMail.Body & "Por medio del presente Correo Electrónico, le hago la notificación y envío del comprobante fiscal" & sEnter
+                oMail.Body = oMail.Body & "emitido por nuestra empresa Material Eléctrico Progreso." & sEnter
+                oMail.Body = oMail.Body & "Anexo archivo ZIP que contiene un archivo XML y un archivo PDF." & sEnter & sEnter
+                oMail.Body = oMail.Body & "Cualquier aclaración, favor de contactarnos. Lo puede hacer respondiendo a este correo." & sEnter & sEnter
+                oMail.Body = oMail.Body & "ATTE:" & sEnter
+                oMail.Body = oMail.Body & "Salvador Bautista Fuentes" & sEnter
+                oMail.Body = oMail.Body & "Empresario" & sEnter
 
                 Dim ct As Net.Mime.ContentType = New Net.Mime.ContentType("application/zip")
                 Dim attachItem As Attachment = New Attachment(gv_CDFI_XML_PATH & FolioFactura & ".zip", ct)
@@ -2896,6 +2896,215 @@ Module Module1
             MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeFactura Genera Reporte Local")
             Return False
         End Try
+    End Function
+
+    Public Function ImprimePago(ByVal NumeroPago As String, ByVal FolioFactura As String, ByVal Imprimir As Boolean) As Boolean
+        Dim flag As Boolean
+
+        Dim table As New DataTable
+        table.Columns.Add("cantidad", GetType(Integer))
+        table.Columns.Add("unidad", GetType(String))
+        table.Columns.Add("clave", GetType(String))
+        table.Columns.Add("descripcion", GetType(String))
+        table.Columns.Add("precio", GetType(Double))
+        table.Columns.Add("subtotal", GetType(Double))
+        table.Columns.Add("noidentificacion", GetType(Integer))
+        table.Columns.Add("impuesto", GetType(String))
+        table.Columns.Add("base", GetType(Double))
+        table.Columns.Add("importe", GetType(Double))
+        table.Columns.Add("tasaocuota", GetType(Double))
+        table.TableName = "facturas"
+
+        Dim table2 As New DataTable
+        table2.Columns.Add("uuid", GetType(String))
+        table2.Columns.Add("metodopago", GetType(String))
+        table2.Columns.Add("parcialidad", GetType(String))
+        table2.Columns.Add("imp_pagado", GetType(String))
+        table2.Columns.Add("seriefolio", GetType(String))
+        table2.Columns.Add("moneda", GetType(String))
+        table2.Columns.Add("saldoanterior", GetType(String))
+        table2.Columns.Add("saldoinsoluto", GetType(String))
+        table2.TableName = "pagos"
+
+        Dim report As New LocalReport
+        Dim ds As New DataSet
+        Dim table3 As New DataTable
+
+        Dim stream As New FileStream(gv_CDFI_XML_PATH & FolioFactura & ".xml", FileMode.Open)
+        ds.ReadXml(stream)
+
+        frmComplementoPago.PrBImprimiendo.PerformStep()
+
+        For i = 0 To ds.Tables("Concepto").Rows.Count - 1
+            Dim row As DataRow = table.NewRow
+            row("cantidad") = CInt(ds.Tables("Concepto").Rows(i)("Cantidad"))
+            row("unidad") = ds.Tables("Concepto").Rows(i)("ClaveUnidad").ToString
+            row("clave") = ds.Tables("Concepto").Rows(i)("ClaveProdServ").ToString
+            row("descripcion") = ds.Tables("Concepto").Rows(i)("Descripcion").ToString
+            row("precio") = CDbl(ds.Tables("Concepto").Rows(i)("ValorUnitario"))
+            row("subtotal") = CDbl(ds.Tables("Concepto").Rows(i)("Importe"))
+            row("noidentificacion") = 0
+            row("impuesto") = ""
+            row("base") = 0
+            row("importe") = CDbl(ds.Tables("Concepto").Rows(i)("Importe"))
+            row("tasaocuota") = 0
+            table.Rows.Add(row)
+        Next
+
+        For i = 0 To ds.Tables("DoctoRelacionado").Rows.Count - 1
+            Dim row2 As DataRow = table2.NewRow
+            row2("uuid") = ds.Tables("DoctoRelacionado").Rows(i)("IdDocumento").ToString
+            row2("parcialidad") = ds.Tables("DoctoRelacionado").Rows(i)("NumParcialidad").ToString
+            row2("imp_pagado") = ds.Tables("DoctoRelacionado").Rows(i)("ImpPagado").ToString
+            row2("seriefolio") = (ds.Tables("DoctoRelacionado").Rows(i)("Serie").ToString & "-" & ds.Tables("DoctoRelacionado").Rows(i)("Folio").ToString)
+            row2("moneda") = ds.Tables("DoctoRelacionado").Rows(i)("MonedaDR").ToString
+            row2("saldoanterior") = ds.Tables("DoctoRelacionado").Rows(i)("ImpSaldoAnt").ToString
+            row2("saldoinsoluto") = ds.Tables("DoctoRelacionado").Rows(i)("ImpSaldoInsoluto").ToString
+            Dim wFacturaH As tblFacturaTotal = DBModelo.GetFacturaHeader(ds.Tables("DoctoRelacionado").Rows(i)("Folio").ToString)
+            If Not IsNothing(wFacturaH) Then
+                row2("metodopago") = wFacturaH.metodopago
+            End If
+            table2.Rows.Add(row2)
+        Next
+
+        Dim sFormaPago As tblFormaPago = DBModelo.GetFormaDePagoByKey(ds.Tables("Pago").Rows(0)("FormaDePagoP").ToString)
+        If Not IsNothing(sFormaPago) Then
+            rep_FormadePago = sFormaPago.FormaPago
+        End If
+
+        Select Case ds.Tables("Comprobante").Rows(0)("TipoDeComprobante").ToString
+            Case "I"
+                rep_TipoComprobante = "I - Ingreso"
+            Case "E"
+                rep_TipoComprobante = "E - Egreso"
+            Case "P"
+                rep_TipoComprobante = "P - Pago"
+        End Select
+
+        Dim sComplementoH As tblComplementoPagosH = DBModelo.GetComplementoPagoH(NumeroPago)
+        If Not IsNothing(sComplementoH) Then
+            sComplementoH.UUID = ds.Tables("TimbreFiscalDigital").Rows(0)("UUID").ToString
+            If DBModelo.UpdateComplementoPagoH(sComplementoH) = False Then
+                MsgBox("No se pudo Actualizar UUID en la tabla FACTURA_TOTAL", MsgBoxStyle.Critical, Nothing)
+            End If
+        End If
+
+        rep_MontoEnLetras = Dinero(CDbl(ds.Tables("Pago").Rows(0)("Monto").ToString), 2, "Pesos", True)
+
+        report.ReportPath = gv_Report_Path_FE & "Pagos.rdlc"
+        report.EnableExternalImages = True
+        report.SetParameters(New ReportParameter("RfcProvCertif", ds.Tables("TimbreFiscalDigital").Rows(0)("RfcProvCertif").ToString))
+        report.SetParameters(New ReportParameter("UUID", ds.Tables("TimbreFiscalDigital").Rows(0)("UUID").ToString))
+        report.SetParameters(New ReportParameter("TipoDeComprobante", rep_TipoComprobante))
+        report.SetParameters(New ReportParameter("NoCertificadoSAT", ds.Tables("TimbreFiscalDigital").Rows(0)("NoCertificadoSAT").ToString))
+        report.SetParameters(New ReportParameter("Image", ("File:///" & gv_CDFI_XML_PATH & FolioFactura & ".png")))
+        report.SetParameters(New ReportParameter("RFC", ds.Tables("Receptor").Rows(0)("Rfc").ToString))
+        report.SetParameters(New ReportParameter("Serie", ds.Tables("Comprobante").Rows(0)("Serie").ToString))
+        report.SetParameters(New ReportParameter("FolioFactura", ds.Tables("Comprobante").Rows(0)("Folio").ToString))
+        report.SetParameters(New ReportParameter("Ciudad_RFC", rep_cuidad))
+        report.SetParameters(New ReportParameter("CP", ds.Tables("Comprobante").Rows(0)("LugarExpedicion").ToString))
+        report.SetParameters(New ReportParameter("Total", ds.Tables("Pago").Rows(0)("Monto").ToString))
+        report.SetParameters(New ReportParameter("Direccion", rep_direccion))
+        report.SetParameters(New ReportParameter("FolioFiscal", ds.Tables("TimbreFiscalDigital").Rows(0)("UUID").ToString))
+        report.SetParameters(New ReportParameter("FechadeEmision", ds.Tables("Comprobante").Rows(0)("Fecha").ToString))
+        report.SetParameters(New ReportParameter("FechaTimbrado", ds.Tables("TimbreFiscalDigital").Rows(0)("FechaTimbrado").ToString))
+        report.SetParameters(New ReportParameter("SelloSAT", ds.Tables("TimbreFiscalDigital").Rows(0)("SelloSAT").ToString))
+        report.SetParameters(New ReportParameter("SelloCFD", ds.Tables("TimbreFiscalDigital").Rows(0)("SelloCFD").ToString))
+        report.SetParameters(New ReportParameter("Version", ds.Tables("TimbreFiscalDigital").Rows(0)("Version").ToString))
+        report.SetParameters(New ReportParameter("SubTotal", "0.00"))
+        report.SetParameters(New ReportParameter("UsodeCFDI", ds.Tables("Receptor").Rows(0)("UsoCFDI").ToString))
+        report.SetParameters(New ReportParameter("Nombre", ds.Tables("Receptor").Rows(0)("Nombre").ToString))
+        report.SetParameters(New ReportParameter("FormadePago", rep_FormadePago))
+        report.SetParameters(New ReportParameter("MetododePago", rep_MetododePago))
+        report.SetParameters(New ReportParameter("Colonia", rep_colonia))
+        report.SetParameters(New ReportParameter("CPReceptor", ds.Tables("Receptor").Rows(0)("Rfc").ToString))
+        report.SetParameters(New ReportParameter("IVA", "0.00"))
+        report.SetParameters(New ReportParameter("FechaFactura", ds.Tables("Pago").Rows(0)("FechaPago").ToString))
+        report.SetParameters(New ReportParameter("ImporteLetra", rep_MontoEnLetras.ToUpper))
+        report.DataSources.Clear()
+        report.DataSources.Add(New ReportDataSource("DataSet1", table))
+        report.DataSources.Add(New ReportDataSource("Pagos", table2))
+
+        stream.Close()
+
+        Dim array As Byte() = report.Render("PDF", Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+        Dim stream2 As New FileStream((gv_CDFI_XML_PATH & FolioFactura & ".pdf"), FileMode.Create)
+        stream2.Write(array, 0, array.Length)
+        stream2.Close()
+        frmComplementoPago.PrBImprimiendo.PerformStep()
+
+        Dim zip As Package = Package.Open((gv_CDFI_XML_PATH & FolioFactura & ".zip"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
+        AddToArchive(zip, (gv_CDFI_XML_PATH & FolioFactura & ".xml"))
+        AddToArchive(zip, (gv_CDFI_XML_PATH & FolioFactura & ".pdf"))
+        zip.Close()
+        frmComplementoPago.PrBImprimiendo.PerformStep()
+
+        If (frmComplementoPago.txtEmail.Text <> "") Then
+
+            'Envio de Archivo ZIP via Correo Electrónico
+            Dim oSmtp As New SmtpClient()
+
+            Dim oMail As New MailMessage()
+
+            oSmtp.UseDefaultCredentials = False
+            oSmtp.Credentials = New Net.NetworkCredential(gv_smtp_correo, gv_smtp_pass)
+            oSmtp.Port = gv_smtp_port
+            oSmtp.EnableSsl = True
+            oSmtp.Host = gv_smtp_server
+
+            oMail = New MailMessage()
+
+            ' Set sender email address, please change it to yours
+            oMail.From = New MailAddress(gv_smtp_correo)
+
+            ' Set recipient email address, please change it to yours
+            oMail.To.Add(frmComplementoPago.txtEmail.Text)
+            'oMail.CC.Add(gv_smtp_correo)
+
+            ' Set email subject
+            oMail.Subject = "Complemento de Pago Electrónico Material Eléctrico Progreso"
+            oMail.BodyEncoding = Encoding.UTF8
+            oMail.IsBodyHtml = True
+
+            Dim sEnter As String = ChrW(13) & ChrW(10)
+            ' Set email body
+            oMail.Body = "Estimado Cliente " & frmComplementoPago.txtNombre.Text & sEnter & sEnter
+            oMail.Body = oMail.Body & "Por medio del presente Correo Electrónico, le hago la notificación y envío del comprobante fiscal" & sEnter
+            oMail.Body = oMail.Body & "emitido por nuestra empresa Material Eléctrico Progreso." & sEnter
+            oMail.Body = oMail.Body & "Anexo archivo ZIP que contiene un archivo XML y un archivo PDF." & sEnter & sEnter
+            oMail.Body = oMail.Body & "Cualquier aclaración, favor de contactarnos. Lo puede hacer respondiendo a este correo." & sEnter & sEnter
+            oMail.Body = oMail.Body & "ATTE:" & sEnter
+            oMail.Body = oMail.Body & "Salvador Bautista Fuentes" & sEnter
+            oMail.Body = oMail.Body & "Empresario" & sEnter
+
+            Dim ct As Net.Mime.ContentType = New Net.Mime.ContentType("application/zip")
+            Dim attachItem As Attachment = New Attachment(gv_CDFI_XML_PATH & FolioFactura & ".zip", ct)
+
+            oMail.Attachments.Add(attachItem)
+
+            Try
+                oSmtp.Send(oMail)
+                oSmtp.Dispose()
+                oMail.Dispose()
+                FrmCancelarPedido.Cursor = Cursors.Default
+                MsgBox("Correo Electrónico enviado correctamente!", vbInformation, "Envío de Correo Electrónico")
+            Catch ep As Exception
+                FrmCancelarPedido.Cursor = Cursors.Default
+                oSmtp.Dispose()
+                oMail.Dispose()
+                MsgBox(ep.Message, vbCritical, "Error al enviar correo electrónico.")
+                Return False
+            End Try
+        End If
+        frmComplementoPago.PrBImprimiendo.PerformStep()
+
+        If (MsgBox("¿Requiere Complemento de Pago Impreso?", MsgBoxStyle.YesNo, "Impresión de Complemento de Pago") = MsgBoxResult.Yes) Then
+            Print_Report2(InvocePrinterName, report, 1, "Image", FolioFactura, gv_CDFI_XML_PATH)
+        End If
+        frmComplementoPago.PrBImprimiendo.PerformStep()
+        frmComplementoPago.Cursor = Cursors.Default
+
+        Return flag
     End Function
 
     Public Sub Print_Report2(i_printer_name As String, i_report_object As LocalReport, i_copies As Integer, i_type As String, i_filename As String, i_foldername As String)
@@ -4387,9 +4596,9 @@ Module Module1
 
                 oSmtp.UseDefaultCredentials = False
                 oSmtp.Credentials = New Net.NetworkCredential(gv_smtp_correo, gv_smtp_pass)
-                oSmtp.Port = 587
+                oSmtp.Port = gv_smtp_port
                 oSmtp.EnableSsl = True
-                oSmtp.Host = "smtp.office365.com"
+                oSmtp.Host = gv_smtp_server
 
                 oMail = New MailMessage()
 
@@ -4397,24 +4606,25 @@ Module Module1
                 oMail.From = New MailAddress(gv_smtp_correo)
 
                 ' Set recipient email address, please change it to yours
-                oMail.To.Add("cat_to_all@hotmail.com")
+                oMail.To.Add(wa_cliente.correo)
                 'oMail.CC.Add(gv_smtp_correo)
 
                 ' Set email subject
-                oMail.Subject = "Factura Electrónica Material Eléctrico Progreso"
+                oMail.Subject = "Nota de Crédito Electrónica Material Eléctrico Progreso"
 
                 oMail.IsBodyHtml = True
 
+                Dim sEnter As String = ChrW(13) & ChrW(10)
                 ' Set email body
                 oMail.Body = ""
-                oMail.Body = oMail.Body & "Estimado Cliente " & "J. Jesus Martinez Fuentes" & vbCrLf & vbCrLf
-                oMail.Body = oMail.Body & "Por medio del presente Correo Electrónico, le hago la notificación y envío del comprobante fiscal" & vbCrLf
-                oMail.Body = oMail.Body & "emitido por nuestra empresa Material Eléctrico Progreso." & vbCrLf
-                oMail.Body = oMail.Body & "Anexo archivo ZIP que contiene un archivo XML y un archivo PDF." & vbCrLf & vbCrLf
-                oMail.Body = oMail.Body & "Cualquier aclaración, favor de contactarnos. Lo puede hacer respondiendo a este correo." & vbCrLf & vbCrLf
-                oMail.Body = oMail.Body & "ATTE:" & vbCrLf
-                oMail.Body = oMail.Body & "Salvador Bautista Fuentes" & vbCrLf
-                oMail.Body = oMail.Body & "Empresario" & vbCrLf
+                oMail.Body = oMail.Body & "Estimado Cliente " & FrmNotaDeCredito.TxtNombre_C.Text & sEnter & sEnter
+                oMail.Body = oMail.Body & "Por medio del presente Correo Electrónico, le hago la notificación y envío del comprobante fiscal" & sEnter
+                oMail.Body = oMail.Body & "emitido por nuestra empresa Material Eléctrico Progreso." & sEnter
+                oMail.Body = oMail.Body & "Anexo archivo ZIP que contiene un archivo XML y un archivo PDF." & sEnter & sEnter
+                oMail.Body = oMail.Body & "Cualquier aclaración, favor de contactarnos. Lo puede hacer respondiendo a este correo." & sEnter & sEnter
+                oMail.Body = oMail.Body & "ATTE:" & sEnter
+                oMail.Body = oMail.Body & "Salvador Bautista Fuentes" & sEnter
+                oMail.Body = oMail.Body & "Empresario" & sEnter
 
                 Dim ct As Net.Mime.ContentType = New Net.Mime.ContentType("application/zip")
                 Dim attachItem As Attachment = New Attachment(gv_CDFI_XML_PATH & FolioFactura & ".zip", ct)
@@ -4437,7 +4647,7 @@ Module Module1
                 End Try
             End If
 
-            If MsgBox("¿Requiere Factura Impresa?", vbYesNo, "Impresión de Factura") = vbYes Then
+            If MsgBox("¿Requiere la Nota de Crédito Impresa?", vbYesNo, "Impresión de Nota de Crédito") = vbYes Then
                 Print_Report2(InvocePrinterName, Report, 1, "Image", FolioFactura, gv_CDFI_XML_PATH)
             End If
             Return True
@@ -5666,15 +5876,62 @@ Module Module1
 
             If dt_cliente.Rows(0)!correo <> "" Then
                 If MsgBox("¿Enviar Cotización por Correo Electrónico?", MsgBoxStyle.YesNo, "Correo Electrónico") = MsgBoxResult.Yes Then
-                    FrmCotizaciones.Cursor = Cursors.WaitCursor
-                    If EnviarEmail("chavabautista@hotmail.com", dt_cliente.Rows(0)!correo, "Cotización", "Este correo es generado automáticamente por " + Nombre, "C:\Cotizaciones\" + Now.Year.ToString + "\" + NumeroVenta + " " + TipoVenta + " ORIGINAL_1.Pdf", "19720416") = True Then
+
+                    'Envio de Archivo ZIP via Correo Electrónico
+                    Dim oSmtp As New SmtpClient()
+
+                    Dim oMail As New MailMessage()
+
+                    oSmtp.UseDefaultCredentials = False
+                    oSmtp.Credentials = New Net.NetworkCredential(gv_smtp_correo, gv_smtp_pass)
+                    oSmtp.Port = gv_smtp_port
+                    oSmtp.EnableSsl = True
+                    oSmtp.Host = gv_smtp_server
+
+                    oMail = New MailMessage()
+
+                    ' Set sender email address, please change it to yours
+                    oMail.From = New MailAddress(gv_smtp_correo)
+
+                    ' Set recipient email address, please change it to yours
+                    oMail.To.Add(dt_cliente.Rows(0)!correo)
+                    'oMail.CC.Add(gv_smtp_correo)
+
+                    ' Set email subject
+                    oMail.Subject = "Cotización - Material Eléctrico Progreso"
+                    oMail.BodyEncoding = Encoding.UTF8
+                    oMail.IsBodyHtml = True
+
+                    Dim sEnter As String = ChrW(13) & ChrW(10)
+                    ' Set email body
+
+                    oMail.Body = "Estimado Cliente " & dt_cliente.Rows(0)!nombre & " " & dt_cliente.Rows(0)!apat & " " & dt_cliente.Rows(0)!amat & sEnter & sEnter
+                    oMail.Body = oMail.Body & "Por medio del presente Correo Electrónico, le hago la notificación y envío de la Cotización" & sEnter
+                    oMail.Body = oMail.Body & "emitido por nuestra empresa Material Eléctrico Progreso." & sEnter
+                    oMail.Body = oMail.Body & "Anexo archivo PDF." & sEnter & sEnter
+                    oMail.Body = oMail.Body & "Cualquier aclaración, favor de contactarnos. Lo puede hacer respondiendo a este correo." & sEnter & sEnter
+                    oMail.Body = oMail.Body & "ATTE:" & sEnter
+                    oMail.Body = oMail.Body & "Salvador Bautista Fuentes" & sEnter
+                    oMail.Body = oMail.Body & "Empresario" & sEnter
+
+                    Dim ct As Net.Mime.ContentType = New Net.Mime.ContentType("application/pdf")
+                    Dim attachItem As Attachment = New Attachment("C:\Cotizaciones\" + Now.Year.ToString + "\" + NumeroVenta + " " + TipoVenta + " ORIGINAL_1.pdf", ct)
+
+                    oMail.Attachments.Add(attachItem)
+
+                    Try
+                        oSmtp.Send(oMail)
+                        oSmtp.Dispose()
+                        oMail.Dispose()
                         FrmCotizaciones.Cursor = Cursors.Default
-                        MsgBox("Correo Electrónico enviado correctamente.", MsgBoxStyle.Information, "Correo Electrónico")
-                    Else
+                        MsgBox("Correo Electrónico enviado correctamente!", vbInformation, "Envío de Correo Electrónico")
+                    Catch ep As Exception
                         FrmCotizaciones.Cursor = Cursors.Default
-                        MsgBox("Correo Electrónico no pudo ser enviado.", MsgBoxStyle.Critical, "Correo Electrónico")
-                    End If
-                    FrmCotizaciones.Cursor = Cursors.Default
+                        oSmtp.Dispose()
+                        oMail.Dispose()
+                        MsgBox(ep.Message, vbCritical, "Error al enviar correo electrónico.")
+                        Return False
+                    End Try
                 End If
             End If
         Catch ex As Exception
@@ -5954,4 +6211,104 @@ Module Module1
         Next
         Return False
     End Function
+
+    Public Function CancelaFactura_CFDI(ByVal NumeroFactura As Integer, ByVal FechaFactura As String) As Boolean
+        Dim flag As Boolean
+        Dim mfsdk As New MFSDK
+        Dim lvFileName As String
+
+        If frmCancelacion.CancelaPago Then
+            lvFileName = "CP-" & frmCancelacion.NoPago & "_" & FechaFactura & "CFDI"
+        Else
+            lvFileName = "CB-" & frmCancelacion.NoPago & "_" & FechaFactura & "CFDI"
+        End If
+
+        mfsdk.AgregaObjeto(Module1.PAC2)
+        mfsdk.Iniciales.Add("modulo", "cancelacion2022")
+        mfsdk.Iniciales.Add("accion", "cancelar")
+        mfsdk.Iniciales.Add("produccion", gv_cfdi_prd)
+        mfsdk.Iniciales.Add("uuid", frmCancelacion.UUID_Cancelar)
+        mfsdk.Iniciales.Add("rfc", frmCancelacion.RFC_ReceptorCancelar)
+        mfsdk.Iniciales.Add("password", gv_sat_pass)
+        mfsdk.Iniciales.Add("motivo", "02")
+        mfsdk.Iniciales.Add("b64Cer", gv_sat_cer)
+        mfsdk.Iniciales.Add("b64Key", gv_sat_key)
+
+        Try
+            Dim respuesta As SDKRespuesta = mfsdk.Timbrar("C:\sdk2\timbrar32.bat", gv_CDFI_XML_PATH, lvFileName, False)
+            Dim text As String = $"Código: {respuesta.Codigo_MF_Numero} Mensaje: {respuesta.Codigo_MF_Texto}"
+            If (respuesta.Codigo_MF_Numero <> "0") Then
+                MessageBox.Show(text, "CFDI", MessageBoxButtons.OK, If((respuesta.Codigo_MF_Numero = "0"), MessageBoxIcon.Asterisk, MessageBoxIcon.Hand))
+                Return False
+            Else
+                MessageBox.Show(text, "CFDI", MessageBoxButtons.OK, If((respuesta.Codigo_MF_Numero = "0"), MessageBoxIcon.Asterisk, MessageBoxIcon.Exclamation))
+
+                Dim wFacturatotal As tblFacturaTotal = DBModelo.GetFacturaHeader(NumeroFactura)
+                If Not IsNothing(wFacturatotal) Then
+                    Dim wCliente As tblClientes = DBModelo.GetCliente(wFacturatotal.id_cliente)
+                    If Not IsNothing(wCliente) Then
+                        If wCliente.correo.Length > 0 Then
+                            Dim filename As String = ""
+                            filename = "Estimado Cliente " & wCliente.nombre & " " & wCliente.apat & " " & wCliente.amat & ChrW(13) & ChrW(10) & ChrW(13) & ChrW(10) &
+                            "Por medio del presente Correo Electrónico, le hago la notificación de Cancelación del comprobante fiscal" & ChrW(13) & ChrW(10) &
+                            "emitido por nuestra empresa Material Eléctrico Progreso." & ChrW(13) & ChrW(10) &
+                            "Favor de accesar a su buzón tributario para aceptar dicha cancelación." & ChrW(13) & ChrW(10) & ChrW(13) & ChrW(10) &
+                            "Cualquier aclaración, favor de contactarnos. Lo puede hacer respondiendo a este correo." & ChrW(13) & ChrW(10) & ChrW(13) & ChrW(10) &
+                            "ATTE:" & ChrW(13) & ChrW(10) & "Salvador Bautista Fuentes" & ChrW(13) & ChrW(10) &
+                            "Empresario" & ChrW(13) & ChrW(10)
+
+                            Dim oSmtp As New SmtpClient()
+
+                            Dim oMail As New MailMessage()
+
+                            oSmtp.UseDefaultCredentials = False
+                            oSmtp.Credentials = New Net.NetworkCredential(gv_smtp_correo, gv_smtp_pass)
+                            oSmtp.Port = gv_smtp_port
+                            oSmtp.EnableSsl = True
+                            oSmtp.Host = gv_smtp_server
+
+                            oMail = New MailMessage()
+
+                            ' Set sender email address, please change it to yours
+                            oMail.From = New MailAddress(gv_smtp_correo)
+
+                            ' Set recipient email address, please change it to yours
+                            oMail.To.Add(wCliente.correo)
+                            'oMail.CC.Add(gv_smtp_correo)
+
+                            ' Set email subject
+                            If frmCancelacion.CancelaPago Then
+                                oMail.Subject = "Cancelación de Complemento de Pago " & lvFileName
+                            Else
+                                oMail.Subject = "Cancelación de Factura " & lvFileName
+                            End If
+                            oMail.BodyEncoding = Encoding.UTF8
+                            oMail.IsBodyHtml = True
+                            oMail.Body = filename
+
+                            Try
+                                oSmtp.Send(oMail)
+                                oSmtp.Dispose()
+                                oMail.Dispose()
+                                frmCancelacion.Cursor = Cursors.Default
+                                MsgBox("Correo Electrónico enviado correctamente!", vbInformation, "Envío de Correo Electrónico")
+                                flag = True
+                            Catch ep As Exception
+                                frmCancelacion.Cursor = Cursors.Default
+                                oSmtp.Dispose()
+                                oMail.Dispose()
+                                MsgBox(ep.Message, vbCritical, "Error al enviar correo electrónico.")
+                                flag = False
+                            End Try
+                        End If
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+            flag = False
+        End Try
+        Return flag
+    End Function
+
 End Module

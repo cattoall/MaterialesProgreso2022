@@ -32,97 +32,89 @@ Partial Class FrmFolioAME
         Me.lblfolioactual = New System.Windows.Forms.Label()
         Me.CmbTipoDoc = New System.Windows.Forms.ComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.mBtnSave = New System.Windows.Forms.Button()
-        Me.GroupBox1.SuspendLayout
-        Me.SuspendLayout
+        Me.btnSalir = New System.Windows.Forms.Button()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.GroupBox1.SuspendLayout()
+        Me.SuspendLayout()
         '
         'TxtFolioAct
         '
-        Me.TxtFolioAct.Location = New System.Drawing.Point(183, 140)
-        Me.TxtFolioAct.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtFolioAct.Location = New System.Drawing.Point(137, 114)
         Me.TxtFolioAct.Name = "TxtFolioAct"
-        Me.TxtFolioAct.Size = New System.Drawing.Size(240, 30)
+        Me.TxtFolioAct.Size = New System.Drawing.Size(181, 26)
         Me.TxtFolioAct.TabIndex = 1
         '
         'TxtfolioIni
         '
-        Me.TxtfolioIni.Location = New System.Drawing.Point(183, 71)
-        Me.TxtfolioIni.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtfolioIni.Location = New System.Drawing.Point(137, 58)
         Me.TxtfolioIni.Name = "TxtfolioIni"
-        Me.TxtfolioIni.Size = New System.Drawing.Size(240, 30)
+        Me.TxtfolioIni.Size = New System.Drawing.Size(181, 26)
         Me.TxtfolioIni.TabIndex = 2
         '
         'txtFilioFin
         '
-        Me.txtFilioFin.Location = New System.Drawing.Point(183, 106)
-        Me.txtFilioFin.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtFilioFin.Location = New System.Drawing.Point(137, 86)
         Me.txtFilioFin.Name = "txtFilioFin"
-        Me.txtFilioFin.Size = New System.Drawing.Size(240, 30)
+        Me.txtFilioFin.Size = New System.Drawing.Size(181, 26)
         Me.txtFilioFin.TabIndex = 3
         '
         'lbldocumento
         '
-        Me.lbldocumento.AutoSize = true
+        Me.lbldocumento.AutoSize = True
         Me.lbldocumento.BackColor = System.Drawing.Color.Transparent
-        Me.lbldocumento.Location = New System.Drawing.Point(12, 38)
-        Me.lbldocumento.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbldocumento.Location = New System.Drawing.Point(9, 31)
         Me.lbldocumento.Name = "lbldocumento"
-        Me.lbldocumento.Size = New System.Drawing.Size(148, 23)
+        Me.lbldocumento.Size = New System.Drawing.Size(119, 19)
         Me.lbldocumento.TabIndex = 5
         Me.lbldocumento.Text = "Tipo Documento"
         '
         'lblinicial
         '
-        Me.lblinicial.AutoSize = true
+        Me.lblinicial.AutoSize = True
         Me.lblinicial.BackColor = System.Drawing.Color.Transparent
-        Me.lblinicial.Location = New System.Drawing.Point(57, 75)
-        Me.lblinicial.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblinicial.Location = New System.Drawing.Point(43, 61)
         Me.lblinicial.Name = "lblinicial"
-        Me.lblinicial.Size = New System.Drawing.Size(107, 23)
+        Me.lblinicial.Size = New System.Drawing.Size(87, 19)
         Me.lblinicial.TabIndex = 6
         Me.lblinicial.Text = "Folio Inicial"
         '
         'lblfinal
         '
-        Me.lblfinal.AutoSize = true
+        Me.lblfinal.AutoSize = True
         Me.lblfinal.BackColor = System.Drawing.Color.Transparent
-        Me.lblfinal.Location = New System.Drawing.Point(67, 110)
-        Me.lblfinal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblfinal.Location = New System.Drawing.Point(50, 89)
         Me.lblfinal.Name = "lblfinal"
-        Me.lblfinal.Size = New System.Drawing.Size(97, 23)
+        Me.lblfinal.Size = New System.Drawing.Size(79, 19)
         Me.lblfinal.TabIndex = 7
         Me.lblfinal.Text = "Folio Final"
         '
         'lblfolioactual
         '
-        Me.lblfolioactual.AutoSize = true
+        Me.lblfolioactual.AutoSize = True
         Me.lblfolioactual.BackColor = System.Drawing.Color.Transparent
-        Me.lblfolioactual.Location = New System.Drawing.Point(55, 144)
-        Me.lblfolioactual.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblfolioactual.Location = New System.Drawing.Point(41, 117)
         Me.lblfolioactual.Name = "lblfolioactual"
-        Me.lblfolioactual.Size = New System.Drawing.Size(110, 23)
+        Me.lblfolioactual.Size = New System.Drawing.Size(88, 19)
         Me.lblfolioactual.TabIndex = 8
         Me.lblfolioactual.Text = "Folio Actual"
         '
         'CmbTipoDoc
         '
         Me.CmbTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CmbTipoDoc.FormattingEnabled = true
+        Me.CmbTipoDoc.FormattingEnabled = True
         Me.CmbTipoDoc.Items.AddRange(New Object() {"FACTURAS", "NOTAS DE CREDITO", "PAGOS"})
-        Me.CmbTipoDoc.Location = New System.Drawing.Point(183, 34)
-        Me.CmbTipoDoc.Margin = New System.Windows.Forms.Padding(4)
+        Me.CmbTipoDoc.Location = New System.Drawing.Point(137, 28)
         Me.CmbTipoDoc.Name = "CmbTipoDoc"
-        Me.CmbTipoDoc.Size = New System.Drawing.Size(240, 31)
+        Me.CmbTipoDoc.Size = New System.Drawing.Size(181, 27)
         Me.CmbTipoDoc.TabIndex = 20
         '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.mBtnSave)
-        Me.GroupBox1.Controls.Add(Me.Button2)
-        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.btnSalir)
+        Me.GroupBox1.Controls.Add(Me.lblYear)
         Me.GroupBox1.Controls.Add(Me.TxtfolioIni)
         Me.GroupBox1.Controls.Add(Me.TxtFolioAct)
         Me.GroupBox1.Controls.Add(Me.txtFilioFin)
@@ -131,26 +123,55 @@ Partial Class FrmFolioAME
         Me.GroupBox1.Controls.Add(Me.lblinicial)
         Me.GroupBox1.Controls.Add(Me.lblfolioactual)
         Me.GroupBox1.Controls.Add(Me.lblfinal)
-        Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(18, 58)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.GroupBox1.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(14, 61)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox1.Size = New System.Drawing.Size(759, 183)
+        Me.GroupBox1.Size = New System.Drawing.Size(569, 149)
         Me.GroupBox1.TabIndex = 26
-        Me.GroupBox1.TabStop = false
+        Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Folio Fiscales"
         '
-        'Label1
+        'mBtnSave
         '
-        Me.Label1.AutoSize = true
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Location = New System.Drawing.Point(427, 38)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(68, 23)
-        Me.Label1.TabIndex = 27
-        Me.Label1.Text = "Label1"
+        Me.mBtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.mBtnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mBtnSave.ForeColor = System.Drawing.Color.FromArgb(CType(CType(47, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.mBtnSave.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.save_16px
+        Me.mBtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.mBtnSave.Location = New System.Drawing.Point(346, 114)
+        Me.mBtnSave.Margin = New System.Windows.Forms.Padding(2)
+        Me.mBtnSave.Name = "mBtnSave"
+        Me.mBtnSave.Size = New System.Drawing.Size(75, 23)
+        Me.mBtnSave.TabIndex = 131
+        Me.mBtnSave.Text = "Guardar"
+        Me.mBtnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.mBtnSave.UseVisualStyleBackColor = True
+        '
+        'btnSalir
+        '
+        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSalir.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSalir.ForeColor = System.Drawing.Color.Red
+        Me.btnSalir.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.close_window_16px
+        Me.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSalir.Location = New System.Drawing.Point(489, 116)
+        Me.btnSalir.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(75, 23)
+        Me.btnSalir.TabIndex = 82
+        Me.btnSalir.Text = "Salir"
+        Me.btnSalir.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSalir.UseVisualStyleBackColor = True
+        '
+        'lblYear
+        '
+        Me.lblYear.AutoSize = True
+        Me.lblYear.BackColor = System.Drawing.Color.Transparent
+        Me.lblYear.Location = New System.Drawing.Point(320, 31)
+        Me.lblYear.Name = "lblYear"
+        Me.lblYear.Size = New System.Drawing.Size(36, 19)
+        Me.lblYear.TabIndex = 27
+        Me.lblYear.Text = "Año"
         '
         'ToolTip1
         '
@@ -159,50 +180,18 @@ Partial Class FrmFolioAME
         Me.ToolTip1.InitialDelay = 50
         Me.ToolTip1.ReshowDelay = 10
         '
-        'Button2
-        '
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.Red
-        Me.Button2.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.close_window_16px
-        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button2.Location = New System.Drawing.Point(652, 143)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(100, 28)
-        Me.Button2.TabIndex = 82
-        Me.Button2.Text = "Salir"
-        Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button2.UseVisualStyleBackColor = true
-        '
-        'mBtnSave
-        '
-        Me.mBtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.mBtnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.mBtnSave.ForeColor = System.Drawing.Color.FromArgb(CType(CType(47,Byte),Integer), CType(CType(170,Byte),Integer), CType(CType(141,Byte),Integer))
-        Me.mBtnSave.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.save_16px
-        Me.mBtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.mBtnSave.Location = New System.Drawing.Point(462, 140)
-        Me.mBtnSave.Name = "mBtnSave"
-        Me.mBtnSave.Size = New System.Drawing.Size(100, 28)
-        Me.mBtnSave.TabIndex = 131
-        Me.mBtnSave.Text = "Guardar"
-        Me.mBtnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.mBtnSave.UseVisualStyleBackColor = true
-        '
         'FrmFolioAME
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8!, 16!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
-        Me.ClientSize = New System.Drawing.Size(791, 287)
-        Me.ControlBox = false
+        Me.ClientSize = New System.Drawing.Size(593, 233)
+        Me.ControlBox = False
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.KeyPreview = true
-        Me.Margin = New System.Windows.Forms.Padding(4)
-        Me.MaximizeBox = false
+        Me.KeyPreview = True
+        Me.MaximizeBox = False
         Me.Name = "FrmFolioAME"
-        Me.Padding = New System.Windows.Forms.Padding(27, 74, 27, 25)
         Me.Text = "Folios Fiscales"
         Me.GroupBox1.ResumeLayout(false)
         Me.GroupBox1.PerformLayout
@@ -218,8 +207,8 @@ End Sub
     Friend WithEvents lblfolioactual As System.Windows.Forms.Label
     Friend WithEvents CmbTipoDoc As System.Windows.Forms.ComboBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents lblYear As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnSalir As Button
     Friend WithEvents mBtnSave As Button
 End Class

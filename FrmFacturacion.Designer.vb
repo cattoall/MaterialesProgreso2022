@@ -32,6 +32,8 @@ Partial Class FrmFacturacion
         Me.CmbBanco = New MetroFramework.Controls.MetroComboBox()
         Me.txtCuenta = New MetroFramework.Controls.MetroTextBox()
         Me.GroupBox3 = New MetroFramework.Controls.MetroPanel()
+        Me.txtRFR = New MetroFramework.Controls.MetroTextBox()
+        Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
         Me.Label11 = New MetroFramework.Controls.MetroLabel()
         Me.txtEmail = New MetroFramework.Controls.MetroTextBox()
         Me.Label1 = New MetroFramework.Controls.MetroLabel()
@@ -161,6 +163,8 @@ Partial Class FrmFacturacion
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.txtRFR)
+        Me.GroupBox3.Controls.Add(Me.MetroLabel1)
         Me.GroupBox3.Controls.Add(Me.Label11)
         Me.GroupBox3.Controls.Add(Me.txtEmail)
         Me.GroupBox3.Controls.Add(Me.Label1)
@@ -194,6 +198,48 @@ Partial Class FrmFacturacion
         Me.GroupBox3.VerticalScrollbarBarColor = True
         Me.GroupBox3.VerticalScrollbarHighlightOnWheel = False
         Me.GroupBox3.VerticalScrollbarSize = 10
+        '
+        'txtRFR
+        '
+        '
+        '
+        '
+        Me.txtRFR.CustomButton.Image = Nothing
+        Me.txtRFR.CustomButton.Location = New System.Drawing.Point(185, 2)
+        Me.txtRFR.CustomButton.Name = ""
+        Me.txtRFR.CustomButton.Size = New System.Drawing.Size(17, 17)
+        Me.txtRFR.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.txtRFR.CustomButton.TabIndex = 1
+        Me.txtRFR.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.txtRFR.CustomButton.UseSelectable = True
+        Me.txtRFR.CustomButton.Visible = False
+        Me.txtRFR.Lines = New String(-1) {}
+        Me.txtRFR.Location = New System.Drawing.Point(670, 116)
+        Me.txtRFR.MaxLength = 32767
+        Me.txtRFR.Name = "txtRFR"
+        Me.txtRFR.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtRFR.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.txtRFR.SelectedText = ""
+        Me.txtRFR.SelectionLength = 0
+        Me.txtRFR.SelectionStart = 0
+        Me.txtRFR.ShortcutsEnabled = True
+        Me.txtRFR.Size = New System.Drawing.Size(205, 22)
+        Me.txtRFR.TabIndex = 46
+        Me.txtRFR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtRFR.UseSelectable = True
+        Me.txtRFR.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.txtRFR.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        '
+        'MetroLabel1
+        '
+        Me.MetroLabel1.AutoSize = True
+        Me.MetroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Bold
+        Me.MetroLabel1.ForeColor = System.Drawing.Color.Black
+        Me.MetroLabel1.Location = New System.Drawing.Point(670, 94)
+        Me.MetroLabel1.Name = "MetroLabel1"
+        Me.MetroLabel1.Size = New System.Drawing.Size(112, 19)
+        Me.MetroLabel1.TabIndex = 45
+        Me.MetroLabel1.Text = "Régimen Fiscal:"
         '
         'Label11
         '
@@ -322,7 +368,7 @@ Partial Class FrmFacturacion
         Me.TxtRFC.CustomButton.UseSelectable = True
         Me.TxtRFC.CustomButton.Visible = False
         Me.TxtRFC.Lines = New String(-1) {}
-        Me.TxtRFC.Location = New System.Drawing.Point(730, 88)
+        Me.TxtRFC.Location = New System.Drawing.Point(730, 64)
         Me.TxtRFC.MaxLength = 32767
         Me.TxtRFC.Name = "TxtRFC"
         Me.TxtRFC.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -342,7 +388,7 @@ Partial Class FrmFacturacion
         Me.Label7.AutoSize = True
         Me.Label7.FontWeight = MetroFramework.MetroLabelWeight.Bold
         Me.Label7.ForeColor = System.Drawing.Color.Black
-        Me.Label7.Location = New System.Drawing.Point(670, 91)
+        Me.Label7.Location = New System.Drawing.Point(670, 67)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(49, 19)
         Me.Label7.TabIndex = 36
@@ -1306,7 +1352,7 @@ Partial Class FrmFacturacion
         '
         Me.ChkTasaCero.AutoSize = True
         Me.ChkTasaCero.FontWeight = MetroFramework.MetroCheckBoxWeight.Bold
-        Me.ChkTasaCero.Location = New System.Drawing.Point(433, 89)
+        Me.ChkTasaCero.Location = New System.Drawing.Point(414, 84)
         Me.ChkTasaCero.Name = "ChkTasaCero"
         Me.ChkTasaCero.Size = New System.Drawing.Size(110, 15)
         Me.ChkTasaCero.TabIndex = 66
@@ -1329,7 +1375,7 @@ Partial Class FrmFacturacion
         '
         Me.Label13.AutoSize = True
         Me.Label13.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.Label13.Location = New System.Drawing.Point(548, 86)
+        Me.Label13.Location = New System.Drawing.Point(530, 84)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(82, 19)
         Me.Label13.TabIndex = 68
@@ -1496,4 +1542,6 @@ End Sub
     Friend WithEvents btnGenerarMostrador As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents Button2 As Button
+    Friend WithEvents txtRFR As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents MetroLabel1 As MetroFramework.Controls.MetroLabel
 End Class

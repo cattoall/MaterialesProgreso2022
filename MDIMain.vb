@@ -381,4 +381,10 @@
         frmCuentasPorCobrarWendy.Close()
         frmCuentasPorCobrarWendy.Dispose()
     End Sub
+
+    Private Sub ComplementoDePagoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ComplementoDePagoToolStripMenuItem.Click
+        frmComplementoPago.ShowDialog()
+        frmComplementoPago.Close()
+        frmComplementoPago.Dispose()
+    End Sub
 End Class

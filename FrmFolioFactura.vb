@@ -1,120 +1,41 @@
 ﻿
 Public Class FrmFolioFactura
-    Dim folio As String
     Dim Selection As Boolean = False
 
     Private Sub FrmFolioFactura_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyValue
             Case Keys.Escape
-                Me.Close()
+                Close()
         End Select
     End Sub
 
     Private Sub FrmFolioFactura_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Selection = False
-        bs.DataSource = Nothing
-        dt.Clear()
-
-        With Me.DataGridView1
-            ' alternar color de filas
-            '.AlternatingRowsDefaultCellStyle.BackColor = My.Settings.BackColorAlt
-            '.DefaultCellStyle.BackColor = My.Settings.BackColor
-            '.DefaultCellStyle.Font = My.Settings.RowFont
-            '.ColumnHeadersDefaultCellStyle.Font = My.Settings.HeaderFont
-            ' Establecer el origen de datos para el DataGridview   
-            .DataSource = bs
-        End With
-
         llena_grid()
-
-        'Me.BackColor = My.Settings.FormsBackColor
-        'Me.GroupBox1.ForeColor = My.Settings.FontForeColor
-        'Me.GroupBox1.Font = My.Settings.FontStyle
-        'Me.CmdSalir.BackColor = My.Settings.FormsBackColor
-        'Me.CmdModificar.BackColor = My.Settings.FormsBackColor
-        'Me.CmdNuevo.BackColor = My.Settings.FormsBackColor
-
     End Sub
 
     Private Sub llena_grid()
         DataGridView1.DataSource = DBModelo.GetFolios()
-        'SQL = "SELECT * FROM foliosfacturas"
-        '
-        ''Carga Lista de Clasificaciones
-        'load_record_dgv(SQL, Me.DataGridView1, DBConnected)
-        '
-        ''Aplica formato al DataGridView
-        load_layout_dgv_folios(Me.DataGridView1)
-        '
-        ' folio = DataGridView1.Item(4, DataGridView1.CurrentRow.Index).Value
+
+        load_layout_dgv_folios(DataGridView1)
     End Sub
-
-    Private Sub DataGridView1_CellDoubleClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) 
-        foliotipodoc    = DataGridView1.Item(1, e.RowIndex).Value
-        folioyear       = DataGridView1.Item(2, e.RowIndex).Value
-        folioini        = DataGridView1.Item(3, e.RowIndex).Value
-        foliofin        = DataGridView1.Item(4, e.RowIndex).Value
-        folioactual     = DataGridView1.Item(5, e.RowIndex).Value
-        
-        Llena_Variables(foliotipodoc, folioini, foliofin, folioactual, folioyear)
-        Selection = True
-        Call btnEdit_Click(sender, e)
-    End Sub
-
-    Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs) 
-        Me.Close()
-    End Sub
-
-    Private Sub ImgNewB_Click(sender As System.Object, e As System.EventArgs) 
-        'FrmFolioAME.ImgGuardarA.Visible = True
-        'FrmFolioAME.ImgModificarA.Visible = False
-        FrmFolioAME.TxtFolioAct.Visible = False
-        FrmFolioAME.lblfolioactual.Visible = False
-
-
-        FrmFolioAME.txtFilioFin.Text = ""
-        FrmFolioAME.TxtFolioAct.Text = ""
-        FrmFolioAME.TxtfolioIni.Text = ""
-        FrmFolioAME.CmbTipoDoc.Text = ""
-        FrmFolioAME.Label1.Text = CInt(Now.Date.Year)
-
-        Llena_Variables("", "", "", "", CInt(Now.Date.Year))
-        FrmFolioAME.ShowDialog()
-
-        llena_grid()
-
-        FrmFolioAME.TxtFolioAct.Visible = True
-        FrmFolioAME.lblfolioactual.Visible = True
-
-    End Sub
-
-    
 
     Private Sub DataGridView1_CellClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
-        foliotipodoc    = DataGridView1.Item(1, e.RowIndex).Value
-        folioyear       = DataGridView1.Item(2, e.RowIndex).Value
-        folioini        = DataGridView1.Item(3, e.RowIndex).Value
-        foliofin        = DataGridView1.Item(4, e.RowIndex).Value
-        folioactual     = DataGridView1.Item(5, e.RowIndex).Value
-        
-        Llena_Variables(foliotipodoc, folioini, foliofin, folioactual, folioyear)
+        Dim sTipoDoc As String = Trim(DataGridView1.Item(1, e.RowIndex).Value.ToString())
+        Select Case sTipoDoc
+            Case "FACTURAS"
+                FrmFolioAME.CmbTipoDoc.SelectedIndex = 0
+            Case "NOTAS DE CREDITO"
+                FrmFolioAME.CmbTipoDoc.SelectedIndex = 1
+            Case "PAGOS"
+                FrmFolioAME.CmbTipoDoc.SelectedIndex = 2
+        End Select
+        FrmFolioAME.lblYear.Text = DataGridView1.Item(2, e.RowIndex).Value
+        FrmFolioAME.TxtfolioIni.Text = DataGridView1.Item(3, e.RowIndex).Value
+        FrmFolioAME.txtFilioFin.Text = DataGridView1.Item(4, e.RowIndex).Value
+        FrmFolioAME.TxtFolioAct.Text = DataGridView1.Item(5, e.RowIndex).Value
+
         Selection = True
-    End Sub
-
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub btnEdit_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
     End Sub
 
     Private Sub mBtnSearch_Click(sender As Object, e As EventArgs) Handles mBtnSearch.Click
@@ -125,10 +46,9 @@ Public Class FrmFolioFactura
         FrmFolioAME.txtFilioFin.Text = ""
         FrmFolioAME.TxtFolioAct.Text = ""
         FrmFolioAME.TxtfolioIni.Text = ""
-        FrmFolioAME.CmbTipoDoc.Text = ""
-        FrmFolioAME.Label1.Text = CInt(Now.Date.Year)
+        FrmFolioAME.CmbTipoDoc.SelectedIndex = -1
+        FrmFolioAME.lblYear.Text = CInt(Now.Date.Year)
 
-        Llena_Variables("", "", "", "", CInt(Now.Date.Year))
         FrmFolioAME.ShowDialog()
 
         llena_grid()
@@ -137,42 +57,25 @@ Public Class FrmFolioFactura
         FrmFolioAME.lblfolioactual.Visible = True
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         If Selection = False Then
             MsgBox("Favor de seleccionar una Factura", MsgBoxStyle.Information, "Folio Fiscales")
             Exit Sub
         End If
 
         FrmFolioAME.mBtnSave.Text = "Modificar"
-        FrmFolioAME.TxtFolioAct.Visible = True
-        FrmFolioAME.lblfolioactual.Visible = True
-
-        FrmFolioAME.CmbTipoDoc.Enabled = False
-        FrmFolioAME.txtFilioFin.Enabled = False
-        FrmFolioAME.TxtfolioIni.Enabled = False
-
-        Select Case foliotipodoc
-            Case "FACTURAS"
-                FrmFolioAME.CmbTipoDoc.SelectedIndex = 0
-            Case Else
-                FrmFolioAME.CmbTipoDoc.SelectedIndex = 1
-        End Select
-        FrmFolioAME.TxtfolioIni.Text = folioini
-        FrmFolioAME.txtFilioFin.Text = foliofin
-        FrmFolioAME.TxtFolioAct.Text = folioactual
-        FrmFolioAME.Label1.Text = folioyear
         FrmFolioAME.ShowDialog()
         llena_grid()
 
-        FrmFolioAME.TxtFolioAct.Visible = False
-        FrmFolioAME.lblfolioactual.Visible = False
+        FrmFolioAME.TxtFolioAct.Visible = True
+        FrmFolioAME.lblfolioactual.Visible = True
         FrmFolioAME.CmbTipoDoc.Enabled = True
         FrmFolioAME.txtFilioFin.Enabled = True
         FrmFolioAME.TxtfolioIni.Enabled = True
         Selection = False
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Me.Close()
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+        Close()
     End Sub
 End Class

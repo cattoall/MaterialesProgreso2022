@@ -70,6 +70,7 @@ Partial Class FrmNotaDeCredito
         Me.IVA = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ClaveProducto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ClaveUnidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ObjImp = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DGVDetalle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -107,7 +108,7 @@ Partial Class FrmNotaDeCredito
         Me.mBtnGenerate.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.export_16px
         Me.mBtnGenerate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.mBtnGenerate.Location = New System.Drawing.Point(574, 532)
-        Me.mBtnGenerate.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.mBtnGenerate.Margin = New System.Windows.Forms.Padding(2)
         Me.mBtnGenerate.Name = "mBtnGenerate"
         Me.mBtnGenerate.Size = New System.Drawing.Size(75, 23)
         Me.mBtnGenerate.TabIndex = 80
@@ -123,7 +124,7 @@ Partial Class FrmNotaDeCredito
         Me.Button1.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.close_window_16px
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button1.Location = New System.Drawing.Point(879, 19)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 79
@@ -231,7 +232,7 @@ Partial Class FrmNotaDeCredito
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGVDetalle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DGVDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVDetalle.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.SubTotal, Me.Cantidad, Me.Folio, Me.ClaveP, Me.IVA, Me.ClaveProducto, Me.ClaveUnidad})
+        Me.DGVDetalle.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.SubTotal, Me.Cantidad, Me.Folio, Me.ClaveP, Me.IVA, Me.ClaveProducto, Me.ClaveUnidad, Me.ObjImp})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -244,7 +245,7 @@ Partial Class FrmNotaDeCredito
         Me.DGVDetalle.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
         Me.DGVDetalle.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.DGVDetalle.Location = New System.Drawing.Point(5, 154)
-        Me.DGVDetalle.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.DGVDetalle.Margin = New System.Windows.Forms.Padding(2)
         Me.DGVDetalle.MultiSelect = False
         Me.DGVDetalle.Name = "DGVDetalle"
         Me.DGVDetalle.ReadOnly = True
@@ -328,10 +329,10 @@ Partial Class FrmNotaDeCredito
         '
         Me.DTPFecha.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.DTPFecha.Location = New System.Drawing.Point(272, 26)
-        Me.DTPFecha.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.DTPFecha.Margin = New System.Windows.Forms.Padding(2)
         Me.DTPFecha.MinimumSize = New System.Drawing.Size(0, 29)
         Me.DTPFecha.Name = "DTPFecha"
-        Me.DTPFecha.Size = New System.Drawing.Size(106, 30)
+        Me.DTPFecha.Size = New System.Drawing.Size(106, 29)
         Me.DTPFecha.TabIndex = 87
         '
         'Label9
@@ -558,6 +559,14 @@ Partial Class FrmNotaDeCredito
         Me.ClaveUnidad.Visible = False
         Me.ClaveUnidad.Width = 116
         '
+        'ObjImp
+        '
+        Me.ObjImp.HeaderText = "ObjImp"
+        Me.ObjImp.Name = "ObjImp"
+        Me.ObjImp.ReadOnly = True
+        Me.ObjImp.Visible = False
+        Me.ObjImp.Width = 82
+        '
         'FrmNotaDeCredito
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -622,4 +631,5 @@ End Sub
     Friend WithEvents IVA As DataGridViewTextBoxColumn
     Friend WithEvents ClaveProducto As DataGridViewTextBoxColumn
     Friend WithEvents ClaveUnidad As DataGridViewTextBoxColumn
+    Friend WithEvents ObjImp As DataGridViewTextBoxColumn
 End Class

@@ -180,10 +180,6 @@
         End If
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim lv_FormaPago() As String = Split(cmbFormaPago.Text, "-")
         Dim lv_MetodoPago() As String = Split(cmbMetodoPago.Text, "-")
@@ -218,6 +214,7 @@
             strCliente.codiciones = CmbCredito.Text
             strCliente.cuenta = txtCuenta.Text
             strCliente.banco = CmbBanco.Text
+            strCliente.RegimenFiscal = txtRegimenFiscal.Text
             If ChkTasaCero.Checked = True Then
                 strCliente.tasa_cero = 1
             Else
@@ -256,6 +253,7 @@
                 strCliente.codiciones = CmbCredito.Text
                 strCliente.cuenta = txtCuenta.Text
                 strCliente.banco = CmbBanco.Text
+                strCliente.RegimenFiscal = txtRegimenFiscal.Text
                 If ChkTasaCero.Checked = True Then
                     strCliente.tasa_cero = 1
                 Else

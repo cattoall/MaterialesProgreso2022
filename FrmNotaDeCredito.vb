@@ -39,8 +39,14 @@ Public Class FrmNotaDeCredito
                     Dim lt_Facturas As New List(Of tblFactura)
                     lt_Facturas = DBModelo.Get_Facturas(CDbl(TxtPedido.Text))
 
-                    For i = 0 To lt_Facturas.Count - 1
-                        Dim row As String() = New String() {lt_Facturas(i).n_factura,
+                Dim sObjImp As String = ""
+                For i = 0 To lt_Facturas.Count - 1
+                    If lt_Facturas(i).IVA <> CDec("0.00") Then
+                        sObjImp = "02"
+                    Else
+                        sObjImp = "01"
+                    End If
+                    Dim row As String() = New String() {lt_Facturas(i).n_factura,
                             lt_Facturas(i).idProducto,
                             Format(lt_Facturas(i).cantidad, "###0.00"),
                             lt_Facturas(i).descripcion,
@@ -51,12 +57,13 @@ Public Class FrmNotaDeCredito
                             lt_Facturas(i).clave_p,
                             lt_Facturas(i).IVA,
                             lt_Facturas(i).ClaveProducto,
-                            lt_Facturas(i).ClaveUnidad}
-                        DGVDetalle.Rows.Add(row)
-                        lv_subtotal_c = lv_subtotal_c + lt_Facturas(i).subtotal
-                        lv_iva_c = lv_iva_c + lt_Facturas(i).IVA
-                    Next i
-                    txtSubtotal.Text = Format(lv_subtotal_c, "###,###,##0.00")
+                            lt_Facturas(i).ClaveUnidad,
+                            sObjImp}
+                    DGVDetalle.Rows.Add(row)
+                    lv_subtotal_c = lv_subtotal_c + lt_Facturas(i).subtotal
+                    lv_iva_c = lv_iva_c + lt_Facturas(i).IVA
+                Next i
+                txtSubtotal.Text = Format(lv_subtotal_c, "###,###,##0.00")
                     txtIVA.Text = Format(lv_iva_c, "###,###,##0.00")
                     lv_total_c = lv_subtotal_c + lv_iva_c
                     txtTotal.Text = Format(lv_total_c, "###,###,##0.00")
@@ -286,7 +293,7 @@ Public Class FrmNotaDeCredito
 
         'Generación del archivo para envío electrónico al SAT
         sdk = New MFSDK
-        sdk.Iniciales.Add("version_cfdi", "3.3")
+        sdk.Iniciales.Add("version_cfdi", "4.0")
         sdk.Iniciales.Add("MODOINI", "DIVISOR")
         sdk.Iniciales.Add("cfdi", (gv_CDFI_XML_PATH & FolioFactura & ".xml"))
         sdk.Iniciales.Add("xml_debug", (gv_CDFI_XML_PATH & "sin_" & FolioFactura & ".xml"))
@@ -304,14 +311,13 @@ Public Class FrmNotaDeCredito
         factura("serie") = gv_SerieNCSalvador
         factura("folio") = CDbl(NoFactura)
         factura("fecha_expedicion") = Now.ToString("s")
+        factura("Exportacion") = "01"
         factura("metodo_pago") = strFacturaTotal.metodopago
         factura("forma_pago") = strFacturaTotal.FormaPago
-        'factura("condicionesDePago") = strFacturaTotal.codiciones
         factura("tipocomprobante") = "E"
         factura("moneda") = "MXN"
         factura("tipocambio") = "1"
         factura("LugarExpedicion") = LugarExpedicion
-        factura("RegimenFiscal") = RegimenFiscal
         factura("subtotal") = subtotal
         factura("total") = total
 
@@ -330,8 +336,11 @@ Public Class FrmNotaDeCredito
         Else
             receptor("UsoCFDI") = strFacturaTotal.UsoCFDI
         End If
+        receptor("DomicilioFiscalReceptor") = wa_cliente.cp
+        receptor("RegimenFiscalReceptor") = wa_cliente.RegimenFiscal
         sdk.AgregaObjeto(receptor)
 
+        Dim baseTotal As Decimal = 0
         Dim oConceptos As New MFObject("conceptos")
         For i = 0 To DGVDetalle.RowCount - 1
             Dim vImporte As String = Trim(Trim(DGVDetalle(5, i).Value).Replace("$", "")).Replace(",", "").ToString
@@ -345,20 +354,23 @@ Public Class FrmNotaDeCredito
             oLinea("Descripcion") = DGVDetalle(3, i).Value.ToString
             oLinea("ValorUnitario") = vValorUnitario
             oLinea("Importe") = vImporte
+            oLinea("ObjetoImp") = DGVDetalle(12, i).Value.ToString
 
-
-            Dim oImpuestos As New MFObject("Impuestos")
-            Dim oTraslado As New MFObject("Traslados")
-            Dim oTraslados As New MFObject(i.ToString)
-            oTraslados("Base") = vImporte
-            Dim vImporteTras As String = DGVDetalle(9, i).Value.ToString
-            oTraslados("Importe") = vImporteTras
-            oTraslados("Impuesto") = "002"
-            oTraslados("TasaOCuota") = FormatNumber(FactorIVA - 1, 6)
-            oTraslados("TipoFactor") = "Tasa"
-            oTraslado.AgregaSubnodo(oTraslados)
-            oImpuestos.AgregaSubnodo(oTraslado)
-            oLinea.AgregaSubnodo(oImpuestos)
+            If oLinea("ObjetoImp") = "02" Then
+                baseTotal = baseTotal + vImporte
+                Dim oImpuestos As New MFObject("Impuestos")
+                Dim oTraslado As New MFObject("Traslados")
+                Dim oTraslados As New MFObject(i.ToString)
+                oTraslados("Base") = vImporte
+                Dim vImporteTras As String = DGVDetalle(9, i).Value.ToString
+                oTraslados("Importe") = vImporteTras
+                oTraslados("Impuesto") = "002"
+                oTraslados("TasaOCuota") = FormatNumber(FactorIVA - 1, 6)
+                oTraslados("TipoFactor") = "Tasa"
+                oTraslado.AgregaSubnodo(oTraslados)
+                oImpuestos.AgregaSubnodo(oTraslado)
+                oLinea.AgregaSubnodo(oImpuestos)
+            End If
             oConceptos.AgregaSubnodo(oLinea)
         Next
         sdk.AgregaObjeto(factura)
@@ -369,15 +381,18 @@ Public Class FrmNotaDeCredito
 
         oImpuestosTotales("TotalImpuestosTrasladados") = Trim(vImporteTotalIVA.Replace(",", ""))
 
-        Dim itras As New MFObject("translados")
-        Dim itra0 As New MFObject("0")
-        Dim vImporteTotalIVAFormat As String = FormatNumber(vImporteTotalIVA, 2)
-        itra0("Impuesto") = "002"
-        itra0("Importe") = Trim(vImporteTotalIVAFormat.Replace(",", ""))
-        itra0("TasaOCuota") = FormatNumber((FactorIVA - 1), 6)
-        itra0("TipoFactor") = "Tasa"
-        itras.AgregaSubnodo(itra0)
-        oImpuestosTotales.AgregaSubnodo(itras)
+        If CDec(FormatNumber(vImporteTotalIVA, 2)) <> CDec("0.00") Then
+            Dim itras As New MFObject("translados")
+            Dim itra0 As New MFObject("0")
+            Dim vImporteTotalIVAFormat As String = FormatNumber(vImporteTotalIVA, 2)
+            itra0("Impuesto") = baseTotal.ToString()
+            itra0("Impuesto") = "002"
+            itra0("Importe") = Trim(vImporteTotalIVAFormat.Replace(",", ""))
+            itra0("TasaOCuota") = FormatNumber((FactorIVA - 1), 6)
+            itra0("TipoFactor") = "Tasa"
+            itras.AgregaSubnodo(itra0)
+            oImpuestosTotales.AgregaSubnodo(itras)
+        End If
 
         sdk.AgregaObjeto(oImpuestosTotales)
 

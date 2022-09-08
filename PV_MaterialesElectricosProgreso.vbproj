@@ -250,10 +250,16 @@
     <Compile Include="FrmBuscarMarcas.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCobrarWendy.Designer.vb">
-      <DependentUpon>frmCobrarWendy.vb</DependentUpon>
+    <Compile Include="frmCancelacion.designer.vb">
+      <DependentUpon>frmCancelacion.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmCobrarWendy.vb">
+    <Compile Include="frmCancelacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmComplementoPago.Designer.vb">
+      <DependentUpon>frmComplementoPago.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmComplementoPago.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmCuentasPorCobrarWendy.Designer.vb">
@@ -822,8 +828,11 @@
     <EmbeddedResource Include="FrmBuscarMarcas.resx">
       <DependentUpon>FrmBuscarMarcas.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCobrarWendy.resx">
-      <DependentUpon>frmCobrarWendy.vb</DependentUpon>
+    <EmbeddedResource Include="frmCancelacion.resx">
+      <DependentUpon>frmCancelacion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmComplementoPago.resx">
+      <DependentUpon>frmComplementoPago.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCuentasPorCobrarWendy.resx">
       <DependentUpon>frmCuentasPorCobrarWendy.vb</DependentUpon>

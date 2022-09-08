@@ -143,18 +143,6 @@
         DataGridTikect.Columns(13).HeaderText = "Clave Unidad"
     End Sub
 
-    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub MetroButton1_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub mBtnPrint_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Close()
     End Sub

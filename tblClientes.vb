@@ -38,5 +38,6 @@ Partial Public Class tblClientes
     Public Property tasa_cero As Nullable(Of Integer)
     Public Property FormaPago As String
     Public Property UsoCFDI As String
+    Public Property RegimenFiscal As String
 
 End Class

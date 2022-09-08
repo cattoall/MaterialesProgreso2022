@@ -11,7 +11,7 @@
             <PropertyRef Name="clave" />
           </Key>
           <Property Name="IdComp" Type="nchar" MaxLength="2" Nullable="false" />
-          <Property Name="clave" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clave" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="nvarchar" MaxLength="255" />
           <Property Name="apat" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="amat" Type="nvarchar" MaxLength="150" Nullable="false" />
@@ -37,6 +37,7 @@
           <Property Name="tasa_cero" Type="int" />
           <Property Name="FormaPago" Type="nvarchar" MaxLength="2" />
           <Property Name="UsoCFDI" Type="nvarchar" MaxLength="3" />
+          <Property Name="RegimenFiscal" Type="nvarchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="cobrar">
           <Key>
@@ -80,7 +81,7 @@
           <Property Name="id_cliente" Type="int" />
           <Property Name="fecha_pago" Type="date" />
           <Property Name="formapago" Type="nvarchar" MaxLength="2" />
-          <Property Name="UsoCFDI" Type="nvarchar" MaxLength="3" />
+          <Property Name="UsoCFDI" Type="nvarchar" MaxLength="4" />
           <Property Name="UUID" Type="nvarchar" MaxLength="45" />
           <Property Name="Cancelado" Type="smallint" />
         </EntityType>
@@ -154,6 +155,8 @@
           </Key>
           <Property Name="IdComp" Type="nchar" MaxLength="2" Nullable="false" />
           <Property Name="n_factura" Type="numeric" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="subtotal" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="iva" Type="numeric" Precision="10" Scale="2" />
           <Property Name="total" Type="numeric" Precision="10" Scale="2" Nullable="false" />
           <Property Name="usuario" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="tipo_venta" Type="varchar" MaxLength="30" Nullable="false" />
@@ -175,6 +178,7 @@
           <Property Name="Cancelada" Type="smallint" />
           <Property Name="ComproPago" Type="smallint" />
           <Property Name="pdf" Type="varchar" MaxLength="80" />
+          <Property Name="ObjetoImp" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="facturas">
           <Key>
@@ -670,6 +674,9 @@
           <Property Name="motivo" Type="nvarchar" MaxLength="50" />
           <Property Name="numeroFactura" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_clientes_clientes' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_clientes_clientes" />-->
         <Function Name="SP_DB_BACKUP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DatabaseName" Type="varchar" Mode="In" />
           <Parameter Name="FullPath" Type="varchar" Mode="In" />
@@ -800,6 +807,7 @@
           <Property Name="tasa_cero" Type="Int32" />
           <Property Name="FormaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="UsoCFDI" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="RegimenFiscal" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblCobrar">
           <Key>
@@ -843,7 +851,7 @@
           <Property Name="id_cliente" Type="Int32" />
           <Property Name="fecha_pago" Type="DateTime" Precision="0" />
           <Property Name="formapago" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="UsoCFDI" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="UsoCFDI" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="UUID" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="Cancelado" Type="Int16" />
         </EntityType>
@@ -938,6 +946,9 @@
           <Property Name="Cancelada" Type="Int16" />
           <Property Name="ComproPago" Type="Int16" />
           <Property Name="pdf" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="ObjetoImp" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="subtotal" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="iva" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="tblFactura">
           <Key>
@@ -1443,6 +1454,7 @@
           <EntitySetMapping Name="tblClientes">
             <EntityTypeMapping TypeName="pv_salvadorModel1.tblClientes">
               <MappingFragment StoreEntitySet="clientes">
+                <ScalarProperty Name="RegimenFiscal" ColumnName="RegimenFiscal" />
                 <ScalarProperty Name="UsoCFDI" ColumnName="UsoCFDI" />
                 <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
                 <ScalarProperty Name="tasa_cero" ColumnName="tasa_cero" />
@@ -1582,6 +1594,9 @@
           <EntitySetMapping Name="tblFacturaTotals">
             <EntityTypeMapping TypeName="pv_salvadorModel1.tblFacturaTotal">
               <MappingFragment StoreEntitySet="factura_total">
+                <ScalarProperty Name="iva" ColumnName="iva" />
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="ObjetoImp" ColumnName="ObjetoImp" />
                 <ScalarProperty Name="pdf" ColumnName="pdf" />
                 <ScalarProperty Name="ComproPago" ColumnName="ComproPago" />
                 <ScalarProperty Name="Cancelada" ColumnName="Cancelada" />

@@ -88,6 +88,10 @@
         MetroGrid1.Columns(11).HeaderText = "R.F.C."
         MetroGrid1.Columns(11).ReadOnly = True
 
+        MetroGrid1.Columns(27).HeaderText = "Régimen Fiscal"
+        MetroGrid1.Columns(27).ReadOnly = True
+        MetroGrid1.Columns(27).Visible = True
+
         MetroGrid1.Columns(15).HeaderText = "Observaciones"
         MetroGrid1.Columns(15).ReadOnly = True
         MetroGrid1.Columns(15).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -179,6 +183,7 @@
         If MetroGrid1.RowCount > 0 Then
 
             idClienteVenta = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
+            idClientePago = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
             Select Case Buscar_Clientes
                 Case "VENTAS"
                     FrmPuntoDeVenta.txtCliente.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
@@ -269,6 +274,31 @@
                     Else
                         FrmFacturacion.CmbUsoCDFI.SelectedIndex = -1
                     End If
+
+                    FrmFacturacion.txtRFR.Text = MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value
+
+                Case "COMPLEMENTO"
+                    frmComplementoPago.txtNombre.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
+                    frmComplementoPago.txtDirecion.Text = MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value
+                    frmComplementoPago.txtColonia.Text = MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value
+                    frmComplementoPago.txtEstado.Text = MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value
+                    frmComplementoPago.txtCP.Text = MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value
+                    frmComplementoPago.TxtRFC.Text = MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value
+                    frmComplementoPago.txtNumero.Text = MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value
+                    frmComplementoPago.txtCiudad.Text = MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value
+                    frmComplementoPago.txtEmail.Text = MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value
+                    If IsDBNull(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value) Then
+                        frmComplementoPago.CmdFormaPago.SelectedIndex = -1
+                        gv_formapago = -1
+                    ElseIf MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value = "" Then
+                        frmComplementoPago.CmdFormaPago.SelectedIndex = -1
+                        gv_formapago = -1
+                    Else
+                        FormaPago = MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value
+                        frmComplementoPago.CmdFormaPago.SelectedIndex = frmComplementoPago.CmdFormaPago.FindString(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value)
+                        gv_formapago = frmComplementoPago.CmdFormaPago.SelectedIndex
+                    End If
+                    frmComplementoPago.txtRFR.Text = MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value
             End Select
             idTipoPrecioCliente = MetroGrid1.Item(16, MetroGrid1.CurrentRow.Index).Value
             MetroGrid1.Refresh()

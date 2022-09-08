@@ -34,5 +34,8 @@ Partial Public Class tblFacturaTotal
     Public Property Cancelada As Nullable(Of Short)
     Public Property ComproPago As Nullable(Of Short)
     Public Property pdf As String
+    Public Property ObjetoImp As String
+    Public Property subtotal As Nullable(Of Decimal)
+    Public Property iva As Nullable(Of Decimal)
 
 End Class
