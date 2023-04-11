@@ -24,14 +24,14 @@ Partial Class FrmDescuento
     Private Sub InitializeComponent()
         Me.NupPrecio = New System.Windows.Forms.NumericUpDown()
         Me.NupCantidad = New System.Windows.Forms.NumericUpDown()
-        Me.NupDescuento = New MetroFramework.Controls.MetroTrackBar()
         Me.lblDescripcion = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel2 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel3 = New MetroFramework.Controls.MetroLabel()
-        Me.lblSalir = New MetroFramework.Controls.MetroLink()
-        Me.lblAplicar = New MetroFramework.Controls.MetroLink()
         Me.lblDesc = New MetroFramework.Controls.MetroLabel()
+        Me.txtPorcentaje = New MetroFramework.Controls.MetroTextBox()
+        Me.btnAplicar = New MetroFramework.Controls.MetroButton()
+        Me.btnSalir = New MetroFramework.Controls.MetroButton()
         CType(Me.NupPrecio, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NupCantidad, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -59,16 +59,6 @@ Partial Class FrmDescuento
         Me.NupCantidad.Size = New System.Drawing.Size(135, 20)
         Me.NupCantidad.TabIndex = 0
         Me.NupCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'NupDescuento
-        '
-        Me.NupDescuento.BackColor = System.Drawing.Color.Transparent
-        Me.NupDescuento.Location = New System.Drawing.Point(205, 181)
-        Me.NupDescuento.Maximum = 30
-        Me.NupDescuento.Name = "NupDescuento"
-        Me.NupDescuento.Size = New System.Drawing.Size(104, 23)
-        Me.NupDescuento.TabIndex = 22
-        Me.NupDescuento.Value = 0
         '
         'lblDescripcion
         '
@@ -108,37 +98,68 @@ Partial Class FrmDescuento
         Me.MetroLabel3.TabIndex = 26
         Me.MetroLabel3.Text = "Descuento:"
         '
-        'lblSalir
-        '
-        Me.lblSalir.Location = New System.Drawing.Point(23, 216)
-        Me.lblSalir.Name = "lblSalir"
-        Me.lblSalir.Size = New System.Drawing.Size(75, 23)
-        Me.lblSalir.TabIndex = 27
-        Me.lblSalir.Text = "Salir"
-        Me.lblSalir.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblSalir.UseCustomForeColor = True
-        Me.lblSalir.UseSelectable = True
-        '
-        'lblAplicar
-        '
-        Me.lblAplicar.Location = New System.Drawing.Point(337, 216)
-        Me.lblAplicar.Name = "lblAplicar"
-        Me.lblAplicar.Size = New System.Drawing.Size(75, 23)
-        Me.lblAplicar.TabIndex = 28
-        Me.lblAplicar.Text = "Aplicar"
-        Me.lblAplicar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.lblAplicar.UseCustomForeColor = True
-        Me.lblAplicar.UseSelectable = True
-        '
         'lblDesc
         '
         Me.lblDesc.AutoSize = True
-        Me.lblDesc.Location = New System.Drawing.Point(309, 181)
+        Me.lblDesc.Location = New System.Drawing.Point(320, 181)
         Me.lblDesc.Name = "lblDesc"
-        Me.lblDesc.Size = New System.Drawing.Size(31, 19)
+        Me.lblDesc.Size = New System.Drawing.Size(20, 19)
         Me.lblDesc.TabIndex = 29
-        Me.lblDesc.Text = "0 %"
+        Me.lblDesc.Text = "%"
         Me.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtPorcentaje
+        '
+        '
+        '
+        '
+        Me.txtPorcentaje.CustomButton.Image = Nothing
+        Me.txtPorcentaje.CustomButton.Location = New System.Drawing.Point(97, 1)
+        Me.txtPorcentaje.CustomButton.Name = ""
+        Me.txtPorcentaje.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtPorcentaje.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.txtPorcentaje.CustomButton.TabIndex = 1
+        Me.txtPorcentaje.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.txtPorcentaje.CustomButton.UseSelectable = True
+        Me.txtPorcentaje.CustomButton.Visible = False
+        Me.txtPorcentaje.Lines = New String(-1) {}
+        Me.txtPorcentaje.Location = New System.Drawing.Point(205, 181)
+        Me.txtPorcentaje.MaxLength = 2
+        Me.txtPorcentaje.Name = "txtPorcentaje"
+        Me.txtPorcentaje.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtPorcentaje.PromptText = "Del 0 al 30%"
+        Me.txtPorcentaje.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.txtPorcentaje.SelectedText = ""
+        Me.txtPorcentaje.SelectionLength = 0
+        Me.txtPorcentaje.SelectionStart = 0
+        Me.txtPorcentaje.ShortcutsEnabled = True
+        Me.txtPorcentaje.Size = New System.Drawing.Size(119, 23)
+        Me.txtPorcentaje.TabIndex = 30
+        Me.txtPorcentaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtPorcentaje.UseSelectable = True
+        Me.txtPorcentaje.WaterMark = "Del 0 al 30%"
+        Me.txtPorcentaje.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.txtPorcentaje.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        '
+        'btnAplicar
+        '
+        Me.btnAplicar.FontSize = MetroFramework.MetroButtonSize.Medium
+        Me.btnAplicar.Location = New System.Drawing.Point(344, 216)
+        Me.btnAplicar.Name = "btnAplicar"
+        Me.btnAplicar.Size = New System.Drawing.Size(74, 35)
+        Me.btnAplicar.TabIndex = 31
+        Me.btnAplicar.Text = "Aplicar"
+        Me.btnAplicar.UseSelectable = True
+        '
+        'btnSalir
+        '
+        Me.btnSalir.FontSize = MetroFramework.MetroButtonSize.Medium
+        Me.btnSalir.Location = New System.Drawing.Point(23, 216)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(74, 35)
+        Me.btnSalir.TabIndex = 32
+        Me.btnSalir.Text = "Salir"
+        Me.btnSalir.UseSelectable = True
         '
         'FrmDescuento
         '
@@ -147,15 +168,15 @@ Partial Class FrmDescuento
         Me.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
         Me.ClientSize = New System.Drawing.Size(441, 267)
         Me.ControlBox = False
+        Me.Controls.Add(Me.btnSalir)
+        Me.Controls.Add(Me.btnAplicar)
+        Me.Controls.Add(Me.txtPorcentaje)
         Me.Controls.Add(Me.lblDesc)
-        Me.Controls.Add(Me.lblAplicar)
-        Me.Controls.Add(Me.lblSalir)
         Me.Controls.Add(Me.MetroLabel3)
         Me.Controls.Add(Me.MetroLabel2)
         Me.Controls.Add(Me.MetroLabel1)
         Me.Controls.Add(Me.lblDescripcion)
         Me.Controls.Add(Me.NupPrecio)
-        Me.Controls.Add(Me.NupDescuento)
         Me.Controls.Add(Me.NupCantidad)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.KeyPreview = True
@@ -170,12 +191,12 @@ Partial Class FrmDescuento
     End Sub
     Friend WithEvents NupCantidad As System.Windows.Forms.NumericUpDown
     Friend WithEvents NupPrecio As System.Windows.Forms.NumericUpDown
-    Friend WithEvents NupDescuento As MetroFramework.Controls.MetroTrackBar
     Friend WithEvents lblDescripcion As MetroFramework.Controls.MetroLabel
     Friend WithEvents MetroLabel1 As MetroFramework.Controls.MetroLabel
     Friend WithEvents MetroLabel2 As MetroFramework.Controls.MetroLabel
     Friend WithEvents MetroLabel3 As MetroFramework.Controls.MetroLabel
-    Friend WithEvents lblSalir As MetroFramework.Controls.MetroLink
-    Friend WithEvents lblAplicar As MetroFramework.Controls.MetroLink
     Friend WithEvents lblDesc As MetroFramework.Controls.MetroLabel
+    Friend WithEvents txtPorcentaje As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents btnAplicar As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnSalir As MetroFramework.Controls.MetroButton
 End Class

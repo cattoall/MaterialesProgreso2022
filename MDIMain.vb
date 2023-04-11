@@ -1,6 +1,5 @@
-﻿Public Class MDIMain
-
-    Private lv_strVariables As String
+﻿Option Explicit On
+Public Class MDIMain
 
     Private Sub MDIMain_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         TssDate.Text = Now.ToLongDateString

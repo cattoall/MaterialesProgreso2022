@@ -887,7 +887,7 @@ Partial Class FrmFacturacion
         '
         Me.DateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.DateTimePicker3.Location = New System.Drawing.Point(19, 40)
-        Me.DateTimePicker3.MinimumSize = New System.Drawing.Size(4, 29)
+        Me.DateTimePicker3.MinimumSize = New System.Drawing.Size(0, 29)
         Me.DateTimePicker3.Name = "DateTimePicker3"
         Me.DateTimePicker3.Size = New System.Drawing.Size(145, 29)
         Me.DateTimePicker3.TabIndex = 29
@@ -1235,7 +1235,7 @@ Partial Class FrmFacturacion
         Me.Precio.MinimumWidth = 6
         Me.Precio.Name = "Precio"
         Me.Precio.ReadOnly = True
-        Me.Precio.Width = 124
+        Me.Precio.Width = 136
         '
         'Subtotal
         '
@@ -1432,7 +1432,7 @@ Partial Class FrmFacturacion
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle
-        Me.ClientSize = New System.Drawing.Size(963, 882)
+        Me.ClientSize = New System.Drawing.Size(932, 882)
         Me.Controls.Add(Me.btnUpdateUUID)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnAdd)

@@ -90,10 +90,10 @@
     End Sub
 
     Private Sub get_selected_customer()
-        idProveedor = MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value
+        idProveedor = CStr(MetroGrid1.Item(0, MetroGrid1.CurrentRow.Index).Value)
         Select Case Buscar_Proveedores
             Case "PROVEEDORES"
-                FrmHistoProveedores.txtCliente.Text = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
+                FrmHistoProveedores.txtCliente.Text = CStr(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
         End Select
         LimpiarObjetos()
         Close()

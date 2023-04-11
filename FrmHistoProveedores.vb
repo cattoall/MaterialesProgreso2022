@@ -15,7 +15,7 @@ Public Class FrmHistoProveedores
         load_layout_dgv_proveedor_histo(Me.DataGridView1)
 
         For i = 0 To DataGridView1.RowCount - 1
-            Label2.Text = CDbl(Label2.Text) + CDbl(DataGridView1.Item(2, i).Value)
+            Label2.Text = CStr(CDbl(Label2.Text) + CDbl(DataGridView1.Item(2, i).Value))
         Next
         Label2.Text = FormatCurrency(Label2.Text, 2)
     End Sub

@@ -58,6 +58,22 @@ Partial Class FrmDevTickets
         Me.TxtPedido_C = New System.Windows.Forms.TextBox()
         Me.MetroLabel10 = New MetroFramework.Controls.MetroLabel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.IdComp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.folio = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdProducto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.concepto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.subtotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clave_producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.precioCosto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.subtotalCosto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.numeroFactura = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClaveProducto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClaveUnidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TasaCero = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DGVDetalle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -92,7 +108,7 @@ Partial Class FrmDevTickets
         Me.CmdGenerar.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.export_16px
         Me.CmdGenerar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.CmdGenerar.Location = New System.Drawing.Point(457, 507)
-        Me.CmdGenerar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.CmdGenerar.Margin = New System.Windows.Forms.Padding(2)
         Me.CmdGenerar.Name = "CmdGenerar"
         Me.CmdGenerar.Size = New System.Drawing.Size(74, 23)
         Me.CmdGenerar.TabIndex = 91
@@ -121,6 +137,7 @@ Partial Class FrmDevTickets
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGVDetalle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DGVDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVDetalle.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdComp, Me.Id, Me.folio, Me.IdProducto, Me.concepto, Me.cantidad, Me.precio, Me.fecha, Me.subtotal, Me.clave_producto, Me.precioCosto, Me.subtotalCosto, Me.numeroFactura, Me.ClaveProducto, Me.ClaveUnidad, Me.TasaCero})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -146,6 +163,10 @@ Partial Class FrmDevTickets
         Me.DGVDetalle.RowHeadersWidth = 51
         Me.DGVDetalle.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DGVDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DGVDetalle.ShowCellErrors = False
+        Me.DGVDetalle.ShowCellToolTips = False
+        Me.DGVDetalle.ShowEditingIcon = False
+        Me.DGVDetalle.ShowRowErrors = False
         Me.DGVDetalle.Size = New System.Drawing.Size(969, 322)
         Me.DGVDetalle.TabIndex = 64
         '
@@ -157,7 +178,7 @@ Partial Class FrmDevTickets
         Me.Button2.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.close_window_16px
         Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button2.Location = New System.Drawing.Point(904, 15)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(2)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(70, 23)
         Me.Button2.TabIndex = 90
@@ -273,7 +294,7 @@ Partial Class FrmDevTickets
         Me.DTPFecha.Location = New System.Drawing.Point(270, 25)
         Me.DTPFecha.MinimumSize = New System.Drawing.Size(0, 29)
         Me.DTPFecha.Name = "DTPFecha"
-        Me.DTPFecha.Size = New System.Drawing.Size(111, 30)
+        Me.DTPFecha.Size = New System.Drawing.Size(111, 29)
         Me.DTPFecha.TabIndex = 68
         '
         'txtSubTotal_C
@@ -436,6 +457,116 @@ Partial Class FrmDevTickets
         Me.ToolTip1.InitialDelay = 50
         Me.ToolTip1.ReshowDelay = 10
         '
+        'IdComp
+        '
+        Me.IdComp.HeaderText = "IdComp"
+        Me.IdComp.Name = "IdComp"
+        Me.IdComp.ReadOnly = True
+        Me.IdComp.Visible = False
+        '
+        'Id
+        '
+        Me.Id.HeaderText = "Id"
+        Me.Id.Name = "Id"
+        Me.Id.ReadOnly = True
+        Me.Id.Visible = False
+        '
+        'folio
+        '
+        Me.folio.HeaderText = "folio"
+        Me.folio.Name = "folio"
+        Me.folio.ReadOnly = True
+        Me.folio.Width = 60
+        '
+        'IdProducto
+        '
+        Me.IdProducto.HeaderText = "IdProducto"
+        Me.IdProducto.Name = "IdProducto"
+        Me.IdProducto.ReadOnly = True
+        Me.IdProducto.Width = 80
+        '
+        'concepto
+        '
+        Me.concepto.HeaderText = "concepto"
+        Me.concepto.Name = "concepto"
+        Me.concepto.ReadOnly = True
+        Me.concepto.Width = 300
+        '
+        'cantidad
+        '
+        Me.cantidad.HeaderText = "cantidad"
+        Me.cantidad.Name = "cantidad"
+        Me.cantidad.Width = 80
+        '
+        'precio
+        '
+        Me.precio.HeaderText = "precio"
+        Me.precio.Name = "precio"
+        Me.precio.ReadOnly = True
+        '
+        'fecha
+        '
+        Me.fecha.HeaderText = "fecha"
+        Me.fecha.Name = "fecha"
+        Me.fecha.ReadOnly = True
+        Me.fecha.Visible = False
+        '
+        'subtotal
+        '
+        Me.subtotal.HeaderText = "subtotal"
+        Me.subtotal.Name = "subtotal"
+        Me.subtotal.ReadOnly = True
+        Me.subtotal.Width = 80
+        '
+        'clave_producto
+        '
+        Me.clave_producto.HeaderText = "clave_producto"
+        Me.clave_producto.Name = "clave_producto"
+        Me.clave_producto.ReadOnly = True
+        Me.clave_producto.Visible = False
+        '
+        'precioCosto
+        '
+        Me.precioCosto.HeaderText = "precioCosto"
+        Me.precioCosto.Name = "precioCosto"
+        Me.precioCosto.ReadOnly = True
+        Me.precioCosto.Visible = False
+        '
+        'subtotalCosto
+        '
+        Me.subtotalCosto.HeaderText = "subtotalCosto"
+        Me.subtotalCosto.Name = "subtotalCosto"
+        Me.subtotalCosto.ReadOnly = True
+        Me.subtotalCosto.Visible = False
+        '
+        'numeroFactura
+        '
+        Me.numeroFactura.HeaderText = "numeroFactura"
+        Me.numeroFactura.Name = "numeroFactura"
+        Me.numeroFactura.ReadOnly = True
+        Me.numeroFactura.Visible = False
+        '
+        'ClaveProducto
+        '
+        Me.ClaveProducto.HeaderText = "ClaveProducto"
+        Me.ClaveProducto.Name = "ClaveProducto"
+        Me.ClaveProducto.ReadOnly = True
+        Me.ClaveProducto.Width = 80
+        '
+        'ClaveUnidad
+        '
+        Me.ClaveUnidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ClaveUnidad.HeaderText = "ClaveUnidad"
+        Me.ClaveUnidad.Name = "ClaveUnidad"
+        Me.ClaveUnidad.ReadOnly = True
+        '
+        'TasaCero
+        '
+        Me.TasaCero.HeaderText = "TasaCero"
+        Me.TasaCero.Name = "TasaCero"
+        Me.TasaCero.ReadOnly = True
+        Me.TasaCero.Visible = False
+        '
         'FrmDevTickets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -488,4 +619,20 @@ End Sub
     Friend WithEvents DTPFecha As MetroFramework.Controls.MetroDateTime
     Friend WithEvents CmdGenerar As Button
     Friend WithEvents Button2 As Button
+    Friend WithEvents IdComp As DataGridViewTextBoxColumn
+    Friend WithEvents Id As DataGridViewTextBoxColumn
+    Friend WithEvents folio As DataGridViewTextBoxColumn
+    Friend WithEvents IdProducto As DataGridViewTextBoxColumn
+    Friend WithEvents concepto As DataGridViewTextBoxColumn
+    Friend WithEvents cantidad As DataGridViewTextBoxColumn
+    Friend WithEvents precio As DataGridViewTextBoxColumn
+    Friend WithEvents fecha As DataGridViewTextBoxColumn
+    Friend WithEvents subtotal As DataGridViewTextBoxColumn
+    Friend WithEvents clave_producto As DataGridViewTextBoxColumn
+    Friend WithEvents precioCosto As DataGridViewTextBoxColumn
+    Friend WithEvents subtotalCosto As DataGridViewTextBoxColumn
+    Friend WithEvents numeroFactura As DataGridViewTextBoxColumn
+    Friend WithEvents ClaveProducto As DataGridViewTextBoxColumn
+    Friend WithEvents ClaveUnidad As DataGridViewTextBoxColumn
+    Friend WithEvents TasaCero As DataGridViewTextBoxColumn
 End Class

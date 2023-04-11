@@ -1,5 +1,5 @@
 ﻿Public Class FrmGrupos
-    Public lv_idGrupo
+    Public lv_idGrupo As Integer
     Public lv_ValorAnterior As String
 
     Private Sub FrmGrupos_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
@@ -142,25 +142,25 @@
             Exit Sub
         End If
 
-        If txtFactorPublico.Text < 1 Or txtFactorPublico.Text > 100 Then
+        If CInt(txtFactorPublico.Text) < 1 Or CInt(txtFactorPublico.Text) > 100 Then
             MetroFramework.MetroMessageBox.Show(Me, "Porcentaje Invalido, favor de corregir el valor.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtFactorPublico.SelectAll()
             Exit Sub
         End If
 
-        If txtFactorP1.Text < 1 Or txtFactorP1.Text > 100 Then
+        If CInt(txtFactorP1.Text) < 1 Or CInt(txtFactorP1.Text) > 100 Then
             MetroFramework.MetroMessageBox.Show(Me, "Porcentaje Invalido, favor de corregir el valor.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtFactorP1.SelectAll()
             Exit Sub
         End If
 
-        If txtFactorP2.Text < 1 Or txtFactorP2.Text > 100 Then
+        If CInt(txtFactorP2.Text) < 1 Or CInt(txtFactorP2.Text) > 100 Then
             MetroFramework.MetroMessageBox.Show(Me, "Porcentaje Invalido, favor de corregir el valor.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtFactorP2.SelectAll()
             Exit Sub
         End If
 
-        If txtFactorP3.Text < 1 Or txtFactorP3.Text > 100 Then
+        If CInt(txtFactorP3.Text) < 1 Or CInt(txtFactorP3.Text) > 100 Then
             MetroFramework.MetroMessageBox.Show(Me, "Porcentaje Invalido, favor de corregir el valor.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtFactorP3.SelectAll()
             Exit Sub
@@ -171,11 +171,11 @@
             If Add_Update = False Then
                 strGrupos.IdComp = CompanyCode
                 strGrupos.descripcion = txtDescripcion.Text
-                strGrupos.factorCosto = txtFactorCosto.Text
-                strGrupos.factorPublico = txtFactorPublico.Text
-                strGrupos.factorP1 = txtFactorP1.Text
-                strGrupos.factorP2 = txtFactorP2.Text
-                strGrupos.factorP3 = txtFactorP3.Text
+                strGrupos.factorCosto = CDec(txtFactorCosto.Text)
+                strGrupos.factorPublico = CDec(txtFactorPublico.Text)
+                strGrupos.factorP1 = CDec(txtFactorP1.Text)
+                strGrupos.factorP2 = CDec(txtFactorP2.Text)
+                strGrupos.factorP3 = CDec(txtFactorP3.Text)
                 If DBModelo.InsertGrupos(strGrupos) Then
                     MetroFramework.MetroMessageBox.Show(Me, "Grupo creado correctamente.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Else
@@ -185,11 +185,11 @@
                 strGrupos = DBModelo.GetGroup(CInt(lv_idGrupo.ToString()))
                 If Not IsNothing(strGrupos) Then
                     strGrupos.descripcion = txtDescripcion.Text
-                    strGrupos.factorCosto = txtFactorCosto.Text
-                    strGrupos.factorPublico = txtFactorPublico.Text
-                    strGrupos.factorP1 = txtFactorP1.Text
-                    strGrupos.factorP2 = txtFactorP2.Text
-                    strGrupos.factorP3 = txtFactorP3.Text
+                    strGrupos.factorCosto = CDec(txtFactorCosto.Text)
+                    strGrupos.factorPublico = CDec(txtFactorPublico.Text)
+                    strGrupos.factorP1 = CDec(txtFactorP1.Text)
+                    strGrupos.factorP2 = CDec(txtFactorP2.Text)
+                    strGrupos.factorP3 = CDec(txtFactorP3.Text)
                     If DBModelo.UpdateGrupos(strGrupos) Then
                         If lv_ValorAnterior <> txtDescripcion.Text Then
                             DBModelo.UpdateGrupoProd(txtDescripcion.Text, lv_ValorAnterior)

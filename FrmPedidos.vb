@@ -92,10 +92,10 @@ Public Class FrmPedidos
     End Sub
 
     Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
-        LblPedido.Text  = Me.DataGridView1.Item(1, DataGridView1.CurrentRow.Index).Value
-        NoFactura       = Me.DataGridView1.Item(1, DataGridView1.CurrentRow.Index).Value
+        LblPedido.Text = CStr(DataGridView1.Item(1, DataGridView1.CurrentRow.Index).Value)
+        NoFactura = CStr(DataGridView1.Item(1, DataGridView1.CurrentRow.Index).Value)
 
-        Dim tPedidosDetails As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(NoFactura)
+        Dim tPedidosDetails As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(CInt(NoFactura))
         DataGridView2.Refresh()
         DataGridView2.DataSource = tPedidosDetails.ToList()
         ConfiguraGridDetail(DataGridView2)
@@ -172,7 +172,7 @@ Public Class FrmPedidos
         Dim lv_folioactual As Integer = 0
         Dim nuevo = 0
         Dim lv_resto = 0
-        Dim lIdCliente As Integer = DataGridView1.Item(9, DataGridView1.CurrentRow.Index).Value
+        Dim lIdCliente As Integer = CInt(DataGridView1.Item(9, DataGridView1.CurrentRow.Index).Value)
         Dim wFoliosTicket As tblFoliosTicket = New tblFoliosTicket
 
         If DataGridView1.Rows.Count = 0 Then
@@ -186,11 +186,11 @@ Public Class FrmPedidos
             Exit Sub
         End If
 
-        Dim folio_pedido As String = Me.DataGridView1.Item(1, DataGridView1.CurrentRow.Index).Value
+        Dim folio_pedido As String = CStr(DataGridView1.Item(1, DataGridView1.CurrentRow.Index).Value)
 
-        If Me.DataGridView1.Item(6, DataGridView1.CurrentRow.Index).Value = "CREDITO" Then
-            Dim wCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(folio_pedido, "PEDIDO", lIdCliente)
-            lv_resto = wCobrar.resto
+        If CStr(DataGridView1.Item(6, DataGridView1.CurrentRow.Index).Value) = "CREDITO" Then
+            Dim wCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(CInt(folio_pedido), "PEDIDO", lIdCliente)
+            lv_resto = CInt(wCobrar.resto)
             If lv_resto > 0 Then
                 MsgBox("Pedido " & folio_pedido & " aún tiene Saldo Pendiente!", MsgBoxStyle.Information, "Convertir Pedido a Ticket")
                 Limpia_Variables_SQL_y_Cierra_Conexion()
@@ -205,16 +205,16 @@ Public Class FrmPedidos
             wFoliosTicket.Year = Now.Year
             wFoliosTicket.IdTerminal = gv_terminal
             wFoliosTicket.DocType = "TICKET"
-            wFoliosTicket.FolioActual = 1
+            wFoliosTicket.FolioActual = CStr(1)
             If DBModelo.Insert_PV_FoliosTicketActual(wFoliosTicket) Then
                 lv_folio = 1
-                lv_folioactual = Val(gv_terminal.ToString & Now.Year.ToString & lv_folio.ToString)
+                lv_folioactual = CInt(gv_terminal & Now.Year & lv_folio)
             Else
                 MetroFramework.MetroMessageBox.Show(Me, "Error al intentar Crear registro en FoliosTicket", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
         Else
-            lv_folioactual = Val(gv_terminal.ToString & Now.Year.ToString & lv_folio.ToString)
+            lv_folioactual = CInt(gv_terminal & Now.Year & lv_folio)
             wFoliosTicket = DBModelo.Get_PV_FoliosTicket(Now.Year, gv_terminal, "TICKET")
         End If
 
@@ -223,15 +223,15 @@ Public Class FrmPedidos
 
         strVenta.IdComp = CompanyCode
         strVenta.nticket = lv_folioactual
-        strVenta.fecha = DateTime.Now.ToString("yyyy-MM-dd")
-        strVenta.SubTotal = CDbl(DataGridView1.Item(3, DataGridView1.CurrentRow.Index).Value)
-        strVenta.IVA = CDbl(DataGridView1.Item(4, DataGridView1.CurrentRow.Index).Value)
-        strVenta.total = CDbl(DataGridView1.Item(5, DataGridView1.CurrentRow.Index).Value)
+        strVenta.fecha = CType(Date.Now.ToString("yyyy-MM-dd"), Date?)
+        strVenta.SubTotal = CDec(DataGridView1.Item(3, DataGridView1.CurrentRow.Index).Value)
+        strVenta.IVA = CDec(DataGridView1.Item(4, DataGridView1.CurrentRow.Index).Value)
+        strVenta.total = CDec(DataGridView1.Item(5, DataGridView1.CurrentRow.Index).Value)
         strVenta.tipo = "CONTADO"
-        strVenta.usuario = DataGridView1.Item(7, DataGridView1.CurrentRow.Index).Value
+        strVenta.usuario = CStr(DataGridView1.Item(7, DataGridView1.CurrentRow.Index).Value)
         strVenta.cliente = "PUBLICO GENERAL"
         strVenta.idCliente = 0
-        strVenta.estado = DataGridView1.Item(10, DataGridView1.CurrentRow.Index).Value
+        strVenta.estado = CStr(DataGridView1.Item(10, DataGridView1.CurrentRow.Index).Value)
         strVenta.motivo = ""
         strVenta.numeroFactura = ""
 
@@ -241,11 +241,11 @@ Public Class FrmPedidos
             Exit Sub
         End If
 
-        Dim tTicketPedido As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(folio_pedido)
+        Dim tTicketPedido As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(CInt(folio_pedido))
 
         For Each wTicketPedido In tTicketPedido
             strTicket.IdComp = CompanyCode
-            strTicket.folio = lv_folioactual
+            strTicket.folio = CStr(lv_folioactual)
             strTicket.concepto = wTicketPedido.concepto
             strTicket.cantidad = wTicketPedido.cantidad
             strTicket.precio = wTicketPedido.precio
@@ -269,13 +269,13 @@ Public Class FrmPedidos
 
         MsgBox("Se generó el Ticket: ( " & lv_folioactual & " ), para el Pedido: ( " & folio_pedido & " )", MsgBoxStyle.Information, "Convertir Pedido a Ticket")
 
-        Dim wVentaPedido As tblVentaPedido = DBModelo.Get_PV_PedidosHeader(folio_pedido)
+        Dim wVentaPedido As tblVentaPedido = DBModelo.Get_PV_PedidosHeader(CInt(folio_pedido))
         If DBModelo.DeleteVentaPedido(wVentaPedido) = False Then
             MsgBox("Error al Eliminar Registro en tabla VENTA_PEDIDO", MsgBoxStyle.Critical, "Convertir Pedido a Ticket")
             Exit Sub
         End If
 
-        Dim tTicketPedidos As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(folio_pedido)
+        Dim tTicketPedidos As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(CInt(folio_pedido))
         For Each wTicPed In tTicketPedidos
             If DBModelo.DeleteTicketPedido(wTicPed) = False Then
                 MsgBox("Error al Eliminar Registro en tabla VENTA_PEDIDO", MsgBoxStyle.Critical, "Convertir Pedido a Ticket")
@@ -283,8 +283,8 @@ Public Class FrmPedidos
             End If
         Next
 
-        If Me.DataGridView1.Item(6, DataGridView1.CurrentRow.Index).Value = "CREDITO" Then
-            Dim wCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(folio_pedido, "PEDIDO", lIdCliente)
+        If CStr(DataGridView1.Item(6, DataGridView1.CurrentRow.Index).Value) = "CREDITO" Then
+            Dim wCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(CInt(folio_pedido), "PEDIDO", lIdCliente)
             If DBModelo.DeleteCobrar(wCobrar) = False Then
                 MsgBox("Error al Eliminar Registro en tabla COBRAR", MsgBoxStyle.Critical, "Convertir Pedido a Ticket")
                 Exit Sub
@@ -293,7 +293,7 @@ Public Class FrmPedidos
 
         lv_folio = lv_folio + 1
         If Not IsNothing(wFoliosTicket) Then
-            wFoliosTicket.FolioActual = lv_folio
+            wFoliosTicket.FolioActual = CStr(lv_folio)
             If DBModelo.Update_PV_FoliosTicketActual(wFoliosTicket) = False Then
                 MetroFramework.MetroMessageBox.Show(Me, "No se pudo Actualizar registro en la tabla FOLIOSTICKETS", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Error_Venta = False
@@ -308,7 +308,7 @@ Public Class FrmPedidos
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         If LblPedido.Text <> "" Then
-            Cancelar = 1
+            Cancelar = CStr(1)
             FrmCancelarPedido.ShowDialog()
             Cancelar = ""
             CmdVerPedidos_Click(sender, e)
@@ -324,7 +324,7 @@ Public Class FrmPedidos
                 lv_result = True
             End If
 
-            If ImprimeVenta(LblPedido.Text, lv_result, "PEDIDO", DataGridView1.Item(3, DataGridView1.CurrentRow.Index).Value, "0.00") = False Then
+            If ImprimeVenta(LblPedido.Text, lv_result, "PEDIDO", CStr(DataGridView1.Item(3, DataGridView1.CurrentRow.Index).Value), "0.00") = False Then
                 MsgBox("Error al Generar la Impresión del Pedido", MsgBoxStyle.Information, "Re-Impresiones de Pedidos")
                 Limpia_Variables_SQL_y_Cierra_Conexion()
                 Exit Sub

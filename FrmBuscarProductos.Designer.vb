@@ -51,13 +51,13 @@ Partial Class FrmBuscarProductos
         Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(114, 30)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(185, 52)
         '
         'AToolStripMenuItem
         '
         Me.AToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.copy
         Me.AToolStripMenuItem.Name = "AToolStripMenuItem"
-        Me.AToolStripMenuItem.Size = New System.Drawing.Size(113, 26)
+        Me.AToolStripMenuItem.Size = New System.Drawing.Size(184, 26)
         Me.AToolStripMenuItem.Text = "Copiar"
         '
         'ToolTip1
@@ -125,9 +125,9 @@ Partial Class FrmBuscarProductos
         '
         '
         Me.txtDescripcion.CustomButton.Image = Nothing
-        Me.txtDescripcion.CustomButton.Location = New System.Drawing.Point(208, 1)
+        Me.txtDescripcion.CustomButton.Location = New System.Drawing.Point(278, 1)
         Me.txtDescripcion.CustomButton.Name = ""
-        Me.txtDescripcion.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtDescripcion.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtDescripcion.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtDescripcion.CustomButton.TabIndex = 1
         Me.txtDescripcion.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -157,9 +157,9 @@ Partial Class FrmBuscarProductos
         '
         '
         Me.txtCodigoBarras.CustomButton.Image = Nothing
-        Me.txtCodigoBarras.CustomButton.Location = New System.Drawing.Point(208, 1)
+        Me.txtCodigoBarras.CustomButton.Location = New System.Drawing.Point(278, 1)
         Me.txtCodigoBarras.CustomButton.Name = ""
-        Me.txtCodigoBarras.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtCodigoBarras.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtCodigoBarras.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtCodigoBarras.CustomButton.TabIndex = 1
         Me.txtCodigoBarras.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -189,9 +189,9 @@ Partial Class FrmBuscarProductos
         '
         '
         Me.txtClave.CustomButton.Image = Nothing
-        Me.txtClave.CustomButton.Location = New System.Drawing.Point(208, 1)
+        Me.txtClave.CustomButton.Location = New System.Drawing.Point(278, 1)
         Me.txtClave.CustomButton.Name = ""
-        Me.txtClave.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtClave.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtClave.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtClave.CustomButton.TabIndex = 1
         Me.txtClave.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -221,9 +221,9 @@ Partial Class FrmBuscarProductos
         '
         '
         Me.txtGrupo.CustomButton.Image = Nothing
-        Me.txtGrupo.CustomButton.Location = New System.Drawing.Point(208, 1)
+        Me.txtGrupo.CustomButton.Location = New System.Drawing.Point(278, 1)
         Me.txtGrupo.CustomButton.Name = ""
-        Me.txtGrupo.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtGrupo.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtGrupo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtGrupo.CustomButton.TabIndex = 1
         Me.txtGrupo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -253,9 +253,9 @@ Partial Class FrmBuscarProductos
         '
         '
         Me.txtFamilia.CustomButton.Image = Nothing
-        Me.txtFamilia.CustomButton.Location = New System.Drawing.Point(208, 1)
+        Me.txtFamilia.CustomButton.Location = New System.Drawing.Point(278, 1)
         Me.txtFamilia.CustomButton.Name = ""
-        Me.txtFamilia.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtFamilia.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtFamilia.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtFamilia.CustomButton.TabIndex = 1
         Me.txtFamilia.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -285,9 +285,9 @@ Partial Class FrmBuscarProductos
         '
         '
         Me.txtLinea.CustomButton.Image = Nothing
-        Me.txtLinea.CustomButton.Location = New System.Drawing.Point(208, 1)
+        Me.txtLinea.CustomButton.Location = New System.Drawing.Point(278, 1)
         Me.txtLinea.CustomButton.Name = ""
-        Me.txtLinea.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtLinea.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtLinea.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtLinea.CustomButton.TabIndex = 1
         Me.txtLinea.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -332,7 +332,7 @@ Partial Class FrmBuscarProductos
         Me.Button1.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.close_window_16px
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button1.Location = New System.Drawing.Point(726, 76)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 81
@@ -347,7 +347,7 @@ Partial Class FrmBuscarProductos
         Me.btnAdd.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.add_16px
         Me.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnAdd.Location = New System.Drawing.Point(646, 76)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(2)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
         Me.btnAdd.TabIndex = 80

@@ -217,7 +217,7 @@ Partial Class frmGenerarAbonoWendy
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(612, 313)
+        Me.ClientSize = New System.Drawing.Size(612, 335)
         Me.Controls.Add(Me.LblVenta)
         Me.Controls.Add(Me.txtventa)
         Me.Controls.Add(Me.GroupBox1)

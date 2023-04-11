@@ -7,7 +7,7 @@
     Private Sub FrmBuscarClientesVentas_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
         If txtBusqueda.Text = "" And MetroGrid1.RowCount = 0 Then
-            idClienteVenta = 0
+            idClienteVenta = CStr(0)
             Exit Sub
         End If
 
@@ -182,125 +182,128 @@
 
         If MetroGrid1.RowCount > 0 Then
 
-            idClienteVenta = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-            idClientePago = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
+            idClienteVenta = CStr(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
+            idClientePago = CStr(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
             Select Case Buscar_Clientes
                 Case "VENTAS"
-                    FrmPuntoDeVenta.txtCliente.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
-                    FrmPuntoDeVenta.txtDomicilio.Text = MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value & " # " &
-                                                        MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value & " Colonia " &
-                                                        MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value & " Ciudad " &
-                                                        MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value & " Estado " &
-                                                        MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value & " Código Postal " &
-                                                        MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value & " R.F.C. " &
-                                                        MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value
-                    Cliente_diasCredito = MetroGrid1.Item(17, MetroGrid1.CurrentRow.Index).Value
-                    Cliente_limite = MetroGrid1.Item(18, MetroGrid1.CurrentRow.Index).Value
-                    FrmPuntoDeVenta.txtIdCliente.Text = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
+                    FrmPuntoDeVenta.txtCliente.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value)
+                    FrmPuntoDeVenta.txtDomicilio.Text = CStr(MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value) & " # " &
+                                                        CStr(MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value) & " Colonia " &
+                                                        CStr(MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value) & " Ciudad " &
+                                                        CStr(MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value) & " Estado " &
+                                                        CStr(MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value) & " Código Postal " &
+                                                        CStr(MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value) & " R.F.C. " &
+                                                        CStr(MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value)
+                    Cliente_diasCredito = CDbl(MetroGrid1.Item(17, MetroGrid1.CurrentRow.Index).Value)
+                    Cliente_limite = CDbl(MetroGrid1.Item(18, MetroGrid1.CurrentRow.Index).Value)
+                    FrmPuntoDeVenta.txtIdCliente.Text = CStr(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
                 Case "PAGOS"
-                    FrmCuentasPorCobrar.TxtCliente.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
-                    FrmCuentasPorCobrar.TxtDomicilio.Text = MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value & " # " &
-                                                        MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value & " Colonia " &
-                                                        MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value & " Ciudad " &
-                                                        MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value & " Estado " &
-                                                        MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value & " Código Postal " &
-                                                        MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value & " R.F.C. " &
-                                                        MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value
+                    FrmCuentasPorCobrar.TxtCliente.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value)
+                    FrmCuentasPorCobrar.TxtDomicilio.Text = CStr(MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value) & " # " &
+                                                        CStr(MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value) & " Colonia " &
+                                                        CStr(MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value) & " Ciudad " &
+                                                        CStr(MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value) & " Estado " &
+                                                        CStr(MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value) & " Código Postal " &
+                                                        CStr(MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value) & " R.F.C. " &
+                                                        CStr(MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value)
+                    Cliente_diasCredito = CDbl(MetroGrid1.Item(17, MetroGrid1.CurrentRow.Index).Value)
                 Case "PAGOS_WENDY"
-                    FrmCuentasPorCobrar.TxtCliente.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
-                    FrmCuentasPorCobrar.TxtDomicilio.Text = MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value & " # " &
-                                                        MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value & " Colonia " &
-                                                        MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value & " Ciudad " &
-                                                        MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value & " Estado " &
-                                                        MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value & " Código Postal " &
-                                                        MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value & " R.F.C. " &
-                                                        MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value
+                    FrmCuentasPorCobrar.TxtCliente.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value)
+                    FrmCuentasPorCobrar.TxtDomicilio.Text = CStr(MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value) & " # " &
+                                                        CStr(MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value) & " Colonia " &
+                                                        CStr(MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value) & " Ciudad " &
+                                                        CStr(MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value) & " Estado " &
+                                                        CStr(MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value) & " Código Postal " &
+                                                        CStr(MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value) & " R.F.C. " &
+                                                        CStr(MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value)
+                    Cliente_diasCredito = CDbl(MetroGrid1.Item(17, MetroGrid1.CurrentRow.Index).Value)
                 Case "HISTORIAL"
-                    FrmHistorialCliente.txtCliente.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
+                    FrmHistorialCliente.txtCliente.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value)
 
                 Case "LINEAS"
-                    FrmListadoDePreciosPorLinea.txtcliente.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
-                    idClienteVenta = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-                    precio_linea = MetroGrid1.Item(16, MetroGrid1.CurrentRow.Index).Value
+                    FrmListadoDePreciosPorLinea.txtcliente.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value)
+                    idClienteVenta = CStr(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
+                    precio_linea = CStr(MetroGrid1.Item(16, MetroGrid1.CurrentRow.Index).Value)
                 Case "FACTURAS"
-                    FrmFacturacion.txtnombre.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtdirecion.Text = MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtcolonia.Text = MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtestado.Text = MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtcp.Text = MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.TxtRFC.Text = MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtNumero.Text = MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtCiudad.Text = MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value
-                    FrmFacturacion.txtEmail.Text = MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value
+                    FrmFacturacion.txtnombre.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value)
+                    FrmFacturacion.txtdirecion.Text = CStr(MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value)
+                    FrmFacturacion.txtcolonia.Text = CStr(MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value)
+                    FrmFacturacion.txtestado.Text = CStr(MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value)
+                    FrmFacturacion.txtcp.Text = CStr(MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value)
+                    FrmFacturacion.TxtRFC.Text = CStr(MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value)
+                    FrmFacturacion.txtNumero.Text = CStr(MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value)
+                    FrmFacturacion.txtCiudad.Text = CStr(MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value)
+                    FrmFacturacion.txtEmail.Text = CStr(MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value)
 
-                    If MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                        FrmFacturacion.CmbCredito.SelectedIndex = FrmFacturacion.CmbCredito.FindString(MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value)
+                    If CStr(MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                        FrmFacturacion.CmbCredito.SelectedIndex = FrmFacturacion.CmbCredito.FindString(CStr(MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value))
                     Else
                         FrmFacturacion.CmbCredito.SelectedIndex = -1
                     End If
 
-                    If MetroGrid1.Item(22, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                        FrmFacturacion.txtCuenta.Text = MetroGrid1.Item(22, MetroGrid1.CurrentRow.Index).Value
+                    If CStr(MetroGrid1.Item(22, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                        FrmFacturacion.txtCuenta.Text = CStr(MetroGrid1.Item(22, MetroGrid1.CurrentRow.Index).Value)
                     Else
                         FrmFacturacion.txtCuenta.Clear()
                     End If
 
-                    If MetroGrid1.Item(23, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                        FrmFacturacion.CmbBanco.SelectedIndex = FrmFacturacion.CmbBanco.FindString(MetroGrid1.Item(23, MetroGrid1.CurrentRow.Index).Value)
+                    If CStr(MetroGrid1.Item(23, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                        FrmFacturacion.CmbBanco.SelectedIndex = FrmFacturacion.CmbBanco.FindString(CStr(MetroGrid1.Item(23, MetroGrid1.CurrentRow.Index).Value))
                     Else
                         FrmFacturacion.CmbBanco.SelectedIndex = -1
                     End If
 
-                    If MetroGrid1.Item(24, MetroGrid1.CurrentRow.Index).Value = 1 Then
+                    If CInt(MetroGrid1.Item(24, MetroGrid1.CurrentRow.Index).Value) = 1 Then
                         FrmFacturacion.ChkTasaCero.Checked = True
                     Else
                         FrmFacturacion.ChkTasaCero.Checked = False
                     End If
 
-                    If MetroGrid1.Item(20, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                        FrmFacturacion.CmbMetodoPago.SelectedIndex = FrmFacturacion.CmbMetodoPago.FindString(MetroGrid1.Item(20, MetroGrid1.CurrentRow.Index).Value)
+                    If CStr(MetroGrid1.Item(20, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                        FrmFacturacion.CmbMetodoPago.SelectedIndex = FrmFacturacion.CmbMetodoPago.FindString(CStr(MetroGrid1.Item(20, MetroGrid1.CurrentRow.Index).Value))
                     Else
                         FrmFacturacion.CmbMetodoPago.SelectedIndex = -1
                     End If
 
-                    If MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                        FrmFacturacion.CmdFormaPago.SelectedIndex = FrmFacturacion.CmdFormaPago.FindString(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value)
+                    If CStr(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                        FrmFacturacion.CmdFormaPago.SelectedIndex = FrmFacturacion.CmdFormaPago.FindString(CStr(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value))
                     Else
                         FrmFacturacion.CmdFormaPago.SelectedIndex = -1
                     End If
 
-                    If MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                        FrmFacturacion.CmbUsoCDFI.SelectedIndex = FrmFacturacion.CmbUsoCDFI.FindString(MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value)
+                    If CStr(MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                        FrmFacturacion.CmbUsoCDFI.SelectedIndex = FrmFacturacion.CmbUsoCDFI.FindString(CStr(MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value))
                     Else
                         FrmFacturacion.CmbUsoCDFI.SelectedIndex = -1
                     End If
-
-                    FrmFacturacion.txtRFR.Text = MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value
+                    UsoCDFI = CStr(MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value)
+                    FrmFacturacion.txtRFR.Text = CStr(MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value)
 
                 Case "COMPLEMENTO"
-                    frmComplementoPago.txtNombre.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value & " " & MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
-                    frmComplementoPago.txtDirecion.Text = MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value
-                    frmComplementoPago.txtColonia.Text = MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value
-                    frmComplementoPago.txtEstado.Text = MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value
-                    frmComplementoPago.txtCP.Text = MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value
-                    frmComplementoPago.TxtRFC.Text = MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value
-                    frmComplementoPago.txtNumero.Text = MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value
-                    frmComplementoPago.txtCiudad.Text = MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value
-                    frmComplementoPago.txtEmail.Text = MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value
+                    frmComplementoPago.txtNombre.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value) & " " & CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value)
+                    frmComplementoPago.txtDirecion.Text = CStr(MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value)
+                    frmComplementoPago.txtColonia.Text = CStr(MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value)
+                    frmComplementoPago.txtEstado.Text = CStr(MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value)
+                    frmComplementoPago.txtCP.Text = CStr(MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value)
+                    frmComplementoPago.TxtRFC.Text = CStr(MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value)
+                    frmComplementoPago.txtNumero.Text = CStr(MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value)
+                    frmComplementoPago.txtCiudad.Text = CStr(MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value)
+                    frmComplementoPago.txtEmail.Text = CStr(MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value)
                     If IsDBNull(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value) Then
                         frmComplementoPago.CmdFormaPago.SelectedIndex = -1
                         gv_formapago = -1
-                    ElseIf MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value = "" Then
+                    ElseIf CStr(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value) = "" Then
                         frmComplementoPago.CmdFormaPago.SelectedIndex = -1
                         gv_formapago = -1
                     Else
-                        FormaPago = MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value
-                        frmComplementoPago.CmdFormaPago.SelectedIndex = frmComplementoPago.CmdFormaPago.FindString(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value)
+                        FormaPago = CStr(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value)
+                        frmComplementoPago.CmdFormaPago.SelectedIndex = frmComplementoPago.CmdFormaPago.FindString(CStr(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value))
                         gv_formapago = frmComplementoPago.CmdFormaPago.SelectedIndex
                     End If
-                    frmComplementoPago.txtRFR.Text = MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value
+                    frmComplementoPago.txtRFR.Text = CStr(MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value)
             End Select
-            idTipoPrecioCliente = MetroGrid1.Item(16, MetroGrid1.CurrentRow.Index).Value
+            idTipoPrecioCliente = CStr(MetroGrid1.Item(16, MetroGrid1.CurrentRow.Index).Value)
+            idClientePago = CStr(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
             MetroGrid1.Refresh()
             LimpiarObjetos()
             Close()

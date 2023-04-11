@@ -25,15 +25,14 @@ Partial Class FrmPuntoDeVenta
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmPuntoDeVenta))
         Me.MetroPanel1 = New MetroFramework.Controls.MetroPanel()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.btnBuscarC = New System.Windows.Forms.Button()
+        Me.btnBuscarP = New System.Windows.Forms.Button()
+        Me.btnDescuento = New System.Windows.Forms.Button()
+        Me.btnCobrar = New System.Windows.Forms.Button()
         Me.MetroLabel6 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel7 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
@@ -46,8 +45,6 @@ Partial Class FrmPuntoDeVenta
         Me.txtTotal = New MetroFramework.Controls.MetroTextBox()
         Me.txtIVA = New MetroFramework.Controls.MetroTextBox()
         Me.txtSubTotal = New MetroFramework.Controls.MetroTextBox()
-        Me.lblCobrar = New MetroFramework.Controls.MetroLink()
-        Me.lblDescuento = New MetroFramework.Controls.MetroLink()
         Me.CmbTipoVenta = New MetroFramework.Controls.MetroComboBox()
         Me.CmbDocto = New MetroFramework.Controls.MetroComboBox()
         Me.MetroLabel2 = New MetroFramework.Controls.MetroLabel()
@@ -57,9 +54,8 @@ Partial Class FrmPuntoDeVenta
         Me.txtProducto = New MetroFramework.Controls.MetroTextBox()
         Me.txtDomicilio = New MetroFramework.Controls.MetroTextBox()
         Me.txtCliente = New MetroFramework.Controls.MetroTextBox()
-        Me.lblBuscarC = New MetroFramework.Controls.MetroLink()
-        Me.lblBuscarP = New MetroFramework.Controls.MetroLink()
-        Me.MetroGrid1 = New MetroFramework.Controls.MetroGrid()
+        Me.ImgLogo = New System.Windows.Forms.PictureBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Ctd = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdProducto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripción = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -73,17 +69,20 @@ Partial Class FrmPuntoDeVenta
         Me.STCosto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ClvProd = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ClvUnidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TasCero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ImgLogo = New System.Windows.Forms.PictureBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.TasaCero = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MetroPanel1.SuspendLayout()
-        CType(Me.MetroGrid1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImgLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MetroPanel1
         '
         Me.MetroPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.MetroPanel1.Controls.Add(Me.DataGridView1)
+        Me.MetroPanel1.Controls.Add(Me.btnBuscarC)
+        Me.MetroPanel1.Controls.Add(Me.btnBuscarP)
+        Me.MetroPanel1.Controls.Add(Me.btnDescuento)
+        Me.MetroPanel1.Controls.Add(Me.btnCobrar)
         Me.MetroPanel1.Controls.Add(Me.MetroLabel6)
         Me.MetroPanel1.Controls.Add(Me.MetroLabel7)
         Me.MetroPanel1.Controls.Add(Me.MetroLabel8)
@@ -96,8 +95,6 @@ Partial Class FrmPuntoDeVenta
         Me.MetroPanel1.Controls.Add(Me.txtTotal)
         Me.MetroPanel1.Controls.Add(Me.txtIVA)
         Me.MetroPanel1.Controls.Add(Me.txtSubTotal)
-        Me.MetroPanel1.Controls.Add(Me.lblCobrar)
-        Me.MetroPanel1.Controls.Add(Me.lblDescuento)
         Me.MetroPanel1.Controls.Add(Me.CmbTipoVenta)
         Me.MetroPanel1.Controls.Add(Me.CmbDocto)
         Me.MetroPanel1.Controls.Add(Me.MetroLabel2)
@@ -107,9 +104,6 @@ Partial Class FrmPuntoDeVenta
         Me.MetroPanel1.Controls.Add(Me.txtProducto)
         Me.MetroPanel1.Controls.Add(Me.txtDomicilio)
         Me.MetroPanel1.Controls.Add(Me.txtCliente)
-        Me.MetroPanel1.Controls.Add(Me.lblBuscarC)
-        Me.MetroPanel1.Controls.Add(Me.lblBuscarP)
-        Me.MetroPanel1.Controls.Add(Me.MetroGrid1)
         Me.MetroPanel1.Controls.Add(Me.ImgLogo)
         Me.MetroPanel1.HorizontalScrollbarBarColor = True
         Me.MetroPanel1.HorizontalScrollbarHighlightOnWheel = False
@@ -121,6 +115,97 @@ Partial Class FrmPuntoDeVenta
         Me.MetroPanel1.VerticalScrollbarBarColor = True
         Me.MetroPanel1.VerticalScrollbarHighlightOnWheel = False
         Me.MetroPanel1.VerticalScrollbarSize = 10
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Desktop
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ctd, Me.IdProducto, Me.Descripción, Me.PU, Me.SubTotal, Me.Código, Me.Desc, Me.PUDesc, Me.STDesc, Me.PreCost, Me.STCosto, Me.ClvProd, Me.ClvUnidad, Me.TasaCero})
+        Me.DataGridView1.Location = New System.Drawing.Point(19, 227)
+        Me.DataGridView1.MultiSelect = False
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DataGridView1.ShowCellErrors = False
+        Me.DataGridView1.ShowCellToolTips = False
+        Me.DataGridView1.ShowEditingIcon = False
+        Me.DataGridView1.ShowRowErrors = False
+        Me.DataGridView1.Size = New System.Drawing.Size(1172, 311)
+        Me.DataGridView1.TabIndex = 2
+        '
+        'btnBuscarC
+        '
+        Me.btnBuscarC.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBuscarC.Image = CType(resources.GetObject("btnBuscarC.Image"), System.Drawing.Image)
+        Me.btnBuscarC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnBuscarC.Location = New System.Drawing.Point(714, 24)
+        Me.btnBuscarC.Name = "btnBuscarC"
+        Me.btnBuscarC.Size = New System.Drawing.Size(75, 30)
+        Me.btnBuscarC.TabIndex = 157
+        Me.btnBuscarC.Text = "(F6)"
+        Me.btnBuscarC.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnBuscarC.UseVisualStyleBackColor = True
+        '
+        'btnBuscarP
+        '
+        Me.btnBuscarP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBuscarP.Image = CType(resources.GetObject("btnBuscarP.Image"), System.Drawing.Image)
+        Me.btnBuscarP.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnBuscarP.Location = New System.Drawing.Point(714, 168)
+        Me.btnBuscarP.Name = "btnBuscarP"
+        Me.btnBuscarP.Size = New System.Drawing.Size(75, 23)
+        Me.btnBuscarP.TabIndex = 156
+        Me.btnBuscarP.Text = "(F2)"
+        Me.btnBuscarP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnBuscarP.UseVisualStyleBackColor = True
+        '
+        'btnDescuento
+        '
+        Me.btnDescuento.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDescuento.Image = CType(resources.GetObject("btnDescuento.Image"), System.Drawing.Image)
+        Me.btnDescuento.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnDescuento.Location = New System.Drawing.Point(985, 155)
+        Me.btnDescuento.Name = "btnDescuento"
+        Me.btnDescuento.Size = New System.Drawing.Size(100, 66)
+        Me.btnDescuento.TabIndex = 5
+        Me.btnDescuento.Text = "(F8)"
+        Me.btnDescuento.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnDescuento.UseVisualStyleBackColor = True
+        '
+        'btnCobrar
+        '
+        Me.btnCobrar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCobrar.Image = CType(resources.GetObject("btnCobrar.Image"), System.Drawing.Image)
+        Me.btnCobrar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnCobrar.Location = New System.Drawing.Point(1091, 155)
+        Me.btnCobrar.Name = "btnCobrar"
+        Me.btnCobrar.Size = New System.Drawing.Size(100, 66)
+        Me.btnCobrar.TabIndex = 6
+        Me.btnCobrar.Text = " (F9)"
+        Me.btnCobrar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnCobrar.UseVisualStyleBackColor = True
         '
         'MetroLabel6
         '
@@ -380,26 +465,6 @@ Partial Class FrmPuntoDeVenta
         Me.txtSubTotal.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.txtSubTotal.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
-        'lblCobrar
-        '
-        Me.lblCobrar.Location = New System.Drawing.Point(1116, 198)
-        Me.lblCobrar.Name = "lblCobrar"
-        Me.lblCobrar.Size = New System.Drawing.Size(75, 23)
-        Me.lblCobrar.TabIndex = 141
-        Me.lblCobrar.Text = "Cobrar (F9)"
-        Me.lblCobrar.UseCustomForeColor = True
-        Me.lblCobrar.UseSelectable = True
-        '
-        'lblDescuento
-        '
-        Me.lblDescuento.Location = New System.Drawing.Point(899, 198)
-        Me.lblDescuento.Name = "lblDescuento"
-        Me.lblDescuento.Size = New System.Drawing.Size(111, 23)
-        Me.lblDescuento.TabIndex = 140
-        Me.lblDescuento.Text = "Descuento % (F8)"
-        Me.lblDescuento.UseCustomForeColor = True
-        Me.lblDescuento.UseSelectable = True
-        '
         'CmbTipoVenta
         '
         Me.CmbTipoVenta.FormattingEnabled = True
@@ -409,7 +474,7 @@ Partial Class FrmPuntoDeVenta
         Me.CmbTipoVenta.Name = "CmbTipoVenta"
         Me.CmbTipoVenta.PromptText = "Tipo de Venta"
         Me.CmbTipoVenta.Size = New System.Drawing.Size(124, 29)
-        Me.CmbTipoVenta.TabIndex = 139
+        Me.CmbTipoVenta.TabIndex = 4
         Me.CmbTipoVenta.UseSelectable = True
         '
         'CmbDocto
@@ -421,7 +486,7 @@ Partial Class FrmPuntoDeVenta
         Me.CmbDocto.Name = "CmbDocto"
         Me.CmbDocto.PromptText = "Documento"
         Me.CmbDocto.Size = New System.Drawing.Size(124, 29)
-        Me.CmbDocto.TabIndex = 138
+        Me.CmbDocto.TabIndex = 3
         Me.CmbDocto.UseSelectable = True
         '
         'MetroLabel2
@@ -510,7 +575,7 @@ Partial Class FrmPuntoDeVenta
         Me.txtProducto.SelectionStart = 0
         Me.txtProducto.ShortcutsEnabled = True
         Me.txtProducto.Size = New System.Drawing.Size(480, 23)
-        Me.txtProducto.TabIndex = 133
+        Me.txtProducto.TabIndex = 1
         Me.txtProducto.UseSelectable = True
         Me.txtProducto.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.txtProducto.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
@@ -581,187 +646,6 @@ Partial Class FrmPuntoDeVenta
         Me.txtCliente.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.txtCliente.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
-        'lblBuscarC
-        '
-        Me.lblBuscarC.Location = New System.Drawing.Point(716, 24)
-        Me.lblBuscarC.Name = "lblBuscarC"
-        Me.lblBuscarC.Size = New System.Drawing.Size(75, 23)
-        Me.lblBuscarC.TabIndex = 130
-        Me.lblBuscarC.Text = "Buscar (F6)"
-        Me.lblBuscarC.UseCustomForeColor = True
-        Me.lblBuscarC.UseSelectable = True
-        '
-        'lblBuscarP
-        '
-        Me.lblBuscarP.Location = New System.Drawing.Point(716, 168)
-        Me.lblBuscarP.Name = "lblBuscarP"
-        Me.lblBuscarP.Size = New System.Drawing.Size(75, 23)
-        Me.lblBuscarP.TabIndex = 129
-        Me.lblBuscarP.Text = "Buscar (F2)"
-        Me.lblBuscarP.UseCustomForeColor = True
-        Me.lblBuscarP.UseSelectable = True
-        '
-        'MetroGrid1
-        '
-        Me.MetroGrid1.AllowUserToAddRows = False
-        Me.MetroGrid1.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        Me.MetroGrid1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.MetroGrid1.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.MetroGrid1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.MetroGrid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
-        Me.MetroGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.MetroGrid1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.MetroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.MetroGrid1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ctd, Me.IdProducto, Me.Descripción, Me.PU, Me.SubTotal, Me.Código, Me.Desc, Me.PUDesc, Me.STDesc, Me.PreCost, Me.STCosto, Me.ClvProd, Me.ClvUnidad, Me.TasCero})
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.MetroGrid1.DefaultCellStyle = DataGridViewCellStyle9
-        Me.MetroGrid1.EnableHeadersVisualStyles = False
-        Me.MetroGrid1.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.MetroGrid1.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.MetroGrid1.Location = New System.Drawing.Point(19, 227)
-        Me.MetroGrid1.Name = "MetroGrid1"
-        Me.MetroGrid1.ReadOnly = True
-        Me.MetroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.MetroGrid1.RowHeadersDefaultCellStyle = DataGridViewCellStyle10
-        Me.MetroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.MetroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.MetroGrid1.Size = New System.Drawing.Size(1172, 311)
-        Me.MetroGrid1.TabIndex = 119
-        '
-        'Ctd
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Ctd.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Ctd.HeaderText = "Ctd"
-        Me.Ctd.Name = "Ctd"
-        Me.Ctd.ReadOnly = True
-        Me.Ctd.Width = 60
-        '
-        'IdProducto
-        '
-        Me.IdProducto.HeaderText = "IdProducto"
-        Me.IdProducto.Name = "IdProducto"
-        Me.IdProducto.ReadOnly = True
-        Me.IdProducto.Visible = False
-        Me.IdProducto.Width = 84
-        '
-        'Descripción
-        '
-        Me.Descripción.HeaderText = "Descripción"
-        Me.Descripción.Name = "Descripción"
-        Me.Descripción.ReadOnly = True
-        Me.Descripción.Width = 350
-        '
-        'PU
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.PU.DefaultCellStyle = DataGridViewCellStyle4
-        Me.PU.HeaderText = "P.U."
-        Me.PU.Name = "PU"
-        Me.PU.ReadOnly = True
-        Me.PU.Width = 120
-        '
-        'SubTotal
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.SubTotal.DefaultCellStyle = DataGridViewCellStyle5
-        Me.SubTotal.HeaderText = "SubTotal"
-        Me.SubTotal.Name = "SubTotal"
-        Me.SubTotal.ReadOnly = True
-        Me.SubTotal.Width = 120
-        '
-        'Código
-        '
-        Me.Código.HeaderText = "Código"
-        Me.Código.Name = "Código"
-        Me.Código.ReadOnly = True
-        Me.Código.Width = 120
-        '
-        'Desc
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Desc.DefaultCellStyle = DataGridViewCellStyle6
-        Me.Desc.HeaderText = "Desc (-%)"
-        Me.Desc.Name = "Desc"
-        Me.Desc.ReadOnly = True
-        Me.Desc.Width = 120
-        '
-        'PUDesc
-        '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.PUDesc.DefaultCellStyle = DataGridViewCellStyle7
-        Me.PUDesc.HeaderText = "P.U. (-%)"
-        Me.PUDesc.Name = "PUDesc"
-        Me.PUDesc.ReadOnly = True
-        Me.PUDesc.Width = 120
-        '
-        'STDesc
-        '
-        Me.STDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.STDesc.DefaultCellStyle = DataGridViewCellStyle8
-        Me.STDesc.HeaderText = "S.T. (-%)"
-        Me.STDesc.Name = "STDesc"
-        Me.STDesc.ReadOnly = True
-        '
-        'PreCost
-        '
-        Me.PreCost.HeaderText = "Precio Costo"
-        Me.PreCost.Name = "PreCost"
-        Me.PreCost.ReadOnly = True
-        Me.PreCost.Visible = False
-        '
-        'STCosto
-        '
-        Me.STCosto.HeaderText = "SubTotal Costo"
-        Me.STCosto.Name = "STCosto"
-        Me.STCosto.ReadOnly = True
-        Me.STCosto.Visible = False
-        '
-        'ClvProd
-        '
-        Me.ClvProd.HeaderText = "ClvProd"
-        Me.ClvProd.Name = "ClvProd"
-        Me.ClvProd.ReadOnly = True
-        Me.ClvProd.Visible = False
-        '
-        'ClvUnidad
-        '
-        Me.ClvUnidad.HeaderText = "ClvUnidad"
-        Me.ClvUnidad.Name = "ClvUnidad"
-        Me.ClvUnidad.ReadOnly = True
-        Me.ClvUnidad.Visible = False
-        '
-        'TasCero
-        '
-        Me.TasCero.HeaderText = "Tasa Cero"
-        Me.TasCero.Name = "TasCero"
-        Me.TasCero.ReadOnly = True
-        Me.TasCero.Visible = False
-        '
         'ImgLogo
         '
         Me.ImgLogo.BackColor = System.Drawing.Color.Transparent
@@ -780,6 +664,104 @@ Partial Class FrmPuntoDeVenta
         Me.ToolTip1.InitialDelay = 50
         Me.ToolTip1.ReshowDelay = 10
         '
+        'Ctd
+        '
+        Me.Ctd.HeaderText = "Ctd"
+        Me.Ctd.Name = "Ctd"
+        Me.Ctd.ReadOnly = True
+        Me.Ctd.Width = 60
+        '
+        'IdProducto
+        '
+        Me.IdProducto.HeaderText = "IdProducto"
+        Me.IdProducto.Name = "IdProducto"
+        Me.IdProducto.ReadOnly = True
+        Me.IdProducto.Visible = False
+        '
+        'Descripción
+        '
+        Me.Descripción.HeaderText = "Descripción"
+        Me.Descripción.Name = "Descripción"
+        Me.Descripción.ReadOnly = True
+        Me.Descripción.Width = 350
+        '
+        'PU
+        '
+        Me.PU.HeaderText = "P.U."
+        Me.PU.Name = "PU"
+        Me.PU.ReadOnly = True
+        Me.PU.Width = 120
+        '
+        'SubTotal
+        '
+        Me.SubTotal.HeaderText = "SubTotal"
+        Me.SubTotal.Name = "SubTotal"
+        Me.SubTotal.ReadOnly = True
+        Me.SubTotal.Width = 120
+        '
+        'Código
+        '
+        Me.Código.HeaderText = "Código"
+        Me.Código.Name = "Código"
+        Me.Código.ReadOnly = True
+        Me.Código.Width = 120
+        '
+        'Desc
+        '
+        Me.Desc.HeaderText = "(-%)"
+        Me.Desc.Name = "Desc"
+        Me.Desc.ReadOnly = True
+        Me.Desc.Width = 120
+        '
+        'PUDesc
+        '
+        Me.PUDesc.HeaderText = "P.U. (-%)"
+        Me.PUDesc.Name = "PUDesc"
+        Me.PUDesc.ReadOnly = True
+        Me.PUDesc.Width = 120
+        '
+        'STDesc
+        '
+        Me.STDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.STDesc.HeaderText = "S.T. (-%)"
+        Me.STDesc.Name = "STDesc"
+        Me.STDesc.ReadOnly = True
+        '
+        'PreCost
+        '
+        Me.PreCost.HeaderText = "PreCost"
+        Me.PreCost.Name = "PreCost"
+        Me.PreCost.ReadOnly = True
+        Me.PreCost.Visible = False
+        '
+        'STCosto
+        '
+        Me.STCosto.HeaderText = "STCosto"
+        Me.STCosto.Name = "STCosto"
+        Me.STCosto.ReadOnly = True
+        Me.STCosto.Visible = False
+        '
+        'ClvProd
+        '
+        Me.ClvProd.HeaderText = "ClvProd"
+        Me.ClvProd.Name = "ClvProd"
+        Me.ClvProd.ReadOnly = True
+        Me.ClvProd.Visible = False
+        '
+        'ClvUnidad
+        '
+        Me.ClvUnidad.HeaderText = "ClvUnidad"
+        Me.ClvUnidad.Name = "ClvUnidad"
+        Me.ClvUnidad.ReadOnly = True
+        Me.ClvUnidad.Visible = False
+        '
+        'TasaCero
+        '
+        Me.TasaCero.HeaderText = "TasaCero"
+        Me.TasaCero.Name = "TasaCero"
+        Me.TasaCero.ReadOnly = True
+        Me.TasaCero.Visible = False
+        '
         'FrmPuntoDeVenta
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -795,7 +777,7 @@ Partial Class FrmPuntoDeVenta
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MetroPanel1.ResumeLayout(False)
         Me.MetroPanel1.PerformLayout()
-        CType(Me.MetroGrid1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ImgLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -804,12 +786,9 @@ Partial Class FrmPuntoDeVenta
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents MetroPanel1 As MetroFramework.Controls.MetroPanel
     Friend WithEvents ToolTip1 As ToolTip
-    Friend WithEvents MetroGrid1 As MetroFramework.Controls.MetroGrid
     Friend WithEvents lblTipoDeVetna As Label
     Friend WithEvents ImgLogo As PictureBox
     Friend WithEvents lblDocumento As Label
-    Friend WithEvents lblBuscarP As MetroFramework.Controls.MetroLink
-    Friend WithEvents lblBuscarC As MetroFramework.Controls.MetroLink
     Friend WithEvents txtCliente As MetroFramework.Controls.MetroTextBox
     Friend WithEvents txtDomicilio As MetroFramework.Controls.MetroTextBox
     Friend WithEvents txtProducto As MetroFramework.Controls.MetroTextBox
@@ -819,8 +798,6 @@ Partial Class FrmPuntoDeVenta
     Friend WithEvents MetroLabel1 As MetroFramework.Controls.MetroLabel
     Friend WithEvents txtIdCliente As MetroFramework.Controls.MetroTextBox
     Friend WithEvents lblIdCliente As MetroFramework.Controls.MetroLabel
-    Friend WithEvents lblDescuento As MetroFramework.Controls.MetroLink
-    Friend WithEvents lblCobrar As MetroFramework.Controls.MetroLink
     Friend WithEvents txtTotalTasaCero As MetroFramework.Controls.MetroTextBox
     Friend WithEvents txtIVATasaCero As MetroFramework.Controls.MetroTextBox
     Friend WithEvents txtSubTotalTasaCero As MetroFramework.Controls.MetroTextBox
@@ -833,6 +810,11 @@ Partial Class FrmPuntoDeVenta
     Friend WithEvents MetroLabel5 As MetroFramework.Controls.MetroLabel
     Friend WithEvents MetroLabel4 As MetroFramework.Controls.MetroLabel
     Friend WithEvents MetroLabel3 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents btnCobrar As Button
+    Friend WithEvents btnDescuento As Button
+    Friend WithEvents btnBuscarP As Button
+    Friend WithEvents btnBuscarC As Button
+    Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Ctd As DataGridViewTextBoxColumn
     Friend WithEvents IdProducto As DataGridViewTextBoxColumn
     Friend WithEvents Descripción As DataGridViewTextBoxColumn
@@ -846,5 +828,5 @@ Partial Class FrmPuntoDeVenta
     Friend WithEvents STCosto As DataGridViewTextBoxColumn
     Friend WithEvents ClvProd As DataGridViewTextBoxColumn
     Friend WithEvents ClvUnidad As DataGridViewTextBoxColumn
-    Friend WithEvents TasCero As DataGridViewTextBoxColumn
+    Friend WithEvents TasaCero As DataGridViewTextBoxColumn
 End Class

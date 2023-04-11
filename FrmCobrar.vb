@@ -38,7 +38,7 @@
                 e.Handled = False
             End If
         Else
-            If e.KeyChar = "." And txtPago.Text.Contains(".") Then e.KeyChar = "" 'Check for Duplicate and Create Null if Yes   
+            If e.KeyChar = "." And txtPago.Text.Contains(".") Then e.KeyChar = CChar("") 'Check for Duplicate and Create Null if Yes   
             e.Handled = False
         End If
     End Sub
@@ -48,7 +48,7 @@
         lv_pago = Val(txtPago.Text)
 
         If lv_monto > 0 Then
-            lblcambio.Text = Math.Abs(lv_monto - lv_pago)
+            lblcambio.Text = CStr(Math.Abs(lv_monto - lv_pago))
         End If
 
     End Sub
@@ -66,10 +66,10 @@
         If lv_pago >= lv_monto Then
             txtPago.SelectAll()
             lv_resultado = lv_pago - lv_monto
-            lblcambio.Text = lv_resultado
+            lblcambio.Text = CStr(lv_resultado)
             Cambio = lblcambio.Text.ToString
             PV_Contado_Cambio = lblcambio.Text.ToString
-            PV_Contado_Paga = lv_pago
+            PV_Contado_Paga = CStr(lv_pago)
             PagoContadoEfectuado = True
             Close()
         ElseIf lv_pago < lv_monto Then

@@ -13,7 +13,7 @@ Public Class frmCancelacion
             Exit Sub
         End If
 
-        If CancelaFactura_CFDI(NoFactura, FechaFactura) Then
+        If CancelaFactura_CFDI(CInt(NoFactura), FechaFactura) Then
             If CancelaPago Then
                 MsgBox(("Complemento de Pago " & NoPago & " Ha sido cancelado ante el SAT."), MsgBoxStyle.Information, "Cancelación de Complemento de Pago")
             Else

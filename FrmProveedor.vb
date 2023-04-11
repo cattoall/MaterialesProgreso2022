@@ -1,6 +1,6 @@
 ﻿
 Public Class FrmProveedor
-    Public lv_idProveedor
+    Public lv_idProveedor As Integer
     Public lv_ValorAnterior As String
 
     Private Sub FrmProveedor_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown

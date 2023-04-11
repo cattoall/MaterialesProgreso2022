@@ -21,13 +21,13 @@
             txtCiudad.Text = strConfig.ciudadEmpresa
             txtRFC.Text = strConfig.rfcEmpresa
             txtPropietario.Text = strConfig.propietario
-            txtFactorIVA.Text = strConfig.factorIVA
-            txtCajaChica.Text = strConfig.cajaChica
-            txtFolioFactura.Text = strConfig.folioFactura
+            txtFactorIVA.Text = CStr(strConfig.factorIVA)
+            txtCajaChica.Text = CStr(strConfig.cajaChica)
+            txtFolioFactura.Text = CStr(strConfig.folioFactura)
             txtFacturas.Text = strConfig.InvoicePrinterName
             txtTickets.Text = strConfig.TicketPrinterName
-            txtNumFacturas.Text = strConfig.impresiones
-            txtTipoCambio.Text = strConfig.TipoCambio
+            txtNumFacturas.Text = CStr(strConfig.impresiones)
+            txtTipoCambio.Text = CStr(strConfig.TipoCambio)
             Config_On_Off = True
         Else
             MetroFramework.MetroMessageBox.Show(Me, "No Existe Configuración, Favor de Configurar ahora.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -160,18 +160,6 @@
         acceptableKey = False
     End Sub
 
-    Private Sub btnTecnoLite_Click(sender As System.Object, e As System.EventArgs) 
-        
-    End Sub
-
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim strConfig As tblConfiguracion = DBModelo.GetConfiguration(gv_terminal)
         If Not IsNothing(strConfig) Then
@@ -182,19 +170,19 @@
             strConfig.ciudadEmpresa = txtCiudad.Text
             strConfig.rfcEmpresa = txtRFC.Text
             strConfig.propietario = txtPropietario.Text
-            strConfig.factorIVA = txtFactorIVA.Text
-            strConfig.cajaChica = txtCajaChica.Text
-            strConfig.folioFactura = txtFolioFactura.Text
+            strConfig.factorIVA = CDec(txtFactorIVA.Text)
+            strConfig.cajaChica = CDec(txtCajaChica.Text)
+            strConfig.folioFactura = CLng(txtFolioFactura.Text)
             strConfig.InvoicePrinterName = txtFacturas.Text
             strConfig.TicketPrinterName = txtTickets.Text
-            strConfig.impresiones = txtNumFacturas.Text
-            strConfig.TipoCambio = txtTipoCambio.Text
+            strConfig.impresiones = CType(txtNumFacturas.Text, Integer?)
+            strConfig.TipoCambio = CType(txtTipoCambio.Text, Decimal?)
             If Config_On_Off = False Then
                 If DBModelo.Insert_Configuracion(strConfig) Then
-                    If TipoCambio <> txtTipoCambio.Text Then
+                    If TipoCambio <> CDbl(txtTipoCambio.Text) Then
                         btnTecnoLite.Visible = True
-                        GranTipoCambio = txtTipoCambio.Text
-                        TipoCambio = txtTipoCambio.Text
+                        GranTipoCambio = CDbl(txtTipoCambio.Text)
+                        TipoCambio = CDbl(txtTipoCambio.Text)
                     End If
                     TicketPrinterName = txtTickets.Text
                     InvocePrinterName = txtFacturas.Text
@@ -204,10 +192,10 @@
                 End If
             Else
                 If DBModelo.Update_Configuracion(strConfig) Then
-                    If TipoCambio <> txtTipoCambio.Text Then
+                    If TipoCambio <> CDbl(txtTipoCambio.Text) Then
                         btnTecnoLite.Visible = True
-                        GranTipoCambio = txtTipoCambio.Text
-                        TipoCambio = txtTipoCambio.Text
+                        GranTipoCambio = CDbl(txtTipoCambio.Text)
+                        TipoCambio = CDbl(txtTipoCambio.Text)
                     End If
                     TicketPrinterName = txtTickets.Text
                     InvocePrinterName = txtFacturas.Text
@@ -276,12 +264,12 @@
                     'Precio P3
                     PrecioP3_TL = (PrecioPublico_TL * (factorP3_TL / 100))
 
-                    strProductos.precioCosto = Math.Round(CDbl(PrecioCosto_TL), 2)
-                    strProductos.precioPublico = Math.Round(CDbl(PrecioPublico_TL), 2)
-                    strProductos.precioP1 = Math.Round(CDbl(PrecioP1_TL), 2)
-                    strProductos.precioP2 = Math.Round(CDbl(PrecioP2_TL), 2)
-                    strProductos.precioP3 = Math.Round(CDbl(PrecioP3_TL), 2)
-                    strProductos.TC = CDbl(GranTipoCambio)
+                    strProductos.precioCosto = CDec(Math.Round(PrecioCosto_TL, 2))
+                    strProductos.precioPublico = CDec(Math.Round(PrecioPublico_TL, 2))
+                    strProductos.precioP1 = CDec(Math.Round(PrecioP1_TL, 2))
+                    strProductos.precioP2 = CDec(Math.Round(PrecioP2_TL, 2))
+                    strProductos.precioP3 = CDec(Math.Round(PrecioP3_TL, 2))
+                    strProductos.TC = CDec(GranTipoCambio)
                     If DBModelo.UpdateProductos(strProductos) = False Then
                         l_updated = False
                     End If

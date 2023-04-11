@@ -15,7 +15,7 @@ Public Class DBModelo
 #Region "Seccion <<Proveedores>>"
     Shared Function GetProveedorAll() As List(Of tblProveedor)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblProveedors.Where(Function(i) i.IdComp = CompanyCode).ToList()
+            Return ctx.tblProveedors.Where(Function(i) i.IdComp = CompanyCode).OrderBy(Function(i) i.razonSocial).ToList()
         End Using
     End Function
 
@@ -100,10 +100,10 @@ Public Class DBModelo
         End Try
     End Function
 
-    Shared Function UpdateProveedor_Productos(ByVal RazonSocial_new As String, ByVal RazonSocial_old As String) As Boolean
+    Shared Function UpdateProveedor_Productos(ByVal RazonSocial_new As String, ByVal IdProveedor As Integer) As Boolean
         Try
             Using ctx As New pv_salvadorEntities1()
-                ctx.Database.ExecuteSqlCommand("UPDATE [pv_salvador].[productos] SET proveedor = {0} WHERE IdComp = {2} and idproveedor = {1}", RazonSocial_new, idProveedor, CompanyCode)
+                ctx.Database.ExecuteSqlCommand("UPDATE [pv_salvador].[productos] SET proveedor = {0} WHERE IdComp = {2} and idproveedor = {1}", RazonSocial_new, IdProveedor, CompanyCode)
             End Using
             Return True
         Catch ex As Exception
@@ -248,7 +248,7 @@ Public Class DBModelo
 #Region "Seccion <<UnidadDeMedida>>"
     Shared Function GetUoMAll() As List(Of tblUnidades)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblUnidades.Where(Function(i) i.IdComp = CompanyCode).ToList()
+            Return ctx.tblUnidades.Where(Function(i) i.IdComp = CompanyCode).OrderBy(Function(i) i.descripcion).ToList()
         End Using
     End Function
 
@@ -326,8 +326,8 @@ Public Class DBModelo
     Shared Function GetConfigProducts(ByVal Grupo As String, UsarTC As Integer) As List(Of tblProductos)
         Using ctx As New pv_salvadorEntities1()
             Return ctx.productos.Where(Function(i) i.IdComp = CompanyCode And
-                                                   i.grupo = UsarTC And
-                                                   i.UsarTC = UsarTC).ToList()
+                                                   CInt(i.grupo) = UsarTC And
+                                                   CInt(i.UsarTC) = UsarTC).ToList()
         End Using
     End Function
     Shared Function GetConfiguration(ByVal IdTerminal As String) As tblConfiguracion
@@ -402,7 +402,7 @@ Public Class DBModelo
                                               i.clave.Contains(ProdClave) And
                                               i.grupo.Contains(ProdGrp) And
                                               i.familia.Contains(ProdFam) And
-                                              i.linea.Contains(ProdLin)).ToList()
+                                              i.linea.Contains(ProdLin)).OrderBy(Function(i) i.descripcionProducto).ToList()
         End Using
     End Function
 
@@ -476,7 +476,7 @@ Public Class DBModelo
 
     Shared Function GetGroupsAll() As List(Of tblGrupos)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblGrupos.Where(Function(i) i.IdComp = CompanyCode).ToList()
+            Return ctx.tblGrupos.Where(Function(i) i.IdComp = CompanyCode).OrderBy(Function(i) i.descripcion).ToList()
         End Using
     End Function
 
@@ -614,7 +614,7 @@ Public Class DBModelo
 
     Shared Function GetFamiliaAll() As List(Of tblFamilia)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblFamilias.Where(Function(i) i.IdComp = CompanyCode).ToList()
+            Return ctx.tblFamilias.Where(Function(i) i.IdComp = CompanyCode).OrderBy(Function(i) i.descripcion).ToList()
         End Using
     End Function
 
@@ -658,7 +658,7 @@ Public Class DBModelo
 #Region "Seccion <<SubFamilias>>"
     Shared Function GetSubFamiliaAll() As List(Of tblSubFamilia)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblSubFamilias.Where(Function(i) i.IdComp = CompanyCode).ToList()
+            Return ctx.tblSubFamilias.Where(Function(i) i.IdComp = CompanyCode).OrderBy(Function(i) i.descripcion).ToList()
         End Using
     End Function
 
@@ -714,7 +714,7 @@ Public Class DBModelo
 #Region "Seccion <<Lineas>>"
     Shared Function GetLineaAll() As List(Of tblLinea)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblLineas.Where(Function(i) i.IdComp = CompanyCode).ToList()
+            Return ctx.tblLineas.Where(Function(i) i.IdComp = CompanyCode).OrderBy(Function(i) i.descripcion).ToList()
         End Using
     End Function
 
@@ -775,8 +775,8 @@ Public Class DBModelo
     Shared Function Get_PV_Producto(ByVal Clave_CodigoBarras As String) As tblProductos
         Using ctx As New pv_salvadorEntities1()
             Return ctx.productos.Where(Function(i) i.IdComp = CompanyCode And
-                                              i.clave.Contains(Clave_CodigoBarras) Or
-                                              i.codigoBarras.Contains(Clave_CodigoBarras)).FirstOrDefault
+                                              i.clave.Equals(Clave_CodigoBarras) Or
+                                              i.codigoBarras.Equals(Clave_CodigoBarras)).FirstOrDefault
         End Using
     End Function
 
@@ -784,7 +784,7 @@ Public Class DBModelo
         Dim p_output As Double = 0
         Try
             Using ctx As New pv_salvadorEntities1()
-                Dim rPagos As List(Of tblCobrar) = ctx.tblCobrars.Where(Function(i) i.IdComp = CompanyCode And i.claveCliente = IdCliente).ToList()
+                Dim rPagos As List(Of tblCobrar) = ctx.tblCobrars.Where(Function(i) i.IdComp = CompanyCode And CInt(i.claveCliente) = IdCliente).ToList()
                 For rP = 0 To rPagos.Count - 1
                     p_output = p_output + rPagos(rP).resto
                 Next
@@ -815,7 +815,7 @@ Public Class DBModelo
             Using ctx As New pv_salvadorEntities1()
                 Dim rFolio As tblFoliosTicket = ctx.tblFoliosTickets.Where(Function(i) i.IdComp = CompanyCode And i.Year = Año And i.IdTerminal = IdTerminal And i.DocType = TipoDocumento).FirstOrDefault
                 If Not IsNothing(rFolio) Then
-                    Return rFolio.FolioActual
+                    Return CInt(rFolio.FolioActual)
                 Else
                     Return 0
                 End If
@@ -974,6 +974,7 @@ Public Class DBModelo
             End Using
             Return True
         Catch ex As Exception
+            MsgBox(ex.ToString)
             Return False
         End Try
     End Function
@@ -998,19 +999,19 @@ Public Class DBModelo
 
     Shared Function Get_PV_PedidosDetalle(ByVal nPedido As Integer) As List(Of tblTicketPedido)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblTicketPedidoes.Where(Function(i) i.IdComp = CompanyCode And i.folio = nPedido).ToList()
+            Return ctx.tblTicketPedidoes.Where(Function(i) i.IdComp = CompanyCode And CInt(i.folio) = nPedido).ToList()
         End Using
     End Function
 
     Shared Function Get_PV_PedidosDetalleByFolioAndIdProducto(ByVal nPedido As Integer, ByVal IdProducto As Integer) As tblTicketPedido
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblTicketPedidoes.Where(Function(i) i.IdComp = CompanyCode And i.folio = nPedido And i.IdProducto = IdProducto).FirstOrDefault
+            Return ctx.tblTicketPedidoes.Where(Function(i) i.IdComp = CompanyCode And CInt(i.folio) = nPedido And i.IdProducto = IdProducto).FirstOrDefault
         End Using
     End Function
 
     Shared Function Get_PV_TicketsDetalleByFolioAndIdProducto(ByVal nPedido As Integer, ByVal IdProducto As Integer) As tblTicket
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblTickets.Where(Function(i) i.IdComp = CompanyCode And i.folio = nPedido And i.IdProducto = IdProducto).FirstOrDefault
+            Return ctx.tblTickets.Where(Function(i) i.IdComp = CompanyCode And CInt(i.folio) = nPedido And i.IdProducto = IdProducto).FirstOrDefault
         End Using
     End Function
 
@@ -1022,7 +1023,7 @@ Public Class DBModelo
 
     Shared Function Get_PV_TicketsDetalle(ByVal nTicket As Integer) As List(Of tblTicket)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblTickets.Where(Function(i) i.IdComp = CompanyCode And i.folio = nTicket).ToList()
+            Return ctx.tblTickets.Where(Function(i) i.IdComp = CompanyCode And CInt(i.folio) = nTicket).ToList()
         End Using
     End Function
 
@@ -1034,13 +1035,14 @@ Public Class DBModelo
 
     Shared Function Get_PV_CotizacionDetalle(ByVal nTicket As Integer) As List(Of tblTicketCotiza)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblTicketCotizas.Where(Function(i) i.IdComp = CompanyCode And i.folio = nTicket).ToList()
+            Return ctx.tblTicketCotizas.Where(Function(i) i.IdComp = CompanyCode And CInt(i.folio) = nTicket).ToList()
         End Using
     End Function
 
     Shared Function Get_VentasByDate(ByVal DateFrom As String, ByVal DateTo As String) As List(Of tblVenta)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblVentas.Where(Function(i) i.IdComp = CompanyCode And i.fecha >= DateFrom And i.fecha <= DateTo).ToList()
+            Return ctx.tblVentas.Where(Function(i) CBool(i.IdComp = CompanyCode And
+                                                   i.fecha >= CType(DateFrom, Date?) And i.fecha <= CType(DateTo, Date?))).ToList()
         End Using
     End Function
 
@@ -1052,7 +1054,10 @@ Public Class DBModelo
 
     Shared Function Get_TicketsByDateIdCliente(ByVal DateFrom As String, ByVal DateTo As String, ByVal IdCliente As Integer) As List(Of tblVenta)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblVentas.Where(Function(i) i.IdComp = CompanyCode And i.fecha >= DateFrom And i.fecha <= DateTo And i.idCliente = IdCliente).ToList()
+            Return ctx.tblVentas.Where(Function(i) CBool(i.IdComp = CompanyCode And
+                                           i.fecha >= CType(DateFrom, Date?) And
+                                           i.fecha <= CType(DateTo, Date?) And
+                                           i.idCliente = IdCliente)).ToList()
         End Using
     End Function
 
@@ -1064,19 +1069,27 @@ Public Class DBModelo
 
     Shared Function Get_PedidosByDateIdCliente(ByVal DateFrom As String, ByVal DateTo As String, ByVal IdCliente As Integer) As List(Of tblVentaPedido)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblVentaPedidoes.Where(Function(i) i.IdComp = CompanyCode And i.fecha >= DateFrom And i.fecha <= DateTo And i.idCliente = IdCliente).ToList()
+            Return ctx.tblVentaPedidoes.Where(Function(i) CBool(i.IdComp = CompanyCode And
+                                                  i.fecha >= CType(DateFrom, Date?) And
+                                                  i.fecha <= CType(DateTo, Date?) And
+                                                  i.idCliente = IdCliente)).ToList()
         End Using
     End Function
 
     Shared Function Get_CotizacionesByDateIdCliente(ByVal DateFrom As String, ByVal DateTo As String, ByVal IdCliente As Integer) As List(Of tblCotizacion)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblCotizacions.Where(Function(i) i.IdComp = CompanyCode And i.fecha >= DateFrom And i.fecha <= DateTo And i.idCliente = IdCliente).ToList()
+            Return ctx.tblCotizacions.Where(Function(i) CBool(i.IdComp = CompanyCode And
+                                                i.fecha >= CType(DateFrom, Date?) And
+                                                i.fecha <= CType(DateTo, Date?) And
+                                                i.idCliente = IdCliente)).ToList()
         End Using
     End Function
 
     Shared Function Get_PedidosByDate(ByVal DateFrom As String, ByVal DateTo As String) As List(Of tblVentaPedido)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblVentaPedidoes.Where(Function(i) i.IdComp = CompanyCode And i.fecha >= DateFrom And i.fecha <= DateTo).ToList()
+            Return ctx.tblVentaPedidoes.Where(Function(i) CBool(i.IdComp = CompanyCode And
+                                                  i.fecha >= CType(DateFrom, Date?) And
+                                                  i.fecha <= CType(DateTo, Date?))).ToList()
         End Using
     End Function
 
@@ -1130,19 +1143,28 @@ Public Class DBModelo
 #Region "Seccion <<Cobrar>>"
     Shared Function Get_CobrarTipoDoc(ByVal NoRemisión As Integer, ByVal TipoDocumento As String, ByVal IdCliente As Integer) As tblCobrar
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblCobrars.Where(Function(i) i.IdComp = CompanyCode And i.n_remision = NoRemisión And i.tipoDocumento = TipoDocumento And i.claveCliente = IdCliente).FirstOrDefault
+            Return ctx.tblCobrars.Where(Function(i) i.IdComp = CompanyCode And
+                                            i.n_remision = NoRemisión And
+                                            i.tipoDocumento = TipoDocumento And
+                                            CInt(i.claveCliente) = IdCliente).FirstOrDefault
         End Using
     End Function
 
     Shared Function Get_CobrarTipoDocWendy(ByVal NoRemisión As Integer, ByVal TipoDocumento As String, ByVal IdCliente As Integer) As tblWCobrar
         Using ctx As New pvEntities()
-            Return ctx.tblWCobrars.Where(Function(i) i.IdComp = "01" And i.n_remision = NoRemisión And i.tipoDocumento = TipoDocumento And i.claveCliente = IdCliente).FirstOrDefault
+            Return ctx.tblWCobrars.Where(Function(i) i.IdComp = "01" And
+                                             i.n_remision = NoRemisión And
+                                             i.tipoDocumento = TipoDocumento And
+                                             CInt(i.claveCliente) = IdCliente).FirstOrDefault
         End Using
     End Function
 
     Shared Function GetCobrarByDates(ByVal DateFrom As String, ByVal DateTo As String) As List(Of tblCobrar)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblCobrars.Where(Function(i) i.IdComp = CompanyCode And i.fecha_venta >= DateFrom And i.fecha_venta <= DateTo And i.resto <> 0).ToList()
+            Return ctx.tblCobrars.Where(Function(i) CBool(i.IdComp = CompanyCode And
+                                            i.fecha_venta >= CType(DateFrom, Date?) And
+                                            i.fecha_venta <= CType(DateTo, Date?) And
+                                            i.resto <> 0)).ToList()
         End Using
     End Function
 
@@ -1188,8 +1210,8 @@ Public Class DBModelo
     Shared Function GetCXC_ByIdCliente(ByVal IdCliente As Integer) As List(Of tblCobrar)
         Using ctx As New pv_salvadorEntities1()
 
-            Dim tCobrar As List(Of tblCobrar) = ctx.tblCobrars.Where(Function(i) i.IdComp = CompanyCode And i.claveCliente = IdCliente And i.resto <> 0).ToList()
-            Dim numeroFactura
+            Dim tCobrar As List(Of tblCobrar) = ctx.tblCobrars.Where(Function(i) i.IdComp = CompanyCode And CInt(i.claveCliente) = IdCliente And i.resto <> 0).ToList()
+            Dim numeroFactura As String
 
             For Each wCobrar In tCobrar
                 If wCobrar.tipoDocumento = "TICKET" Then
@@ -1229,8 +1251,8 @@ Public Class DBModelo
     Shared Function GetCXC_ByIdClienteWendy(ByVal IdCliente As Integer) As List(Of tblWCobrar)
         Using ctx As New pvEntities()
 
-            Dim tCobrar As List(Of tblWCobrar) = ctx.tblWCobrars.Where(Function(i) i.IdComp = "01" And i.claveCliente = IdCliente And i.resto <> 0).ToList()
-            Dim numeroFactura
+            Dim tCobrar As List(Of tblWCobrar) = ctx.tblWCobrars.Where(Function(i) i.IdComp = "01" And CInt(i.claveCliente) = IdCliente And i.resto <> 0).ToList()
+            Dim numeroFactura As String
 
             For Each wCobrar In tCobrar
                 If wCobrar.tipoDocumento = "TICKET" Then
@@ -1269,13 +1291,13 @@ Public Class DBModelo
 
     Shared Function GetCobrarByIdCliente(ByVal IdCliente As Integer) As List(Of tblCobrar)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblCobrars.Where(Function(i) i.IdComp = CompanyCode And i.claveCliente = IdCliente).ToList()
+            Return ctx.tblCobrars.Where(Function(i) i.IdComp = CompanyCode And CInt(i.claveCliente) = IdCliente).ToList()
         End Using
     End Function
 
     Shared Function GetCobrarByIdClienteWendy(ByVal IdCliente As Integer) As List(Of tblWCobrar)
         Using ctx As New pvEntities()
-            Return ctx.tblWCobrars.Where(Function(i) i.IdComp = "01" And i.claveCliente = IdCliente).ToList()
+            Return ctx.tblWCobrars.Where(Function(i) i.IdComp = "01" And CInt(i.claveCliente) = IdCliente).ToList()
         End Using
     End Function
 
@@ -1318,13 +1340,13 @@ Public Class DBModelo
 
     Shared Function GetHistorialPago_ByIdCliente(ByVal IdCliente As Integer) As List(Of tblHistorialPagos)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblHistorialPagos.Where(Function(i) i.IdComp = CompanyCode And i.claveCliente = IdCliente).ToList()
+            Return ctx.tblHistorialPagos.Where(Function(i) i.IdComp = CompanyCode And CInt(i.claveCliente) = IdCliente).ToList()
         End Using
     End Function
 
     Shared Function GetHistorialPago_ByIdClienteWendy(ByVal IdCliente As Integer) As List(Of tblWHistorialPagos)
         Using ctx As New pvEntities()
-            Return ctx.tblWHistorialPagos.Where(Function(i) i.IdComp = "01" And i.claveCliente = IdCliente).ToList()
+            Return ctx.tblWHistorialPagos.Where(Function(i) i.IdComp = "01" And CInt(i.claveCliente) = IdCliente).ToList()
         End Using
     End Function
 
@@ -1420,7 +1442,7 @@ Public Class DBModelo
             Using ctx As New pv_salvadorEntities1()
                 Dim rFolio As tblFolioFacturas = ctx.tblFolioFacturas.Where(Function(i) i.IdComp = CompanyCode And i.Year = Año And i.TipoComprobante = TipoDocumento).FirstOrDefault
                 If Not IsNothing(rFolio) Then
-                    Return rFolio.FolioActual
+                    Return CInt(rFolio.FolioActual)
                 Else
                     Return 0
                 End If
@@ -1463,7 +1485,7 @@ Public Class DBModelo
 
     Shared Function Get_PV_FacturaTotal(ByVal NumeroFactura As String) As tblFacturaTotal
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.n_factura = NumeroFactura).FirstOrDefault
+            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.n_factura = CDec(NumeroFactura)).FirstOrDefault
         End Using
     End Function
 
@@ -1525,13 +1547,13 @@ Public Class DBModelo
 #Region "Seccion <<Convertir Cotizaciones>>"
     Shared Function GetCotizaciones(ByVal DateFrom As Date, ByVal DateTo As Date) As List(Of tblCotizacion)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblCotizacions.Where(Function(i) i.fecha >= DateFrom And i.fecha <= DateTo).ToList()
+            Return ctx.tblCotizacions.Where(Function(i) CBool(i.fecha >= DateFrom And i.fecha <= DateTo)).ToList()
         End Using
     End Function
 
     Shared Function GetCotizacionesDet(ByVal Folio As Integer) As List(Of tblTicketCotiza)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblTicketCotizas.Where(Function(i) i.folio = Folio).ToList()
+            Return ctx.tblTicketCotizas.Where(Function(i) CInt(i.folio) = Folio).ToList()
         End Using
     End Function
 #End Region
@@ -1593,7 +1615,11 @@ Public Class DBModelo
 #Region "Seccion <<Facturación>>"
     Shared Function GetVentasMostrador(ByVal sFecha As String, ByVal iIdCliente As Integer, ByVal sNumeroFactura As String, ByVal sEstado As String) As List(Of tblVenta)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblVentas.Where(Function(i) i.IdComp = CompanyCode And i.fecha = sFecha And i.idCliente = iIdCliente And i.numeroFactura = sNumeroFactura And i.estado = sEstado).ToList()
+            Return ctx.tblVentas.Where(Function(i) CBool(i.IdComp = CompanyCode And
+                                           i.fecha = CDate(sFecha) And
+                                           i.idCliente = iIdCliente And
+                                           i.numeroFactura = sNumeroFactura And
+                                           i.estado = sEstado)).ToList()
         End Using
     End Function
 
@@ -1637,6 +1663,7 @@ Public Class DBModelo
             End Using
             Return True
         Catch ex As Exception
+            MsgBox(ex.ToString)
             Return False
         End Try
     End Function
@@ -1682,7 +1709,7 @@ Public Class DBModelo
 
     Shared Function GetFolioFactura(ByVal TipoComprobante As String, ByVal Year As String) As tblFoliofacturas
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblFolioFacturas.Where(Function(i) i.IdComp = CompanyCode And i.TipoComprobante = TipoComprobante And i.Year = Year).FirstOrDefault()
+            Return ctx.tblFolioFacturas.Where(Function(i) i.IdComp = CompanyCode And i.TipoComprobante = TipoComprobante And i.Year = CInt(Year)).FirstOrDefault()
         End Using
     End Function
 
@@ -1701,19 +1728,19 @@ Public Class DBModelo
 
     Shared Function GetIntervalFacturas(ByVal startDate As String, ByVal endDate As String) As List(Of tblFacturaTotal)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.fecha_venta >= startDate And i.fecha_venta <= endDate).ToList
+            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.fecha_venta >= CDate(startDate) And i.fecha_venta <= CDate(endDate)).ToList
         End Using
     End Function
 
     Shared Function GetNCIntervalFacturas(ByVal startDate As String, ByVal endDate As String) As List(Of tblNC)
         Using ctx As New pv_salvadorEntities1()
-            Return ctx.tblNCs.Where(Function(i) i.IdComp = CompanyCode And i.fecha_venta >= startDate And i.fecha_venta <= endDate).ToList
+            Return ctx.tblNCs.Where(Function(i) i.IdComp = CompanyCode And i.fecha_venta >= CDate(startDate) And i.fecha_venta <= CDate(endDate)).ToList
         End Using
     End Function
 
     Shared Function GetFacturaByN(ByVal nFactura As String) As List(Of tblFactura)
         Using ctx As New pv_salvadorEntities1
-            Return ctx.tblFacturas.Where(Function(i) i.IdComp = CompanyCode And i.n_factura = nFactura).ToList
+            Return ctx.tblFacturas.Where(Function(i) i.IdComp = CompanyCode And i.n_factura = CLng(nFactura)).ToList
         End Using
     End Function
 
@@ -1725,25 +1752,53 @@ Public Class DBModelo
 
     Shared Function GetFacturasHeaderByIdClienteFechaVenta(ByVal IdCliente As String, ByVal FechaVentaFrom As String, ByVal FechaVentaTo As String) As List(Of tblFacturaTotal)
         Using ctx As New pv_salvadorEntities1
-            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.id_cliente = IdCliente And i.fecha_venta >= FechaVentaFrom And i.fecha_venta <= FechaVentaTo).ToList
+            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And
+                                                  i.id_cliente = IdCliente And
+                                                  i.fecha_venta >= CDate(FechaVentaFrom) And
+                                                  i.fecha_venta <= CDate(FechaVentaTo)).ToList
         End Using
     End Function
 
-    Shared Function GetFacturasHeaderByIdClienteFechaVentaCancelados(ByVal IdCliente As String, ByVal FechaVentaFrom As String, ByVal FechaVentaTo As String, ByVal Cancelados As String) As List(Of tblFacturaTotal)
+    Shared Function GetFacturasHeaderByIdClienteFechaVentaCancelados(ByVal IdCliente As String, ByVal FechaVentaFrom As String, ByVal FechaVentaTo As String, ByVal Cancelados As Boolean) As List(Of tblFacturaTotal)
         Using ctx As New pv_salvadorEntities1
-            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.id_cliente = IdCliente And i.fecha_venta >= FechaVentaFrom And i.fecha_venta <= FechaVentaTo And i.Cancelada <> Cancelados).ToList
+            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And
+                                                  i.id_cliente = IdCliente And
+                                                  i.fecha_venta >= CDate(FechaVentaFrom) And
+                                                  i.fecha_venta <= CDate(FechaVentaTo)).ToList
+            'Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And
+            '                                      i.id_cliente = IdCliente And
+            '                                      i.fecha_venta >= CDate(FechaVentaFrom) And
+            '                                      i.fecha_venta <= CDate(FechaVentaTo) And
+            '                                      CBool(i.Cancelada) = Cancelados).ToList
         End Using
     End Function
 
-    Shared Function GetFacturasHeaderByIdClienteFechaVentaPagados(ByVal IdCliente As String, ByVal FechaVentaFrom As String, ByVal FechaVentaTo As String, ByVal Pagados As String) As List(Of tblFacturaTotal)
+    Shared Function GetFacturasHeaderByIdClienteFechaVentaPagados(ByVal IdCliente As String, ByVal FechaVentaFrom As String, ByVal FechaVentaTo As String, ByVal Pagados As Boolean) As List(Of tblFacturaTotal)
         Using ctx As New pv_salvadorEntities1
-            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.id_cliente = IdCliente And i.fecha_venta >= FechaVentaFrom And i.fecha_venta <= FechaVentaTo And i.ComproPago <> Pagados).ToList
+            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And
+                                                  i.id_cliente = IdCliente And
+                                                  i.fecha_venta >= CDate(FechaVentaFrom) And
+                                                  i.fecha_venta <= CDate(FechaVentaTo)).ToList
+            'Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And
+            '                                      i.id_cliente = IdCliente And
+            '                                      i.fecha_venta >= CDate(FechaVentaFrom) And
+            '                                      i.fecha_venta <= CDate(FechaVentaTo) And
+            '                                      CBool(i.ComproPago) = Pagados).ToList
         End Using
     End Function
 
-    Shared Function GetFacturasHeaderByIdClienteFechaVentaCanceladosPagados(ByVal IdCliente As String, ByVal FechaVentaFrom As String, ByVal FechaVentaTo As String, ByVal Cancelados As String, ByVal Pagados As String) As List(Of tblFacturaTotal)
+    Shared Function GetFacturasHeaderByIdClienteFechaVentaCanceladosPagados(ByVal IdCliente As String, ByVal FechaVentaFrom As String, ByVal FechaVentaTo As String, ByVal Cancelados As Boolean, ByVal Pagados As Boolean) As List(Of tblFacturaTotal)
         Using ctx As New pv_salvadorEntities1
-            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And i.id_cliente = IdCliente And i.fecha_venta >= FechaVentaFrom And i.fecha_venta <= FechaVentaTo And i.Cancelada <> Cancelados And i.ComproPago <> Pagados).ToList
+            Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And
+                                                  i.id_cliente = IdCliente And
+                                                  i.fecha_venta >= CDate(FechaVentaFrom) And
+                                                  i.fecha_venta <= CDate(FechaVentaTo)).ToList
+            'Return ctx.tblFacturaTotals.Where(Function(i) i.IdComp = CompanyCode And
+            '                                      i.id_cliente = IdCliente And
+            '                                      i.fecha_venta >= CDate(FechaVentaFrom) And
+            '                                      i.fecha_venta <= CDate(FechaVentaTo) And
+            '                                      CBool(i.Cancelada) = Cancelados And
+            '                                      CBool(i.ComproPago) = Pagados).ToList
         End Using
     End Function
 
@@ -1752,16 +1807,18 @@ Public Class DBModelo
             Dim facturas As List(Of tblFactura) =  GetFacturaByN(nFactura)
             Dim r As List(Of tblVenta) = New List(Of tblVenta)
             Dim nFolios As List(Of String) = New List(Of String)
-            Dim ind As Int16
-            For ind = 0 To facturas.LongCount - 1
-                Dim folio As String = facturas(ind).folio
+            Dim ind As Long
+            Dim iTo As Long = facturas.LongCount - 1
+            For ind = 0 To iTo
+                Dim folio As String = facturas(CInt(ind)).folio
                 If nFolios.Contains(folio) Then
-                    
+
                 Else
                     Dim temp As List(Of tblVenta) = ctx.tblVentas.Where(Function(i) i.IdComp = CompanyCode And i.nticket = CLng(folio)).ToList
-                    Dim inde As Int16
-                    For inde = 0 To temp.LongCount - 1
-                        r.Add(temp(inde))
+                    Dim inde As Long
+                    Dim iToe As Long = temp.LongCount - 1
+                    For inde = 0 To iToe
+                        r.Add(temp(CInt(inde)))
                     Next
                     nFolios.Add(folio)
                 End If
@@ -1789,7 +1846,7 @@ Public Class DBModelo
         End Try
     End Function
 
-    Shared Function GetNCDetalle(ByVal n_nc As String) As List(Of tblNcDetalle)
+    Shared Function GetNCDetalle(ByVal n_nc As Long) As List(Of tblNcDetalle)
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblNcDetalles.Where(Function(i) i.IdComp = CompanyCode And i.n_nc = n_nc).ToList
         End Using
@@ -1798,6 +1855,11 @@ Public Class DBModelo
     Shared Function GetFormaDePagoByKey(ByVal FormaDePagoKey As String) As tblFormaPago
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblFormaPagoes1.Where(Function(i) i.IdComp = CompanyCode And i.FormaPago.Contains(FormaDePagoKey)).FirstOrDefault
+        End Using
+    End Function
+    Shared Function GetRegimenFiscalByKey(ByVal RegimenFiscalKey As String) As tblRegimenFiscal
+        Using ctx As New pv_salvadorEntities1()
+            Return ctx.tblRegimenFiscals1.Where(Function(i) i.Clave.Equals(RegimenFiscalKey)).FirstOrDefault
         End Using
     End Function
 

@@ -48,7 +48,7 @@
     End Sub
 
     Private Sub MetroGrid1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellClick
-        DataGridTikect.DataSource = DBModelo.GetVenta(Me.MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
+        DataGridTikect.DataSource = DBModelo.GetVenta(CStr(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value))
 
         DataGridTikect.Columns(0).Visible    = False
         DataGridTikect.Columns(1).HeaderText = "No. Ticket"
@@ -66,16 +66,8 @@
         DataGridTikect.Columns(12).HeaderText = "No. Factura"
     End Sub
 
-    Private Sub mBtnExit_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim x As List(Of tblFacturaTotal) = DBModelo.GetIntervalFacturas(dtFechaInicial.Value.Date, dtFechaFinal.Value.Date)
+        Dim x As List(Of tblFacturaTotal) = DBModelo.GetIntervalFacturas(dtFechaInicial.Value.Date.ToString("yyyy-MM-dd"), dtFechaFinal.Value.Date.ToString("yyyy-MM-dd"))
         MetroGrid1.DataSource = x
         Console.WriteLine(MetroGrid1.Columns.Count.ToString)
 

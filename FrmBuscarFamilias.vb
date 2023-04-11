@@ -1,6 +1,6 @@
 ﻿
 Public Class FrmBuscarFamilias
-    Private lv_idFamilia
+    Private lv_idFamilia As Integer
     Public lv_ValorAnterior As String
 
     Private Sub LimpiarObjetos()
@@ -48,13 +48,9 @@ Public Class FrmBuscarFamilias
 
     Private Sub MetroGrid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellDoubleClick
         Add_Update = True
-        lv_idFamilia = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-        txtFamilia.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
-        lv_ValorAnterior = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
-    End Sub
-
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
-        
+        lv_idFamilia = CInt(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
+        txtFamilia.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
+        lv_ValorAnterior = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
     End Sub
 
     Private Sub btnCrear_Click(sender As Object, e As EventArgs) 

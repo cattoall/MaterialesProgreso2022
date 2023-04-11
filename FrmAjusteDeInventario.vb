@@ -1,4 +1,5 @@
-﻿Public Class FrmAjusteDeInventario
+﻿Option Explicit On
+Public Class FrmAjusteDeInventario
     Dim strProducto As New tblProductos
 
     Private Sub LimpiarObjetos()
@@ -38,7 +39,7 @@
                 e.Handled = False
             End If
         Else
-            If e.KeyChar = "." And TxtStockActual.Text.Contains(".") Then e.KeyChar = "" 'Check for Duplicate and Create Null if Yes   
+            If e.KeyChar = "." And TxtStockActual.Text.Contains(".") Then e.KeyChar = CChar("") 'Check for Duplicate and Create Null if Yes   
             e.Handled = False
         End If
     End Sub
@@ -52,12 +53,12 @@
         End If
 
         If RbtnAcumulativo.Checked = True Then
-            strProducto = DBModelo.GetProducts(ProductoID)
+            strProducto = DBModelo.GetProducts(CInt(ProductoID))
             If Not IsNothing(strProducto) Then
-                TxtStockActual.Text = strProducto.stock
+                TxtStockActual.Text = CStr(strProducto.stock)
                 ' Es nothing
             End If
-            
+
             'LblStock.Text = Format(CDbl(TxtStockActual.Text), "###,###,##0.00") & " +"
             TxtStockActual.Text = "0.00"
             TxtStockActual.Focus()
@@ -74,9 +75,9 @@
         End If
 
         If RbtnAcumulativo.Checked = True Then
-            strProducto = DBModelo.GetProducts(ProductoID)
+            strProducto = DBModelo.GetProducts(CInt(ProductoID))
             If Not IsNothing(strProducto) Then
-                TxtStockActual.Text = strProducto.stock
+                TxtStockActual.Text = CStr(strProducto.stock)
             End If
             LblStock.Text = Format(CDbl(TxtStockActual.Text), "###,###,##0.00") & " +"
             TxtStockActual.Text = "0.00"
@@ -106,9 +107,9 @@
             End If
 
             If RbtnAcumulativo.Checked = True Then
-                strProducto = DBModelo.GetProducts(ProductoID)
+                strProducto = DBModelo.GetProducts(CInt(ProductoID))
                 If Not IsNothing(strProducto) Then
-                    TxtStockActual.Text = strProducto.stock
+                    TxtStockActual.Text = CStr(strProducto.stock)
                 End If
 
                 LblStock.Text = Format(CDbl(TxtStockActual.Text), "###,###,##0.00") & " +"
@@ -119,16 +120,16 @@
         End If
     End Sub
 
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) 
-        
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs)
+
     End Sub
 
-    Private Sub btnCancelar_Click(sender As Object, e As EventArgs) 
-        
+    Private Sub btnCancelar_Click(sender As Object, e As EventArgs)
+
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
-        
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -139,11 +140,11 @@
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If RbtnActual.Checked = True Then
-            strProducto.stock = CDbl(TxtStockActual.Text)
+            strProducto.stock = CDec(TxtStockActual.Text)
         End If
 
         If RbtnAcumulativo.Checked = True Then
-            strProducto.stock = strProducto.stock + CDbl(TxtStockActual.Text)
+            strProducto.stock = strProducto.stock + CDec(TxtStockActual.Text)
         End If
         strProducto.IdComp = CompanyCode
         If DBModelo.UpdateProductos(strProducto) = False Then

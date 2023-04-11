@@ -51,10 +51,10 @@ Public Class FrmFolioAME
 
         newFolio.IdComp = CompanyCode
         newFolio.TipoComprobante = CmbTipoDoc.Text
-        newFolio.Year = lblYear.Text
+        newFolio.Year = CInt(lblYear.Text)
         newFolio.FolioInicial = CInt(TxtfolioIni.Text)
         newFolio.FolioFinal = CInt(txtFilioFin.Text)
-        newFolio.FolioActual = CInt(TxtFolioAct.Text)
+        newFolio.FolioActual = CInt(TxtfolioIni.Text)
 
         If mBtnSave.Text = "Modificar" Then
             If DBModelo.UpdateFolioFacturas(newFolio) Then

@@ -1,4 +1,5 @@
-﻿Public Class FrmBuscarClientes
+﻿Option Explicit On
+Public Class FrmBuscarClientes
     Private Sub LimpiarObjetos()
         MetroGrid1.Refresh()
         txtBusqueda.Clear()
@@ -45,9 +46,9 @@
 
         MetroGrid1.Columns(0).Visible = False
 
-        Dim i As Int16 = 0
+        Dim i As Integer = 0
 
-        For i = 0 To MetroGrid1.Columns.Count - 1 
+        For i = 0 To MetroGrid1.Columns.Count - 1
             MetroGrid1.Columns(i).ReadOnly = True
         Next
 
@@ -139,36 +140,28 @@
 
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
     Private Sub MetroGrid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellDoubleClick
         If MetroGrid1.RowCount > 0 Then
             Add_Update = True
 
-            FrmClientes.Text                    = "Modificar Cliente"
-            FrmClientes.lv_idCliente            = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtNombre.Text          = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtApat.Text            = MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtAmat.Text            = MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtDomicilio.Text       = MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtNumExterno.Text      = MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtColonia.Text         = MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtCiudad.Text          = MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtEstado.Text          = MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtCodigoPostal.Text    = MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtRFC.Text             = MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtTelFijo.Text         = MetroGrid1.Item(12, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtMovil.Text           = MetroGrid1.Item(13, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtEmail.Text           = MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value
-            FrmClientes.txtObs.Text = MetroGrid1.Item(15, MetroGrid1.CurrentRow.Index).Value
+            FrmClientes.Text = "Modificar Cliente"
+            FrmClientes.lv_idCliente = CInt(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtNombre.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtApat.Text = CStr(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtAmat.Text = CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtDomicilio.Text = CStr(MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtNumExterno.Text = CStr(MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtColonia.Text = CStr(MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtCiudad.Text = CStr(MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtEstado.Text = CStr(MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtCodigoPostal.Text = CStr(MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtRFC.Text = CStr(MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtTelFijo.Text = CStr(MetroGrid1.Item(12, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtMovil.Text = CStr(MetroGrid1.Item(13, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtEmail.Text = CStr(MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtObs.Text = CStr(MetroGrid1.Item(15, MetroGrid1.CurrentRow.Index).Value)
 
-            Select Case MetroGrid1.Item(16, MetroGrid1.CurrentRow.Index).Value
+            Select Case MetroGrid1.Item(16, MetroGrid1.CurrentRow.Index).Value.ToString
                 Case "Precio Publico"
                     FrmClientes.CmbPrecio.SelectedIndex = 0
                 Case "Precio Público"
@@ -180,18 +173,18 @@
                 Case "Precio P3"
                     FrmClientes.CmbPrecio.SelectedIndex = 3
             End Select
-            FrmClientes.txtCredito.Text = CInt(MetroGrid1.Item(17, MetroGrid1.CurrentRow.Index).Value)
-            FrmClientes.txtLimite.Text  = CDbl(MetroGrid1.Item(18, MetroGrid1.CurrentRow.Index).Value)
+            FrmClientes.txtCredito.Text = CStr(CInt(MetroGrid1.Item(17, MetroGrid1.CurrentRow.Index).Value))
+            FrmClientes.txtLimite.Text = CStr(CDbl(MetroGrid1.Item(18, MetroGrid1.CurrentRow.Index).Value))
 
-            If MetroGrid1.Item(19, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                FrmClientes.CmbTipo.SelectedIndex = FrmClientes.CmbTipo.FindString(MetroGrid1.Item(19, MetroGrid1.CurrentRow.Index).Value)
+            If CStr(MetroGrid1.Item(19, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                FrmClientes.CmbTipo.SelectedIndex = FrmClientes.CmbTipo.FindString(CStr(MetroGrid1.Item(19, MetroGrid1.CurrentRow.Index).Value))
             Else
                 FrmClientes.CmbTipo.SelectedIndex = -1
             End If
 
             If Not IsDBNull(MetroGrid1.Item(20, MetroGrid1.CurrentRow.Index).Value) Then
-                If MetroGrid1.Item(20, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                    FrmClientes.cmbMetodoPago.SelectedIndex = FrmClientes.cmbMetodoPago.FindString(MetroGrid1.Item(20, MetroGrid1.CurrentRow.Index).Value)
+                If CStr(MetroGrid1.Item(20, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                    FrmClientes.cmbMetodoPago.SelectedIndex = FrmClientes.cmbMetodoPago.FindString(CStr(MetroGrid1.Item(20, MetroGrid1.CurrentRow.Index).Value))
                 Else
                     FrmClientes.cmbMetodoPago.SelectedIndex = -1
                 End If
@@ -199,31 +192,31 @@
                 FrmClientes.cmbMetodoPago.SelectedIndex = -1
             End If
 
-            If MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                FrmClientes.CmbCredito.SelectedIndex = FrmClientes.CmbCredito.FindString(MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value)
+            If CStr(MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                FrmClientes.CmbCredito.SelectedIndex = FrmClientes.CmbCredito.FindString(CStr(MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value))
             Else
                 FrmClientes.CmbCredito.SelectedIndex = -1
             End If
 
-            If MetroGrid1.Item(22, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                FrmClientes.txtCuenta.Text = MetroGrid1.Item(22, MetroGrid1.CurrentRow.Index).Value
+            If CStr(MetroGrid1.Item(22, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                FrmClientes.txtCuenta.Text = CStr(MetroGrid1.Item(22, MetroGrid1.CurrentRow.Index).Value)
             Else
                 FrmClientes.txtCuenta.Clear()
             End If
 
-            If MetroGrid1.Item(23, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                FrmClientes.CmbBanco.SelectedIndex = FrmClientes.CmbBanco.FindString(MetroGrid1.Item(23, MetroGrid1.CurrentRow.Index).Value)
+            If CStr(MetroGrid1.Item(23, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                FrmClientes.CmbBanco.SelectedIndex = FrmClientes.CmbBanco.FindString(CStr(MetroGrid1.Item(23, MetroGrid1.CurrentRow.Index).Value))
             Else
                 FrmClientes.CmbBanco.SelectedIndex = -1
             End If
-            If MetroGrid1.Item(24, MetroGrid1.CurrentRow.Index).Value = 1 Then
+            If CInt(MetroGrid1.Item(24, MetroGrid1.CurrentRow.Index).Value) = 1 Then
                 FrmClientes.ChkTasaCero.Checked = True
             Else
                 FrmClientes.ChkTasaCero.Checked = False
             End If
             If Not IsDBNull(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value) Then
-                If MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                    FrmClientes.cmbFormaPago.SelectedIndex = FrmClientes.cmbFormaPago.FindString(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value)
+                If CStr(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                    FrmClientes.cmbFormaPago.SelectedIndex = FrmClientes.cmbFormaPago.FindString(CStr(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value))
                 Else
                     FrmClientes.cmbFormaPago.SelectedIndex = -1
                 End If
@@ -232,8 +225,8 @@
             End If
 
             If Not IsDBNull(MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value) Then
-                If MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                    FrmClientes.cmbUsoCFDI.SelectedIndex = FrmClientes.cmbUsoCFDI.FindString(MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value)
+                If CStr(MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                    FrmClientes.cmbUsoCFDI.SelectedIndex = FrmClientes.cmbUsoCFDI.FindString(CStr(MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value))
                 Else
                     FrmClientes.cmbUsoCFDI.SelectedIndex = -1
                 End If
@@ -241,11 +234,18 @@
                 FrmClientes.cmbUsoCFDI.SelectedIndex = -1
             End If
 
-            FrmClientes.txtRegimenFiscal.Text = MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value
+            If Not IsDBNull(MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value) Then
+                If CStr(MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                    FrmClientes.cmbRegimen.SelectedIndex = FrmClientes.cmbRegimen.FindString(CStr(MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value))
+                Else
+                    FrmClientes.cmbRegimen.SelectedIndex = -1
+                End If
+            Else
+                FrmClientes.cmbRegimen.SelectedIndex = -1
+            End If
 
             FrmClientes.ShowDialog()
             FrmClientes.Close()
-            FrmClientes.Dispose()
             LimpiarObjetos()
             refresh_data_dgv()
         Else
@@ -259,7 +259,6 @@
         FrmClientes.Text = "Crear Cliente"
         FrmClientes.ShowDialog()
         FrmClientes.Close()
-        FrmClientes.Dispose()
         LimpiarObjetos()
         refresh_data_dgv()
     End Sub

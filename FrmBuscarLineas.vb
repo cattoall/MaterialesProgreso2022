@@ -1,5 +1,5 @@
 ﻿Public Class FrmBuscarLineas
-    Private lv_idLinea
+    Private lv_idLinea As Integer
     Public lv_ValorAnterior As String
 
     Private Sub LimpiarObjetos()
@@ -46,13 +46,9 @@
 
     Private Sub MetroGrid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellDoubleClick
         Add_Update = True
-        lv_idLinea = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-        txtLinea.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
-        lv_ValorAnterior = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
-    End Sub
-
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs)
-
+        lv_idLinea = CInt(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
+        txtLinea.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
+        lv_ValorAnterior = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
     End Sub
 
     Private Sub btnCrear_Click(sender As Object, e As EventArgs)

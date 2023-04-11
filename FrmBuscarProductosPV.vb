@@ -48,33 +48,35 @@
         MetroGrid1.Columns(2).HeaderText = "CB"
         MetroGrid1.Columns(3).HeaderText = "Clave"
         MetroGrid1.Columns(4).HeaderText = "Descripción"
+        MetroGrid1.Columns(4).Width = 300
         MetroGrid1.Columns(5).HeaderText = "UoM"
-        MetroGrid1.Columns(6).HeaderText = "Grupo"
-        MetroGrid1.Columns(7).HeaderText = "Familia"
-        MetroGrid1.Columns(8).HeaderText = "SubFamilia"
-        MetroGrid1.Columns(8).Visible = False
-        MetroGrid1.Columns(9).HeaderText = "Linea"
-        MetroGrid1.Columns(10).HeaderText = "Proveedor"
-        MetroGrid1.Columns(10).Visible = False
-        MetroGrid1.Columns(11).HeaderText = "TipoVenta"
+        MetroGrid1.Columns(6).HeaderText = "Marca"
+        MetroGrid1.Columns(7).HeaderText = "Grupo"
+        MetroGrid1.Columns(8).HeaderText = "Familia"
+        MetroGrid1.Columns(9).HeaderText = "SubFamilia"
+        MetroGrid1.Columns(9).Visible = False
+        MetroGrid1.Columns(10).HeaderText = "Linea"
+        MetroGrid1.Columns(11).HeaderText = "Proveedor"
         MetroGrid1.Columns(11).Visible = False
-        MetroGrid1.Columns(12).HeaderText = "Descuento"
-        MetroGrid1.Columns(13).HeaderText = "PrecioLista"
-        MetroGrid1.Columns(14).HeaderText = "PrecioCosto"
-        MetroGrid1.Columns(15).HeaderText = "PrecioPublico"
-        MetroGrid1.Columns(16).HeaderText = "Precio P1"
-        MetroGrid1.Columns(17).HeaderText = "Precio P2"
-        MetroGrid1.Columns(18).HeaderText = "Precio P3"
-        MetroGrid1.Columns(19).HeaderText = "Stock"
-        MetroGrid1.Columns(19).Visible = False
-        MetroGrid1.Columns(20).HeaderText = "PrecioManual"
-        MetroGrid1.Columns(21).HeaderText = "Inventario"
-        MetroGrid1.Columns(21).Visible = False
-        MetroGrid1.Columns(22).HeaderText = "UsarTC"
-        MetroGrid1.Columns(23).HeaderText = "TC"
-        MetroGrid1.Columns(24).HeaderText = "ClaveProducto"
-        MetroGrid1.Columns(25).HeaderText = "ClaveUnidad"
-        MetroGrid1.Columns(26).HeaderText = "TasaCero"
+        MetroGrid1.Columns(12).HeaderText = "TipoVenta"
+        MetroGrid1.Columns(12).Visible = False
+        MetroGrid1.Columns(13).HeaderText = "Descuento"
+        MetroGrid1.Columns(14).HeaderText = "PrecioLista"
+        MetroGrid1.Columns(15).HeaderText = "PrecioCosto"
+        MetroGrid1.Columns(16).HeaderText = "PrecioPublico"
+        MetroGrid1.Columns(17).HeaderText = "Precio P1"
+        MetroGrid1.Columns(18).HeaderText = "Precio P2"
+        MetroGrid1.Columns(19).HeaderText = "Precio P3"
+        MetroGrid1.Columns(20).HeaderText = "Stock"
+        MetroGrid1.Columns(20).Visible = False
+        MetroGrid1.Columns(21).HeaderText = "PrecioManual"
+        MetroGrid1.Columns(22).HeaderText = "Inventario"
+        MetroGrid1.Columns(22).Visible = False
+        MetroGrid1.Columns(23).HeaderText = "UsarTC"
+        MetroGrid1.Columns(24).HeaderText = "TC"
+        MetroGrid1.Columns(25).HeaderText = "ClaveProducto"
+        MetroGrid1.Columns(26).HeaderText = "ClaveUnidad"
+        MetroGrid1.Columns(27).HeaderText = "TasaCero"
     End Sub
 
     Private Sub txtDescripcion_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtDescripcion.KeyPress
@@ -116,10 +118,10 @@
     Private Sub get_selected_product()
         If MetroGrid1.RowCount > 0 Then
             Add_Update = True
-            If MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                FrmPuntoDeVenta.txtProducto.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
-            ElseIf MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                FrmPuntoDeVenta.txtProducto.Text = MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value
+            If CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                FrmPuntoDeVenta.txtProducto.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
+            ElseIf CStr(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                FrmPuntoDeVenta.txtProducto.Text = CStr(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value)
             End If
             LimpiarObjetos()
             AccionSalir = False
@@ -133,14 +135,14 @@
         Close()
     End Sub
 
-    Private Sub MetroGrid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellDoubleClick
-        get_selected_product()
-    End Sub
-
     Private Sub MetroGrid1_KeyDown(sender As Object, e As KeyEventArgs) Handles MetroGrid1.KeyDown
         If e.KeyCode = Keys.Enter Then
             get_selected_product()
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub MetroGrid1_DoubleClick(sender As Object, e As EventArgs) Handles MetroGrid1.DoubleClick
+        get_selected_product()
     End Sub
 End Class

@@ -1,6 +1,6 @@
 ﻿
 Public Class FrmProductos
-    Public lv_idProducto
+    Public lv_idProducto As Long
     Private lv_flag_tmp As Boolean = False
 
     Private Sub FrmProductos_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
@@ -12,22 +12,26 @@ Public Class FrmProductos
     End Sub
 
     Private Sub FrmClientes_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        chkTC.Text = "Tipo de Cambio (" & GranTipoCambio & ")"
-        txtCodigoBarras.BackColor = Nothing
-        txtClave.BackColor = Nothing
-        txtDescripcion.BackColor = Nothing
-        txtPrecioLista.BackColor = Nothing
-        txtPrecioCosto.BackColor = Nothing
+        Try
+            chkTC.Text = "Tipo de Cambio (" & GranTipoCambio & ")"
+            txtCodigoBarras.BackColor = Nothing
+            txtClave.BackColor = Nothing
+            txtDescripcion.BackColor = Nothing
+            txtPrecioLista.BackColor = Nothing
+            txtPrecioCosto.BackColor = Nothing
 
-        txtCodigoBarras.Select()
-        Precio_Manual_Check()
-        Llena_Grupos()
-        Llena_SubFamilias()
-        Llena_Proveedores()
-        Llena_Familias()
-        Llena_Lineas()
-        Llena_UoMs()
-        CmbTipoVenta.SelectedIndex = 0
+            txtCodigoBarras.Select()
+            Precio_Manual_Check()
+            Llena_Grupos()
+            Llena_SubFamilias()
+            Llena_Proveedores()
+            Llena_Familias()
+            Llena_Lineas()
+            Llena_UoMs()
+            CmbTipoVenta.SelectedIndex = 0
+        Catch ex As Exception
+            MsgBox(ex.Message & " - " & ex.InnerException.Message)
+        End Try
     End Sub
 
     Private Sub Llena_Grupos()
@@ -42,8 +46,8 @@ Public Class FrmProductos
         CmbGrupo.ValueMember   = "clave"
         CmbGrupo.SelectedIndex = -1
 
-        'Material_Grupo = Material_Grupo.Trim
-        If Material_Grupo <> "" Then
+
+        If Material_Grupo <> "" And Add_Update = True Then
             CmbGrupo.SelectedValue = grps.Find(Function(f) f.descripcion = Material_Grupo).clave
         End If
 
@@ -55,22 +59,25 @@ Public Class FrmProductos
     End Sub
 
     Private Sub Llena_SubFamilias()
-        Dim subfam As List(Of tblSubFamilia) = DBModelo.GetSubFamiliaAll
-        Dim i As Int16
+        Try
+            Dim subfam As List(Of tblSubFamilia) = DBModelo.GetSubFamiliaAll
+            If IsNothing(subfam) Then
+                Exit Sub
+            End If
 
-        If IsNothing(subfam) Then
-            Exit Sub
-        End If
+            CmbSubFamilia.DataSource = subfam
+            CmbSubFamilia.DisplayMember = "descripcion"
+            CmbSubFamilia.ValueMember = "clave"
+            CmbSubFamilia.SelectedIndex = -1
 
-        CmbSubFamilia.DataSource = subfam
-        CmbSubFamilia.DisplayMember = "descripcion"
-        CmbSubFamilia.ValueMember = "clave"
-        CmbSubFamilia.SelectedIndex = -1
+            Material_SubFam = Material_SubFam.Trim
+            If Material_SubFam <> "" And Add_Update = True Then
+                CmbSubFamilia.SelectedValue = subfam.Find(Function(f) f.descripcion.Equals(Material_SubFam)).clave
+            End If
 
-        'Material_SubFam = Material_SubFam.Trim
-        If Material_SubFam <> "" Then
-            CmbSubFamilia.SelectedValue = subfam.Find(Function(f) f.descripcion = Material_SubFam).clave
-        End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " - " & ex.InnerException.Message)
+        End Try
     End Sub
 
     Private Sub Llena_Proveedores()
@@ -86,7 +93,7 @@ Public Class FrmProductos
         CmbProveedor.SelectedIndex = -1
 
         'Material_Proveedores = Material_Proveedores.Trim
-        If Material_Proveedores <> "" Then
+        If Material_Proveedores <> "" And Add_Update = True Then
             CmbProveedor.SelectedValue = proveedor.Find(Function(f) f.razonSocial = Material_Proveedores).clave
         End If
     End Sub
@@ -104,7 +111,7 @@ Public Class FrmProductos
         CmbFamilia.SelectedIndex = -1
 
         'Material_Familia = Material_Familia.Trim
-        If Material_Familia <> "" Then
+        If Material_Familia <> "" And Add_Update = True Then
             CmbFamilia.SelectedValue = familia.Find(Function(f) f.descripcion = Material_Familia).clave
         End If
 
@@ -123,7 +130,7 @@ Public Class FrmProductos
         CmbLinea.SelectedIndex = -1
 
         'Material_Linea = Material_Linea.Trim
-        If Material_Linea <> "" Then
+        If Material_Linea <> "" And Add_Update = True Then
             CmbLinea.SelectedValue = linea.Find(Function(f) f.descripcion = Material_Linea).clave
         End If
 
@@ -142,7 +149,7 @@ Public Class FrmProductos
         CmbUnidad.SelectedIndex = -1
 
         'Material_Umedida = Material_Umedida.Trim
-        If Material_Umedida <> "" Then
+        If Material_Umedida <> "" And Add_Update = True Then
             CmbUnidad.SelectedValue = uom.Find(Function(f) f.descripcion = Material_Umedida).Clave
         End If
     End Sub
@@ -201,7 +208,7 @@ Public Class FrmProductos
         If e.KeyChar <> "." Then 'Allow "."'s before checking for Numerics   
             If IsNumeric(e.KeyChar) Then e.Handled = False 'Check for Numerics   
         Else
-            If e.KeyChar = "." And txtPrecioLista.Text.Contains(".") Then e.KeyChar = "" 'Check for Duplicate and Create Null if Yes   
+            If e.KeyChar = "." And txtPrecioLista.Text.Contains(".") Then e.KeyChar = CChar("") 'Check for Duplicate and Create Null if Yes   
             e.Handled = False
         End If
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
@@ -232,7 +239,7 @@ Public Class FrmProductos
     End Function
 
     Private Sub Calcula_Precios()
-        Dim grp As tblGrupos = DBModelo.GetGroup(CmbGrupo.SelectedValue)
+        Dim grp As tblGrupos = DBModelo.GetGroup(CLng(CmbGrupo.SelectedValue))
 
         If IsNothing(grp) Then
             Exit Sub
@@ -247,7 +254,7 @@ Public Class FrmProductos
         If txtPrecioLista.Text <> "" Then
             precioLista = CDbl(txtPrecioLista.Text)
         Else
-            precioLista = "0.00"
+            precioLista = CDbl("0.00")
         End If
 
         If chkTC.Checked = True Then
@@ -291,7 +298,7 @@ Public Class FrmProductos
         If e.KeyChar <> "." Then 'Allow "."'s before checking for Numerics   
             If IsNumeric(e.KeyChar) Then e.Handled = False 'Check for Numerics   
         Else
-            If e.KeyChar = "." And txtPrecioCosto.Text.Contains(".") Then e.KeyChar = "" 'Check for Duplicate and Create Null if Yes   
+            If e.KeyChar = "." And txtPrecioCosto.Text.Contains(".") Then e.KeyChar = CChar("") 'Check for Duplicate and Create Null if Yes   
             e.Handled = False
         End If
     End Sub
@@ -305,7 +312,7 @@ Public Class FrmProductos
         If e.KeyChar <> "." Then 'Allow "."'s before checking for Numerics   
             If IsNumeric(e.KeyChar) Then e.Handled = False 'Check for Numerics   
         Else
-            If e.KeyChar = "." And txtPrecioPublico.Text.Contains(".") Then e.KeyChar = "" 'Check for Duplicate and Create Null if Yes   
+            If e.KeyChar = "." And txtPrecioPublico.Text.Contains(".") Then e.KeyChar = CChar("") 'Check for Duplicate and Create Null if Yes   
             e.Handled = False
         End If
     End Sub
@@ -319,7 +326,7 @@ Public Class FrmProductos
         If e.KeyChar <> "." Then 'Allow "."'s before checking for Numerics   
             If IsNumeric(e.KeyChar) Then e.Handled = False 'Check for Numerics   
         Else
-            If e.KeyChar = "." And txtPrecioP1.Text.Contains(".") Then e.KeyChar = "" 'Check for Duplicate and Create Null if Yes   
+            If e.KeyChar = "." And txtPrecioP1.Text.Contains(".") Then e.KeyChar = CChar("") 'Check for Duplicate and Create Null if Yes   
             e.Handled = False
         End If
     End Sub
@@ -333,7 +340,7 @@ Public Class FrmProductos
         If e.KeyChar <> "." Then 'Allow "."'s before checking for Numerics   
             If IsNumeric(e.KeyChar) Then e.Handled = False 'Check for Numerics   
         Else
-            If e.KeyChar = "." And txtPrecioP2.Text.Contains(".") Then e.KeyChar = "" 'Check for Duplicate and Create Null if Yes   
+            If e.KeyChar = "." And txtPrecioP2.Text.Contains(".") Then e.KeyChar = CChar("") 'Check for Duplicate and Create Null if Yes   
             e.Handled = False
         End If
     End Sub
@@ -347,7 +354,7 @@ Public Class FrmProductos
         If e.KeyChar <> "." Then 'Allow "."'s before checking for Numerics   
             If IsNumeric(e.KeyChar) Then e.Handled = False 'Check for Numerics   
         Else
-            If e.KeyChar = "." And txtPrecioP3.Text.Contains(".") Then e.KeyChar = "" 'Check for Duplicate and Create Null if Yes   
+            If e.KeyChar = "." And txtPrecioP3.Text.Contains(".") Then e.KeyChar = CChar("") 'Check for Duplicate and Create Null if Yes   
             e.Handled = False
         End If
     End Sub
@@ -403,9 +410,9 @@ Public Class FrmProductos
     Private Sub CmdAgrupo_Click(sender As System.Object, e As System.EventArgs) Handles CmdAgrupo.Click
         lv_flag_tmp = Add_Update
         Add_Update = False
-        FrmGrupos.ShowDialog()
-        FrmGrupos.Close()
-        FrmGrupos.Dispose()
+        Dim oForm As New FrmGrupos
+        oForm.ShowDialog()
+        oForm.Close()
         Llena_Grupos()
         Add_Update = lv_flag_tmp
     End Sub
@@ -413,9 +420,9 @@ Public Class FrmProductos
     Private Sub CmdSubFam_Click(sender As System.Object, e As System.EventArgs) Handles CmdSubFam.Click
         lv_flag_tmp = Add_Update
         Add_Update = False
-        FrmBuscarSubFamilias.ShowDialog()
-        FrmBuscarSubFamilias.Close()
-        FrmBuscarSubFamilias.Dispose()
+        Dim oForm As New FrmBuscarSubFamilias
+        oForm.ShowDialog()
+        oForm.Close()
         Llena_SubFamilias()
         Add_Update = lv_flag_tmp
     End Sub
@@ -423,9 +430,9 @@ Public Class FrmProductos
     Private Sub CmdProveedor_Click(sender As System.Object, e As System.EventArgs) Handles CmdProveedor.Click
         lv_flag_tmp = Add_Update
         Add_Update = False
-        FrmBuscarProveedores.ShowDialog()
-        FrmBuscarProveedores.Close()
-        FrmBuscarProveedores.Dispose()
+        Dim oForm As New FrmBuscarProveedores
+        oForm.ShowDialog()
+        oForm.Close()
         Llena_Proveedores()
         Add_Update = lv_flag_tmp
     End Sub
@@ -433,9 +440,9 @@ Public Class FrmProductos
     Private Sub CmdFamilia_Click(sender As System.Object, e As System.EventArgs) Handles CmdFamilia.Click
         lv_flag_tmp = Add_Update
         Add_Update = False
-        FrmBuscarFamilias.ShowDialog()
-        FrmBuscarFamilias.Close()
-        FrmBuscarFamilias.Dispose()
+        Dim oForm As New FrmBuscarFamilias
+        oForm.ShowDialog()
+        oForm.Close()
         Llena_Familias()
         Add_Update = lv_flag_tmp
     End Sub
@@ -443,9 +450,9 @@ Public Class FrmProductos
     Private Sub CmdLinea_Click(sender As System.Object, e As System.EventArgs) Handles CmdLinea.Click
         lv_flag_tmp = Add_Update
         Add_Update = False
-        FrmBuscarLineas.ShowDialog()
-        FrmBuscarLineas.Close()
-        FrmBuscarLineas.Dispose()
+        Dim oForm As New FrmBuscarLineas
+        oForm.ShowDialog()
+        oForm.Close()
         Llena_Lineas()
         Add_Update = lv_flag_tmp
     End Sub
@@ -461,18 +468,6 @@ Public Class FrmProductos
 
     Private Sub chkTC_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkTC.CheckedChanged
         Calcula_Precios()
-    End Sub
-
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) 
-        
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -506,7 +501,7 @@ Public Class FrmProductos
             Exit Sub
         End If
 
-        If txtPrecioLista.Text <= 0 Then
+        If CInt(txtPrecioLista.Text) <= 0 Then
             MetroFramework.MetroMessageBox.Show(Me, "El valor de Precio Lista debe de ser mayor a 0.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtPrecioLista.SelectAll()
             txtPrecioLista.Focus()
@@ -541,7 +536,7 @@ Public Class FrmProductos
         End If
 
 
-        If txtDescripcion.Text = "" Or txtPrecioCosto.Text <= 0 Or txtPrecioLista.Text <= 0 Or txtClave.Text = "" Or txtCodigoBarras.Text = "" Or CmbGrupo.Text = "" Or CmbTipoVenta.Text = "" Or CmbUnidad.Text = "" Then
+        If txtDescripcion.Text = "" Or CDec(txtPrecioCosto.Text) <= 0 Or CDec(txtPrecioLista.Text) <= 0 Or txtClave.Text = "" Or txtCodigoBarras.Text = "" Or CmbGrupo.Text = "" Or CmbTipoVenta.Text = "" Or CmbUnidad.Text = "" Then
             MetroFramework.MetroMessageBox.Show(Me, "Campos Obligatorios para crear un Producto", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
@@ -595,21 +590,21 @@ Public Class FrmProductos
         StrProductos.linea = CmbLinea.Text
         StrProductos.proveedor = CmbProveedor.Text
         StrProductos.tipoVenta = CmbTipoVenta.Text
-        StrProductos.descuento = CDbl(txtDesc.Text)
-        StrProductos.precioLista = CDbl(txtPrecioLista.Text)
-        StrProductos.precioCosto = CDbl(txtPrecioCosto.Text)
-        StrProductos.precioPublico = CDbl(txtPrecioPublico.Text)
-        StrProductos.precioP1 = CDbl(txtPrecioP1.Text)
-        StrProductos.precioP2 = CDbl(txtPrecioP2.Text)
-        StrProductos.precioP3 = CDbl(txtPrecioP3.Text)
+        StrProductos.descuento = CDec(txtDesc.Text)
+        StrProductos.precioLista = CDec(txtPrecioLista.Text)
+        StrProductos.precioCosto = CDec(txtPrecioCosto.Text)
+        StrProductos.precioPublico = CDec(txtPrecioPublico.Text)
+        StrProductos.precioP1 = CDec(txtPrecioP1.Text)
+        StrProductos.precioP2 = CDec(txtPrecioP2.Text)
+        StrProductos.precioP3 = CDec(txtPrecioP3.Text)
         StrProductos.stock = CInt(txtStock.Text)
         StrProductos.precioManual = lv_PrecioManual
-        StrProductos.Inventario = 0
-        StrProductos.UsarTC = CInt(CInt(lv_UsarTC))
-        StrProductos.TC = CInt(CDbl(GranTipoCambio))
-        StrProductos.ClaveProducto = CInt(txtClaveProducto.Text)
+        StrProductos.Inventario = CBool(0)
+        StrProductos.UsarTC = CBool(lv_UsarTC)
+        StrProductos.TC = CDec(GranTipoCambio)
+        StrProductos.ClaveProducto = CStr(txtClaveProducto.Text)
         StrProductos.ClaveUnidad = txtClaveUnidad.Text
-        StrProductos.TasaCero = CInt(lv_TasaCero)
+        StrProductos.TasaCero = CBool(lv_TasaCero)
 
         If Add_Update = False Then
             If Checa_CodigoBarras() = True Then
@@ -640,5 +635,21 @@ Public Class FrmProductos
         Add_Update = False
         LimpiarObjetos()
         Close()
+    End Sub
+
+    Private Sub CmbUnidad_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbUnidad.SelectedIndexChanged
+        Select Case CStr(CmbUnidad.Text)
+            Case "PIEZA"
+                txtClaveUnidad.Text = "H87"
+            Case "KILO"
+                txtClaveUnidad.Text = "KGM"
+            Case "ROLLO"
+                txtClaveUnidad.Text = "H87"
+            Case "LITRO"
+                txtClaveUnidad.Text = "LTR"
+            Case "METRO"
+                txtClaveUnidad.Text = "MTR"
+        End Select
+
     End Sub
 End Class

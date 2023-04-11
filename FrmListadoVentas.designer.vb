@@ -29,8 +29,11 @@ Partial Class FrmListadoVentas
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -47,6 +50,19 @@ Partial Class FrmListadoVentas
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.IdComp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.nticket = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SubTotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IVA = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.total = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.usuario = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idCliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.estado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.motivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.numeroFactura = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridTikect, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridConsulta, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -142,7 +158,7 @@ Partial Class FrmListadoVentas
         Me.dtFechaFinal.Location = New System.Drawing.Point(144, 36)
         Me.dtFechaFinal.MinimumSize = New System.Drawing.Size(0, 29)
         Me.dtFechaFinal.Name = "dtFechaFinal"
-        Me.dtFechaFinal.Size = New System.Drawing.Size(106, 30)
+        Me.dtFechaFinal.Size = New System.Drawing.Size(106, 29)
         Me.dtFechaFinal.TabIndex = 68
         '
         'dtFechaInicial
@@ -152,7 +168,7 @@ Partial Class FrmListadoVentas
         Me.dtFechaInicial.Location = New System.Drawing.Point(15, 36)
         Me.dtFechaInicial.MinimumSize = New System.Drawing.Size(0, 29)
         Me.dtFechaInicial.Name = "dtFechaInicial"
-        Me.dtFechaInicial.Size = New System.Drawing.Size(109, 30)
+        Me.dtFechaInicial.Size = New System.Drawing.Size(109, 29)
         Me.dtFechaInicial.TabIndex = 67
         '
         'DataGridTikect
@@ -205,6 +221,8 @@ Partial Class FrmListadoVentas
         '
         'DataGridConsulta
         '
+        Me.DataGridConsulta.AllowUserToAddRows = False
+        Me.DataGridConsulta.AllowUserToDeleteRows = False
         Me.DataGridConsulta.AllowUserToResizeRows = False
         DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -223,28 +241,30 @@ Partial Class FrmListadoVentas
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridConsulta.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridConsulta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridConsulta.DefaultCellStyle = DataGridViewCellStyle7
+        Me.DataGridConsulta.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdComp, Me.nticket, Me.fecha, Me.SubTotal, Me.IVA, Me.total, Me.tipo, Me.usuario, Me.cliente, Me.idCliente, Me.estado, Me.motivo, Me.numeroFactura})
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridConsulta.DefaultCellStyle = DataGridViewCellStyle10
         Me.DataGridConsulta.EnableHeadersVisualStyles = False
         Me.DataGridConsulta.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
         Me.DataGridConsulta.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.DataGridConsulta.Location = New System.Drawing.Point(15, 68)
         Me.DataGridConsulta.Name = "DataGridConsulta"
+        Me.DataGridConsulta.ReadOnly = True
         Me.DataGridConsulta.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridConsulta.RowHeadersDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridConsulta.RowHeadersDefaultCellStyle = DataGridViewCellStyle11
         Me.DataGridConsulta.RowHeadersWidth = 51
         Me.DataGridConsulta.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridConsulta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -324,6 +344,97 @@ Partial Class FrmListadoVentas
         Me.ToolTip1.InitialDelay = 50
         Me.ToolTip1.ReshowDelay = 10
         '
+        'IdComp
+        '
+        Me.IdComp.HeaderText = "IdComp"
+        Me.IdComp.Name = "IdComp"
+        Me.IdComp.ReadOnly = True
+        Me.IdComp.Visible = False
+        '
+        'nticket
+        '
+        Me.nticket.HeaderText = "Venta"
+        Me.nticket.Name = "nticket"
+        Me.nticket.ReadOnly = True
+        '
+        'fecha
+        '
+        Me.fecha.HeaderText = "Fecha"
+        Me.fecha.Name = "fecha"
+        Me.fecha.ReadOnly = True
+        '
+        'SubTotal
+        '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.SubTotal.DefaultCellStyle = DataGridViewCellStyle7
+        Me.SubTotal.HeaderText = "SubTotal"
+        Me.SubTotal.Name = "SubTotal"
+        Me.SubTotal.ReadOnly = True
+        '
+        'IVA
+        '
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.IVA.DefaultCellStyle = DataGridViewCellStyle8
+        Me.IVA.HeaderText = "Impuesto"
+        Me.IVA.Name = "IVA"
+        Me.IVA.ReadOnly = True
+        '
+        'total
+        '
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.total.DefaultCellStyle = DataGridViewCellStyle9
+        Me.total.HeaderText = "Total"
+        Me.total.Name = "total"
+        Me.total.ReadOnly = True
+        '
+        'tipo
+        '
+        Me.tipo.HeaderText = "Tipo"
+        Me.tipo.Name = "tipo"
+        Me.tipo.ReadOnly = True
+        '
+        'usuario
+        '
+        Me.usuario.HeaderText = "usuario"
+        Me.usuario.Name = "usuario"
+        Me.usuario.ReadOnly = True
+        Me.usuario.Visible = False
+        '
+        'cliente
+        '
+        Me.cliente.HeaderText = "Cliente"
+        Me.cliente.Name = "cliente"
+        Me.cliente.ReadOnly = True
+        Me.cliente.Width = 300
+        '
+        'idCliente
+        '
+        Me.idCliente.HeaderText = "idCliente"
+        Me.idCliente.Name = "idCliente"
+        Me.idCliente.ReadOnly = True
+        Me.idCliente.Visible = False
+        '
+        'estado
+        '
+        Me.estado.HeaderText = "Status"
+        Me.estado.Name = "estado"
+        Me.estado.ReadOnly = True
+        Me.estado.Width = 80
+        '
+        'motivo
+        '
+        Me.motivo.HeaderText = "Motivo"
+        Me.motivo.Name = "motivo"
+        Me.motivo.ReadOnly = True
+        Me.motivo.Width = 140
+        '
+        'numeroFactura
+        '
+        Me.numeroFactura.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.numeroFactura.HeaderText = "No. Factura"
+        Me.numeroFactura.Name = "numeroFactura"
+        Me.numeroFactura.ReadOnly = True
+        '
         'FrmListadoVentas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
@@ -361,4 +472,17 @@ End Sub
     Friend WithEvents btnAdd As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
+    Friend WithEvents IdComp As DataGridViewTextBoxColumn
+    Friend WithEvents nticket As DataGridViewTextBoxColumn
+    Friend WithEvents fecha As DataGridViewTextBoxColumn
+    Friend WithEvents SubTotal As DataGridViewTextBoxColumn
+    Friend WithEvents IVA As DataGridViewTextBoxColumn
+    Friend WithEvents total As DataGridViewTextBoxColumn
+    Friend WithEvents tipo As DataGridViewTextBoxColumn
+    Friend WithEvents usuario As DataGridViewTextBoxColumn
+    Friend WithEvents cliente As DataGridViewTextBoxColumn
+    Friend WithEvents idCliente As DataGridViewTextBoxColumn
+    Friend WithEvents estado As DataGridViewTextBoxColumn
+    Friend WithEvents motivo As DataGridViewTextBoxColumn
+    Friend WithEvents numeroFactura As DataGridViewTextBoxColumn
 End Class

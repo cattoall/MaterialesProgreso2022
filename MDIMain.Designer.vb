@@ -204,7 +204,7 @@ Partial Class MDIMain
         '
         Me.FacturaciónToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FacturaciónToolStripMenuItem1, Me.NotasDeCréditoToolStripMenuItem1, Me.ComplementoDePagoToolStripMenuItem, Me.ToolStripSeparator1, Me.ReimpresiónDeFacturasToolStripMenuItem, Me.ReimpresiónDeNotasDeCréditoToolStripMenuItem})
         Me.FacturaciónToolStripMenuItem.Name = "FacturaciónToolStripMenuItem"
-        Me.FacturaciónToolStripMenuItem.Size = New System.Drawing.Size(263, 26)
+        Me.FacturaciónToolStripMenuItem.Size = New System.Drawing.Size(259, 22)
         Me.FacturaciónToolStripMenuItem.Text = "Facturación Electrónica"
         '
         'FacturaciónToolStripMenuItem1
@@ -246,14 +246,14 @@ Partial Class MDIMain
         '
         Me.ListadoDeTicketsPorFacturasToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.ZuneFact
         Me.ListadoDeTicketsPorFacturasToolStripMenuItem.Name = "ListadoDeTicketsPorFacturasToolStripMenuItem"
-        Me.ListadoDeTicketsPorFacturasToolStripMenuItem.Size = New System.Drawing.Size(263, 26)
+        Me.ListadoDeTicketsPorFacturasToolStripMenuItem.Size = New System.Drawing.Size(259, 22)
         Me.ListadoDeTicketsPorFacturasToolStripMenuItem.Text = "Listado de Tickets por Facturas"
         '
         'ReimpresiónDeFacturaToolStripMenuItem
         '
         Me.ReimpresiónDeFacturaToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Re_Imp
         Me.ReimpresiónDeFacturaToolStripMenuItem.Name = "ReimpresiónDeFacturaToolStripMenuItem"
-        Me.ReimpresiónDeFacturaToolStripMenuItem.Size = New System.Drawing.Size(263, 26)
+        Me.ReimpresiónDeFacturaToolStripMenuItem.Size = New System.Drawing.Size(259, 22)
         Me.ReimpresiónDeFacturaToolStripMenuItem.Text = "Reimpresión de Factura"
         Me.ReimpresiónDeFacturaToolStripMenuItem.Visible = False
         '
@@ -261,7 +261,7 @@ Partial Class MDIMain
         '
         Me.RevisarFacturasConErroresToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.RevisarFact
         Me.RevisarFacturasConErroresToolStripMenuItem.Name = "RevisarFacturasConErroresToolStripMenuItem"
-        Me.RevisarFacturasConErroresToolStripMenuItem.Size = New System.Drawing.Size(263, 26)
+        Me.RevisarFacturasConErroresToolStripMenuItem.Size = New System.Drawing.Size(259, 22)
         Me.RevisarFacturasConErroresToolStripMenuItem.Text = "Revisar Facturas con Errores"
         Me.RevisarFacturasConErroresToolStripMenuItem.Visible = False
         '
@@ -269,14 +269,14 @@ Partial Class MDIMain
         '
         Me.ConfiguraciónDeFoliosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.ConFol
         Me.ConfiguraciónDeFoliosToolStripMenuItem.Name = "ConfiguraciónDeFoliosToolStripMenuItem"
-        Me.ConfiguraciónDeFoliosToolStripMenuItem.Size = New System.Drawing.Size(263, 26)
+        Me.ConfiguraciónDeFoliosToolStripMenuItem.Size = New System.Drawing.Size(259, 22)
         Me.ConfiguraciónDeFoliosToolStripMenuItem.Text = "Configuración de Folios"
         '
         'ReimpresionesDeNotasDeCréditoToolStripMenuItem
         '
         Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Re_Imp
         Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem.Name = "ReimpresionesDeNotasDeCréditoToolStripMenuItem"
-        Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem.Size = New System.Drawing.Size(263, 26)
+        Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem.Size = New System.Drawing.Size(259, 22)
         Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem.Text = "Reimpresiones de Notas de Crédito"
         Me.ReimpresionesDeNotasDeCréditoToolStripMenuItem.Visible = False
         '
@@ -502,7 +502,7 @@ Partial Class MDIMain
         '
         Me.ToolStripStatusLabel8.Name = "ToolStripStatusLabel8"
         Me.ToolStripStatusLabel8.Size = New System.Drawing.Size(158, 17)
-        Me.ToolStripStatusLabel8.Text = "Versión CFDI 3.3 : 2022-01-01"
+        Me.ToolStripStatusLabel8.Text = "Versión CFDI 4.0 : 2023-03-24"
         '
         'ToolStripStatusLabel9
         '

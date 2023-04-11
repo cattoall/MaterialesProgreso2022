@@ -13,7 +13,7 @@ Public Class frmComplementoPago
         FrmBuscarClientesVentas.ShowDialog()
         FrmBuscarClientesVentas.Close()
         LblCliente.Text = idClientePago
-        If (idClientePago <> "") Then
+        If idClientePago <> "" Then
             GetInvoicesByClient()
         End If
 
@@ -21,83 +21,80 @@ Public Class frmComplementoPago
 
     Private Sub GetInvoicesByClient()
         Try
-            Dim tFacturaTotal As List(Of tblFacturaTotal) = DBModelo.GetFacturasHeaderByIdCliente(idClientePago)
+            Dim tFacturaTotal As List(Of tblFacturaTotal) = DBModelo.GetFacturasHeaderByIdClienteFechaVenta(idClientePago, Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"))
 
             DataGridView1.Rows.Clear()
 
             If (tFacturaTotal.Count <= 0) Then
                 MsgBox("No existen facturas para este cliente", MsgBoxStyle.Critical, "Complemento de Pagos")
             Else
-
-                For i = 0 To tFacturaTotal.Count - 1
-                    If IsDBNull(tFacturaTotal.Item(i).fecha_venta) Then
-                        tFacturaTotal.Item(i).fecha_venta = ""
+                For Each fRow In tFacturaTotal
+                    If IsDBNull(fRow.fecha_venta) Then
+                        fRow.fecha_venta = CDate("")
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).n_factura) Then
-                        tFacturaTotal.Item(i).n_factura = ""
+                    If IsDBNull(fRow.n_factura) Then
+                        fRow.n_factura = CDec("")
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).total) Then
-                        tFacturaTotal.Item(i).total = ""
+                    If IsDBNull(fRow.total) Then
+                        fRow.total = CDec("")
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).tipo_venta) Then
-                        tFacturaTotal.Item(i).tipo_venta = ""
+                    If IsDBNull(fRow.tipo_venta) Then
+                        fRow.tipo_venta = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).cliente) Then
-                        tFacturaTotal.Item(i).cliente = ""
+                    If IsDBNull(fRow.cliente) Then
+                        fRow.cliente = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).codiciones) Then
-                        tFacturaTotal.Item(i).codiciones = ""
+                    If IsDBNull(fRow.codiciones) Then
+                        fRow.codiciones = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).metodopago) Then
-                        tFacturaTotal.Item(i).metodopago = ""
+                    If IsDBNull(fRow.metodopago) Then
+                        fRow.metodopago = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).FormaPago) Then
-                        tFacturaTotal.Item(i).FormaPago = ""
+                    If IsDBNull(fRow.FormaPago) Then
+                        fRow.FormaPago = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).UsoCFDI) Then
-                        tFacturaTotal.Item(i).UsoCFDI = ""
+                    If IsDBNull(fRow.UsoCFDI) Then
+                        fRow.UsoCFDI = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).UUID) Then
-                        tFacturaTotal.Item(i).UUID = ""
+                    If IsDBNull(fRow.UUID) Then
+                        fRow.UUID = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).Cancelada) Then
-                        tFacturaTotal.Item(i).Cancelada = 0
+                    If IsDBNull(fRow.Cancelada) Then
+                        fRow.Cancelada = 0
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).ComproPago) Then
-                        tFacturaTotal.Item(i).ComproPago = 0
+                    If IsDBNull(fRow.ComproPago) Then
+                        fRow.ComproPago = 0
                     End If
 
                     Dim textArray1 As String() = New String(15 - 1) {}
-                    textArray1(0) = tFacturaTotal.Item(i).fecha_venta
-                    textArray1(1) = tFacturaTotal.Item(i).n_factura
-                    textArray1(2) = FormatNumber(tFacturaTotal.Item(i).total, 2)
-                    textArray1(3) = tFacturaTotal.Item(i).tipo_venta
-                    textArray1(4) = tFacturaTotal.Item(i).cliente
-                    textArray1(5) = tFacturaTotal.Item(i).codiciones
-                    textArray1(6) = tFacturaTotal.Item(i).metodopago
-                    textArray1(7) = tFacturaTotal.Item(i).FormaPago
-                    textArray1(8) = tFacturaTotal.Item(i).UsoCFDI
-                    textArray1(9) = tFacturaTotal.Item(i).UUID
-                    Select Case tFacturaTotal.Item(i).Cancelada
+                    textArray1(0) = CStr(fRow.fecha_venta)
+                    textArray1(1) = CStr(fRow.n_factura)
+                    textArray1(2) = FormatNumber(fRow.total, 2)
+                    textArray1(3) = fRow.tipo_venta
+                    textArray1(4) = fRow.cliente
+                    textArray1(5) = fRow.codiciones
+                    textArray1(6) = fRow.metodopago
+                    textArray1(7) = fRow.FormaPago
+                    textArray1(8) = fRow.UsoCFDI
+                    textArray1(9) = fRow.UUID
+                    Select Case fRow.Cancelada
                         Case 0
                             textArray1(10) = Boolean.FalseString
                         Case 1
                             textArray1(10) = Boolean.TrueString
                     End Select
-                    Select Case tFacturaTotal.Item(i).ComproPago
+                    Select Case fRow.ComproPago
                         Case 0
                             textArray1(11) = Boolean.FalseString
                         Case 1
                             textArray1(11) = Boolean.TrueString
                     End Select
-                    textArray1(12) = FormatNumber(tFacturaTotal.Item(i).subtotal, 2)
-                    textArray1(13) = FormatNumber(tFacturaTotal.Item(i).iva, 2)
-                    textArray1(14) = tFacturaTotal.Item(i).ObjetoImp
+                    textArray1(12) = FormatNumber(fRow.subtotal, 2)
+                    textArray1(13) = FormatNumber(fRow.iva, 2)
+                    textArray1(14) = fRow.ObjetoImp
                     Dim values As String() = textArray1
                     DataGridView1.Rows.Add(values)
-                    i += 1
                 Next
-
             End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.ApplicationModal, Nothing)
@@ -106,97 +103,109 @@ Public Class frmComplementoPago
 
     Private Sub btnMostrar_Click(sender As Object, e As EventArgs) Handles btnMostrar.Click
         Try
-            Dim tFacturaTotal As List(Of tblFacturaTotal) = New List(Of tblFacturaTotal)
+            Dim tFacturaTotal As List(Of tblFacturaTotal) = DBModelo.GetFacturasHeaderByIdClienteFechaVenta(idClientePago, Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"))
 
             DataGridView1.Rows.Clear()
 
             If chkCancelados.Checked And chkPagados.Checked Then
-                tFacturaTotal = DBModelo.GetFacturasHeaderByIdClienteFechaVentaCanceladosPagados(idClientePago, Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"), "1", "1")
+                For Each line In tFacturaTotal
+                    If CBool(line.Cancelada) = True Then
+                        tFacturaTotal.Remove(line)
+                    End If
+                Next
+
+                For Each line In tFacturaTotal
+                    If CBool(line.ComproPago) = True Then
+                        tFacturaTotal.Remove(line)
+                    End If
+                Next
             End If
 
             If chkCancelados.Checked And chkPagados.Checked = False Then
-                tFacturaTotal = DBModelo.GetFacturasHeaderByIdClienteFechaVentaCancelados(idClientePago, Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"), "1")
+                For Each line In tFacturaTotal
+                    If CBool(line.Cancelada) = True Then
+                        tFacturaTotal.Remove(line)
+                    End If
+                Next
             End If
 
             If chkCancelados.Checked = False And chkPagados.Checked Then
-                tFacturaTotal = DBModelo.GetFacturasHeaderByIdClienteFechaVentaPagados(idClientePago, Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"), "1")
+                For Each line In tFacturaTotal
+                    If CBool(line.ComproPago) = True Then
+                        tFacturaTotal.Remove(line)
+                    End If
+                Next
             End If
-
-            If chkCancelados.Checked = False And chkPagados.Checked = False Then
-                tFacturaTotal = DBModelo.GetFacturasHeaderByIdClienteFechaVenta(idClientePago, Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"))
-            End If
-
 
             If (tFacturaTotal.Count <= 0) Then
                 MsgBox("No existen facturas para este cliente", MsgBoxStyle.Critical, "Complemento de Pagos")
             Else
-                For i = 0 To tFacturaTotal.Count - 1
-                    If IsDBNull(tFacturaTotal.Item(i).fecha_venta) Then
-                        tFacturaTotal.Item(i).fecha_venta = ""
+                For Each fRow In tFacturaTotal
+                    If IsDBNull(fRow.fecha_venta) Then
+                        fRow.fecha_venta = CDate("")
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).n_factura) Then
-                        tFacturaTotal.Item(i).n_factura = ""
+                    If IsDBNull(fRow.n_factura) Then
+                        fRow.n_factura = CDec("")
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).total) Then
-                        tFacturaTotal.Item(i).total = ""
+                    If IsDBNull(fRow.total) Then
+                        fRow.total = CDec("")
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).tipo_venta) Then
-                        tFacturaTotal.Item(i).tipo_venta = ""
+                    If IsDBNull(fRow.tipo_venta) Then
+                        fRow.tipo_venta = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).cliente) Then
-                        tFacturaTotal.Item(i).cliente = ""
+                    If IsDBNull(fRow.cliente) Then
+                        fRow.cliente = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).codiciones) Then
-                        tFacturaTotal.Item(i).codiciones = ""
+                    If IsDBNull(fRow.codiciones) Then
+                        fRow.codiciones = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).metodopago) Then
-                        tFacturaTotal.Item(i).metodopago = ""
+                    If IsDBNull(fRow.metodopago) Then
+                        fRow.metodopago = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).FormaPago) Then
-                        tFacturaTotal.Item(i).FormaPago = ""
+                    If IsDBNull(fRow.FormaPago) Then
+                        fRow.FormaPago = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).UsoCFDI) Then
-                        tFacturaTotal.Item(i).UsoCFDI = ""
+                    If IsDBNull(fRow.UsoCFDI) Then
+                        fRow.UsoCFDI = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).UUID) Then
-                        tFacturaTotal.Item(i).UUID = ""
+                    If IsDBNull(fRow.UUID) Then
+                        fRow.UUID = ""
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).Cancelada) Then
-                        tFacturaTotal.Item(i).Cancelada = 0
+                    If IsDBNull(fRow.Cancelada) Then
+                        fRow.Cancelada = 0
                     End If
-                    If IsDBNull(tFacturaTotal.Item(i).ComproPago) Then
-                        tFacturaTotal.Item(i).ComproPago = 0
+                    If IsDBNull(fRow.ComproPago) Then
+                        fRow.ComproPago = 0
                     End If
 
                     Dim textArray1 As String() = New String(15 - 1) {}
-                    textArray1(0) = tFacturaTotal.Item(i).fecha_venta
-                    textArray1(1) = tFacturaTotal.Item(i).n_factura
-                    textArray1(2) = FormatNumber(tFacturaTotal.Item(i).total, 2)
-                    textArray1(3) = tFacturaTotal.Item(i).tipo_venta
-                    textArray1(4) = tFacturaTotal.Item(i).cliente
-                    textArray1(5) = tFacturaTotal.Item(i).codiciones
-                    textArray1(6) = tFacturaTotal.Item(i).metodopago
-                    textArray1(7) = tFacturaTotal.Item(i).FormaPago
-                    textArray1(8) = tFacturaTotal.Item(i).UsoCFDI
-                    textArray1(9) = tFacturaTotal.Item(i).UUID
-                    Select Case tFacturaTotal.Item(i).Cancelada
+                    textArray1(0) = CStr(fRow.fecha_venta)
+                    textArray1(1) = CStr(fRow.n_factura)
+                    textArray1(2) = FormatNumber(fRow.total, 2)
+                    textArray1(3) = fRow.tipo_venta
+                    textArray1(4) = fRow.cliente
+                    textArray1(5) = fRow.codiciones
+                    textArray1(6) = fRow.metodopago
+                    textArray1(7) = fRow.FormaPago
+                    textArray1(8) = fRow.UsoCFDI
+                    textArray1(9) = fRow.UUID
+                    Select Case fRow.Cancelada
                         Case 0
                             textArray1(10) = Boolean.FalseString
                         Case 1
                             textArray1(10) = Boolean.TrueString
                     End Select
-                    Select Case tFacturaTotal.Item(i).ComproPago
+                    Select Case fRow.ComproPago
                         Case 0
                             textArray1(11) = Boolean.FalseString
                         Case 1
                             textArray1(11) = Boolean.TrueString
                     End Select
-                    textArray1(12) = FormatNumber(tFacturaTotal.Item(i).subtotal, 2)
-                    textArray1(13) = FormatNumber(tFacturaTotal.Item(i).iva, 2)
-                    textArray1(14) = tFacturaTotal.Item(i).ObjetoImp
+                    textArray1(12) = FormatNumber(fRow.subtotal, 2)
+                    textArray1(13) = FormatNumber(fRow.iva, 2)
+                    textArray1(14) = fRow.ObjetoImp
                     Dim values As String() = textArray1
                     DataGridView1.Rows.Add(values)
-                    i += 1
                 Next
             End If
         Catch ex As Exception
@@ -240,14 +249,14 @@ Public Class frmComplementoPago
         Dim dataTable As New DataTable
         Try
             limpiar()
-            wFolioFacturas = DBModelo.GetFolioFactura("PAGOS", Now.Date.Year)
+            wFolioFacturas = DBModelo.GetFolioFactura("PAGOS", CStr(Now.Date.Year))
 
             If IsNothing(wFolioFacturas) Then
                 MsgBox("No hay Folios Disponibles para Pagos", MsgBoxStyle.Critical, "Verificación de Folios Disponibles")
             Else
-                folio = wFolioFacturas.FolioActual
-                folio_inicial = wFolioFacturas.FolioInicial
-                folio_final = wFolioFacturas.FolioFinal
+                folio = CStr(wFolioFacturas.FolioActual)
+                folio_inicial = CStr(wFolioFacturas.FolioInicial)
+                folio_final = CStr(wFolioFacturas.FolioFinal)
 
                 lblPago.Text = ("Pago No.: P-" & folio)
 
@@ -272,13 +281,13 @@ Public Class frmComplementoPago
             MsgBox("La cancelación es por factura, favor de solo seleccionar una Factura a cancelar.", MsgBoxStyle.Information, "Complemento de Pagos")
         ElseIf (rowCount = 0) Then
             MsgBox("No hay factura seleccionada para cancelar, favor de solo seleccionar la Factura a cancelar.", MsgBoxStyle.Information, "Complemento de Pagos")
-        ElseIf DataGridView1(11, DataGridView1.CurrentRow.Index).Value = True Then
+        ElseIf CBool(DataGridView1(11, DataGridView1.CurrentRow.Index).Value) = True Then
             MsgBox("La factura aun tiene el status Pagada, favor de cancelar el pago y posteriormente la factura.", MsgBoxStyle.Information, "Complemento de Pagos")
-        ElseIf DataGridView1(10, DataGridView1.CurrentRow.Index).Value = True Then
+        ElseIf CBool(DataGridView1(10, DataGridView1.CurrentRow.Index).Value) = True Then
             MsgBox("La factura ya se encuentra cancelada.", MsgBoxStyle.Information, "Complemento de Pagos")
         ElseIf (rowCount = 1) Then
-            frmCancelacion.NoFactura = DataGridView1(1, DataGridView1.CurrentRow.Index).Value
-            frmCancelacion.UUID_Cancelar = DataGridView1(9, DataGridView1.CurrentRow.Index).Value
+            frmCancelacion.NoFactura = CStr(DataGridView1(1, DataGridView1.CurrentRow.Index).Value)
+            frmCancelacion.UUID_Cancelar = CStr(DataGridView1(9, DataGridView1.CurrentRow.Index).Value)
             frmCancelacion.RFC_ReceptorCancelar = TxtRFC.Text
             frmCancelacion.CancelaPago = False
             frmCancelacion.FechaFactura = Format(DataGridView1(0, DataGridView1.CurrentRow.Index).Value, "yyyyMMdd")
@@ -300,15 +309,15 @@ Public Class frmComplementoPago
             MsgBox("La cancelación es por Factura, favor de solo seleccionar una Factura a cancelar.", MsgBoxStyle.Information, "Complemento de Pagos")
         ElseIf (rowCount = 0) Then
             MsgBox("No hay factura seleccionada para cancelar, favor de solo seleccionar la Factura a cancelar.", MsgBoxStyle.Information, "Complemento de Pagos")
-        ElseIf DataGridView1(11, DataGridView1.CurrentRow.Index).Value = False Then
+        ElseIf CBool(DataGridView1(11, DataGridView1.CurrentRow.Index).Value) = False Then
             MsgBox("La factura aun no tiene Complemento de Pago generado.", MsgBoxStyle.Information, "Complemento de Pagos")
-        ElseIf DataGridView1(10, DataGridView1.CurrentRow.Index).Value = True Then
+        ElseIf CBool(DataGridView1(10, DataGridView1.CurrentRow.Index).Value) = True Then
             MsgBox("La factura ya se encuentra cancelada.", MsgBoxStyle.Information, "Complemento de Pagos")
         ElseIf (rowCount = 1) Then
-            frmCancelacion.NoFactura = DataGridView1(1, DataGridView1.CurrentRow.Index).Value
+            frmCancelacion.NoFactura = CStr(DataGridView1(1, DataGridView1.CurrentRow.Index).Value)
             Dim tComplementoPagoD As List(Of TblComplementoPagosD) = DBModelo.GetComplementoPagoD_ByFactura(frmCancelacion.NoFactura)
             If (tComplementoPagoD.Count > 0) Then
-                frmCancelacion.NoPago = tComplementoPagoD.Item(0).n_pago
+                frmCancelacion.NoPago = CStr(tComplementoPagoD.Item(0).n_pago)
                 frmCancelacion.UUID_Cancelar = tComplementoPagoD.Item(0).UUID
             Else
                 MsgBox("El Complemento de Pago de la Factura no ha sido encontrado.", MsgBoxStyle.Information, "Complemento de Pagos")
@@ -323,7 +332,10 @@ Public Class frmComplementoPago
     End Sub
 
     Private Sub btnComproPago_Click(sender As Object, e As EventArgs) Handles btnComproPago.Click
-        Dim amount As Decimal = DataGridView1(2, DataGridView1.CurrentRow.Index).Value
+        Dim amount As Decimal
+        For Each row As DataGridViewRow In DataGridView1.SelectedRows
+            amount = amount + CDec(DataGridView1(2, row.Index).Value)
+        Next
         If (txtNombre.Text = "") Then
             MsgBox("Favor de especificar un Cliente.", MsgBoxStyle.Critical, "Complemento de Pago")
             btnBuscar.Focus()
@@ -374,12 +386,12 @@ Public Class frmComplementoPago
             If (rowCount = 0) Then
                 MsgBox("No hay Factura(s) seleccionada(s) para generar Complemento de Pago.", MsgBoxStyle.Information, "Complemento de Pago")
             ElseIf (rowCount >= 1) Then
-                If DataGridView1(10, DataGridView1.CurrentRow.Index).Value = True Then
+                If CBool(DataGridView1(10, DataGridView1.CurrentRow.Index).Value) = True Then
                     MsgBox("Existen Facturas seleccionadas con Status Cancelada. Favor de excluir Facturas Canceladas.", MsgBoxStyle.Information, "Complemento de Pago")
-                ElseIf DataGridView1(11, DataGridView1.CurrentRow.Index).Value = True Then
+                ElseIf CBool(DataGridView1(11, DataGridView1.CurrentRow.Index).Value) = True Then
                     MsgBox("Existen Facturas seleccionadas con Status Pagadas. Favor de excluir Facturas Pagadas.", MsgBoxStyle.Information, "Complemento de Pago")
                 ElseIf (MsgBox(("¿Generar Complemento de Pago por " & Format(amount, "$ ###,###,###.00") & " MXN con Fecha del Pago " & Format(dtpFechaPago.Value, "dd-MM-yyyy") & "?"), MsgBoxStyle.YesNo, "Complemento de Pago") = MsgBoxResult.Yes) Then
-                    GenerarComplementoPago(amount)
+                    GenerarComplementoPago(CStr(amount))
                     GetInvoicesByClient()
                 End If
             End If
@@ -392,11 +404,11 @@ Public Class frmComplementoPago
         PrBImprimiendo.Step = 10
         Dim strComplementoPagoH As tblComplementoPagosH = New tblComplementoPagosH
         strComplementoPagoH.IdComp = CompanyCode
-        strComplementoPagoH.n_pago = folio
-        strComplementoPagoH.total = totalFacturas
+        strComplementoPagoH.n_pago = CInt(folio)
+        strComplementoPagoH.total = CDec(totalFacturas)
         strComplementoPagoH.cliente = txtNombre.Text
-        strComplementoPagoH.id_cliente = LblCliente.Text
-        strComplementoPagoH.fecha_pago = Format(Now, "yyyy-MM-dd")
+        strComplementoPagoH.id_cliente = CInt(LblCliente.Text)
+        strComplementoPagoH.fecha_pago = CDate(Format(Now, "yyyy-MM-dd"))
         strComplementoPagoH.formapago = CmdFormaPago.Text.Substring(0, 2)
         strComplementoPagoH.UsoCFDI = "CP01"
         strComplementoPagoH.Cancelado = 0
@@ -406,9 +418,9 @@ Public Class frmComplementoPago
             For Each row20 As DataGridViewRow In DataGridView1.SelectedRows
                 Dim sComplementoPagoD As TblComplementoPagosD = New TblComplementoPagosD
                 sComplementoPagoD.IdComp = CompanyCode
-                sComplementoPagoD.n_pago = folio
-                sComplementoPagoD.n_factura = row20.Cells(1).Value
-                sComplementoPagoD.UUID = row20.Cells(9).Value
+                sComplementoPagoD.n_pago = CInt(folio)
+                sComplementoPagoD.n_factura = CInt(row20.Cells(1).Value)
+                sComplementoPagoD.UUID = CStr(row20.Cells(9).Value)
                 sComplementoPagoD.Cancelado = 0
                 If DBModelo.InsertComplementoPagoD(sComplementoPagoD) = False Then
                     MsgBox(("Error al agregar detalle al Complemento de Pago " & folio), MsgBoxStyle.Critical, "Complemento de Pagos Detalle")
@@ -425,15 +437,15 @@ Public Class frmComplementoPago
             sdk.Iniciales.Add("remueve_acentos", "NO")
             sdk.Iniciales.Add("RESPUESTA_UTF8", "SI")
             sdk.Iniciales.Add("html_a_txt", "NO")
-            sdk.Iniciales.Add("validacion_local", "NO")
             sdk.Iniciales.Add("cfdi", (gv_CDFI_XML_PATH & folio_timbre & ".xml"))
             sdk.Iniciales.Add("xml_debug", (gv_CDFI_XML_PATH & "sin_" & folio_timbre & ".xml"))
+            sdk.Iniciales.Add("validacion_local", "NO")
 
             sdk.AgregaObjeto(PAC)
             sdk.AgregaObjeto(Conf)
 
             Dim FacHeader As New MFObject("factura")
-            FacHeader("Serie") = "P"
+            FacHeader("serie") = "P"
             FacHeader("folio") = folio
             FacHeader("fecha_expedicion") = Now.ToString("s")
             FacHeader("tipocomprobante") = "P"
@@ -452,14 +464,14 @@ Public Class frmComplementoPago
             FacReceptor("rfc") = TxtRFC.Text
             FacReceptor("nombre") = txtNombre.Text
             FacReceptor("UsoCFDI") = "CP01"
-            FacReceptor("DomicilioFiscalReceptor") = txtCP.Text
             FacReceptor("RegimenFiscalReceptor") = txtRFR.Text
+            FacReceptor("DomicilioFiscalReceptor") = txtCP.Text
 
             Dim FacConceptos As New MFObject("conceptos")
             Dim FacConcepto As New MFObject("0")
             FacConcepto("ClaveProdServ") = "84111506"
-            FacConcepto("Cantidad") = "1"
             FacConcepto("ClaveUnidad") = "ACT"
+            FacConcepto("Cantidad") = "1"
             FacConcepto("Descripcion") = "Pago"
             FacConcepto("ValorUnitario") = "0"
             FacConcepto("Importe") = "0"
@@ -478,18 +490,20 @@ Public Class frmComplementoPago
             FacPago("TipoCambioP") = "1"
 
             Dim dIVATotal As Decimal = 0
-            Dim dExentoTotal As Decimal = 0
+            Dim dBaseTotal16 As Decimal = 0
+            Dim dBaseTotal0 As Decimal = 0
+            Dim FacDoctoRelacionados As New MFObject("DoctoRelacionado")
+            Dim iIndex As Integer = 0
             For Each row20 As DataGridViewRow In DataGridView1.SelectedRows
-                Dim FacDoctoRelacionados As New MFObject("DoctoRelacionado")
-                Dim iIndex As Integer = 0
-                Dim FacDoctoRelacionado As New MFObject(iIndex)
-                Dim sPagado As String = Trim(row20.Cells(2).Value).Replace(",", "")
+                Dim FacDoctoRelacionado As New MFObject(CStr(iIndex))
+                Dim sPagado As String = Trim(CStr(row20.Cells(2).Value)).Replace(",", "")
                 Dim sObjImp As String = row20.Cells(14).Value.ToString
-                Dim sIVA As String = Trim(row20.Cells(13).Value).Replace(",", "")
+                Dim sIVA As String = Trim(FormatNumber(CDec(sPagado) - (CDec(sPagado) / CDec(FactorIVA)), 6)).Replace(",", "")
+                Dim sBase As String = Trim(FormatNumber(CDec(sPagado) - CDec(sIVA), 6)).Replace(",", "")
 
-                FacDoctoRelacionado("IdDocumento") = row20.Cells(9).Value
+                FacDoctoRelacionado("IdDocumento") = CStr(row20.Cells(9).Value)
                 FacDoctoRelacionado("Serie") = "B"
-                FacDoctoRelacionado("Folio") = row20.Cells(1).Value
+                FacDoctoRelacionado("Folio") = CStr(row20.Cells(1).Value)
                 FacDoctoRelacionado("MonedaDR") = "MXN"
                 FacDoctoRelacionado("NumParcialidad") = "1"
                 FacDoctoRelacionado("ImpSaldoAnt") = sPagado
@@ -499,69 +513,76 @@ Public Class frmComplementoPago
                 FacDoctoRelacionado("ObjetoImpDR") = sObjImp
 
                 If sObjImp = "02" Then
-                    Dim ImpuestosDR As New MFObject("ImpuestosDR")
-                    Dim TrasladoDR As New MFObject("TrasladoDR")
+                    Dim ImpuestosDR As New MFObject("ImpuestosDR.TrasladoDR")
                     Dim TrasladoDR_0 As New MFObject("0")
 
-                    TrasladoDR_0("BaseDR") = Trim(FormatNumber((100 * CDec(sIVA)) / 16, 2)).Replace(",", "")
-                    TrasladoDR_0("ImpuestoDR") = "002"
-                    TrasladoDR_0("TipoFactorDR") = "Tasa"
-                    TrasladoDR_0("TasaOCuotaDR") = FormatNumber(FactorIVA - 1, 6)
-                    TrasladoDR_0("ImporteDR") = sIVA
-                    dIVATotal = dIVATotal + CDec(sIVA)
+                    If CDec(sIVA) > CDec("0.00") Then
+                        TrasladoDR_0("BaseDR") = sBase
+                        TrasladoDR_0("ImpuestoDR") = "002"
+                        TrasladoDR_0("TipoFactorDR") = "Tasa"
+                        TrasladoDR_0("TasaOCuotaDR") = FormatNumber(CDbl(FactorIVA) - 1, 6)
+                        TrasladoDR_0("ImporteDR") = sIVA
+                        dBaseTotal16 = dBaseTotal16 + CDec(sBase)
+                        dIVATotal = dIVATotal + CDec(sIVA)
+                    Else
+                        TrasladoDR_0("BaseDR") = sBase
+                        TrasladoDR_0("ImpuestoDR") = "002"
+                        TrasladoDR_0("TipoFactorDR") = "Tasa"
+                        TrasladoDR_0("TasaOCuotaDR") = "0.000000"
+                        TrasladoDR_0("ImporteDR") = "0.00"
+                        dBaseTotal0 = dBaseTotal0 + CDec(sBase)
+                    End If
 
-                    TrasladoDR.AgregaSubnodo(TrasladoDR_0)
-                    ImpuestosDR.AgregaSubnodo(TrasladoDR)
+
+                    ImpuestosDR.AgregaSubnodo(TrasladoDR_0)
                     FacDoctoRelacionado.AgregaSubnodo(ImpuestosDR)
-                Else
-                    dExentoTotal = dExentoTotal + sPagado
                 End If
 
                 FacDoctoRelacionados.AgregaSubnodo(FacDoctoRelacionado)
-                FacPago.AgregaSubnodo(FacDoctoRelacionados)
+                iIndex = iIndex + 1
             Next
 
-            If dIVATotal <> CDec("0.00") Then
-                Dim ImpuestosP As New MFObject("ImpuestosP")
-                Dim TrasladosP As New MFObject("TrasladosP")
-                Dim TrasladosP_0 As New MFObject("0")
+            Dim lv_item As Integer = 0
+            If dBaseTotal16 > CDec("0.00") Then
+                Dim ImpuestosP As New MFObject("ImpuestosP.TrasladosP")
+                Dim TrasladosP_0 As New MFObject(lv_item.ToString)
 
-                TrasladosP_0("BaseP") = Trim(FormatNumber((100 * dIVATotal) / 16, 2)).Replace(",", "")
-                TrasladosP_0("ImpuestoP") = "002"
+                TrasladosP_0("BaseP") = Trim(FormatNumber(dBaseTotal16, 6)).Replace(",", "")
                 TrasladosP_0("TipoFactorP") = "Tasa"
-                TrasladosP_0("TasaOCuotaP") = FormatNumber(FactorIVA - 1, 6)
+                TrasladosP_0("ImpuestoP") = "002"
+                TrasladosP_0("TasaOCuotaP") = FormatNumber(CDbl(FactorIVA) - 1, 6)
                 TrasladosP_0("ImporteP") = dIVATotal.ToString()
+                ImpuestosP.AgregaSubnodo(TrasladosP_0)
+                FacPago.AgregaSubnodo(ImpuestosP)
+                lv_item = lv_item + 1
+            End If
 
-                TrasladosP.AgregaSubnodo(TrasladosP_0)
-                ImpuestosP.AgregaSubnodo(TrasladosP)
+            If dBaseTotal0 > CDec("0.00") Then
+                Dim ImpuestosP As New MFObject("ImpuestosP.TrasladosP")
+                Dim TrasladosP_0 As New MFObject(lv_item.ToString)
+
+                TrasladosP_0("BaseP") = Trim(FormatNumber(dBaseTotal0, 6)).Replace(",", "")
+                TrasladosP_0("TipoFactorP") = "Tasa"
+                TrasladosP_0("ImpuestoP") = "002"
+                TrasladosP_0("TasaOCuotaP") = "0.000000"
+                TrasladosP_0("ImporteP") = "0.00"
+                ImpuestosP.AgregaSubnodo(TrasladosP_0)
                 FacPago.AgregaSubnodo(ImpuestosP)
             End If
+
+            FacPago.AgregaSubnodo(FacDoctoRelacionados)
 
             FacPagos.AgregaSubnodo(FacPago)
             FacPagos20.AgregaSubnodo(FacPagos)
             Dim pTotales As New MFObject("Totales")
-            pTotales("TotalTrasladosImpuestoIVA8") = "0.00"
-            If dIVATotal <> CDec("0.00") Then
-                pTotales("TotalTrasladosImpuestoIVA16") = dIVATotal.ToString
-            Else
-                pTotales("TotalTrasladosImpuestoIVA16") = "0.00"
+            If dBaseTotal16 > CDec("0.00") Then
+                pTotales("TotalTrasladosImpuestoIVA16") = Trim(FormatNumber(dIVATotal, 2)).Replace(",", "")
+                pTotales("TotalTrasladosBaseIVA16") = Trim(FormatNumber(dBaseTotal16, 2)).Replace(",", "")
             End If
-            pTotales("TotalTrasladosImpuestoIVA0") = "0.00"
-            If dExentoTotal <> CDec("0.00") Then
-                pTotales("TotalTrasladosBaseIVAExento") = dExentoTotal.ToString
-            Else
-                pTotales("TotalTrasladosBaseIVAExento") = "0.00"
+            If dBaseTotal0 > CDec("0.00") Then
+                pTotales("TotalTrasladosImpuestoIVA0") = "0.00"
+                pTotales("TotalTrasladosBaseIVA0") = Trim(FormatNumber(dBaseTotal0, 2)).Replace(",", "")
             End If
-            pTotales("TotalTrasladosBaseIVA8") = "0.00"
-            If dIVATotal <> CDec("0.00") Then
-                pTotales("TotalTrasladosBaseIVA16") = Trim(FormatNumber((100 * dIVATotal) / 16, 2)).Replace(",", "")
-            Else
-                pTotales("TotalTrasladosBaseIVA16") = "0.00"
-            End If
-            pTotales("TotalTrasladosBaseIVA0") = "0.00"
-            pTotales("TotalRetencionesIVA") = "0.00"
-            pTotales("TotalRetencionesISR") = "0.00"
-            pTotales("TotalRetencionesIEPS") = "0.00"
             pTotales("MontoTotalPagos") = totalFacturas
 
             FacPagos20.AgregaSubnodo(pTotales)
@@ -578,18 +599,18 @@ Public Class frmComplementoPago
                 Dim respuesta As SDKRespuesta = sdk.Timbrar("C:\sdk2\timbrar32.bat", gv_CDFI_XML_PATH, folio_timbre, False)
                 PrBImprimiendo.PerformStep()
 
-                If Not respuesta.Codigo_MF_Numero = 0 Then
+                If Not CInt(respuesta.Codigo_MF_Numero) = 0 Then
                     PrBImprimiendo.Value = 100
                     MsgBox($"Código: {respuesta.Codigo_MF_Numero} Mensaje: {respuesta.Codigo_MF_Texto}", MsgBoxStyle.Critical, "Complemento de Pagos")
                     PrBImprimiendo.Value = 0
                 Else
                     MsgBox(("Complemento de Pago " & folio_timbre & " Generado Correctamente"), MsgBoxStyle.Information, "Complemento de Pagos")
-                    folio = folio + 1
-                    wFolioFacturas.FolioActual = folio
+                    folio = CStr(CInt(folio) + 1)
+                    wFolioFacturas.FolioActual = CType(folio, Integer?)
                     If DBModelo.Update_PV_FoliosNC_Actual(wFolioFacturas) Then
                         For Each row20 As DataGridViewRow In DataGridView1.SelectedRows
                             Dim sFacturaNo = row20.Cells(1).Value
-                            Dim wFactura As tblFacturaTotal = DBModelo.GetFacturaHeader(sFacturaNo)
+                            Dim wFactura As tblFacturaTotal = DBModelo.GetFacturaHeader(CStr(sFacturaNo))
                             If Not IsNothing(wFactura) Then
                                 wFactura.ComproPago = 1
                                 wFactura.pdf = gv_CDFI_XML_PATH & folio_timbre & ".pdf"

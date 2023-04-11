@@ -31,5 +31,6 @@ Partial Public Class tblConfiguracion
     Public Property TipoCambio As Nullable(Of Decimal)
     Public Property RegimenFiscal As String
     Public Property LugarExpedicion As String
+    Public Property NoCertificado As String
 
 End Class

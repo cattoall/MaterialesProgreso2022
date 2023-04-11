@@ -44,6 +44,7 @@ Partial Class FrmClientes
         Me.txtLimite = New MetroFramework.Controls.MetroTextBox()
         Me.txtCredito = New MetroFramework.Controls.MetroTextBox()
         Me.MetroTabPage3 = New MetroFramework.Controls.MetroTabPage()
+        Me.cmbRegimen = New MetroFramework.Controls.MetroComboBox()
         Me.ChkTasaCero = New MetroFramework.Controls.MetroCheckBox()
         Me.cmbUsoCFDI = New MetroFramework.Controls.MetroComboBox()
         Me.cmbMetodoPago = New MetroFramework.Controls.MetroComboBox()
@@ -57,8 +58,6 @@ Partial Class FrmClientes
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.txtRegimenFiscal = New MetroFramework.Controls.MetroTextBox()
-        Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
         Me.MetroTabControl1.SuspendLayout()
         Me.MetroTabPage1.SuspendLayout()
         Me.MetroTabPage2.SuspendLayout()
@@ -120,9 +119,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtEmail.CustomButton.Image = Nothing
-        Me.txtEmail.CustomButton.Location = New System.Drawing.Point(347, 1)
+        Me.txtEmail.CustomButton.Location = New System.Drawing.Point(463, 1)
         Me.txtEmail.CustomButton.Name = ""
-        Me.txtEmail.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtEmail.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtEmail.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtEmail.CustomButton.TabIndex = 1
         Me.txtEmail.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -153,9 +152,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtMovil.CustomButton.Image = Nothing
-        Me.txtMovil.CustomButton.Location = New System.Drawing.Point(127, 2)
+        Me.txtMovil.CustomButton.Location = New System.Drawing.Point(169, 2)
         Me.txtMovil.CustomButton.Name = ""
-        Me.txtMovil.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtMovil.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtMovil.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtMovil.CustomButton.TabIndex = 1
         Me.txtMovil.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -186,9 +185,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtTelFijo.CustomButton.Image = Nothing
-        Me.txtTelFijo.CustomButton.Location = New System.Drawing.Point(124, 2)
+        Me.txtTelFijo.CustomButton.Location = New System.Drawing.Point(166, 2)
         Me.txtTelFijo.CustomButton.Name = ""
-        Me.txtTelFijo.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtTelFijo.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtTelFijo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtTelFijo.CustomButton.TabIndex = 1
         Me.txtTelFijo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -219,9 +218,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtRFC.CustomButton.Image = Nothing
-        Me.txtRFC.CustomButton.Location = New System.Drawing.Point(127, 2)
+        Me.txtRFC.CustomButton.Location = New System.Drawing.Point(169, 2)
         Me.txtRFC.CustomButton.Name = ""
-        Me.txtRFC.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtRFC.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtRFC.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtRFC.CustomButton.TabIndex = 1
         Me.txtRFC.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -252,9 +251,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtCodigoPostal.CustomButton.Image = Nothing
-        Me.txtCodigoPostal.CustomButton.Location = New System.Drawing.Point(124, 2)
+        Me.txtCodigoPostal.CustomButton.Location = New System.Drawing.Point(166, 2)
         Me.txtCodigoPostal.CustomButton.Name = ""
-        Me.txtCodigoPostal.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtCodigoPostal.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtCodigoPostal.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtCodigoPostal.CustomButton.TabIndex = 1
         Me.txtCodigoPostal.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -285,9 +284,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtEstado.CustomButton.Image = Nothing
-        Me.txtEstado.CustomButton.Location = New System.Drawing.Point(127, 2)
+        Me.txtEstado.CustomButton.Location = New System.Drawing.Point(169, 2)
         Me.txtEstado.CustomButton.Name = ""
-        Me.txtEstado.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtEstado.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtEstado.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtEstado.CustomButton.TabIndex = 1
         Me.txtEstado.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -318,9 +317,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtCiudad.CustomButton.Image = Nothing
-        Me.txtCiudad.CustomButton.Location = New System.Drawing.Point(124, 2)
+        Me.txtCiudad.CustomButton.Location = New System.Drawing.Point(166, 2)
         Me.txtCiudad.CustomButton.Name = ""
-        Me.txtCiudad.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtCiudad.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtCiudad.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtCiudad.CustomButton.TabIndex = 1
         Me.txtCiudad.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -351,9 +350,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtColonia.CustomButton.Image = Nothing
-        Me.txtColonia.CustomButton.Location = New System.Drawing.Point(227, 2)
+        Me.txtColonia.CustomButton.Location = New System.Drawing.Point(303, 2)
         Me.txtColonia.CustomButton.Name = ""
-        Me.txtColonia.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtColonia.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtColonia.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtColonia.CustomButton.TabIndex = 1
         Me.txtColonia.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -384,9 +383,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtNumExterno.CustomButton.Image = Nothing
-        Me.txtNumExterno.CustomButton.Location = New System.Drawing.Point(34, 2)
+        Me.txtNumExterno.CustomButton.Location = New System.Drawing.Point(46, 2)
         Me.txtNumExterno.CustomButton.Name = ""
-        Me.txtNumExterno.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtNumExterno.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtNumExterno.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtNumExterno.CustomButton.TabIndex = 1
         Me.txtNumExterno.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -417,9 +416,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtDomicilio.CustomButton.Image = Nothing
-        Me.txtDomicilio.CustomButton.Location = New System.Drawing.Point(347, 1)
+        Me.txtDomicilio.CustomButton.Location = New System.Drawing.Point(463, 1)
         Me.txtDomicilio.CustomButton.Name = ""
-        Me.txtDomicilio.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtDomicilio.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtDomicilio.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtDomicilio.CustomButton.TabIndex = 1
         Me.txtDomicilio.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -450,9 +449,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtAmat.CustomButton.Image = Nothing
-        Me.txtAmat.CustomButton.Location = New System.Drawing.Point(347, 1)
+        Me.txtAmat.CustomButton.Location = New System.Drawing.Point(463, 1)
         Me.txtAmat.CustomButton.Name = ""
-        Me.txtAmat.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtAmat.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtAmat.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtAmat.CustomButton.TabIndex = 1
         Me.txtAmat.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -483,9 +482,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtApat.CustomButton.Image = Nothing
-        Me.txtApat.CustomButton.Location = New System.Drawing.Point(347, 1)
+        Me.txtApat.CustomButton.Location = New System.Drawing.Point(463, 1)
         Me.txtApat.CustomButton.Name = ""
-        Me.txtApat.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtApat.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtApat.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtApat.CustomButton.TabIndex = 1
         Me.txtApat.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -517,9 +516,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtNombre.CustomButton.Image = Nothing
-        Me.txtNombre.CustomButton.Location = New System.Drawing.Point(347, 1)
+        Me.txtNombre.CustomButton.Location = New System.Drawing.Point(463, 1)
         Me.txtNombre.CustomButton.Name = ""
-        Me.txtNombre.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtNombre.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtNombre.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtNombre.CustomButton.TabIndex = 1
         Me.txtNombre.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -579,9 +578,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtLimite.CustomButton.Image = Nothing
-        Me.txtLimite.CustomButton.Location = New System.Drawing.Point(66, 2)
+        Me.txtLimite.CustomButton.Location = New System.Drawing.Point(88, 2)
         Me.txtLimite.CustomButton.Name = ""
-        Me.txtLimite.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtLimite.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtLimite.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtLimite.CustomButton.TabIndex = 1
         Me.txtLimite.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -612,9 +611,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtCredito.CustomButton.Image = Nothing
-        Me.txtCredito.CustomButton.Location = New System.Drawing.Point(66, 2)
+        Me.txtCredito.CustomButton.Location = New System.Drawing.Point(88, 2)
         Me.txtCredito.CustomButton.Name = ""
-        Me.txtCredito.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtCredito.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtCredito.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtCredito.CustomButton.TabIndex = 1
         Me.txtCredito.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -640,8 +639,7 @@ Partial Class FrmClientes
         '
         'MetroTabPage3
         '
-        Me.MetroTabPage3.Controls.Add(Me.MetroLabel1)
-        Me.MetroTabPage3.Controls.Add(Me.txtRegimenFiscal)
+        Me.MetroTabPage3.Controls.Add(Me.cmbRegimen)
         Me.MetroTabPage3.Controls.Add(Me.ChkTasaCero)
         Me.MetroTabPage3.Controls.Add(Me.cmbUsoCFDI)
         Me.MetroTabPage3.Controls.Add(Me.cmbMetodoPago)
@@ -662,6 +660,19 @@ Partial Class FrmClientes
         Me.MetroTabPage3.VerticalScrollbarHighlightOnWheel = False
         Me.MetroTabPage3.VerticalScrollbarSize = 10
         '
+        'cmbRegimen
+        '
+        Me.cmbRegimen.FormattingEnabled = True
+        Me.cmbRegimen.ItemHeight = 23
+        Me.cmbRegimen.Items.AddRange(New Object() {"601-General de Ley Personas Morales", "603-Personas Morales con Fines no Lucrativos", "605-Sueldos y Salarios e Ingresos Asimilados a Salarios", "606-Arrendamiento", "607-Régimen de Enajenación o Adquisición de Bienes", "608-Demás ingresos", "609-Consolidación", "610-Residentes en el Extranjero sin Establecimiento Permanente en México", "611-Ingresos por Dividendos (socios y accionistas)", "612-Personas Físicas con Actividades Empresariales y Profesionales", "614-Ingresos por intereses", "615-Régimen de los ingresos por obtención de premios", "616-Sin obligaciones fiscales", "620-Sociedades Cooperativas de Producción que optan por diferir sus ingresos", "621-Incorporación Fiscal", "622-Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras", "623-Opcional para Grupos de Sociedades", "624-Coordinados", "625-Régimen de las Actividades Empresariales con ingresos a través de Plataformas" &
+                " Tecnológicas", "626-Régimen Simplificado de Confianza", "628-Hidrocarburos", "629-De los Regímenes Fiscales Preferentes y de las Empresas Multinacionales", "630-Enajenación de acciones en bolsa de valores"})
+        Me.cmbRegimen.Location = New System.Drawing.Point(3, 146)
+        Me.cmbRegimen.Name = "cmbRegimen"
+        Me.cmbRegimen.PromptText = "Régimen Fiscal"
+        Me.cmbRegimen.Size = New System.Drawing.Size(487, 29)
+        Me.cmbRegimen.TabIndex = 12
+        Me.cmbRegimen.UseSelectable = True
+        '
         'ChkTasaCero
         '
         Me.ChkTasaCero.AutoSize = True
@@ -678,7 +689,7 @@ Partial Class FrmClientes
         Me.cmbUsoCFDI.ItemHeight = 23
         Me.cmbUsoCFDI.Items.AddRange(New Object() {"G01-Adquisición de mercancías", "G02-Devoluciones, descuentos o bonificaciones", "G03-Gastos en general", "I01-Construcciones", "I02-Mobiliario y equipo de oficina por inversiones", "I03-Equipo de transporte", "I04-Equipo de cómputo y accesorios", "I05-Dados, troqueles, moldes, matrices y herramental", "I06-Comunicaciones telefónicas", "I07-Comunicaciones satelitales", "I08-Otra maquinaria y equipo", "D01-Honorarios médicos, dentales y gastos hospitalarios", "D02-Gastos médicos por incapacidad o discapacidad", "D03-Gastos funerales", "D04-Donativos", "D05-Intereses reales efectivamente pagados por créditos hipotecarios (casa habita" &
                 "ción)", "D06-Aportaciones voluntarias al SAR", "D07-Primas por seguros de gastos médicos", "D08-Gastos de transportación escolar obligatoria", "D09-Depósito de cuentas para el ahorro, primas que tengan como planes de pensione" &
-                "s", "D10-Pagos por servicios educativos (colegiaturas)", "P01-Por definir"})
+                "s", "D10-Pagos por servicios educativos (colegiaturas)", "CP01-Pagos", "CN01-Nómina", "S01-Sin Efectos Fiscales"})
         Me.cmbUsoCFDI.Location = New System.Drawing.Point(3, 253)
         Me.cmbUsoCFDI.Name = "cmbUsoCFDI"
         Me.cmbUsoCFDI.PromptText = "Uso del CFDI"
@@ -717,9 +728,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtCuenta.CustomButton.Image = Nothing
-        Me.txtCuenta.CustomButton.Location = New System.Drawing.Point(40, 1)
+        Me.txtCuenta.CustomButton.Location = New System.Drawing.Point(53, 1)
         Me.txtCuenta.CustomButton.Name = ""
-        Me.txtCuenta.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtCuenta.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtCuenta.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtCuenta.CustomButton.TabIndex = 1
         Me.txtCuenta.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -801,9 +812,9 @@ Partial Class FrmClientes
         '
         '
         Me.txtObs.CustomButton.Image = Nothing
-        Me.txtObs.CustomButton.Location = New System.Drawing.Point(148, 1)
+        Me.txtObs.CustomButton.Location = New System.Drawing.Point(197, 1)
         Me.txtObs.CustomButton.Name = ""
-        Me.txtObs.CustomButton.Size = New System.Drawing.Size(217, 235)
+        Me.txtObs.CustomButton.Size = New System.Drawing.Size(289, 289)
         Me.txtObs.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtObs.CustomButton.TabIndex = 1
         Me.txtObs.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -835,7 +846,7 @@ Partial Class FrmClientes
         Me.btnSave.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.save_16px
         Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSave.Location = New System.Drawing.Point(29, 406)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 78
@@ -850,7 +861,7 @@ Partial Class FrmClientes
         Me.btnEliminar.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.trash_can_16px
         Me.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnEliminar.Location = New System.Drawing.Point(109, 406)
-        Me.btnEliminar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnEliminar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(75, 23)
         Me.btnEliminar.TabIndex = 79
@@ -865,54 +876,13 @@ Partial Class FrmClientes
         Me.Button1.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.close_window_16px
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button1.Location = New System.Drawing.Point(439, 406)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 80
         Me.Button1.Text = "Salir"
         Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'txtRegimenFiscal
-        '
-        '
-        '
-        '
-        Me.txtRegimenFiscal.CustomButton.Image = Nothing
-        Me.txtRegimenFiscal.CustomButton.Location = New System.Drawing.Point(53, 1)
-        Me.txtRegimenFiscal.CustomButton.Name = ""
-        Me.txtRegimenFiscal.CustomButton.Size = New System.Drawing.Size(21, 21)
-        Me.txtRegimenFiscal.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
-        Me.txtRegimenFiscal.CustomButton.TabIndex = 1
-        Me.txtRegimenFiscal.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.txtRegimenFiscal.CustomButton.UseSelectable = True
-        Me.txtRegimenFiscal.CustomButton.Visible = False
-        Me.txtRegimenFiscal.Lines = New String(-1) {}
-        Me.txtRegimenFiscal.Location = New System.Drawing.Point(121, 152)
-        Me.txtRegimenFiscal.MaxLength = 5
-        Me.txtRegimenFiscal.Name = "txtRegimenFiscal"
-        Me.txtRegimenFiscal.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtRegimenFiscal.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.txtRegimenFiscal.SelectedText = ""
-        Me.txtRegimenFiscal.SelectionLength = 0
-        Me.txtRegimenFiscal.SelectionStart = 0
-        Me.txtRegimenFiscal.ShortcutsEnabled = True
-        Me.txtRegimenFiscal.Size = New System.Drawing.Size(75, 23)
-        Me.txtRegimenFiscal.TabIndex = 10
-        Me.txtRegimenFiscal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtRegimenFiscal.UseSelectable = True
-        Me.txtRegimenFiscal.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.txtRegimenFiscal.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
-        '
-        'MetroLabel1
-        '
-        Me.MetroLabel1.AutoSize = True
-        Me.MetroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Bold
-        Me.MetroLabel1.Location = New System.Drawing.Point(3, 152)
-        Me.MetroLabel1.Name = "MetroLabel1"
-        Me.MetroLabel1.Size = New System.Drawing.Size(112, 19)
-        Me.MetroLabel1.TabIndex = 11
-        Me.MetroLabel1.Text = "Régimen Fiscal:"
         '
         'FrmClientes
         '
@@ -973,6 +943,5 @@ End Sub
     Friend WithEvents btnSave As Button
     Friend WithEvents btnEliminar As Button
     Friend WithEvents Button1 As Button
-    Friend WithEvents MetroLabel1 As MetroFramework.Controls.MetroLabel
-    Friend WithEvents txtRegimenFiscal As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents cmbRegimen As MetroFramework.Controls.MetroComboBox
 End Class

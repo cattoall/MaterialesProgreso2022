@@ -2,7 +2,7 @@
 Imports System.Data.SqlClient
 
 Public Class FrmClientesWendy
-    Public lv_idCliente
+    Public lv_idCliente As Integer
 
     Private Sub CmdSalir_Click(sender As System.Object, e As System.EventArgs) Handles CmdSalir.Click
         Me.Close()
@@ -231,7 +231,7 @@ Public Class FrmClientesWendy
                 e.Handled = False
             End If
         Else
-            If e.KeyChar = "." And txtLimite.Text.Contains(".") Then e.KeyChar = "" 'Check for Duplicate and Create Null if Yes   
+            If e.KeyChar = "." And txtLimite.Text.Contains(".") Then e.KeyChar = CChar("") 'Check for Duplicate and Create Null if Yes   
             e.Handled = False
         End If
     End Sub

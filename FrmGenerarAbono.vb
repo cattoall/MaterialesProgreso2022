@@ -26,10 +26,10 @@
         total = Trim(Replace(total, ",", ""))
         total_nota = Trim(Replace(total_nota, "$", ""))
         total_nota = Trim(Replace(total_nota, ",", ""))
-        lv_resto = (total - txttotal.Text)
+        lv_resto = CDbl(total) - CDbl(txttotal.Text)
 
-        Dim w_cobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(Convert.ToInt32(txtventa.Text), tipodoc, idcliente)
-        w_cobrar.resto = lv_resto
+        Dim w_cobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(Convert.ToInt32(txtventa.Text), tipodoc, CInt(idcliente))
+        w_cobrar.resto = CDec(lv_resto)
 
         If DBModelo.Update_Cobrar(w_cobrar) Then
         Else
@@ -54,7 +54,7 @@
                 e.Handled = False
             End If
         Else
-            If e.KeyChar = "." And txttotal.Text.Contains(".") Then e.KeyChar = "" 'Check for Duplicate and Create Null if Yes   
+            If e.KeyChar = "." And txttotal.Text.Contains(".") Then e.KeyChar = CChar("") 'Check for Duplicate and Create Null if Yes   
             e.Handled = False
         End If
     End Sub
@@ -84,7 +84,7 @@
             txttotal.Focus()
             Exit Sub
 
-        ElseIf txttotal.Text < 0 Then
+        ElseIf CDbl(txttotal.Text) < 0 Then
             MsgBox("Introduce valor valido", MsgBoxStyle.Exclamation, "Mensaje de Informacion")
             txttotal.Text = ""
             txttotal.Focus()
@@ -104,9 +104,9 @@
         Dim w_HistPago As tblHistorialPagos = New tblHistorialPagos
 
         w_HistPago.IdComp = CompanyCode
-        w_HistPago.fecha = lv_fecha
+        w_HistPago.fecha = CDate(lv_fecha)
         w_HistPago.numeroVenta = txtventa.Text
-        w_HistPago.total = txttotal.Text
+        w_HistPago.total = CType(txttotal.Text, Decimal?)
         w_HistPago.claveCliente = idcliente
         w_HistPago.cliente = cliente
         w_HistPago.observaciones = txtobservaciones.Text
@@ -116,7 +116,7 @@
             actualiza()
             MsgBox("Abono a Cuenta Generado Correctamente", MsgBoxStyle.Information, "Generar Abono a Cuenta")
             abono = txttotal.Text
-            resto_total = resto_total - abono
+            resto_total = CStr(CDbl(resto_total) - CDbl(abono))
             cuenta = txtventa.Text
             fecha = ""
             txtventa.Text = ""

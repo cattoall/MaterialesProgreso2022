@@ -1,5 +1,5 @@
 ﻿Public Class FrmBuscarUOM
-    Private lv_idUOM
+    Private lv_idUOM As Integer
     Public lv_ValorAnterior As String
 
     Private Sub LimpiarObjetos()
@@ -46,9 +46,9 @@
 
     Private Sub MetroGrid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellDoubleClick
         Add_Update = True
-        lv_idUOM = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-        txtUOM.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
-        lv_ValorAnterior = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
+        lv_idUOM = CInt(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
+        txtUOM.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
+        lv_ValorAnterior = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
     End Sub
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs)

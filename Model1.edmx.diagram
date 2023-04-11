@@ -5,14 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8ee950fd9763423eb188fe8fc246434d" Name="Diagram1" ZoomLevel="84">
-        <EntityTypeShape EntityType="pv_salvadorModel1.tblClientes" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblCobrar" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.TblComplementoPagosD" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="pv_salvadorModel1.tblComplementoPagosH" Width="1.5" PointX="2.75" PointY="4.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblCompra" Width="1.5" PointX="4.75" PointY="3.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblConfiguracion" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblCotizacion" Width="1.5" PointX="6.75" PointY="6.75" />
-        <EntityTypeShape EntityType="pv_salvadorModel1.tblFacturaTotal" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblFactura" Width="1.5" PointX="0.75" PointY="8.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblFamilia" Width="1.5" PointX="2.75" PointY="8.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblFolioFacturas" Width="1.5" PointX="8.75" PointY="7.75" />
@@ -22,7 +19,6 @@
         <EntityTypeShape EntityType="pv_salvadorModel1.tblHistorialPagosProveedores" Width="1.5" PointX="2.75" PointY="11.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblLinea" Width="1.5" PointX="4.75" PointY="11.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblMarcas" Width="1.5" PointX="6.75" PointY="11.75" />
-        <EntityTypeShape EntityType="pv_salvadorModel1.tblNC" Width="1.5" PointX="8.75" PointY="11.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblNcDetalle" Width="1.5" PointX="10.75" PointY="11.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblOrdenCompra" Width="1.5" PointX="12.75" PointY="0.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblOrdenCompraDe" Width="1.5" PointX="12.75" PointY="3.75" />
@@ -46,6 +42,11 @@
         <EntityTypeShape EntityType="pv_salvadorModel1.tblUsuarios" Width="1.5" PointX="8.75" PointY="17.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblVenta" Width="1.5" PointX="18.75" PointY="0.75" />
         <EntityTypeShape EntityType="pv_salvadorModel1.tblVentaPedido" Width="1.5" PointX="18.75" PointY="5.75" />
+        <EntityTypeShape EntityType="pv_salvadorModel1.tblRegimenFiscal" Width="1.5" PointX="11.375" PointY="18.75" />
+        <EntityTypeShape EntityType="pv_salvadorModel1.tblClientes" Width="1.5" PointX="13.75" PointY="18.75" />
+        <EntityTypeShape EntityType="pv_salvadorModel1.tblComplementoPagosH" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="pv_salvadorModel1.tblFacturaTotal" Width="1.5" PointX="19.75" PointY="10.75" />
+        <EntityTypeShape EntityType="pv_salvadorModel1.tblNC" Width="1.5" PointX="15.75" PointY="19.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

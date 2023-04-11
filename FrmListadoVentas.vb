@@ -1,7 +1,7 @@
 ﻿
 Public Class FrmListadoVentas
 
-    Private Sub ConfigurarGridDetalle(ByRef dv As DataGridView)
+    Private Sub ConfigurarGridDetalle(ByRef dv As MetroFramework.Controls.MetroGrid)
         dv.Columns(0).Visible = False
         dv.Columns(1).Visible = False
         dv.Columns(2).Visible = False
@@ -74,11 +74,11 @@ Public Class FrmListadoVentas
         LblTotal.Text = "$ 0.00"
     End Sub
 
-    Private Sub CmdGenerarListado_Click(sender As Object, e As EventArgs) 
-
+    Private Sub CmdGenerarListado_Click(sender As Object, e As EventArgs)
+        Call btnAdd_Click(sender, e)
     End Sub
 
-    Private Sub ConfigurarGrid(ByRef dv As DataGridView)
+    Private Sub ConfigurarGrid(ByRef dv As MetroFramework.Controls.MetroGrid)
 
         dv.Columns(0).Visible = False
 
@@ -150,11 +150,11 @@ Public Class FrmListadoVentas
 
     Private Sub DataGridConsulta_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridConsulta.CellClick
         LblNumTicket.Visible = True
-        LblTotal.Text = Format(Me.DataGridConsulta.Item(5, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,###.00")
-        LblNumTicket.Text = Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value
-        NoFactura = Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value
+        LblTotal.Text = Format(DataGridConsulta.Item(5, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,###.00")
+        LblNumTicket.Text = CStr(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value)
+        NoFactura = CStr(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value)
 
-        Dim tTickets As List(Of tblTicket) = DBModelo.Get_PV_TicketsDetalle(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value)
+        Dim tTickets As List(Of tblTicket) = DBModelo.Get_PV_TicketsDetalle(CInt(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value))
 
         DataGridTikect.Refresh()
         DataGridTikect.DataSource = tTickets.ToList()
@@ -167,9 +167,28 @@ Public Class FrmListadoVentas
         Dim tVentas As List(Of tblVenta) = DBModelo.Get_VentasByDate(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"))
 
         DataGridConsulta.Refresh()
-        DataGridConsulta.DataSource = tVentas.ToList()
+        DataGridConsulta.Rows.Clear()
 
-        ConfigurarGrid(DataGridConsulta)
+        For Each venta As tblVenta In tVentas
+            Dim row As String() = New String() {venta.IdComp,
+                                                venta.nticket.ToString,
+                                                Format(CDate(venta.fecha), "yyyy-MM-dd"),
+                                                FormatNumber(venta.SubTotal, 2),
+                                                FormatNumber(venta.IVA, 2),
+                                                FormatNumber(venta.total, 2),
+                                                venta.tipo.ToString,
+                                                venta.usuario.ToString,
+                                                venta.cliente,
+                                                venta.idCliente.ToString,
+                                                venta.estado.ToString,
+                                                venta.motivo.ToString,
+                                                venta.numeroFactura.ToString}
+            DataGridConsulta.Rows.Add(row)
+
+        Next
+        'DataGridConsulta.DataSource = tVentas.ToList()
+
+        'ConfigurarGrid(DataGridConsulta)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -179,9 +198,11 @@ Public Class FrmListadoVentas
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If LblNumTicket.Text <> "" Then
-            If DataGridConsulta.Item(9, DataGridConsulta.CurrentRow.Index).Value = "VENDIDO" Then
-                Cancelar = 2
-                FrmCancelarPedido.ShowDialog()
+            If CStr(DataGridConsulta.Item(10, DataGridConsulta.CurrentRow.Index).Value) = "VENDIDO" Then
+                Cancelar = CStr(2)
+                Dim oForm As New FrmCancelarPedido
+                oForm.ShowDialog()
+                oForm.Close()
                 Cancelar = ""
                 DataGridConsulta.Refresh()
                 DataGridTikect.Refresh()
@@ -201,7 +222,7 @@ Public Class FrmListadoVentas
                 lv_result = True
             End If
 
-            If ReImprimeVenta(LblNumTicket.Text, lv_result, "TICKET", DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value, "0.00") = False Then
+            If ReImprimeVenta(LblNumTicket.Text, lv_result, "TICKET", CStr(DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value), "0.00") = False Then
                 MsgBox("Error al Generar la Impresión del Ticket", MsgBoxStyle.Information, "Impresión de Ticket")
                 Limpia_Variables_SQL_y_Cierra_Conexion()
                 Exit Sub

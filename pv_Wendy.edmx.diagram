@@ -4,13 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f2371f6cf9dd40a8afb087c775e714fe" Name="Diagram1" ZoomLevel="73">
+      <Diagram DiagramId="f2371f6cf9dd40a8afb087c775e714fe" Name="Diagram1" ZoomLevel="112">
         <EntityTypeShape EntityType="pvModelWendy.tblWClientes" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="pvModelWendy.tblWCobrar" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="pvModelWendy.compra" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="pvModelWendy.tblWConfiguracion" Width="1.5" PointX="2.75" PointY="4.75" />
         <EntityTypeShape EntityType="pvModelWendy.cotizacion" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="pvModelWendy.factura_total" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="pvModelWendy.factura" Width="1.5" PointX="6.75" PointY="7.75" />
         <EntityTypeShape EntityType="pvModelWendy.familia" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="pvModelWendy.foliosfactura" Width="1.5" PointX="8.75" PointY="3.75" />
@@ -20,7 +19,6 @@
         <EntityTypeShape EntityType="pvModelWendy.historial_pagos_proveedores" Width="1.5" PointX="0.75" PointY="10.75" />
         <EntityTypeShape EntityType="pvModelWendy.linea" Width="1.5" PointX="2.75" PointY="10.75" />
         <EntityTypeShape EntityType="pvModelWendy.marca" Width="1.5" PointX="10.75" PointY="4.75" />
-        <EntityTypeShape EntityType="pvModelWendy.nc" Width="1.5" PointX="10.75" PointY="7.75" />
         <EntityTypeShape EntityType="pvModelWendy.nc_detalle" Width="1.5" PointX="12.75" PointY="0.75" />
         <EntityTypeShape EntityType="pvModelWendy.ordencompra" Width="1.5" PointX="4.75" PointY="12.75" />
         <EntityTypeShape EntityType="pvModelWendy.ordencomprade" Width="1.5" PointX="12.75" PointY="5.75" />
@@ -37,6 +35,8 @@
         <EntityTypeShape EntityType="pvModelWendy.tblW_Usuarios" Width="1.5" PointX="16.75" PointY="0.75" />
         <EntityTypeShape EntityType="pvModelWendy.tblWVventa" Width="1.5" PointX="16.75" PointY="3.75" />
         <EntityTypeShape EntityType="pvModelWendy.tblWVentasPedidos" Width="1.5" PointX="16.75" PointY="8.75" />
+        <EntityTypeShape EntityType="pvModelWendy.factura_total" Width="1.5" PointX="9.375" PointY="16.75" />
+        <EntityTypeShape EntityType="pvModelWendy.nc" Width="1.5" PointX="17.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

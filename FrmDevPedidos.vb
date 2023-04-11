@@ -1,6 +1,6 @@
 ﻿
 Public Class FrmDevPedidos
-    Private Sub ConfigurarGridDetalle(ByRef dv As DataGridView)
+    Private Sub ConfigurarGridDetalle(ByRef dv As MetroFramework.Controls.MetroGrid)
         dv.Columns(0).Visible = False
         dv.Columns(1).Visible = False
         dv.Columns(2).Visible = False
@@ -68,7 +68,7 @@ Public Class FrmDevPedidos
                 Exit Sub
             End If
 
-            Dim wVentaPedidos As tblVentaPedido = DBModelo.Get_PV_PedidosHeader(CDbl(Lv_pedido))
+            Dim wVentaPedidos As tblVentaPedido = DBModelo.Get_PV_PedidosHeader(CInt(Lv_pedido))
             If Not wVentaPedidos Is Nothing Then
                 If wVentaPedidos.estado = "CANCELADO"
                     MsgBox("Esta Nota de Crédito ya ha sido cancelada", MsgBoxStyle.Information, "Devolución de Pedidos")
@@ -76,27 +76,27 @@ Public Class FrmDevPedidos
                     TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
                     Exit Sub
                 End If
-                TxtPedido_C.Text = wVentaPedidos.nticket
-                DTPFecha.Value = wVentaPedidos.fecha
-                txtSubTotal_C.Text = wVentaPedidos.SubTotal
-                txtIVA_C.Text = wVentaPedidos.IVA
-                txtTotal_C.Text = wVentaPedidos.total
+                TxtPedido_C.Text = CStr(wVentaPedidos.nticket)
+                DTPFecha.Value = CDate(wVentaPedidos.fecha)
+                txtSubTotal_C.Text = CStr(wVentaPedidos.SubTotal)
+                txtIVA_C.Text = CStr(wVentaPedidos.IVA)
+                txtTotal_C.Text = CStr(wVentaPedidos.total)
                 TxtTipo_C.Text = wVentaPedidos.tipo
                 TxtStatus_C.Text = wVentaPedidos.estado
                 TxtNombre_C.Text = wVentaPedidos.cliente
                 Label9.Visible = True
-                Label9.Text = wVentaPedidos.idCliente
+                Label9.Text = CStr(wVentaPedidos.idCliente)
 
-                Dim tTicketPedido As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(wVentaPedidos.nticket)
+                Dim tTicketPedido As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(CInt(wVentaPedidos.nticket))
                 DGVDetalle.Refresh()
                 DGVDetalle.DataSource = tTicketPedido.ToList()
 
                 ConfigurarGridDetalle(DGVDetalle)
 
                 For i = 0 To tTicketPedido.Count - 1
-                    lv_subtotal_c = lv_subtotal_c + tTicketPedido(i).subtotal
+                    lv_subtotal_c = lv_subtotal_c + CDbl(tTicketPedido(i).subtotal)
                 Next i
-                lv_iva_c = lv_subtotal_c * (FactorIVA - 1)
+                lv_iva_c = lv_subtotal_c * (CDbl(FactorIVA) - 1)
                 lv_total_c = lv_subtotal_c + lv_iva_c
                 txtSubTotal_N.Text = Format(lv_subtotal_c, "$ ###,###,##0.00")
                 txtIVA_N.Text = Format(lv_iva_c, "$ ###,###,##0.00")
@@ -145,7 +145,7 @@ Public Class FrmDevPedidos
     Private Sub FrmDevPedidos_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyValue
             Case Keys.Escape
-                Call CmdSalir_Click(sender, e)
+                Close()
         End Select
     End Sub
 
@@ -153,34 +153,26 @@ Public Class FrmDevPedidos
         Limpiar_objetos()
     End Sub
 
-    Private Sub CmdGenerar_Click(sender As Object, e As EventArgs) 
-
-    End Sub
-
     Private Sub DGVDetalle_RowsRemoved(sender As Object, e As DataGridViewRowsRemovedEventArgs) Handles DGVDetalle.RowsRemoved
         Dim lv_subtotal_c As Double = 0
         Dim lv_iva_c As Double = 0
         Dim lv_total_c As Double = 0
         For i = 0 To DGVDetalle.Rows.Count - 1
-            lv_subtotal_c = lv_subtotal_c + DGVDetalle.Rows(i).Cells(7).Value
+            lv_subtotal_c = lv_subtotal_c + CDbl(DGVDetalle.Rows(i).Cells(7).Value)
         Next i
-        lv_iva_c = lv_subtotal_c * (FactorIVA - 1)
+        lv_iva_c = lv_subtotal_c * (CDbl(FactorIVA) - 1)
         lv_total_c = lv_subtotal_c + lv_iva_c
         txtSubTotal_N.Text = Format(lv_subtotal_c, "$ ###,###,##0.00")
         txtIVA_N.Text = Format(lv_iva_c, "$ ###,###,##0.00")
         TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
     End Sub
 
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
     Private Sub DGVDetalle_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DGVDetalle.CellValueChanged
         If e.ColumnIndex = 4 And e.RowIndex <> -1 Then
-            Dim lv_cantidad As Double = DGVDetalle.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-            Dim wTicketPedidoOrig As tblTicketPedido = DBModelo.Get_PV_PedidosDetalleByFolioAndIdProducto(DGVDetalle.Rows(e.RowIndex).Cells(1).Value, DGVDetalle.Rows(e.RowIndex).Cells(2).Value)
+            Dim lv_cantidad As Double = CDbl(DGVDetalle.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)
+            Dim wTicketPedidoOrig As tblTicketPedido = DBModelo.Get_PV_PedidosDetalleByFolioAndIdProducto(CInt(DGVDetalle.Rows(e.RowIndex).Cells(1).Value), CInt(DGVDetalle.Rows(e.RowIndex).Cells(2).Value))
             If lv_cantidad <= wTicketPedidoOrig.cantidad Then
-                Dim lv_pu As Double = DGVDetalle.Rows(e.RowIndex).Cells(5).Value
+                Dim lv_pu As Double = CDbl(DGVDetalle.Rows(e.RowIndex).Cells(5).Value)
 
                 DGVDetalle.Rows(e.RowIndex).Cells(7).Value = CDec(lv_cantidad * lv_pu)
 
@@ -188,9 +180,9 @@ Public Class FrmDevPedidos
                 Dim lv_iva_c As Double = 0
                 Dim lv_total_c As Double = 0
                 For i = 0 To DGVDetalle.Rows.Count - 1
-                    lv_subtotal_c = lv_subtotal_c + DGVDetalle.Rows(i).Cells(7).Value
+                    lv_subtotal_c = lv_subtotal_c + CDbl(DGVDetalle.Rows(i).Cells(7).Value)
                 Next i
-                lv_iva_c = lv_subtotal_c * (FactorIVA - 1)
+                lv_iva_c = lv_subtotal_c * (CDbl(FactorIVA) - 1)
                 lv_total_c = lv_subtotal_c + lv_iva_c
                 txtSubTotal_N.Text = Format(lv_subtotal_c, "$ ###,###,##0.00")
                 txtIVA_N.Text = Format(lv_iva_c, "$ ###,###,##0.00")
@@ -212,7 +204,7 @@ Public Class FrmDevPedidos
         
         'Validar que el pedido no tenga abonos realizados en caso de que sea Pedido a Crédito
         If TxtTipo_C.Text = "CREDITO" Then
-            Dim wCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(CDbl(TxtPedido_C.Text), "PEDIDO", CInt(Label9.Text))
+            Dim wCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(CInt(TxtPedido_C.Text), "PEDIDO", CInt(Label9.Text))
 
             If Not wCobrar Is Nothing Then
                 If wCobrar.resto <> wCobrar.total Then
@@ -228,10 +220,10 @@ Public Class FrmDevPedidos
         Dim tTicketPedidos As List(Of tblTicketPedido) = DBModelo.Get_PV_PedidosDetalle(CInt(TxtPedido.Text))
         If tTicketPedidos.Count > 0 Then
             For Each wTicketPedido In tTicketPedidos
-                Dim wProducto As tblProductos = DBModelo.GetProductById(wTicketPedido.IdProducto)
+                Dim wProducto As tblProductos = DBModelo.GetProductById(CInt(wTicketPedido.IdProducto))
                 If Not wProducto Is Nothing Then
                     Console.WriteLine("CheckPoint 2")
-                    wProducto.stock = wProducto.stock + wTicketPedido.cantidad
+                    wProducto.stock = CDec(wProducto.stock + wTicketPedido.cantidad)
                     If DBModelo.UpdateProductos(wProducto) = False Then
                         MsgBox("No se pudo Actualizar Inventario en la tabla PRODUCTOS", MsgBoxStyle.Critical)
                         Error_Venta = False
@@ -249,9 +241,9 @@ Public Class FrmDevPedidos
         'Actualizamos la cabecera los campos subtotal, iva y total acorde al nuevo calculo
         Dim wVentaPedido As tblVentaPedido = DBModelo.Get_PV_PedidosHeader(CInt(TxtPedido.Text))
         If Not wVentaPedido Is Nothing Then
-            wVentaPedido.SubTotal = Trim(Replace(Trim(Replace(txtSubTotal_N.Text, "$", "")), ",", ""))
-            wVentaPedido.IVA = Trim(Replace(Trim(Replace(txtIVA_N.Text, "$", "")), ",", ""))
-            wVentaPedido.total = Trim(Replace(Trim(Replace(TxtTotal_N.Text, "$", "")), ",", ""))
+            wVentaPedido.SubTotal = CDec(Trim(Replace(Trim(Replace(txtSubTotal_N.Text, "$", "")), ",", "")))
+            wVentaPedido.IVA = CDec(Trim(Replace(Trim(Replace(txtIVA_N.Text, "$", "")), ",", "")))
+            wVentaPedido.total = CDec(Trim(Replace(Trim(Replace(TxtTotal_N.Text, "$", "")), ",", "")))
             wVentaPedido.estado = "CANCELADO"
             wVentaPedido.motivo = "DEVOLUCION-ADMIN"
             If DBModelo.Update_PV_VentaPedidos(wVentaPedido) = False Then
@@ -265,20 +257,20 @@ Public Class FrmDevPedidos
         For i = 0 To DGVDetalle.Rows.Count - 1
             Dim wTicketPedido As tblTicketPedido = New tblTicketPedido
 
-            wTicketPedido.IdComp            = CompanyCode
-            wTicketPedido.folio             = DGVDetalle.Rows(i).Cells(2).Value.ToString
-            wTicketPedido.IdProducto        = DGVDetalle.Rows(i).Cells(3).Value
-            wTicketPedido.concepto          = DGVDetalle.Rows(i).Cells(4).Value.ToString
-            wTicketPedido.cantidad          = CDec(DGVDetalle.Rows(i).Cells(5).Value)
-            wTicketPedido.precio            = CDec(DGVDetalle.Rows(i).Cells(6).Value)
-            wTicketPedido.fecha             = DGVDetalle.Rows(i).Cells(7).Value.ToString
-            wTicketPedido.subtotal          = CDec(DGVDetalle.Rows(i).Cells(8).Value)
-            wTicketPedido.clave_producto    = DGVDetalle.Rows(i).Cells(9).Value.ToString
-            wTicketPedido.precioCosto       = CDec(DGVDetalle.Rows(i).Cells(10).Value)
-            wTicketPedido.subtotalCosto     = CDec(DGVDetalle.Rows(i).Cells(11).Value)
+            wTicketPedido.IdComp = CompanyCode
+            wTicketPedido.folio = DGVDetalle.Rows(i).Cells(2).Value.ToString
+            wTicketPedido.IdProducto = CLng(DGVDetalle.Rows(i).Cells(3).Value)
+            wTicketPedido.concepto = DGVDetalle.Rows(i).Cells(4).Value.ToString
+            wTicketPedido.cantidad = CDec(DGVDetalle.Rows(i).Cells(5).Value)
+            wTicketPedido.precio = CDec(DGVDetalle.Rows(i).Cells(6).Value)
+            wTicketPedido.fecha = CType(DGVDetalle.Rows(i).Cells(7).Value.ToString, Date?)
+            wTicketPedido.subtotal = CDec(DGVDetalle.Rows(i).Cells(8).Value)
+            wTicketPedido.clave_producto = DGVDetalle.Rows(i).Cells(9).Value.ToString
+            wTicketPedido.precioCosto = CDec(DGVDetalle.Rows(i).Cells(10).Value)
+            wTicketPedido.subtotalCosto = CDec(DGVDetalle.Rows(i).Cells(11).Value)
 
             If DGVDetalle.Rows(i).Cells(12).Value Is Nothing Then
-                wTicketPedido.numeroFactura = 0
+                wTicketPedido.numeroFactura = CStr(0)
             Else
                 wTicketPedido.numeroFactura = DGVDetalle.Rows(i).Cells(12).Value.ToString
             End If
@@ -293,7 +285,7 @@ Public Class FrmDevPedidos
             End If
 
             'Actualizamos Stock descontando las piezas correspondientes
-            Dim wProducto As tblProductos = DBModelo.GetProductById(DGVDetalle.Rows(i).Cells(3).Value)
+            Dim wProducto As tblProductos = DBModelo.GetProductById(CInt(DGVDetalle.Rows(i).Cells(3).Value))
             If Not wProducto Is Nothing Then
                 'wProducto.stock = wProducto.stock + CDec(DGVDetalle.Rows(i).Cells(4).Value)
                 If DBModelo.UpdateProductos(wProducto) = False Then
@@ -307,7 +299,7 @@ Public Class FrmDevPedidos
 
         'Si el pedido es a CREDITO, solo se modificará si no hay abonos realizados
         If TxtTipo_C.Text = "CREDITO" Then
-            Dim wCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(CDbl(TxtPedido_C.Text), "PEDIDO", CInt(Label9.Text))
+            Dim wCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(CInt(TxtPedido_C.Text), "PEDIDO", CInt(Label9.Text))
 
             If Not wCobrar Is Nothing Then
                 If wCobrar.resto = wCobrar.total Then

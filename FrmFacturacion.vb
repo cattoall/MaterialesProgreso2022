@@ -13,18 +13,6 @@ Public Class FrmFacturacion
     Private lv_total_ticket As Double
     Private sdk As MFSDK
 
-    Private Sub CmdBuscar_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub CmdLimpiar_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
     Private Sub limpiar()
         DataGridView1.Rows.Clear()
         DataGridView1.DataSource = Nothing
@@ -49,6 +37,7 @@ Public Class FrmFacturacion
         TxtRFC.Clear()
         txtCiudad.Clear()
         txtEmail.Clear()
+        txtRFR.Clear()
         CmbMetodoPago.SelectedIndex = -1
         lv_subtotal_ticket = 0
         lv_iva_ticket = 0
@@ -68,10 +57,6 @@ Public Class FrmFacturacion
         ClaveUnidad = ""
     End Sub
 
-    Private Sub CmdGenerarMostrador_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
     Private Sub TxtTikect_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtTikect.KeyDown
         If (e.KeyCode = Keys.Enter) Then
             AgregarTicket_Click
@@ -84,13 +69,13 @@ Public Class FrmFacturacion
         If IsNumeric(TxtTikect.Text) Then
             If TxtTikect.Text <> "" Then
                 For i = 0 To lv_ticket.Items.Count - 1
-                    If TxtTikect.Text = lv_ticket.Items(i) Then
+                    If TxtTikect.Text = CStr(lv_ticket.Items(i)) Then
                         MsgBox(("Ticket " & TxtTikect.Text & " utilizado previamente."), MsgBoxStyle.Critical, "Validación de Tickets de Venta")
                         TxtTikect.Clear()
                         TxtTikect.Focus()
                         Exit Sub
                     Else
-                        Dim wVenta As tblVenta = DBModelo.Get_PV_TicketHeader(TxtTikect.Text)
+                        Dim wVenta As tblVenta = DBModelo.Get_PV_TicketHeader(CInt(TxtTikect.Text))
                         If Not wVenta Is Nothing Then
                             If wVenta.numeroFactura <> "" Then
                                 MsgBox(("El Ticket " & Me.TxtTikect.Text & " ya está siento utilizado en una Factura."), MsgBoxStyle.Critical, "Validación de Tickets de Venta")
@@ -118,7 +103,7 @@ Public Class FrmFacturacion
             Exit Sub
         End If
 
-        Dim tTicket As List(Of tblTicket) = DBModelo.Get_PV_TicketsDetalle(TxtTikect.Text)
+        Dim tTicket As List(Of tblTicket) = DBModelo.Get_PV_TicketsDetalle(CInt(TxtTikect.Text))
         If tTicket.Count > 0 Then
             For Each wTicket In tTicket
                 If wTicket.ClaveProducto.Equals("") Then
@@ -132,30 +117,42 @@ Public Class FrmFacturacion
 
                 Dim row As String() = New String(15 - 1) {}
                 row(0) = wTicket.folio
-                row(1) = wTicket.cantidad
+                row(1) = CStr(wTicket.cantidad)
                 row(2) = wTicket.concepto
-                row(3) = wTicket.precio 'Math.Round(CDbl(wTicket.precio / FactorIVA), 6)
-                row(4) = wTicket.subtotal 'Math.Round(CDbl(wTicket.subtotal / FactorIVA), 6)
-                row(5) = wTicket.fecha
-                row(6) = wTicket.precioCosto
-                row(7) = wTicket.subtotalCosto
+                row(3) = CStr(wTicket.precio) 'Math.Round(CDbl(wTicket.precio / FactorIVA), 6)
+                row(4) = CStr(wTicket.subtotal) 'Math.Round(CDbl(wTicket.subtotal / FactorIVA), 6)
+                row(5) = CStr(wTicket.fecha)
+                row(6) = CStr(wTicket.precioCosto)
+                row(7) = CStr(wTicket.subtotalCosto)
                 row(8) = wTicket.clave_producto
                 row(9) = TxtFolio.Text
-                row(10) = wTicket.IdProducto
+                row(10) = CStr(wTicket.IdProducto)
                 row(11) = wTicket.ClaveProducto
                 row(12) = wTicket.ClaveUnidad
-                row(13) = "0"
-                row(14) = Math.Round(CDbl(((wTicket.subtotal * FactorIVA) - wTicket.subtotal)), 6) 'Math.Round(CDbl((wTicket.subtotal - (wTicket.subtotal / FactorIVA))), 6)
+                If wTicket.TasaCero = False Then
+                    row(13) = "0"
+                    row(14) = CStr(Math.Round(CDbl(((wTicket.subtotal * CDbl(FactorIVA)) - wTicket.subtotal)), 6)) 'Math.Round(CDbl((wTicket.subtotal - (wTicket.subtotal / FactorIVA))), 6)
+                Else
+                    row(13) = "1"
+                    row(14) = CStr(wTicket.subtotal)
+                End If
                 Dim rowValues As String() = row
                 DataGridView1.Rows.Add(rowValues)
-                TxtSubtotal.Text = TxtSubtotal.Text + wTicket.subtotal 'Math.Round(CDbl(wTicket.subtotal / FactorIVA), 6)
-                TxtIVA.Text = TxtIVA.Text + Math.Round(CDbl(((wTicket.subtotal * FactorIVA) - wTicket.subtotal)), 6) 'Math.Round(CDbl((wTicket.subtotal - (wTicket.subtotal / FactorIVA))), 6)
-                TxtTotal.Text = CDbl(TxtSubtotal.Text) + CDbl(TxtIVA.Text)
+                TxtSubtotal.Text = CStr(CDec(TxtSubtotal.Text) + wTicket.subtotal) 'Math.Round(CDbl(wTicket.subtotal / FactorIVA), 6)
+                If wTicket.TasaCero = False Then
+                    TxtIVA.Text = CStr(CDec(TxtIVA.Text) + Math.Round(CDec((wTicket.subtotal * CDbl(FactorIVA)) - wTicket.subtotal), 6)) 'Math.Round(CDbl((wTicket.subtotal - (wTicket.subtotal / FactorIVA))), 6)
+                    TxtTotal.Text = CStr(CDbl(TxtSubtotal.Text) + CDbl(TxtIVA.Text))
+                Else
+                    TxtIVA.Text = "0.00"
+                    TxtTotal.Text = CStr(TxtSubtotal.Text)
+                End If
             Next
             TxtSubtotal.Text = FormatNumber(Math.Round(CDbl(TxtSubtotal.Text), 2))
-            TxtIVA.Text = FormatNumber(Math.Round(CDbl(TxtIVA.Text), 2))
-            TxtTotal.Text = FormatNumber(Math.Round(CDbl(TxtTotal.Text), 2))
-            LblNRegistros.Text = DataGridView1.Rows.Count
+            If TxtIVA.Text <> "0.00" Then
+                TxtIVA.Text = FormatNumber(CDec(TxtIVA.Text), 6)
+            End If
+            TxtTotal.Text = FormatNumber(CDbl(TxtTotal.Text), 2)
+            LblNRegistros.Text = CStr(DataGridView1.Rows.Count)
             lv_ticket.Items.Add(TxtTikect.Text)
             TxtTikect.Clear()
             TxtTikect.Focus()
@@ -174,9 +171,9 @@ Public Class FrmFacturacion
             DataGridView1.DataSource = Nothing
             TxtTikect.Focus()
             TxtTikect.Text = ""
-            TxtSubtotal.Text = CDbl(0)
-            TxtIVA.Text = CDbl(0)
-            TxtTotal.Text = CDbl(0)
+            TxtSubtotal.Text = CStr(CDbl(0))
+            TxtIVA.Text = CStr(CDbl(0))
+            TxtTotal.Text = CStr(CDbl(0))
 
             If lv_ticket.Items.Count > 0 Then
                 For i = lv_ticket.Items.Count - 1 To 0
@@ -196,17 +193,17 @@ Public Class FrmFacturacion
             GbTicket.Enabled = False
             DataGridView1.Rows.Clear()
             DataGridView1.DataSource = Nothing
-            TxtSubtotal.Text = CDbl(0)
-            TxtIVA.Text = CDbl(0)
+            TxtSubtotal.Text = CStr(CDbl(0))
+            TxtIVA.Text = CStr(CDbl(0))
             CmbMetodoPago.SelectedIndex = 0
-            TxtTotal.Text = CDbl(0)
+            TxtTotal.Text = CStr(CDbl(0))
 
             btnGenerarMostrador.Enabled = True
             DateTimePicker3.Enabled = True
-            Dim wCliente As tblClientes = DBModelo.GetClienteByName("VENTA AL PUBLICO EN GENERAL")
+            Dim wCliente As tblClientes = DBModelo.GetClienteByName("PUBLICO EN GENERAL")
             If Not wCliente Is Nothing Then
                 txtnombre.Text = wCliente.nombre.ToUpper
-                LblCliente.Text = wCliente.clave
+                LblCliente.Text = CStr(wCliente.clave)
                 txtEmail.Text = wCliente.correo.ToUpper
                 txtdirecion.Text = wCliente.calle
                 txtNumero.Text = wCliente.numero
@@ -215,10 +212,11 @@ Public Class FrmFacturacion
                 txtcolonia.Text = wCliente.colonia
                 txtcp.Text = wCliente.cp
                 TxtRFC.Text = wCliente.rfc
+                txtRFR.Text = wCliente.RegimenFiscal
                 CmbMetodoPago.SelectedIndex = 0
                 CmdFormaPago.SelectedIndex = 0
                 CmbCredito.SelectedIndex = 4
-                CmbUsoCDFI.SelectedIndex = 2
+                CmbUsoCDFI.SelectedIndex = 23
                 DateTimePicker3.Focus()
             End If
         End If
@@ -252,10 +250,6 @@ Public Class FrmFacturacion
         End If
     End Sub
 
-    Private Sub Btn_cfdi3_3_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
     Public Function PAC() As MFObject
         Dim oPAC As New MFObject("PAC")
         oPAC("usuario") = gv_cfdi_usuario
@@ -280,25 +274,27 @@ Public Class FrmFacturacion
     End Function
 
     Private Sub FrmFacturacion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim wFolioFacturas As tblFoliofacturas = DBModelo.GetFolioFactura("FACTURAS", Now.Year)
+        Dim wFolioFacturas As tblFolioFacturas = DBModelo.GetFolioFactura("FACTURAS", CStr(Now.Year))
         If Not wFolioFacturas Is Nothing Then
-            TxtFolio.Text = wFolioFacturas.FolioActual
-            folio_inicial = wFolioFacturas.FolioInicial
-            folio_final = wFolioFacturas.FolioFinal
+            TxtFolio.Text = CStr(wFolioFacturas.FolioActual)
+            folio_inicial = CStr(wFolioFacturas.FolioInicial)
+            folio_final = CStr(wFolioFacturas.FolioFinal)
         Else
-            Dim wFolioFacturas1 As tblFoliofacturas = New tblFoliofacturas()
+            Dim wFolioFacturas1 As tblFolioFacturas = New tblFolioFacturas()
+            Dim wFolioFacturas2 As tblFolioFacturas = DBModelo.GetFolioFactura("FACTURAS", CStr(Now.Year - 1))
+            wFolioFacturas1.IdComp = CompanyCode
             wFolioFacturas1.TipoComprobante = "FACTURAS"
             wFolioFacturas1.Year = Now.Year
-            wFolioFacturas1.FolioInicial = 1
-            wFolioFacturas1.FolioFinal = 100000
-            wFolioFacturas1.FolioActual = 1
+            wFolioFacturas1.FolioInicial = wFolioFacturas2.FolioActual
+            wFolioFacturas1.FolioFinal = wFolioFacturas2.FolioFinal
+            wFolioFacturas1.FolioActual = wFolioFacturas2.FolioActual
             If DBModelo.Insert_PV_FoliosNC_Actual(wFolioFacturas1) = False Then
                 MsgBox("Error al insertar registro en tabla FolioFactura", MsgBoxStyle.Critical, "Facturación")
                 Exit Sub
             End If
-            TxtFolio.Text = wFolioFacturas1.FolioActual
-            folio_inicial = wFolioFacturas1.FolioInicial
-            folio_final = wFolioFacturas1.FolioFinal
+            TxtFolio.Text = CStr(wFolioFacturas1.FolioActual)
+            folio_inicial = CStr(wFolioFacturas1.FolioInicial)
+            folio_final = CStr(wFolioFacturas1.FolioFinal)
         End If
 
         CmbCredito.Visible = True
@@ -362,32 +358,30 @@ Public Class FrmFacturacion
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Close()
-        Dispose()
-    End Sub
-
-    Private Sub cmdUpdateUUID_Click(sender As Object, e As EventArgs) 
-
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnUpdateUUID.Click
-
     End Sub
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles btnGenerarMostrador.Click
         If Me.CbMostrador.Enabled Then
             Dim tVentas As List(Of tblVenta) = DBModelo.GetVentasMostrador(Format(Me.DateTimePicker3.Value.Date, "yyyy-MM-dd"), 0, "", "VENDIDO")
             DataGridView1.Rows.Clear()
+            DataGridView1.Refresh()
             DataGridView1.DataSource = Nothing
+            TxtSubtotal.Text = "0.00"
+            TxtIVA.Text = "0.00"
+            TxtTotal.Text = "0.00"
+            Dim dSubTotal As Decimal = CDec("0.00")
+            Dim dIVA As Decimal = CDec("0.00")
+            Dim dTotal As Decimal = CDec("0.00")
 
             If tVentas.Count > 0 Then
                 For Each wVentas In tVentas
                     Dim row As String() = New String(15 - 1) {}
-                    row(0) = wVentas.nticket
+                    row(0) = CStr(wVentas.nticket)
                     row(1) = "1"
                     row(2) = "TICKET DE VENTA: " & wVentas.nticket
-                    row(3) = wVentas.SubTotal
-                    row(4) = wVentas.total
-                    row(5) = Format(DateTimePicker1.Value, "dd-MM-yyyy")
+                    row(3) = CStr(wVentas.SubTotal)
+                    row(4) = CStr(wVentas.SubTotal)
+                    row(5) = Format(DateTimePicker1.Value, "yyyy-MM-dd")
                     row(6) = "0.00"
                     row(7) = "0.00"
                     row(8) = "DIA"
@@ -395,14 +389,21 @@ Public Class FrmFacturacion
                     row(10) = "0"
                     row(11) = "01010101"
                     row(12) = "ACT"
-                    row(13) = "0"
-                    row(14) = wVentas.IVA
+                    If wVentas.IVA > 0.00 Then
+                        row(13) = "0"
+                    Else
+                        row(13) = "1"
+                    End If
+                    row(14) = CStr(wVentas.IVA)
                     Dim rowValues As String() = row
                     DataGridView1.Rows.Add(rowValues)
-                    TxtSubtotal.Text = TxtSubtotal.Text + wVentas.SubTotal
-                    TxtIVA.Text = TxtIVA.Text + wVentas.IVA
-                    TxtTotal.Text = TxtTotal.Text + wVentas.total
+                    dSubTotal = CDec(dSubTotal + wVentas.SubTotal)
+                    dIVA = CDec(dIVA + wVentas.IVA)
+                    dTotal = CDec(dTotal + wVentas.total)
                 Next
+                TxtSubtotal.Text = dSubTotal.ToString
+                TxtIVA.Text = dIVA.ToString
+                TxtTotal.Text = dTotal.ToString
             Else
                 MsgBox("No hay ventas registradas o pendientes por facturar para este día.", MsgBoxStyle.Critical, "Ventas de Mostrador")
             End If
@@ -434,6 +435,9 @@ Public Class FrmFacturacion
         ElseIf TxtRFC.Text = "" Then
             MsgBox("Favor de especificar el RFC.", MsgBoxStyle.Critical, Nothing)
             btnAdd.Focus()
+        ElseIf txtRFR.Text = "" Then
+            MsgBox("Favor de especificar el Régimen Fiscal.", MsgBoxStyle.Critical, Nothing)
+            btnAdd.Focus()
         ElseIf CmbMetodoPago.Text = "" Then
             MsgBox("Favor de especificar el Tipo de Pago", MsgBoxStyle.Critical, Nothing)
             CmbMetodoPago.Focus()
@@ -457,7 +461,6 @@ Public Class FrmFacturacion
             Dim wFacturaTotal As tblFacturaTotal = New tblFacturaTotal
 
             wFacturaTotal.IdComp = CompanyCode
-            ' Desconozco si sea error de mi lado
             wFacturaTotal.n_factura = Decimal.Parse(NoFactura)
             wFacturaTotal.subtotal = Decimal.Parse(TxtSubtotal.Text)
             wFacturaTotal.iva = Decimal.Parse(TxtIVA.Text)
@@ -472,8 +475,8 @@ Public Class FrmFacturacion
             End If
             wFacturaTotal.cliente = txtnombre.Text
             wFacturaTotal.id_cliente = LblCliente.Text
-            wFacturaTotal.fecha_venta = Format(DateTimePicker1.Value.Date, "yyyy-MM-dd")
-            wFacturaTotal.fecha_limite = Format(DateTimePicker2.Value.Date, "yyyy-MM-dd")
+            wFacturaTotal.fecha_venta = CDate(Format(DateTimePicker1.Value.Date, "yyyy-MM-dd"))
+            wFacturaTotal.fecha_limite = CDate(Format(DateTimePicker2.Value.Date, "yyyy-MM-dd"))
             wFacturaTotal.estado = "VENDIDO"
             wFacturaTotal.observaciones = ""
             If CbMostrador.CheckState = CheckState.Checked Then
@@ -491,23 +494,19 @@ Public Class FrmFacturacion
             wFacturaTotal.Cancelada = 0
             wFacturaTotal.ComproPago = 0
             wFacturaTotal.pdf = ""
-            If wFacturaTotal.iva = CDec("0.00") Then
-                wFacturaTotal.ObjetoImp = "01"
-            Else
-                wFacturaTotal.ObjetoImp = "02"
-            End If
+            wFacturaTotal.ObjetoImp = "02"
 
             If DBModelo.InsertFacturaTotal(wFacturaTotal) Then
                 For i = 0 To DataGridView1.RowCount - 1
                     Dim wFactura As tblFactura = New tblFactura
                     wFactura.IdComp = CompanyCode
-                    wFactura.n_factura = CDec(NoFactura)
+                    wFactura.n_factura = CLng(NoFactura)
                     wFactura.folio = DataGridView1.Rows(i).Cells(0).Value.ToString
                     wFactura.idProducto = CInt(DataGridView1.Rows(i).Cells(10).Value)
                     wFactura.clave_p = DataGridView1.Rows(i).Cells(8).Value.ToString
                     wFactura.descripcion = DataGridView1.Rows(i).Cells(2).Value.ToString
                     wFactura.cantidad = CDec(DataGridView1.Rows(i).Cells(1).Value)
-                    wFactura.fecha = DataGridView1.Rows(i).Cells(5).Value
+                    wFactura.fecha = CDate(DataGridView1.Rows(i).Cells(5).Value)
                     wFactura.subtotal = Math.Round(CDec(DataGridView1.Rows(i).Cells(4).Value), 2)
                     wFactura.IVA = Math.Round(CDec(DataGridView1.Rows(i).Cells(14).Value), 2)
                     wFactura.precio = Math.Round(CDec(DataGridView1.Rows(i).Cells(3).Value), 2)
@@ -519,7 +518,7 @@ Public Class FrmFacturacion
                     End If
                 Next
 
-                Dim wFolioFacturas As tblFolioFacturas = DBModelo.GetFolioFactura("FACTURAS", Now.Year)
+                Dim wFolioFacturas As tblFolioFacturas = DBModelo.GetFolioFactura("FACTURAS", CStr(Now.Year))
                 If Not wFolioFacturas Is Nothing Then
                     wFolioFacturas.IdComp = CompanyCode
                     wFolioFacturas.FolioActual = wFolioFacturas.FolioActual + 1
@@ -527,7 +526,7 @@ Public Class FrmFacturacion
                         MsgBox("Error al actualizar Folio Factura en tabla FolioFacturas", MsgBoxStyle.Critical, "Facturación")
                         Exit Sub
                     End If
-                    TxtFolio.Text = wFolioFacturas.FolioActual
+                    TxtFolio.Text = CStr(wFolioFacturas.FolioActual)
                 End If
 
                 'Generación del archivo para envío electrónico al SAT
@@ -548,7 +547,7 @@ Public Class FrmFacturacion
                 Dim total As String = Trim(Trim(TxtTotal.Text.Replace("$", "")).Replace(",", ""))
 
                 factura("serie") = gv_SerieFacturaSalvador
-                factura("folio") = CDbl(NoFactura)
+                factura("folio") = NoFactura
                 factura("fecha_expedicion") = Now.ToString("s")
                 MetodoPago = CmbMetodoPago.Text
                 factura("metodo_pago") = MetodoPago.Substring(0, 3)
@@ -582,11 +581,12 @@ Public Class FrmFacturacion
                 receptor("RegimenFiscalReceptor") = txtRFR.Text
                 sdk.AgregaObjeto(receptor)
 
-                Dim baseTotal As Decimal = 0
+                Dim baseTotal16 As Decimal = 0
+                Dim baseTotal0 As Decimal = 0
                 Dim oConceptos As New MFObject("conceptos")
                 For i = 0 To DataGridView1.RowCount - 1
-                    Dim vImporte As String = Trim(Trim(DataGridView1(4, i).Value).Replace("$", "")).Replace(",", "").ToString
-                    Dim vValorUnitario As String = Trim(Trim(DataGridView1(3, i).Value).Replace("$", "")).Replace(",", "").ToString
+                    Dim vImporte As String = Trim(Trim(CStr(DataGridView1(4, i).Value)).Replace("$", "")).Replace(",", "")
+                    Dim vValorUnitario As String = Trim(Trim(CStr(DataGridView1(3, i).Value)).Replace("$", "")).Replace(",", "")
 
                     Dim oLinea As New MFObject(i.ToString)
                     oLinea("ClaveProdServ") = DataGridView1(11, i).Value.ToString
@@ -596,22 +596,24 @@ Public Class FrmFacturacion
                     oLinea("Descripcion") = DataGridView1(2, i).Value.ToString
                     oLinea("ValorUnitario") = vValorUnitario
                     oLinea("Importe") = vImporte
-                    Dim vImporteTras As String = DataGridView1(14, i).Value.ToString
-                    If vImporteTras = "" Then
-                        oLinea("ObjetoImp") = "01"
-                    Else
-                        oLinea("ObjetoImp") = "02"
-                    End If
+                    oLinea("ObjetoImp") = "02"
 
                     If oLinea("ObjetoImp") = "02" Then
-                        baseTotal = baseTotal + vImporte
                         Dim oImpuestos As New MFObject("Impuestos")
                         Dim oTraslado As New MFObject("Traslados")
                         Dim oTraslados As New MFObject(i.ToString)
+                        Dim vImporteTras As String = DataGridView1(14, i).Value.ToString
                         oTraslados("Base") = vImporte
-                        oTraslados("Importe") = vImporteTras
                         oTraslados("Impuesto") = "002"
-                        oTraslados("TasaOCuota") = FormatNumber(FactorIVA - 1, 6)
+                        If CBool(DataGridView1(13, i).Value) = False Then
+                            baseTotal16 = baseTotal16 + CDec(vImporte)
+                            oTraslados("Importe") = vImporteTras
+                            oTraslados("TasaOCuota") = FormatNumber(CDbl(FactorIVA) - 1, 6)
+                        Else
+                            baseTotal0 = baseTotal0 + CDec(vImporte)
+                            oTraslados("Importe") = "0.00"
+                            oTraslados("TasaOCuota") = "0.000000"
+                        End If
                         oTraslados("TipoFactor") = "Tasa"
                         oTraslado.AgregaSubnodo(oTraslados)
                         oImpuestos.AgregaSubnodo(oTraslado)
@@ -620,35 +622,62 @@ Public Class FrmFacturacion
                     oConceptos.AgregaSubnodo(oLinea)
                 Next
                 sdk.AgregaObjeto(factura)
+
+                If txtnombre.Text.Trim = "PUBLICO EN GENERAL" Then
+                    Dim InformacionGlobal As New MFObject("InformacionGlobal")
+                    InformacionGlobal("Periodicidad") = CStr("01")
+                    InformacionGlobal("Meses") = Format(DateTimePicker3.Value, "MM")
+                    InformacionGlobal("Año") = Format(DateTimePicker3.Value, "yyyy")
+                    sdk.AgregaObjeto(InformacionGlobal)
+                End If
+
                 sdk.AgregaObjeto(oConceptos)
 
                 Dim oImpuestosTotales As New MFObject("impuestos")
-                Dim vImporteTotalIVA As String = (total - subtotal).ToString
+                Dim vImporteTotalIVA As String = CStr(CDec(total) - CDec(subtotal))
+                Dim lvItem As Integer = 0
+                Dim itras As New MFObject("translados")
 
                 oImpuestosTotales("TotalImpuestosTrasladados") = Trim(vImporteTotalIVA.Replace(",", ""))
-
-                If CDec(FormatNumber(vImporteTotalIVA, 2)) <> CDec("0.00") Then
-                    Dim itras As New MFObject("translados")
-                    Dim itra0 As New MFObject("0")
-                    Dim vImporteTotalIVAFormat As String = FormatNumber(vImporteTotalIVA, 2)
-                    itra0("Base") = baseTotal.ToString()
+                If baseTotal0 > 0.00 Then
+                    Dim itra0 As New MFObject(lvItem.ToString)
+                    itra0("Base") = baseTotal0.ToString()
                     itra0("Impuesto") = "002"
-                    itra0("Importe") = Trim(vImporteTotalIVAFormat.Replace(",", ""))
-                    itra0("TasaOCuota") = FormatNumber((FactorIVA - 1), 6)
+                    itra0("Importe") = "0.00"
+                    itra0("TasaOCuota") = "0.000000"
                     itra0("TipoFactor") = "Tasa"
                     itras.AgregaSubnodo(itra0)
-                    oImpuestosTotales.AgregaSubnodo(itras)
+                    lvItem = lvItem + 1
                 End If
+
+                If baseTotal16 > 0.00 Then
+                    Dim itra0 As New MFObject(lvItem.ToString)
+                    Dim vImporteTotalIVAFormat As String = FormatNumber(vImporteTotalIVA, 2)
+                    itra0("Base") = baseTotal16.ToString()
+                    itra0("Impuesto") = "002"
+                    itra0("Importe") = Trim(vImporteTotalIVAFormat.Replace(",", ""))
+                    itra0("TasaOCuota") = "0.160000"
+                    itra0("TipoFactor") = "Tasa"
+                    itras.AgregaSubnodo(itra0)
+                End If
+                oImpuestosTotales.AgregaSubnodo(itras)
 
                 sdk.AgregaObjeto(oImpuestosTotales)
 
                 'Timbra Factura
-                Dim view As DataGridView
+                Dim view As MetroFramework.Controls.MetroGrid
                 Dim respuesta As SDKRespuesta = sdk.Timbrar("C:\sdk2\timbrar32.bat", gv_CDFI_XML_PATH, FolioFactura, False)
-                If respuesta.Codigo_MF_Numero = 0 Then
+                If CInt(respuesta.Codigo_MF_Numero) = 0 Then
                     PrBImprimiendo.PerformStep()
                     MsgBox(("Factura " & gv_SerieFacturaSalvador & "-" & NoFactura & " Generada Correctamente"), MsgBoxStyle.Information, "Generació de Facturas")
                     ImprimeFactura2(NoFactura, FolioFactura, True)
+                    For i = 0 To DataGridView1.RowCount - 1
+                        Dim wVenta As tblVenta = DBModelo.Get_PV_TicketHeader(CInt(DataGridView1.Rows(i).Cells(0).Value))
+                        wVenta.numeroFactura = NoFactura
+                        If DBModelo.Update_PV_Venta(wVenta) = False Then
+                            MsgBox(("Ticket " & DataGridView1.Rows(i).Cells(0).Value.ToString & " no pudo ser actualizado con el número de factura: " & NoFactura), MsgBoxStyle.Information, "Generació de Facturas")
+                        End If
+                    Next
                 Else
                     PrBImprimiendo.Value = 100
                     MsgBox($"Código: {respuesta.Codigo_MF_Numero} Mensaje: {respuesta.Codigo_MF_Texto}", MsgBoxStyle.Critical, Nothing)
@@ -680,26 +709,107 @@ Public Class FrmFacturacion
                     Next
                 End If
                 If sFacErrorDet = "" Then
-                    Dim wFolioFacturas As tblFolioFacturas = DBModelo.GetFolioFactura("FACTURAS", Now.Year)
+                    Dim wFolioFacturas As tblFolioFacturas = DBModelo.GetFolioFactura("FACTURAS", CStr(Now.Year))
                     If Not wFolioFacturas Is Nothing Then
                         wFolioFacturas.IdComp = CompanyCode
                         wFolioFacturas.FolioActual = wFolioFacturas.FolioActual - 1
                         If DBModelo.UpdateFolioFacturas(wFolioFacturas) Then
-                            TxtFolio.Text = wFolioFacturas.FolioActual
+                            TxtFolio.Text = CStr(wFolioFacturas.FolioActual)
                         Else
-                            MsgBox("Error al actualizar Folio Factura en tabla FolioFacturas", MsgBoxStyle.Critical, "Facturación")
+                            MsgBox("Error al actualizar Folio Factura en tabla FolioFacturas", MsgBoxStyle.Critical, "RollBack Facturación")
                             Exit Sub
                         End If
                     End If
                 Else
-                    MsgBox("Error al eliminar detalle de Factura", MsgBoxStyle.Critical, "Facturación")
+                    MsgBox("Error al eliminar detalle de Factura", MsgBoxStyle.Critical, "RollBack Facturación")
                 End If
             Else
-                MsgBox("Error al eliminar cabecera de Factura", MsgBoxStyle.Critical, "Facturación")
+                MsgBox("Error al eliminar cabecera de Factura", MsgBoxStyle.Critical, "RollBack Facturación")
             End If
         End If
+
+        For i = 0 To DataGridView1.RowCount - 1
+            Dim wVenta As tblVenta = DBModelo.Get_PV_TicketHeader(CInt(DataGridView1.Rows(i).Cells(0).Value))
+            wVenta.numeroFactura = ""
+            If DBModelo.Update_PV_Venta(wVenta) = False Then
+                MsgBox(("Ticket " & DataGridView1.Rows(i).Cells(0).Value.ToString & " no pudo ser actualizado."), MsgBoxStyle.Information, "RollBack Facturación")
+            End If
+        Next
     End Sub
+
     Private Sub Button2_Click_2(sender As Object, e As EventArgs) Handles Button2.Click
         limpiar()
+    End Sub
+
+    Private Sub lv_ticket_DoubleClick(sender As Object, e As EventArgs) Handles lv_ticket.DoubleClick
+        Dim lvTicket As String = lv_ticket.Items(lv_ticket.SelectedIndex).ToString
+        lv_ticket.Items.RemoveAt(lv_ticket.SelectedIndex)
+
+        TxtSubtotal.Text = "0.00"
+        TxtIVA.Text = "0.00"
+        TxtTotal.Text = "0.00"
+        DataGridView1.Refresh()
+        DataGridView1.Rows.Clear()
+
+        For i = 0 To lv_ticket.Items.Count - 1
+            Dim tTicket As List(Of tblTicket) = DBModelo.Get_PV_TicketsDetalle(CInt(lv_ticket.Items(i)))
+            If tTicket.Count > 0 Then
+                For Each wTicket In tTicket
+                    If wTicket.ClaveProducto.Equals("") Then
+                        MsgBox("Falta definir ClaveProducto al Producto " & wTicket.clave_producto & " - " & wTicket.concepto, MsgBoxStyle.Critical, "Validación de Tickets de Venta")
+                        Exit Sub
+                    End If
+                    If wTicket.ClaveUnidad.Equals("") Then
+                        MsgBox("Falta definir ClaveUnidad al Producto " & wTicket.clave_producto & " - " & wTicket.concepto, MsgBoxStyle.Critical, "Validación de Tickets de Venta")
+                        Exit Sub
+                    End If
+
+                    Dim row As String() = New String(15 - 1) {}
+                    row(0) = wTicket.folio
+                    row(1) = CStr(wTicket.cantidad)
+                    row(2) = wTicket.concepto
+                    row(3) = CStr(wTicket.precio) 'Math.Round(CDbl(wTicket.precio / FactorIVA), 6)
+                    row(4) = CStr(wTicket.subtotal) 'Math.Round(CDbl(wTicket.subtotal / FactorIVA), 6)
+                    row(5) = CStr(wTicket.fecha)
+                    row(6) = CStr(wTicket.precioCosto)
+                    row(7) = CStr(wTicket.subtotalCosto)
+                    row(8) = wTicket.clave_producto
+                    row(9) = TxtFolio.Text
+                    row(10) = CStr(wTicket.IdProducto)
+                    row(11) = wTicket.ClaveProducto
+                    row(12) = wTicket.ClaveUnidad
+                    If wTicket.TasaCero = False Then
+                        row(13) = "0"
+                        row(14) = CStr(Math.Round(CDbl(((wTicket.subtotal * CDbl(FactorIVA)) - wTicket.subtotal)), 6)) 'Math.Round(CDbl((wTicket.subtotal - (wTicket.subtotal / FactorIVA))), 6)
+                    Else
+                        row(13) = "1"
+                        row(14) = CStr(wTicket.subtotal)
+                    End If
+                    Dim rowValues As String() = row
+                    DataGridView1.Rows.Add(rowValues)
+                    TxtSubtotal.Text = CStr(CDec(TxtSubtotal.Text) + wTicket.subtotal) 'Math.Round(CDbl(wTicket.subtotal / FactorIVA), 6)
+                    If wTicket.TasaCero = False Then
+                        TxtIVA.Text = CStr(CDec(TxtIVA.Text) + Math.Round(CDec((wTicket.subtotal * CDbl(FactorIVA)) - wTicket.subtotal), 6)) 'Math.Round(CDbl((wTicket.subtotal - (wTicket.subtotal / FactorIVA))), 6)
+                        TxtTotal.Text = CStr(CDbl(TxtSubtotal.Text) + CDbl(TxtIVA.Text))
+                    Else
+                        TxtIVA.Text = "0.00"
+                        TxtTotal.Text = CStr(TxtSubtotal.Text)
+                    End If
+                Next
+                TxtSubtotal.Text = FormatNumber(Math.Round(CDbl(TxtSubtotal.Text), 2))
+                If TxtIVA.Text <> "0.00" Then
+                    TxtIVA.Text = FormatNumber(CDec(TxtIVA.Text), 6)
+                End If
+                TxtTotal.Text = FormatNumber(CDbl(TxtTotal.Text), 2)
+                LblNRegistros.Text = CStr(DataGridView1.Rows.Count)
+                TxtTikect.Clear()
+                TxtTikect.Focus()
+            Else
+                MsgBox(("Ticket #: " & TxtTikect.Text & " no tiene detalle"), MsgBoxStyle.ApplicationModal, Nothing)
+                TxtTikect.Clear()
+                TxtTikect.Focus()
+                Exit Sub
+            End If
+        Next
     End Sub
 End Class

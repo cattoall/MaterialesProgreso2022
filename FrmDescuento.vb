@@ -29,44 +29,51 @@
     Private Sub NupPrecio_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles NupPrecio.KeyDown
         If e.KeyCode = Keys.Enter Then
             e.SuppressKeyPress = True
-            NupDescuento.Focus()
+            txtPorcentaje.Focus()
         End If
     End Sub
 
-    Private Sub NupDescuento_ValueChanged(sender As Object, e As EventArgs) Handles NupDescuento.ValueChanged
-        lblDesc.Text = NupDescuento.Value & " %"
+    Private Sub txtPorcentaje_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPorcentaje.KeyPress
+        If Asc(e.KeyChar) <> 8 Then
+            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
+                e.Handled = True
+            End If
+        End If
     End Sub
 
-    Private Sub lblSalir_Click(sender As Object, e As EventArgs) Handles lblSalir.Click
-        Close()
+    Private Sub txtPorcentaje_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPorcentaje.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            e.SuppressKeyPress = True
+            btnAplicar_Click(sender, e)
+        End If
     End Sub
 
-    Private Sub lblAplicar_Click(sender As Object, e As EventArgs) Handles lblAplicar.Click
-        desc = CDbl(NupDescuento.Value)
+    Private Sub btnAplicar_Click(sender As Object, e As EventArgs) Handles btnAplicar.Click
+        desc = CDbl(txtPorcentaje.Text)
 
         If desc > 30 Or desc < 0 Then
-            NupDescuento.Focus()
+            txtPorcentaje.Focus()
             desc = 0
         Else
             If (Not IsNumeric(NupCantidad.Value)) Then
-                NupCantidad.Value = 0.0
+                NupCantidad.Value = CDec(0.0)
             End If
 
             If (Not IsNumeric(desc)) Then
-                NupDescuento.Value = 0.0
+                txtPorcentaje.Text = CStr(0)
             End If
 
             If (Not IsNumeric(NupPrecio.Value)) Then
-                NupPrecio.Value = 0.0
+                NupPrecio.Value = CDec(0.0)
             End If
 
-            FrmPuntoDeVenta.MetroGrid1.Rows(FrmPuntoDeVenta.MetroGrid1.CurrentRow.Index).Cells(0).Value = NupCantidad.Value
-            FrmPuntoDeVenta.MetroGrid1.Rows(FrmPuntoDeVenta.MetroGrid1.CurrentRow.Index).Cells(3).Value = CDbl(NupPrecio.Value)
-            FrmPuntoDeVenta.MetroGrid1.Rows(FrmPuntoDeVenta.MetroGrid1.CurrentRow.Index).Cells(4).Value = FrmPuntoDeVenta.MetroGrid1.Rows(FrmPuntoDeVenta.MetroGrid1.CurrentRow.Index).Cells(3).Value * FrmPuntoDeVenta.MetroGrid1.Rows(FrmPuntoDeVenta.MetroGrid1.CurrentRow.Index).Cells(0).Value
-            FrmPuntoDeVenta.MetroGrid1.Rows(FrmPuntoDeVenta.MetroGrid1.CurrentRow.Index).Cells(6).Value = CDbl(desc)
-            FrmPuntoDeVenta.MetroGrid1.Rows(FrmPuntoDeVenta.MetroGrid1.CurrentRow.Index).Cells(7).Value = FrmPuntoDeVenta.MetroGrid1.Rows(FrmPuntoDeVenta.MetroGrid1.CurrentRow.Index).Cells(3).Value - Math.Round((FrmPuntoDeVenta.MetroGrid1.Rows(FrmPuntoDeVenta.MetroGrid1.CurrentRow.Index).Cells(3).Value * CDbl(desc) / 100), 2)
-            FrmPuntoDeVenta.MetroGrid1.Rows(FrmPuntoDeVenta.MetroGrid1.CurrentRow.Index).Cells(8).Value = FrmPuntoDeVenta.MetroGrid1.Rows(FrmPuntoDeVenta.MetroGrid1.CurrentRow.Index).Cells(7).Value * FrmPuntoDeVenta.MetroGrid1.Rows(FrmPuntoDeVenta.MetroGrid1.CurrentRow.Index).Cells(0).Value
-            FrmPuntoDeVenta.MetroGrid1.Rows(FrmPuntoDeVenta.MetroGrid1.CurrentRow.Index).Cells(3).Value = CDbl(NupPrecio.Value)
+            FrmPuntoDeVenta.DataGridView1.Rows(FrmPuntoDeVenta.DataGridView1.CurrentRow.Index).Cells(0).Value = NupCantidad.Value
+            FrmPuntoDeVenta.DataGridView1.Rows(FrmPuntoDeVenta.DataGridView1.CurrentRow.Index).Cells(3).Value = CDbl(NupPrecio.Value)
+            FrmPuntoDeVenta.DataGridView1.Rows(FrmPuntoDeVenta.DataGridView1.CurrentRow.Index).Cells(4).Value = CDbl(FrmPuntoDeVenta.DataGridView1.Rows(FrmPuntoDeVenta.DataGridView1.CurrentRow.Index).Cells(3).Value) * CDbl(FrmPuntoDeVenta.DataGridView1.Rows(FrmPuntoDeVenta.DataGridView1.CurrentRow.Index).Cells(0).Value)
+            FrmPuntoDeVenta.DataGridView1.Rows(FrmPuntoDeVenta.DataGridView1.CurrentRow.Index).Cells(6).Value = desc
+            FrmPuntoDeVenta.DataGridView1.Rows(FrmPuntoDeVenta.DataGridView1.CurrentRow.Index).Cells(7).Value = CDbl(FrmPuntoDeVenta.DataGridView1.Rows(FrmPuntoDeVenta.DataGridView1.CurrentRow.Index).Cells(3).Value) - Math.Round(CDbl(FrmPuntoDeVenta.DataGridView1.Rows(FrmPuntoDeVenta.DataGridView1.CurrentRow.Index).Cells(3).Value) * CDbl(desc) / 100, 2)
+            FrmPuntoDeVenta.DataGridView1.Rows(FrmPuntoDeVenta.DataGridView1.CurrentRow.Index).Cells(8).Value = CDbl(FrmPuntoDeVenta.DataGridView1.Rows(FrmPuntoDeVenta.DataGridView1.CurrentRow.Index).Cells(7).Value) * CDbl(FrmPuntoDeVenta.DataGridView1.Rows(FrmPuntoDeVenta.DataGridView1.CurrentRow.Index).Cells(0).Value)
+            FrmPuntoDeVenta.DataGridView1.Rows(FrmPuntoDeVenta.DataGridView1.CurrentRow.Index).Cells(3).Value = CDbl(NupPrecio.Value)
 
             Dim lv_granSubTotal As Double = 0
             Dim lv_granIVA As Double = 0
@@ -74,16 +81,16 @@
             Dim lv_granSubTotal_TasaCero As Double = 0
             Dim lv_granIVA_TasaCero As Double = 0
             Dim lv_granTotal_TasaCero As Double = 0
-            For i = 0 To FrmPuntoDeVenta.MetroGrid1.RowCount - 1
-                Dim lv_total = FrmPuntoDeVenta.MetroGrid1.Rows(i).Cells(8).Value
+            For i = 0 To FrmPuntoDeVenta.DataGridView1.RowCount - 1
+                Dim lv_total As Double = CDbl(FrmPuntoDeVenta.DataGridView1.Rows(i).Cells(8).Value)
                 lv_granSubTotal = lv_granSubTotal + lv_total
-                If FrmPuntoDeVenta.MetroGrid1.Rows(i).Cells(13).Value = False Then
-                    lv_granIVA = lv_granIVA + FormatNumber((lv_total * (FactorIVA - 1)), 2)
-                    lv_granTotal = lv_granTotal + FormatNumber((lv_total + (lv_total * (FactorIVA - 1))))
+                If CBool(FrmPuntoDeVenta.DataGridView1.Rows(i).Cells(13).Value) = False Then
+                    lv_granIVA = lv_granIVA + CDbl(FormatNumber(lv_total * (CDbl(FactorIVA) - 1), 2))
+                    lv_granTotal = lv_granTotal + CDbl(FormatNumber(lv_total + (lv_total * (CDbl(FactorIVA) - 1))))
                     gv_tasa_16 = True
                 Else
-                    lv_granTotal = lv_granTotal + FormatNumber(lv_total, 2)
-                    lv_granTotal_TasaCero = lv_granTotal_TasaCero + FormatNumber(lv_total, 2)
+                    lv_granTotal = lv_granTotal + CDbl(FormatNumber(lv_total, 2))
+                    lv_granTotal_TasaCero = lv_granTotal_TasaCero + CDbl(FormatNumber(lv_total, 2))
                     lv_granSubTotal_TasaCero = lv_granSubTotal_TasaCero + lv_total
                     gv_tasa_0 = True
                 End If
@@ -97,8 +104,11 @@
             desc = 0
             NupCantidad.Focus()
             NupCantidad.Select(0, NupCantidad.Value.ToString.Length)
-            Me.Close()
+            Close()
         End If
+    End Sub
 
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+        Close()
     End Sub
 End Class

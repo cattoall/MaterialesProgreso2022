@@ -16,7 +16,7 @@
         lbltotal.Text = "$ 0.00"
     End Sub
 
-    Private Sub ConfiguraGrid(ByRef dv As DataGridView)
+    Private Sub ConfiguraGrid(ByRef dv As MetroFramework.Controls.MetroGrid)
         dv.Columns(0).Visible = False
         dv.Columns(1).Visible = False
 
@@ -82,13 +82,6 @@
 
     End Sub
 
-    Private Sub CmdGenerarReporte_Click(sender As Object, e As EventArgs) 
-
-    End Sub
-
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         
@@ -99,9 +92,9 @@
 
         ConfiguraGrid(DataGridView1)
 
-        lbltotal.Text = 0
+        lbltotal.Text = CStr(0)
         For i = 0 To DataGridView1.RowCount - 1
-            lbltotal.Text = CDbl(lbltotal.Text) + CDbl(DataGridView1.Item(2, i).Value)
+            lbltotal.Text = CStr(CDbl(lbltotal.Text) + CDbl(DataGridView1.Item(2, i).Value))
         Next
         lbltotal.Text = FormatCurrency(lbltotal.Text, 2)
     End Sub

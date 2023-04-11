@@ -29,7 +29,7 @@
         MetroGrid1.DataSource = Proveedores.ToList
         MetroGrid1.Columns(0).Visible = False
 
-        Dim i As Int16 = 0
+        Dim i As Integer = 0
 
         For i = 0 To MetroGrid1.Columns.Count - 1 
             MetroGrid1.Columns(i).ReadOnly = True
@@ -83,21 +83,21 @@
         Add_Update = True
         FrmProveedor.Text = "Modificar Proveedor"
 
-        FrmProveedor.lv_idProveedor         = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.txtRazonSocial.Text    = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.lv_ValorAnterior       = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.txtDomicilio.Text      = MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.txtNumExterno.Text     = MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.txtColonia.Text        = MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.txtCiudad.Text         = MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.txtEstado.Text         = MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.txtCodigoPostal.Text   = MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.txtRFC.Text            = MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.txtTelFijo.Text        = MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.txtMovil.Text          = MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.txtEmail.Text          = MetroGrid1.Item(12, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.txtContacto.Text       = MetroGrid1.Item(13, MetroGrid1.CurrentRow.Index).Value
-        FrmProveedor.txtObs.Text            = MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value
+        FrmProveedor.lv_idProveedor = CInt(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.txtRazonSocial.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.lv_ValorAnterior = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.txtDomicilio.Text = CStr(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.txtNumExterno.Text = CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.txtColonia.Text = CStr(MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.txtCiudad.Text = CStr(MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.txtEstado.Text = CStr(MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.txtCodigoPostal.Text = CStr(MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.txtRFC.Text = CStr(MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.txtTelFijo.Text = CStr(MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.txtMovil.Text = CStr(MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.txtEmail.Text = CStr(MetroGrid1.Item(12, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.txtContacto.Text = CStr(MetroGrid1.Item(13, MetroGrid1.CurrentRow.Index).Value)
+        FrmProveedor.txtObs.Text = CStr(MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value)
 
         FrmProveedor.ShowDialog()
         FrmProveedor.Close()
@@ -106,12 +106,12 @@
         refresh_data_dgv()
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs)
         LimpiarObjetos()
         Close()
     End Sub
 
-    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) 
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs)
         Add_Update = False
         FrmProveedor.Text = "Crear Proveedor"
         FrmProveedor.ShowDialog()

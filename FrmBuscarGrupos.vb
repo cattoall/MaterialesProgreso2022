@@ -29,14 +29,14 @@
         Add_Update = True
         FrmGrupos.Text = "Modificar Grupo"
 
-        FrmGrupos.lv_idGrupo            = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.lv_ValorAnterior      = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.txtDescripcion.Text   = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.txtFactorCosto.Text   = MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.txtFactorPublico.Text = MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.txtFactorP1.Text      = MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.txtFactorP2.Text      = MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value
-        FrmGrupos.txtFactorP3.Text      = MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value
+        FrmGrupos.lv_idGrupo = CInt(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
+        FrmGrupos.lv_ValorAnterior = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
+        FrmGrupos.txtDescripcion.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
+        FrmGrupos.txtFactorCosto.Text = CStr(MetroGrid1.Item(3, MetroGrid1.CurrentRow.Index).Value)
+        FrmGrupos.txtFactorPublico.Text = CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value)
+        FrmGrupos.txtFactorP1.Text = CStr(MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value)
+        FrmGrupos.txtFactorP2.Text = CStr(MetroGrid1.Item(6, MetroGrid1.CurrentRow.Index).Value)
+        FrmGrupos.txtFactorP3.Text = CStr(MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value)
         FrmGrupos.ShowDialog()
         FrmGrupos.Close()
         FrmGrupos.Dispose()
@@ -58,9 +58,9 @@
         MetroGrid1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         MetroGrid1.Columns(0).Visible = False
 
-        Dim i As Int16 = 0
+        Dim i As Integer = 0
 
-        For i = 0 To MetroGrid1.Columns.Count - 1 
+        For i = 0 To MetroGrid1.Columns.Count - 1
             MetroGrid1.Columns(i).ReadOnly = True
             MetroGrid1.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         Next
@@ -77,18 +77,6 @@
     Private Sub ImgSalirB_Click(sender As System.Object, e As System.EventArgs)
         MetroGrid1.Refresh()
         Close()
-    End Sub
-
-    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) 
-        
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click

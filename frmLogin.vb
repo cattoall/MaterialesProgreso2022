@@ -1,5 +1,4 @@
-﻿
-Public Class frmLogin
+﻿Public Class frmLogin
 
     Private Sub frmLogin_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         cmbSistema.SelectedIndex = cmbSistema.FindString("Salvador")
@@ -89,13 +88,13 @@ Public Class frmLogin
                     Colonia = conf.localidadEmpresa
                     Telefono = conf.telefonoEmpresa
                     Ciudad = conf.ciudadEmpresa
-                    FactorIVA = conf.factorIVA
+                    FactorIVA = CStr(conf.factorIVA)
                     InvocePrinterName = conf.InvoicePrinterName
                     TicketPrinterName = conf.TicketPrinterName
-                    GranTipoCambio = conf.TipoCambio
-                    FactorIVA = conf.factorIVA
+                    GranTipoCambio = CDbl(conf.TipoCambio)
                     RegimenFiscal = conf.RegimenFiscal
                     LugarExpedicion = conf.LugarExpedicion
+                    NoCertificado = conf.NoCertificado
 
                     lv_backup_error = 0
                     Dim lv_backup_pathfile As String

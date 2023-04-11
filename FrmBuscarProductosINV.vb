@@ -121,13 +121,13 @@ Public Class FrmBuscarProductosINV
     Private Sub get_selected_product()
         If MetroGrid1.RowCount > 0 Then
             Add_Update = True
-            If MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                FrmAjusteDeInventario.txtDescripcion.Text = MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value
-            ElseIf MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value <> "" Then
-                FrmAjusteDeInventario.txtDescripcion.Text = MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value
+            If CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                FrmAjusteDeInventario.txtDescripcion.Text = CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value)
+            ElseIf CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value) <> "" Then
+                FrmAjusteDeInventario.txtDescripcion.Text = CStr(MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value)
             End If
-            ProductoID = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-            If MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value = False Then
+            ProductoID = CStr(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
+            If CBool(MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value) = False Then
                 Inventariado = False
             Else
                 Inventariado = True

@@ -24,14 +24,11 @@ Partial Public Class pv_salvadorEntities1
         Throw New UnintentionalCodeFirstException()
     End Sub
 
-    Public Overridable Property tblClientes() As DbSet(Of tblClientes)
     Public Overridable Property tblCobrars() As DbSet(Of tblCobrar)
     Public Overridable Property TblComplementoPagosDs() As DbSet(Of TblComplementoPagosD)
-    Public Overridable Property tblComplementoPagosHes() As DbSet(Of tblComplementoPagosH)
     Public Overridable Property tblCompras() As DbSet(Of tblCompra)
     Public Overridable Property tblConfiguracions() As DbSet(Of tblConfiguracion)
     Public Overridable Property tblCotizacions() As DbSet(Of tblCotizacion)
-    Public Overridable Property tblFacturaTotals() As DbSet(Of tblFacturaTotal)
     Public Overridable Property tblFacturas() As DbSet(Of tblFactura)
     Public Overridable Property tblFamilias() As DbSet(Of tblFamilia)
     Public Overridable Property tblFolioFacturas() As DbSet(Of tblFolioFacturas)
@@ -41,7 +38,6 @@ Partial Public Class pv_salvadorEntities1
     Public Overridable Property tblHistorialPagosProveedores() As DbSet(Of tblHistorialPagosProveedores)
     Public Overridable Property tblLineas() As DbSet(Of tblLinea)
     Public Overridable Property tblMarcas1() As DbSet(Of tblMarcas)
-    Public Overridable Property tblNCs() As DbSet(Of tblNC)
     Public Overridable Property tblNcDetalles() As DbSet(Of tblNcDetalle)
     Public Overridable Property tblOrdenCompras() As DbSet(Of tblOrdenCompra)
     Public Overridable Property tblOrdenCompraDes() As DbSet(Of tblOrdenCompraDe)
@@ -65,6 +61,11 @@ Partial Public Class pv_salvadorEntities1
     Public Overridable Property tblUsuarios1() As DbSet(Of tblUsuarios)
     Public Overridable Property tblVentas() As DbSet(Of tblVenta)
     Public Overridable Property tblVentaPedidoes() As DbSet(Of tblVentaPedido)
+    Public Overridable Property tblRegimenFiscals1() As DbSet(Of tblRegimenFiscal)
+    Public Overridable Property tblClientes() As DbSet(Of tblClientes)
+    Public Overridable Property tblComplementoPagosHes() As DbSet(Of tblComplementoPagosH)
+    Public Overridable Property tblFacturaTotals() As DbSet(Of tblFacturaTotal)
+    Public Overridable Property tblNCs() As DbSet(Of tblNC)
 
     Public Overridable Function SP_DB_BACKUP(databaseName As String, fullPath As String) As Integer
         Dim databaseNameParameter As ObjectParameter = If(databaseName IsNot Nothing, New ObjectParameter("DatabaseName", databaseName), New ObjectParameter("DatabaseName", GetType(String)))

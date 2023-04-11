@@ -30,10 +30,10 @@ Public Class FrmFolioFactura
             Case "PAGOS"
                 FrmFolioAME.CmbTipoDoc.SelectedIndex = 2
         End Select
-        FrmFolioAME.lblYear.Text = DataGridView1.Item(2, e.RowIndex).Value
-        FrmFolioAME.TxtfolioIni.Text = DataGridView1.Item(3, e.RowIndex).Value
-        FrmFolioAME.txtFilioFin.Text = DataGridView1.Item(4, e.RowIndex).Value
-        FrmFolioAME.TxtFolioAct.Text = DataGridView1.Item(5, e.RowIndex).Value
+        FrmFolioAME.lblYear.Text = CStr(DataGridView1.Item(2, e.RowIndex).Value)
+        FrmFolioAME.TxtfolioIni.Text = CStr(DataGridView1.Item(3, e.RowIndex).Value)
+        FrmFolioAME.txtFilioFin.Text = CStr(DataGridView1.Item(4, e.RowIndex).Value)
+        FrmFolioAME.TxtFolioAct.Text = CStr(DataGridView1.Item(5, e.RowIndex).Value)
 
         Selection = True
     End Sub
@@ -47,7 +47,7 @@ Public Class FrmFolioFactura
         FrmFolioAME.TxtFolioAct.Text = ""
         FrmFolioAME.TxtfolioIni.Text = ""
         FrmFolioAME.CmbTipoDoc.SelectedIndex = -1
-        FrmFolioAME.lblYear.Text = CInt(Now.Date.Year)
+        FrmFolioAME.lblYear.Text = CStr(Now.Date.Year)
 
         FrmFolioAME.ShowDialog()
 

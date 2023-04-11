@@ -7,26 +7,26 @@ Public Class FrmListadoVentasError
     Private Sub DataGridConsulta_CellClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridConsulta.CellClick
 
         LblTotal.Text = Format(Me.DataGridConsulta.Item(2, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,###.00")
-        LblNumTicket.Text = Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+        LblNumTicket.Text = CStr(DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value)
 
-        SQL = "SELECT diasCredito FROM clientes where clave = " & Me.DataGridConsulta.Item(6, DataGridConsulta.CurrentRow.Index).Value
+        SQL = "SELECT diasCredito FROM clientes where clave = " & CStr(DataGridConsulta.Item(6, DataGridConsulta.CurrentRow.Index).Value)
         conn.Open()
         If conn.State = ConnectionState.Open Then
             myCommand = New SqlCommand(SQL, conn)
             myAdapter.SelectCommand = myCommand
             myAdapter.Fill(myDs)
             If myDs.Tables(0).Rows.Count > 0 Then
-                lv_fechaventa = Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value
-                lv_fechalimite = lv_fechaventa.AddDays(myDs.Tables(0).Rows(0)!diasCredito)
+                lv_fechaventa = CDate(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value)
+                lv_fechalimite = lv_fechaventa.AddDays(CDbl((myDs.Tables(0).Rows(0)!diasCredito)))
             End If
         End If
         Limpia_Variables_SQL_y_Cierra_Conexion()
 
         If RbtTicket.Checked = True Then
-            SQL = "SELECT folio,cantidad,concepto,precio,subtotal,clave_producto,idProducto,fecha,precioCosto,subtotalCosto,numeroFactura FROM ticket where folio = " & Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+            SQL = "SELECT folio,cantidad,concepto,precio,subtotal,clave_producto,idProducto,fecha,precioCosto,subtotalCosto,numeroFactura FROM ticket where folio = " & CStr(DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value)
         End If
         If RbtPedidos.Checked = True Then
-            SQL = "SELECT folio,cantidad,concepto,precio,subtotal,clave_producto,idProducto,fecha,precioCosto,subtotalCosto,numeroFactura FROM ticket_pedido where folio = " & Me.DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value
+            SQL = "SELECT folio,cantidad,concepto,precio,subtotal,clave_producto,idProducto,fecha,precioCosto,subtotalCosto,numeroFactura FROM ticket_pedido where folio = " & CStr(DataGridConsulta.Item(0, DataGridConsulta.CurrentRow.Index).Value)
         End If
 
         'Carga Lista de Clasificaciones

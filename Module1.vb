@@ -9,6 +9,7 @@ Imports System.IO.Packaging
 Imports System.Reflection
 Imports System.Xml
 Imports System.Data.SqlClient
+Imports BarcodeLib
 
 Module Module1
     Public conn As New SqlConnection
@@ -31,6 +32,7 @@ Module Module1
     Public gv_SerieFactura As String = ""
     Public RegimenFiscal As String
     Public LugarExpedicion As String
+    Public NoCertificado As String
 
     Public privilegios As String
     Public usuario As String
@@ -709,12 +711,12 @@ Module Module1
             dv.Columns(1).HeaderText = "Tipo de Documento"
             dv.Columns(1).ReadOnly = True
             dv.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-            dv.Columns(1).Width = "200"
+            dv.Columns(1).Width = CInt("200")
 
             dv.Columns(2).HeaderText = "Año"
             dv.Columns(2).ReadOnly = True
             dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            dv.Columns(2).Width = "50"
+            dv.Columns(2).Width = CInt("50")
 
             dv.Columns(3).HeaderText = "Folio Inicial"
             dv.Columns(3).ReadOnly = True
@@ -1295,69 +1297,74 @@ Module Module1
             dv.Columns(1).DefaultCellStyle.Format = "#########"
             dv.Columns(1).Width = 70
 
-            dv.Columns(2).HeaderText = "Total"
-            dv.Columns(2).ReadOnly = True
-            dv.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            dv.Columns(2).DefaultCellStyle.Format = "$ ###,###,###.00"
-            dv.Columns(2).Width = 110
+            dv.Columns(2).Visible = False
 
-            dv.Columns(3).HeaderText = "Usuario"
-            dv.Columns(3).ReadOnly = True
-            dv.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dv.Columns(3).Visible = False
-            dv.Columns(3).Width = 100
 
-            dv.Columns(4).HeaderText = "Tipo"
+            dv.Columns(4).HeaderText = "Total"
             dv.Columns(4).ReadOnly = True
-            dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            dv.Columns(4).Width = 100
+            dv.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            dv.Columns(4).DefaultCellStyle.Format = "$ ###,###,###.00"
+            dv.Columns(4).Width = 110
 
-            dv.Columns(5).HeaderText = "Cliente"
+            dv.Columns(5).HeaderText = "Usuario"
             dv.Columns(5).ReadOnly = True
-            dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-            dv.Columns(5).Width = 400
+            dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dv.Columns(5).Visible = False
+            dv.Columns(5).Width = 100
 
-            dv.Columns(6).HeaderText = "IdCliente"
+            dv.Columns(6).HeaderText = "Tipo"
             dv.Columns(6).ReadOnly = True
-            dv.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight
-            dv.Columns(6).Visible = False
+            dv.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dv.Columns(6).Width = 100
 
-            dv.Columns(7).HeaderText = "Fecha Factura"
+            dv.Columns(7).HeaderText = "Cliente"
             dv.Columns(7).ReadOnly = True
-            dv.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            dv.Columns(7).Width = 100
+            dv.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            dv.Columns(7).Width = 400
 
-            dv.Columns(8).HeaderText = "Fecha Límite"
+            dv.Columns(8).HeaderText = "IdCliente"
             dv.Columns(8).ReadOnly = True
-            dv.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dv.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight
             dv.Columns(8).Visible = False
             dv.Columns(8).Width = 100
 
-            dv.Columns(9).HeaderText = "Condiciones"
+            dv.Columns(9).HeaderText = "Fecha Factura"
             dv.Columns(9).ReadOnly = True
-            dv.Columns(9).Visible = False
+            dv.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dv.Columns(9).Width = 100
 
-            dv.Columns(10).HeaderText = "Estado"
+            dv.Columns(10).HeaderText = "Fecha Límite"
             dv.Columns(10).ReadOnly = True
-            dv.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            dv.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dv.Columns(10).Visible = False
             dv.Columns(10).Width = 100
 
-            dv.Columns(11).HeaderText = "Observaciones"
+            dv.Columns(11).HeaderText = "Condiciones"
             dv.Columns(11).ReadOnly = True
+            dv.Columns(11).Visible = False
             dv.Columns(11).Width = 100
 
-            dv.Columns(12).HeaderText = "Tipo Factura"
+            dv.Columns(12).HeaderText = "Estado"
             dv.Columns(12).ReadOnly = True
-            dv.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            dv.Columns(12).Visible = False
-            dv.Columns(12).Width = 150
+            dv.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            dv.Columns(12).Width = 100
 
-            dv.Columns(13).HeaderText = "Tipo Factura"
+            dv.Columns(13).HeaderText = "Observaciones"
             dv.Columns(13).ReadOnly = True
-            dv.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            dv.Columns(13).Width = 150
+            dv.Columns(13).Width = 100
+
+            dv.Columns(14).HeaderText = "Tipo Factura"
+            dv.Columns(14).ReadOnly = True
+            dv.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dv.Columns(14).Visible = False
+            dv.Columns(14).Width = 150
+
+            dv.Columns(15).HeaderText = "Tipo Factura"
+            dv.Columns(15).ReadOnly = True
+            dv.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dv.Columns(15).Visible = True
+            dv.Columns(15).Width = 150
 
         Catch ex As Exception
             MsgBox(ex.Message.ToString, MsgBoxStyle.Critical)
@@ -2270,7 +2277,7 @@ Module Module1
         End Try
     End Sub
 
-    Public Function Dinero(ByVal Monto As Double, ByVal ncents As Integer, ByVal desmon As String, ByVal mn As Boolean)
+    Public Function Dinero(ByVal Monto As Double, ByVal ncents As Integer, ByVal desmon As String, ByVal mn As Boolean) As String
         Dim nmonto As Double
         Dim acUnid(10) As String
         Dim acDecY(10) As String
@@ -2283,9 +2290,9 @@ Module Module1
         Dim cRetVal As String
         Dim cCant As String
         Dim caux As String
-        Dim naux1 As String
-        Dim naux2 As String
-        Dim naux3 As String
+        Dim naux1 As Integer
+        Dim naux2 As Integer
+        Dim naux3 As Integer
         Dim n As Integer
         Dim cCents As Double
         Dim sCents As String
@@ -2293,7 +2300,7 @@ Module Module1
         Dim Moneda As String
         Moneda = desmon
         nmonto = Math.Abs(Math.Round(Monto, 2))
-        masmen = IIf(Math.Round(Monto, 2) >= 0, "", "Menos ")
+        masmen = CStr(IIf(Math.Round(Monto, 2) >= 0, "", "Menos "))
         acUnid(1) = "Un "
         acUnid(2) = "Dos "
         acUnid(3) = "Tres "
@@ -2397,13 +2404,13 @@ Module Module1
                 Case 1 : cRetVal = cRetVal & sCents & "/100"
                 Case 2 : cRetVal = cRetVal & " " & sCents & "/100"
                 Case 3
-                    If cCents = "00" Then
+                    If cCents = CDbl("00") Then
                         cRetVal = cRetVal & "Sin Centimos"
                     Else
                         cRetVal = cRetVal & "con " & sCents & " CENTIMOS"
                     End If
                 Case 4
-                    If cCents = "00" Then
+                    If cCents = CDbl("00") Then
                         cRetVal = cRetVal & "Sin Centavos"
                     Else
                         cRetVal = cRetVal & "con " & sCents & " CENTAVOS"
@@ -2571,7 +2578,7 @@ Module Module1
             Return
         End If
         AddHandler printDoc.PrintPage, AddressOf PrintPage
-        printDoc.PrinterSettings.Copies = i_copies
+        printDoc.PrinterSettings.Copies = CShort(i_copies)
 
         printDoc.Print()
     End Sub
@@ -2617,6 +2624,7 @@ Module Module1
         '---------Variables para reporte--------------
         Dim rep_FormadePago As String
         Dim rep_MetododePago As String
+        Dim rep_Regimen As String
         Dim rep_UsoCFDI As String
         Dim rep_folio As String = FolioFactura
         Dim rep_direccion As String
@@ -2636,6 +2644,7 @@ Module Module1
         dt_detail.Columns.Add("base", GetType(Double))
         dt_detail.Columns.Add("importe", GetType(Double))
         dt_detail.Columns.Add("tasaocuota", GetType(Double))
+        dt_detail.Columns.Add("objetoimp", GetType(String))
 
         dt_detail.TableName = "facturas"
         Try
@@ -2664,6 +2673,7 @@ Module Module1
                 dt_details_row("tasaocuota") = CDbl(DS.Tables("Traslado").Rows(i)("TasaOCuota")) * 100
                 dt_details_row("precio") = CDbl(DS.Tables("Concepto").Rows(i)("ValorUnitario"))
                 dt_details_row("subtotal") = CDbl(DS.Tables("Concepto").Rows(i)("Importe"))
+                dt_details_row("objetoimp") = CDbl(DS.Tables("Concepto").Rows(i)("ObjetoImp"))
 
                 lv_iva_total = lv_iva_total + CDbl(DS.Tables("Traslado").Rows(i)("Importe"))
                 dt_detail.Rows.Add(dt_details_row)
@@ -2678,6 +2688,11 @@ Module Module1
             Dim wa_MetodoDePago As tblMetodoPago = DBModelo.GetMetodoDePagoByKey(rep_MetododePago)
             rep_MetododePago = wa_MetodoDePago.MetodoPago
 
+            rep_Regimen = DS.Tables("Receptor").Rows(0)("RegimenFiscalReceptor").ToString()
+            Dim wa_RegimenFiscal As tblRegimenFiscal = DBModelo.GetRegimenFiscalByKey(rep_Regimen)
+            rep_Regimen = wa_RegimenFiscal.Clave & "-" & wa_RegimenFiscal.Descripcion
+
+
             rep_UsoCFDI = DS.Tables("Receptor").Rows(0)("UsoCFDI").ToString()
             Dim wa_UsoCFDI As tblUsoCFDI = DBModelo.GetUsoCFDIByKey(rep_UsoCFDI)
             rep_UsoCFDI = wa_UsoCFDI.UsoCFDI
@@ -2688,7 +2703,7 @@ Module Module1
             If Not DBModelo.Update_PV_FacturaTotal(wa_header) Then
                 MsgBox("Problemas al actualizar el UUID en la tabla FacturasTotal", MsgBoxStyle.Exclamation, "Actualización de UUID")
             End If
-            Dim wa_cliente As tblClientes = DBModelo.GetCliente(wa_header.id_cliente)
+            Dim wa_cliente As tblClientes = DBModelo.GetCliente(CInt(wa_header.id_cliente))
 
             Dim lv_nombre As String = ""
             Dim lv_direccion As String = ""
@@ -2751,6 +2766,8 @@ Module Module1
                     lv_TipoDeComprobante = "E-Egreso"
             End Select
 
+            rep_MontoEnLetras = Dinero(CDbl(DS.Tables("Comprobante").Rows(0)("Total").ToString), 2, "Pesos", True)
+
             Dim p1 As New Microsoft.Reporting.WinForms.ReportParameter("RfcProvCertif", DS.Tables("TimbreFiscalDigital").Rows(0)("RfcProvCertif").ToString())
             Dim p2 As New Microsoft.Reporting.WinForms.ReportParameter("UUID", DS.Tables("TimbreFiscalDigital").Rows(0)("UUID").ToString())
             Dim p3 As New Microsoft.Reporting.WinForms.ReportParameter("TipoDeComprobante", lv_TipoDeComprobante)
@@ -2777,6 +2794,10 @@ Module Module1
             Dim p24 As New Microsoft.Reporting.WinForms.ReportParameter("Colonia", rep_colonia)
             Dim p25 As New Microsoft.Reporting.WinForms.ReportParameter("CPReceptor", DS.Tables("Receptor").Rows(0)("Rfc").ToString())
             Dim p26 As New Microsoft.Reporting.WinForms.ReportParameter("IVA", lv_iva_total.ToString)
+            Dim p27 As New Microsoft.Reporting.WinForms.ReportParameter("CertificadoSAT", DS.Tables("TimbreFiscalDigital").Rows(0)("NoCertificadoSAT").ToString())
+            Dim p28 As New Microsoft.Reporting.WinForms.ReportParameter("RegimenFiscalCliente", rep_Regimen)
+            Dim p29 As New Microsoft.Reporting.WinForms.ReportParameter("Certificado", NoCertificado)
+            Dim p30 As New Microsoft.Reporting.WinForms.ReportParameter("ImporteLetra", rep_MontoEnLetras)
 
             Report.ReportPath = gv_Report_Path & "Report6.rdlc"
             Report.EnableExternalImages = True
@@ -2807,6 +2828,10 @@ Module Module1
             Report.SetParameters(p24)
             Report.SetParameters(p25)
             Report.SetParameters(p26)
+            Report.SetParameters(p27)
+            Report.SetParameters(p28)
+            Report.SetParameters(p29)
+            Report.SetParameters(p30)
 
             Report.DataSources.Clear()
             Report.DataSources.Add(New Microsoft.Reporting.WinForms.ReportDataSource("DataSet1", dt_detail))
@@ -2838,7 +2863,7 @@ Module Module1
 
                 oSmtp.UseDefaultCredentials = False
                 oSmtp.Credentials = New Net.NetworkCredential(gv_smtp_correo, gv_smtp_pass)
-                oSmtp.Port = gv_smtp_port
+                oSmtp.Port = CInt(gv_smtp_port)
                 oSmtp.EnableSsl = True
                 oSmtp.Host = gv_smtp_server
 
@@ -2854,7 +2879,7 @@ Module Module1
                 ' Set email subject
                 oMail.Subject = "Factura Electrónica Material Eléctrico Progreso"
                 oMail.BodyEncoding = Encoding.UTF8
-                oMail.IsBodyHtml = True
+                'oMail.IsBodyHtml = True
 
                 Dim sEnter As String = ChrW(13) & ChrW(10)
                 ' Set email body
@@ -2893,13 +2918,14 @@ Module Module1
             End If
             Return True
         Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeFactura Genera Reporte Local")
+            MsgBox(ex.Message & " - " & ex.InnerException.Message, MsgBoxStyle.Critical, "ImprimeFactura Genera Reporte Local")
             Return False
         End Try
     End Function
 
     Public Function ImprimePago(ByVal NumeroPago As String, ByVal FolioFactura As String, ByVal Imprimir As Boolean) As Boolean
         Dim flag As Boolean
+        Dim rep_Regimen As String = ""
 
         Dim table As New DataTable
         table.Columns.Add("cantidad", GetType(Integer))
@@ -2989,6 +3015,10 @@ Module Module1
             End If
         End If
 
+        rep_Regimen = ds.Tables("Receptor").Rows(0)("RegimenFiscalReceptor").ToString()
+        Dim wa_RegimenFiscal As tblRegimenFiscal = DBModelo.GetRegimenFiscalByKey(rep_Regimen)
+        rep_Regimen = wa_RegimenFiscal.Clave & "-" & wa_RegimenFiscal.Descripcion
+
         rep_MontoEnLetras = Dinero(CDbl(ds.Tables("Pago").Rows(0)("Monto").ToString), 2, "Pesos", True)
 
         report.ReportPath = gv_Report_Path_FE & "Pagos.rdlc"
@@ -3021,6 +3051,10 @@ Module Module1
         report.SetParameters(New ReportParameter("IVA", "0.00"))
         report.SetParameters(New ReportParameter("FechaFactura", ds.Tables("Pago").Rows(0)("FechaPago").ToString))
         report.SetParameters(New ReportParameter("ImporteLetra", rep_MontoEnLetras.ToUpper))
+        report.SetParameters(New ReportParameter("CertificadoSAT", ds.Tables("TimbreFiscalDigital").Rows(0)("NoCertificadoSAT").ToString()))
+        report.SetParameters(New ReportParameter("RegimenFiscalCliente", rep_Regimen))
+        report.SetParameters(New ReportParameter("Certificado", NoCertificado))
+
         report.DataSources.Clear()
         report.DataSources.Add(New ReportDataSource("DataSet1", table))
         report.DataSources.Add(New ReportDataSource("Pagos", table2))
@@ -3048,7 +3082,7 @@ Module Module1
 
             oSmtp.UseDefaultCredentials = False
             oSmtp.Credentials = New Net.NetworkCredential(gv_smtp_correo, gv_smtp_pass)
-            oSmtp.Port = gv_smtp_port
+            oSmtp.Port = CInt(gv_smtp_port)
             oSmtp.EnableSsl = True
             oSmtp.Host = gv_smtp_server
 
@@ -3064,7 +3098,7 @@ Module Module1
             ' Set email subject
             oMail.Subject = "Complemento de Pago Electrónico Material Eléctrico Progreso"
             oMail.BodyEncoding = Encoding.UTF8
-            oMail.IsBodyHtml = True
+            'oMail.IsBodyHtml = True
 
             Dim sEnter As String = ChrW(13) & ChrW(10)
             ' Set email body
@@ -4442,7 +4476,7 @@ Module Module1
                 MsgBox("Problemas al actualizar el UUID en la tabla NC", MsgBoxStyle.Exclamation, "Actualización de UUID")
             End If
 
-            Dim wa_cliente As tblClientes = DBModelo.GetCliente(wa_header.id_cliente)
+            Dim wa_cliente As tblClientes = DBModelo.GetCliente(CInt(wa_header.id_cliente))
 
             Dim lv_nombre As String = ""
             Dim lv_direccion As String = ""
@@ -4596,7 +4630,7 @@ Module Module1
 
                 oSmtp.UseDefaultCredentials = False
                 oSmtp.Credentials = New Net.NetworkCredential(gv_smtp_correo, gv_smtp_pass)
-                oSmtp.Port = gv_smtp_port
+                oSmtp.Port = CInt(gv_smtp_port)
                 oSmtp.EnableSsl = True
                 oSmtp.Host = gv_smtp_server
 
@@ -4611,8 +4645,7 @@ Module Module1
 
                 ' Set email subject
                 oMail.Subject = "Nota de Crédito Electrónica Material Eléctrico Progreso"
-
-                oMail.IsBodyHtml = True
+                'oMail.IsBodyHtml = True
 
                 Dim sEnter As String = ChrW(13) & ChrW(10)
                 ' Set email body
@@ -4657,498 +4690,19 @@ Module Module1
         End Try
     End Function
 
-    Public Function ImprimeNotaDeCredito_CFDI(ByVal NumeroFactura As Integer, ByVal DB As String) As Boolean
-        Dim dt_header As List(Of tblNC) = New List(Of tblNC)
-        Dim dt_detail As List(Of tblNcDetalle) = New List(Of tblNcDetalle)
-        Dim dt_factura As List(Of tblFoliofacturas) = New List(Of tblFoliofacturas)
-        Dim dt_cliente As List(Of tblClientes) = New List(Of tblClientes)
-        Dim dt_productos As List(Of tblProductos) = New List(Of tblProductos)
-        Dim sql_header As String = "Select * from nc where n_nc = " & NumeroFactura
-        Dim sql_detail As String = "select * from nc_detalle where n_nc = " & NumeroFactura
-        Dim sql_factura As String = "select * from foliosfacturas where tipocomprobante = 'NOTAS DE CREDITO' and year = " & CInt(Now.Date.Year)
-
-        Dim lv_documento_01 As String = ""
-        Dim lv_cliente_02_bill_to As String = ""
-        Dim lv_cliente_02_ship_to As String = ""
-        Dim lv_concepto_04 As String = ""
-        Dim lv_iva_10 As String = ""
-        Using ctx As New pv_salvadorEntities1
-            dt_header = ctx.tblNCs.Where(Function(i) i.n_nc = NumeroFactura).ToList
-            dt_detail = ctx.tblNcDetalles.Where(Function(i) i.n_nc = NumeroFactura).ToList
-            Dim d As Int32 = CInt(Now.Date.Year)
-            dt_factura = ctx.tblFoliofacturas.Where(Function(i) i.TipoComprobante = "NOTAS DE CREDITO" & i.Year = d).ToList
-            'dt_cliente = ctx.tblClientes.Where(Function(i) i.clave = dt_header(0).id_cliente).ToList
-        End Using
-        'Try
-        '    Select Case DB
-        '        Case "Wendy"
-        '            SqlDataAdapter = New SqlDataAdapter(sql_header, gv_ConStringWendy)
-        '        Case "Librada"
-        '            SqlDataAdapter = New SqlDataAdapter(sql_header, gv_ConStringLibrada)
-        '        Case "Salvador"
-        '            SqlDataAdapter = New SqlDataAdapter(sql_header, gv_ConStringSalvador)
-        '    End Select
-        '
-        '    Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
-        '
-        '    ' llenar el DataTable   
-        '    dt_header.Clear()
-        '    dt_header.Dispose()
-        '    dt_header.Reset()
-        '    dt_header = New DataTable
-        '    SqlDataAdapter.Fill(dt_header)
-        '
-        'Catch exSql As SqlException
-        '    MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNotaDeCredito_CFDI dt_header")
-        '    Return False
-        'Catch ex As Exception
-        '    MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNotaDeCredito_CFDI dt_header")
-        '    Return False
-        'End Try
-        '
-        'Try
-        '    Select Case DB
-        '        Case "Wendy"
-        '            SqlDataAdapter = New SqlDataAdapter(sql_detail, gv_ConStringWendy)
-        '        Case "Librada"
-        '            SqlDataAdapter = New SqlDataAdapter(sql_detail, gv_ConStringLibrada)
-        '        Case "Salvador"
-        '            SqlDataAdapter = New SqlDataAdapter(sql_detail, gv_ConStringSalvador)
-        '    End Select
-        '
-        '    Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
-        '
-        '    ' llenar el DataTable   
-        '    dt_detail.Clear()
-        '    dt_detail.Dispose()
-        '    dt_detail.Reset()
-        '    dt_detail = New DataTable
-        '    SqlDataAdapter.Fill(dt_detail)
-        '
-        'Catch exSql As SqlException
-        '    MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNotaDeCredito_CFDI dt_detail")
-        '    Return False
-        'Catch ex As Exception
-        '    MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNotaDeCredito_CFDI dt_detail")
-        '    Return False
-        'End Try
-        '
-        'Try
-        '    Select Case DB
-        '        Case "Wendy"
-        '            SqlDataAdapter = New SqlDataAdapter(sql_factura, gv_ConStringWendy)
-        '        Case "Librada"
-        '            SqlDataAdapter = New SqlDataAdapter(sql_factura, gv_ConStringLibrada)
-        '        Case "Salvador"
-        '            SqlDataAdapter = New SqlDataAdapter(sql_factura, gv_ConStringSalvador)
-        '    End Select
-        '
-        '    Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
-        '
-        '    ' llenar el DataTable   
-        '    dt_factura.Clear()
-        '    dt_factura.Dispose()
-        '    dt_factura.Reset()
-        '    dt_factura = New DataTable
-        '    SqlDataAdapter.Fill(dt_factura)
-        '
-        'Catch exSql As SqlException
-        '    MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNotaDeCredito_CFDI dt_detail")
-        '    Return False
-        'Catch ex As Exception
-        '    MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNotaDeCredito_CFDI dt_detail")
-        '    Return False
-        'End Try
-
-        'Try
-        '    Dim sql_cliente As String = "select * from clientes where clave = '" & dt_header.Rows(0)!id_cliente & "'"
-        '
-        '    Select Case DB
-        '        Case "Wendy"
-        '            SqlDataAdapter = New SqlDataAdapter(sql_cliente, gv_ConStringWendy)
-        '        Case "Librada"
-        '            SqlDataAdapter = New SqlDataAdapter(sql_cliente, gv_ConStringLibrada)
-        '        Case "Salvador"
-        '            SqlDataAdapter = New SqlDataAdapter(sql_cliente, gv_ConStringSalvador)
-        '    End Select
-        '
-        '    Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
-        '
-        '    ' llenar el DataTable   
-        '    dt_cliente.Clear()
-        '    dt_cliente.Dispose()
-        '    dt_cliente.Reset()
-        '    dt_cliente = New DataTable
-        '    SqlDataAdapter.Fill(dt_cliente)
-        '
-        'Catch exSql As SqlException
-        '    MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNotaDeCredito_CFDI dt_cliente")
-        '    Return False
-        'Catch ex As Exception
-        '    MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNotaDeCredito_CFDI dt_detail")
-        '    Return False
-        'End Try
-
-        Dim lv_nombre As String = ""
-        Dim lv_direccion As String = ""
-        Dim lv_colonia As String = ""
-        Dim lv_codigopostal As String = ""
-        Dim lv_ciudad As String = ""
-        Dim lv_rfc As String = ""
-
-        Try
-            If dt_cliente.LongCount > 0 Then
-                If dt_cliente(0).nombre <> "" Or dt_cliente(0).apat <> "" Or dt_cliente(0).amat <> "" Then
-                    lv_nombre = dt_cliente(0).nombre & " " & dt_cliente(0).apat & " " & dt_cliente(0).amat
-                End If
-                If dt_cliente(0).calle <> "" Then
-                    lv_direccion = dt_cliente(0).calle
-                    If dt_cliente(0).numero <> "" Then
-                        lv_direccion = lv_direccion & " #" & dt_cliente(0).numero
-                    End If
-                Else
-                    lv_direccion = " "
-                End If
-                If dt_cliente(0).colonia <> "" Then
-                    lv_colonia = dt_cliente(0).colonia
-                Else
-                    lv_colonia = " "
-                End If
-                If dt_cliente(0).cp <> "" Then
-                    lv_codigopostal = dt_cliente(0).cp
-                Else
-                    lv_codigopostal = " "
-                End If
-                If dt_cliente(0).ciudad <> "" Then
-                    If dt_cliente(0).estado <> "" Then
-                        lv_ciudad = dt_cliente(0).ciudad & ", " & dt_cliente(0).estado
-                    Else
-                        lv_ciudad = dt_cliente(0).ciudad
-                    End If
-                Else
-                    lv_ciudad = " "
-                End If
-                If dt_cliente(0).rfc <> "" Then
-                    lv_rfc = dt_cliente(0).rfc
-                Else
-                    lv_rfc = " "
-                End If
-                lv_cliente_02_bill_to = "<BILL_TO_CUSTOMER SEND_XML=""TRUE"" SEND_PDF=""TRUE"">" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<PARTY>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<PARTY_ID>" & dt_cliente(0).clave & "</PARTY_ID>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<PARTY_NAME><![CDATA[" & lv_nombre & "]]></PARTY_NAME>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<PARTY_TYPE>" & "CUSTOMER" & "</PARTY_TYPE>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<JGZZ_FISCAL_CODE><![CDATA[" & lv_rfc & "]]></JGZZ_FISCAL_CODE>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<ADDRESS1><![CDATA[" & dt_cliente(0).calle & "]]></ADDRESS1>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<ADDRESS2><![CDATA[" & dt_cliente(0).numero & "]]></ADDRESS2>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<ADDRESS3>" & "" & "</ADDRESS3>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<ADDRESS4><![CDATA[" & lv_colonia & "]]></ADDRESS4>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<POSTAL_CODE>" & lv_codigopostal & "</POSTAL_CODE>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<CITY><![CDATA[" & lv_ciudad & "]]></CITY>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<STATE><![CDATA[" & dt_cliente(0).estado & "]]></STATE>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<COUNTRY><![CDATA[" & "México" & "]]></COUNTRY>" & vbCrLf
-
-                Select Case dt_header(0).metodopago
-                    Case "EFECTIVO"
-                        lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<METODO_PAGO>" & "1" & "</METODO_PAGO>" & vbCrLf
-                    Case "CHEQUE"
-                        lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<METODO_PAGO>" & "2" & "</METODO_PAGO>" & vbCrLf
-                    Case "TRANSFERENCIA"
-                        lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<METODO_PAGO>" & "3" & "</METODO_PAGO>" & vbCrLf
-                End Select
-
-                Select Case dt_header(0).tipo_venta
-                    Case "CONTADO"
-                        lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<COND_PAGO>" & "1" & "</COND_PAGO>" & vbCrLf
-                    Case "CREDITO"
-                        lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<COND_PAGO>" & "2" & "</COND_PAGO>" & vbCrLf
-                End Select
-
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<DIAS_PAGO>" & "0" & "</DIAS_PAGO>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<LOCALIDAD>" & "0" & "</LOCALIDAD>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<REFERENCIA>" & "0" & "</REFERENCIA>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<EMAIL>" & dt_cliente(0).correo & "</EMAIL>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "<CODIGO_CLIENTE>" & dt_cliente(0).clave & "</CODIGO_CLIENTE>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "</PARTY>" & vbCrLf
-                lv_cliente_02_bill_to = lv_cliente_02_bill_to & "</BILL_TO_CUSTOMER>"
-
-                lv_cliente_02_ship_to = "<SHIP_TO_CUSTOMER>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<PARTY>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<PARTY_ID>" & dt_cliente(0).clave & "</PARTY_ID>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<PARTY_NAME><![CDATA[" & lv_nombre & "]]></PARTY_NAME>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<PARTY_TYPE>" & "CUSTOMER" & "</PARTY_TYPE>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<JGZZ_FISCAL_CODE><![CDATA[" & lv_rfc & "]]></JGZZ_FISCAL_CODE>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<ADDRESS1><![CDATA[" & dt_cliente(0).calle & "]]></ADDRESS1>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<ADDRESS2><![CDATA[" & dt_cliente(0).numero & "]]></ADDRESS2>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<ADDRESS3>" & "" & "</ADDRESS3>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<ADDRESS4><![CDATA[" & lv_colonia & "]]></ADDRESS4>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<POSTAL_CODE>" & lv_codigopostal & "</POSTAL_CODE>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<CITY><![CDATA[" & lv_ciudad & "]]></CITY>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<STATE><![CDATA[" & dt_cliente(0).estado & "]]></STATE>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<COUNTRY><![CDATA[" & "México" & "]]></COUNTRY>" & vbCrLf
-
-                Select Case dt_header(0).metodopago
-                    Case "EFECTIVO"
-                        lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<METODO_PAGO>" & "1" & "</METODO_PAGO>" & vbCrLf
-                    Case "CHEQUE"
-                        lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<METODO_PAGO>" & "2" & "</METODO_PAGO>" & vbCrLf
-                    Case "TRANSFERENCIA"
-                        lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<METODO_PAGO>" & "3" & "</METODO_PAGO>" & vbCrLf
-                End Select
-
-                Select Case dt_header(0).tipo_venta
-                    Case "CONTADO"
-                        lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<COND_PAGO>" & "1" & "</COND_PAGO>" & vbCrLf
-                    Case "CREDITO"
-                        lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<COND_PAGO>" & "2" & "</COND_PAGO>" & vbCrLf
-                End Select
-
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<DIAS_PAGO>" & "0" & "</DIAS_PAGO>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "<CODIGO_CLIENTE>" & dt_cliente(0).clave & "</CODIGO_CLIENTE>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "</PARTY>" & vbCrLf
-                lv_cliente_02_ship_to = lv_cliente_02_ship_to & "</SHIP_TO_CUSTOMER>"
-            End If
-        Catch exSql As SqlException
-            MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeNotaDeCredito_CFDI Datos Cliente")
-            Return False
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNotaDeCredito_CFDI Datos Cliente")
-            Return False
-
-        End Try
-
-        'Fuera del índice
-        Try
-            Dim lv_factura As String = NumeroFactura
-            Dim lv_fecha As String = Format(dt_header(0).fecha_venta, "MM/dd/yyyy")
-            Dim lv_time As String = Format(Now.TimeOfDay.Hours, "00") & ":" & Format(Now.TimeOfDay.Minutes, "00") & ":" & Format(Now.TimeOfDay.Seconds, "00")
-            Dim lv_full_date As String = lv_fecha & " " & lv_time
-
-            Dim lv_subtotal As String = dt_header(0).total
-
-            Dim lv_iva As String = dt_header(0).total * (FactorIVA - 1)
-
-            Dim lv_total As String = Val(lv_subtotal) + Val(lv_iva)
-
-            lv_documento_01 = "<?xml version='1.0'  encoding='UTF-8' ?>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<TRANSACTIONS>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<TRANSACTION>" & vbCrLf
-
-            Select Case DB
-                Case "Wendy"
-                    lv_documento_01 = lv_documento_01 & "<SERIE>" & "XXX" & "</SERIE>" & vbCrLf
-                Case "Librada"
-                    lv_documento_01 = lv_documento_01 & "<SERIE>" & gv_SerieNCLibrada & "</SERIE>" & vbCrLf
-                Case "Salvador"
-                    lv_documento_01 = lv_documento_01 & "<SERIE>" & gv_SerieNCSalvador & "</SERIE>" & vbCrLf
-            End Select
-
-            lv_documento_01 = lv_documento_01 & "<TRX_NUMBER>" & Format(NumeroFactura, "000000") & "</TRX_NUMBER>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<CUST_TRX_TYPE_ID>" & "2" & "</CUST_TRX_TYPE_ID>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<TRX_DATE>" & lv_full_date & "</TRX_DATE>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & lv_cliente_02_bill_to & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<TIPO_MONEDA>" & "MXN" & "</TIPO_MONEDA>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<TASA_DE_CAMBIO>" & "1" & "</TASA_DE_CAMBIO>" & vbCrLf
-
-            Select Case DB
-                Case "Wendy"
-                    lv_documento_01 = lv_documento_01 & "<SELLER_ID></SELLER_ID>" & vbCrLf
-                Case "Librada"
-                    lv_documento_01 = lv_documento_01 & "<SELLER_ID>" & "1120" & "</SELLER_ID>" & vbCrLf
-                Case "Salvador"
-                    lv_documento_01 = lv_documento_01 & "<SELLER_ID>" & "631" & "</SELLER_ID>" & vbCrLf
-            End Select
-            'lv_documento_01 = lv_documento_01 & "<BUYER_ID>" & dt_cliente(0).clave & "</BUYER_ID>" & vbCrLf
-
-            Select Case DB
-                Case "Wendy"
-                    lv_documento_01 = lv_documento_01 & "<SHIP_FROM></SHIP_FROM>" & vbCrLf
-                Case "Librada"
-                    lv_documento_01 = lv_documento_01 & "<SHIP_FROM>" & "1121" & "</SHIP_FROM>" & vbCrLf
-                Case "Salvador"
-                    lv_documento_01 = lv_documento_01 & "<SHIP_FROM>" & "632" & "</SHIP_FROM>" & vbCrLf
-            End Select
-            'lv_documento_01 = lv_documento_01 & "<SHIP_TO>" & dt_cliente(0).clave & "</SHIP_TO>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<ACCOUNT_NUMBER>" & "NO IDENTIFICADO" & "</ACCOUNT_NUMBER>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & lv_cliente_02_ship_to & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<PEDIDO>" & Format(NumeroFactura, "000000") & "</PEDIDO>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<FECHA_PEDIDO>" & lv_full_date & "</FECHA_PEDIDO>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<STATUS_FACTURA>" & "1" & "</STATUS_FACTURA>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<FEC_VENC_FACT />" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<TRANSACTION_LINES>"
-
-            lv_concepto_04 = ""
-
-            For i = 0 To dt_detail.LongCount - 1
-                Console.WriteLine("Largo: " & dt_detail.LongCount.ToString & "N: " & i.ToString)
-                Using ctx As New pv_salvadorEntities1
-                    'dt_productos = ctx.productos.Where(Function(ind) ind.IdProducto = dt_detail(0).idProducto).ToList
-                    Console.WriteLine(dt_productos.LongCount.ToString)
-                End Using
-                'Try
-                '    Select Case DB
-                '        Case "Wendy"
-                '            SqlDataAdapter = New SqlDataAdapter("SELECT * FROM productos WHERE idProducto = " & dt_detail(0).idProducto, gv_ConStringWendy)
-                '        Case "Librada"
-                '            SqlDataAdapter = New SqlDataAdapter("SELECT * FROM productos WHERE idProducto = " & dt_detail(0).idProducto, gv_ConStringLibrada)
-                '        Case "Salvador"
-                '            SqlDataAdapter = New SqlDataAdapter("SELECT * FROM productos WHERE idProducto = " & dt_detail(0).idProducto, gv_ConStringSalvador)
-                '    End Select
-                '
-                '    Dim SqlCommandBuilder As New SqlCommandBuilder(SqlDataAdapter)
-                '
-                '    ' llenar el DataTable   
-                '    dt_productos.Clear()
-                '    dt_productos.Dispose()
-                '    dt_productos.Reset()
-                '    dt_productos = New DataTable
-                '    SqlDataAdapter.Fill(dt_productos)
-                '
-                'Catch exSql As SqlException
-                '    MsgBox(exSql.Message, MsgBoxStyle.Critical, "ImprimeFactura dt_productos")
-                '    Return False
-                'Catch ex As Exception
-                '    MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeFactura dt_productos")
-                '    Return False
-                'End Try
-                lv_concepto_04 = lv_concepto_04 & "<TRANSACTION_LINE>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<LINE_NUMBER>" & i + 1 & "</LINE_NUMBER>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<LINE_TYPE>" & "LINE" & "</LINE_TYPE>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<INVENTORY_ITEM_ID>" & dt_detail(0).idProducto & "</INVENTORY_ITEM_ID>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<ITEM_EAN_NUMBER />" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<SERIAL />" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<DESCRIPTION><![CDATA[" & dt_detail(0).descripcion & "]]></DESCRIPTION>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<QUANTITY_INVOICED>" & dt_detail(0).cantidad.ToString & "</QUANTITY_INVOICED>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<QUANTITY_CREDITED>" & "</QUANTITY_CREDITED>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<UNIT_SELLING_PRICE>" & dt_detail(0).precio.ToString & "</UNIT_SELLING_PRICE>" & vbCrLf
-
-                If dt_productos.LongCount > 0 Then
-                    lv_concepto_04 = lv_concepto_04 & "<UOM_CODE>" & dt_productos(0).unidadMedida & "</UOM_CODE>" & vbCrLf
-                Else
-                    lv_concepto_04 = lv_concepto_04 & "<UOM_CODE>" & "PIEZA" & "</UOM_CODE>" & vbCrLf
-                End If
-
-                lv_concepto_04 = lv_concepto_04 & "<TAX_RATE>" & (FactorIVA - 1) * 100 & "</TAX_RATE>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<TAXABLE_AMOUNT>" & (dt_detail(0).subtotal * (FactorIVA - 1)).ToString & "</TAXABLE_AMOUNT>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<PRECIO_NETO>" & dt_detail(0).subtotal.ToString & "</PRECIO_NETO>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<DESCUENTO/>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "<VAT_TAX_ID>1</VAT_TAX_ID>" & vbCrLf
-                lv_concepto_04 = lv_concepto_04 & "</TRANSACTION_LINE>" & vbCrLf
-
-            Next i
-            lv_documento_01 = lv_documento_01 & vbCrLf & lv_concepto_04
-            lv_documento_01 = lv_documento_01 & "</TRANSACTION_LINES>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<ADDENDA TYPE=""NONE""/>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "<COMPLEMENTO TYPE=""NONE"" />" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "</TRANSACTION>" & vbCrLf
-            lv_documento_01 = lv_documento_01 & "</TRANSACTIONS>"
-
-            lv_documento_01.Replace("Ñ", "&#x00D1;")
-            lv_documento_01.Replace("ñ", "&#x00F1;")
-            lv_documento_01.Replace("°", "&#x00B0;")
-            lv_documento_01.Replace("Á", "&#x00C1;")
-            lv_documento_01.Replace("É", "&#x00C9;")
-            lv_documento_01.Replace("Í", "&#x00CD;")
-            lv_documento_01.Replace("Ó", "&#x00D3;")
-            lv_documento_01.Replace("Ú", "&#x00DA;")
-            lv_documento_01.Replace("á", "&#x00E1;")
-            lv_documento_01.Replace("é", "&#x00E9;")
-            lv_documento_01.Replace("í", "&#x00ED;")
-            lv_documento_01.Replace("ó", "&#x00F3;")
-            lv_documento_01.Replace("ú", "&#x00FA;")
-
-            Dim path As String = ""
-            Select Case DB
-                Case "Wendy"
-                    path = gv_CDFI_XML_PATH & "XXX-" & Format(NumeroFactura, "000000") & "_" & Format(Now.Year, "00") & Format(Now.Month, "00") & Format(Now.Day, "00") & "(A-" & Format(CInt(FrmNotaDeCredito.TxtPedido_C.Text), "000000") & ")_CFDI.xml"
-                Case "Librada"
-                    path = gv_CDFI_XML_PATH & "C-" & Format(NumeroFactura, "000000") & "_" & Format(Now.Year, "00") & Format(Now.Month, "00") & Format(Now.Day, "00") & "(A-" & Format(CInt(FrmNotaDeCredito.TxtPedido_C.Text), "000000") & ")_CFDI.xml"
-                Case "Salvador"
-                    path = gv_CDFI_XML_PATH & "D-" & Format(NumeroFactura, "000000") & "_" & Format(Now.Year, "00") & Format(Now.Month, "00") & Format(Now.Day, "00") & "(A-" & FrmNotaDeCredito.TxtPedido_C.Text & ")_CFDI.xml"
-            End Select
-            Console.WriteLine(path)
-            ' This text is added only once to the file. 
-            If File.Exists(path) = False Then
-                ' Create a file to write to. 
-                File.WriteAllText(path, lv_documento_01)
-            Else
-                File.Delete(path)
-                File.WriteAllText(path, lv_documento_01)
-            End If
-            Return True
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "ImprimeNotaDeCredito_CFDI Genera Reporte Local")
-            Return False
-        End Try
-
-    End Function
-
-    Public Function DisplayNode(ByRef Nodes As MSXML2.IXMLDOMNodeList) As String
-        Dim xNode As MSXML2.IXMLDOMNode
-        For Each xNode In Nodes
-            If xNode.parentNode.nodeName = "exito" Then
-                If xNode.nodeValue = "0" Then
-                    lv_mensaje = lv_mensaje & "Hubo un error." & lv_enter
-                    lv_exitoRet = 0
-                Else
-                    lv_mensaje = lv_mensaje & "Factura generada correctamente en el Portal Web." & lv_enter
-                    lv_exitoRet = 1
-                End If
-            End If
-            If lv_exitoRet = 0 Then
-                If xNode.parentNode.nodeName = "codigo" Then
-                    lv_mensaje = lv_mensaje & "Codigo Error: " & xNode.nodeValue & lv_enter
-                End If
-                If xNode.parentNode.nodeName = "descripcion" Then
-                    lv_mensaje = lv_mensaje & "Descripción: " & xNode.nodeValue & lv_enter
-                End If
-            End If
-            If xNode.hasChildNodes Then
-                DisplayNode(xNode.childNodes)
-            End If
-        Next xNode
-        Return lv_mensaje
-    End Function
-
-    'Public Function Insertar_Registro(ByRef sql As String, ByVal DB As String) As Boolean
-    '    Dim SQLConnection As SqlConnection = New SqlConnection
-
-    '    SQLConnection = New SqlConnection()
-    '    Select Case DB
-    '        Case "Wendy"
-    '            SQLConnection.ConnectionString = gv_ConStringWendy
-    '        Case "Librada"
-    '            SQLConnection.ConnectionString = gv_ConStringLibrada
-    '        Case "Salvador"
-    '            SQLConnection.ConnectionString = gv_ConStringSalvador
-    '    End Select
-
-    '    Dim sqlCommand As New SqlCommand
-    '    Try
-    '        SQLConnection.Open()
-    '        sqlCommand.Connection = SQLConnection
-    '        sqlCommand.CommandText = sql
-    '        sqlCommand.ExecuteNonQuery()
-    '        SQLConnection.Close()
-    '        Return True
-    '    Catch ex As Exception
-    '        Return False
-    '    End Try
-    'End Function
-
     Public Function ConvertGenericListToDataTable(ByVal genericList As Object) As DataTable
 
-        Dim dataTable As Data.DataTable = Nothing
-        Dim listType As Type = genericList.GetType()
+        Dim dataTable As DataTable = Nothing
+        Dim listType As System.Type = genericList.GetType()
 
         If (listType.IsGenericType AndAlso (genericList IsNot Nothing)) Then
 
             '//determine the underlying type the List<> contains
-            Dim elementType As Type = listType.GetGenericArguments()(0)
+            Dim elementType As System.Type = listType.GetGenericArguments()(0)
 
             '//create empty table -- give it a name in case
             '//it needs to be serialized
-            dataTable = New Data.DataTable(elementType.Name + "List")
+            dataTable = New DataTable(elementType.Name + "List")
 
             '//define the table -- add a column for each public
             '//property or field
@@ -5194,7 +4748,7 @@ Module Module1
         Return dataTable
     End Function
 
-    Private Function IsNullableType(ByVal propertyType As Type) As Boolean
+    Private Function IsNullableType(ByVal propertyType As System.Type) As Boolean
 
         Return (propertyType.IsGenericType) AndAlso (propertyType.GetGenericTypeDefinition() Is GetType(Nullable(Of )))
 
@@ -5239,29 +4793,29 @@ Module Module1
 
         Select Case TipoVenta
             Case "PEDIDO"
-                header_ventapedido = DBModelo.Get_PV_PedidosHeader(NumeroVenta)
+                header_ventapedido = DBModelo.Get_PV_PedidosHeader(CInt(NumeroVenta))
                 If Not IsNothing(header_ventapedido) Then
                     header_ventapedido_t.Add(header_ventapedido)
                     dt_header = ConvertGenericListToDataTable(header_ventapedido_t)
                 End If
-                detail_ventapedido = DBModelo.Get_PV_PedidosDetalle(NumeroVenta)
+                detail_ventapedido = DBModelo.Get_PV_PedidosDetalle(CInt(NumeroVenta))
                 If Not IsNothing(detail_ventapedido) Then
                     dt_detail = ConvertGenericListToDataTable(detail_ventapedido)
                 End If
             Case "TICKET"
-                header_venta = DBModelo.Get_PV_TicketHeader(NumeroVenta)
+                header_venta = DBModelo.Get_PV_TicketHeader(CInt(NumeroVenta))
                 If Not IsNothing(header_venta) Then
                     header_venta_t.Add(header_venta)
                     dt_header = ConvertGenericListToDataTable(header_venta_t)
                 End If
-                detail_venta = DBModelo.Get_PV_TicketsDetalle(NumeroVenta)
+                detail_venta = DBModelo.Get_PV_TicketsDetalle(CInt(NumeroVenta))
                 If Not IsNothing(detail_venta) Then
                     dt_detail = ConvertGenericListToDataTable(detail_venta)
                 End If
         End Select
 
         Try
-            Select Case dt_header.Rows(0)!tipo
+            Select Case CStr(dt_header.Rows(0)!tipo)
                 Case "CONTADO"
                     dt_detail.TableName = "ticket"
                     Dim p2 As New ReportParameter("Nombre", Nombre)
@@ -5276,7 +4830,7 @@ Module Module1
                     Dim p9 As New ReportParameter("Ticket", NumeroVenta)
 
                     'obtener fecha'
-                    Dim lv_fecha As String = dt_header.Rows(0)!fecha
+                    Dim lv_fecha As String = CStr((dt_header.Rows(0)!fecha))
                     Dim p10 As New ReportParameter("Fecha", lv_fecha.ToString)
 
                     'obtener total'
@@ -5284,23 +4838,23 @@ Module Module1
                     Dim p11 As New ReportParameter("Total", lv_total.ToString)
 
                     'obtener pago'
-                    Dim lv_paga_tmp As Double = Paga
+                    Dim lv_paga_tmp As Double = CDbl(Paga)
                     Dim lv_paga As String = Format(lv_paga_tmp, "$ ###,###,##0.00")
                     Dim p12 As New ReportParameter("Paga", lv_paga)
 
                     'dinero a letra'
-                    Dim lv_dinero As String = Dinero(dt_header.Rows(0)!total, 2, "Pesos", True)
+                    Dim lv_dinero As String = Dinero(CDbl((dt_header.Rows(0)!total)), 2, "Pesos", True)
                     Dim p13 As New ReportParameter("Dinero", lv_dinero.ToUpper)
 
                     'usuario'
-                    Dim lv_usuario As String = dt_header.Rows(0)!usuario
+                    Dim lv_usuario As String = CStr((dt_header.Rows(0)!usuario))
                     Dim p14 As New ReportParameter("Atendido", lv_usuario.ToString)
 
                     Dim p15 As New ReportParameter("TipoDocumento", TipoVenta)
 
                     Cambio = Replace(Cambio, "$", "")
                     Cambio = Replace(Cambio, " ", "")
-                    Dim lv_cambio_tmp As Double = Cambio
+                    Dim lv_cambio_tmp As Double = CDbl(Cambio)
                     Dim lv_cambio As String = Format(lv_cambio_tmp, "$ ###,###,##0.00")
                     Dim p16 As New ReportParameter("Cambio", lv_cambio.ToString)
                     Dim p17 As New ReportParameter("OriginalCopia", "ORIGINAL")
@@ -5308,7 +4862,18 @@ Module Module1
                     Dim lv_iva As String = Format(dt_header.Rows(0)!iva, "$ ###,###,###.00")
                     Dim p19 As New ReportParameter("IVA", lv_iva.ToString)
 
+                    'Genera Código de Barra
+                    Dim BC As New Barcode
+                    BC.IncludeLabel = True
+                    BC.Alignment = AlignmentPositions.CENTER
+                    BC.LabelFont = New Font(FontFamily.GenericMonospace, 14, FontStyle.Bold)
+                    Dim BarCodeImage As Image = BC.Encode(TYPE.CODE128, NumeroVenta, Color.Black, Color.White, 200, 100)
+                    Dim sFullPathBarCodeImage = "C:\Tickets\" & Now.Year.ToString & "\" & NumeroVenta & ".jpg"
+                    BC.SaveImage(sFullPathBarCodeImage, SaveTypes.JPG)
+                    Dim p20 As New ReportParameter("BarCodeImage", "File:///" & sFullPathBarCodeImage)
+
                     Report.ReportPath = gv_Report_Path & "Report2.rdlc"
+                    Report.EnableExternalImages = True
 
                     Report.SetParameters(p2)
                     Report.SetParameters(p3)
@@ -5327,25 +4892,26 @@ Module Module1
                     Report.SetParameters(p16)
                     Report.SetParameters(p17)
                     Report.SetParameters(p19)
+                    Report.SetParameters(p20)
 
                     Report.DataSources.Clear()
                     Report.DataSources.Add(New ReportDataSource("DataSet1", dt_detail))
-                    Print_Report(TicketPrinterName, Report, 1, "Pdf", NumeroVenta + "_" + dt_header.Rows(0)!tipo + "_ORIGINAL", "C:\Tickets\" + Now.Year.ToString, "VENTA")
+                    Print_Report(TicketPrinterName, Report, 1, "Pdf", NumeroVenta + "_" + CStr(dt_header.Rows(0)!tipo) + "_ORIGINAL", "C:\Tickets\" + Now.Year.ToString, "VENTA")
                     If Imprimir = True Then
-                        Print_Report(TicketPrinterName, Report, 1, "Image", NumeroVenta + "_" + dt_header.Rows(0)!tipo + "_ORIGINAL", "C:\Tickets\" + Now.Year.ToString, "VENTA")
+                        Print_Report(TicketPrinterName, Report, 1, "Image", NumeroVenta + "_" + CStr(dt_header.Rows(0)!tipo) + "_ORIGINAL", "C:\Tickets\" + Now.Year.ToString, "VENTA")
                     End If
 
                     Dim p18 As New ReportParameter("OriginalCopia", "COPIA CLIENTE")
                     Report.SetParameters(p18)
 
-                    Print_Report(TicketPrinterName, Report, 1, "Pdf", NumeroVenta + "_" + dt_header.Rows(0)!tipo + "_COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
+                    Print_Report(TicketPrinterName, Report, 1, "Pdf", NumeroVenta + "_" + CStr(dt_header.Rows(0)!tipo) + "_COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
                     If Imprimir = True Then
-                        Print_Report(TicketPrinterName, Report, 1, "Image", NumeroVenta + "_" + dt_header.Rows(0)!tipo + "_COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
+                        Print_Report(TicketPrinterName, Report, 1, "Image", NumeroVenta + "_" + CStr(dt_header.Rows(0)!tipo) + "_COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
                     End If
 
                 Case "CREDITO"
 
-                    strCliente = DBModelo.GetCliente(dt_header.Rows(0)!idcliente)
+                    strCliente = DBModelo.GetCliente(CInt((dt_header.Rows(0)!idcliente)))
                     If Not IsNothing(strCliente) Then
                         tblClient.Add(strCliente)
                         dt_cliente = ConvertGenericListToDataTable(tblClient)
@@ -5360,34 +4926,34 @@ Module Module1
 
 
                     If dt_cliente.Rows.Count > 0 Then
-                        If dt_cliente.Rows(0)!nombre <> "" Or dt_cliente.Rows(0)!apat <> "" Or dt_cliente.Rows(0)!amat <> "" Then
-                            lv_nombre = dt_cliente.Rows(0)!nombre & " " & dt_cliente.Rows(0)!apat & " " & dt_cliente.Rows(0)!amat
+                        If CStr(dt_cliente.Rows(0)!nombre) <> "" Or CStr(dt_cliente.Rows(0)!apat) <> "" Or CStr(dt_cliente.Rows(0)!amat) <> "" Then
+                            lv_nombre = CStr(dt_cliente.Rows(0)!nombre) & " " & CStr(dt_cliente.Rows(0)!apat) & " " & CStr(dt_cliente.Rows(0)!amat)
                         End If
-                        If dt_cliente.Rows(0)!calle <> "" Then
-                            lv_direccion = dt_cliente.Rows(0)!calle
-                            If dt_cliente.Rows(0)!numero <> "" Then
-                                lv_direccion = lv_direccion & " #" & dt_cliente.Rows(0)!numero
+                        If CStr(dt_cliente.Rows(0)!calle) <> "" Then
+                            lv_direccion = CStr(dt_cliente.Rows(0)!calle)
+                            If CStr(dt_cliente.Rows(0)!numero) <> "" Then
+                                lv_direccion = lv_direccion & " #" & CStr(dt_cliente.Rows(0)!numero)
                             End If
                         Else
                             lv_direccion = " "
                         End If
-                        If dt_cliente.Rows(0)!colonia <> "" Then
-                            lv_colonia = dt_cliente.Rows(0)!colonia
+                        If CStr(dt_cliente.Rows(0)!colonia) <> "" Then
+                            lv_colonia = CStr(dt_cliente.Rows(0)!colonia)
                         Else
                             lv_colonia = " "
                         End If
-                        If dt_cliente.Rows(0)!cp <> "" Then
-                            lv_codigopostal = dt_cliente.Rows(0)!cp
+                        If CStr(dt_cliente.Rows(0)!cp) <> "" Then
+                            lv_codigopostal = CStr(dt_cliente.Rows(0)!cp)
                         Else
                             lv_codigopostal = " "
                         End If
-                        If dt_cliente.Rows(0)!ciudad <> "" Then
-                            lv_ciudad = dt_cliente.Rows(0)!ciudad
+                        If CStr(dt_cliente.Rows(0)!ciudad) <> "" Then
+                            lv_ciudad = CStr(dt_cliente.Rows(0)!ciudad)
                         Else
                             lv_ciudad = " "
                         End If
-                        If dt_cliente.Rows(0)!rfc <> "" Then
-                            lv_rfc = dt_cliente.Rows(0)!rfc
+                        If CStr(dt_cliente.Rows(0)!rfc) <> "" Then
+                            lv_rfc = CStr(dt_cliente.Rows(0)!rfc)
                         Else
                             lv_rfc = " "
                         End If
@@ -5405,7 +4971,7 @@ Module Module1
                     Dim p9 As New ReportParameter("Ticket", NumeroVenta)
 
                     'obtener fecha'
-                    Dim lv_fecha As String = dt_header.Rows(0)!fecha
+                    Dim lv_fecha As String = CStr((dt_header.Rows(0)!fecha))
                     Dim p10 As New ReportParameter("Fecha", lv_fecha.ToString)
 
                     'obtener total'
@@ -5415,11 +4981,11 @@ Module Module1
                     Dim p12 As New ReportParameter("CopiaOriginal", "ORIGINAL")
 
                     'dinero a letra'
-                    Dim lv_dinero As String = Dinero(dt_header.Rows(0)!total, 2, "Pesos", True)
+                    Dim lv_dinero As String = Dinero(CDbl((dt_header.Rows(0)!total)), 2, "Pesos", True)
                     Dim p13 As New ReportParameter("Dinero", lv_dinero.ToUpper)
 
                     'usuario'
-                    Dim lv_usuario As String = dt_header.Rows(0)!usuario
+                    Dim lv_usuario As String = CStr((dt_header.Rows(0)!usuario))
                     Dim p14 As New ReportParameter("Atendido", lv_usuario.ToString)
 
                     Dim p15 As New ReportParameter("TipoDocumento", TipoVenta)
@@ -5430,11 +4996,22 @@ Module Module1
                     Dim lv_iva As String = Format(dt_header.Rows(0)!iva, "$ ###,###,##0.00")
                     Dim p19 As New ReportParameter("IVA", lv_iva.ToString)
 
-                    Dim lvDeuda As Double = DBModelo.Get_PV_Cliente_SUM(dt_header.Rows(0)!idcliente)
+                    Dim lvDeuda As Double = DBModelo.Get_PV_Cliente_SUM(CInt((dt_header.Rows(0)!idcliente)))
 
                     Dim p17 As New ReportParameter("Deuda", Format(lvDeuda, "$ ###,###,##0.00"))
 
+                    'Genera Código de Barra
+                    Dim BC As New Barcode
+                    BC.IncludeLabel = True
+                    BC.Alignment = AlignmentPositions.CENTER
+                    BC.LabelFont = New Font(FontFamily.GenericMonospace, 14, FontStyle.Bold)
+                    Dim BarCodeImage As Image = BC.Encode(TYPE.CODE128, NumeroVenta, Color.Black, Color.White, 200, 100)
+                    Dim sFullPathBarCodeImage = "C:\Tickets\" & Now.Year.ToString & "\" & NumeroVenta & ".jpg"
+                    BC.SaveImage(sFullPathBarCodeImage, SaveTypes.JPG)
+                    Dim p20 As New ReportParameter("BarCodeImage", "File:///" & sFullPathBarCodeImage)
+
                     Report.ReportPath = gv_Report_Path & "Report3.rdlc"
+                    Report.EnableExternalImages = True
 
                     Report.SetParameters(p2)
                     Report.SetParameters(p3)
@@ -5453,26 +5030,27 @@ Module Module1
                     Report.SetParameters(p16)
                     Report.SetParameters(p17)
                     Report.SetParameters(p19)
+                    Report.SetParameters(p20)
 
                     Report.DataSources.Clear()
                     Report.DataSources.Add(New ReportDataSource("DataSet1", dt_detail))
-                    Print_Report(TicketPrinterName, Report, 1, "Pdf", NumeroVenta + " " + dt_header.Rows(0)!tipo + " ORIGINAL", "C:\Tickets\" + Now.Year.ToString, "VENTA")
+                    Print_Report(TicketPrinterName, Report, 1, "Pdf", NumeroVenta + " " + CStr(dt_header.Rows(0)!tipo) + " ORIGINAL", "C:\Tickets\" + Now.Year.ToString, "VENTA")
                     If Imprimir = True Then
-                        Print_Report(TicketPrinterName, Report, 1, "Image", NumeroVenta + " " + dt_header.Rows(0)!tipo + " ORIGINAL", "C:\Tickets\" + Now.Year.ToString, "VENTA")
+                        Print_Report(TicketPrinterName, Report, 1, "Image", NumeroVenta + " " + CStr(dt_header.Rows(0)!tipo) + " ORIGINAL", "C:\Tickets\" + Now.Year.ToString, "VENTA")
                     End If
 
                     Dim p18 As New ReportParameter("CopiaOriginal", "COPIA CLIENTE")
                     Report.SetParameters(p18)
 
-                    Print_Report(TicketPrinterName, Report, 1, "Pdf", NumeroVenta + " " + dt_header.Rows(0)!tipo + " COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
+                    Print_Report(TicketPrinterName, Report, 1, "Pdf", NumeroVenta + " " + CStr(dt_header.Rows(0)!tipo) + " COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
                     If Imprimir = True Then
-                        Print_Report(TicketPrinterName, Report, 1, "Image", NumeroVenta + " " + dt_header.Rows(0)!tipo + " COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
+                        Print_Report(TicketPrinterName, Report, 1, "Image", NumeroVenta + " " + CStr(dt_header.Rows(0)!tipo) + " COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
                     End If
             End Select
 
             Return True
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.InnerException)
             Return False
         End Try
     End Function
@@ -5516,29 +5094,29 @@ Module Module1
 
         Select Case TipoVenta
             Case "PEDIDO"
-                header_ventapedido = DBModelo.Get_PV_PedidosHeader(NumeroVenta)
+                header_ventapedido = DBModelo.Get_PV_PedidosHeader(CInt(NumeroVenta))
                 If Not IsNothing(header_ventapedido) Then
                     header_ventapedido_t.Add(header_ventapedido)
                     dt_header = ConvertGenericListToDataTable(header_ventapedido_t)
                 End If
-                detail_ventapedido = DBModelo.Get_PV_PedidosDetalle(NumeroVenta)
+                detail_ventapedido = DBModelo.Get_PV_PedidosDetalle(CInt(NumeroVenta))
                 If Not IsNothing(detail_ventapedido) Then
                     dt_detail = ConvertGenericListToDataTable(detail_ventapedido)
                 End If
             Case "TICKET"
-                header_venta = DBModelo.Get_PV_TicketHeader(NumeroVenta)
+                header_venta = DBModelo.Get_PV_TicketHeader(CInt(NumeroVenta))
                 If Not IsNothing(header_venta) Then
                     header_venta_t.Add(header_venta)
                     dt_header = ConvertGenericListToDataTable(header_venta_t)
                 End If
-                detail_venta = DBModelo.Get_PV_TicketsDetalle(NumeroVenta)
+                detail_venta = DBModelo.Get_PV_TicketsDetalle(CInt(NumeroVenta))
                 If Not IsNothing(detail_venta) Then
                     dt_detail = ConvertGenericListToDataTable(detail_venta)
                 End If
         End Select
 
         Try
-            Select Case dt_header.Rows(0)!tipo
+            Select Case CStr(dt_header.Rows(0)!tipo)
                 Case "CONTADO"
                     dt_detail.TableName = "ticket"
                     Dim p2 As New ReportParameter("Nombre", Nombre)
@@ -5553,7 +5131,7 @@ Module Module1
                     Dim p9 As New ReportParameter("Ticket", NumeroVenta)
 
                     'obtener fecha'
-                    Dim lv_fecha As String = dt_header.Rows(0)!fecha
+                    Dim lv_fecha As String = CStr((dt_header.Rows(0)!fecha))
                     Dim p10 As New ReportParameter("Fecha", lv_fecha.ToString)
 
                     'obtener total'
@@ -5561,21 +5139,21 @@ Module Module1
                     Dim p11 As New ReportParameter("Total", lv_total.ToString)
 
                     'obtener pago'
-                    Dim lv_paga_tmp As Double = "0.00"
+                    Dim lv_paga_tmp As Double = CDbl("0.00")
                     Dim lv_paga As String = Format(lv_paga_tmp, "$ ###,###,##0.00")
                     Dim p12 As New ReportParameter("Paga", lv_paga)
 
                     'dinero a letra'
-                    Dim lv_dinero As String = Dinero(dt_header.Rows(0)!total, 2, "Pesos", True)
+                    Dim lv_dinero As String = Dinero(CDbl((dt_header.Rows(0)!total)), 2, "Pesos", True)
                     Dim p13 As New ReportParameter("Dinero", lv_dinero.ToUpper)
 
                     'usuario'
-                    Dim lv_usuario As String = dt_header.Rows(0)!usuario
+                    Dim lv_usuario As String = CStr((dt_header.Rows(0)!usuario))
                     Dim p14 As New ReportParameter("Atendido", lv_usuario.ToString)
 
                     Dim p15 As New ReportParameter("TipoDocumento", TipoVenta)
 
-                    Dim lv_cambio_tmp As Double = "0.00"
+                    Dim lv_cambio_tmp As Double = CDbl("0.00")
                     Dim lv_cambio As String = Format(lv_cambio_tmp, "$ ###,###,##0.00")
                     Dim p16 As New ReportParameter("Cambio", lv_cambio.ToString)
                     Dim p17 As New ReportParameter("OriginalCopia", "ORIGINAL")
@@ -5583,7 +5161,18 @@ Module Module1
                     Dim lv_iva As String = Format(dt_header.Rows(0)!iva, "$ ###,###,###.00")
                     Dim p19 As New ReportParameter("IVA", lv_iva.ToString)
 
+                    'Genera Código de Barra
+                    Dim BC As New Barcode
+                    BC.IncludeLabel = True
+                    BC.Alignment = AlignmentPositions.CENTER
+                    BC.LabelFont = New Font(FontFamily.GenericMonospace, 14, FontStyle.Bold)
+                    Dim BarCodeImage As Image = BC.Encode(TYPE.CODE128, NumeroVenta, Color.Black, Color.White, 200, 100)
+                    Dim sFullPathBarCodeImage = "C:\Tickets\" & Now.Year.ToString & "\" & NumeroVenta & ".jpg"
+                    BC.SaveImage(sFullPathBarCodeImage, SaveTypes.JPG)
+                    Dim p20 As New ReportParameter("BarCodeImage", "File:///" & sFullPathBarCodeImage)
+
                     Report.ReportPath = gv_Report_Path & "Report2.rdlc"
+                    Report.EnableExternalImages = True
 
                     Report.SetParameters(p2)
                     Report.SetParameters(p3)
@@ -5602,6 +5191,7 @@ Module Module1
                     Report.SetParameters(p16)
                     Report.SetParameters(p17)
                     Report.SetParameters(p19)
+                    Report.SetParameters(p20)
 
                     Report.DataSources.Clear()
                     Report.DataSources.Add(New ReportDataSource("DataSet1", dt_detail))
@@ -5609,14 +5199,14 @@ Module Module1
                     Dim p18 As New ReportParameter("OriginalCopia", "COPIA CLIENTE")
                     Report.SetParameters(p18)
 
-                    Print_Report(TicketPrinterName, Report, 1, "Pdf", NumeroVenta + "_" + dt_header.Rows(0)!tipo + "_COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
+                    Print_Report(TicketPrinterName, Report, 1, "Pdf", NumeroVenta + "_" + CStr(dt_header.Rows(0)!tipo) + "_COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
                     If Imprimir = True Then
-                        Print_Report(TicketPrinterName, Report, 1, "Image", NumeroVenta + "_" + dt_header.Rows(0)!tipo + "_COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
+                        Print_Report(TicketPrinterName, Report, 1, "Image", NumeroVenta + "_" + CStr(dt_header.Rows(0)!tipo) + "_COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
                     End If
 
                 Case "CREDITO"
 
-                    strCliente = DBModelo.GetCliente(dt_header.Rows(0)!idcliente)
+                    strCliente = DBModelo.GetCliente(CInt((dt_header.Rows(0)!idcliente)))
                     If Not IsNothing(strCliente) Then
                         tblClient.Add(strCliente)
                         dt_cliente = ConvertGenericListToDataTable(tblClient)
@@ -5630,34 +5220,34 @@ Module Module1
                     Dim lv_rfc As String = ""
 
                     If dt_cliente.Rows.Count > 0 Then
-                        If dt_cliente.Rows(0)!nombre <> "" Or dt_cliente.Rows(0)!apat <> "" Or dt_cliente.Rows(0)!amat <> "" Then
-                            lv_nombre = dt_cliente.Rows(0)!nombre & " " & dt_cliente.Rows(0)!apat & " " & dt_cliente.Rows(0)!amat
+                        If CStr(dt_cliente.Rows(0)!nombre) <> "" Or CStr(dt_cliente.Rows(0)!apat) <> "" Or CStr(dt_cliente.Rows(0)!amat) <> "" Then
+                            lv_nombre = CStr(dt_cliente.Rows(0)!nombre) & " " & CStr(dt_cliente.Rows(0)!apat) & " " & CStr(dt_cliente.Rows(0)!amat)
                         End If
-                        If dt_cliente.Rows(0)!calle <> "" Then
-                            lv_direccion = dt_cliente.Rows(0)!calle
-                            If dt_cliente.Rows(0)!numero <> "" Then
-                                lv_direccion = lv_direccion & " #" & dt_cliente.Rows(0)!numero
+                        If CStr(dt_cliente.Rows(0)!calle) <> "" Then
+                            lv_direccion = CStr(dt_cliente.Rows(0)!calle)
+                            If CStr(dt_cliente.Rows(0)!numero) <> "" Then
+                                lv_direccion = lv_direccion & " #" & CStr(dt_cliente.Rows(0)!numero)
                             End If
                         Else
                             lv_direccion = " "
                         End If
-                        If dt_cliente.Rows(0)!colonia <> "" Then
-                            lv_colonia = dt_cliente.Rows(0)!colonia
+                        If CStr(dt_cliente.Rows(0)!colonia) <> "" Then
+                            lv_colonia = CStr(dt_cliente.Rows(0)!colonia)
                         Else
                             lv_colonia = " "
                         End If
-                        If dt_cliente.Rows(0)!cp <> "" Then
-                            lv_codigopostal = dt_cliente.Rows(0)!cp
+                        If CStr(dt_cliente.Rows(0)!cp) <> "" Then
+                            lv_codigopostal = CStr(dt_cliente.Rows(0)!cp)
                         Else
                             lv_codigopostal = " "
                         End If
-                        If dt_cliente.Rows(0)!ciudad <> "" Then
-                            lv_ciudad = dt_cliente.Rows(0)!ciudad
+                        If CStr(dt_cliente.Rows(0)!ciudad) <> "" Then
+                            lv_ciudad = CStr(dt_cliente.Rows(0)!ciudad)
                         Else
                             lv_ciudad = " "
                         End If
-                        If dt_cliente.Rows(0)!rfc <> "" Then
-                            lv_rfc = dt_cliente.Rows(0)!rfc
+                        If CStr(dt_cliente.Rows(0)!rfc) <> "" Then
+                            lv_rfc = CStr(dt_cliente.Rows(0)!rfc)
                         Else
                             lv_rfc = " "
                         End If
@@ -5675,7 +5265,7 @@ Module Module1
                     Dim p9 As New ReportParameter("Ticket", NumeroVenta)
 
                     'obtener fecha'
-                    Dim lv_fecha As String = dt_header.Rows(0)!fecha
+                    Dim lv_fecha As String = CStr((dt_header.Rows(0)!fecha))
                     Dim p10 As New ReportParameter("Fecha", lv_fecha.ToString)
 
                     'obtener total'
@@ -5685,11 +5275,11 @@ Module Module1
                     Dim p12 As New ReportParameter("CopiaOriginal", "ORIGINAL")
 
                     'dinero a letra'
-                    Dim lv_dinero As String = Dinero(dt_header.Rows(0)!total, 2, "Pesos", True)
+                    Dim lv_dinero As String = Dinero(CDbl((dt_header.Rows(0)!total)), 2, "Pesos", True)
                     Dim p13 As New ReportParameter("Dinero", lv_dinero.ToUpper)
 
                     'usuario'
-                    Dim lv_usuario As String = dt_header.Rows(0)!usuario
+                    Dim lv_usuario As String = CStr((dt_header.Rows(0)!usuario))
                     Dim p14 As New ReportParameter("Atendido", lv_usuario.ToString)
 
                     Dim p15 As New ReportParameter("TipoDocumento", TipoVenta)
@@ -5700,11 +5290,22 @@ Module Module1
                     Dim lv_iva As String = Format(dt_header.Rows(0)!iva, "$ ###,###,##0.00")
                     Dim p19 As New ReportParameter("IVA", lv_iva.ToString)
 
-                    Dim lvDeuda As Double = DBModelo.Get_PV_Cliente_SUM(dt_header.Rows(0)!idcliente)
+                    Dim lvDeuda As Double = DBModelo.Get_PV_Cliente_SUM(CInt((dt_header.Rows(0)!idcliente)))
 
                     Dim p17 As New ReportParameter("Deuda", Format(lvDeuda, "$ ###,###,##0.00"))
 
+                    'Genera Código de Barra
+                    Dim BC As New Barcode
+                    BC.IncludeLabel = True
+                    BC.Alignment = AlignmentPositions.CENTER
+                    BC.LabelFont = New Font(FontFamily.GenericMonospace, 14, FontStyle.Bold)
+                    Dim BarCodeImage As Image = BC.Encode(TYPE.CODE128, NumeroVenta, Color.Black, Color.White, 200, 100)
+                    Dim sFullPathBarCodeImage = "C:\Tickets\" & Now.Year.ToString & "\" & NumeroVenta & ".jpg"
+                    BC.SaveImage(sFullPathBarCodeImage, SaveTypes.JPG)
+                    Dim p20 As New ReportParameter("BarCodeImage", "File:///" & sFullPathBarCodeImage)
+
                     Report.ReportPath = gv_Report_Path & "Report3.rdlc"
+                    Report.EnableExternalImages = True
 
                     Report.SetParameters(p2)
                     Report.SetParameters(p3)
@@ -5723,6 +5324,7 @@ Module Module1
                     Report.SetParameters(p16)
                     Report.SetParameters(p17)
                     Report.SetParameters(p19)
+                    Report.SetParameters(p20)
 
                     Report.DataSources.Clear()
                     Report.DataSources.Add(New ReportDataSource("DataSet1", dt_detail))
@@ -5730,9 +5332,9 @@ Module Module1
                     Dim p18 As New ReportParameter("CopiaOriginal", "COPIA CLIENTE")
                     Report.SetParameters(p18)
 
-                    Print_Report(TicketPrinterName, Report, 1, "Pdf", NumeroVenta + " " + dt_header.Rows(0)!tipo + " COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
+                    Print_Report(TicketPrinterName, Report, 1, "Pdf", NumeroVenta + " " + CStr(dt_header.Rows(0)!tipo) + " COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
                     If Imprimir = True Then
-                        Print_Report(TicketPrinterName, Report, 1, "Image", NumeroVenta + " " + dt_header.Rows(0)!tipo + " COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
+                        Print_Report(TicketPrinterName, Report, 1, "Image", NumeroVenta + " " + CStr(dt_header.Rows(0)!tipo) + " COPIA", "C:\Tickets\" + Now.Year.ToString, "VENTA")
                     End If
             End Select
 
@@ -5778,51 +5380,51 @@ Module Module1
         header_t.Clear()
         tblClient.Clear()
 
-        header = DBModelo.Get_PV_CotizacionHeader(NumeroVenta)
+        header = DBModelo.Get_PV_CotizacionHeader(CInt(NumeroVenta))
         If Not IsNothing(header) Then
             header_t.Add(header)
             dt_header = ConvertGenericListToDataTable(header_t)
         End If
-        detail = DBModelo.Get_PV_CotizacionDetalle(NumeroVenta)
+        detail = DBModelo.Get_PV_CotizacionDetalle(CInt(NumeroVenta))
         If Not IsNothing(detail) Then
             dt_detail = ConvertGenericListToDataTable(detail)
         End If
 
-        strCliente = DBModelo.GetCliente(dt_header.Rows(0)!idcliente)
+        strCliente = DBModelo.GetCliente(CInt((dt_header.Rows(0)!idcliente)))
         If Not IsNothing(strCliente) Then
             tblClient.Add(strCliente)
             dt_cliente = ConvertGenericListToDataTable(tblClient)
         End If
 
         If dt_cliente.Rows.Count > 0 Then
-            If dt_cliente.Rows(0)!nombre <> "" Or dt_cliente.Rows(0)!apat <> "" Or dt_cliente.Rows(0)!amat <> "" Then
-                lv_nombre = dt_cliente.Rows(0)!nombre & " " & dt_cliente.Rows(0)!apat & " " & dt_cliente.Rows(0)!amat
+            If CStr(dt_cliente.Rows(0)!nombre) <> "" Or CStr(dt_cliente.Rows(0)!apat) <> "" Or CStr(dt_cliente.Rows(0)!amat) <> "" Then
+                lv_nombre = CStr(dt_cliente.Rows(0)!nombre) & " " & CStr(dt_cliente.Rows(0)!apat) & " " & CStr(dt_cliente.Rows(0)!amat)
             End If
-            If dt_cliente.Rows(0)!calle <> "" Then
-                lv_direccion = dt_cliente.Rows(0)!calle
-                If dt_cliente.Rows(0)!numero <> "" Then
-                    lv_direccion = lv_direccion & " #" & dt_cliente.Rows(0)!numero
+            If CStr(dt_cliente.Rows(0)!calle) <> "" Then
+                lv_direccion = CStr(dt_cliente.Rows(0)!calle)
+                If CStr(dt_cliente.Rows(0)!numero) <> "" Then
+                    lv_direccion = lv_direccion & " #" & CStr(dt_cliente.Rows(0)!numero)
                 End If
             Else
                 lv_direccion = " "
             End If
-            If dt_cliente.Rows(0)!colonia <> "" Then
-                lv_colonia = dt_cliente.Rows(0)!colonia
+            If CStr(dt_cliente.Rows(0)!colonia) <> "" Then
+                lv_colonia = CStr(dt_cliente.Rows(0)!colonia)
             Else
                 lv_colonia = " "
             End If
-            If dt_cliente.Rows(0)!cp <> "" Then
-                lv_codigopostal = dt_cliente.Rows(0)!cp
+            If CStr(dt_cliente.Rows(0)!cp) <> "" Then
+                lv_codigopostal = CStr(dt_cliente.Rows(0)!cp)
             Else
                 lv_codigopostal = " "
             End If
-            If dt_cliente.Rows(0)!ciudad <> "" Then
-                lv_ciudad = dt_cliente.Rows(0)!ciudad
+            If CStr(dt_cliente.Rows(0)!ciudad) <> "" Then
+                lv_ciudad = CStr(dt_cliente.Rows(0)!ciudad)
             Else
                 lv_ciudad = " "
             End If
-            If dt_cliente.Rows(0)!rfc <> "" Then
-                lv_rfc = dt_cliente.Rows(0)!rfc
+            If CStr(dt_cliente.Rows(0)!rfc) <> "" Then
+                lv_rfc = CStr(dt_cliente.Rows(0)!rfc)
             Else
                 lv_rfc = " "
             End If
@@ -5846,11 +5448,10 @@ Module Module1
             Dim p12 As New ReportParameter("cuidadcliente", lv_ciudad)
             Dim p13 As New ReportParameter("IVA", lv_iva_c)
             Dim p14 As New ReportParameter("TOTAL", lv_total_c)
-            Dim lv_dinero As String = Dinero(dt_header.Rows(0)!total, 2, "Pesos", True)
+            Dim lv_dinero As String = Dinero(CDbl((dt_header.Rows(0)!total)), 2, "Pesos", True)
             Dim p15 As New ReportParameter("dinero", lv_dinero.ToUpper)
 
             Report.ReportPath = gv_Report_Path & "Report1.rdlc"
-
             Report.SetParameters(p2)
             Report.SetParameters(p3)
             Report.SetParameters(p4)
@@ -5874,7 +5475,7 @@ Module Module1
                 Print_Report(InvocePrinterName, Report, 1, "Image", NumeroVenta + " " + TipoVenta + " ORIGINAL", "C:\Cotizaciones\" + Now.Year.ToString, "COTIZACION")
             End If
 
-            If dt_cliente.Rows(0)!correo <> "" Then
+            If CStr(dt_cliente.Rows(0)!correo) <> "" Then
                 If MsgBox("¿Enviar Cotización por Correo Electrónico?", MsgBoxStyle.YesNo, "Correo Electrónico") = MsgBoxResult.Yes Then
 
                     'Envio de Archivo ZIP via Correo Electrónico
@@ -5884,7 +5485,7 @@ Module Module1
 
                     oSmtp.UseDefaultCredentials = False
                     oSmtp.Credentials = New Net.NetworkCredential(gv_smtp_correo, gv_smtp_pass)
-                    oSmtp.Port = gv_smtp_port
+                    oSmtp.Port = CInt(gv_smtp_port)
                     oSmtp.EnableSsl = True
                     oSmtp.Host = gv_smtp_server
 
@@ -5894,18 +5495,18 @@ Module Module1
                     oMail.From = New MailAddress(gv_smtp_correo)
 
                     ' Set recipient email address, please change it to yours
-                    oMail.To.Add(dt_cliente.Rows(0)!correo)
+                    oMail.To.Add(CStr((dt_cliente.Rows(0)!correo)))
                     'oMail.CC.Add(gv_smtp_correo)
 
                     ' Set email subject
                     oMail.Subject = "Cotización - Material Eléctrico Progreso"
                     oMail.BodyEncoding = Encoding.UTF8
-                    oMail.IsBodyHtml = True
+                    'oMail.IsBodyHtml = True
 
                     Dim sEnter As String = ChrW(13) & ChrW(10)
                     ' Set email body
 
-                    oMail.Body = "Estimado Cliente " & dt_cliente.Rows(0)!nombre & " " & dt_cliente.Rows(0)!apat & " " & dt_cliente.Rows(0)!amat & sEnter & sEnter
+                    oMail.Body = "Estimado Cliente " & CStr(dt_cliente.Rows(0)!nombre) & " " & CStr(dt_cliente.Rows(0)!apat) & " " & CStr(dt_cliente.Rows(0)!amat) & sEnter & sEnter
                     oMail.Body = oMail.Body & "Por medio del presente Correo Electrónico, le hago la notificación y envío de la Cotización" & sEnter
                     oMail.Body = oMail.Body & "emitido por nuestra empresa Material Eléctrico Progreso." & sEnter
                     oMail.Body = oMail.Body & "Anexo archivo PDF." & sEnter & sEnter
@@ -5994,7 +5595,7 @@ Module Module1
 
         Dim dt_detail As DataTable = New DataTable
 
-        Dim wCobrar As List(Of tblCobrar) = DBModelo.GetCobrarByIdCliente(idClienteVenta)
+        Dim wCobrar As List(Of tblCobrar) = DBModelo.GetCobrarByIdCliente(CInt(idClienteVenta))
 
         ' llenar el DataTable   
         dt_detail.Clear()
@@ -6017,7 +5618,7 @@ Module Module1
             Dim p9 As New Microsoft.Reporting.WinForms.ReportParameter("Fecha", DateTime.Now.ToShortDateString())
 
 
-            Dim lv_dinero As String = Dinero(resto_total, 2, "Pesos", True)
+            Dim lv_dinero As String = Dinero(CDbl(resto_total), 2, "Pesos", True)
             Dim p13 As New Microsoft.Reporting.WinForms.ReportParameter("Dinero", lv_dinero.ToUpper)
 
             Dim lv_abono As String = abono
@@ -6071,7 +5672,7 @@ Module Module1
 
         Dim dt_detail As DataTable = New DataTable
 
-        Dim wCobrar As List(Of tblWCobrar) = DBModelo.GetCobrarByIdClienteWendy(idClienteVenta)
+        Dim wCobrar As List(Of tblWCobrar) = DBModelo.GetCobrarByIdClienteWendy(CInt(idClienteVenta))
         Dim wConfiguracion As tblWConfiguracion = DBModelo.GetConfigurationWendy(gv_terminal)
 
         ' llenar el DataTable   
@@ -6095,7 +5696,7 @@ Module Module1
             Dim p9 As New Microsoft.Reporting.WinForms.ReportParameter("Fecha", DateTime.Now.ToShortDateString())
 
 
-            Dim lv_dinero As String = Dinero(resto_total, 2, "Pesos", True)
+            Dim lv_dinero As String = Dinero(CDbl(resto_total), 2, "Pesos", True)
             Dim p13 As New Microsoft.Reporting.WinForms.ReportParameter("Dinero", lv_dinero.ToUpper)
 
             Dim lv_abono As String = abono
@@ -6176,7 +5777,7 @@ Module Module1
         Dim myMessage As MailMessage
 
         Try
-            Smtp.Port = gv_smtp_port
+            Smtp.Port = CInt(gv_smtp_port)
             Smtp.UseDefaultCredentials = False
             Smtp.Credentials = New Net.NetworkCredential(SendFrom, Password)
             Smtp.EnableSsl = True
@@ -6243,9 +5844,9 @@ Module Module1
             Else
                 MessageBox.Show(text, "CFDI", MessageBoxButtons.OK, If((respuesta.Codigo_MF_Numero = "0"), MessageBoxIcon.Asterisk, MessageBoxIcon.Exclamation))
 
-                Dim wFacturatotal As tblFacturaTotal = DBModelo.GetFacturaHeader(NumeroFactura)
+                Dim wFacturatotal As tblFacturaTotal = DBModelo.GetFacturaHeader(CStr(NumeroFactura))
                 If Not IsNothing(wFacturatotal) Then
-                    Dim wCliente As tblClientes = DBModelo.GetCliente(wFacturatotal.id_cliente)
+                    Dim wCliente As tblClientes = DBModelo.GetCliente(CInt(wFacturatotal.id_cliente))
                     If Not IsNothing(wCliente) Then
                         If wCliente.correo.Length > 0 Then
                             Dim filename As String = ""
@@ -6263,7 +5864,7 @@ Module Module1
 
                             oSmtp.UseDefaultCredentials = False
                             oSmtp.Credentials = New Net.NetworkCredential(gv_smtp_correo, gv_smtp_pass)
-                            oSmtp.Port = gv_smtp_port
+                            oSmtp.Port = CInt(gv_smtp_port)
                             oSmtp.EnableSsl = True
                             oSmtp.Host = gv_smtp_server
 
@@ -6283,7 +5884,7 @@ Module Module1
                                 oMail.Subject = "Cancelación de Factura " & lvFileName
                             End If
                             oMail.BodyEncoding = Encoding.UTF8
-                            oMail.IsBodyHtml = True
+                            'oMail.IsBodyHtml = True
                             oMail.Body = filename
 
                             Try

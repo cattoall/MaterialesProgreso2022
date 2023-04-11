@@ -13,6 +13,8 @@ Imports System.Collections.Generic
 Partial Public Class tblFacturaTotal
     Public Property IdComp As String
     Public Property n_factura As Decimal
+    Public Property subtotal As Nullable(Of Decimal)
+    Public Property iva As Nullable(Of Decimal)
     Public Property total As Decimal
     Public Property usuario As String
     Public Property tipo_venta As String
@@ -31,11 +33,9 @@ Partial Public Class tblFacturaTotal
     Public Property FormaPago As String
     Public Property UsoCFDI As String
     Public Property UUID As String
-    Public Property Cancelada As Nullable(Of Short)
-    Public Property ComproPago As Nullable(Of Short)
+    Public Property Cancelada As Nullable(Of Integer)
+    Public Property ComproPago As Nullable(Of Integer)
     Public Property pdf As String
     Public Property ObjetoImp As String
-    Public Property subtotal As Nullable(Of Decimal)
-    Public Property iva As Nullable(Of Decimal)
 
 End Class

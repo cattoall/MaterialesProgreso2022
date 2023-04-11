@@ -1,5 +1,5 @@
 ﻿Public Class FrmBuscarMarcas
-    Private lv_idMarca
+    Private lv_idMarca As Integer
     Public lv_ValorAnterior As String
 
     Private Sub txtBusqueda_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBusqueda.KeyPress
@@ -48,9 +48,9 @@
 
     Private Sub MetroGrid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellDoubleClick
         Add_Update = True
-        lv_idMarca = MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
-        txtMarca.Text = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
-        lv_ValorAnterior = MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value
+        lv_idMarca = CInt(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
+        txtMarca.Text = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
+        lv_ValorAnterior = CStr(MetroGrid1.Item(2, MetroGrid1.CurrentRow.Index).Value)
     End Sub
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) 

@@ -13,7 +13,7 @@
 
         Dim motivo As String
 
-        If Cancelar = 1 Then
+        If CInt(Cancelar) = 1 Then
 
             If CmbCancelarPedido.Text = "" Or CmbCancelarPedido.Text = " " Then
                 MetroFramework.MetroMessageBox.Show(Me, "Favor De Especificar El Motivo De Cancelación", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -24,8 +24,8 @@
 
             Try
                 For i = 0 To FrmPedidos.DataGridView2.RowCount - 1
-                    Dim strProducto As tblProductos = DBModelo.GetProductById(CInt(FrmPedidos.DataGridView2.Item(9, i).Value))
-                    strProducto.stock = strProducto.stock + CDbl(FrmPedidos.DataGridView2.Item(2, i).Value)
+                    Dim strProducto As tblProductos = DBModelo.GetProductById(CInt(FrmPedidos.DataGridView2.Item(3, i).Value))
+                    strProducto.stock = CDec(strProducto.stock + CDbl(FrmPedidos.DataGridView2.Item(5, i).Value))
                     If DBModelo.UpdateProductos(strProducto) = False Then
                         MetroFramework.MetroMessageBox.Show(Me, "Error al Actualizar en Tabla PRODUCTOS", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Exit Sub
@@ -37,7 +37,7 @@
             End Try
 
             Try
-                Dim PedidoHeader As tblVentaPedido = DBModelo.Get_PV_PedidosHeader(NoFactura)
+                Dim PedidoHeader As tblVentaPedido = DBModelo.Get_PV_PedidosHeader(CInt(NoFactura))
                 PedidoHeader.estado = "CANCELADO"
                 PedidoHeader.motivo = motivo
 
@@ -50,10 +50,10 @@
                 Exit Sub
             End Try
 
-            If FrmPedidos.DataGridView1.Item(5, FrmPedidos.DataGridView1.CurrentRow.Index).Value = "CREDITO" Then
+            If CStr(FrmPedidos.DataGridView1.Item(6, FrmPedidos.DataGridView1.CurrentRow.Index).Value) = "CREDITO" Then
                 Try
-                    Dim strCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(NoFactura, "PEDIDO", FrmPedidos.DataGridView1.Item(8, FrmPedidos.DataGridView1.CurrentRow.Index).Value)
-                    strCobrar.resto = "0.00"
+                    Dim strCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(CInt(NoFactura), "PEDIDO", CInt(FrmPedidos.DataGridView1.Item(9, FrmPedidos.DataGridView1.CurrentRow.Index).Value))
+                    strCobrar.resto = CDec("0.00")
 
                     If DBModelo.Update_Cobrar(strCobrar) = False Then
                         MetroFramework.MetroMessageBox.Show(Me, "Error al Actualizar en Tabla COBRAR", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -71,7 +71,7 @@
             NoFactura = ""
             Close()
 
-        ElseIf Cancelar = 2 Then
+        ElseIf CInt(Cancelar) = 2 Then
 
             If CmbCancelarPedido.Text = "" Or CmbCancelarPedido.Text = " " Then
                 MetroFramework.MetroMessageBox.Show(Me, "Favor De Especificar El Motivo De Cancelación", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -84,8 +84,8 @@
             Try
 
                 For i = 0 To FrmListadoVentas.DataGridTikect.RowCount - 1
-                    Dim strProducto As tblProductos = DBModelo.GetProductById(CInt(FrmListadoVentas.DataGridTikect.Item(9, i).Value))
-                    strProducto.stock = strProducto.stock + CDbl(FrmListadoVentas.DataGridTikect.Item(2, i).Value)
+                    Dim strProducto As tblProductos = DBModelo.GetProductById(CInt(FrmListadoVentas.DataGridTikect.Item(3, i).Value))
+                    strProducto.stock = CDec(strProducto.stock + CDbl(FrmListadoVentas.DataGridTikect.Item(5, i).Value))
                     If DBModelo.UpdateProductos(strProducto) = False Then
                         MetroFramework.MetroMessageBox.Show(Me, "Error al Actualizar en Tabla PRODUCTOS", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Exit Sub
@@ -97,7 +97,7 @@
             End Try
 
             Try
-                Dim strVenta As tblVenta = DBModelo.Get_PV_TicketHeader(NoFactura)
+                Dim strVenta As tblVenta = DBModelo.Get_PV_TicketHeader(CInt(NoFactura))
                 strVenta.estado = "CANCELADO"
                 strVenta.motivo = motivo
 
@@ -110,10 +110,10 @@
                 Exit Sub
             End Try
 
-            If FrmListadoVentas.DataGridConsulta.Item(5, FrmListadoVentas.DataGridConsulta.CurrentRow.Index).Value = "CREDITO" Then
+            If CStr(FrmListadoVentas.DataGridConsulta.Item(6, FrmListadoVentas.DataGridConsulta.CurrentRow.Index).Value) = "CREDITO" Then
                 Try
-                    Dim strCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(NoFactura, "TICKET", FrmListadoVentas.DataGridConsulta.Item(8, FrmListadoVentas.DataGridConsulta.CurrentRow.Index).Value)
-                    strCobrar.resto = "0.00"
+                    Dim strCobrar As tblCobrar = DBModelo.Get_CobrarTipoDoc(CInt(NoFactura), "TICKET", CInt(FrmListadoVentas.DataGridConsulta.Item(9, FrmListadoVentas.DataGridConsulta.CurrentRow.Index).Value))
+                    strCobrar.resto = CDec("0.00")
 
                     If DBModelo.Update_Cobrar(strCobrar) = False Then
                         MetroFramework.MetroMessageBox.Show(Me, "Error al Actualizar en Tabla COBRAR", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -134,9 +134,9 @@
             Close()
 
 
-        ElseIf Cancelar = 3 Then
+        ElseIf CInt(Cancelar) = 3 Then
 
-        ElseIf Cancelar = 4 Then
+        ElseIf CInt(Cancelar) = 4 Then
 
             If CmbCancelarPedido.Text = "" Or CmbCancelarPedido.Text = " " Then
                 MetroFramework.MetroMessageBox.Show(Me, "Favor De Especificar El Motivo De Cancelación", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -147,7 +147,7 @@
 
             'Cambiar status en tabla Factura_Total
             Try
-                Dim strNC As tblNC = DBModelo.Get_NotaDeCredito(NoFactura)
+                Dim strNC As tblNC = DBModelo.Get_NotaDeCredito(CInt(NoFactura))
                 strNC.estado = "CANCELADO"
                 strNC.observaciones = motivo
 
@@ -160,11 +160,7 @@
                 Exit Sub
             End Try
 
-            'CancelaNC_CFDI(CInt(NoFactura), DBConnected)
-
             MetroFramework.MetroMessageBox.Show(Me, "Nota de Crédito " & NoFactura & " Ha sido cancelada.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-            'Call FrmListadoNC.ImgVerFactB_Click(sender, e)
 
             FrmListadoNC.LblNumTicket.Text = ""
             FrmListadoNC.LblNumTicket.Visible = False

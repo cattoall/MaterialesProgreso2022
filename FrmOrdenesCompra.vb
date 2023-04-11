@@ -46,8 +46,8 @@
     End Sub
 
     Private Sub DataGridView1_Click(sender As Object, e As System.EventArgs) Handles DataGridView1.Click
-        Lblorden.Text = Me.DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value
-        SQL = "SELECT folio, cantidad, concepto, codigo FROM ordencomprades where folio = " & Me.DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value
+        Lblorden.Text = CStr(DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value)
+        SQL = "SELECT folio, cantidad, concepto, codigo FROM ordencomprades where folio = " & CStr(DataGridView1.Item(0, DataGridView1.CurrentRow.Index).Value)
 
         'Carga Lista de Clasificaciones
         load_record_dgv2_ordenes(SQL, Me.DataGridView2, DBConnected)

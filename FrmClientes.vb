@@ -1,5 +1,5 @@
 ﻿Public Class FrmClientes
-    Public lv_idCliente
+    Public lv_idCliente As Integer
 
     Private Sub FrmClientes_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyValue
@@ -14,6 +14,7 @@
             LimpiarVar()
         End If
         txtNombre.Select()
+        MetroTabControl1.SelectedIndex = 0
     End Sub
 
     Private Sub LimpiarVar()
@@ -42,6 +43,7 @@
         ChkTasaCero.Checked = False
         cmbFormaPago.SelectedIndex = -1
         cmbUsoCFDI.SelectedIndex = -1
+        cmbRegimen.SelectedIndex = -1
     End Sub
 
     Private Sub txtNombre_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNombre.KeyPress
@@ -142,7 +144,7 @@
                 e.Handled = False
             End If
         Else
-            If e.KeyChar = "." And txtLimite.Text.Contains(".") Then e.KeyChar = "" 'Check for Duplicate and Create Null if Yes   
+            If e.KeyChar = "." And txtLimite.Text.Contains(".") Then e.KeyChar = CChar("") 'Check for Duplicate and Create Null if Yes   
             e.Handled = False
         End If
     End Sub
@@ -158,20 +160,6 @@
         End If
     End Sub
 
-    'Private Sub CmdMetPago_SelectionChangeCommitted(sender As Object, e As System.EventArgs)
-    '    If cmbMetodoPago.Text <> "EFECTIVO" Then
-    '        txtCuenta.Visible = True
-    '        CmbBanco.Visible = True
-    '        txtCuenta.Focus()
-    '        CmbBanco.SelectedIndex = -1
-    '    Else
-    '        txtCuenta.Visible = False
-    '        CmbBanco.Visible = False
-    '        txtCuenta.Clear()
-    '        CmbBanco.SelectedIndex = -1
-    '    End If
-    'End Sub
-
     Private Sub CmbTipo_SelectionChangeCommitted(sender As Object, e As System.EventArgs) Handles CmbTipo.SelectionChangeCommitted
         If CmbTipo.Text = "CREDITO" Then
             CmbCredito.Visible = True
@@ -183,6 +171,7 @@
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim lv_FormaPago() As String = Split(cmbFormaPago.Text, "-")
         Dim lv_MetodoPago() As String = Split(cmbMetodoPago.Text, "-")
+        Dim lv_Regimen() As String = Split(cmbRegimen.Text, "-")
         Dim lv_UsoCFDI() As String = Split(cmbUsoCFDI.Text, "-")
         Dim strCliente As New tblClientes
 
@@ -209,12 +198,12 @@
             strCliente.observaciones = txtObs.Text
             strCliente.listaPrecios = CmbPrecio.Text
             strCliente.diasCredito = CInt(txtCredito.Text)
-            strCliente.limiteCredito = CDbl(txtLimite.Text)
+            strCliente.limiteCredito = CDec(txtLimite.Text)
             strCliente.tipo_venta = CmbTipo.Text
             strCliente.codiciones = CmbCredito.Text
             strCliente.cuenta = txtCuenta.Text
             strCliente.banco = CmbBanco.Text
-            strCliente.RegimenFiscal = txtRegimenFiscal.Text
+            strCliente.RegimenFiscal = lv_Regimen(0)
             If ChkTasaCero.Checked = True Then
                 strCliente.tasa_cero = 1
             Else
@@ -248,12 +237,12 @@
                 strCliente.observaciones = txtObs.Text
                 strCliente.listaPrecios = CmbPrecio.Text
                 strCliente.diasCredito = CInt(txtCredito.Text)
-                strCliente.limiteCredito = CDbl(txtLimite.Text)
+                strCliente.limiteCredito = CDec(txtLimite.Text)
                 strCliente.tipo_venta = CmbTipo.Text
                 strCliente.codiciones = CmbCredito.Text
                 strCliente.cuenta = txtCuenta.Text
                 strCliente.banco = CmbBanco.Text
-                strCliente.RegimenFiscal = txtRegimenFiscal.Text
+                strCliente.RegimenFiscal = lv_Regimen(0)
                 If ChkTasaCero.Checked = True Then
                     strCliente.tasa_cero = 1
                 Else

@@ -20,10 +20,10 @@ Public Class FrmCotizaciones
 
     Private Sub MetroGrid1_CellClick(sender As Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles MetroGrid1.CellClick
         lblcotizacion.Visible = True
-        lblcotizacion.Text = Me.MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value
+        lblcotizacion.Text = CStr(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
 
         MetroGrid2.Refresh()
-        Dim CotizaDet As List(Of tblTicketCotiza) = DBModelo.GetCotizacionesDet(Me.MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value)
+        Dim CotizaDet As List(Of tblTicketCotiza) = DBModelo.GetCotizacionesDet(CInt(MetroGrid1.Item(1, MetroGrid1.CurrentRow.Index).Value))
 
         MetroGrid2.DataSource = CotizaDet.ToList
 
@@ -65,27 +65,10 @@ Public Class FrmCotizaciones
         MetroGrid2.Columns(9).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
         MetroGrid2.Columns(10).Visible = False
-        MetroGrid2.Columns(10).Visible = False
         MetroGrid2.Columns(11).Visible = False
         MetroGrid2.Columns(12).Visible = False
         MetroGrid2.Columns(13).Visible = False
         MetroGrid2.Columns(14).Visible = False
-    End Sub
-
-    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub btnMandarATicket_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub btnImprimir_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) 
-        
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -138,7 +121,6 @@ Public Class FrmCotizaciones
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Close()
-        Dispose()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -169,8 +151,8 @@ Public Class FrmCotizaciones
 
             FrmPuntoDeVenta.txtDomicilio.Text = ""
             FrmPuntoDeVenta.txtCliente.Text = ""
-            FrmPuntoDeVenta.MetroGrid1.DataSource = Nothing
-            FrmPuntoDeVenta.MetroGrid1.Rows.Clear()
+            FrmPuntoDeVenta.DataGridView1.DataSource = Nothing
+            FrmPuntoDeVenta.DataGridView1.Rows.Clear()
 
             Dim lv_granTotal As Double = 0
             Dim lv_granSubTotal As Double = 0
@@ -179,30 +161,30 @@ Public Class FrmCotizaciones
             Dim lv_granIVA_TasaCero As Double = 0
             Dim lv_granTotal_TasaCero As Double = 0
             For i = 0 To MetroGrid2.Rows.Count - 1
-                Dim row As String() = New String() {MetroGrid2.Rows(i).Cells(5).Value,
-                                                    MetroGrid2.Rows(i).Cells(3).Value,
-                                                    MetroGrid2.Rows(i).Cells(2).Value,
+                Dim row As String() = New String() {MetroGrid2.Rows(i).Cells(5).Value.ToString,
+                                                    MetroGrid2.Rows(i).Cells(3).Value.ToString,
+                                                    MetroGrid2.Rows(i).Cells(4).Value.ToString,
                                                     Format(MetroGrid2.Rows(i).Cells(6).Value, "###,###,##0.00"),
                                                     Format(MetroGrid2.Rows(i).Cells(8).Value, "###,###,##0.00"),
-                                                    MetroGrid2.Rows(i).Cells(9).Value,
+                                                    MetroGrid2.Rows(i).Cells(9).Value.ToString,
                                                     "0",
                                                     Format(MetroGrid2.Rows(i).Cells(6).Value, "###,###,##0.00"),
                                                     Format(MetroGrid2.Rows(i).Cells(8).Value, "###,###,##0.00"),
                                                     Format(MetroGrid2.Rows(i).Cells(10).Value, "###,###,##0.00"),
                                                     Format(MetroGrid2.Rows(i).Cells(11).Value, "###,###,##0.00"),
-                                                    MetroGrid2.Rows(i).Cells(12).Value,
-                                                    MetroGrid2.Rows(i).Cells(13).Value,
-                                                    MetroGrid2.Rows(i).Cells(14).Value}
-                FrmPuntoDeVenta.MetroGrid1.Rows.Add(row)
-                Dim lv_total As Double = MetroGrid2.Rows(i).Cells(8).Value
+                                                    MetroGrid2.Rows(i).Cells(12).Value.ToString,
+                                                    MetroGrid2.Rows(i).Cells(13).Value.ToString,
+                                                    MetroGrid2.Rows(i).Cells(14).Value.ToString}
+                FrmPuntoDeVenta.DataGridView1.Rows.Add(row)
+                Dim lv_total As Double = CDbl(MetroGrid2.Rows(i).Cells(8).Value)
                 lv_granSubTotal = lv_granSubTotal + lv_total
-                If MetroGrid2.Rows(i).Cells(14).Value = False Then
-                    lv_granIVA = lv_granIVA + FormatNumber((lv_total * (FactorIVA - 1)), 2)
-                    lv_granTotal = lv_granTotal + FormatNumber((lv_total + (lv_total * (FactorIVA - 1))))
+                If CBool(MetroGrid2.Rows(i).Cells(14).Value) = False Then
+                    lv_granIVA = lv_granIVA + CDbl(FormatNumber(lv_total * (CDbl(FactorIVA) - 1), 2))
+                    lv_granTotal = lv_granTotal + CDbl(FormatNumber(lv_total + (lv_total * (CDbl(FactorIVA) - 1))))
                     gv_tasa_16 = True
                 Else
-                    lv_granTotal = lv_granTotal + FormatNumber(lv_total, 2)
-                    lv_granTotal_TasaCero = lv_granTotal_TasaCero + FormatNumber(lv_total, 2)
+                    lv_granTotal = lv_granTotal + CDbl(FormatNumber(lv_total, 2))
+                    lv_granTotal_TasaCero = lv_granTotal_TasaCero + CDbl(FormatNumber(lv_total, 2))
                     lv_granSubTotal_TasaCero = lv_granSubTotal_TasaCero + lv_total
                     gv_tasa_0 = True
                 End If
@@ -214,11 +196,11 @@ Public Class FrmCotizaciones
             FrmPuntoDeVenta.txtIVATasaCero.Text = Format(lv_granIVA_TasaCero, "###,###,##0.00")
             FrmPuntoDeVenta.txtTotalTasaCero.Text = Format(lv_granTotal_TasaCero, "###,###,##0.00")
 
-            FrmPuntoDeVenta.txtCliente.Text = MetroGrid1.Rows(MetroGrid1.CurrentRow.Index).Cells(8).Value
-            FrmPuntoDeVenta.txtIdCliente.Text = MetroGrid1.Rows(MetroGrid1.CurrentRow.Index).Cells(9).Value
+            FrmPuntoDeVenta.txtCliente.Text = CStr(MetroGrid1.Rows(MetroGrid1.CurrentRow.Index).Cells(8).Value)
+            FrmPuntoDeVenta.txtIdCliente.Text = CStr(MetroGrid1.Rows(MetroGrid1.CurrentRow.Index).Cells(9).Value)
 
             FrmPuntoDeVenta.CmbDocto.SelectedItem = "PEDIDO"
-            Dim Cliente As tblClientes = DBModelo.GetCliente(MetroGrid1.Rows(MetroGrid1.CurrentRow.Index).Cells(9).Value)
+            Dim Cliente As tblClientes = DBModelo.GetCliente(CInt(MetroGrid1.Rows(MetroGrid1.CurrentRow.Index).Cells(9).Value))
             If IsNothing(Cliente) = False Then
                 FrmPuntoDeVenta.txtDomicilio.Text = Cliente.calle & " #" & Cliente.numero & " colonia " & Cliente.colonia & " Ciudad " & Cliente.ciudad & " " & Cliente.estado & " codigo postal " & Cliente.cp & " RFC " & Cliente.rfc
             End If
@@ -227,7 +209,6 @@ Public Class FrmCotizaciones
             FrmPuntoDeVenta.CmbTipoVenta.Text = "CREDITO"
             EsCotizacion = False
             Close()
-            Dispose()
         Else
             MsgBox("Favor De Seleccionar Una Cotización", MsgBoxStyle.Critical, "Consulta y Reimpresion de Cotizaciones")
             Exit Sub

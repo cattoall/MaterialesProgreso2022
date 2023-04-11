@@ -58,29 +58,13 @@
         Me.Close()
     End Sub
 
-    Private Sub ImgCancelarB_Click(sender As System.Object, e As System.EventArgs)
-
-    End Sub
-
-    Private Sub ImgGenXmlB_Click(sender As System.Object, e As System.EventArgs)
-
-    End Sub
-
-    Private Sub ImgCFDIB_Click(sender As System.Object, e As System.EventArgs)
-
-    End Sub
-
-    Private Sub DataGridConsulta_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs)
-
-    End Sub
-
     Private Sub DataGridConsulta_CellClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridConsulta.CellClick
         LblNumTicket.Visible = True
-        LblTotal.Text       = Format(Me.DataGridConsulta.Item(4, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,##0.00")
-        LblNumTicket.Text   = Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value
-        NoFactura = Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value
+        LblTotal.Text = Format(DataGridConsulta.Item(4, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,##0.00")
+        LblNumTicket.Text = CStr(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value)
+        NoFactura = CStr(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value)
 
-        DataGridTikect.DataSource = DBModelo.GetNCDetalle(Me.DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value)
+        DataGridTikect.DataSource = DBModelo.GetNCDetalle(CLng(DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value))
 
         'Aplica formato al DataGridView
         DataGridTikect.Columns(0).Visible = False
@@ -88,17 +72,9 @@
         'load_layout_dgv_ListaNC_i(Me.DataGridTikect)
     End Sub
 
-    Private Sub mBtnSearch_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub mBtnExit_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub mBtnCancel_Click(sender As Object, e As EventArgs) Handles mBtnCancel.Click
         If LblNumTicket.Text <> "" Then
-            Cancelar = 4
+            Cancelar = CStr(4)
             FrmCancelarPedido.ShowDialog()
             Cancelar = ""
         Else
@@ -126,8 +102,8 @@
         If LblNumTicket.Text <> "" Then
             Dim NoFactura       = DataGridConsulta.Item(1, DataGridConsulta.CurrentRow.Index).Value
             Dim FechaFactura    = DataGridConsulta.Item(9, DataGridConsulta.CurrentRow.Index).Value
-            Dim FolioFactura As String = gv_SerieNCSalvador & "-" & NoFactura & "_" & Format(FechaFactura, "yyyyMMdd") & "_CFDI"
-            If ImprimeNotaDeCredito(NoFactura, FolioFactura, True) = False Then
+            Dim FolioFactura As String = gv_SerieNCSalvador & "-" & CStr(NoFactura) & "_" & Format(FechaFactura, "yyyyMMdd") & "_CFDI"
+            If ImprimeNotaDeCredito(CStr(NoFactura), FolioFactura, True) = False Then
                 MsgBox("Hubo un error al Generar la Impresión de la Nota de Crédito", MsgBoxStyle.Critical, "Impresiones de Notas de Crédito")
             Else
                 MsgBox("Re'Impresión de Nota de Credito Correctamente", MsgBoxStyle.Information, "Impresiones de Notas de Crédito")
@@ -141,10 +117,9 @@
         DataGridConsulta.DataSource = DBModelo.GetNCIntervalFacturas(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"))
 
         DataGridConsulta.Columns(0).Visible = False
-        'load_layout_dgv_ListaNC_H(Me.DataGridConsulta)
 
         For i = 0 To DataGridConsulta.RowCount - 1
-            Select Case DataGridConsulta.Item(11, i).Value
+            Select Case CStr(DataGridConsulta.Item(11, i).Value)
                 Case "0"
                     DataGridConsulta.Item(12, i).Value = "CLIENTE"
                 Case "1"
