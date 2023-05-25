@@ -201,45 +201,51 @@
     End Sub
 
     Private Sub CopiarProductoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopiarProductoToolStripMenuItem.Click
-        Add_Update = False
-        Dim oForm As New FrmProductos
-        oForm.Text = "Crear Producto"
-        oForm.lv_idProducto = CLng("0")
-        oForm.txtIdProducto.Text = ""
-        oForm.txtCodigoBarras.Text = ""
-        oForm.txtClave.Text = ""
-        oForm.txtDescripcion.Text = CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value)
-        Material_Umedida = CStr(MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value)
-        Material_Grupo = CStr(MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value)
-        Material_Familia = CStr(MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value)
-        Material_SubFam = CStr(MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value)
-        Material_Linea = CStr(MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value)
-        Material_Proveedores = CStr(MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value)
-        oForm.CmbTipoVenta.Text = CStr(MetroGrid1.Item(12, MetroGrid1.CurrentRow.Index).Value)
-        oForm.txtDesc.Text = CStr(MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value)
-        If CBool(MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value) = True Then
-            oForm.chkPrecioManual.Checked = True
-        Else
-            oForm.chkPrecioManual.Checked = False
-        End If
-        If CBool(MetroGrid1.Item(23, MetroGrid1.CurrentRow.Index).Value) = True Then
-            oForm.chkTC.Checked = True
-        Else
-            oForm.chkTC.Checked = False
-        End If
+        If Not MetroGrid1.CurrentRow Is Nothing Then
+            Add_Update = False
+            Copy_Product = True
+            Dim oForm As New FrmProductos
+            oForm.Text = "Crear Producto"
+            oForm.lv_idProducto = CLng("0")
+            oForm.txtIdProducto.Text = ""
+            oForm.txtCodigoBarras.Text = ""
+            oForm.txtClave.Text = ""
 
-        oForm.txtClaveProducto.Text = CStr(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value)
-        oForm.txtClaveUnidad.Text = CStr(MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value)
-        If CBool(MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value) = True Then
-            oForm.chkTasaCero.Checked = True
-        Else
-            oForm.chkTasaCero.Checked = False
-        End If
+            oForm.txtDescripcion.Text = CStr(MetroGrid1.Item(4, MetroGrid1.CurrentRow.Index).Value)
+            Material_Umedida = CStr(MetroGrid1.Item(5, MetroGrid1.CurrentRow.Index).Value)
+            Material_Grupo = CStr(MetroGrid1.Item(7, MetroGrid1.CurrentRow.Index).Value)
+            Material_Familia = CStr(MetroGrid1.Item(8, MetroGrid1.CurrentRow.Index).Value)
+            Material_SubFam = CStr(MetroGrid1.Item(9, MetroGrid1.CurrentRow.Index).Value)
+            Material_Linea = CStr(MetroGrid1.Item(10, MetroGrid1.CurrentRow.Index).Value)
+            Material_Proveedores = CStr(MetroGrid1.Item(11, MetroGrid1.CurrentRow.Index).Value)
+            oForm.CmbTipoVenta.Text = CStr(MetroGrid1.Item(12, MetroGrid1.CurrentRow.Index).Value)
+            oForm.txtDesc.Text = CStr(MetroGrid1.Item(14, MetroGrid1.CurrentRow.Index).Value)
+            If CBool(MetroGrid1.Item(21, MetroGrid1.CurrentRow.Index).Value) = True Then
+                oForm.chkPrecioManual.Checked = True
+            Else
+                oForm.chkPrecioManual.Checked = False
+            End If
+            If CBool(MetroGrid1.Item(23, MetroGrid1.CurrentRow.Index).Value) = True Then
+                oForm.chkTC.Checked = True
+            Else
+                oForm.chkTC.Checked = False
+            End If
 
-        oForm.ShowDialog()
-        oForm.Close()
-        MetroGrid1.Refresh()
-        refresh_data_dgv()
+            oForm.txtClaveProducto.Text = CStr(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value)
+            oForm.txtClaveUnidad.Text = CStr(MetroGrid1.Item(26, MetroGrid1.CurrentRow.Index).Value)
+            If CBool(MetroGrid1.Item(27, MetroGrid1.CurrentRow.Index).Value) = True Then
+                oForm.chkTasaCero.Checked = True
+            Else
+                oForm.chkTasaCero.Checked = False
+            End If
+
+            oForm.ShowDialog()
+            oForm.Close()
+            MetroGrid1.Refresh()
+            refresh_data_dgv()
+        Else
+            MsgBox("Selecciona primero el producto a compiar", MsgBoxStyle.Information, "Seleccionar producto")
+        End If
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click

@@ -40,104 +40,42 @@ Public Class FrmBuscarClientes
 
     Private Sub refresh_data_dgv()
         MetroGrid1.Refresh()
+        MetroGrid1.Rows.Clear()
         Dim Clientes As List(Of tblClientes) = DBModelo.GetClientesByNameApatAmat(txtBusqueda.Text)
 
-        MetroGrid1.DataSource = Clientes.ToList
-
-        MetroGrid1.Columns(0).Visible = False
-
-        Dim i As Integer = 0
-
-        For i = 0 To MetroGrid1.Columns.Count - 1
-            MetroGrid1.Columns(i).ReadOnly = True
+        For Each row In Clientes
+            Dim line As String() = New String() {
+                                                    row.IdComp,
+                                                    row.clave.ToString,
+                                                    row.nombre,
+                                                    row.apat,
+                                                    row.amat,
+                                                    row.calle,
+                                                    row.numero,
+                                                    row.colonia,
+                                                    row.ciudad,
+                                                    row.estado,
+                                                    row.cp,
+                                                    row.rfc,
+                                                    row.telefono,
+                                                    row.celular,
+                                                    row.correo,
+                                                    row.observaciones,
+                                                    row.listaPrecios,
+                                                    row.diasCredito.ToString,
+                                                    row.limiteCredito.ToString,
+                                                    row.tipo_venta,
+                                                    row.metodopago,
+                                                    row.codiciones,
+                                                    row.cuenta,
+                                                    row.banco,
+                                                    row.tasa_cero.ToString,
+                                                    row.FormaPago,
+                                                    row.UsoCFDI,
+                                                    row.RegimenFiscal
+                                                    }
+            MetroGrid1.Rows.Add(line)
         Next
-
-        MetroGrid1.Columns(1).HeaderText = "ID"
-        MetroGrid1.Columns(1).Width = 50
-
-        MetroGrid1.Columns(2).HeaderText = "Nombre"
-        MetroGrid1.Columns(2).Width = 150
-
-        MetroGrid1.Columns(3).HeaderText = "Apellido Paterno"
-        MetroGrid1.Columns(3).Width = 150
-
-        MetroGrid1.Columns(4).HeaderText = "Apellido Materno"
-        MetroGrid1.Columns(4).Width = 150
-
-        MetroGrid1.Columns(11).HeaderText = "R.F.C."
-
-        MetroGrid1.Columns(27).HeaderText = "Régimen Fiscal"
-        MetroGrid1.Columns(27).Visible = True
-
-        MetroGrid1.Columns(15).HeaderText = "Observaciones"
-        MetroGrid1.Columns(15).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-
-        MetroGrid1.Columns(5).HeaderText = "Domicilio"
-        MetroGrid1.Columns(5).ReadOnly = True
-        MetroGrid1.Columns(5).Visible = False
-
-        MetroGrid1.Columns(6).HeaderText = "Número"
-        MetroGrid1.Columns(6).ReadOnly = True
-        MetroGrid1.Columns(6).Visible = False
-
-        MetroGrid1.Columns(7).HeaderText = "Colonia"
-        MetroGrid1.Columns(7).ReadOnly = True
-        MetroGrid1.Columns(7).Visible = False
-
-        MetroGrid1.Columns(8).HeaderText = "Ciudad"
-        MetroGrid1.Columns(8).ReadOnly = True
-        MetroGrid1.Columns(8).Visible = False
-
-        MetroGrid1.Columns(9).HeaderText = "Estado"
-        MetroGrid1.Columns(9).ReadOnly = True
-        MetroGrid1.Columns(9).Visible = False
-
-        MetroGrid1.Columns(10).HeaderText = "Código Postal"
-        MetroGrid1.Columns(10).ReadOnly = True
-        MetroGrid1.Columns(10).Visible = False
-
-        MetroGrid1.Columns(12).HeaderText = "Teléfono"
-        MetroGrid1.Columns(12).Visible = False
-
-        MetroGrid1.Columns(13).HeaderText = "Celular"
-        MetroGrid1.Columns(13).Visible = False
-
-        MetroGrid1.Columns(14).HeaderText = "Correo"
-        MetroGrid1.Columns(14).Visible = False
-
-        MetroGrid1.Columns(16).HeaderText = "Lista Precios"
-        MetroGrid1.Columns(16).Visible = False
-
-        MetroGrid1.Columns(17).HeaderText = "Días Crédito"
-        MetroGrid1.Columns(17).Visible = False
-
-        MetroGrid1.Columns(18).HeaderText = "Límite Crédito"
-        MetroGrid1.Columns(18).Visible = False
-
-        MetroGrid1.Columns(19).HeaderText = "Tipo Venta"
-        MetroGrid1.Columns(19).Visible = False
-
-        MetroGrid1.Columns(20).HeaderText = "Método Pago"
-        MetroGrid1.Columns(20).Visible = False
-
-        MetroGrid1.Columns(21).HeaderText = "Condiciones"
-        MetroGrid1.Columns(21).Visible = False
-
-        MetroGrid1.Columns(22).HeaderText = "Cuenta"
-        MetroGrid1.Columns(22).Visible = False
-
-        MetroGrid1.Columns(23).HeaderText = "Banco"
-        MetroGrid1.Columns(23).Visible = False
-
-        MetroGrid1.Columns(24).HeaderText = "Tasa Cero"
-        MetroGrid1.Columns(24).Visible = False
-
-        MetroGrid1.Columns(25).HeaderText = "Forma Pago"
-        MetroGrid1.Columns(25).Visible = False
-
-        MetroGrid1.Columns(26).HeaderText = "Uso CFDI"
-        MetroGrid1.Columns(26).Visible = False
-
     End Sub
 
     Private Sub MetroGrid1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles MetroGrid1.CellDoubleClick

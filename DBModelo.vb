@@ -1042,7 +1042,7 @@ Public Class DBModelo
     Shared Function Get_VentasByDate(ByVal DateFrom As String, ByVal DateTo As String) As List(Of tblVenta)
         Using ctx As New pv_salvadorEntities1()
             Return ctx.tblVentas.Where(Function(i) CBool(i.IdComp = CompanyCode And
-                                                   i.fecha >= CType(DateFrom, Date?) And i.fecha <= CType(DateTo, Date?))).ToList()
+                                               i.fecha >= CDate(DateFrom) And i.fecha <= CDate(DateTo))).ToList()
         End Using
     End Function
 

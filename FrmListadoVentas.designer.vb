@@ -356,12 +356,14 @@ Partial Class FrmListadoVentas
         Me.nticket.HeaderText = "Venta"
         Me.nticket.Name = "nticket"
         Me.nticket.ReadOnly = True
+        Me.nticket.Width = 80
         '
         'fecha
         '
         Me.fecha.HeaderText = "Fecha"
         Me.fecha.Name = "fecha"
         Me.fecha.ReadOnly = True
+        Me.fecha.Width = 80
         '
         'SubTotal
         '
@@ -370,6 +372,7 @@ Partial Class FrmListadoVentas
         Me.SubTotal.HeaderText = "SubTotal"
         Me.SubTotal.Name = "SubTotal"
         Me.SubTotal.ReadOnly = True
+        Me.SubTotal.Visible = False
         '
         'IVA
         '
@@ -378,6 +381,7 @@ Partial Class FrmListadoVentas
         Me.IVA.HeaderText = "Impuesto"
         Me.IVA.Name = "IVA"
         Me.IVA.ReadOnly = True
+        Me.IVA.Visible = False
         '
         'total
         '
@@ -405,7 +409,7 @@ Partial Class FrmListadoVentas
         Me.cliente.HeaderText = "Cliente"
         Me.cliente.Name = "cliente"
         Me.cliente.ReadOnly = True
-        Me.cliente.Width = 300
+        Me.cliente.Width = 250
         '
         'idCliente
         '
@@ -431,7 +435,7 @@ Partial Class FrmListadoVentas
         'numeroFactura
         '
         Me.numeroFactura.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.numeroFactura.HeaderText = "No. Factura"
+        Me.numeroFactura.HeaderText = "Factura"
         Me.numeroFactura.Name = "numeroFactura"
         Me.numeroFactura.ReadOnly = True
         '

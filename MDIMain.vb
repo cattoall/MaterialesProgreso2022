@@ -282,9 +282,11 @@ Public Class MDIMain
     End Sub
 
     Private Sub ListadoDeVentasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeVentasToolStripMenuItem.Click
-        FrmListadoVentas.ShowDialog()
-        FrmListadoVentas.Close()
-        FrmListadoVentas.Dispose()
+        FrmListadoVentas.Show()
+
+        'FrmListadoVentas.ShowDialog()
+        'FrmListadoVentas.Close()
+        'FrmListadoVentas.Dispose()
     End Sub
 
     Private Sub ListadoDePreciosPorLineaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDePreciosPorLineaToolStripMenuItem.Click
@@ -324,9 +326,11 @@ Public Class MDIMain
     End Sub
 
     Private Sub DevoluciónDeTicketsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DevoluciónDeTicketsToolStripMenuItem.Click
-        FrmDevTickets.ShowDialog()
-        FrmDevTickets.Close()
-        FrmDevTickets.Dispose()
+        FrmDevTickets.Show()
+
+        'FrmDevTickets.ShowDialog()
+        'FrmDevTickets.Close()
+        'FrmDevTickets.Dispose()
     End Sub
 
     Private Sub GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerarRespaldoDeLaBaseDeDatosToolStripMenuItem.Click
@@ -352,9 +356,11 @@ Public Class MDIMain
     End Sub
 
     Private Sub FacturaciónToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles FacturaciónToolStripMenuItem1.Click
-        FrmFacturacion.ShowDialog()
-        FrmFacturacion.Close()
-        FrmFacturacion.Dispose()
+        FrmFacturacion.Show()
+
+        'FrmFacturacion.ShowDialog()
+        'FrmFacturacion.Close()
+        'FrmFacturacion.Dispose()
     End Sub
 
     Private Sub ReimpresiónDeFacturasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReimpresiónDeFacturasToolStripMenuItem.Click

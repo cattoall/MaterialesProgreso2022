@@ -150,12 +150,12 @@
             Dim lv_total As Double = CDbl(lc_stRow.Cells(8).Value)
             lv_granSubTotal = lv_granSubTotal + lv_total
             If CBool(lc_stRow.Cells(13).Value) = False Then
-                lv_IVA = CDbl(FormatNumber(lv_total * (CDbl(FactorIVA) - 1), 2))
+                lv_IVA = CDbl(FormatNumber(lv_total * (CDbl(FactorIVA) - 1), 10))
                 lv_granIVA = lv_granIVA + lv_IVA
                 lv_granTotal = lv_granTotal + lv_total + lv_IVA
                 gv_tasa_16 = True
             Else
-                lv_granTotal = lv_granTotal + CDbl(FormatNumber(lv_total, 2))
+                lv_granTotal = lv_granTotal + CDbl(lv_total)
                 lv_granSubTotal_TasaCero = lv_granSubTotal_TasaCero + lv_total
                 lv_granTotal_TasaCero = lv_granTotal_TasaCero + lv_total
                 gv_tasa_0 = True
@@ -163,15 +163,12 @@
             lc_stRow.Cells(8).Value = lv_total
         Next
 
-        txtSubTotal.Text = Format(lv_granSubTotal, "###,###,##0.00")
-        txtIVA.Text = Format(lv_granIVA, "###,###,##0.00")
-        txtTotal.Text = Format(lv_granTotal, "###,###,##0.00")
-        txtSubTotalTasaCero.Text = Format(lv_granSubTotal_TasaCero, "###,###,##0.00")
-        txtIVATasaCero.Text = Format(lv_granIVA_TasaCero, "###,###,##0.00")
-        txtTotalTasaCero.Text = Format(lv_granTotal_TasaCero, "###,###,##0.00")
-        'ex_stRow.Cells(3).Value = CDbl(ex_stRow.Cells(3).Value)
-        'ex_stRow.Cells(9).Value = CDbl(ex_stRow.Cells(9).Value)
-        'ex_stRow.Cells(7).Value = CDbl(ex_stRow.Cells(7).Value)
+        txtSubTotal.Text = FormatNumber(lv_granSubTotal, 6)
+        txtIVA.Text = FormatNumber(lv_granIVA, 6)
+        txtTotal.Text = FormatNumber(lv_granTotal, 2)
+        txtSubTotalTasaCero.Text = FormatNumber(lv_granSubTotal_TasaCero, 6)
+        txtIVATasaCero.Text = FormatNumber(lv_granIVA_TasaCero, 6)
+        txtTotalTasaCero.Text = FormatNumber(lv_granTotal_TasaCero, 2)
 
     End Sub
 
@@ -180,19 +177,19 @@
             Case "Precio Publico"
                 Dim lv_pp1 As Double
                 If strProducto.TasaCero = CBool(0) Then
-                    lv_pp1 = CDbl(FormatNumber(CDbl(strProducto.precioPublico) / CDbl(FactorIVA), 2))
+                    lv_pp1 = CDbl(FormatNumber(CDbl(strProducto.precioPublico) / CDbl(FactorIVA), 6))
                 Else
-                    lv_pp1 = CDbl(FormatNumber(strProducto.precioPublico, 2))
+                    lv_pp1 = CDbl(FormatNumber(strProducto.precioPublico, 6))
                 End If
                 Dim row As String() = New String() {"1",
                                                     strProducto.IdProducto.ToString,
                                                     strProducto.descripcionProducto,
-                                                    FormatNumber(lv_pp1, 2),
-                                                    FormatNumber(lv_pp1, 2),
+                                                    FormatNumber(lv_pp1, 6),
+                                                    FormatNumber(lv_pp1, 6),
                                                     strProducto.clave,
                                                     "0",
-                                                    FormatNumber(lv_pp1, 2),
-                                                    FormatNumber(lv_pp1, 2),
+                                                    FormatNumber(lv_pp1, 6),
+                                                    FormatNumber(lv_pp1, 6),
                                                     strProducto.precioCosto.ToString,
                                                     strProducto.precioCosto.ToString,
                                                     strProducto.ClaveProducto,
@@ -202,19 +199,19 @@
             Case "Precio Público"
                 Dim lv_pp2 As Double
                 If strProducto.TasaCero = CBool(0) Then
-                    lv_pp2 = CDbl(FormatNumber(CDbl(strProducto.precioPublico) / CDbl(FactorIVA), 2))
+                    lv_pp2 = CDbl(FormatNumber(CDbl(strProducto.precioPublico) / CDbl(FactorIVA), 6))
                 Else
-                    lv_pp2 = CDbl(FormatNumber(strProducto.precioPublico, 2))
+                    lv_pp2 = CDbl(FormatNumber(strProducto.precioPublico, 6))
                 End If
                 Dim row As String() = New String() {"1",
                                                     strProducto.IdProducto.ToString,
                                                     strProducto.descripcionProducto,
-                                                    FormatNumber(lv_pp2, 2),
-                                                    FormatNumber(lv_pp2, 2),
+                                                    FormatNumber(lv_pp2, 6),
+                                                    FormatNumber(lv_pp2, 6),
                                                     strProducto.clave,
                                                     "0",
-                                                    FormatNumber(lv_pp2, 2),
-                                                    FormatNumber(lv_pp2, 2),
+                                                    FormatNumber(lv_pp2, 6),
+                                                    FormatNumber(lv_pp2, 6),
                                                     strProducto.precioCosto.ToString,
                                                     strProducto.precioCosto.ToString,
                                                     strProducto.ClaveProducto,
@@ -224,19 +221,19 @@
             Case "Precio P1"
                 Dim lv_ppp1 As Double
                 If strProducto.TasaCero = CBool(0) Then
-                    lv_ppp1 = CDbl(FormatNumber(CDbl(strProducto.precioP1) / CDbl(FactorIVA), 2))
+                    lv_ppp1 = CDbl(FormatNumber(CDbl(strProducto.precioP1) / CDbl(FactorIVA), 6))
                 Else
-                    lv_ppp1 = CDbl(FormatNumber(strProducto.precioP1, 2))
+                    lv_ppp1 = CDbl(FormatNumber(strProducto.precioP1, 6))
                 End If
                 Dim row As String() = New String() {"1",
                                                     strProducto.IdProducto.ToString,
                                                     strProducto.descripcionProducto,
-                                                    FormatNumber(lv_ppp1, 2),
-                                                    FormatNumber(lv_ppp1, 2),
+                                                    FormatNumber(lv_ppp1, 6),
+                                                    FormatNumber(lv_ppp1, 6),
                                                     strProducto.clave,
                                                     "0",
-                                                    FormatNumber(lv_ppp1, 2),
-                                                    FormatNumber(lv_ppp1, 2),
+                                                    FormatNumber(lv_ppp1, 6),
+                                                    FormatNumber(lv_ppp1, 6),
                                                     strProducto.precioCosto.ToString,
                                                     strProducto.precioCosto.ToString,
                                                     strProducto.ClaveProducto,
@@ -246,19 +243,19 @@
             Case "Precio P2"
                 Dim lv_ppp2 As Double
                 If strProducto.TasaCero = CBool(0) Then
-                    lv_ppp2 = CDbl(FormatNumber(CDbl(strProducto.precioP2) / CDbl(FactorIVA), 2))
+                    lv_ppp2 = CDbl(FormatNumber(CDbl(strProducto.precioP2) / CDbl(FactorIVA), 6))
                 Else
-                    lv_ppp2 = CDbl(FormatNumber(strProducto.precioP2, 2))
+                    lv_ppp2 = CDbl(FormatNumber(strProducto.precioP2, 6))
                 End If
                 Dim row As String() = New String() {"1",
                                                     strProducto.IdProducto.ToString,
                                                     strProducto.descripcionProducto,
-                                                    FormatNumber(lv_ppp2, 2),
-                                                    FormatNumber(lv_ppp2, 2),
+                                                    FormatNumber(lv_ppp2, 6),
+                                                    FormatNumber(lv_ppp2, 6),
                                                     strProducto.clave,
                                                     "0",
-                                                    FormatNumber(lv_ppp2, 2),
-                                                    FormatNumber(lv_ppp2, 2),
+                                                    FormatNumber(lv_ppp2, 6),
+                                                    FormatNumber(lv_ppp2, 6),
                                                     strProducto.precioCosto.ToString,
                                                     strProducto.precioCosto.ToString,
                                                     strProducto.ClaveProducto,
@@ -268,19 +265,19 @@
             Case "Precio P3"
                 Dim lv_ppp3 As Double
                 If strProducto.TasaCero = CBool(0) Then
-                    lv_ppp3 = CDbl(FormatNumber(CDbl(strProducto.precioP3) / CDbl(FactorIVA), 2))
+                    lv_ppp3 = CDbl(FormatNumber(CDbl(strProducto.precioP3) / CDbl(FactorIVA), 6))
                 Else
-                    lv_ppp3 = CDbl(FormatNumber(strProducto.precioP3, 2))
+                    lv_ppp3 = CDbl(FormatNumber(strProducto.precioP3, 6))
                 End If
                 Dim row As String() = New String() {"1",
                                                     strProducto.IdProducto.ToString,
                                                     strProducto.descripcionProducto,
-                                                    FormatNumber(lv_ppp3, 2),
-                                                    FormatNumber(lv_ppp3, 2),
+                                                    FormatNumber(lv_ppp3, 6),
+                                                    FormatNumber(lv_ppp3, 6),
                                                     strProducto.clave,
                                                     "0",
-                                                    FormatNumber(lv_ppp3, 2),
-                                                    FormatNumber(lv_ppp3, 2),
+                                                    FormatNumber(lv_ppp3, 6),
+                                                    FormatNumber(lv_ppp3, 6),
                                                     strProducto.precioCosto.ToString,
                                                     strProducto.precioCosto.ToString,
                                                     strProducto.ClaveProducto,
@@ -290,19 +287,19 @@
             Case Else
                 Dim lv_pp3 As Double
                 If strProducto.TasaCero = CBool(0) Then
-                    lv_pp3 = CDbl(FormatNumber(CDbl(strProducto.precioPublico) / CDbl(FactorIVA), 2))
+                    lv_pp3 = CDbl(FormatNumber(CDbl(strProducto.precioPublico) / CDbl(FactorIVA), 6))
                 Else
-                    lv_pp3 = CDbl(FormatNumber(strProducto.precioPublico, 2))
+                    lv_pp3 = CDbl(FormatNumber(strProducto.precioPublico, 6))
                 End If
                 Dim row As String() = New String() {"1",
                                                     strProducto.IdProducto.ToString,
                                                     strProducto.descripcionProducto,
-                                                    FormatNumber(lv_pp3, 2),
-                                                    FormatNumber(lv_pp3, 2),
+                                                    FormatNumber(lv_pp3, 6),
+                                                    FormatNumber(lv_pp3, 6),
                                                     strProducto.clave,
                                                     "0",
-                                                    FormatNumber(lv_pp3, 2),
-                                                    FormatNumber(lv_pp3, 2),
+                                                    FormatNumber(lv_pp3, 6),
+                                                    FormatNumber(lv_pp3, 6),
                                                     strProducto.precioCosto.ToString,
                                                     strProducto.precioCosto.ToString,
                                                     strProducto.ClaveProducto,
@@ -336,12 +333,12 @@
 
     Private Sub Procesa_Pedido_Contado(ByVal nFolio As String, ByVal TasaCero As Boolean)
         If PagoContadoEfectuado = True Then
-            Dim lv_subtotal = txtSubTotal.Text.ToString
-            Dim lv_iva = txtIVA.Text.ToString
-            Dim lv_total = txtTotal.Text.ToString
-            Dim lv_subtotal_TasaCero = txtSubTotalTasaCero.Text.ToString
-            Dim lv_iva_TasaCero = txtIVATasaCero.Text.ToString
-            Dim lv_total_TasaCero = txtTotalTasaCero.Text.ToString
+            Dim lv_subtotal = FormatNumber(txtSubTotal.Text, 6)
+            Dim lv_iva = FormatNumber(txtIVA.Text, 6)
+            Dim lv_total = FormatNumber(txtTotal.Text, 2)
+            Dim lv_subtotal_TasaCero = FormatNumber(txtSubTotalTasaCero.Text, 6)
+            Dim lv_iva_TasaCero = FormatNumber(txtIVATasaCero.Text, 6)
+            Dim lv_total_TasaCero = FormatNumber(txtTotalTasaCero.Text, 2)
             Dim strVentaPedido As New tblVentaPedido
             Dim strTicketPedido As New tblTicketPedido
 
@@ -445,12 +442,12 @@ SiguienteRegistro:
 
     Private Sub Procesa_Ticket_Contado(ByVal nFolio As String, ByVal TasaCero As Boolean)
         If PagoContadoEfectuado = True Then
-            Dim lv_subtotal = txtSubTotal.Text.ToString
-            Dim lv_iva = txtIVA.Text.ToString
-            Dim lv_total = txtTotal.Text.ToString
-            Dim lv_subtotal_TasaCero = txtSubTotalTasaCero.Text.ToString
-            Dim lv_iva_TasaCero = txtIVATasaCero.Text.ToString
-            Dim lv_total_TasaCero = txtTotalTasaCero.Text.ToString
+            Dim lv_subtotal = FormatNumber(txtSubTotal.Text, 6)
+            Dim lv_iva = FormatNumber(txtIVA.Text, 6)
+            Dim lv_total = FormatNumber(txtTotal.Text, 2)
+            Dim lv_subtotal_TasaCero = FormatNumber(txtSubTotalTasaCero.Text, 6)
+            Dim lv_iva_TasaCero = FormatNumber(txtIVATasaCero.Text, 6)
+            Dim lv_total_TasaCero = FormatNumber(txtTotalTasaCero.Text, 2)
             Dim strVenta As New tblVenta
             Dim strTicket As New tblTicket
 
@@ -583,12 +580,12 @@ SiguienteRegistro:
     End Function
 
     Private Sub Procesa_Pedido_Credito(ByVal nFolio As String, ByVal TasaCero As Boolean)
-        Dim lv_subtotal = txtSubTotal.Text.ToString
-        Dim lv_iva = txtIVA.Text.ToString
-        Dim lv_total = txtTotal.Text.ToString
-        Dim lv_subtotal_TasaCero = txtSubTotalTasaCero.Text.ToString
-        Dim lv_iva_TasaCero = txtIVATasaCero.Text.ToString
-        Dim lv_total_TasaCero = txtTotalTasaCero.Text.ToString
+        Dim lv_subtotal = FormatNumber(txtSubTotal.Text, 6)
+        Dim lv_iva = FormatNumber(txtIVA.Text, 6)
+        Dim lv_total = FormatNumber(txtTotal.Text, 2)
+        Dim lv_subtotal_TasaCero = FormatNumber(txtSubTotalTasaCero.Text, 6)
+        Dim lv_iva_TasaCero = FormatNumber(txtIVATasaCero.Text, 6)
+        Dim lv_total_TasaCero = FormatNumber(txtTotalTasaCero.Text, 2)
         Dim strVentaPedido As New tblVentaPedido
         Dim strTicketPedido As New tblTicketPedido
 
@@ -717,12 +714,12 @@ SiguienteRegistro:
     End Sub
 
     Private Sub Procesa_Ticket_Credito(ByVal nFolio As String, ByVal TasaCero As Boolean)
-        Dim lv_subtotal = txtSubTotal.Text.ToString
-        Dim lv_iva = txtIVA.Text.ToString
-        Dim lv_total = txtTotal.Text.ToString
-        Dim lv_subtotal_TasaCero = txtSubTotalTasaCero.Text.ToString
-        Dim lv_iva_TasaCero = txtIVATasaCero.Text.ToString
-        Dim lv_total_TasaCero = txtTotalTasaCero.Text.ToString
+        Dim lv_subtotal = FormatNumber(txtSubTotal.Text, 6)
+        Dim lv_iva = FormatNumber(txtIVA.Text, 6)
+        Dim lv_total = FormatNumber(txtTotal.Text, 2)
+        Dim lv_subtotal_TasaCero = FormatNumber(txtSubTotalTasaCero.Text, 6)
+        Dim lv_iva_TasaCero = FormatNumber(txtIVATasaCero.Text, 6)
+        Dim lv_total_TasaCero = FormatNumber(txtTotalTasaCero.Text, 2)
         Dim strVenta As New tblVenta
         Dim strTicket As New tblTicket
 
@@ -906,12 +903,12 @@ SiguienteRegistro:
 
     Private Sub Procesa_Cotizacion(ByVal nFolio As String, ByVal TasaCero As Boolean)
 
-        Dim lv_subtotal = txtSubTotal.Text.ToString
-        Dim lv_iva = txtIVA.Text.ToString
-        Dim lv_total = txtTotal.Text.ToString
-        Dim lv_subtotal_TasaCero = txtSubTotalTasaCero.Text.ToString
-        Dim lv_iva_TasaCero = txtIVATasaCero.Text.ToString
-        Dim lv_total_TasaCero = txtTotalTasaCero.Text.ToString
+        Dim lv_subtotal = FormatNumber(txtSubTotal.Text, 6)
+        Dim lv_iva = FormatNumber(txtIVA.Text, 6)
+        Dim lv_total = FormatNumber(txtTotal.Text, 2)
+        Dim lv_subtotal_TasaCero = FormatNumber(txtSubTotalTasaCero.Text, 6)
+        Dim lv_iva_TasaCero = FormatNumber(txtIVATasaCero.Text, 6)
+        Dim lv_total_TasaCero = FormatNumber(txtTotalTasaCero.Text, 2)
         Dim strCotizacion As New tblCotizacion
         Dim strTicketCotizacion As New tblTicketCotiza
 

@@ -138,8 +138,8 @@
           <Property Name="IdComp" Type="nchar" MaxLength="2" Nullable="false" />
           <Property Name="nticket" Type="bigint" Nullable="false" />
           <Property Name="fecha" Type="date" />
-          <Property Name="SubTotal" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="IVA" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SubTotal" Type="decimal" Precision="14" Scale="6" />
+          <Property Name="IVA" Type="decimal" Precision="14" Scale="6" />
           <Property Name="total" Type="decimal" Precision="10" Scale="2" />
           <Property Name="tipo" Type="nvarchar" MaxLength="50" />
           <Property Name="usuario" Type="nvarchar" MaxLength="50" />
@@ -324,7 +324,7 @@
           <Property Name="FolioFactura" Type="varchar" MaxLength="50" />
           <Property Name="metodopago" Type="varchar" MaxLength="3" />
           <Property Name="FormaPago" Type="varchar" MaxLength="2" />
-          <Property Name="UsoCFDI" Type="varchar" MaxLength="3" />
+          <Property Name="UsoCFDI" Type="varchar" MaxLength="4" />
           <Property Name="UUID" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="nc_detalle">
@@ -547,9 +547,9 @@
           <Property Name="IdProducto" Type="bigint" Nullable="false" />
           <Property Name="concepto" Type="nvarchar" MaxLength="255" />
           <Property Name="cantidad" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="precio" Type="decimal" Precision="14" Scale="6" />
           <Property Name="fecha" Type="date" />
-          <Property Name="subtotal" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="subtotal" Type="decimal" Precision="14" Scale="6" />
           <Property Name="clave_producto" Type="nvarchar" MaxLength="50" />
           <Property Name="precioCosto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="subtotalCosto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
@@ -567,9 +567,9 @@
           <Property Name="folio" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="concepto" Type="nvarchar" MaxLength="255" />
           <Property Name="cantidad" Type="decimal" Precision="10" Scale="0" />
-          <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="precio" Type="decimal" Precision="14" Scale="6" />
           <Property Name="fecha" Type="date" />
-          <Property Name="subtotal" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="subtotal" Type="decimal" Precision="14" Scale="6" />
           <Property Name="clave_producto" Type="nvarchar" MaxLength="50" />
           <Property Name="proveedor" Type="nvarchar" MaxLength="100" />
           <Property Name="ClaveProducto" Type="nvarchar" MaxLength="20" />
@@ -589,9 +589,9 @@
           <Property Name="IdProducto" Type="bigint" Nullable="false" />
           <Property Name="concepto" Type="nvarchar" MaxLength="255" />
           <Property Name="cantidad" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="precio" Type="decimal" Precision="14" Scale="6" />
           <Property Name="fecha" Type="date" />
-          <Property Name="subtotal" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="subtotal" Type="decimal" Precision="14" Scale="6" />
           <Property Name="clave_producto" Type="nvarchar" MaxLength="50" />
           <Property Name="precioCosto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="subtotalCosto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
@@ -612,9 +612,9 @@
           <Property Name="IdProducto" Type="bigint" Nullable="false" />
           <Property Name="concepto" Type="nvarchar" MaxLength="255" />
           <Property Name="cantidad" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="precio" Type="decimal" Precision="14" Scale="6" />
           <Property Name="fecha" Type="date" />
-          <Property Name="subtotal" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="subtotal" Type="decimal" Precision="14" Scale="6" />
           <Property Name="clave_producto" Type="nvarchar" MaxLength="50" />
           <Property Name="precioCosto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="subtotalCosto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
@@ -652,8 +652,8 @@
           <Property Name="IdComp" Type="nchar" MaxLength="2" Nullable="false" />
           <Property Name="nticket" Type="bigint" Nullable="false" />
           <Property Name="fecha" Type="date" />
-          <Property Name="SubTotal" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="IVA" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SubTotal" Type="decimal" Precision="14" Scale="6" />
+          <Property Name="IVA" Type="decimal" Precision="14" Scale="6" />
           <Property Name="total" Type="decimal" Precision="10" Scale="2" />
           <Property Name="tipo" Type="nvarchar" MaxLength="50" />
           <Property Name="usuario" Type="nvarchar" MaxLength="50" />
@@ -671,8 +671,8 @@
           <Property Name="IdComp" Type="nchar" MaxLength="2" Nullable="false" />
           <Property Name="nticket" Type="bigint" Nullable="false" />
           <Property Name="fecha" Type="date" />
-          <Property Name="SubTotal" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="IVA" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SubTotal" Type="decimal" Precision="14" Scale="6" />
+          <Property Name="IVA" Type="decimal" Precision="14" Scale="6" />
           <Property Name="total" Type="decimal" Precision="10" Scale="2" />
           <Property Name="tipo" Type="nvarchar" MaxLength="50" />
           <Property Name="usuario" Type="nvarchar" MaxLength="50" />
@@ -868,8 +868,8 @@ warning 6035: The relationship 'FK_clientes_clientes' has columns that are not p
           <Property Name="IdComp" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
           <Property Name="nticket" Type="Int64" Nullable="false" />
           <Property Name="fecha" Type="DateTime" Precision="0" />
-          <Property Name="SubTotal" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="IVA" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SubTotal" Type="Decimal" Precision="14" Scale="6" />
+          <Property Name="IVA" Type="Decimal" Precision="14" Scale="6" />
           <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1213,9 +1213,9 @@ warning 6035: The relationship 'FK_clientes_clientes' has columns that are not p
           <Property Name="IdProducto" Type="Int64" Nullable="false" />
           <Property Name="concepto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="cantidad" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="precio" Type="Decimal" Precision="14" Scale="6" />
           <Property Name="fecha" Type="DateTime" Precision="0" />
-          <Property Name="subtotal" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="subtotal" Type="Decimal" Precision="14" Scale="6" />
           <Property Name="clave_producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="precioCosto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="subtotalCosto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
@@ -1233,9 +1233,9 @@ warning 6035: The relationship 'FK_clientes_clientes' has columns that are not p
           <Property Name="folio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="concepto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="cantidad" Type="Decimal" Precision="10" Scale="0" />
-          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="precio" Type="Decimal" Precision="14" Scale="6" />
           <Property Name="fecha" Type="DateTime" Precision="0" />
-          <Property Name="subtotal" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="subtotal" Type="Decimal" Precision="14" Scale="6" />
           <Property Name="clave_producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="proveedor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ClaveProducto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -1255,9 +1255,9 @@ warning 6035: The relationship 'FK_clientes_clientes' has columns that are not p
           <Property Name="IdProducto" Type="Int64" Nullable="false" />
           <Property Name="concepto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="cantidad" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="precio" Type="Decimal" Precision="14" Scale="6" />
           <Property Name="fecha" Type="DateTime" Precision="0" />
-          <Property Name="subtotal" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="subtotal" Type="Decimal" Precision="14" Scale="6" />
           <Property Name="clave_producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="precioCosto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="subtotalCosto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
@@ -1278,9 +1278,9 @@ warning 6035: The relationship 'FK_clientes_clientes' has columns that are not p
           <Property Name="IdProducto" Type="Int64" Nullable="false" />
           <Property Name="concepto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="cantidad" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="precio" Type="Decimal" Precision="14" Scale="6" />
           <Property Name="fecha" Type="DateTime" Precision="0" />
-          <Property Name="subtotal" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="subtotal" Type="Decimal" Precision="14" Scale="6" />
           <Property Name="clave_producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="precioCosto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="subtotalCosto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
@@ -1318,8 +1318,8 @@ warning 6035: The relationship 'FK_clientes_clientes' has columns that are not p
           <Property Name="IdComp" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
           <Property Name="nticket" Type="Int64" Nullable="false" />
           <Property Name="fecha" Type="DateTime" Precision="0" />
-          <Property Name="SubTotal" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="IVA" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SubTotal" Type="Decimal" Precision="14" Scale="6" />
+          <Property Name="IVA" Type="Decimal" Precision="14" Scale="6" />
           <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1337,8 +1337,8 @@ warning 6035: The relationship 'FK_clientes_clientes' has columns that are not p
           <Property Name="IdComp" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
           <Property Name="nticket" Type="Int64" Nullable="false" />
           <Property Name="fecha" Type="DateTime" Precision="0" />
-          <Property Name="SubTotal" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="IVA" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SubTotal" Type="Decimal" Precision="14" Scale="6" />
+          <Property Name="IVA" Type="Decimal" Precision="14" Scale="6" />
           <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1459,7 +1459,7 @@ warning 6035: The relationship 'FK_clientes_clientes' has columns that are not p
           <Property Name="FolioFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="metodopago" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="FormaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="UsoCFDI" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="UsoCFDI" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="UUID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>

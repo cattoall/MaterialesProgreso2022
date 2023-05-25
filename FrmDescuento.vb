@@ -85,22 +85,22 @@
                 Dim lv_total As Double = CDbl(FrmPuntoDeVenta.DataGridView1.Rows(i).Cells(8).Value)
                 lv_granSubTotal = lv_granSubTotal + lv_total
                 If CBool(FrmPuntoDeVenta.DataGridView1.Rows(i).Cells(13).Value) = False Then
-                    lv_granIVA = lv_granIVA + CDbl(FormatNumber(lv_total * (CDbl(FactorIVA) - 1), 2))
+                    lv_granIVA = lv_granIVA + CDbl(FormatNumber(lv_total * (CDbl(FactorIVA) - 1), 10))
                     lv_granTotal = lv_granTotal + CDbl(FormatNumber(lv_total + (lv_total * (CDbl(FactorIVA) - 1))))
                     gv_tasa_16 = True
                 Else
-                    lv_granTotal = lv_granTotal + CDbl(FormatNumber(lv_total, 2))
-                    lv_granTotal_TasaCero = lv_granTotal_TasaCero + CDbl(FormatNumber(lv_total, 2))
+                    lv_granTotal = lv_granTotal + CDbl(lv_total)
+                    lv_granTotal_TasaCero = lv_granTotal_TasaCero + CDbl(lv_total)
                     lv_granSubTotal_TasaCero = lv_granSubTotal_TasaCero + lv_total
                     gv_tasa_0 = True
                 End If
             Next
-            FrmPuntoDeVenta.txtSubTotal.Text = Format(lv_granSubTotal, "0.00")
-            FrmPuntoDeVenta.txtIVA.Text = Format(lv_granIVA, "0.00")
-            FrmPuntoDeVenta.txtTotal.Text = Format(lv_granTotal, "0.00")
-            FrmPuntoDeVenta.txtSubTotalTasaCero.Text = Format(lv_granSubTotal_TasaCero, "0.00")
-            FrmPuntoDeVenta.txtIVATasaCero.Text = Format(lv_granIVA_TasaCero, "0.00")
-            FrmPuntoDeVenta.txtTotalTasaCero.Text = Format(lv_granTotal_TasaCero, "0.00")
+            FrmPuntoDeVenta.txtSubTotal.Text = FormatNumber(lv_granSubTotal, 6)
+            FrmPuntoDeVenta.txtIVA.Text = FormatNumber(lv_granIVA, 6)
+            FrmPuntoDeVenta.txtTotal.Text = FormatNumber(lv_granTotal, 2)
+            FrmPuntoDeVenta.txtSubTotalTasaCero.Text = FormatNumber(lv_granSubTotal_TasaCero, 6)
+            FrmPuntoDeVenta.txtIVATasaCero.Text = FormatNumber(lv_granIVA_TasaCero, 6)
+            FrmPuntoDeVenta.txtTotalTasaCero.Text = FormatNumber(lv_granTotal_TasaCero, 2)
             desc = 0
             NupCantidad.Focus()
             NupCantidad.Select(0, NupCantidad.Value.ToString.Length)

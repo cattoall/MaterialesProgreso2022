@@ -45,7 +45,7 @@ Public Class FrmDevTickets
             If Lv_pedido = "" Then
                 MsgBox("Favor De Proporcionar El Número De Ticket", MsgBoxStyle.Information, "Devolución de Tickets")
                 Limpiar_objetos()
-                TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
+                TxtTotal_N.Text = CStr(Math.Round(lv_total_c, 2))
                 Exit Sub
             ElseIf Lv_pedido = " " Then
                 Exit Sub
@@ -53,12 +53,12 @@ Public Class FrmDevTickets
 
             Dim wVenta As tblVenta = DBModelo.Get_PV_TicketHeader(CInt(Lv_pedido))
             If Not wVenta Is Nothing Then
-                If wVenta.estado = "CANCELADO" Then
-                    MsgBox("Este ticket ya ha sido devuelto", MsgBoxStyle.Information, "Devolución de Tickets")
-                    Limpiar_objetos()
-                    TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
-                    Exit Sub
-                End If
+                'If wVenta.estado = "CANCELADO" Then
+                '    MsgBox("Este ticket ya ha sido devuelto", MsgBoxStyle.Information, "Devolución de Tickets")
+                '    Limpiar_objetos()
+                '    TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
+                '    Exit Sub
+                'End If
                 TxtPedido_C.Text = CStr(wVenta.nticket)
                 DTPFecha.Value = CDate(wVenta.fecha)
                 txtSubTotal_C.Text = CStr(wVenta.SubTotal)
@@ -100,14 +100,14 @@ Public Class FrmDevTickets
                 Next i
                 lv_iva_c = lv_subtotal_c * (CDbl(FactorIVA) - 1)
                 lv_total_c = lv_subtotal_c + lv_iva_c
-                txtSubTotal_N.Text = Format(lv_subtotal_c, "$ ###,###,##0.00")
-                txtIVA_N.Text = Format(lv_iva_c, "$ ###,###,##0.00")
-                TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
+                txtSubTotal_N.Text = CStr(Math.Round(lv_subtotal_c, 6))
+                txtIVA_N.Text = CStr(Math.Round(lv_iva_c, 6))
+                TxtTotal_N.Text = CStr(Math.Round(lv_total_c, 2))
                 CmdGenerar.Enabled = True
             Else
                 MsgBox("Ticket N°:" & Trim(Lv_pedido) & ", No existe ", MsgBoxStyle.Information, "Devolución de Tickets")
                 Limpiar_objetos()
-                TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
+                TxtTotal_N.Text = CStr(Math.Round(lv_total_c, 2))
                 Label9.Visible = False
             End If
         End If
@@ -174,13 +174,13 @@ Public Class FrmDevTickets
                 Next i
                 lv_iva_c = lv_subtotal_c * (CDbl(FactorIVA) - 1)
                 lv_total_c = lv_subtotal_c + lv_iva_c
-                txtSubTotal_N.Text = Format(lv_subtotal_c, "$ ###,###,##0.00")
-                txtIVA_N.Text = Format(lv_iva_c, "$ ###,###,##0.00")
-                TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
+                txtSubTotal_N.Text = CStr(Math.Round(lv_subtotal_c, 6))
+                txtIVA_N.Text = CStr(Math.Round(lv_iva_c, 6))
+                TxtTotal_N.Text = CStr(Math.Round(lv_total_c, 2))
                 DGVDetalle.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = lv_cantidad
             Else
                 MsgBox("Cantidad mayor a la Cantidad Original", MsgBoxStyle.Critical, "Favor de verificar")
-                DGVDetalle.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Format(wTicketOrig.cantidad, "###0.00")
+                DGVDetalle.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = CStr(Math.Round(CDbl(wTicketOrig.cantidad), 2))
             End If
         End If
     End Sub
@@ -194,9 +194,9 @@ Public Class FrmDevTickets
         Next i
         lv_iva_c = lv_subtotal_c * (CDbl(FactorIVA) - 1)
         lv_total_c = lv_subtotal_c + lv_iva_c
-        txtSubTotal_N.Text = Format(lv_subtotal_c, "$ ###,###,##0.00")
-        txtIVA_N.Text = Format(lv_iva_c, "$ ###,###,##0.00")
-        TxtTotal_N.Text = Format(lv_total_c, "$ ###,###,##0.00")
+        txtSubTotal_N.Text = CStr(Math.Round(lv_subtotal_c, 6))
+        txtIVA_N.Text = CStr(Math.Round(lv_iva_c, 6))
+        TxtTotal_N.Text = CStr(Math.Round(lv_total_c, 2))
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -244,8 +244,8 @@ Public Class FrmDevTickets
             wVenta.SubTotal = CDec(Trim(Replace(Trim(Replace(txtSubTotal_N.Text, "$", "")), ",", "")))
             wVenta.IVA = CDec(Trim(Replace(Trim(Replace(txtIVA_N.Text, "$", "")), ",", "")))
             wVenta.total = CDec(Trim(Replace(Trim(Replace(TxtTotal_N.Text, "$", "")), ",", "")))
-            wVenta.estado = "CANCELADO"
-            wVenta.motivo = "DEVOLUCION-ADMIN"
+            wVenta.estado = "VENDIDO"
+            wVenta.motivo = ""
             If DBModelo.Update_PV_Venta(wVenta) = False Then
                 MsgBox("No se pudo Actualizar registros en la tabla VENTA", MsgBoxStyle.Critical)
                 Error_Venta = False

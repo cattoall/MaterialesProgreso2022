@@ -46,9 +46,10 @@ Public Class FrmProductos
         CmbGrupo.ValueMember   = "clave"
         CmbGrupo.SelectedIndex = -1
 
-
-        If Material_Grupo <> "" And Add_Update = True Then
-            CmbGrupo.SelectedValue = grps.Find(Function(f) f.descripcion = Material_Grupo).clave
+        If Copy_Product Or Add_Update Then
+            If Material_Grupo <> "" Then
+                CmbGrupo.SelectedValue = grps.Find(Function(f) f.descripcion = Material_Grupo).clave
+            End If
         End If
 
         If Material_Grupo = "TECNO LITE" Then
@@ -70,11 +71,12 @@ Public Class FrmProductos
             CmbSubFamilia.ValueMember = "clave"
             CmbSubFamilia.SelectedIndex = -1
 
-            Material_SubFam = Material_SubFam.Trim
-            If Material_SubFam <> "" And Add_Update = True Then
-                CmbSubFamilia.SelectedValue = subfam.Find(Function(f) f.descripcion.Equals(Material_SubFam)).clave
+            If Copy_Product Or Add_Update Then
+                Material_SubFam = Material_SubFam.Trim
+                If Material_SubFam <> "" Then
+                    CmbSubFamilia.SelectedValue = subfam.Find(Function(f) f.descripcion.Equals(Material_SubFam)).clave
+                End If
             End If
-
         Catch ex As Exception
             MsgBox(ex.Message & " - " & ex.InnerException.Message)
         End Try
@@ -92,9 +94,10 @@ Public Class FrmProductos
         CmbProveedor.ValueMember = "clave"
         CmbProveedor.SelectedIndex = -1
 
-        'Material_Proveedores = Material_Proveedores.Trim
-        If Material_Proveedores <> "" And Add_Update = True Then
-            CmbProveedor.SelectedValue = proveedor.Find(Function(f) f.razonSocial = Material_Proveedores).clave
+        If Copy_Product Or Add_Update Then
+            If Material_Proveedores <> "" Then
+                CmbProveedor.SelectedValue = proveedor.Find(Function(f) f.razonSocial = Material_Proveedores).clave
+            End If
         End If
     End Sub
 
@@ -110,11 +113,11 @@ Public Class FrmProductos
         CmbFamilia.ValueMember = "clave"
         CmbFamilia.SelectedIndex = -1
 
-        'Material_Familia = Material_Familia.Trim
-        If Material_Familia <> "" And Add_Update = True Then
-            CmbFamilia.SelectedValue = familia.Find(Function(f) f.descripcion = Material_Familia).clave
+        If Copy_Product Or Add_Update Then
+            If Material_Familia <> "" Then
+                CmbFamilia.SelectedValue = familia.Find(Function(f) f.descripcion = Material_Familia).clave
+            End If
         End If
-
     End Sub
 
     Private Sub Llena_Lineas()
@@ -129,11 +132,11 @@ Public Class FrmProductos
         CmbLinea.ValueMember = "clave"
         CmbLinea.SelectedIndex = -1
 
-        'Material_Linea = Material_Linea.Trim
-        If Material_Linea <> "" And Add_Update = True Then
-            CmbLinea.SelectedValue = linea.Find(Function(f) f.descripcion = Material_Linea).clave
+        If Copy_Product Or Add_Update Then
+            If Material_Linea <> "" Then
+                CmbLinea.SelectedValue = linea.Find(Function(f) f.descripcion = Material_Linea).clave
+            End If
         End If
-
     End Sub
 
     Private Sub Llena_UoMs()
@@ -148,9 +151,10 @@ Public Class FrmProductos
         CmbUnidad.ValueMember = "Clave"
         CmbUnidad.SelectedIndex = -1
 
-        'Material_Umedida = Material_Umedida.Trim
-        If Material_Umedida <> "" And Add_Update = True Then
-            CmbUnidad.SelectedValue = uom.Find(Function(f) f.descripcion = Material_Umedida).Clave
+        If Copy_Product Or Add_Update Then
+            If Material_Umedida <> "" Then
+                CmbUnidad.SelectedValue = uom.Find(Function(f) f.descripcion = Material_Umedida).Clave
+            End If
         End If
     End Sub
 
@@ -501,7 +505,7 @@ Public Class FrmProductos
             Exit Sub
         End If
 
-        If CInt(txtPrecioLista.Text) <= 0 Then
+        If CDec(txtPrecioLista.Text) <= 0 Then
             MetroFramework.MetroMessageBox.Show(Me, "El valor de Precio Lista debe de ser mayor a 0.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtPrecioLista.SelectAll()
             txtPrecioLista.Focus()

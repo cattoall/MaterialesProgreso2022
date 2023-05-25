@@ -22,7 +22,7 @@ Public Class FrmListadoVentas
         dv.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         dv.Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dv.Columns(6).HeaderText = "Precio Unitario"
+        dv.Columns(6).HeaderText = "P.U."
         dv.Columns(6).ReadOnly = True
         dv.Columns(6).DefaultCellStyle.Format = "$ ###,###,##0.00"
         dv.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -136,18 +136,6 @@ Public Class FrmListadoVentas
 
     End Sub
 
-    Private Sub CmdSalir_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub CmdCancelar_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
-    Private Sub CmdImpresion_Click(sender As Object, e As EventArgs) 
-        
-    End Sub
-
     Private Sub DataGridConsulta_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridConsulta.CellClick
         LblNumTicket.Visible = True
         LblTotal.Text = Format(DataGridConsulta.Item(5, DataGridConsulta.CurrentRow.Index).Value, "$ ###,###,###.00")
@@ -163,32 +151,33 @@ Public Class FrmListadoVentas
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        
         Dim tVentas As List(Of tblVenta) = DBModelo.Get_VentasByDate(Format(dtFechaInicial.Value.Date, "yyyy-MM-dd"), Format(dtFechaFinal.Value.Date, "yyyy-MM-dd"))
 
         DataGridConsulta.Refresh()
         DataGridConsulta.Rows.Clear()
 
         For Each venta As tblVenta In tVentas
-            Dim row As String() = New String() {venta.IdComp,
+            If IsDBNull(venta.numeroFactura) Then
+                venta.numeroFactura = ""
+            End If
+
+            Dim row As String() = New String() {
+                                                venta.IdComp,
                                                 venta.nticket.ToString,
                                                 Format(CDate(venta.fecha), "yyyy-MM-dd"),
-                                                FormatNumber(venta.SubTotal, 2),
-                                                FormatNumber(venta.IVA, 2),
+                                                FormatNumber(venta.SubTotal, 6),
+                                                FormatNumber(venta.IVA, 6),
                                                 FormatNumber(venta.total, 2),
-                                                venta.tipo.ToString,
-                                                venta.usuario.ToString,
+                                                venta.tipo,
+                                                venta.usuario,
                                                 venta.cliente,
                                                 venta.idCliente.ToString,
-                                                venta.estado.ToString,
-                                                venta.motivo.ToString,
-                                                venta.numeroFactura.ToString}
+                                                venta.estado,
+                                                venta.motivo,
+                                                venta.numeroFactura
+                                                }
             DataGridConsulta.Rows.Add(row)
-
         Next
-        'DataGridConsulta.DataSource = tVentas.ToList()
-
-        'ConfigurarGrid(DataGridConsulta)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -231,5 +220,9 @@ Public Class FrmListadoVentas
             MsgBox("Favor de seleccionar una venta.", MsgBoxStyle.Critical, "Impresión de Ticket")
         End If
         Limpia_Variables_SQL_y_Cierra_Conexion()
+    End Sub
+
+    Private Sub DataGridConsulta_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridConsulta.CellContentClick
+
     End Sub
 End Class

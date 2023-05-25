@@ -40,6 +40,7 @@ Module Module1
     Public Config_On_Off As Boolean = False
     Public Logotipo As String = ""
     Public Add_Update As Boolean = False
+    Public Copy_Product As Boolean = False
     Public Action_Clientes As String = ""
     Public Buscar_Clientes As String = ""
     Public Buscar_Proveedores As String = ""

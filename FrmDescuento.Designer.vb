@@ -39,7 +39,7 @@ Partial Class FrmDescuento
         'NupPrecio
         '
         Me.NupPrecio.AccessibleDescription = ""
-        Me.NupPrecio.DecimalPlaces = 2
+        Me.NupPrecio.DecimalPlaces = 10
         Me.NupPrecio.Increment = New Decimal(New Integer() {50, 0, 0, 131072})
         Me.NupPrecio.Location = New System.Drawing.Point(205, 140)
         Me.NupPrecio.Maximum = New Decimal(New Integer() {100000000, 0, 0, 0})
