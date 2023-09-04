@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class tblRegimenFiscal
+Partial Public Class tblregimenfiscal
     Public Property Clave As String
     Public Property Descripcion As String
 

@@ -39,5 +39,6 @@ Partial Public Class tblClientes
     Public Property FormaPago As String
     Public Property UsoCFDI As String
     Public Property RegimenFiscal As String
+    Public Property Bloqueado As Nullable(Of Integer)
 
 End Class

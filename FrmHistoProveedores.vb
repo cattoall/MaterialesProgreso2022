@@ -47,17 +47,6 @@ Public Class FrmHistoProveedores
             .DataSource = bs5
         End With
 
-        Me.BackColor = My.Settings.FormsBackColor
-        Me.lblelejir.BackColor = My.Settings.FormsBackColor
-        Me.GroupBox1.ForeColor = My.Settings.FontForeColor
-        Me.GroupBox1.Font = My.Settings.FontStyle
-        Me.CmdSalir.BackColor = My.Settings.FormsBackColor
-        Me.CmdVerVenta.BackColor = My.Settings.FormsBackColor
-        Me.CmdLimpiar.BackColor = My.Settings.FormsBackColor
-        Me.CmdProveedor.BackColor = My.Settings.FormsBackColor
-        Label2.BackColor = My.Settings.FormsBackColor
-        Label2.ForeColor = My.Settings.FontForeColor
-        Label2.Font = My.Settings.FontStyle
         txtCliente.Text = "RAZON SOCIAL"
         idProveedor = "0"
         dtFechaFinal.Value = Now

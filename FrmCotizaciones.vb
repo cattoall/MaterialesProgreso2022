@@ -164,12 +164,12 @@ Public Class FrmCotizaciones
                 Dim row As String() = New String() {MetroGrid2.Rows(i).Cells(5).Value.ToString,
                                                     MetroGrid2.Rows(i).Cells(3).Value.ToString,
                                                     MetroGrid2.Rows(i).Cells(4).Value.ToString,
-                                                    Format(MetroGrid2.Rows(i).Cells(6).Value, "###,###,##0.00"),
-                                                    Format(MetroGrid2.Rows(i).Cells(8).Value, "###,###,##0.00"),
+                                                    FormatNumber(MetroGrid2.Rows(i).Cells(6).Value, 6),
+                                                    FormatNumber(MetroGrid2.Rows(i).Cells(8).Value, 6),
                                                     MetroGrid2.Rows(i).Cells(9).Value.ToString,
                                                     "0",
-                                                    Format(MetroGrid2.Rows(i).Cells(6).Value, "###,###,##0.00"),
-                                                    Format(MetroGrid2.Rows(i).Cells(8).Value, "###,###,##0.00"),
+                                                    FormatNumber(MetroGrid2.Rows(i).Cells(6).Value, 6),
+                                                    FormatNumber(MetroGrid2.Rows(i).Cells(8).Value, 6),
                                                     Format(MetroGrid2.Rows(i).Cells(10).Value, "###,###,##0.00"),
                                                     Format(MetroGrid2.Rows(i).Cells(11).Value, "###,###,##0.00"),
                                                     MetroGrid2.Rows(i).Cells(12).Value.ToString,
@@ -179,7 +179,7 @@ Public Class FrmCotizaciones
                 Dim lv_total As Double = CDbl(MetroGrid2.Rows(i).Cells(8).Value)
                 lv_granSubTotal = lv_granSubTotal + lv_total
                 If CBool(MetroGrid2.Rows(i).Cells(14).Value) = False Then
-                    lv_granIVA = lv_granIVA + CDbl(FormatNumber(lv_total * (CDbl(FactorIVA) - 1), 2))
+                    lv_granIVA = lv_granIVA + CDbl(FormatNumber(lv_total * (CDbl(FactorIVA) - 1), 10))
                     lv_granTotal = lv_granTotal + CDbl(FormatNumber(lv_total + (lv_total * (CDbl(FactorIVA) - 1))))
                     gv_tasa_16 = True
                 Else
@@ -189,17 +189,17 @@ Public Class FrmCotizaciones
                     gv_tasa_0 = True
                 End If
             Next
-            FrmPuntoDeVenta.txtSubTotal.Text = Format(lv_granSubTotal, "###,###,##0.00")
-            FrmPuntoDeVenta.txtIVA.Text = Format(lv_granIVA, "###,###,##0.00")
-            FrmPuntoDeVenta.txtTotal.Text = Format(lv_granTotal, "###,###,##0.00")
-            FrmPuntoDeVenta.txtSubTotalTasaCero.Text = Format(lv_granSubTotal_TasaCero, "###,###,##0.00")
-            FrmPuntoDeVenta.txtIVATasaCero.Text = Format(lv_granIVA_TasaCero, "###,###,##0.00")
-            FrmPuntoDeVenta.txtTotalTasaCero.Text = Format(lv_granTotal_TasaCero, "###,###,##0.00")
+            FrmPuntoDeVenta.txtSubTotal.Text = FormatNumber(lv_granSubTotal, 6)
+            FrmPuntoDeVenta.txtIVA.Text = FormatNumber(lv_granIVA, 6)
+            FrmPuntoDeVenta.txtTotal.Text = FormatNumber(lv_granTotal, 2)
+            FrmPuntoDeVenta.txtSubTotalTasaCero.Text = FormatNumber(lv_granSubTotal_TasaCero, 6)
+            FrmPuntoDeVenta.txtIVATasaCero.Text = FormatNumber(lv_granIVA_TasaCero, 6)
+            FrmPuntoDeVenta.txtTotalTasaCero.Text = FormatNumber(lv_granTotal_TasaCero, 2)
 
             FrmPuntoDeVenta.txtCliente.Text = CStr(MetroGrid1.Rows(MetroGrid1.CurrentRow.Index).Cells(8).Value)
             FrmPuntoDeVenta.txtIdCliente.Text = CStr(MetroGrid1.Rows(MetroGrid1.CurrentRow.Index).Cells(9).Value)
 
-            FrmPuntoDeVenta.CmbDocto.SelectedItem = "PEDIDO"
+            FrmPuntoDeVenta.CmbDocto.SelectedItem = "TICKET"
             Dim Cliente As tblClientes = DBModelo.GetCliente(CInt(MetroGrid1.Rows(MetroGrid1.CurrentRow.Index).Cells(9).Value))
             If IsNothing(Cliente) = False Then
                 FrmPuntoDeVenta.txtDomicilio.Text = Cliente.calle & " #" & Cliente.numero & " colonia " & Cliente.colonia & " Ciudad " & Cliente.ciudad & " " & Cliente.estado & " codigo postal " & Cliente.cp & " RFC " & Cliente.rfc

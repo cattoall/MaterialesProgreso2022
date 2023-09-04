@@ -9,18 +9,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub FrmClientes_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        Me.BackColor = My.Settings.FormsBackColor
-        Me.GroupBox1.ForeColor = My.Settings.FontForeColor
-        Me.GroupBox1.Font = My.Settings.FontStyle
-        CmdGuardar.BackColor = My.Settings.FormsBackColor
-        CmdGuardar.Font = My.Settings.FontStyle
-        CmdGuardar.ForeColor = My.Settings.FontForeColor
-        CmdSalir.BackColor = My.Settings.FormsBackColor
-        CmdSalir.Font = My.Settings.FontStyle
-        CmdSalir.ForeColor = My.Settings.FontForeColor
-        BtnEliminar.BackColor = My.Settings.FormsBackColor
-        BtnEliminar.Font = My.Settings.FontStyle
-        BtnEliminar.ForeColor = My.Settings.FontForeColor
         If Add_Update = False Then
             BtnEliminar.Visible = False
         Else
@@ -30,7 +18,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtNombre_GotFocus(sender As Object, e As System.EventArgs) Handles txtNombre.GotFocus
-        txtNombre.BackColor = My.Settings.BoxColor
         txtNombre.SelectAll()
     End Sub
 
@@ -43,7 +30,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtApat_GotFocus(sender As Object, e As System.EventArgs) Handles txtApat.GotFocus
-        txtApat.BackColor = My.Settings.BoxColor
         txtApat.SelectAll()
     End Sub
 
@@ -56,7 +42,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtAmat_GotFocus(sender As Object, e As System.EventArgs) Handles txtAmat.GotFocus
-        txtAmat.BackColor = My.Settings.BoxColor
         txtAmat.SelectAll()
     End Sub
 
@@ -69,7 +54,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtDomicilio_GotFocus(sender As Object, e As System.EventArgs) Handles txtDomicilio.GotFocus
-        txtDomicilio.BackColor = My.Settings.BoxColor
         txtDomicilio.SelectAll()
     End Sub
 
@@ -82,7 +66,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtNumExterno_GotFocus(sender As Object, e As System.EventArgs) Handles txtNumExterno.GotFocus
-        txtNumExterno.BackColor = My.Settings.BoxColor
         txtNumExterno.SelectAll()
     End Sub
 
@@ -95,7 +78,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtColonia_GotFocus(sender As Object, e As System.EventArgs) Handles txtColonia.GotFocus
-        txtColonia.BackColor = My.Settings.BoxColor
         txtColonia.SelectAll()
     End Sub
 
@@ -108,7 +90,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtCiudad_GotFocus(sender As Object, e As System.EventArgs) Handles txtCiudad.GotFocus
-        txtCiudad.BackColor = My.Settings.BoxColor
         txtCiudad.SelectAll()
     End Sub
 
@@ -121,7 +102,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtEstado_GotFocus(sender As Object, e As System.EventArgs) Handles txtEstado.GotFocus
-        txtEstado.BackColor = My.Settings.BoxColor
         txtEstado.SelectAll()
     End Sub
 
@@ -134,7 +114,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtCodigoPostal_GotFocus(sender As Object, e As System.EventArgs) Handles txtCodigoPostal.GotFocus
-        txtCodigoPostal.BackColor = My.Settings.BoxColor
         txtCodigoPostal.SelectAll()
     End Sub
 
@@ -147,7 +126,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtRFC_GotFocus(sender As Object, e As System.EventArgs) Handles txtRFC.GotFocus
-        txtRFC.BackColor = My.Settings.BoxColor
         txtRFC.SelectAll()
     End Sub
 
@@ -160,7 +138,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtTelFijo_GotFocus(sender As Object, e As System.EventArgs) Handles txtTelFijo.GotFocus
-        txtTelFijo.BackColor = My.Settings.BoxColor
         txtTelFijo.SelectAll()
     End Sub
 
@@ -173,7 +150,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub MaskedTextBox1_GotFocus(sender As Object, e As System.EventArgs) Handles txtMovil.GotFocus
-        txtMovil.BackColor = My.Settings.BoxColor
         txtMovil.SelectAll()
     End Sub
 
@@ -186,7 +162,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtEmail_GotFocus(sender As Object, e As System.EventArgs) Handles txtEmail.GotFocus
-        txtEmail.BackColor = My.Settings.BoxColor
         txtEmail.SelectAll()
     End Sub
 
@@ -199,7 +174,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtCredito_GotFocus(sender As Object, e As System.EventArgs) Handles txtCredito.GotFocus
-        txtCredito.BackColor = My.Settings.BoxColor
         txtCredito.SelectAll()
     End Sub
 
@@ -217,7 +191,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtLimite_GotFocus(sender As Object, e As System.EventArgs) Handles txtLimite.GotFocus
-        txtLimite.BackColor = My.Settings.BoxColor
         txtLimite.SelectAll()
     End Sub
 
@@ -245,7 +218,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub CmbPrecio_GotFocus(sender As Object, e As System.EventArgs) Handles CmbPrecio.GotFocus
-        CmbPrecio.BackColor = My.Settings.BoxColor
         CmbPrecio.SelectAll()
     End Sub
 
@@ -258,7 +230,6 @@ Public Class FrmClientesWendy
     End Sub
 
     Private Sub txtObs_GotFocus(sender As Object, e As System.EventArgs) Handles txtObs.GotFocus
-        txtObs.BackColor = My.Settings.BoxColor
         txtObs.SelectAll()
     End Sub
 

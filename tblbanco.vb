@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class tblBanco
+Partial Public Class tblbanco
     Public Property IdComp As String
     Public Property Id As Integer
     Public Property Banco As String

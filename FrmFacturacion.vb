@@ -311,7 +311,7 @@ Public Class FrmFacturacion
     End Sub
 
     Private Sub Llena_UsoCFDI()
-        Dim UsoCFDI As List(Of tblUsoCFDI) = DBModelo.GetUsoCFDI_All
+        Dim UsoCFDI As List(Of tblUsoDeCFDI) = DBModelo.GetUsoCFDI_All
 
         If IsNothing(UsoCFDI) Then
             Exit Sub
@@ -338,7 +338,7 @@ Public Class FrmFacturacion
     End Sub
 
     Private Sub Llena_FormaDePago()
-        Dim FormaDePago As List(Of tblFormaPago) = DBModelo.GetFormaDePago_All
+        Dim FormaDePago As List(Of tblFormaDePago) = DBModelo.GetFormaDePago_All
 
         If IsNothing(FormaDePago) Then
             Exit Sub

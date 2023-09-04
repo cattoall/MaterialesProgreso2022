@@ -1,0 +1,544 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="pvModelWendy.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="clientes">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="clave" />
+          </Key>
+          <Property Name="IdComp" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="clave" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="255" />
+          <Property Name="apat" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="amat" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="calle" Type="nvarchar" MaxLength="255" />
+          <Property Name="numero" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="colonia" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ciudad" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="estado" Type="nvarchar" MaxLength="200" />
+          <Property Name="cp" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="rfc" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="255" />
+          <Property Name="celular" Type="nvarchar" MaxLength="255" />
+          <Property Name="correo" Type="nvarchar" MaxLength="255" />
+          <Property Name="observaciones" Type="nvarchar" MaxLength="255" />
+          <Property Name="listaPrecios" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="diasCredito" Type="int" Nullable="false" />
+          <Property Name="limiteCredito" Type="decimal" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="tipo_venta" Type="nvarchar" MaxLength="30" />
+          <Property Name="metodopago" Type="nvarchar" MaxLength="3" />
+          <Property Name="codiciones" Type="nvarchar" MaxLength="100" />
+          <Property Name="cuenta" Type="nchar" MaxLength="4" />
+          <Property Name="banco" Type="nvarchar" MaxLength="45" />
+          <Property Name="tasa_cero" Type="int" />
+          <Property Name="FormaPago" Type="nvarchar" MaxLength="2" />
+          <Property Name="UsoCFDI" Type="nvarchar" MaxLength="3" />
+          <Property Name="RegimenFiscal" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="cobrar">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="n_remision" />
+          </Key>
+          <Property Name="IdComp" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="n_remision" Type="bigint" Nullable="false" />
+          <Property Name="total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="fecha_venta" Type="date" />
+          <Property Name="fecha_limite" Type="date" />
+          <Property Name="cliente" Type="nvarchar" MaxLength="255" />
+          <Property Name="resto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="claveCliente" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="tipoDocumento" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="facturado" Type="bigint" />
+        </EntityType>
+        <EntityType Name="configuracion">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdTerminal" />
+          </Key>
+          <Property Name="IdComp" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTerminal" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombreEmpresa" Type="nvarchar" MaxLength="100" />
+          <Property Name="direccionEmpresa" Type="nvarchar" MaxLength="60" />
+          <Property Name="localidadEmpresa" Type="nvarchar" MaxLength="50" />
+          <Property Name="telefonoEmpresa" Type="nvarchar" MaxLength="30" />
+          <Property Name="ciudadEmpresa" Type="nvarchar" MaxLength="55" />
+          <Property Name="rfcEmpresa" Type="nvarchar" MaxLength="255" />
+          <Property Name="propietario" Type="nvarchar" MaxLength="255" />
+          <Property Name="impresiones" Type="int" />
+          <Property Name="factorIVA" Type="decimal" Precision="20" Scale="2" Nullable="false" />
+          <Property Name="cajaChica" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="logotipo" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="folioFactura" Type="bigint" Nullable="false" />
+          <Property Name="InvoicePrinterName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TicketPrinterName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TipoCambio" Type="decimal" Precision="10" Scale="5" />
+          <Property Name="RegimenFiscal" Type="nvarchar" MaxLength="3" />
+          <Property Name="LugarExpedicion" Type="nvarchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="factura_total">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="n_factura" />
+          </Key>
+          <Property Name="IdComp" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="n_factura" Type="numeric" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="total" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="usuario" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="tipo_venta" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="cliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="id_cliente" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="fecha_venta" Type="date" Nullable="false" />
+          <Property Name="fecha_limite" Type="date" />
+          <Property Name="codiciones" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="observaciones" Type="varchar" MaxLength="250" />
+          <Property Name="facturaDia" Type="int" Nullable="false" />
+          <Property Name="metodopago" Type="varchar" MaxLength="3" />
+          <Property Name="nc" Type="char" MaxLength="1" />
+          <Property Name="cuenta" Type="char" MaxLength="4" />
+          <Property Name="banco" Type="varchar" MaxLength="45" />
+          <Property Name="FormaPago" Type="varchar" MaxLength="2" />
+          <Property Name="UsoCFDI" Type="varchar" MaxLength="3" />
+          <Property Name="UUID" Type="varchar" MaxLength="45" />
+          <Property Name="Cancelada" Type="smallint" />
+          <Property Name="ComproPago" Type="smallint" />
+          <Property Name="pdf" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="historial_pagos">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="numeroVenta" />
+          </Key>
+          <Property Name="IdComp" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="numeroVenta" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="claveCliente" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="cliente" Type="nvarchar" MaxLength="255" />
+          <Property Name="observaciones" Type="nvarchar" MaxLength="255" />
+          <Property Name="tipoDocumento" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="venta">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="nticket" />
+          </Key>
+          <Property Name="IdComp" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="nticket" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="date" />
+          <Property Name="SubTotal" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="IVA" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="tipo" Type="nvarchar" MaxLength="50" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="50" />
+          <Property Name="cliente" Type="nvarchar" MaxLength="150" />
+          <Property Name="idCliente" Type="bigint" Nullable="false" />
+          <Property Name="estado" Type="nvarchar" MaxLength="50" />
+          <Property Name="motivo" Type="nvarchar" MaxLength="50" />
+          <Property Name="numeroFactura" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="venta_pedido">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="nticket" />
+          </Key>
+          <Property Name="IdComp" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="nticket" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="date" />
+          <Property Name="SubTotal" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="IVA" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="tipo" Type="nvarchar" MaxLength="50" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="50" />
+          <Property Name="cliente" Type="nvarchar" MaxLength="150" />
+          <Property Name="idCliente" Type="bigint" Nullable="false" />
+          <Property Name="estado" Type="nvarchar" MaxLength="50" />
+          <Property Name="motivo" Type="nvarchar" MaxLength="50" />
+          <Property Name="numeroFactura" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityContainer Name="pvModelWendyStoreContainer">
+          <EntitySet Name="clientes" EntityType="Self.clientes" Schema="pv" store:Type="Tables" />
+          <EntitySet Name="cobrar" EntityType="Self.cobrar" Schema="pv" store:Type="Tables" />
+          <EntitySet Name="configuracion" EntityType="Self.configuracion" Schema="pv" store:Type="Tables" />
+          <EntitySet Name="factura_total" EntityType="Self.factura_total" Schema="pv" store:Type="Tables" />
+          <EntitySet Name="historial_pagos" EntityType="Self.historial_pagos" Schema="pv" store:Type="Tables" />
+          <EntitySet Name="venta" EntityType="Self.venta" Schema="pv" store:Type="Tables" />
+          <EntitySet Name="venta_pedido" EntityType="Self.venta_pedido" Schema="pv" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="pvModelWendy" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblWClientes">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="clave" />
+          </Key>
+          <Property Name="IdComp" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="clave" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="apat" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="amat" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="calle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="numero" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="colonia" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ciudad" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="cp" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="rfc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="celular" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="correo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="observaciones" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="listaPrecios" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="diasCredito" Type="Int32" Nullable="false" />
+          <Property Name="limiteCredito" Type="Decimal" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="tipo_venta" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="metodopago" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="codiciones" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cuenta" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="banco" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="tasa_cero" Type="Int32" />
+          <Property Name="FormaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="UsoCFDI" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="RegimenFiscal" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblWConfiguracion">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdTerminal" />
+          </Key>
+          <Property Name="IdComp" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTerminal" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nombreEmpresa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="direccionEmpresa" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="localidadEmpresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="telefonoEmpresa" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ciudadEmpresa" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+          <Property Name="rfcEmpresa" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="propietario" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="impresiones" Type="Int32" />
+          <Property Name="factorIVA" Type="Decimal" Precision="20" Scale="2" Nullable="false" />
+          <Property Name="cajaChica" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="logotipo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="folioFactura" Type="Int64" Nullable="false" />
+          <Property Name="InvoicePrinterName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TicketPrinterName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TipoCambio" Type="Decimal" Precision="10" Scale="5" />
+          <Property Name="RegimenFiscal" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="LugarExpedicion" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblWFacturaToral">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="n_factura" />
+          </Key>
+          <Property Name="IdComp" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="n_factura" Type="Decimal" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo_venta" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_cliente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_venta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha_limite" Type="DateTime" Precision="0" />
+          <Property Name="codiciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="facturaDia" Type="Int32" Nullable="false" />
+          <Property Name="metodopago" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="nc" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="cuenta" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="banco" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="FormaPago" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="UsoCFDI" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="UUID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Cancelada" Type="Int16" />
+          <Property Name="ComproPago" Type="Int16" />
+          <Property Name="pdf" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblWHistorialPagos">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="numeroVenta" />
+          </Key>
+          <Property Name="IdComp" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="numeroVenta" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="claveCliente" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cliente" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="observaciones" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tipoDocumento" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblWVventas">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="nticket" />
+          </Key>
+          <Property Name="IdComp" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nticket" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="SubTotal" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IVA" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cliente" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="idCliente" Type="Int64" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="motivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="numeroFactura" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblWVentasPedidos">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="nticket" />
+          </Key>
+          <Property Name="IdComp" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nticket" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="SubTotal" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IVA" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cliente" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="idCliente" Type="Int64" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="motivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="numeroFactura" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="pvEntitiesWendy" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblWClientes" EntityType="pvModelWendy.tblWClientes" />
+          <EntitySet Name="tblWConfiguracions" EntityType="pvModelWendy.tblWConfiguracion" />
+          <EntitySet Name="tblWFacturaTorals" EntityType="pvModelWendy.tblWFacturaToral" />
+          <EntitySet Name="tblWHistorialPagos" EntityType="pvModelWendy.tblWHistorialPagos" />
+          <EntitySet Name="tblWVventas" EntityType="pvModelWendy.tblWVventas" />
+          <EntitySet Name="tblWVentasPedidos" EntityType="pvModelWendy.tblWVentasPedidos" />
+          <EntitySet Name="tblWCobrars" EntityType="pvModelWendy.tblWCobrar" />
+        </EntityContainer>
+        <EntityType Name="tblWCobrar">
+          <Key>
+            <PropertyRef Name="IdComp" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="n_remision" />
+          </Key>
+          <Property Name="IdComp" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="n_remision" Type="Int64" Nullable="false" />
+          <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="fecha_venta" Type="DateTime" Precision="0" />
+          <Property Name="fecha_limite" Type="DateTime" Precision="0" />
+          <Property Name="cliente" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="resto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="claveCliente" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="tipoDocumento" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="facturado" Type="Int64" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="pvModelWendyStoreContainer" CdmEntityContainer="pvEntitiesWendy">
+          <EntitySetMapping Name="tblWClientes">
+            <EntityTypeMapping TypeName="pvModelWendy.tblWClientes">
+              <MappingFragment StoreEntitySet="clientes">
+                <ScalarProperty Name="IdComp" ColumnName="IdComp" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apat" ColumnName="apat" />
+                <ScalarProperty Name="amat" ColumnName="amat" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="colonia" ColumnName="colonia" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="cp" ColumnName="cp" />
+                <ScalarProperty Name="rfc" ColumnName="rfc" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="listaPrecios" ColumnName="listaPrecios" />
+                <ScalarProperty Name="diasCredito" ColumnName="diasCredito" />
+                <ScalarProperty Name="limiteCredito" ColumnName="limiteCredito" />
+                <ScalarProperty Name="tipo_venta" ColumnName="tipo_venta" />
+                <ScalarProperty Name="metodopago" ColumnName="metodopago" />
+                <ScalarProperty Name="codiciones" ColumnName="codiciones" />
+                <ScalarProperty Name="cuenta" ColumnName="cuenta" />
+                <ScalarProperty Name="banco" ColumnName="banco" />
+                <ScalarProperty Name="tasa_cero" ColumnName="tasa_cero" />
+                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
+                <ScalarProperty Name="UsoCFDI" ColumnName="UsoCFDI" />
+                <ScalarProperty Name="RegimenFiscal" ColumnName="RegimenFiscal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWConfiguracions">
+            <EntityTypeMapping TypeName="pvModelWendy.tblWConfiguracion">
+              <MappingFragment StoreEntitySet="configuracion">
+                <ScalarProperty Name="IdComp" ColumnName="IdComp" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdTerminal" ColumnName="IdTerminal" />
+                <ScalarProperty Name="nombreEmpresa" ColumnName="nombreEmpresa" />
+                <ScalarProperty Name="direccionEmpresa" ColumnName="direccionEmpresa" />
+                <ScalarProperty Name="localidadEmpresa" ColumnName="localidadEmpresa" />
+                <ScalarProperty Name="telefonoEmpresa" ColumnName="telefonoEmpresa" />
+                <ScalarProperty Name="ciudadEmpresa" ColumnName="ciudadEmpresa" />
+                <ScalarProperty Name="rfcEmpresa" ColumnName="rfcEmpresa" />
+                <ScalarProperty Name="propietario" ColumnName="propietario" />
+                <ScalarProperty Name="impresiones" ColumnName="impresiones" />
+                <ScalarProperty Name="factorIVA" ColumnName="factorIVA" />
+                <ScalarProperty Name="cajaChica" ColumnName="cajaChica" />
+                <ScalarProperty Name="logotipo" ColumnName="logotipo" />
+                <ScalarProperty Name="folioFactura" ColumnName="folioFactura" />
+                <ScalarProperty Name="InvoicePrinterName" ColumnName="InvoicePrinterName" />
+                <ScalarProperty Name="TicketPrinterName" ColumnName="TicketPrinterName" />
+                <ScalarProperty Name="TipoCambio" ColumnName="TipoCambio" />
+                <ScalarProperty Name="RegimenFiscal" ColumnName="RegimenFiscal" />
+                <ScalarProperty Name="LugarExpedicion" ColumnName="LugarExpedicion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWFacturaTorals">
+            <EntityTypeMapping TypeName="pvModelWendy.tblWFacturaToral">
+              <MappingFragment StoreEntitySet="factura_total">
+                <ScalarProperty Name="IdComp" ColumnName="IdComp" />
+                <ScalarProperty Name="n_factura" ColumnName="n_factura" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="tipo_venta" ColumnName="tipo_venta" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="fecha_venta" ColumnName="fecha_venta" />
+                <ScalarProperty Name="fecha_limite" ColumnName="fecha_limite" />
+                <ScalarProperty Name="codiciones" ColumnName="codiciones" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="facturaDia" ColumnName="facturaDia" />
+                <ScalarProperty Name="metodopago" ColumnName="metodopago" />
+                <ScalarProperty Name="nc" ColumnName="nc" />
+                <ScalarProperty Name="cuenta" ColumnName="cuenta" />
+                <ScalarProperty Name="banco" ColumnName="banco" />
+                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
+                <ScalarProperty Name="UsoCFDI" ColumnName="UsoCFDI" />
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="Cancelada" ColumnName="Cancelada" />
+                <ScalarProperty Name="ComproPago" ColumnName="ComproPago" />
+                <ScalarProperty Name="pdf" ColumnName="pdf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWHistorialPagos">
+            <EntityTypeMapping TypeName="pvModelWendy.tblWHistorialPagos">
+              <MappingFragment StoreEntitySet="historial_pagos">
+                <ScalarProperty Name="IdComp" ColumnName="IdComp" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="numeroVenta" ColumnName="numeroVenta" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="claveCliente" ColumnName="claveCliente" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWVventas">
+            <EntityTypeMapping TypeName="pvModelWendy.tblWVventas">
+              <MappingFragment StoreEntitySet="venta">
+                <ScalarProperty Name="IdComp" ColumnName="IdComp" />
+                <ScalarProperty Name="nticket" ColumnName="nticket" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="numeroFactura" ColumnName="numeroFactura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWVentasPedidos">
+            <EntityTypeMapping TypeName="pvModelWendy.tblWVentasPedidos">
+              <MappingFragment StoreEntitySet="venta_pedido">
+                <ScalarProperty Name="IdComp" ColumnName="IdComp" />
+                <ScalarProperty Name="nticket" ColumnName="nticket" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="numeroFactura" ColumnName="numeroFactura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWCobrars">
+            <EntityTypeMapping TypeName="pvModelWendy.tblWCobrar">
+              <MappingFragment StoreEntitySet="cobrar">
+                <ScalarProperty Name="facturado" ColumnName="facturado" />
+                <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
+                <ScalarProperty Name="claveCliente" ColumnName="claveCliente" />
+                <ScalarProperty Name="resto" ColumnName="resto" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="fecha_limite" ColumnName="fecha_limite" />
+                <ScalarProperty Name="fecha_venta" ColumnName="fecha_venta" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="n_remision" ColumnName="n_remision" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdComp" ColumnName="IdComp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

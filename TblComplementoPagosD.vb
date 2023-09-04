@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class TblComplementoPagosD
+Partial Public Class tblComplementoPagosD
     Public Property IdComp As String
     Public Property n_pago As Integer
     Public Property n_factura As Integer

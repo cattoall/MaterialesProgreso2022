@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class tblParametro
+Partial Public Class tblparametro
     Public Property IdComp As String
     Public Property Id As Integer
     Public Property Name As String

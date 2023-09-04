@@ -175,8 +175,53 @@
         Dim lv_UsoCFDI() As String = Split(cmbUsoCFDI.Text, "-")
         Dim strCliente As New tblClientes
 
-        If txtNombre.Text = "" Or txtLimite.Text = "" Or txtCredito.Text = "" Or CmbPrecio.Text = "" Then
-            MetroFramework.MetroMessageBox.Show(Me, "Campos Obligatorios para crear un Cliente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        If txtNombre.Text.Length = 0 Then
+            MetroFramework.MetroMessageBox.Show(Me, "Campo Nombre es Obligatorio", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            txtNombre.Focus()
+            Exit Sub
+        End If
+
+        If txtDomicilio.Text.Length = 0 Then
+            MetroFramework.MetroMessageBox.Show(Me, "Campo Domicilio es Obligatorio", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            txtDomicilio.Focus()
+            Exit Sub
+        End If
+
+        If txtNumExterno.Text.Length = 0 Then
+            MetroFramework.MetroMessageBox.Show(Me, "Campo Número Externo es Obligatorio", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            txtNumExterno.Focus()
+            Exit Sub
+        End If
+
+        If txtTelFijo.Text.Length > 0 Then
+            If txtTelFijo.Text.Length < 10 Or txtTelFijo.Text.Length > 10 Then
+                MetroFramework.MetroMessageBox.Show(Me, "Número de Teléfono debe de ser a 10 dígitos", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                txtTelFijo.Focus()
+                Exit Sub
+            End If
+        End If
+
+        If txtMovil.Text.Length < 10 Or txtMovil.Text.Length > 10 Then
+            MetroFramework.MetroMessageBox.Show(Me, "Número de Celular debe de ser a 10 dígitos", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            txtMovil.Focus()
+            Exit Sub
+        End If
+
+        If txtLimite.Text.Length = 0 Then
+            MetroFramework.MetroMessageBox.Show(Me, "Campo Límite de Crédito es Obligatorio", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            txtLimite.Focus()
+            Exit Sub
+        End If
+
+        If txtCredito.Text.Length = 0 Then
+            MetroFramework.MetroMessageBox.Show(Me, "Campo Días de Crédito es Obligatorio", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            txtCredito.Focus()
+            Exit Sub
+        End If
+
+        If CmbPrecio.Text = "" Then
+            MetroFramework.MetroMessageBox.Show(Me, "Campo Lista de Precio es Obligatorio", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            CmbPrecio.Focus()
             Exit Sub
         End If
 

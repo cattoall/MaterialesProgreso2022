@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class tblWVventa
+Partial Public Class tblWVventas
     Public Property IdComp As String
     Public Property nticket As Long
     Public Property fecha As Nullable(Of Date)

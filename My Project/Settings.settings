@@ -1,24 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" UseMySettingsClassName="true">
   <Profiles />
-  <Settings>
-    <Setting Name="BoxColor" Type="System.Drawing.Color" Scope="Application">
-      <Value Profile="(Default)">Gold</Value>
-    </Setting>
-    <Setting Name="FormsBackColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Blue</Value>
-    </Setting>
-    <Setting Name="FontForeColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">White</Value>
-    </Setting>
-    <Setting Name="FontStyle" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">Microsoft Sans Serif, 9.75pt, style=Bold</Value>
-    </Setting>
-    <Setting Name="CDFI_XML_PATH" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\CFDI\</Value>
-    </Setting>
-    <Setting Name="CDFI_XML_PATH_QR" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:/CFDI/</Value>
-    </Setting>
-  </Settings>
+  <Settings />
 </SettingsFile>

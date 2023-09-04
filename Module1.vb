@@ -9,7 +9,8 @@ Imports System.IO.Packaging
 Imports System.Reflection
 Imports System.Xml
 Imports System.Data.SqlClient
-Imports BarcodeLib
+Imports BarcodeStandard
+Imports SkiaSharp
 
 Module Module1
     Public conn As New SqlConnection
@@ -2682,20 +2683,20 @@ Module Module1
             Next
 
             rep_FormadePago = DS.Tables("Comprobante").Rows(0)("FormaPago").ToString()
-            Dim wa_FormaDePago As tblFormaPago = DBModelo.GetFormaDePagoByKey(rep_FormadePago)
+            Dim wa_FormaDePago As tblFormaDePago = DBModelo.GetFormaDePagoByKey(rep_FormadePago)
             rep_FormadePago = wa_FormaDePago.FormaPago
 
             rep_MetododePago = DS.Tables("Comprobante").Rows(0)("MetodoPago").ToString()
-            Dim wa_MetodoDePago As tblMetodoPago = DBModelo.GetMetodoDePagoByKey(rep_MetododePago)
+            Dim wa_MetodoDePago As tblmetodopago = DBModelo.GetMetodoDePagoByKey(rep_MetododePago)
             rep_MetododePago = wa_MetodoDePago.MetodoPago
 
             rep_Regimen = DS.Tables("Receptor").Rows(0)("RegimenFiscalReceptor").ToString()
-            Dim wa_RegimenFiscal As tblRegimenFiscal = DBModelo.GetRegimenFiscalByKey(rep_Regimen)
+            Dim wa_RegimenFiscal As tblregimenfiscal = DBModelo.GetRegimenFiscalByKey(rep_Regimen)
             rep_Regimen = wa_RegimenFiscal.Clave & "-" & wa_RegimenFiscal.Descripcion
 
 
             rep_UsoCFDI = DS.Tables("Receptor").Rows(0)("UsoCFDI").ToString()
-            Dim wa_UsoCFDI As tblUsoCFDI = DBModelo.GetUsoCFDIByKey(rep_UsoCFDI)
+            Dim wa_UsoCFDI As tblUsoDeCFDI = DBModelo.GetUsoCFDIByKey(rep_UsoCFDI)
             rep_UsoCFDI = wa_UsoCFDI.UsoCFDI
 
 
@@ -2994,7 +2995,7 @@ Module Module1
             table2.Rows.Add(row2)
         Next
 
-        Dim sFormaPago As tblFormaPago = DBModelo.GetFormaDePagoByKey(ds.Tables("Pago").Rows(0)("FormaDePagoP").ToString)
+        Dim sFormaPago As tblFormaDePago = DBModelo.GetFormaDePagoByKey(ds.Tables("Pago").Rows(0)("FormaDePagoP").ToString)
         If Not IsNothing(sFormaPago) Then
             rep_FormadePago = sFormaPago.FormaPago
         End If
@@ -3017,7 +3018,7 @@ Module Module1
         End If
 
         rep_Regimen = ds.Tables("Receptor").Rows(0)("RegimenFiscalReceptor").ToString()
-        Dim wa_RegimenFiscal As tblRegimenFiscal = DBModelo.GetRegimenFiscalByKey(rep_Regimen)
+        Dim wa_RegimenFiscal As tblregimenfiscal = DBModelo.GetRegimenFiscalByKey(rep_Regimen)
         rep_Regimen = wa_RegimenFiscal.Clave & "-" & wa_RegimenFiscal.Descripcion
 
         rep_MontoEnLetras = Dinero(CDbl(ds.Tables("Pago").Rows(0)("Monto").ToString), 2, "Pesos", True)
@@ -4451,7 +4452,7 @@ Module Module1
             Next
 
             rep_FormadePago = DS.Tables("Comprobante").Rows(0)("FormaPago").ToString()
-            Dim wa_FormaDePago As tblFormaPago = DBModelo.GetFormaDePagoByKey(rep_FormadePago)
+            Dim wa_FormaDePago As tblFormaDePago = DBModelo.GetFormaDePagoByKey(rep_FormadePago)
             rep_FormadePago = wa_FormaDePago.FormaPago
 
             rep_TipoRelacion = DS.Tables("CfdiRelacionados").Rows(0)("TipoRelacion").ToString()
@@ -4459,11 +4460,11 @@ Module Module1
             rep_TipoRelacion = wa_TipoRelacion.TipoRelacion
 
             rep_MetododePago = DS.Tables("Comprobante").Rows(0)("MetodoPago").ToString()
-            Dim wa_MetodoDePago As tblMetodoPago = DBModelo.GetMetodoDePagoByKey(rep_MetododePago)
+            Dim wa_MetodoDePago As tblmetodopago = DBModelo.GetMetodoDePagoByKey(rep_MetododePago)
             rep_MetododePago = wa_MetodoDePago.MetodoPago
 
             rep_UsoCFDI = DS.Tables("Receptor").Rows(0)("UsoCFDI").ToString()
-            Dim wa_UsoCFDI As tblUsoCFDI = DBModelo.GetUsoCFDIByKey(rep_UsoCFDI)
+            Dim wa_UsoCFDI As tblUsoDeCFDI = DBModelo.GetUsoCFDIByKey(rep_UsoCFDI)
             rep_UsoCFDI = wa_UsoCFDI.UsoCFDI
 
             ' Copia del GetFacturasHeader en Notas de Crédito, junto con el Ipdate_PV_Notas
@@ -4864,13 +4865,14 @@ Module Module1
                     Dim p19 As New ReportParameter("IVA", lv_iva.ToString)
 
                     'Genera Código de Barra
-                    Dim BC As New Barcode
-                    BC.IncludeLabel = True
-                    BC.Alignment = AlignmentPositions.CENTER
-                    BC.LabelFont = New Font(FontFamily.GenericMonospace, 14, FontStyle.Bold)
-                    Dim BarCodeImage As Image = BC.Encode(TYPE.CODE128, NumeroVenta, Color.Black, Color.White, 200, 100)
+                    Dim BC As New Barcode With {
+                        .IncludeLabel = True,
+                        .Alignment = AlignmentPositions.Center,
+                        .LabelFont = New SKFont(SKTypeface.Default, 14, FontStyle.Bold)
+                    }
+                    Dim BarCodeImage As SKImage = BC.Encode(Type.Code128, NumeroVenta, SKColors.Black, SKColors.White, 200, 100)
                     Dim sFullPathBarCodeImage = "C:\Tickets\" & Now.Year.ToString & "\" & NumeroVenta & ".jpg"
-                    BC.SaveImage(sFullPathBarCodeImage, SaveTypes.JPG)
+                    BC.SaveImage(sFullPathBarCodeImage, SaveTypes.Jpg)
                     Dim p20 As New ReportParameter("BarCodeImage", "File:///" & sFullPathBarCodeImage)
 
                     Report.ReportPath = gv_Report_Path & "Report2.rdlc"
@@ -5002,11 +5004,12 @@ Module Module1
                     Dim p17 As New ReportParameter("Deuda", Format(lvDeuda, "$ ###,###,##0.00"))
 
                     'Genera Código de Barra
-                    Dim BC As New Barcode
-                    BC.IncludeLabel = True
-                    BC.Alignment = AlignmentPositions.CENTER
-                    BC.LabelFont = New Font(FontFamily.GenericMonospace, 14, FontStyle.Bold)
-                    Dim BarCodeImage As Image = BC.Encode(TYPE.CODE128, NumeroVenta, Color.Black, Color.White, 200, 100)
+                    Dim BC As New Barcode With {
+                        .IncludeLabel = True,
+                        .Alignment = AlignmentPositions.Center,
+                        .LabelFont = New SKFont(SKTypeface.Default, 14, FontStyle.Bold)
+                    }
+                    Dim BarCodeImage As SKImage = BC.Encode(Type.Code128, NumeroVenta, SKColors.Black, SKColors.White, 200, 100)
                     Dim sFullPathBarCodeImage = "C:\Tickets\" & Now.Year.ToString & "\" & NumeroVenta & ".jpg"
                     BC.SaveImage(sFullPathBarCodeImage, SaveTypes.JPG)
                     Dim p20 As New ReportParameter("BarCodeImage", "File:///" & sFullPathBarCodeImage)
@@ -5163,11 +5166,12 @@ Module Module1
                     Dim p19 As New ReportParameter("IVA", lv_iva.ToString)
 
                     'Genera Código de Barra
-                    Dim BC As New Barcode
-                    BC.IncludeLabel = True
-                    BC.Alignment = AlignmentPositions.CENTER
-                    BC.LabelFont = New Font(FontFamily.GenericMonospace, 14, FontStyle.Bold)
-                    Dim BarCodeImage As Image = BC.Encode(TYPE.CODE128, NumeroVenta, Color.Black, Color.White, 200, 100)
+                    Dim BC As New Barcode With {
+                        .IncludeLabel = True,
+                        .Alignment = AlignmentPositions.Center,
+                        .LabelFont = New SKFont(SKTypeface.Default, 14, FontStyle.Bold)
+                    }
+                    Dim BarCodeImage As SKImage = BC.Encode(Type.Code128, NumeroVenta, SKColors.Black, SKColors.White, 200, 100)
                     Dim sFullPathBarCodeImage = "C:\Tickets\" & Now.Year.ToString & "\" & NumeroVenta & ".jpg"
                     BC.SaveImage(sFullPathBarCodeImage, SaveTypes.JPG)
                     Dim p20 As New ReportParameter("BarCodeImage", "File:///" & sFullPathBarCodeImage)
@@ -5296,11 +5300,12 @@ Module Module1
                     Dim p17 As New ReportParameter("Deuda", Format(lvDeuda, "$ ###,###,##0.00"))
 
                     'Genera Código de Barra
-                    Dim BC As New Barcode
-                    BC.IncludeLabel = True
-                    BC.Alignment = AlignmentPositions.CENTER
-                    BC.LabelFont = New Font(FontFamily.GenericMonospace, 14, FontStyle.Bold)
-                    Dim BarCodeImage As Image = BC.Encode(TYPE.CODE128, NumeroVenta, Color.Black, Color.White, 200, 100)
+                    Dim BC As New Barcode With {
+                        .IncludeLabel = True,
+                        .Alignment = AlignmentPositions.Center,
+                        .LabelFont = New SKFont(SKTypeface.Default, 14, FontStyle.Bold)
+                    }
+                    Dim BarCodeImage As SKImage = BC.Encode(Type.Code128, NumeroVenta, SKColors.Black, SKColors.White, 200, 100)
                     Dim sFullPathBarCodeImage = "C:\Tickets\" & Now.Year.ToString & "\" & NumeroVenta & ".jpg"
                     BC.SaveImage(sFullPathBarCodeImage, SaveTypes.JPG)
                     Dim p20 As New ReportParameter("BarCodeImage", "File:///" & sFullPathBarCodeImage)

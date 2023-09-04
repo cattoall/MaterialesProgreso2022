@@ -10,7 +10,7 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class tblMetodoPago
+Partial Public Class tblmetodopago
     Public Property IdComp As String
     Public Property Id As Integer
     Public Property MetodoPago As String

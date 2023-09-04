@@ -58,6 +58,14 @@ Partial Class FrmClientes
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel2 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel3 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel4 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel5 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel6 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel7 = New MetroFramework.Controls.MetroLabel()
+        Me.ChkBloqCliente = New MetroFramework.Controls.MetroCheckBox()
         Me.MetroTabControl1.SuspendLayout()
         Me.MetroTabPage1.SuspendLayout()
         Me.MetroTabPage2.SuspendLayout()
@@ -80,13 +88,17 @@ Partial Class FrmClientes
         Me.MetroTabControl1.Controls.Add(Me.MetroTabPage4)
         Me.MetroTabControl1.Location = New System.Drawing.Point(23, 63)
         Me.MetroTabControl1.Name = "MetroTabControl1"
-        Me.MetroTabControl1.SelectedIndex = 2
+        Me.MetroTabControl1.SelectedIndex = 0
         Me.MetroTabControl1.Size = New System.Drawing.Size(501, 341)
         Me.MetroTabControl1.TabIndex = 73
         Me.MetroTabControl1.UseSelectable = True
         '
         'MetroTabPage1
         '
+        Me.MetroTabPage1.Controls.Add(Me.MetroLabel4)
+        Me.MetroTabPage1.Controls.Add(Me.MetroLabel3)
+        Me.MetroTabPage1.Controls.Add(Me.MetroLabel2)
+        Me.MetroTabPage1.Controls.Add(Me.MetroLabel1)
         Me.MetroTabPage1.Controls.Add(Me.txtEmail)
         Me.MetroTabPage1.Controls.Add(Me.txtMovil)
         Me.MetroTabPage1.Controls.Add(Me.txtTelFijo)
@@ -161,7 +173,7 @@ Partial Class FrmClientes
         Me.txtMovil.CustomButton.UseSelectable = True
         Me.txtMovil.CustomButton.Visible = False
         Me.txtMovil.Lines = New String(-1) {}
-        Me.txtMovil.Location = New System.Drawing.Point(295, 230)
+        Me.txtMovil.Location = New System.Drawing.Point(272, 230)
         Me.txtMovil.MaxLength = 32767
         Me.txtMovil.Name = "txtMovil"
         Me.txtMovil.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -227,7 +239,7 @@ Partial Class FrmClientes
         Me.txtRFC.CustomButton.UseSelectable = True
         Me.txtRFC.CustomButton.Visible = False
         Me.txtRFC.Lines = New String(-1) {}
-        Me.txtRFC.Location = New System.Drawing.Point(295, 198)
+        Me.txtRFC.Location = New System.Drawing.Point(272, 198)
         Me.txtRFC.MaxLength = 32767
         Me.txtRFC.Name = "txtRFC"
         Me.txtRFC.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -293,7 +305,7 @@ Partial Class FrmClientes
         Me.txtEstado.CustomButton.UseSelectable = True
         Me.txtEstado.CustomButton.Visible = False
         Me.txtEstado.Lines = New String(-1) {}
-        Me.txtEstado.Location = New System.Drawing.Point(295, 166)
+        Me.txtEstado.Location = New System.Drawing.Point(272, 166)
         Me.txtEstado.MaxLength = 32767
         Me.txtEstado.Name = "txtEstado"
         Me.txtEstado.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -350,7 +362,7 @@ Partial Class FrmClientes
         '
         '
         Me.txtColonia.CustomButton.Image = Nothing
-        Me.txtColonia.CustomButton.Location = New System.Drawing.Point(303, 2)
+        Me.txtColonia.CustomButton.Location = New System.Drawing.Point(280, 2)
         Me.txtColonia.CustomButton.Name = ""
         Me.txtColonia.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtColonia.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
@@ -369,7 +381,7 @@ Partial Class FrmClientes
         Me.txtColonia.SelectionLength = 0
         Me.txtColonia.SelectionStart = 0
         Me.txtColonia.ShortcutsEnabled = True
-        Me.txtColonia.Size = New System.Drawing.Size(327, 26)
+        Me.txtColonia.Size = New System.Drawing.Size(304, 26)
         Me.txtColonia.TabIndex = 7
         Me.txtColonia.UseSelectable = True
         Me.txtColonia.WaterMark = "Colonia"
@@ -416,7 +428,7 @@ Partial Class FrmClientes
         '
         '
         Me.txtDomicilio.CustomButton.Image = Nothing
-        Me.txtDomicilio.CustomButton.Location = New System.Drawing.Point(463, 1)
+        Me.txtDomicilio.CustomButton.Location = New System.Drawing.Point(440, 1)
         Me.txtDomicilio.CustomButton.Name = ""
         Me.txtDomicilio.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtDomicilio.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
@@ -435,7 +447,7 @@ Partial Class FrmClientes
         Me.txtDomicilio.SelectionLength = 0
         Me.txtDomicilio.SelectionStart = 0
         Me.txtDomicilio.ShortcutsEnabled = True
-        Me.txtDomicilio.Size = New System.Drawing.Size(485, 23)
+        Me.txtDomicilio.Size = New System.Drawing.Size(462, 23)
         Me.txtDomicilio.TabIndex = 5
         Me.txtDomicilio.UseSelectable = True
         Me.txtDomicilio.WaterMark = "Calle"
@@ -449,7 +461,7 @@ Partial Class FrmClientes
         '
         '
         Me.txtAmat.CustomButton.Image = Nothing
-        Me.txtAmat.CustomButton.Location = New System.Drawing.Point(463, 1)
+        Me.txtAmat.CustomButton.Location = New System.Drawing.Point(440, 1)
         Me.txtAmat.CustomButton.Name = ""
         Me.txtAmat.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtAmat.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
@@ -468,7 +480,7 @@ Partial Class FrmClientes
         Me.txtAmat.SelectionLength = 0
         Me.txtAmat.SelectionStart = 0
         Me.txtAmat.ShortcutsEnabled = True
-        Me.txtAmat.Size = New System.Drawing.Size(485, 23)
+        Me.txtAmat.Size = New System.Drawing.Size(462, 23)
         Me.txtAmat.TabIndex = 4
         Me.txtAmat.UseSelectable = True
         Me.txtAmat.WaterMark = "Apellido Materno"
@@ -482,7 +494,7 @@ Partial Class FrmClientes
         '
         '
         Me.txtApat.CustomButton.Image = Nothing
-        Me.txtApat.CustomButton.Location = New System.Drawing.Point(463, 1)
+        Me.txtApat.CustomButton.Location = New System.Drawing.Point(440, 1)
         Me.txtApat.CustomButton.Name = ""
         Me.txtApat.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtApat.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
@@ -501,7 +513,7 @@ Partial Class FrmClientes
         Me.txtApat.SelectionLength = 0
         Me.txtApat.SelectionStart = 0
         Me.txtApat.ShortcutsEnabled = True
-        Me.txtApat.Size = New System.Drawing.Size(485, 23)
+        Me.txtApat.Size = New System.Drawing.Size(462, 23)
         Me.txtApat.TabIndex = 3
         Me.txtApat.UseSelectable = True
         Me.txtApat.WaterMark = "Apellido Paterno"
@@ -516,7 +528,7 @@ Partial Class FrmClientes
         '
         '
         Me.txtNombre.CustomButton.Image = Nothing
-        Me.txtNombre.CustomButton.Location = New System.Drawing.Point(463, 1)
+        Me.txtNombre.CustomButton.Location = New System.Drawing.Point(440, 1)
         Me.txtNombre.CustomButton.Name = ""
         Me.txtNombre.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtNombre.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
@@ -535,7 +547,7 @@ Partial Class FrmClientes
         Me.txtNombre.SelectionLength = 0
         Me.txtNombre.SelectionStart = 0
         Me.txtNombre.ShortcutsEnabled = True
-        Me.txtNombre.Size = New System.Drawing.Size(485, 23)
+        Me.txtNombre.Size = New System.Drawing.Size(462, 23)
         Me.txtNombre.TabIndex = 2
         Me.txtNombre.UseSelectable = True
         Me.txtNombre.WaterMark = "Nombre"
@@ -544,6 +556,9 @@ Partial Class FrmClientes
         '
         'MetroTabPage2
         '
+        Me.MetroTabPage2.Controls.Add(Me.MetroLabel6)
+        Me.MetroTabPage2.Controls.Add(Me.MetroLabel7)
+        Me.MetroTabPage2.Controls.Add(Me.MetroLabel5)
         Me.MetroTabPage2.Controls.Add(Me.CmbPrecio)
         Me.MetroTabPage2.Controls.Add(Me.txtLimite)
         Me.MetroTabPage2.Controls.Add(Me.txtCredito)
@@ -884,6 +899,110 @@ Partial Class FrmClientes
         Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'MetroLabel1
+        '
+        Me.MetroLabel1.AutoSize = True
+        Me.MetroLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.MetroLabel1.FontSize = MetroFramework.MetroLabelSize.Tall
+        Me.MetroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Bold
+        Me.MetroLabel1.ForeColor = System.Drawing.Color.Red
+        Me.MetroLabel1.Location = New System.Drawing.Point(467, 18)
+        Me.MetroLabel1.Name = "MetroLabel1"
+        Me.MetroLabel1.Size = New System.Drawing.Size(20, 25)
+        Me.MetroLabel1.TabIndex = 81
+        Me.MetroLabel1.Text = "*"
+        '
+        'MetroLabel2
+        '
+        Me.MetroLabel2.AutoSize = True
+        Me.MetroLabel2.BackColor = System.Drawing.Color.Transparent
+        Me.MetroLabel2.FontSize = MetroFramework.MetroLabelSize.Tall
+        Me.MetroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Bold
+        Me.MetroLabel2.ForeColor = System.Drawing.Color.Red
+        Me.MetroLabel2.Location = New System.Drawing.Point(467, 231)
+        Me.MetroLabel2.Name = "MetroLabel2"
+        Me.MetroLabel2.Size = New System.Drawing.Size(20, 25)
+        Me.MetroLabel2.TabIndex = 81
+        Me.MetroLabel2.Text = "*"
+        '
+        'MetroLabel3
+        '
+        Me.MetroLabel3.AutoSize = True
+        Me.MetroLabel3.BackColor = System.Drawing.Color.Transparent
+        Me.MetroLabel3.FontSize = MetroFramework.MetroLabelSize.Tall
+        Me.MetroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Bold
+        Me.MetroLabel3.ForeColor = System.Drawing.Color.Red
+        Me.MetroLabel3.Location = New System.Drawing.Point(467, 103)
+        Me.MetroLabel3.Name = "MetroLabel3"
+        Me.MetroLabel3.Size = New System.Drawing.Size(20, 25)
+        Me.MetroLabel3.TabIndex = 81
+        Me.MetroLabel3.Text = "*"
+        '
+        'MetroLabel4
+        '
+        Me.MetroLabel4.AutoSize = True
+        Me.MetroLabel4.BackColor = System.Drawing.Color.Transparent
+        Me.MetroLabel4.FontSize = MetroFramework.MetroLabelSize.Tall
+        Me.MetroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Bold
+        Me.MetroLabel4.ForeColor = System.Drawing.Color.Red
+        Me.MetroLabel4.Location = New System.Drawing.Point(79, 135)
+        Me.MetroLabel4.Name = "MetroLabel4"
+        Me.MetroLabel4.Size = New System.Drawing.Size(20, 25)
+        Me.MetroLabel4.TabIndex = 81
+        Me.MetroLabel4.Text = "*"
+        '
+        'MetroLabel5
+        '
+        Me.MetroLabel5.AutoSize = True
+        Me.MetroLabel5.BackColor = System.Drawing.Color.Transparent
+        Me.MetroLabel5.FontSize = MetroFramework.MetroLabelSize.Tall
+        Me.MetroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Bold
+        Me.MetroLabel5.ForeColor = System.Drawing.Color.Red
+        Me.MetroLabel5.Location = New System.Drawing.Point(121, 51)
+        Me.MetroLabel5.Name = "MetroLabel5"
+        Me.MetroLabel5.Size = New System.Drawing.Size(20, 25)
+        Me.MetroLabel5.TabIndex = 82
+        Me.MetroLabel5.Text = "*"
+        '
+        'MetroLabel6
+        '
+        Me.MetroLabel6.AutoSize = True
+        Me.MetroLabel6.BackColor = System.Drawing.Color.Transparent
+        Me.MetroLabel6.FontSize = MetroFramework.MetroLabelSize.Tall
+        Me.MetroLabel6.FontWeight = MetroFramework.MetroLabelWeight.Bold
+        Me.MetroLabel6.ForeColor = System.Drawing.Color.Red
+        Me.MetroLabel6.Location = New System.Drawing.Point(121, 20)
+        Me.MetroLabel6.Name = "MetroLabel6"
+        Me.MetroLabel6.Size = New System.Drawing.Size(20, 25)
+        Me.MetroLabel6.TabIndex = 82
+        Me.MetroLabel6.Text = "*"
+        '
+        'MetroLabel7
+        '
+        Me.MetroLabel7.AutoSize = True
+        Me.MetroLabel7.BackColor = System.Drawing.Color.Transparent
+        Me.MetroLabel7.FontSize = MetroFramework.MetroLabelSize.Tall
+        Me.MetroLabel7.FontWeight = MetroFramework.MetroLabelWeight.Bold
+        Me.MetroLabel7.ForeColor = System.Drawing.Color.Red
+        Me.MetroLabel7.Location = New System.Drawing.Point(201, 83)
+        Me.MetroLabel7.Name = "MetroLabel7"
+        Me.MetroLabel7.Size = New System.Drawing.Size(20, 25)
+        Me.MetroLabel7.TabIndex = 82
+        Me.MetroLabel7.Text = "*"
+        '
+        'ChkBloqCliente
+        '
+        Me.ChkBloqCliente.AutoSize = True
+        Me.ChkBloqCliente.FontSize = MetroFramework.MetroCheckBoxSize.Medium
+        Me.ChkBloqCliente.FontWeight = MetroFramework.MetroCheckBoxWeight.Bold
+        Me.ChkBloqCliente.ForeColor = System.Drawing.Color.Black
+        Me.ChkBloqCliente.Location = New System.Drawing.Point(230, 406)
+        Me.ChkBloqCliente.Name = "ChkBloqCliente"
+        Me.ChkBloqCliente.Size = New System.Drawing.Size(136, 19)
+        Me.ChkBloqCliente.TabIndex = 81
+        Me.ChkBloqCliente.Text = "Bloquear Cliente"
+        Me.ChkBloqCliente.UseSelectable = True
+        '
         'FrmClientes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -891,6 +1010,7 @@ Partial Class FrmClientes
         Me.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
         Me.ClientSize = New System.Drawing.Size(546, 462)
         Me.ControlBox = False
+        Me.Controls.Add(Me.ChkBloqCliente)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnEliminar)
         Me.Controls.Add(Me.btnSave)
@@ -900,15 +1020,18 @@ Partial Class FrmClientes
         Me.MaximizeBox = False
         Me.Name = "FrmClientes"
         Me.Text = "Datos del Cliente"
-        Me.MetroTabControl1.ResumeLayout(false)
-        Me.MetroTabPage1.ResumeLayout(false)
-        Me.MetroTabPage2.ResumeLayout(false)
-        Me.MetroTabPage3.ResumeLayout(false)
-        Me.MetroTabPage3.PerformLayout
-        Me.MetroTabPage4.ResumeLayout(false)
-        Me.ResumeLayout(false)
+        Me.MetroTabControl1.ResumeLayout(False)
+        Me.MetroTabPage1.ResumeLayout(False)
+        Me.MetroTabPage1.PerformLayout()
+        Me.MetroTabPage2.ResumeLayout(False)
+        Me.MetroTabPage2.PerformLayout()
+        Me.MetroTabPage3.ResumeLayout(False)
+        Me.MetroTabPage3.PerformLayout()
+        Me.MetroTabPage4.ResumeLayout(False)
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
 
-End Sub
+    End Sub
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents MetroTabControl1 As MetroFramework.Controls.MetroTabControl
     Friend WithEvents MetroTabPage1 As MetroFramework.Controls.MetroTabPage
@@ -944,4 +1067,12 @@ End Sub
     Friend WithEvents btnEliminar As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents cmbRegimen As MetroFramework.Controls.MetroComboBox
+    Friend WithEvents MetroLabel1 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents MetroLabel2 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents MetroLabel3 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents MetroLabel4 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents MetroLabel5 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents MetroLabel6 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents MetroLabel7 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents ChkBloqCliente As MetroFramework.Controls.MetroCheckBox
 End Class

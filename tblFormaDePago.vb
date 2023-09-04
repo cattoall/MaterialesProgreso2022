@@ -10,9 +10,9 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class tblUsoCFDI
+Partial Public Class tblFormaDePago
     Public Property IdComp As String
     Public Property Id As Integer
-    Public Property UsoCFDI As String
+    Public Property FormaPago As String
 
 End Class

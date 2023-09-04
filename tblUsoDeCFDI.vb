@@ -10,9 +10,9 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class subfamilia
+Partial Public Class tblUsoDeCFDI
     Public Property IdComp As String
-    Public Property clave As Long
-    Public Property descripcion As String
+    Public Property Id As Integer
+    Public Property UsoCFDI As String
 
 End Class
