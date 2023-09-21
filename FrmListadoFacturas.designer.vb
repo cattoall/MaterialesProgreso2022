@@ -47,6 +47,7 @@ Partial Class FrmListadoFacturas
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridTikect, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridConsulta, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -54,6 +55,7 @@ Partial Class FrmListadoFacturas
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button2)
         Me.GroupBox1.Controls.Add(Me.mBtnPrint)
         Me.GroupBox1.Controls.Add(Me.mBtnSearch)
         Me.GroupBox1.Controls.Add(Me.Button1)
@@ -81,7 +83,7 @@ Partial Class FrmListadoFacturas
         Me.mBtnPrint.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.mBtnPrint.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.print_16px
         Me.mBtnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.mBtnPrint.Location = New System.Drawing.Point(16, 462)
+        Me.mBtnPrint.Location = New System.Drawing.Point(18, 450)
         Me.mBtnPrint.Name = "mBtnPrint"
         Me.mBtnPrint.Size = New System.Drawing.Size(100, 28)
         Me.mBtnPrint.TabIndex = 83
@@ -124,7 +126,7 @@ Partial Class FrmListadoFacturas
         Me.dtFechaFinal.Location = New System.Drawing.Point(144, 37)
         Me.dtFechaFinal.MinimumSize = New System.Drawing.Size(0, 29)
         Me.dtFechaFinal.Name = "dtFechaFinal"
-        Me.dtFechaFinal.Size = New System.Drawing.Size(113, 30)
+        Me.dtFechaFinal.Size = New System.Drawing.Size(113, 29)
         Me.dtFechaFinal.TabIndex = 78
         '
         'dtFechaInicial
@@ -133,7 +135,7 @@ Partial Class FrmListadoFacturas
         Me.dtFechaInicial.Location = New System.Drawing.Point(16, 37)
         Me.dtFechaInicial.MinimumSize = New System.Drawing.Size(0, 29)
         Me.dtFechaInicial.Name = "dtFechaInicial"
-        Me.dtFechaInicial.Size = New System.Drawing.Size(113, 30)
+        Me.dtFechaInicial.Size = New System.Drawing.Size(113, 29)
         Me.dtFechaInicial.TabIndex = 77
         '
         'DataGridTikect
@@ -323,6 +325,20 @@ Partial Class FrmListadoFacturas
         Me.ToolTip1.InitialDelay = 50
         Me.ToolTip1.ReshowDelay = 10
         '
+        'Button2
+        '
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Button2.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.transmit_go
+        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button2.Location = New System.Drawing.Point(277, 247)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(100, 28)
+        Me.Button2.TabIndex = 84
+        Me.Button2.Text = "Timbrar"
+        Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'FrmListadoFacturas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
@@ -359,4 +375,5 @@ End Sub
     Friend WithEvents Button1 As Button
     Friend WithEvents mBtnPrint As Button
     Friend WithEvents mBtnSearch As Button
+    Friend WithEvents Button2 As Button
 End Class

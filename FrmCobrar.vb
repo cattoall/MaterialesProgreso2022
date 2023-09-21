@@ -59,26 +59,30 @@
     End Sub
 
     Private Sub btnPagar_Click(sender As Object, e As EventArgs) Handles btnPagar.Click
-        lv_monto = Val(Replace(lblmontoventa.Text, ",", ""))
-        lv_pago = Val(txtPago.Text)
+        Try
+            lv_monto = Val(Replace(lblmontoventa.Text, ",", ""))
+            lv_pago = Val(txtPago.Text)
 
-        Dim lv_resultado As Double = 0
-        If lv_pago >= lv_monto Then
-            txtPago.SelectAll()
-            lv_resultado = lv_pago - lv_monto
-            lblcambio.Text = CStr(lv_resultado)
-            Cambio = lblcambio.Text.ToString
-            PV_Contado_Cambio = lblcambio.Text.ToString
-            PV_Contado_Paga = CStr(lv_pago)
-            PagoContadoEfectuado = True
-            Close()
-        ElseIf lv_pago < lv_monto Then
-            MetroFramework.MetroMessageBox.Show(Me, "Monto de Venta no esta cubierto en su totalidad.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtPago.Focus()
-            txtPago.SelectAll()
-            PV_Contado_Cambio = ""
-            PV_Contado_Paga = ""
-            Exit Sub
-        End If
+            Dim lv_resultado As Double = 0
+            If lv_pago >= lv_monto Then
+                txtPago.SelectAll()
+                lv_resultado = lv_pago - lv_monto
+                lblcambio.Text = CStr(lv_resultado)
+                Cambio = lblcambio.Text
+                PV_Contado_Cambio = lblcambio.Text
+                PV_Contado_Paga = CStr(lv_pago)
+                PagoContadoEfectuado = True
+                Close()
+            ElseIf lv_pago < lv_monto Then
+                MetroFramework.MetroMessageBox.Show(Me, "Monto de Venta no esta cubierto en su totalidad.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                txtPago.Focus()
+                txtPago.SelectAll()
+                PV_Contado_Cambio = ""
+                PV_Contado_Paga = ""
+                Exit Sub
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 End Class

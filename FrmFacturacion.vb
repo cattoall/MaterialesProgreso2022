@@ -696,7 +696,7 @@ Public Class FrmFacturacion
                     Next
                 Else
                     PrBImprimiendo.Value = 100
-                    MsgBox($"Código: {respuesta.Codigo_MF_Numero} Mensaje: {respuesta.Codigo_MF_Texto}", MsgBoxStyle.Critical, Nothing)
+                    MsgBox($"Código: {respuesta.Codigo_MF_Numero} Mensaje: {respuesta.Codigo_MF_Texto} Mensaje2: {respuesta.MensajeOriginalPacJSON}", MsgBoxStyle.Critical, Nothing)
                     view = DataGridView1
                     DataGridView1 = view
 

@@ -1121,13 +1121,13 @@ SiguienteRegistro:
             strFoliosTicket.FolioActual = CStr(1)
             If DBModelo.Insert_PV_FoliosTicketActual(strFoliosTicket) Then
                 lv_folio = 1
-                lv_folioactual = CInt(gv_terminal & Now.Year & lv_folio)
+                lv_folioactual = CInt(CInt(gv_terminal) & Now.Year.ToString().Substring(2) & lv_folio)
             Else
                 MetroFramework.MetroMessageBox.Show(Me, "Error al intentar Crear registro en FoliosTicket", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
         Else
-            lv_folioactual = CInt(gv_terminal & Now.Year & lv_folio)
+            lv_folioactual = CInt(CInt(gv_terminal) & Now.Year.ToString().Substring(2) & lv_folio)
             strFoliosTicket = DBModelo.Get_PV_FoliosTicket(Now.Year, gv_terminal, CmbDocto.Text)
         End If
 
