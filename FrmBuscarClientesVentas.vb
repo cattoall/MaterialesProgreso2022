@@ -124,37 +124,40 @@
             Case Else
                 Clientes = DBModelo.GetClientesByNameApatAmat(txtBusqueda.Text)
                 For Each row In Clientes
-                    Dim line As String() = New String() {
-                                                    row.IdComp,
-                                                    row.clave.ToString,
-                                                    row.nombre,
-                                                    row.apat,
-                                                    row.amat,
-                                                    row.calle,
-                                                    row.numero,
-                                                    row.colonia,
-                                                    row.ciudad,
-                                                    row.estado,
-                                                    row.cp,
-                                                    row.rfc,
-                                                    row.telefono,
-                                                    row.celular,
-                                                    row.correo,
-                                                    row.observaciones,
-                                                    row.listaPrecios,
-                                                    row.diasCredito.ToString,
-                                                    row.limiteCredito.ToString,
-                                                    row.tipo_venta,
-                                                    row.metodopago,
-                                                    row.codiciones,
-                                                    row.cuenta,
-                                                    row.banco,
-                                                    row.tasa_cero.ToString,
-                                                    row.FormaPago,
-                                                    row.UsoCFDI,
-                                                    row.RegimenFiscal
-                                                    }
-                    MetroGrid1.Rows.Add(line)
+                    If row.Bloqueado = 0 Then
+
+                        Dim line As String() = New String() {
+                                                        row.IdComp,
+                                                        row.clave.ToString,
+                                                        row.nombre,
+                                                        row.apat,
+                                                        row.amat,
+                                                        row.calle,
+                                                        row.numero,
+                                                        row.colonia,
+                                                        row.ciudad,
+                                                        row.estado,
+                                                        row.cp,
+                                                        row.rfc,
+                                                        row.telefono,
+                                                        row.celular,
+                                                        row.correo,
+                                                        row.observaciones,
+                                                        row.listaPrecios,
+                                                        row.diasCredito.ToString,
+                                                        row.limiteCredito.ToString,
+                                                        row.tipo_venta,
+                                                        row.metodopago,
+                                                        row.codiciones,
+                                                        row.cuenta,
+                                                        row.banco,
+                                                        row.tasa_cero.ToString,
+                                                        row.FormaPago,
+                                                        row.UsoCFDI,
+                                                        row.RegimenFiscal
+                                                        }
+                        MetroGrid1.Rows.Add(line)
+                    End If
                 Next
         End Select
 

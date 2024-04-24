@@ -70,6 +70,8 @@ Public Class FrmDevTickets
                 Label9.Visible = True
                 Label9.Text = CStr(wVenta.idCliente)
 
+                DGVDetalle.Refresh()
+                DGVDetalle.Rows.Clear()
                 Dim tTicket As List(Of tblTicket) = DBModelo.Get_PV_TicketsDetalle(CInt(wVenta.nticket))
                 DGVDetalle.ResumeLayout()
                 For Each det In tTicket

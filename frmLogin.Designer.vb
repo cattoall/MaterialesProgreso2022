@@ -21,6 +21,7 @@ Partial Class frmLogin
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
+    <Obsolete>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
         Me.cmbSistema = New MetroFramework.Controls.MetroComboBox()

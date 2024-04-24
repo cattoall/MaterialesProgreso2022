@@ -20,7 +20,8 @@ Partial Class FrmBuscarMarcas
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
+    <Obsolete>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -194,10 +195,10 @@ Partial Class FrmBuscarMarcas
         Me.Controls.Add(Me.txtBusqueda)
         Me.Name = "FrmBuscarMarcas"
         Me.Text = "Buscar/Agregar Marcas"
-        CType(Me.MetroGrid1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ResumeLayout(false)
+        CType(Me.MetroGrid1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
 
-End Sub
+    End Sub
     Friend WithEvents txtMarca As MetroFramework.Controls.MetroTextBox
     Friend WithEvents txtBusqueda As MetroFramework.Controls.MetroTextBox
     Friend WithEvents MetroGrid1 As MetroFramework.Controls.MetroGrid

@@ -254,6 +254,11 @@
             Else
                 strCliente.tasa_cero = 0
             End If
+            If ChkBloqCliente.Checked = True Then
+                strCliente.Bloqueado = 1
+            Else
+                strCliente.Bloqueado = 0
+            End If
             strCliente.FormaPago = lv_FormaPago(0)
             strCliente.metodopago = lv_MetodoPago(0)
             strCliente.UsoCFDI = lv_UsoCFDI(0)
@@ -293,6 +298,11 @@
                 Else
                     strCliente.tasa_cero = 0
                 End If
+                If ChkBloqCliente.Checked = True Then
+                    strCliente.Bloqueado = 1
+                Else
+                    strCliente.Bloqueado = 0
+                End If
                 strCliente.FormaPago = lv_FormaPago(0)
                 strCliente.metodopago = lv_MetodoPago(0)
                 strCliente.UsoCFDI = lv_UsoCFDI(0)
@@ -330,7 +340,7 @@
             End If
         End If
 
-        FrmBuscarClientes.txtBusqueda.Text = txtNombre.Text
+        'FrmBuscarClientes.txtBusqueda.Text = txtNombre.Text
         Add_Update = False
         LimpiarVar()
         Close()

@@ -22,6 +22,7 @@ Partial Class FrmBuscarClientesVentas
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
+    <Obsolete>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()

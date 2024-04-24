@@ -20,7 +20,8 @@ Partial Class FrmBuscarClientes
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
+    <Obsolete>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -60,6 +61,7 @@ Partial Class FrmBuscarClientes
         Me.FormaPago_G1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UsoCFDI_G1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RegimenFiscal_G1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Bloqueo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.MetroGrid1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -92,7 +94,7 @@ Partial Class FrmBuscarClientes
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.MetroGrid1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.MetroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.MetroGrid1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdComp_G1, Me.ID_G1, Me.Nombre_G1, Me.Paterno_G1, Me.Materno_G1, Me.Calle_G1, Me.Numero_G1, Me.Colonia_G1, Me.Ciudad_G1, Me.Estado_G1, Me.CP_G1, Me.RFC_G1, Me.Telefono_G1, Me.Celular_G1, Me.Correo_G1, Me.Observaciones_G1, Me.ListaPrecios_G1, Me.DiasCredito_G1, Me.LimiteCredito_G1, Me.TipoVenta_G1, Me.MetodoPago_G1, Me.Condiciones_G1, Me.Cuenta_G1, Me.Banco_G1, Me.TasaCero_G1, Me.FormaPago_G1, Me.UsoCFDI_G1, Me.RegimenFiscal_G1})
+        Me.MetroGrid1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdComp_G1, Me.ID_G1, Me.Nombre_G1, Me.Paterno_G1, Me.Materno_G1, Me.Calle_G1, Me.Numero_G1, Me.Colonia_G1, Me.Ciudad_G1, Me.Estado_G1, Me.CP_G1, Me.RFC_G1, Me.Telefono_G1, Me.Celular_G1, Me.Correo_G1, Me.Observaciones_G1, Me.ListaPrecios_G1, Me.DiasCredito_G1, Me.LimiteCredito_G1, Me.TipoVenta_G1, Me.MetodoPago_G1, Me.Condiciones_G1, Me.Cuenta_G1, Me.Banco_G1, Me.TasaCero_G1, Me.FormaPago_G1, Me.UsoCFDI_G1, Me.RegimenFiscal_G1, Me.Bloqueo})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -380,6 +382,13 @@ Partial Class FrmBuscarClientes
         Me.RegimenFiscal_G1.Name = "RegimenFiscal_G1"
         Me.RegimenFiscal_G1.ReadOnly = True
         '
+        'Bloqueo
+        '
+        Me.Bloqueo.HeaderText = "Bloqueo"
+        Me.Bloqueo.Name = "Bloqueo"
+        Me.Bloqueo.ReadOnly = True
+        Me.Bloqueo.Visible = False
+        '
         'FrmBuscarClientes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -396,10 +405,10 @@ Partial Class FrmBuscarClientes
         Me.MaximizeBox = False
         Me.Name = "FrmBuscarClientes"
         Me.Text = "Buscar Clientes"
-        CType(Me.MetroGrid1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ResumeLayout(false)
+        CType(Me.MetroGrid1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
 
-End Sub
+    End Sub
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents MetroGrid1 As MetroFramework.Controls.MetroGrid
     Friend WithEvents txtBusqueda As MetroFramework.Controls.MetroTextBox
@@ -433,4 +442,5 @@ End Sub
     Friend WithEvents FormaPago_G1 As DataGridViewTextBoxColumn
     Friend WithEvents UsoCFDI_G1 As DataGridViewTextBoxColumn
     Friend WithEvents RegimenFiscal_G1 As DataGridViewTextBoxColumn
+    Friend WithEvents Bloqueo As DataGridViewTextBoxColumn
 End Class

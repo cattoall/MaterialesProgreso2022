@@ -2,7 +2,7 @@
 Public Class FrmBuscarClientes
     Private Sub LimpiarObjetos()
         MetroGrid1.Refresh()
-        txtBusqueda.Clear()
+        'txtBusqueda.Clear()
     End Sub
 
     Private Sub FrmBuscarClientes_Disposed(sender As Object, e As System.EventArgs) Handles Me.Disposed
@@ -72,7 +72,8 @@ Public Class FrmBuscarClientes
                                                     row.tasa_cero.ToString,
                                                     row.FormaPago,
                                                     row.UsoCFDI,
-                                                    row.RegimenFiscal
+                                                    row.RegimenFiscal,
+                                                    row.Bloqueado.ToString
                                                     }
             MetroGrid1.Rows.Add(line)
         Next
@@ -152,6 +153,7 @@ Public Class FrmBuscarClientes
             Else
                 FrmClientes.ChkTasaCero.Checked = False
             End If
+
             If Not IsDBNull(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value) Then
                 If CStr(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value) <> "" Then
                     FrmClientes.cmbFormaPago.SelectedIndex = FrmClientes.cmbFormaPago.FindString(CStr(MetroGrid1.Item(25, MetroGrid1.CurrentRow.Index).Value))
@@ -180,6 +182,12 @@ Public Class FrmBuscarClientes
                 End If
             Else
                 FrmClientes.cmbRegimen.SelectedIndex = -1
+            End If
+
+            If CInt(MetroGrid1.Item(28, MetroGrid1.CurrentRow.Index).Value) = 1 Then
+                FrmClientes.ChkBloqCliente.Checked = True
+            Else
+                FrmClientes.ChkBloqCliente.Checked = False
             End If
 
             FrmClientes.ShowDialog()

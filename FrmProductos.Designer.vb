@@ -20,7 +20,8 @@ Partial Class FrmProductos
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
+    <Obsolete>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.txtDescripcion = New MetroFramework.Controls.MetroTextBox()
@@ -78,7 +79,7 @@ Partial Class FrmProductos
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
-        Me.SuspendLayout
+        Me.SuspendLayout()
         '
         'txtDescripcion
         '
@@ -1041,10 +1042,10 @@ Partial Class FrmProductos
         Me.MaximizeBox = False
         Me.Name = "FrmProductos"
         Me.Text = "Datos del Producto"
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
 
-End Sub
+    End Sub
     Friend WithEvents CmdAgrupo As System.Windows.Forms.Button
     Friend WithEvents CmdSubFam As System.Windows.Forms.Button
     Friend WithEvents CmdLinea As System.Windows.Forms.Button

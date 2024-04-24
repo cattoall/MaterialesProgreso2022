@@ -1189,7 +1189,7 @@ SiguienteRegistro:
                         Exit Sub
                     End If
                 Else
-                    If ImprimeCotizacion(CStr(lv_folioactual), True, CmbDocto.Text) = False Then
+                    If ImprimeCotizacion(CStr(lv_folioactual), False, CmbDocto.Text) = False Then
                         MetroFramework.MetroMessageBox.Show(Me, "Error al Generar la Impresión de la Cotización, favor de Re-Imprimir", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Call NuevaVenta()
                         Exit Sub
