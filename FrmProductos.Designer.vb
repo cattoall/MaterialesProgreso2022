@@ -79,6 +79,8 @@ Partial Class FrmProductos
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
+        Me.nudDescuento = New System.Windows.Forms.NumericUpDown()
+        CType(Me.nudDescuento, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtDescripcion
@@ -88,9 +90,9 @@ Partial Class FrmProductos
         '
         '
         Me.txtDescripcion.CustomButton.Image = Nothing
-        Me.txtDescripcion.CustomButton.Location = New System.Drawing.Point(279, 1)
+        Me.txtDescripcion.CustomButton.Location = New System.Drawing.Point(372, 1)
         Me.txtDescripcion.CustomButton.Name = ""
-        Me.txtDescripcion.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtDescripcion.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtDescripcion.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtDescripcion.CustomButton.TabIndex = 1
         Me.txtDescripcion.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -121,9 +123,9 @@ Partial Class FrmProductos
         '
         '
         Me.txtClave.CustomButton.Image = Nothing
-        Me.txtClave.CustomButton.Location = New System.Drawing.Point(107, 1)
+        Me.txtClave.CustomButton.Location = New System.Drawing.Point(143, 1)
         Me.txtClave.CustomButton.Name = ""
-        Me.txtClave.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtClave.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtClave.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtClave.CustomButton.TabIndex = 1
         Me.txtClave.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -155,9 +157,9 @@ Partial Class FrmProductos
         '
         '
         Me.txtCodigoBarras.CustomButton.Image = Nothing
-        Me.txtCodigoBarras.CustomButton.Location = New System.Drawing.Point(107, 1)
+        Me.txtCodigoBarras.CustomButton.Location = New System.Drawing.Point(143, 1)
         Me.txtCodigoBarras.CustomButton.Name = ""
-        Me.txtCodigoBarras.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtCodigoBarras.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtCodigoBarras.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtCodigoBarras.CustomButton.TabIndex = 1
         Me.txtCodigoBarras.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -188,9 +190,9 @@ Partial Class FrmProductos
         '
         '
         Me.txtIdProducto.CustomButton.Image = Nothing
-        Me.txtIdProducto.CustomButton.Location = New System.Drawing.Point(44, 1)
+        Me.txtIdProducto.CustomButton.Location = New System.Drawing.Point(58, 1)
         Me.txtIdProducto.CustomButton.Name = ""
-        Me.txtIdProducto.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtIdProducto.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtIdProducto.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtIdProducto.CustomButton.TabIndex = 1
         Me.txtIdProducto.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -345,16 +347,16 @@ Partial Class FrmProductos
         '
         '
         Me.txtPrecioP3.CustomButton.Image = Nothing
-        Me.txtPrecioP3.CustomButton.Location = New System.Drawing.Point(70, 1)
+        Me.txtPrecioP3.CustomButton.Location = New System.Drawing.Point(96, 1)
         Me.txtPrecioP3.CustomButton.Name = ""
-        Me.txtPrecioP3.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtPrecioP3.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtPrecioP3.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtPrecioP3.CustomButton.TabIndex = 1
         Me.txtPrecioP3.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
         Me.txtPrecioP3.CustomButton.UseSelectable = True
         Me.txtPrecioP3.CustomButton.Visible = False
         Me.txtPrecioP3.Lines = New String(-1) {}
-        Me.txtPrecioP3.Location = New System.Drawing.Point(391, 458)
+        Me.txtPrecioP3.Location = New System.Drawing.Point(444, 458)
         Me.txtPrecioP3.MaxLength = 32767
         Me.txtPrecioP3.Name = "txtPrecioP3"
         Me.txtPrecioP3.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -364,7 +366,7 @@ Partial Class FrmProductos
         Me.txtPrecioP3.SelectionLength = 0
         Me.txtPrecioP3.SelectionStart = 0
         Me.txtPrecioP3.ShortcutsEnabled = True
-        Me.txtPrecioP3.Size = New System.Drawing.Size(115, 23)
+        Me.txtPrecioP3.Size = New System.Drawing.Size(118, 23)
         Me.txtPrecioP3.TabIndex = 103
         Me.txtPrecioP3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtPrecioP3.UseSelectable = True
@@ -378,16 +380,16 @@ Partial Class FrmProductos
         '
         '
         Me.txtPrecioP2.CustomButton.Image = Nothing
-        Me.txtPrecioP2.CustomButton.Location = New System.Drawing.Point(70, 1)
+        Me.txtPrecioP2.CustomButton.Location = New System.Drawing.Point(96, 1)
         Me.txtPrecioP2.CustomButton.Name = ""
-        Me.txtPrecioP2.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtPrecioP2.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtPrecioP2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtPrecioP2.CustomButton.TabIndex = 1
         Me.txtPrecioP2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
         Me.txtPrecioP2.CustomButton.UseSelectable = True
         Me.txtPrecioP2.CustomButton.Visible = False
         Me.txtPrecioP2.Lines = New String(-1) {}
-        Me.txtPrecioP2.Location = New System.Drawing.Point(391, 429)
+        Me.txtPrecioP2.Location = New System.Drawing.Point(444, 429)
         Me.txtPrecioP2.MaxLength = 32767
         Me.txtPrecioP2.Name = "txtPrecioP2"
         Me.txtPrecioP2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -397,7 +399,7 @@ Partial Class FrmProductos
         Me.txtPrecioP2.SelectionLength = 0
         Me.txtPrecioP2.SelectionStart = 0
         Me.txtPrecioP2.ShortcutsEnabled = True
-        Me.txtPrecioP2.Size = New System.Drawing.Size(115, 23)
+        Me.txtPrecioP2.Size = New System.Drawing.Size(118, 23)
         Me.txtPrecioP2.TabIndex = 102
         Me.txtPrecioP2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtPrecioP2.UseSelectable = True
@@ -411,16 +413,16 @@ Partial Class FrmProductos
         '
         '
         Me.txtPrecioP1.CustomButton.Image = Nothing
-        Me.txtPrecioP1.CustomButton.Location = New System.Drawing.Point(70, 1)
+        Me.txtPrecioP1.CustomButton.Location = New System.Drawing.Point(96, 1)
         Me.txtPrecioP1.CustomButton.Name = ""
-        Me.txtPrecioP1.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtPrecioP1.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtPrecioP1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtPrecioP1.CustomButton.TabIndex = 1
         Me.txtPrecioP1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
         Me.txtPrecioP1.CustomButton.UseSelectable = True
         Me.txtPrecioP1.CustomButton.Visible = False
         Me.txtPrecioP1.Lines = New String(-1) {}
-        Me.txtPrecioP1.Location = New System.Drawing.Point(391, 400)
+        Me.txtPrecioP1.Location = New System.Drawing.Point(444, 400)
         Me.txtPrecioP1.MaxLength = 32767
         Me.txtPrecioP1.Name = "txtPrecioP1"
         Me.txtPrecioP1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -430,7 +432,7 @@ Partial Class FrmProductos
         Me.txtPrecioP1.SelectionLength = 0
         Me.txtPrecioP1.SelectionStart = 0
         Me.txtPrecioP1.ShortcutsEnabled = True
-        Me.txtPrecioP1.Size = New System.Drawing.Size(115, 23)
+        Me.txtPrecioP1.Size = New System.Drawing.Size(118, 23)
         Me.txtPrecioP1.TabIndex = 101
         Me.txtPrecioP1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtPrecioP1.UseSelectable = True
@@ -444,9 +446,9 @@ Partial Class FrmProductos
         '
         '
         Me.txtPrecioPublico.CustomButton.Image = Nothing
-        Me.txtPrecioPublico.CustomButton.Location = New System.Drawing.Point(70, 1)
+        Me.txtPrecioPublico.CustomButton.Location = New System.Drawing.Point(93, 1)
         Me.txtPrecioPublico.CustomButton.Name = ""
-        Me.txtPrecioPublico.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtPrecioPublico.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtPrecioPublico.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtPrecioPublico.CustomButton.TabIndex = 1
         Me.txtPrecioPublico.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -477,9 +479,9 @@ Partial Class FrmProductos
         '
         '
         Me.txtPrecioCosto.CustomButton.Image = Nothing
-        Me.txtPrecioCosto.CustomButton.Location = New System.Drawing.Point(70, 1)
+        Me.txtPrecioCosto.CustomButton.Location = New System.Drawing.Point(93, 1)
         Me.txtPrecioCosto.CustomButton.Name = ""
-        Me.txtPrecioCosto.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtPrecioCosto.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtPrecioCosto.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtPrecioCosto.CustomButton.TabIndex = 1
         Me.txtPrecioCosto.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -510,9 +512,9 @@ Partial Class FrmProductos
         '
         '
         Me.txtPrecioLista.CustomButton.Image = Nothing
-        Me.txtPrecioLista.CustomButton.Location = New System.Drawing.Point(70, 1)
+        Me.txtPrecioLista.CustomButton.Location = New System.Drawing.Point(93, 1)
         Me.txtPrecioLista.CustomButton.Name = ""
-        Me.txtPrecioLista.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtPrecioLista.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtPrecioLista.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtPrecioLista.CustomButton.TabIndex = 1
         Me.txtPrecioLista.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -551,9 +553,9 @@ Partial Class FrmProductos
         '
         '
         Me.txtClaveProducto.CustomButton.Image = Nothing
-        Me.txtClaveProducto.CustomButton.Location = New System.Drawing.Point(107, 1)
+        Me.txtClaveProducto.CustomButton.Location = New System.Drawing.Point(143, 1)
         Me.txtClaveProducto.CustomButton.Name = ""
-        Me.txtClaveProducto.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtClaveProducto.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtClaveProducto.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtClaveProducto.CustomButton.TabIndex = 1
         Me.txtClaveProducto.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -584,9 +586,9 @@ Partial Class FrmProductos
         '
         '
         Me.txtClaveUnidad.CustomButton.Image = Nothing
-        Me.txtClaveUnidad.CustomButton.Location = New System.Drawing.Point(125, 1)
+        Me.txtClaveUnidad.CustomButton.Location = New System.Drawing.Point(167, 1)
         Me.txtClaveUnidad.CustomButton.Name = ""
-        Me.txtClaveUnidad.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtClaveUnidad.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtClaveUnidad.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtClaveUnidad.CustomButton.TabIndex = 1
         Me.txtClaveUnidad.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -618,9 +620,9 @@ Partial Class FrmProductos
         '
         '
         Me.txtDesc.CustomButton.Image = Nothing
-        Me.txtDesc.CustomButton.Location = New System.Drawing.Point(44, 1)
+        Me.txtDesc.CustomButton.Location = New System.Drawing.Point(58, 1)
         Me.txtDesc.CustomButton.Name = ""
-        Me.txtDesc.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtDesc.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtDesc.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtDesc.CustomButton.TabIndex = 1
         Me.txtDesc.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -652,9 +654,9 @@ Partial Class FrmProductos
         '
         '
         Me.txtStock.CustomButton.Image = Nothing
-        Me.txtStock.CustomButton.Location = New System.Drawing.Point(44, 1)
+        Me.txtStock.CustomButton.Location = New System.Drawing.Point(58, 1)
         Me.txtStock.CustomButton.Name = ""
-        Me.txtStock.CustomButton.Size = New System.Drawing.Size(16, 17)
+        Me.txtStock.CustomButton.Size = New System.Drawing.Size(21, 21)
         Me.txtStock.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
         Me.txtStock.CustomButton.TabIndex = 1
         Me.txtStock.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
@@ -894,7 +896,7 @@ Partial Class FrmProductos
         '
         Me.MetroLabel19.AutoSize = True
         Me.MetroLabel19.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel19.Location = New System.Drawing.Point(311, 404)
+        Me.MetroLabel19.Location = New System.Drawing.Point(364, 404)
         Me.MetroLabel19.Name = "MetroLabel19"
         Me.MetroLabel19.Size = New System.Drawing.Size(66, 19)
         Me.MetroLabel19.TabIndex = 126
@@ -904,7 +906,7 @@ Partial Class FrmProductos
         '
         Me.MetroLabel20.AutoSize = True
         Me.MetroLabel20.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel20.Location = New System.Drawing.Point(311, 433)
+        Me.MetroLabel20.Location = New System.Drawing.Point(364, 433)
         Me.MetroLabel20.Name = "MetroLabel20"
         Me.MetroLabel20.Size = New System.Drawing.Size(66, 19)
         Me.MetroLabel20.TabIndex = 127
@@ -914,7 +916,7 @@ Partial Class FrmProductos
         '
         Me.MetroLabel21.AutoSize = True
         Me.MetroLabel21.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel21.Location = New System.Drawing.Point(311, 462)
+        Me.MetroLabel21.Location = New System.Drawing.Point(364, 462)
         Me.MetroLabel21.Name = "MetroLabel21"
         Me.MetroLabel21.Size = New System.Drawing.Size(66, 19)
         Me.MetroLabel21.TabIndex = 128
@@ -938,7 +940,7 @@ Partial Class FrmProductos
         Me.Button1.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.close_window_16px
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button1.Location = New System.Drawing.Point(671, 462)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 131
@@ -953,7 +955,7 @@ Partial Class FrmProductos
         Me.btnGuardar.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.save_16px
         Me.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnGuardar.Location = New System.Drawing.Point(671, 407)
-        Me.btnGuardar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnGuardar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(75, 23)
         Me.btnGuardar.TabIndex = 130
@@ -968,13 +970,22 @@ Partial Class FrmProductos
         Me.btnEliminar.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.trash_can_16px
         Me.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnEliminar.Location = New System.Drawing.Point(671, 435)
-        Me.btnEliminar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnEliminar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(75, 23)
         Me.btnEliminar.TabIndex = 132
         Me.btnEliminar.Text = "Eliminar"
         Me.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnEliminar.UseVisualStyleBackColor = True
+        '
+        'nudDescuento
+        '
+        Me.nudDescuento.DecimalPlaces = 2
+        Me.nudDescuento.Location = New System.Drawing.Point(254, 402)
+        Me.nudDescuento.Name = "nudDescuento"
+        Me.nudDescuento.Size = New System.Drawing.Size(61, 20)
+        Me.nudDescuento.TabIndex = 133
+        Me.nudDescuento.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'FrmProductos
         '
@@ -983,6 +994,7 @@ Partial Class FrmProductos
         Me.BackgroundImage = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.FondoLogin
         Me.ClientSize = New System.Drawing.Size(766, 522)
         Me.ControlBox = False
+        Me.Controls.Add(Me.nudDescuento)
         Me.Controls.Add(Me.btnEliminar)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnGuardar)
@@ -1042,6 +1054,7 @@ Partial Class FrmProductos
         Me.MaximizeBox = False
         Me.Name = "FrmProductos"
         Me.Text = "Datos del Producto"
+        CType(Me.nudDescuento, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1112,4 +1125,5 @@ Partial Class FrmProductos
     Friend WithEvents Button1 As Button
     Friend WithEvents btnGuardar As Button
     Friend WithEvents btnEliminar As Button
+    Friend WithEvents nudDescuento As NumericUpDown
 End Class

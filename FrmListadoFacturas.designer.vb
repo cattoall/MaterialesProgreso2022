@@ -32,6 +32,7 @@ Partial Class FrmListadoFacturas
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.mBtnPrint = New System.Windows.Forms.Button()
         Me.mBtnSearch = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -47,7 +48,6 @@ Partial Class FrmListadoFacturas
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridTikect, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridConsulta, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -76,6 +76,20 @@ Partial Class FrmListadoFacturas
         Me.GroupBox1.Size = New System.Drawing.Size(995, 500)
         Me.GroupBox1.TabIndex = 9
         Me.GroupBox1.TabStop = False
+        '
+        'Button2
+        '
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Button2.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.transmit_go
+        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button2.Location = New System.Drawing.Point(277, 247)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(100, 28)
+        Me.Button2.TabIndex = 84
+        Me.Button2.Text = "Timbrar"
+        Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'mBtnPrint
         '
@@ -196,7 +210,7 @@ Partial Class FrmListadoFacturas
         Me.DataGridConsulta.AllowUserToAddRows = False
         Me.DataGridConsulta.AllowUserToDeleteRows = False
         Me.DataGridConsulta.AllowUserToResizeRows = False
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.Black
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke
         DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
         Me.DataGridConsulta.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
@@ -324,20 +338,6 @@ Partial Class FrmListadoFacturas
         Me.ToolTip1.AutoPopDelay = 5000
         Me.ToolTip1.InitialDelay = 50
         Me.ToolTip1.ReshowDelay = 10
-        '
-        'Button2
-        '
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.Button2.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.transmit_go
-        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button2.Location = New System.Drawing.Point(277, 247)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(100, 28)
-        Me.Button2.TabIndex = 84
-        Me.Button2.Text = "Timbrar"
-        Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'FrmListadoFacturas
         '

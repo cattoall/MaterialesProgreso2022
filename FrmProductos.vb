@@ -249,7 +249,8 @@ Public Class FrmProductos
             Exit Sub
         End If
 
-        factorCosto = grp.factorCosto
+        'factorCosto = grp.factorCosto
+        factorCosto = nudDescuento.Value
         factorPublico = grp.factorPublico
         factorP1 = grp.factorP1
         factorP2 = grp.factorP2
@@ -272,20 +273,24 @@ Public Class FrmProductos
 
         'Precio Publico
         factorPublico = factorPublico / 100
-        txtPrecioPublico.Text = Format(precioCosto / factorPublico, "###,###,##0.00")
+        Dim RoundPP = Math.Round(precioCosto / factorPublico, 0)
+        txtPrecioPublico.Text = Format(RoundPP, "###,###,##0.00")
         precioPublico = CDbl(txtPrecioPublico.Text)
 
         'Precio P1
         factorP1 = (factorP1 / 100)
-        txtPrecioP1.Text = Format(precioPublico * factorP1, "###,###,##0.00")
+        Dim RoundP1 = Math.Round(precioPublico * factorP1, 0)
+        txtPrecioP1.Text = Format(RoundP1, "###,###,##0.00")
 
         'Precio P2
         factorP2 = (factorP2 / 100)
-        txtPrecioP2.Text = Format(precioPublico * factorP2, "###,###,##0.00")
+        Dim RoundP2 = Math.Round(precioPublico * factorP2, 0)
+        txtPrecioP2.Text = Format(RoundP2, "###,###,##0.00")
 
         'Precio P3
         factorP3 = (factorP3 / 100)
-        txtPrecioP3.Text = Format(precioPublico * factorP3, "###,###,##0.00")
+        Dim RoundP3 = Math.Round(precioPublico * factorP3, 0)
+        txtPrecioP3.Text = Format(RoundP3, "###,###,##0.00")
 
     End Sub
 
@@ -589,6 +594,7 @@ Public Class FrmProductos
         StrProductos.unidadMedida = CmbUnidad.Text
         StrProductos.marca = ""
         StrProductos.grupo = CmbGrupo.Text
+        StrProductos.descMarca = nudDescuento.Value
         StrProductos.familia = CmbFamilia.Text
         StrProductos.subfamilia = CmbSubFamilia.Text
         StrProductos.linea = CmbLinea.Text
@@ -655,5 +661,19 @@ Public Class FrmProductos
                 txtClaveUnidad.Text = "MTR"
         End Select
 
+    End Sub
+
+    Private Sub nudDescuento_MouseDown(sender As Object, e As MouseEventArgs) Handles nudDescuento.MouseDown
+        Calcula_Precios()
+    End Sub
+
+    Private Sub nudDescuento_KeyPress(sender As Object, e As KeyPressEventArgs) Handles nudDescuento.KeyPress
+        If e.KeyChar = Convert.ToChar(Keys.Enter) Then
+            If chkPrecioManual.Checked = False Then
+                Calcula_Precios()
+                txtPrecioLista.Focus()
+                txtPrecioLista.SelectAll()
+            End If
+        End If
     End Sub
 End Class

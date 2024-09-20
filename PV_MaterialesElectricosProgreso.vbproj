@@ -686,6 +686,9 @@
     <Compile Include="tblTicket.vb">
       <DependentUpon>DBSalvador.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblTicketComp.vb">
+      <DependentUpon>DBSalvador.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblTicketCotiza.vb">
       <DependentUpon>DBSalvador.tt</DependentUpon>
     </Compile>
@@ -730,9 +733,6 @@
     </Compile>
     <Compile Include="tblWVventas.vb">
       <DependentUpon>DBWendy.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ticket_com.vb">
-      <DependentUpon>DBSalvador.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

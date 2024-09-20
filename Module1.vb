@@ -925,6 +925,212 @@ Module Module1
     End Sub
     'END ***********************************Imprimir ReportViewer directo a Impresora******************************************
 
+    Public Function GeneraArchivoINI(noFactura As String, folioFactura As String) As Boolean
+
+        Dim sdk As MFSDK
+
+        Dim wFacturas As tblFacturaTotal = DBModelo.GetFacturaHeader(noFactura)
+        If Not wFacturas Is Nothing Then
+            'Generación del archivo para envío electrónico al SAT
+            sdk = New MFSDK
+            sdk.Iniciales.Add("version_cfdi", "4.0")
+            sdk.Iniciales.Add("MODOINI", "DIVISOR")
+            sdk.Iniciales.Add("cfdi", (gv_CDFI_XML_PATH & folioFactura & ".xml"))
+            sdk.Iniciales.Add("xml_debug", (gv_CDFI_XML_PATH & "sin_" & folioFactura & ".xml"))
+            sdk.Iniciales.Add("remueve_acentos", "NO")
+            sdk.Iniciales.Add("RESPUESTA_UTF8", "SI")
+            sdk.Iniciales.Add("html_a_txt", "NO")
+
+            sdk.AgregaObjeto(PAC)
+            sdk.AgregaObjeto(Conf)
+
+            Dim factura As New MFObject("factura")
+            Dim subtotal As String = wFacturas.subtotal.ToString()
+            Dim total As String = wFacturas.total.ToString()
+
+            factura("serie") = gv_SerieFacturaSalvador
+            factura("folio") = noFactura
+            factura("fecha_expedicion") = Now.ToString("s")
+            factura("metodo_pago") = wFacturas.metodopago
+            factura("forma_pago") = wFacturas.FormaPago
+            factura("condicionesDePago") = wFacturas.codiciones
+            factura("tipocomprobante") = "I"
+            factura("moneda") = "MXN"
+            factura("tipocambio") = "1"
+            factura("LugarExpedicion") = LugarExpedicion
+            factura("subtotal") = Trim(CStr(Math.Round(CDec(subtotal), 2)))
+            factura("total") = Trim(CStr(Math.Round(CDec(total), 2)))
+            factura("Exportacion") = "01"
+
+            Dim emisor As New MFObject("emisor")
+            emisor("rfc") = Trim(RFC.Replace("-", ""))
+            emisor("nombre") = Propietario
+            emisor("RegimenFiscal") = RegimenFiscal
+            sdk.AgregaObjeto(emisor)
+
+            Dim wCliente As tblClientes = DBModelo.GetCliente(Convert.ToInt32(wFacturas.id_cliente))
+
+            Dim receptor As New MFObject("receptor")
+            receptor("rfc") = wCliente.rfc
+            receptor("nombre") = wFacturas.cliente
+            receptor("UsoCFDI") = wFacturas.UsoCFDI
+            receptor("DomicilioFiscalReceptor") = wCliente.cp
+            receptor("RegimenFiscalReceptor") = wCliente.RegimenFiscal
+            sdk.AgregaObjeto(receptor)
+
+            Dim tFacturasDetalle As List(Of tblFactura) = DBModelo.GetFacturaByN(noFactura)
+            If tFacturasDetalle.Count > 0 Then
+                Dim baseTotal16 As Decimal = 0
+                Dim baseTotal0 As Decimal = 0
+                Dim vImporteTotalIVA As Decimal = 0
+                Dim oConceptos As New MFObject("conceptos")
+                For i = 0 To tFacturasDetalle.Count - 1
+                    Dim vImporte As String = tFacturasDetalle(i).subtotal.ToString()
+                    Dim vValorUnitario As String = tFacturasDetalle(i).precio.ToString()
+
+                    Dim oLinea As New MFObject(i.ToString)
+                    oLinea("ClaveProdServ") = tFacturasDetalle(i).ClaveProducto
+                    oLinea("NoIdentificacion") = tFacturasDetalle(i).idProducto.ToString()
+                    oLinea("Cantidad") = tFacturasDetalle(i).cantidad.ToString()
+                    oLinea("ClaveUnidad") = tFacturasDetalle(i).ClaveUnidad
+                    oLinea("Descripcion") = tFacturasDetalle(i).descripcion
+                    oLinea("ValorUnitario") = vValorUnitario
+                    oLinea("Importe") = Trim(CStr(Math.Round(CDec(vImporte), 2)))
+                    oLinea("ObjetoImp") = "02"
+
+                    If oLinea("ObjetoImp") = "02" Then
+                        Dim oImpuestos As New MFObject("Impuestos")
+                        Dim oTraslado As New MFObject("Traslados")
+                        Dim oTraslados As New MFObject(i.ToString)
+                        Dim vImporteTras As String = tFacturasDetalle(i).IVA.ToString()
+                        oTraslados("Base") = Trim(CStr(Math.Round(CDec(vImporte), 2)))
+                        oTraslados("Impuesto") = "002"
+                        Dim wProducto As tblProductos = DBModelo.GetProductById(Convert.ToInt32(tFacturasDetalle(i).idProducto))
+                        If CBool(wProducto.TasaCero) = False Then
+                            baseTotal16 = baseTotal16 + Math.Round(CDec(vImporte), 2)
+                            oTraslados("Importe") = Trim(CStr(Math.Round(CDec(vImporteTras), 2)))
+                            oTraslados("TasaOCuota") = FormatNumber(CDbl(FactorIVA) - 1, 6)
+                            vImporteTotalIVA = vImporteTotalIVA + Math.Round(CDec(vImporteTras), 2)
+                        Else
+                            baseTotal0 = baseTotal0 + Math.Round(CDec(vImporte), 2)
+                            oTraslados("Importe") = "0.00"
+                            oTraslados("TasaOCuota") = "0.000000"
+                        End If
+                        oTraslados("TipoFactor") = "Tasa"
+                        oTraslado.AgregaSubnodo(oTraslados)
+                        oImpuestos.AgregaSubnodo(oTraslado)
+                        oLinea.AgregaSubnodo(oImpuestos)
+                    End If
+                    oConceptos.AgregaSubnodo(oLinea)
+                Next
+                sdk.AgregaObjeto(factura)
+
+                If wFacturas.cliente = "PUBLICO EN GENERAL" Then
+                    Dim InformacionGlobal As New MFObject("InformacionGlobal")
+                    InformacionGlobal("Periodicidad") = "01"
+                    InformacionGlobal("Meses") = Format(wFacturas.fecha_venta, "MM")
+                    InformacionGlobal("Año") = Format(wFacturas.fecha_venta, "yyyy")
+                    sdk.AgregaObjeto(InformacionGlobal)
+                End If
+
+                sdk.AgregaObjeto(oConceptos)
+
+                Dim oImpuestosTotales As New MFObject("impuestos")
+                Dim lvItem As Integer = 0
+                Dim itras As New MFObject("translados")
+
+                oImpuestosTotales("TotalImpuestosTrasladados") = Trim(CStr(vImporteTotalIVA))
+                If baseTotal0 > 0.00 Then
+                    Dim itra0 As New MFObject(lvItem.ToString)
+                    Dim basetotal0s As String = Trim(CStr(baseTotal0))
+                    itra0("Base") = basetotal0s
+                    itra0("Impuesto") = "002"
+                    itra0("Importe") = "0.00"
+                    itra0("TasaOCuota") = "0.000000"
+                    itra0("TipoFactor") = "Tasa"
+                    itras.AgregaSubnodo(itra0)
+                    lvItem = lvItem + 1
+                End If
+
+                If baseTotal16 > 0.00 Then
+                    Dim itra0 As New MFObject(lvItem.ToString)
+                    Dim vImporteTotalIVAFormat As String = Trim(CStr(vImporteTotalIVA))
+                    Dim baseTotal16s As String = Trim(CStr(baseTotal16))
+                    itra0("Base") = baseTotal16s
+                    itra0("Impuesto") = "002"
+                    itra0("Importe") = vImporteTotalIVAFormat
+                    itra0("TasaOCuota") = "0.160000"
+                    itra0("TipoFactor") = "Tasa"
+                    itras.AgregaSubnodo(itra0)
+                End If
+                oImpuestosTotales.AgregaSubnodo(itras)
+
+                sdk.AgregaObjeto(oImpuestosTotales)
+
+                'Timbra Factura
+                Dim respuesta As SDKRespuesta = sdk.Timbrar("C:\sdk2\timbrar32.bat", gv_CDFI_XML_PATH, folioFactura, False)
+                If CInt(respuesta.Codigo_MF_Numero) = 0 Then
+                    MsgBox(("Factura " & gv_SerieFacturaSalvador & "-" & noFactura & " Generada Correctamente"), MsgBoxStyle.Information, "Generació de Facturas")
+                    ImprimeFactura2(noFactura, folioFactura, True)
+                    For i = 0 To tFacturasDetalle.Count - 1
+                        Dim wVenta As tblVenta = DBModelo.Get_PV_TicketHeader(CInt(tFacturasDetalle(i).folio))
+                        wVenta.numeroFactura = noFactura
+                        If DBModelo.Update_PV_Venta(wVenta) = False Then
+                            MsgBox(("Ticket " & tFacturasDetalle(i).folio & " no pudo ser actualizado con el número de factura: " & noFactura), MsgBoxStyle.Information, "Generació de Facturas")
+                            Return False
+                        End If
+                    Next
+                    Return True
+                Else
+                    MsgBox($"Código: {respuesta.Codigo_MF_Numero} Mensaje: {respuesta.Codigo_MF_Texto} Mensaje2: {respuesta.MensajeOriginalPacJSON}", MsgBoxStyle.Critical, Nothing)
+                    Return False
+                End If
+            Else
+                Return False
+            End If
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Sub RollBackWork(ByVal nFactura As String)
+        Dim sFacErrorDet As String = ""
+        Dim wFacturaTotal As tblFacturaTotal = DBModelo.GetFacturaHeader(nFactura)
+        If Not IsNothing(wFacturaTotal) Then
+            If DBModelo.DeleteFacturaTotal(wFacturaTotal) Then
+                Dim tFacturasDet As List(Of tblFactura) = DBModelo.GetFacturaByN(nFactura)
+                If tFacturasDet.Count > 0 Then
+                    For Each rowDet As tblFactura In tFacturasDet
+                        Dim wVenta As tblVenta = DBModelo.Get_PV_TicketHeader(CInt(rowDet.folio))
+                        wVenta.numeroFactura = ""
+                        If DBModelo.Update_PV_Venta(wVenta) = False Then
+                            MsgBox(("Ticket " & rowDet.folio & " no pudo ser actualizado."), MsgBoxStyle.Information, "RollBack Facturación")
+                            sFacErrorDet = "X"
+                        End If
+                        If DBModelo.DeleteFactura(rowDet) = False Then
+                            sFacErrorDet = "X"
+                        End If
+                    Next
+                End If
+                If sFacErrorDet = "" Then
+                    Dim wFolioFacturas As tblFolioFacturas = DBModelo.GetFolioFactura("FACTURAS", CStr(Now.Year))
+                    If Not wFolioFacturas Is Nothing Then
+                        wFolioFacturas.IdComp = CompanyCode
+                        wFolioFacturas.FolioActual = wFolioFacturas.FolioActual - 1
+                        If Not DBModelo.UpdateFolioFacturas(wFolioFacturas) Then
+                            MsgBox("Error al actualizar Folio Factura en tabla FolioFacturas", MsgBoxStyle.Critical, "RollBack Facturación")
+                            Exit Sub
+                        End If
+                    End If
+                Else
+                    MsgBox("Error al eliminar detalle de Factura", MsgBoxStyle.Critical, "RollBack Facturación")
+                End If
+            Else
+                MsgBox("Error al eliminar cabecera de Factura", MsgBoxStyle.Critical, "RollBack Facturación")
+            End If
+        End If
+    End Sub
+
     Public Function ImprimeFactura2(ByVal NumeroFactura As String, ByVal FolioFactura As String, ByVal Imprimir As Boolean) As Boolean
 
         Dim dt_detail As DataTable = New DataTable

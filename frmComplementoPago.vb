@@ -636,4 +636,23 @@ Public Class frmComplementoPago
             MsgBox(("Complemento de Pago " & folio & " no pudo ser creado"), MsgBoxStyle.Critical, "Complemento de Pagos Cabecera")
         End If
     End Sub
+
+    Private Sub btnGenerar_Click(sender As Object, e As EventArgs) Handles btnGenerar.Click
+        Dim rowCount As Integer = Me.DataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected)
+        If (rowCount > 1) Then
+            MsgBox("La Generación es por factura, favor de solo seleccionar una Factura a Generar.", MsgBoxStyle.Information, "Complemento de Pagos")
+        ElseIf (rowCount = 0) Then
+            MsgBox("No hay factura seleccionada para generar, favor de solo seleccionar la Factura a generar.", MsgBoxStyle.Information, "Complemento de Pagos")
+        ElseIf CBool(DataGridView1(11, DataGridView1.CurrentRow.Index).Value) = True Then
+            MsgBox("La factura aun tiene el status Pagada, favor de cancelar el pago y posteriormente la factura.", MsgBoxStyle.Information, "Complemento de Pagos")
+        ElseIf CBool(DataGridView1(10, DataGridView1.CurrentRow.Index).Value) = True Then
+            MsgBox("La factura ya se encuentra generada.", MsgBoxStyle.Information, "Complemento de Pagos")
+        ElseIf (rowCount = 1) Then
+            Dim noFactura As String = CStr(DataGridView1(1, DataGridView1.CurrentRow.Index).Value)
+            Dim wDate As Date = CDate(DataGridView1(0, DataGridView1.CurrentRow.Index).Value)
+            Dim FolioFactura As String = gv_SerieFacturaSalvador & "-" & CStr(DataGridView1(1, DataGridView1.CurrentRow.Index).Value) & "_" & Format(wDate, "yyyyMMdd") & "_CFDI"
+            GeneraArchivoINI(noFactura, FolioFactura)
+            btnMostrar_Click(sender, e)
+        End If
+    End Sub
 End Class

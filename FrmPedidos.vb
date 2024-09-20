@@ -223,7 +223,7 @@ Public Class FrmPedidos
 
         strVenta.IdComp = CompanyCode
         strVenta.nticket = lv_folioactual
-        strVenta.fecha = CType(Date.Now.ToString("yyyy-MM-dd"), Date?)
+        strVenta.fecha = CDate(Date.Now.ToString("yyyy-MM-dd"))
         strVenta.SubTotal = CDec(DataGridView1.Item(3, DataGridView1.CurrentRow.Index).Value)
         strVenta.IVA = CDec(DataGridView1.Item(4, DataGridView1.CurrentRow.Index).Value)
         strVenta.total = CDec(DataGridView1.Item(5, DataGridView1.CurrentRow.Index).Value)

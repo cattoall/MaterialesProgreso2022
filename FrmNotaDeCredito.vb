@@ -209,7 +209,7 @@ Public Class FrmNotaDeCredito
         Dim lv_Total As String = Trim(txtTotal.Text.Replace(",", ""))
 
         strNC.IdComp = CompanyCode
-        strNC.n_nc = CDec(FolioNC_Actual)
+        strNC.n_nc = CLng(FolioNC_Actual)
         strNC.SubTotal = CDec(lv_Subtotal)
         strNC.IVA = CDec(lv_IVA)
         strNC.total = CDec(lv_Total)

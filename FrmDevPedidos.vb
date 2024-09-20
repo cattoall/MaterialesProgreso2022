@@ -263,7 +263,7 @@ Public Class FrmDevPedidos
             wTicketPedido.concepto = DGVDetalle.Rows(i).Cells(4).Value.ToString
             wTicketPedido.cantidad = CDec(DGVDetalle.Rows(i).Cells(5).Value)
             wTicketPedido.precio = CDec(DGVDetalle.Rows(i).Cells(6).Value)
-            wTicketPedido.fecha = CType(DGVDetalle.Rows(i).Cells(7).Value.ToString, Date?)
+            wTicketPedido.fecha = CDate(DGVDetalle.Rows(i).Cells(7).Value)
             wTicketPedido.subtotal = CDec(DGVDetalle.Rows(i).Cells(8).Value)
             wTicketPedido.clave_producto = DGVDetalle.Rows(i).Cells(9).Value.ToString
             wTicketPedido.precioCosto = CDec(DGVDetalle.Rows(i).Cells(10).Value)

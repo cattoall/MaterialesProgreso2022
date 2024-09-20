@@ -66,6 +66,7 @@
             Else
                 oForm.chkTasaCero.Checked = False
             End If
+            oForm.nudDescuento.Value = CDec(MetroGrid1.Item(28, MetroGrid1.CurrentRow.Index).Value)
             oForm.txtClave.Enabled = False
             oForm.txtCodigoBarras.Enabled = False
             oForm.ShowDialog()
@@ -149,6 +150,7 @@
             MetroGrid1.Columns(26).HeaderText = "ClaveUnidad"
 
             MetroGrid1.Columns(27).HeaderText = "TasaCero"
+            MetroGrid1.Columns(28).HeaderText = "DescMarca"
         End If
     End Sub
 
@@ -238,7 +240,7 @@
             Else
                 oForm.chkTasaCero.Checked = False
             End If
-
+            oForm.nudDescuento.Value = CDec(MetroGrid1.Item(28, MetroGrid1.CurrentRow.Index).Value)
             oForm.ShowDialog()
             oForm.Close()
             MetroGrid1.Refresh()

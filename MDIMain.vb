@@ -392,4 +392,8 @@ Public Class MDIMain
         frmComplementoPago.Close()
         frmComplementoPago.Dispose()
     End Sub
+
+    Private Sub ReimpresiónDeFacturaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReimpresiónDeFacturaToolStripMenuItem.Click
+
+    End Sub
 End Class

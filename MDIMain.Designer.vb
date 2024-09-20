@@ -296,35 +296,35 @@ Partial Class MDIMain
         '
         Me.ListadoDeProductosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Productosxx
         Me.ListadoDeProductosToolStripMenuItem.Name = "ListadoDeProductosToolStripMenuItem"
-        Me.ListadoDeProductosToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
+        Me.ListadoDeProductosToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.ListadoDeProductosToolStripMenuItem.Text = "Listado de Productos"
         '
         'ListadoDeCotizacionesToolStripMenuItem
         '
         Me.ListadoDeCotizacionesToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Cotizacion
         Me.ListadoDeCotizacionesToolStripMenuItem.Name = "ListadoDeCotizacionesToolStripMenuItem"
-        Me.ListadoDeCotizacionesToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
+        Me.ListadoDeCotizacionesToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.ListadoDeCotizacionesToolStripMenuItem.Text = "Listado de Cotizaciones"
         '
         'ListadoDeDeudoresToolStripMenuItem
         '
         Me.ListadoDeDeudoresToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Deudores
         Me.ListadoDeDeudoresToolStripMenuItem.Name = "ListadoDeDeudoresToolStripMenuItem"
-        Me.ListadoDeDeudoresToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
+        Me.ListadoDeDeudoresToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.ListadoDeDeudoresToolStripMenuItem.Text = "Listado de Deudores"
         '
         'ListadoDeVentasToolStripMenuItem
         '
         Me.ListadoDeVentasToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.VentasBien
         Me.ListadoDeVentasToolStripMenuItem.Name = "ListadoDeVentasToolStripMenuItem"
-        Me.ListadoDeVentasToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
+        Me.ListadoDeVentasToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.ListadoDeVentasToolStripMenuItem.Text = "Listado de Ventas"
         '
         'ListadoDePreciosPorLineaToolStripMenuItem
         '
         Me.ListadoDePreciosPorLineaToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.PrecioLinea
         Me.ListadoDePreciosPorLineaToolStripMenuItem.Name = "ListadoDePreciosPorLineaToolStripMenuItem"
-        Me.ListadoDePreciosPorLineaToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
+        Me.ListadoDePreciosPorLineaToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.ListadoDePreciosPorLineaToolStripMenuItem.Text = "Listado de Precios por Linea"
         Me.ListadoDePreciosPorLineaToolStripMenuItem.Visible = False
         '
@@ -332,14 +332,14 @@ Partial Class MDIMain
         '
         Me.HistorialDeClientesToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.Historial
         Me.HistorialDeClientesToolStripMenuItem.Name = "HistorialDeClientesToolStripMenuItem"
-        Me.HistorialDeClientesToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
+        Me.HistorialDeClientesToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.HistorialDeClientesToolStripMenuItem.Text = "Historial de Clientes"
         '
         'AjusteDeInventarioToolStripMenuItem
         '
         Me.AjusteDeInventarioToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.InventarioAjust
         Me.AjusteDeInventarioToolStripMenuItem.Name = "AjusteDeInventarioToolStripMenuItem"
-        Me.AjusteDeInventarioToolStripMenuItem.Size = New System.Drawing.Size(225, 26)
+        Me.AjusteDeInventarioToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.AjusteDeInventarioToolStripMenuItem.Text = "Ajuste de Inventario"
         '
         'TransaccionesToolStripMenuItem
@@ -355,34 +355,34 @@ Partial Class MDIMain
         '
         Me.PagosDeClientesToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.PagosClientes
         Me.PagosDeClientesToolStripMenuItem.Name = "PagosDeClientesToolStripMenuItem"
-        Me.PagosDeClientesToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
+        Me.PagosDeClientesToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.PagosDeClientesToolStripMenuItem.Text = "Pagos de Clientes"
         '
         'CuentasPorCobrarToolStripMenuItem
         '
         Me.CuentasPorCobrarToolStripMenuItem.Name = "CuentasPorCobrarToolStripMenuItem"
-        Me.CuentasPorCobrarToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
+        Me.CuentasPorCobrarToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.CuentasPorCobrarToolStripMenuItem.Text = "Pago de Clientes Wendy"
         '
         'ConvertirPedidoATicketToolStripMenuItem
         '
         Me.ConvertirPedidoATicketToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.keynotes_alt
         Me.ConvertirPedidoATicketToolStripMenuItem.Name = "ConvertirPedidoATicketToolStripMenuItem"
-        Me.ConvertirPedidoATicketToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
+        Me.ConvertirPedidoATicketToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.ConvertirPedidoATicketToolStripMenuItem.Text = "Convertir Pedido a Ticket"
         '
         'DevoluciónDePedidosToolStripMenuItem
         '
         Me.DevoluciónDePedidosToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.spideroak
         Me.DevoluciónDePedidosToolStripMenuItem.Name = "DevoluciónDePedidosToolStripMenuItem"
-        Me.DevoluciónDePedidosToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
+        Me.DevoluciónDePedidosToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.DevoluciónDePedidosToolStripMenuItem.Text = "Devolución de Pedidos"
         '
         'DevoluciónDeTicketsToolStripMenuItem
         '
         Me.DevoluciónDeTicketsToolStripMenuItem.Image = Global.PV_MaterialesElectricosProgreso.My.Resources.Resources.pay
         Me.DevoluciónDeTicketsToolStripMenuItem.Name = "DevoluciónDeTicketsToolStripMenuItem"
-        Me.DevoluciónDeTicketsToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
+        Me.DevoluciónDeTicketsToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.DevoluciónDeTicketsToolStripMenuItem.Text = "Devolución de Tickets"
         '
         'OtrasOperacionesToolStripMenuItem
